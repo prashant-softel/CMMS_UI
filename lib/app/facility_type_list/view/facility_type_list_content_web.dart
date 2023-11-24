@@ -337,9 +337,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -347,14 +347,41 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                   child: CustomRichText(
                                                       title: 'Owner ')),
-                                              Expanded(
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
-                                                  height: MediaQuery.of(context)
+                                                  width: (MediaQuery.of(context)
                                                           .size
-                                                          .height *
-                                                      0.040,
-                                                  decoration: BoxDecoration(
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black26,
@@ -374,71 +401,31 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         spreadRadius: 0.0,
                                                       ),
                                                     ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      controller: controller,
-                                                      dropdownList:
-                                                          controller.ownerList,
-                                                      isValueSelected:
-                                                          controller
-                                                              .isSelectedOwner
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedOwner.value,
-                                                      // onValueChanged:
-                                                      //     controller.onValueChanged(46, 46),
-                                                      onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
-                                                        controller
-                                                            .onValueChangedOwner(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
-                                                    ),
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.ownerList,
+                                                    isValueSelected: controller
+                                                        .isSelectedOwner.value,
+                                                    selectedValue: controller
+                                                        .selectedOwner.value,
+                                                    // onValueChanged:
+                                                    //     controller.onValueChanged(46, 46),
+                                                    onValueChanged:
+                                                        (selectedValue,
+                                                            isValueSelected) {
+                                                      controller
+                                                          .onValueChangedOwner(
+                                                              selectedValue,
+                                                              isValueSelected);
+                                                    },
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -447,14 +434,45 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 child: CustomRichText(
                                                     title: 'Operator '),
                                               ),
-                                              Expanded(
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
                                                       0.040,
-                                                  margin: Dimens.edgeInsets5,
-                                                  decoration: BoxDecoration(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black26,
@@ -474,74 +492,30 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         spreadRadius: 0.0,
                                                       ),
                                                     ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .customerList,
-                                                      isValueSelected: controller
-                                                          .isSelectedCustomer
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedCustomer
-                                                          .value,
-                                                      onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
-                                                        controller
-                                                            .onValueChangedCustomer(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
-                                                    ),
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.customerList,
+                                                    isValueSelected: controller
+                                                        .isSelectedCustomer
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedCustomer.value,
+                                                    onValueChanged:
+                                                        (selectedValue,
+                                                            isValueSelected) {
+                                                      controller
+                                                          .onValueChangedCustomer(
+                                                              selectedValue,
+                                                              isValueSelected);
+                                                    },
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -549,10 +523,41 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                   child: CustomRichText(
                                                       title: 'Customer ')),
-                                              Expanded(
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
-                                                  decoration: BoxDecoration(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black26,
@@ -572,66 +577,22 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         spreadRadius: 0.0,
                                                       ),
                                                     ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .operatorList,
-                                                      isValueSelected: controller
-                                                          .isSelectedOperator
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedOperator
-                                                          .value,
-                                                      onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
-                                                        controller
-                                                            .onValueChangedOperator(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                      },
-                                                    ),
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.operatorList,
+                                                    isValueSelected: controller
+                                                        .isSelectedOperator
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedOperator.value,
+                                                    onValueChanged:
+                                                        (selectedValue,
+                                                            isValueSelected) {
+                                                      controller
+                                                          .onValueChangedOperator(
+                                                              selectedValue,
+                                                              isValueSelected);
+                                                    },
                                                   ),
                                                 ),
                                               ),
@@ -640,9 +601,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           // SizedBox(
                                           //   height: 10,
                                           // ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -664,53 +625,48 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ]),
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                    margin: Dimens.edgeInsets5,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
                                                         ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            45,
-                                                    child: LoginCustomTextfield(
-                                                      // ishint: 'Enter Address',
-                                                      textController: controller
-                                                          .addressCtrlr,
-                                                    )),
-                                              ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: LoginCustomTextfield(
+                                                    // ishint: 'Enter Address',
+                                                    textController:
+                                                        controller.addressCtrlr,
+                                                  )),
                                             ],
                                           ),
 
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -732,99 +688,82 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ]),
                                                 ),
                                               ),
-                                              Expanded(
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
                                                       0.040,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
                                                           ),
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            offset:
-                                                                const Offset(
-                                                                    0.0, 0.0),
-                                                            blurRadius: 0.0,
-                                                            spreadRadius: 0.0,
-                                                          ),
-                                                        ],
-                                                        controller: controller,
-                                                        dropdownList: controller
-                                                            .countryList,
-                                                        isValueSelected: controller
-                                                            .isSelectedCountryType
-                                                            .value,
-                                                        selectedValue:
-                                                            controller
-                                                                .selectedCountry
-                                                                .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged),
-                                                  ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .countryList,
+                                                      isValueSelected: controller
+                                                          .isSelectedCountryType
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedCountry
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -846,99 +785,81 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ]),
                                                 ),
                                               ),
-                                              Expanded(
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
                                                       0.040,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
                                                           ),
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            offset:
-                                                                const Offset(
-                                                                    0.0, 0.0),
-                                                            blurRadius: 0.0,
-                                                            spreadRadius: 0.0,
-                                                          ),
-                                                        ],
-                                                        controller: controller,
-                                                        dropdownList: controller
-                                                            .stateList,
-                                                        isValueSelected: controller
-                                                            .isSelectedStateType
-                                                            .value,
-                                                        selectedValue:
-                                                            controller
-                                                                .selectedState
-                                                                .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged),
-                                                  ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList:
+                                                          controller.stateList,
+                                                      isValueSelected: controller
+                                                          .isSelectedStateType
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedState.value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -960,13 +881,107 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ]),
                                                 ),
                                               ),
-                                              Expanded(
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: Container(
-                                                  margin: Dimens.edgeInsets5,
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
                                                       0.040,
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList:
+                                                          controller.cityList,
+                                                      isValueSelected: controller
+                                                          .isSelectedCityType
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedCity.value,
+                                                      // onValueChanged:
+                                                      //     controller.onValueChanged(46, 46),
+                                                      onValueChanged: controller
+                                                          .onValueChanged
+                                                      // },
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: "Pin",
+                                                      style: Styles.blackBold16,
+                                                      children: [
+                                                        TextSpan(
+                                                          style: TextStyle(
+                                                            color: ColorValues
+                                                                .orangeColor,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              Container(
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
@@ -994,136 +1009,19 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
-                                                    child: DropdownWebWidget(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            offset:
-                                                                const Offset(
-                                                                    0.0, 0.0),
-                                                            blurRadius: 0.0,
-                                                            spreadRadius: 0.0,
-                                                          ),
-                                                        ],
-                                                        controller: controller,
-                                                        dropdownList:
-                                                            controller.cityList,
-                                                        isValueSelected: controller
-                                                            .isSelectedCityType
-                                                            .value,
-                                                        selectedValue:
-                                                            controller
-                                                                .selectedCity
-                                                                .value,
-                                                        // onValueChanged:
-                                                        //     controller.onValueChanged(46, 46),
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged
-                                                        // },
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: LoginCustomTextfield(
+                                                    // ishint: 'Enter Pin',
+                                                    textController:
+                                                        controller.zipcodeCtrlr,
+                                                  )),
                                             ],
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                      text: "Pin",
-                                                      style: Styles.blackBold16,
-                                                      children: [
-                                                        TextSpan(
-                                                          style: TextStyle(
-                                                            color: ColorValues
-                                                                .orangeColor,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ]),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                    margin: Dimens.edgeInsets5,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            45,
-                                                    child: LoginCustomTextfield(
-                                                      // ishint: 'Enter Pin',
-                                                      textController: controller
-                                                          .zipcodeCtrlr,
-                                                    )),
-                                              ),
-                                            ],
+                                          SizedBox(
+                                            height: 10,
                                           ),
-                                          // SizedBox(
-                                          //   height: 10,
-                                          // ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -1145,48 +1043,43 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ]),
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Container(
-                                                    margin: Dimens.edgeInsets5,
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
                                                         ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            45,
-                                                    child: LoginCustomTextfield(
-                                                      // ishint:
-                                                      // 'Enter Description',
-                                                      textController: controller
-                                                          .descriptionCtrlr,
-                                                    )),
-                                              ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .25),
+                                                  child: LoginCustomTextfield(
+                                                    // ishint:
+                                                    // 'Enter Description',
+                                                    textController: controller
+                                                        .descriptionCtrlr,
+                                                  )),
                                             ],
                                           ),
                                           // Row(
@@ -1209,6 +1102,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             height: 10,
                                           ),
                                         ]),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1263,6 +1159,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   },
                                                   text: 'Update')),
                                     ],
+                                  ),
+
+                                  SizedBox(
+                                    height: 10,
                                   ),
                                 ],
                               ),
