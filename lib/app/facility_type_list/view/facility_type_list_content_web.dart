@@ -2,6 +2,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.masterDashboard);
                     },
                     child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
@@ -244,7 +245,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-
+                                          Dimens.boxHeight10,
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -252,98 +253,87 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               Expanded(
                                                   child: CustomRichText(
                                                       title: 'SPV ')),
-                                              Expanded(
-                                                child: Container(
-                                                  margin: Dimens.edgeInsets5,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: Container(
-                                                      width: (MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width *
-                                                          .3),
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.040,
-                                                      child: Obx(
-                                                        () => DropdownWebWidget(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          controller:
-                                                              controller,
-                                                          dropdownList:
-                                                              controller
-                                                                  .SpvList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isSelectedSpv
-                                                                  .value,
-                                                          selectedValue:
-                                                              controller
-                                                                  .selectedSpv
-                                                                  .value,
-                                                          onValueChanged:
-                                                              (selectedValue,
-                                                                  isValueSelected) {
-                                                            controller.onValueChangedSpv(
-                                                                selectedValue,
-                                                                isValueSelected);
-                                                          },
-                                                        ),
-                                                      )),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                 ),
+                                                child: Container(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .25),
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                    child: Obx(
+                                                      () => DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        controller: controller,
+                                                        dropdownList:
+                                                            controller.SpvList,
+                                                        isValueSelected:
+                                                            controller
+                                                                .isSelectedSpv
+                                                                .value,
+                                                        selectedValue:
+                                                            controller
+                                                                .selectedSpv
+                                                                .value,
+                                                        onValueChanged:
+                                                            (selectedValue,
+                                                                isValueSelected) {
+                                                          controller
+                                                              .onValueChangedSpv(
+                                                                  selectedValue,
+                                                                  isValueSelected);
+                                                        },
+                                                      ),
+                                                    )),
                                               ),
                                             ],
                                           ),
