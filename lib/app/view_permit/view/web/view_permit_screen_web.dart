@@ -4212,67 +4212,68 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       ))
                   : Dimens.box0,
               Dimens.boxWidth20,
-              ////cancel approver
-              varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.approve ==
-                                      UserAccessConstants.kHaveApproveAccess)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_CANCEL_REQUESTED
 
-                  //130
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appGreenColor,
-                        text: "Permit Cancel Approve",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitCancelByApproverDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                          ));
-                        },
-                      ),
-                    )
-                  : Dimens.box0,
-              Dimens.boxWidth20,
-              varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.approve ==
-                                      UserAccessConstants.kHaveApproveAccess)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_CANCEL_REQUESTED
-                  //130
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Permit Cancel Reject",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitCancelRejectDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                          ));
-                        },
-                      ),
-                    )
-                  : Dimens.box0
+              // ////cancel approver
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) =>
+              //                     e.feature_id ==
+              //                         UserAccessConstants.kPermitFeatureId &&
+              //                     e.approve ==
+              //                         UserAccessConstants.kHaveApproveAccess)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus ==
+              //             PermitStatusConstants.PTW_CANCEL_REQUESTED
+
+              //     //130
+              //     ? Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appGreenColor,
+              //           text: "Permit Cancel Approve",
+              //           icon: Icons.close,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitCancelByApproverDialog(
+              //               permitId: controller
+              //                   .viewPermitDetailsModel.value?.permitNo,
+              //               ptwStatus:
+              //                   '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+              //             ));
+              //           },
+              //         ),
+              //       )
+              //     : Dimens.box0,
+              // Dimens.boxWidth20,
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) =>
+              //                     e.feature_id ==
+              //                         UserAccessConstants.kPermitFeatureId &&
+              //                     e.approve ==
+              //                         UserAccessConstants.kHaveApproveAccess)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus ==
+              //             PermitStatusConstants.PTW_CANCEL_REQUESTED
+              //     //130
+              //     ? Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appRedColor,
+              //           text: "Permit Cancel Reject",
+              //           icon: Icons.close,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitCancelRejectDialog(
+              //               permitId: controller
+              //                   .viewPermitDetailsModel.value?.permitNo,
+              //             ));
+              //           },
+              //         ),
+              //       )
+              //     : Dimens.box0
 
               // // //Permit Extend Approve
               // varUserAccessModel.value.access_list!
