@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/master_dashboard/master_controller.dart';
@@ -297,11 +298,17 @@ class MastersDashboard extends GetView<MastersController> {
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "SPV List",
-                                    onTap: () {
-                                      controller.goToSPVList();
-                                    });
+                                return varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id == 5 && e.add == 0)
+                                            .length >
+                                        0
+                                    ? createContentTile(
+                                        title: "SPV List",
+                                        onTap: () {
+                                          controller.goToSPVList();
+                                        })
+                                    : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -427,7 +434,6 @@ class MastersDashboard extends GetView<MastersController> {
                                       });
                                 }),
                               ),
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Roles",
@@ -514,12 +520,11 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Designation",
@@ -755,13 +760,13 @@ class MastersDashboard extends GetView<MastersController> {
                                 ),
                                 SizedBox(
                                     width:
-                                    10), // Add some space between the text and the line
+                                        10), // Add some space between the text and the line
                                 Expanded(
                                   child: Divider(
                                     color: Colors
                                         .grey, // Customize the color of the line if needed
                                     height:
-                                    1, // Adjust the height of the line if needed
+                                        1, // Adjust the height of the line if needed
                                   ),
                                 ),
                               ],
@@ -774,7 +779,7 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
@@ -793,7 +798,6 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToSourceOfObservation();
                                     });
                               }))),
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Risk Type",
@@ -803,7 +807,6 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                             ],
                           ),
-
                         ],
                       )),
                     ),
@@ -827,8 +830,7 @@ class MastersDashboard extends GetView<MastersController> {
           ),
           // padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
 
-        child:
-          Row(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
