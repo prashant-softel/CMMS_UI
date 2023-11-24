@@ -317,176 +317,185 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 Dimens.boxHeight12,
                                 // controller.filteredInventoryNameList.length > 0
                                 //     ?
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  height: 550,
-                                  //  ((controller.filteredInventoryNameList
-                                  //             .length) *
-                                  //         40) +
-                                  //     150,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
+                                Expanded(
+                                  child: Container(
+                                    margin: Dimens.edgeInsets20,
+                                    height: 400,
+                                    //  ((controller
+                                    //             .filteredInventoryNameList
+                                    //             .length) *
+                                    //         30) +
+                                    //     100,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
                                     ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Equipment List ",
-                                              style: Styles.blue700,
-                                            ),
-                                          ],
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Equipment List ",
+                                                style: Styles.blue700,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: DataTable2(
-                                          border: TableBorder.all(
-                                              color: Color.fromARGB(
-                                                  255, 206, 229, 234)),
-                                          columns: [
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Sr. No.",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                            DataColumn2(
-                                                //fixedWidth: 150,
-                                                label: Text(
-                                              'Assest name',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                fixedWidth: 150,
-                                                label: Text(
-                                                  'Assest ID',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                            DataColumn2(
-                                                // fixedWidth: 300,
-                                                label: Text(
-                                              'Parent Assest',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                // fixedWidth: 300,
-                                                label: Text(
-                                              'Module Quantity',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                // fixedWidth: 300,
-                                                label: Text(
-                                              "Checklist",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                          ],
-                                          rows: controller.rowItem.value
-                                              .map((record) {
-                                            return DataRow(
-                                              // height: 130,
-                                              cells: record.map((mapData) {
-                                                return DataCell(
-                                                  (mapData['key'] ==
-                                                          "checklist")
-                                                      ? DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          dropdownList: controller
-                                                              .preventiveCheckList,
-                                                          selectedValue:
-                                                              mapData["value"],
-                                                          onValueChanged: (list,
-                                                              selectedValue) {
-                                                            // print(
-                                                            //     'paifcghb:${controller.preventiveCheckList}');
-                                                            // print({
-                                                            //   selectedValue:
-                                                            //       selectedValue
-                                                            // });
-                                                            mapData["value"] =
-                                                                selectedValue;
-                                                            controller.checkdropdownMapperData[
-                                                                    selectedValue] =
-                                                                list.firstWhere(
-                                                                    (element) =>
-                                                                        element
-                                                                            .name ==
-                                                                        selectedValue,
-                                                                    orElse:
-                                                                        null);
-                                                          },
-                                                        )
-                                                      // SizedBox(
-                                                      //     child: DropdownWebStock(
-                                                      //       width: (MediaQuery.of(
-                                                      //                   context)
-                                                      //               .size
-                                                      //               .width *
-                                                      //           .2),
-                                                      //       controller:
-                                                      //           controller,
-                                                      //       dropdownList: controller
-                                                      //           .preventiveCheckList,
-                                                      //       isValueSelected:
-                                                      //           controller
-                                                      //               .isSelectedChecklist
-                                                      //               .value,
-                                                      //       selectedValue: controller
-                                                      //           .selectedChecklist
-                                                      //           .value,
-                                                      //       onValueChanged:
-                                                      //           controller
-                                                      //               .onValueChanged,
-                                                      //     ),
-                                                      //   )
+                                        Expanded(
+                                          child: DataTable2(
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr. No.",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  //fixedWidth: 150,
+                                                  label: Text(
+                                                'Assest name',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Assest ID',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                'Parent Assest',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                'Module Quantity',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Checklist",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                            ],
+                                            rows: controller.rowItem.value
+                                                .map((record) {
+                                              return DataRow(
+                                                // height: 130,
+                                                cells: record.map((mapData) {
+                                                  return DataCell(
+                                                    (mapData['key'] ==
+                                                            "checklist")
+                                                        ? DropdownWebStock(
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            dropdownList: controller
+                                                                .preventiveCheckList,
+                                                            selectedValue:
+                                                                mapData[
+                                                                    "value"],
+                                                            onValueChanged: (list,
+                                                                selectedValue) {
+                                                              // print(
+                                                              //     'paifcghb:${controller.preventiveCheckList}');
+                                                              // print({
+                                                              //   selectedValue:
+                                                              //       selectedValue
+                                                              // });
+                                                              mapData["value"] =
+                                                                  selectedValue;
+                                                              controller.checkdropdownMapperData[
+                                                                      selectedValue] =
+                                                                  list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                            },
+                                                          )
+                                                        // SizedBox(
+                                                        //     child: DropdownWebStock(
+                                                        //       width: (MediaQuery.of(
+                                                        //                   context)
+                                                        //               .size
+                                                        //               .width *
+                                                        //           .2),
+                                                        //       controller:
+                                                        //           controller,
+                                                        //       dropdownList: controller
+                                                        //           .preventiveCheckList,
+                                                        //       isValueSelected:
+                                                        //           controller
+                                                        //               .isSelectedChecklist
+                                                        //               .value,
+                                                        //       selectedValue: controller
+                                                        //           .selectedChecklist
+                                                        //           .value,
+                                                        //       onValueChanged:
+                                                        //           controller
+                                                        //               .onValueChanged,
+                                                        //     ),
+                                                        //   )
 
-                                                      : (mapData['key'] ==
-                                                              "srNo")
-                                                          ? Text(mapData[
-                                                                  'value'] ??
-                                                              "")
-                                                          : Text(mapData[
-                                                                  'value'] ??
-                                                              ''),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
+                                                        : (mapData['key'] ==
+                                                                "srNo")
+                                                            ? Text(mapData[
+                                                                    'value'] ??
+                                                                "")
+                                                            : Text(mapData[
+                                                                    'value'] ??
+                                                                ''),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }).toList(),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 //  : Dimens.box0,

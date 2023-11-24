@@ -119,6 +119,7 @@ class CreatePmPlanController extends GetxController {
         pmPlanId: pmPlanId, isLoading: isloading);
 
     if (_pmPlanDetailsModel != null) {
+      selectedInventoryNameIdList.value = [];
       planTittleCtrlr.text = _pmPlanDetailsModel.plan_name ?? "";
       startDateDateTc.text = _pmPlanDetailsModel.plan_date ?? "";
       selectedAssignedTo.value = _pmPlanDetailsModel.assign_to_name ?? "";
@@ -127,21 +128,28 @@ class CreatePmPlanController extends GetxController {
       selectedfrequencyId = _pmPlanDetailsModel.plan_freq_id ?? 0;
       selectedInventoryCategoryId = _pmPlanDetailsModel.category_id ?? 0;
       selectedInventory.value = _pmPlanDetailsModel.category_name ?? "";
-      //filteredInventoryNameList.value = _pmPlanDetailsModel.mapAssetChecklist;
-      _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
-        rowItem.value.add([
-          {"key": "srNo", "value": ''},
-          {"key": "assetName", "value": '${element.asset_name}'},
-          {'key': "assetsId", "value": '${element.asset_id}'},
-          {'key': "parentAsset", "value": '${element.parent_name}'},
-          {'key': "qty", "value": '${element.module_qty}'},
-          {
-            'key': "checklist",
-            "value": '${element.checklist_name}',
-            "checkListId": '${element.checklist_id}'
-          },
-        ]);
-      });
+      if (selectedInventoryCategoryId > 0) {
+        inventoryList(
+            facilityId: _pmPlanDetailsModel.facility_id,
+            categoryId: selectedInventoryCategoryId);
+        getPreventiveCheckList(_pmPlanDetailsModel.facility_id ?? 0, 1, true,
+            selectedfrequencyId, selectedInventoryCategoryId);
+        _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
+          rowItem.value.add([
+            {"key": "srNo", "value": ''},
+            {"key": "assetName", "value": '${element.asset_name}'},
+            {'key': "assetsId", "value": '${element.asset_id}'},
+            {'key': "parentAsset", "value": '${element.parent_name}'},
+            {'key': "qty", "value": '${element.module_qty}'},
+            {
+              'key': "checklist",
+              "value": '${element.checklist_name}',
+              "checkListId": '${element.checklist_id}'
+            },
+          ]);
+        });
+      }
+
       //  pmPlanDetailsModel.value = _pmPlanDetailsModel;
     }
   }
@@ -200,27 +208,16 @@ class CreatePmPlanController extends GetxController {
     }
   }
 
-  void addRowItem() {
-    rowItem.value.add([
-      {"key": "srNo", "value": ''},
-      {"key": "assetName", "value": ''},
-      {'key': "assetsId", "value": ''},
-      {'key': "parentAsset", "value": ''},
-      {'key': "qty", "value": ''},
-      {'key': "checklist", "value": '', "checkListId": ''},
-    ]);
-  }
-
   void facilityNameSelected(_selectedfacilityNameIds) {
-    filteredInventoryNameList.value = <InventoryModel>[];
+    // filteredInventoryNameList.value = <InventoryModel>[];
     // late int emp_id = 0;
     for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
-      selectedInventoryNameIdList.value = <int>[];
-
-      selectedInventoryNameIdList.add(_selectedfacilityNameId);
-      InventoryModel? e = inventoryNameList.firstWhere((element) {
-        return element?.id == _selectedfacilityNameId;
-      });
+      InventoryModel? e = inventoryNameList.firstWhere(
+        (element) {
+          return element?.id == _selectedfacilityNameId;
+        },
+        orElse: () {},
+      );
       filteredInventoryNameList.add(e);
     }
     print({"filteredInventoryNameList": filteredInventoryNameList});
@@ -327,7 +324,7 @@ class CreatePmPlanController extends GetxController {
 
           print('First Category Id:$selectedInventoryNameIdList');
           if (selectedInventoryNameIdList.length > 0) {
-            filteredInventoryNameList.value = <InventoryModel>[];
+            //  filteredInventoryNameList.value = <InventoryModel>[];
 
             facilityNameSelected(selectedInventoryNameIdList);
           }
