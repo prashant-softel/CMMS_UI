@@ -56,7 +56,10 @@ class LoginCustomTextfield extends GetView {
         obscureText: obscureText,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
+
         decoration: InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           fillColor: readOnly == true
               ? Color.fromARGB(255, 206, 205, 205)
               : Colors.white,
@@ -77,7 +80,7 @@ class LoginCustomTextfield extends GetView {
             height: 0,
           ),
           errorText: errorController,
-          contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+          // contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
           suffixIcon: widget,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),

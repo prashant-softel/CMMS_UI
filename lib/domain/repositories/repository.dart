@@ -6936,6 +6936,34 @@ class Repository {
     }
   }
 
+  Future<List<InventoryModel>> inventoryListviaCategory(
+      {required int? facilityId,
+      required bool isLoading,
+      int? categoryId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.inventoryListviaCategory(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+          categoryId: categoryId);
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var inventoryList = inventoryModelFromJson(res.data);
+        return inventoryList.reversed.toList();
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<bool> startCalibration(Object calibrationId, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);

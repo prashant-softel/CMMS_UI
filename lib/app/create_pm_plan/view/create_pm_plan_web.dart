@@ -319,10 +319,11 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 //     ?
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.filteredInventoryNameList
-                                              .length) *
-                                          40) +
-                                      150,
+                                  height: 550,
+                                  //  ((controller.filteredInventoryNameList
+                                  //             .length) *
+                                  //         40) +
+                                  //     150,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
