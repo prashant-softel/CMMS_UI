@@ -72,10 +72,8 @@ class SPVListController extends GetxController {
     }
 
     SPVList.value = filteredData
-        .where((item) => item.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+        .where((item) =>
+            item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
 
@@ -115,7 +113,7 @@ class SPVListController extends GetxController {
       SPVList.add(facilityType_list);
     }
     // selectedSopPermit.value = _SPVList[0].name ?? '';
-  
+
     // supplierNameList = _supplierNameList;
     SPVListPaginationController = PaginationController(
       rowCount: SPVList.length,
