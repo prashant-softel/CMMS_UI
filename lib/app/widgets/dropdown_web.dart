@@ -68,6 +68,7 @@ class DropdownWebWidget extends StatelessWidget {
           popupProps: PopupProps.menu(
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
+                isDense: true,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
@@ -84,6 +85,7 @@ class DropdownWebWidget extends StatelessWidget {
           items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(
+              // isDense: true,
               border: InputBorder.none,
               enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
               focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),

@@ -4446,6 +4446,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> inventoryListviaCategory(
+      {required bool isLoading,
+      required String auth,
+      int? facilityId,
+      int? categoryId}) async {
+    var categoryIdsParam = (categoryId != 0) ? '&categoryIds=$categoryId' : '';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facilityId' + categoryIdsParam,
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> startCalibration({
     required String auth,
     bool? isLoading,

@@ -125,8 +125,8 @@ class PreventiveChecklistListContentWeb
                                           ),
                                         ),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          // crossAxisAlignment:
+                                          //     CrossAxisAlignment.center,
                                           children: [
                                             Expanded(
                                               child: Column(
@@ -202,94 +202,80 @@ class PreventiveChecklistListContentWeb
                                                             .checklistNumberCtrlr,
                                                       )),
                                                   Dimens.boxHeight10,
-                                                  Container(
+                                                  DropdownWebWidget(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
                                                             6,
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
-                                                    child: DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .equipmentCategoryList,
-                                                      isValueSelected: controller
-                                                          .isSelectedequipment
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedequipment
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .equipmentCategoryList,
+                                                    isValueSelected: controller
+                                                        .isSelectedequipment
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedequipment
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                   Dimens.boxHeight10,
-                                                  Container(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
+                                                  DropdownWebWidget(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
                                                             6,
-                                                    child: DropdownWebWidget(
-                                                      controller: controller,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
+                                                    controller: controller,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
                                                         ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      dropdownList: controller
-                                                          .frequencyList,
-                                                      isValueSelected: controller
-                                                          .isSelectedfrequency
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedfrequency
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    dropdownList: controller
+                                                        .frequencyList,
+                                                    isValueSelected: controller
+                                                        .isSelectedfrequency
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedfrequency
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                   Dimens.boxHeight10,
                                                   Container(

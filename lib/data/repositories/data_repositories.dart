@@ -2607,6 +2607,18 @@ class DataRepository extends DomainRepository {
         categoryId: categoryId);
   }
 
+  Future<ResponseModel> inventoryListviaCategory(
+      {int? facilityId,
+      required bool isLoading,
+      required String auth,
+      int? categoryId}) async {
+    return await connectHelper.inventoryListviaCategory(
+        isLoading: isLoading,
+        auth: auth,
+        facilityId: facilityId,
+        categoryId: categoryId);
+  }
+
   Future<ResponseModel> startCalibration({
     auth,
     bool? isLoading,

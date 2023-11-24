@@ -227,12 +227,24 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                       ],
                     ),
                     Dimens.boxHeight20,
-                    Center(
-                      child: Text(
-                        "Download template",
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: ColorValues.blueColor),
+                    GestureDetector(
+                      onTap: () async {
+                        //Replace 'assets/sample.xlsx' with the path to your XLSX file in the assets folder
+                        String assetPath = 'assets/files/Import_PM_Plan.xlsx';
+                        String localPath =
+                            await controller.downloadXLSXFromAssets(assetPath);
+
+                        // TODO: Use the localPath to work with the XLSX file (e.g., open it with a package like 'excel')
+
+                        print('XLSX file downloaded to: $localPath');
+                      },
+                      child: Center(
+                        child: Text(
+                          "Download template",
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: ColorValues.blueColor),
+                        ),
                       ),
                     ),
                     Dimens.boxHeight20,

@@ -60,6 +60,8 @@ dependencies:
   data_table_2: ^2.4.2
   syncfusion_flutter_pdf: ^19.4.56-beta
   package_info_plus: ^4.2.0
+  flutter_cache_manager: ^3.3.1
+  
 
 dev_dependencies:
   hive_generator:
