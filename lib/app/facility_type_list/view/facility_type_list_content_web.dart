@@ -65,7 +65,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                   Container(
                     width: (Get.width * .30),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height / 1.25,
+                    height: Get.height / 1.40,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -84,7 +84,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Add Facility",
+                                      "Create Facility",
                                       style: Styles.blackBold16,
                                     ),
                                     SizedBox(
@@ -98,7 +98,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             Text(
                                               controller.selectedFacilityId ==
                                                       null
-                                                  ? "Facility added Successfully in the List."
+                                                  ? "Facility Create Successfully in the List."
                                                   : "Facility updated Successfully in the List.",
                                               style: TextStyle(
                                                   fontSize: 16,
@@ -223,6 +223,67 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       ],
                                     ),
                                     Dimens.boxHeight10,
+
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: RichText(
+                                            text: TextSpan(
+                                                text: "Description",
+                                                style: Styles.blackBold16,
+                                                children: [
+                                                  TextSpan(
+                                                    style: TextStyle(
+                                                      color: ColorValues
+                                                          .orangeColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .20),
+                                            child: LoginCustomTextfield(
+                                              // ishint:
+                                              // 'Enter Description',
+                                              textController:
+                                                  controller.descriptionCtrlr,
+                                            )),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -955,66 +1016,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             )),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Description",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                        Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              color: ColorValues.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .20),
-                                            child: LoginCustomTextfield(
-                                              // ishint:
-                                              // 'Enter Description',
-                                              textController:
-                                                  controller.descriptionCtrlr,
-                                            )),
-                                      ],
-                                    ),
                                     // Row(
                                     //   children: [
                                     //     CustomRichText(
@@ -1111,7 +1112,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
                               child: Row(
                                 children: [
                                   Text(
@@ -1122,7 +1124,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   Container(
                                     width: 300,
                                     height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    // margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: TextStyle(
                                         fontSize: 17.0,
@@ -1184,19 +1186,19 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
-                                      "Title",
+                                      "Plant Name",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
-                                    DataColumn2(
-                                        // fixedWidth: 300,
-                                        label: Text(
-                                      "Address",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 300,
+                                    //     label: Text(
+                                    //   "Address",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
@@ -1208,7 +1210,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     DataColumn2(
                                         // fixedWidth: 300,
                                         label: Text(
-                                      "City",
+                                      "Owner",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
@@ -1224,19 +1226,27 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
-                                      "Country",
+                                      "Oprater",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
                                     DataColumn2(
-                                        fixedWidth: 60,
+                                        // fixedWidth: 60,
                                         label: Text(
-                                          "Pin",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Customer",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn2(
+                                        // fixedWidth: 60,
+                                        label: Text(
+                                      "City",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                     DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
@@ -1254,15 +1264,16 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               .facilityTypeList?[index]?.name
                                               .toString() ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .facilityTypeList?[index]
-                                              ?.address ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .facilityTypeList?[index]
+                                      //         ?.address ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .facilityTypeList?[index]?.spv ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]?.city ??
+                                              .facilityTypeList?[index]
+                                              ?.owner ??
                                           '')),
                                       // DataCell(Text(controller
                                       //         .facilityTypeList?[index]
@@ -1270,10 +1281,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       //     '')),
                                       DataCell(Text(controller
                                               .facilityTypeList?[index]
-                                              ?.country ??
+                                              ?.operator ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]?.pin
+                                              .facilityTypeList?[index]
+                                              ?.customer ??
+                                          '')),
+                                      DataCell(Text(controller
+                                              .facilityTypeList?[index]?.city
                                               .toString() ??
                                           '')),
                                       DataCell(Row(

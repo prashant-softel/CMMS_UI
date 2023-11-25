@@ -424,7 +424,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
                               child: Row(
                                 children: [
                                   Text(
@@ -435,7 +436,6 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                   Container(
                                     width: 300,
                                     height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: TextStyle(
                                         fontSize: 17.0,
@@ -489,7 +489,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                     DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
-                                          "Sr num",
+                                          "Sr No",
                                           style: TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
