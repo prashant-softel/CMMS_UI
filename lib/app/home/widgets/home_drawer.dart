@@ -81,16 +81,6 @@ class HomeDrawer extends GetView<HomeController> {
                                                     Routes.breakdown);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "MIS",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.misDashboard);
-                                              },
-                                            ),
 
                                             // MenuItem(
                                             ////                                              isexpand: controller.isExpanded.valu
@@ -193,12 +183,14 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
-                                              title: "Audit",
-                                              icon: "assets/files/setting.png",
+                                              title: "MIS",
+                                              icon: "assets/files/warranty.png",
                                               press: () {
-                                                Get.offAllNamed(Routes.audit);
+                                                Get.offAllNamed(
+                                                    Routes.misDashboard);
                                               },
                                             ),
+
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -206,6 +198,15 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon: "assets/files/setting.png",
                                               press: () {
                                                 Get.offAllNamed(Routes.setting);
+                                              },
+                                            ),
+                                            MenuItem(
+                                              isexpand:
+                                                  controller.isExpanded.value,
+                                              title: "Audit",
+                                              icon: "assets/files/setting.png",
+                                              press: () {
+                                                Get.offAllNamed(Routes.audit);
                                               },
                                             ),
                                             MenuItem(

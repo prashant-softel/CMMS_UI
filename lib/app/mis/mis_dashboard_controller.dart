@@ -96,4 +96,22 @@ class MisDashboardController extends GetxController {
   void goToWasteDataScreen() {
     Get.toNamed(Routes.wasteData);
   }
+
+  Future<void> goToTypeOfObservation() async {
+    Get.toNamed(
+      Routes.typeofobservation,
+    );
+  }
+
+  Future<void> goToSourceOfObservation() async {
+    Get.toNamed(
+      Routes.sourceofobservation,
+    );
+  }
+
+  Future<void> goToRiskType() async {
+    Get.toNamed(
+      Routes.risktypemaster,
+    );
+  }
 }
