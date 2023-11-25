@@ -4,7 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
-import'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -105,8 +105,8 @@ class BlockTypeListController extends GetxController {
     for (var facilityType_list in _FacilityTypeList) {
       facilityTypeList.add(facilityType_list);
     }
-      selectedfacility.value = facilityTypeList[0].name!;
-    selectedFacilityId = facilityTypeList[0].id! ;
+    selectedfacility.value = facilityTypeList[0].name!;
+    selectedFacilityId = facilityTypeList[0].id!;
     getBlockTypeList(selectedFacilityId);
   }
 
@@ -115,7 +115,7 @@ class BlockTypeListController extends GetxController {
     print(selected);
   }
 
-  Future<void> getBlockTypeList( selectedFacilityId) async {
+  Future<void> getBlockTypeList(selectedFacilityId) async {
     blockTypeList.value = <BlockTypeListModel>[];
     final _blockTypePermitList = await blockTypeListPresenter.getBlockTypeList(
       isLoading: true,
@@ -127,7 +127,7 @@ class BlockTypeListController extends GetxController {
       blockTypeList.add(blockType_list);
     }
     // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
-  
+
     // supplierNameList = _supplierNameList;
     blockTypeListPaginationController = PaginationController(
       rowCount: blockTypeList.length,
@@ -135,14 +135,15 @@ class BlockTypeListController extends GetxController {
     );
     update(['block_type_list']);
   }
-  void checkForm() {
 
-    if(selectedfacility.value == ''){
+  void checkForm() {
+    if (selectedfacility.value == '') {
       isSelectedfacility.value = false;
     }
 
-    if(isNameInvalid.value == true || isDescriptionInvalid.value == true || isSelectedfacility.value == false
-    ){
+    if (isNameInvalid.value == true ||
+        isDescriptionInvalid.value == true ||
+        isSelectedfacility.value == false) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -150,7 +151,7 @@ class BlockTypeListController extends GetxController {
   }
 
   Future<bool> createBlockList() async {
-    if (titleCtrlr.text.trim() == '' ) {
+    if (titleCtrlr.text.trim() == '') {
       isNameInvalid.value = true;
       // isDescriptionInvalid.value = true;
       isFormInvalid.value = true;
@@ -225,14 +226,12 @@ class BlockTypeListController extends GetxController {
     // String _zip = zipCtrlr.text.trim();
     //
     UpdateBlockTypeListModel updateBusinessList = UpdateBlockTypeListModel(
-      id:businessId,
+      id: businessId,
       name: _businessName,
       description: _description,
       parentId: selectedFacilityId,
     );
-    var modulelistJsonString =
-    updateBusinessList.toJson();
-
+    var modulelistJsonString = updateBusinessList.toJson();
 
     print({"modulelistJsonString", modulelistJsonString});
     await blockTypeListPresenter.updateBlock(
@@ -241,15 +240,12 @@ class BlockTypeListController extends GetxController {
     );
     return true;
   }
-  void isDeleteDialog({
-    String? business_id ,
-    String? business
-  }) {
+
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -259,7 +255,7 @@ class BlockTypeListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: business,
+                    text: "[$business]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -295,13 +291,10 @@ class BlockTypeListController extends GetxController {
     );
   }
 
-
   Future<void> deleteBusiness(String? business_id) async {
     {
       await blockTypeListPresenter.deleteBlock(
         business_id,
-
-
         isLoading: true,
       );
     }
