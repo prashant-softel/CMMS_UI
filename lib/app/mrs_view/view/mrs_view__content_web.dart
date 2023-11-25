@@ -174,12 +174,12 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Requested Date Time:',
+                                    'Where Used:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Where Used:',
+                                    'Requested Date Time:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
@@ -200,18 +200,18 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                      controller.mrsDetailsModel.value
-                                              ?.requestd_date ??
-                                          "",
-                                      style: Styles.blue17),
-                                  Dimens.boxHeight10,
-                                  Text(
-                                      '${controller.mrsDetailsModel.value?.whereUsedType.toString().toUpperCase() ?? ''}${controller.mrsDetailsModel.value?.whereUsedTypeId ?? ''}',
+                                      '${controller.mrsDetailsModel.value?.whereUsedTypeName.toString().toUpperCase() ?? ''}${controller.mrsDetailsModel.value?.whereUsedRefID ?? ''}',
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(
                                       controller.mrsDetailsModel.value
                                               ?.approval_date ??
+                                          "",
+                                      style: Styles.blue17),
+                                  Dimens.boxHeight10,
+                                  Text(
+                                      controller.mrsDetailsModel.value
+                                              ?.requestd_date ??
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
@@ -287,13 +287,13 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
-                                    DataColumn(
-                                        label: Text(
-                                      "Approved Qty.",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                    // DataColumn(
+                                    //     label: Text(
+                                    //   "Approved Qty.",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn(
                                         label: Text(
                                       "issued Qyt.",
@@ -324,12 +324,12 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                                 .cmmrsItems![index]
                                                 .requested_qty
                                                 .toString())),
-                                            DataCell(Text(controller
-                                                .mrsDetailsModel
-                                                .value!
-                                                .cmmrsItems![index]
-                                                .available_qty
-                                                .toString())),
+                                            // DataCell(Text(controller
+                                            //     .mrsDetailsModel
+                                            //     .value!
+                                            //     .cmmrsItems![index]
+                                            //     .a
+                                            //     .toString())),
                                             DataCell(Text(controller
                                                 .mrsDetailsModel
                                                 .value!

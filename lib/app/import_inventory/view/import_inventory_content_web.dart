@@ -5,6 +5,11 @@ import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../import_inventory_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+// import 'dart:html' as html;
+import 'package:http/http.dart' as http;
+import 'package:universal_html/html.dart' as universal;
 
 class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
   ImportInventoryContentWeb({
@@ -231,12 +236,20 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                       onTap: () async {
                         //Replace 'assets/sample.xlsx' with the path to your XLSX file in the assets folder
                         String assetPath = 'assets/files/Import_PM_Plan.xlsx';
-                        String localPath =
-                            await controller.downloadXLSXFromAssets(assetPath);
+                        // String localPath =
+                        //     await controller.downloadXLSXFromAssets(assetPath);
 
                         // TODO: Use the localPath to work with the XLSX file (e.g., open it with a package like 'excel')
 
-                        print('XLSX file downloaded to: $localPath');
+                        // print('XLSX file downloaded to: $localPath');
+
+                        // Replace 'assets/example.xls' with the actual path of your asset.
+                        // String assetPath = 'assets/example.xls';
+
+                        // Replace 'example.xls' with the desired name for the downloaded file.
+                        String fileName = 'example.xls';
+
+                        downloadFile(assetPath, fileName);
                       },
                       child: Center(
                         child: Text(
@@ -316,5 +329,34 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
         ],
       ),
     );
+  }
+
+  Future<void> downloadFile(String url, String fileName) async {
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final Uint8List bytes = response.bodyBytes;
+
+        final universal.Blob blob = universal.Blob([bytes]);
+        final String url = universal.Url.createObjectUrlFromBlob(blob);
+
+        final universal.AnchorElement anchor =
+            universal.AnchorElement(href: url)
+              ..target = 'webbrowser'
+              ..download = fileName;
+
+        universal.document.body?.children.add(anchor);
+        anchor.click();
+        universal.document.body?.children.remove(anchor);
+        universal.Url.revokeObjectUrl(url);
+
+        print('Download successful. File saved as: $fileName');
+      } else {
+        print('Failed to download file. Status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error downloading file: $error');
+    }
   }
 }

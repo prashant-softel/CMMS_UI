@@ -320,7 +320,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 Expanded(
                                   child: Container(
                                     margin: Dimens.edgeInsets20,
-                                    height: 400,
+                                    height: 600,
                                     //  ((controller
                                     //             .filteredInventoryNameList
                                     //             .length) *

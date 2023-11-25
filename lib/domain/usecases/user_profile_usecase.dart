@@ -45,4 +45,5 @@ class UserProfileUsecase {
       repository.saveValue(LocalKeys.userDetailId, userId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.userDetailId);
+  void clearValue() async => repository.clearData(LocalKeys.userDetailId);
 }
