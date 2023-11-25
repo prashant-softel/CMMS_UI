@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 
 import 'package:cmms/app/mis/mis_dashboard_controller.dart';
+import 'package:cmms/app/onHover.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -100,6 +101,32 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           ),
                         ),
                       ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "MIS",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
@@ -276,6 +303,66 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             onTap: () {
                               controller.goToWasteDataScreen();
                             })
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Master",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: Dimens.edgeInsets15,
+                      crossAxisSpacing: 70,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        OnHover(builder: (((isHovered) {
+                          return createContentTile(
+                              title: "Type of observation",
+                              onTap: () {
+                                controller.goToTypeOfObservation();
+                              });
+                        }))),
+                        OnHover(builder: (((isHovered) {
+                          return createContentTile(
+                              title: "Source of observation",
+                              onTap: () {
+                                controller.goToSourceOfObservation();
+                              });
+                        }))),
+                        OnHover(builder: (((isHovered) {
+                          return createContentTile(
+                              title: "Risk Type",
+                              onTap: () {
+                                controller.goToRiskType();
+                              });
+                        }))),
                       ],
                     ),
                   ]),
