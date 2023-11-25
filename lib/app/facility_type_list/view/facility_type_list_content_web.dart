@@ -63,7 +63,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: (Get.width * .35),
+                    width: (Get.width * .30),
                     margin: EdgeInsets.only(left: 30, top: 30),
                     height: Get.height / 1.25,
                     child: Card(
@@ -129,7 +129,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           width: (MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.25),
+                                              0.20),
                                           height: 30,
                                           decoration: BoxDecoration(
                                             boxShadow: [
@@ -257,7 +257,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  .25),
+                                                  .20),
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
@@ -344,7 +344,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                               boxShadow: [
                                                 BoxShadow(
@@ -430,7 +430,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                               boxShadow: [
                                                 BoxShadow(
@@ -510,7 +510,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                               boxShadow: [
                                                 BoxShadow(
@@ -603,7 +603,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: LoginCustomTextfield(
                                               // ishint: 'Enter Address',
                                               textController:
@@ -671,7 +671,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                                 boxShadow: [
                                                   BoxShadow(
@@ -765,7 +765,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                                 boxShadow: [
                                                   BoxShadow(
@@ -858,7 +858,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: DropdownWebWidget(
                                                 boxShadow: [
                                                   BoxShadow(
@@ -947,7 +947,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: LoginCustomTextfield(
                                               // ishint: 'Enter Pin',
                                               textController:
@@ -1006,7 +1006,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .25),
+                                                .20),
                                             child: LoginCustomTextfield(
                                               // ishint:
                                               // 'Enter Description',
@@ -1167,14 +1167,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                               child: Obx(
                                 () => DataTable2(
                                   key: UniqueKey(),
-                                  dataRowHeight: 50,
+                                  dataRowHeight: 60,
                                   columnSpacing: 10,
                                   border: TableBorder.all(
                                       color:
                                           Color.fromARGB(255, 206, 229, 234)),
                                   columns: [
                                     DataColumn2(
-                                        fixedWidth: 50,
+                                        fixedWidth: 45,
                                         label: Text(
                                           "Sr No",
                                           style: TextStyle(
@@ -1213,14 +1213,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
-                                    DataColumn2(
-                                        fixedWidth: 100,
-                                        label: Text(
-                                          "State",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                    // DataColumn2(
+                                    //     fixedWidth: 100,
+                                    //     label: Text(
+                                    //       "State",
+                                    //       style: TextStyle(
+                                    //           fontSize: 15,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     )),
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
@@ -1230,13 +1230,13 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           fontWeight: FontWeight.bold),
                                     )),
                                     DataColumn2(
-                                        // fixedWidth: 300,
+                                        fixedWidth: 60,
                                         label: Text(
-                                      "Pin",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                          "Pin",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
                                     DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
@@ -1264,10 +1264,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       DataCell(Text(controller
                                               .facilityTypeList?[index]?.city ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .facilityTypeList?[index]
-                                              ?.state ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .facilityTypeList?[index]
+                                      //         ?.state ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .facilityTypeList?[index]
                                               ?.country ??
