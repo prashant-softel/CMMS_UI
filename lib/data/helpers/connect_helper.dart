@@ -3231,7 +3231,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'PM/DeletePMPlan?planId=$planId',
-      Request.delete,
+      Request.put,
       planId,
       isLoading ?? false,
       {
@@ -5174,6 +5174,24 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'PM/CreatePMPlan',
+      Request.post,
+      createPmPlanJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updatePmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/UpdatePMPlan',
       Request.post,
       createPmPlanJsonString,
       isLoading ?? false,
