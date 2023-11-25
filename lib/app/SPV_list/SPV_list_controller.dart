@@ -255,7 +255,7 @@ class SPVListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: business,
+                    text: "[$business]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
