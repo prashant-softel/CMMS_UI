@@ -221,7 +221,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                   ],
                                 ),
                                 Container(
-                                  margin: EdgeInsets.all(20),
+                                  margin: EdgeInsets.only(
+                                      left: 20, right: 20, top: 10, bottom: 10),
                                   child: Row(
                                     children: [
                                       Text(
@@ -392,9 +393,9 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
                                 controller.transactionReportList.isEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(

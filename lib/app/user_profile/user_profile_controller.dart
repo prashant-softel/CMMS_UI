@@ -101,9 +101,8 @@ class UserProfileController extends GetxController {
   // }
 
   Future<void> editProfile() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
+    userProfilePresenter.clearValue();
 
-    _flutterSecureStorage.delete(key: "userId");
     Get.toNamed(Routes.addUser, arguments: {
       'userId': userId.value,
     });
