@@ -175,7 +175,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(
-                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
+                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
                                       style: Styles.blue17),
                                 ],
                               )
@@ -311,7 +311,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                         .value!
                                                         .cmmrsItems![index]
                                                         .approval_required ==
-                                                    1
+                                                    "Yes"
                                                 ? DataCell(
                                                     Padding(
                                                       padding:

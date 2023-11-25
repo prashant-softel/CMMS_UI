@@ -45,4 +45,5 @@ class UserProfilePresenter {
   }
 
   Future<String?> getValue() async => await userProfileUsecase.getValue();
+  void clearValue() async => userProfileUsecase.clearValue();
 }
