@@ -355,7 +355,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                           )),
                                                     ),
                                                   )
-                                                : DataCell(Text("data")),
+                                                : DataCell(Text("")),
                                             DataCell(
                                               Padding(
                                                 padding:

@@ -129,22 +129,34 @@ class CreatePmPlanController extends GetxController {
       selectedInventoryCategoryId = _pmPlanDetailsModel.category_id ?? 0;
       selectedInventory.value = _pmPlanDetailsModel.category_name ?? "";
       if (selectedInventoryCategoryId > 0) {
-        inventoryList(
+        await inventoryList(
             facilityId: _pmPlanDetailsModel.facility_id,
             categoryId: selectedInventoryCategoryId);
-        getPreventiveCheckList(_pmPlanDetailsModel.facility_id ?? 0, 1, true,
-            selectedfrequencyId, selectedInventoryCategoryId);
+        await getPreventiveCheckList(_pmPlanDetailsModel.facility_id ?? 0, 1,
+            true, selectedfrequencyId, selectedInventoryCategoryId);
+        // selectedInventoryNameList
+
+        selectedInventoryNameList.value = [];
+        rowItem.value = [];
+
         _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
+          InventoryModel? inventoryModel = inventoryNameList.firstWhere(
+            (e) => e?.id == element.asset_id,
+            orElse: () => null,
+          );
+          if (inventoryModel != null) {
+            print("hsdfbhjgfhsbgfhdsbshj");
+            selectedInventoryNameList.value.add(inventoryModel);
+          }
           rowItem.value.add([
-            {"key": "srNo", "value": ''},
-            {"key": "assetName", "value": '${element.asset_name}'},
+            {"key": "assetName", "value": '${element.name}'},
             {'key': "assetsId", "value": '${element.asset_id}'},
             {'key': "parentAsset", "value": '${element.parent_name}'},
             {'key': "qty", "value": '${element.module_qty}'},
             {
               'key': "checklist",
               "value": '${element.checklist_name}',
-              "checkListId": '${element.checklist_id}'
+              "id": '${element.checklist_id}'
             },
           ]);
         });
@@ -225,10 +237,6 @@ class CreatePmPlanController extends GetxController {
       filteredInventoryNameList.forEach((element) {
         rowItem.value.add([
           {
-            "key": "srNo",
-            "value": '',
-          },
-          {
             "key": "assetName",
             "value": '${element?.name}',
           },
@@ -241,11 +249,7 @@ class CreatePmPlanController extends GetxController {
             "value": '${element?.parentName}',
           },
           {'key': "qty", "value": ''},
-          {
-            'key': "checklist",
-            "value": '',
-            "checkListId": '${selectedChecklistId}'
-          },
+          {'key': "checklist", "value": '', "id": ''},
         ]);
       });
     }
@@ -288,7 +292,9 @@ class CreatePmPlanController extends GetxController {
           preventiveCheckList.value = <PreventiveCheckListModel>[];
           selectedInventoryNameIdList.value = [];
 
-          selectedInventoryNameList.value = [];
+          if (pmPlanId == 0 || pmPlanId == null) {
+            selectedInventoryNameList.value = [];
+          }
           Future.delayed(Duration(seconds: 1), () {
             inventoryList(
                 facilityId: facilityId,
@@ -304,7 +310,7 @@ class CreatePmPlanController extends GetxController {
         break;
       case RxList<InventoryModel>:
         {
-          // filteredInventoryNameList.value = <InventoryModel>[];
+          filteredInventoryNameList.value = <InventoryModel>[];
           // inventoryNameList.value = <InventoryModel>[];
           // selectedInventoryNameIdList.value = [];
           rowItem.value = [];
@@ -380,7 +386,7 @@ class CreatePmPlanController extends GetxController {
     // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
     rowItem.value.forEach((element) {
       AssetChecklist item = AssetChecklist(
-          asset_name: "",
+          name: "",
           checklist_name: "",
           module_qty: 0,
           parent_id: 0,
@@ -390,6 +396,7 @@ class CreatePmPlanController extends GetxController {
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(
+        plan_id: 0,
         plan_name: _plantitle,
         plan_date: _startDate,
         facility_id: facilityId,
@@ -403,6 +410,49 @@ class CreatePmPlanController extends GetxController {
     print({"createPmPlanJsonString", createPmPlanJsonString});
     Map<String, dynamic>? responseCreatePmPlan =
         await createPmPlanPresenter.createPmPlan(
+      createPmPlanJsonString: createPmPlanJsonString,
+      isLoading: true,
+    );
+    if (responseCreatePmPlan == null) {
+    } else {
+      Get.offAllNamed(
+        Routes.pmPlanList,
+      );
+    }
+  }
+
+  Future<void> updatePmPlan() async {
+    String _startDate = startDateDateTc.text.trim();
+    String _plantitle = planTittleCtrlr.text.trim();
+
+    List<AssetChecklist> mapAssetChecklist = [];
+    // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
+    rowItem.value.forEach((element) {
+      AssetChecklist item = AssetChecklist(
+          name: "",
+          checklist_name: "",
+          module_qty: 0,
+          parent_id: 0,
+          parent_name: "",
+          asset_id: int.tryParse(element[2]["value"] ?? '0'),
+          checklist_id: int.tryParse('${element[5]["id"]}'));
+      mapAssetChecklist.add(item);
+    });
+    CreatePmPlanModel createPmPlan = CreatePmPlanModel(
+        plan_id: pmPlanId.value,
+        plan_name: _plantitle,
+        plan_date: _startDate,
+        facility_id: facilityId,
+        assigned_to_id: selectedAssignedToId,
+        category_id:
+            selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
+        plan_freq_id: selectedfrequencyId,
+        mapAssetChecklist: mapAssetChecklist);
+    var createPmPlanJsonString = createPmPlan.toJson();
+
+    print({"createPmPlanJsonString", createPmPlanJsonString});
+    Map<String, dynamic>? responseCreatePmPlan =
+        await createPmPlanPresenter.updatePmPlan(
       createPmPlanJsonString: createPmPlanJsonString,
       isLoading: true,
     );

@@ -41,6 +41,14 @@ class CreatePmPlanUsecase {
         createPmPlanJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> updatePmPlan({
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updatePmPlan(
+        createPmPlanJsonString,
+        isLoading,
+      );
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForPm(
           {int? type,
           int? facilityId,
