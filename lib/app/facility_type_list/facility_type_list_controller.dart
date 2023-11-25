@@ -88,6 +88,8 @@ class FacilityTypeListController extends GetxController {
   ///SOP Permit List
   RxList<FacilityTypeListModel> facilityTypeList =
       <FacilityTypeListModel>[].obs;
+  RxList<FacilityTypeListModel> BufferFacilityTypeList =
+      <FacilityTypeListModel>[].obs;
 
   RxList<FacilityTypeListModel> filteredData = <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
@@ -186,15 +188,30 @@ class FacilityTypeListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
+
     if (keyword.isEmpty) {
-      facilityTypeList.value = filteredData;
+      print(
+          'facilityTypeList length (empty keyword): ${facilityTypeList.length}');
+      facilityTypeList.value = BufferFacilityTypeList.value;
+
       return;
     }
 
-    facilityTypeList.value = filteredData
-        .where((item) =>
-            item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
-        .toList();
+    // Use print statements to debug the filtering logic
+    List<FacilityTypeListModel> filteredList = BufferFacilityTypeList.where(
+        (item) =>
+            item.name
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false).toList();
+
+    print('Filtered list length: ${filteredList.length}');
+
+    facilityTypeList.value = filteredList;
+    print(
+        'facilityTypeList length (non-empty keyword): ${facilityTypeList.length}');
   }
 
   Future<void> getCountryList() async {
