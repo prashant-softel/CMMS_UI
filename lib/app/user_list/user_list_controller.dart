@@ -103,20 +103,6 @@ class UserListController extends GetxController {
 
     if (_userList != null) {
       userList.value = _userList;
-      filteredData.value = userList;
-      paginationController = PaginationController(
-        rowCount: userList.length,
-        rowsPerPage: 10,
-      );
-
-      if (filteredData.isNotEmpty) {
-        userListModel = filteredData[0];
-        var userListJson = userListModel?.toJson();
-        userListTableColumns.value = <String>[];
-        for (var key in userListJson?.keys.toList() ?? []) {
-          userListTableColumns.add(key);
-        }
-      }
     }
     update(['user_list']);
   }
