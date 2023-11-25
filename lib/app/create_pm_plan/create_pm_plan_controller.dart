@@ -26,6 +26,8 @@ class CreatePmPlanController extends GetxController {
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> bufferRowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   int selectedPurchaseID = 0;
   bool openStartDatePicker = false;
@@ -44,14 +46,14 @@ class CreatePmPlanController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
   Rx<bool> isSelectedInventory = true.obs;
-  RxList<InventoryModel?> selectedInventoryNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel> selectedInventoryNameList = <InventoryModel>[].obs;
   int selectedInventoryCategoryId = 0;
-  RxList<InventoryModel?> filteredInventoryNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel> filteredInventoryNameList = <InventoryModel>[].obs;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   //Equipment Name List
-  RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel> inventoryNameList = <InventoryModel>[].obs;
   // RxList<InventoryModel?> filteredNameList = <InventoryModel>[].obs;
   RxList<int> selectedInventoryNameIdList = <int>[].obs;
   Map<dynamic, dynamic> inventory_map = {};
@@ -142,7 +144,7 @@ class CreatePmPlanController extends GetxController {
         _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
           InventoryModel? inventoryModel = inventoryNameList.firstWhere(
             (e) => e?.id == element.asset_id,
-            orElse: () => null,
+            // orElse: () => null,
           );
           if (inventoryModel != null) {
             print("hsdfbhjgfhsbgfhdsbshj");
@@ -182,17 +184,17 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> inventoryList({int? facilityId, int? categoryId}) async {
-    inventoryNameList.value = <InventoryModel>[];
-    filteredInventoryNameList.value = <InventoryModel>[];
+    inventoryNameList.value = []; //<InventoryModel?>[];
+    filteredInventoryNameList.value = []; //<InventoryModel>[];
     // inventoryNameList.value = <InventoryModel>[];
     // selectedInventoryNameIdList.value = [];
     rowItem.value = [];
-    preventiveCheckList.value = <PreventiveCheckListModel>[];
+    preventiveCheckList.value = <PreventiveCheckListModel?>[];
     final _equipmentNameList = await createPmPlanPresenter.inventoryList(
         isLoading: true, facilityId: facilityId, categoryId: categoryId);
     if (_equipmentNameList != null) {
       for (var equipmentName in _equipmentNameList) {
-        inventoryNameList.add(equipmentName);
+        inventoryNameList.add(equipmentName!);
       }
     }
   }
@@ -228,13 +230,19 @@ class CreatePmPlanController extends GetxController {
         (element) {
           return element?.id == _selectedfacilityNameId;
         },
-        orElse: () {},
+        // orElse: () => null,
       );
-      filteredInventoryNameList.add(e);
+      if (e != null) {
+        filteredInventoryNameList.add(e);
+      }
     }
     print({"filteredInventoryNameList": filteredInventoryNameList});
     if (filteredInventoryNameList.length > 0) {
       filteredInventoryNameList.forEach((element) {
+        var aa = bufferRowItem.value
+                .firstWhereOrNull((i) => i[1]["value"] == '${element?.id}') ??
+            [];
+
         rowItem.value.add([
           {
             "key": "assetName",
@@ -249,7 +257,11 @@ class CreatePmPlanController extends GetxController {
             "value": '${element?.parentName}',
           },
           {'key': "qty", "value": ''},
-          {'key': "checklist", "value": '', "id": ''},
+          {
+            'key': "checklist",
+            "value": (aa.length > 0 ? '${aa[4]["value"]}' : ''),
+            "id": (aa.length > 0 ? '${aa[4]["id"]}' : '')
+          },
         ]);
       });
     }
@@ -313,6 +325,7 @@ class CreatePmPlanController extends GetxController {
           filteredInventoryNameList.value = <InventoryModel>[];
           // inventoryNameList.value = <InventoryModel>[];
           // selectedInventoryNameIdList.value = [];
+          bufferRowItem.value = rowItem.value;
           rowItem.value = [];
           // preventiveCheckList.value = <PreventiveCheckListModel>[];
           selectedInventoryNameIdList.value = [];
