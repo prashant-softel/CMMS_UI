@@ -99,7 +99,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "ADD SPV",
+                                      "CREATE SPV",
                                       style: Styles.blackBold16,
                                     ),
                                     SizedBox(
@@ -139,8 +139,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                         // ),
 
                                         Expanded(
-                                            child:
-                                                CustomRichText(title: 'Name ')),
+                                            child: CustomRichText(
+                                                title: 'Spv Name ')),
                                         Container(
                                           width: (MediaQuery.of(context)
                                                   .size
@@ -493,7 +493,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                     DataColumn2(
                                         fixedWidth: 100,
                                         label: Text(
-                                          "Sr num",
+                                          "Sr No",
                                           style: TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
@@ -501,7 +501,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
-                                      "Name",
+                                      "Spv Name",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
