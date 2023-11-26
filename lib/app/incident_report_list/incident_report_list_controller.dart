@@ -108,14 +108,14 @@ class IncidentReportListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Id": 153,
-    "Description": 320,
+    "Description": 220,
     "Block Name": 220,
     "Equipment Name": 200,
-    "Approved By": 250,
-    "Approved At": 250,
-    "Reported By": 250,
-    "Reported At": 250,
-    "Status": 250,
+    "Approved By": 200,
+    "Approved At": 200,
+    "Reported By": 200,
+    "Reported At": 200,
+    "Status": 200,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {

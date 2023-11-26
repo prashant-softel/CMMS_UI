@@ -2805,7 +2805,7 @@ class Repository {
 
       if (!res.hasError) {
         var incidentReportList = incidentReportListModelFromJson(res.data);
-        return incidentReportList;
+        return incidentReportList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');

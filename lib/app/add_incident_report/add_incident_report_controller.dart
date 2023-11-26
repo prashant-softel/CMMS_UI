@@ -236,6 +236,18 @@ class AddIncidentReportController extends GetxController {
   ///Propsed Row item
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
+  //why why analysis
+  RxList<List<Map<String, String>>> rowWhyWhyAnalysisItem =
+      <List<Map<String, String>>>[].obs;
+
+  ///Root cause
+  RxList<List<Map<String, String>>> rowRootCauseItem =
+      <List<Map<String, String>>>[].obs;
+
+  //immediate correction
+  RxList<List<Map<String, String>>> rowImmediateCorrectionItem =
+      <List<Map<String, String>>>[].obs;
+
 //Address textfield
   Rx<bool> isAddressInvalid = false.obs;
   var addressTextCtrlr = TextEditingController();
@@ -726,6 +738,9 @@ class AddIncidentReportController extends GetxController {
     );
     update(['inventory_list']);
     addRowItem();
+    addWhyWhyAnalysisRowItem();
+    addRootCauseRowItem();
+    addImmediateCorrectionRowItem();
   }
 
   void addRowItem() {
@@ -737,6 +752,25 @@ class AddIncidentReportController extends GetxController {
       },
       {'key': "Target Date ", "value": ''},
       {'key': "Remark", "value": ''},
+    ]);
+  }
+
+  void addWhyWhyAnalysisRowItem() {
+    rowWhyWhyAnalysisItem.add([
+      {'key': "Why ", "value": ''},
+      {'key': "Cause ", "value": ''},
+    ]);
+  }
+
+  void addRootCauseRowItem() {
+    rowRootCauseItem.add([
+      {'key': "Cause ", "value": ''},
+    ]);
+  }
+
+  void addImmediateCorrectionRowItem() {
+    rowImmediateCorrectionItem.add([
+      {'key': "Correction ", "value": ''},
     ]);
   }
 
@@ -1023,19 +1057,19 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
       String _insuranceAvailable =
           htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
-      // // String _costOfReplacement =
-      // //     htmlEscape.convert(costOfReplacementTextController.text.trim());
-      // String _orderReferenceNo =
-      //     htmlEscape.convert(orderReferenceNoTextController.text.trim());
-      // String _affectedSerialNo =
-      //     htmlEscape.convert(affectedSerialNoTextController.text.trim());
-
-      // int costOfReplacement =
-      //     int.parse(costOfReplacementTextController.text.trim());
-
-      // int? sopFileId = createSOPModel2.sop_fileId;
-      // // int? jsaFileId = data.jsa_fileId;
-      // print('SOPFileId:$sopFileId');
+      String _jobType = htmlEscape.convert(typeOfJbTextCtrlr.text.trim());
+      String _personAuthorized =
+          htmlEscape.convert(personAuthorizedInvolvedTextCtrlr.text.trim());
+      String? _instruction =
+          htmlEscape.convert(instructionsTextCtrlr.text.trim());
+      String? _safetyEquipment =
+          htmlEscape.convert(SafetyEquipmetsTextCtrlr.text.trim());
+      String? _correctSafetyProcedure =
+          htmlEscape.convert(correctSafeTextCtrlr.text.trim());
+      String? _unsafeConditionContributed =
+          htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
+      String? _unsafeActCause =
+          htmlEscape.convert(unsafeIncidentTextCtrlr.text.trim());
       // late List<ExternalEmails> external_emails_list = [];
 
       // externalEmails.forEach((e) {
@@ -1051,6 +1085,40 @@ class AddIncidentReportController extends GetxController {
       //     // is_required: e.is_required
       //   ));
       // });
+
+      ///Why why analysis
+      List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
+      rowWhyWhyAnalysisItem.forEach((element) {
+        WhyWhyAnalysis item = WhyWhyAnalysis(
+          incidents_id: 123,
+          why: element[0]["value"] ?? '0',
+          cause: element[1]["value"] ?? '0',
+        );
+
+        whyWhyAnalysisItems.add(item);
+      });
+
+      ///Root Cause
+      List<RootCause> rootCauseItems = [];
+      rowRootCauseItem.forEach((element) {
+        RootCause item = RootCause(
+          incidents_id: 123,
+          cause: element[0]["value"] ?? '0',
+        );
+
+        rootCauseItems.add(item);
+      });
+
+      ///Immediate correction
+      List<ImmediateCorrection> immediateCorrectionItems = [];
+      rowImmediateCorrectionItem.forEach((element) {
+        ImmediateCorrection item = ImmediateCorrection(
+          incidents_id: 123,
+          details: element[0]["value"] ?? '0',
+        );
+
+        immediateCorrectionItems.add(item);
+      });
 
       CreateIncidentReportModel createIncidentReportModel =
           CreateIncidentReportModel(
@@ -1084,7 +1152,18 @@ class AddIncidentReportController extends GetxController {
               insurance_status: 2,
               // insurance_remark: _insuranceRemark,
               insurance_remark: _insuranceAvailable,
-              severity: selectedSeverity.value);
+              severity: selectedSeverity.value,
+              //new data adding
+              type_of_job: _jobType,
+              is_person_authorized: _personAuthorized,
+              instructions_given: _instruction,
+              safety_equipments: _safetyEquipment,
+              safe_procedure_observed: _correctSafetyProcedure,
+              unsafe_condition_contributed: _unsafeConditionContributed,
+              unsafe_act_cause: _unsafeActCause,
+              why_why_analysis: whyWhyAnalysisItems,
+              root_cause: rootCauseItems,
+              immediate_correction: immediateCorrectionItems);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
       Map<String, dynamic>? responseCreateIncidentReport =
