@@ -126,17 +126,17 @@ class HomeDrawer extends GetView<HomeController> {
                                                 Get.offAllNamed(Routes.home);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Assets",
-                                              icon:
-                                                  "assets/files/maintenance.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.inventory);
-                                              },
-                                            ),
+                                            // MenuItem(
+                                            //   isexpand:
+                                            //       controller.isExpanded.value,
+                                            //   title: "Assets",
+                                            //   icon:
+                                            //       "assets/files/maintenance.png",
+                                            //   press: () {
+                                            //     Get.offAllNamed(
+                                            //         Routes.inventory);
+                                            //   },
+                                            // ),
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -183,7 +183,7 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
-                                              title: "MIS",
+                                              title: "HSC Report",
                                               icon: "assets/files/warranty.png",
                                               press: () {
                                                 Get.offAllNamed(

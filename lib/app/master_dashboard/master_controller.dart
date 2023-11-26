@@ -242,6 +242,30 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> pmSchedule() async {
+    Get.toNamed(
+      Routes.pmSchedule,
+    );
+  }
+
+  Future<void> newWarrantyClaimList() async {
+    Get.toNamed(
+      Routes.newWarrantyClaimList,
+    );
+  }
+
+  Future<void> breakdownMaintenance() async {
+    Get.toNamed(
+      Routes.warrantyClaimListWeb,
+    );
+  }
+
+  Future<void> inventoryStatusScreen() async {
+    Get.toNamed(
+      Routes.inventoryStatusListScreen,
+    );
+  }
+
   Future<void> goToAddUser() async {
     Get.toNamed(Routes.addUser, arguments: {'userId': 0});
   }
