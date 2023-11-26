@@ -1001,7 +1001,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                               child: Obx(
                                 () => DataTable2(
                                   key: UniqueKey(),
-                                  dataRowHeight: 90,
+                                  dataRowHeight: 70,
                                   columnSpacing: 10,
                                   border: TableBorder.all(
                                       color:
@@ -1023,38 +1023,38 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 150,
+                                    //     label: Text(
+                                    //   "Email",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
-                                        // fixedWidth: 150,
+                                        fixedWidth: 150,
                                         label: Text(
-                                      "Email",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 300,
-                                        label: Text(
-                                      "Contact Person",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 100,
-                                        label: Text(
-                                      "Contact Number",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 100,
-                                        label: Text(
-                                      "Website",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                          "Contact Name",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 100,
+                                    //     label: Text(
+                                    //   "Contact No",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 100,
+                                    //     label: Text(
+                                    //   "Website",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
                                         // fixedWidth: 100,
                                         label: Text(
@@ -1079,22 +1079,22 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
-                                    DataColumn2(
-                                        // fixedWidth: 60,
-                                        label: Text(
-                                      "State",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 60,
-                                        label: Text(
-                                      "Country",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 60,
+                                    //     label: Text(
+                                    //   "State",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 60,
+                                    //     label: Text(
+                                    //   "Country",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
                                         // fixedWidth: 60,
                                         label: Text(
@@ -1119,21 +1119,21 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                       DataCell(Text(
                                           controller.moduleList?[index]?.name ??
                                               '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.email ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.email ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]
                                               ?.contactPerson ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]
-                                              ?.contactnumber ??
-                                          '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.website
-                                              .toString() ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]
+                                      //         ?.contactnumber ??
+                                      //     '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.website
+                                      //         .toString() ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]?.location
                                               .toString() ??
@@ -1146,14 +1146,14 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               .moduleList?[index]?.city
                                               .toString() ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.state
-                                              .toString() ??
-                                          '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.country
-                                              .toString() ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.state
+                                      //         .toString() ??
+                                      //     '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.country
+                                      //         .toString() ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]?.zip
                                               .toString() ??

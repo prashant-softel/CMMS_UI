@@ -63,6 +63,8 @@ class AddInventoryController extends GetxController {
   //currancy
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<bool> isManufacturerSelected = true.obs;
+
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
@@ -132,6 +134,8 @@ class AddInventoryController extends GetxController {
   /// manufacturer name
   RxList<ManufacturerModel?> manufacturerModelNameList =
       <ManufacturerModel>[].obs;
+  RxList<String?> selectedmanufacturerNameList = <String>[].obs;
+
   Rx<String> selectedmanufacturerName = ''.obs;
   Rx<bool> iswarrantymanufacturerSelected = true.obs;
   int selectedmanufacturerNameId = 0;
@@ -458,7 +462,7 @@ class AddInventoryController extends GetxController {
     String _modelNoCtrlr = modelNoCtrlr.text.trim();
     String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
     String _costCtrlr = costCtrlr.text.trim();
-    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _calibrationRemainderInTc = calibrationRemaingCtrlr.text.trim();
     String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
     String _expireDateTc = expireDateTc.text.trim();
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
@@ -495,9 +499,10 @@ class AddInventoryController extends GetxController {
             serialNumber: _serialNoCtrlr,
             parentId: selectedEquipmentnameId,
             calibrationFrequency: selectedfrequencyId,
-            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
-            calibrationLastDate: "2023-01-10",
-            calibrationFirstDueDate: "2023-01-10",
+            calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
+            calibrationLastDate: _lastCalibrationDateTc,
+
+            //  calibrationFirstDueDate: _lastCalibrationDateTc,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -537,11 +542,12 @@ class AddInventoryController extends GetxController {
 
   Future<void> getmanufacturerList() async {
     manufacturerModelNameList.value = <ManufacturerModel>[];
-    final _manufacturerList = await addInventoryPresenter.getmanufacturerList(
+    final _manufacturerModelNameList =
+        await addInventoryPresenter.getmanufacturerList(
       isLoading: true,
       BusinessType: 8,
     );
-    for (var manufacturerName in _manufacturerList) {
+    for (var manufacturerName in _manufacturerModelNameList) {
       manufacturerModelNameList.add(manufacturerName);
     }
   }
@@ -678,10 +684,10 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<ManufacturerModel>:
         {
-          int manufacturerIndex =
+          int manufacturerModelNameIndex =
               manufacturerModelNameList.indexWhere((x) => x?.name == value);
           selectedmanufacturerNameId =
-              manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+              manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
           selectedmanufacturerName.value = value;
         }
         break;
