@@ -314,17 +314,18 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
                                               contentPadding:
-                                                  Dimens.edgeInsets05_10,
+                                                  EdgeInsets.fromLTRB(
+                                                      10, 10, 10, 12),
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(10.0),
+                                                    BorderRadius.circular(5),
                                                 borderSide: BorderSide(
                                                     color: Colors.transparent),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(10.0),
+                                                    BorderRadius.circular(5),
                                                 borderSide: BorderSide(
                                                     color: Colors.transparent),
                                               ),
@@ -424,8 +425,9 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             decoration: InputDecoration(
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 5, right: 5),
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      10, 10, 10, 12),
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -1043,7 +1045,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           ),
                                         ),
                                         contentPadding:
-                                            EdgeInsets.only(left: 5, right: 5),
+                                            EdgeInsets.fromLTRB(10, 10, 10, 12),
                                         hintText: 'search'.tr,
                                         hintStyle: Styles.grey16,
                                       ),
