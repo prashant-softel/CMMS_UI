@@ -27,12 +27,22 @@ class CreateIncidentReportModel {
   int? generation_loss;
   int? job_id;
   String? description;
+  String? type_of_job;
+  String? is_person_authorized;
+  String? instructions_given;
+  String? safety_equipments;
+  String? safe_procedure_observed;
+  String? unsafe_condition_contributed;
+  String? unsafe_act_cause;
   bool? is_insurance_applicable;
   String? insurance;
   int? insurance_status;
   String? insurance_remark;
   int? id;
   String? severity;
+  List<WhyWhyAnalysis?>? why_why_analysis;
+  List<RootCause?>? root_cause;
+  List<ImmediateCorrection?>? immediate_correction;
   // List<InvestigationTeam?>? investigationTeam;
 
   CreateIncidentReportModel({
@@ -56,12 +66,22 @@ class CreateIncidentReportModel {
     this.generation_loss,
     this.job_id,
     this.description,
+    this.type_of_job,
+    this.is_person_authorized,
+    this.instructions_given,
+    this.safety_equipments,
+    this.safe_procedure_observed,
+    this.unsafe_condition_contributed,
+    this.unsafe_act_cause,
     this.is_insurance_applicable,
     this.insurance,
     this.insurance_status,
     this.insurance_remark,
     this.id,
     this.severity,
+    this.why_why_analysis,
+    this.root_cause,
+    this.immediate_correction,
     // this.investigationTeam,
   });
 
@@ -87,12 +107,31 @@ class CreateIncidentReportModel {
         generation_loss: json['generation_loss'],
         job_id: json['job_id'],
         description: json['description'],
+        type_of_job: json['type_of_job'],
+        is_person_authorized: json['is_person_authorized'],
+        instructions_given: json['instructions_given'],
         is_insurance_applicable: json['is_insurance_applicable'],
+        safety_equipments: json['safety_equipments'],
+        safe_procedure_observed: json['safe_procedure_observed'],
+        unsafe_condition_contributed: json['unsafe_condition_contributed'],
+        unsafe_act_cause: json['unsafe_act_cause'],
         insurance: json['insurance'],
         insurance_status: json['insurance_status'],
         insurance_remark: json['insurance_remark'],
         id: json['id'],
         severity: json['severity'],
+        why_why_analysis: json['why_why_analysis'] != null
+            ? List<WhyWhyAnalysis>.from(json["why_why_analysis"]
+                ?.map((x) => WhyWhyAnalysis.fromJson(x)))
+            : [],
+        root_cause: json['root_cause'] != null
+            ? List<RootCause>.from(
+                json["root_cause"]?.map((x) => RootCause.fromJson(x)))
+            : [],
+        immediate_correction: json['immediate_correction'] != null
+            ? List<ImmediateCorrection>.from(json["immediate_correction"]
+                ?.map((x) => ImmediateCorrection.fromJson(x)))
+            : [],
         // investigationTeam: json["supplierActions"] != null
         //     ? List<InvestigationTeam>.from(json["supplierActions"]
         //         ?.map((x) => InvestigationTeam.fromJson(x)))
@@ -119,14 +158,94 @@ class CreateIncidentReportModel {
         "damaged_cost": damaged_cost,
         "generation_loss": generation_loss,
         "description": description,
+        "type_of_job": type_of_job,
+        "is_person_authorized": is_person_authorized,
+        "instructions_given": instructions_given,
+        "safety_equipments": safety_equipments,
+        "safe_procedure_observed": safe_procedure_observed,
+        "unsafe_condition_contributed": unsafe_condition_contributed,
+        "unsafe_act_cause": unsafe_act_cause,
         "is_insurance_applicable": is_insurance_applicable,
         "insurance": insurance,
         "insurance_status": insurance_status,
         "insurance_remark": insurance_remark,
         "id": id,
         "severity": severity,
+        "why_why_analysis": List<dynamic>.from(why_why_analysis!.map((x) => x)),
+        "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),
+        "immediate_correction":
+            List<dynamic>.from(immediate_correction!.map((x) => x)),
+
         // "investigationTeam":
         //     List<dynamic>.from(investigationTeam!.map((x) => x)),
+      };
+}
+
+///why why Analysis
+class WhyWhyAnalysis {
+  WhyWhyAnalysis({
+    this.incidents_id,
+    this.why,
+    this.cause,
+  });
+
+  int? incidents_id;
+  String? why;
+  String? cause;
+
+  factory WhyWhyAnalysis.fromJson(Map<String, dynamic> json) => WhyWhyAnalysis(
+        incidents_id: json['incidents_id'],
+        why: json['why'],
+        cause: json["cause"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "why": why,
+        "cause": cause,
+      };
+}
+
+//Root Cause
+class RootCause {
+  RootCause({
+    this.incidents_id,
+    this.cause,
+  });
+
+  int? incidents_id;
+  String? cause;
+
+  factory RootCause.fromJson(Map<String, dynamic> json) => RootCause(
+        incidents_id: json['incidents_id'],
+        cause: json["cause"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "cause": cause,
+      };
+}
+
+///Imeediate Correction
+class ImmediateCorrection {
+  ImmediateCorrection({
+    this.incidents_id,
+    this.details,
+  });
+
+  int? incidents_id;
+  String? details;
+
+  factory ImmediateCorrection.fromJson(Map<String, dynamic> json) =>
+      ImmediateCorrection(
+        incidents_id: json['incidents_id'],
+        details: json["details"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "details": details,
       };
 }
 
