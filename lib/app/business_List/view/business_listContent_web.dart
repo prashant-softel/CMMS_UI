@@ -491,8 +491,22 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                            child: CustomRichText(
-                                                title: 'Website ')),
+                                          child: RichText(
+                                            text: TextSpan(
+                                                text: "Website",
+                                                style: Styles.blackBold16,
+                                                children: [
+                                                  TextSpan(
+                                                    style: TextStyle(
+                                                      color: ColorValues
+                                                          .orangeColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
                                         Container(
                                           decoration: BoxDecoration(
                                             boxShadow: [
@@ -540,22 +554,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Location",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
+                                            child: CustomRichText(
+                                                title: 'Location ')),
                                         Container(
                                             decoration: BoxDecoration(
                                               boxShadow: [
@@ -599,21 +599,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Address",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'Address '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -660,21 +647,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Country",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'Country '),
                                         ),
                                         Container(
                                           height: MediaQuery.of(context)
@@ -735,21 +709,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "State",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'State '),
                                         ),
                                         Container(
                                           height: MediaQuery.of(context)
@@ -810,21 +771,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "City",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child: CustomRichText(title: 'City '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -875,21 +822,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Zip",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child: CustomRichText(title: 'Zip '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
