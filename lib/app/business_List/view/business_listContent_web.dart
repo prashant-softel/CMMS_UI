@@ -491,8 +491,22 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                            child: CustomRichText(
-                                                title: 'Website ')),
+                                          child: RichText(
+                                            text: TextSpan(
+                                                text: "Website",
+                                                style: Styles.blackBold16,
+                                                children: [
+                                                  TextSpan(
+                                                    style: TextStyle(
+                                                      color: ColorValues
+                                                          .orangeColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
                                         Container(
                                           decoration: BoxDecoration(
                                             boxShadow: [
@@ -540,22 +554,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Location",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
+                                            child: CustomRichText(
+                                                title: 'Location ')),
                                         Container(
                                             decoration: BoxDecoration(
                                               boxShadow: [
@@ -599,21 +599,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Address",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'Address '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -660,21 +647,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Country",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'Country '),
                                         ),
                                         Container(
                                           height: MediaQuery.of(context)
@@ -735,21 +709,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "State",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child:
+                                              CustomRichText(title: 'State '),
                                         ),
                                         Container(
                                           height: MediaQuery.of(context)
@@ -810,21 +771,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "City",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child: CustomRichText(title: 'City '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -875,21 +822,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           MainAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: "Zip",
-                                                style: Styles.blackBold16,
-                                                children: [
-                                                  TextSpan(
-                                                    style: TextStyle(
-                                                      color: ColorValues
-                                                          .orangeColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
+                                          child: CustomRichText(title: 'Zip '),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -1068,7 +1001,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                               child: Obx(
                                 () => DataTable2(
                                   key: UniqueKey(),
-                                  dataRowHeight: 90,
+                                  dataRowHeight: 70,
                                   columnSpacing: 10,
                                   border: TableBorder.all(
                                       color:
@@ -1090,38 +1023,38 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 150,
+                                    //     label: Text(
+                                    //   "Email",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
-                                        // fixedWidth: 150,
+                                        fixedWidth: 150,
                                         label: Text(
-                                      "Email",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 300,
-                                        label: Text(
-                                      "Contact Person",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 100,
-                                        label: Text(
-                                      "Contact Number",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 100,
-                                        label: Text(
-                                      "Website",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                          "Contact Name",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 100,
+                                    //     label: Text(
+                                    //   "Contact No",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 100,
+                                    //     label: Text(
+                                    //   "Website",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
                                         // fixedWidth: 100,
                                         label: Text(
@@ -1146,22 +1079,22 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
-                                    DataColumn2(
-                                        // fixedWidth: 60,
-                                        label: Text(
-                                      "State",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    DataColumn2(
-                                        // fixedWidth: 60,
-                                        label: Text(
-                                      "Country",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 60,
+                                    //     label: Text(
+                                    //   "State",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
+                                    // DataColumn2(
+                                    //     // fixedWidth: 60,
+                                    //     label: Text(
+                                    //   "Country",
+                                    //   style: TextStyle(
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.bold),
+                                    // )),
                                     DataColumn2(
                                         // fixedWidth: 60,
                                         label: Text(
@@ -1186,21 +1119,21 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                       DataCell(Text(
                                           controller.moduleList?[index]?.name ??
                                               '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.email ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.email ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]
                                               ?.contactPerson ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]
-                                              ?.contactnumber ??
-                                          '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.website
-                                              .toString() ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]
+                                      //         ?.contactnumber ??
+                                      //     '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.website
+                                      //         .toString() ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]?.location
                                               .toString() ??
@@ -1213,14 +1146,14 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               .moduleList?[index]?.city
                                               .toString() ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.state
-                                              .toString() ??
-                                          '')),
-                                      DataCell(Text(controller
-                                              .moduleList?[index]?.country
-                                              .toString() ??
-                                          '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.state
+                                      //         .toString() ??
+                                      //     '')),
+                                      // DataCell(Text(controller
+                                      //         .moduleList?[index]?.country
+                                      //         .toString() ??
+                                      //     '')),
                                       DataCell(Text(controller
                                               .moduleList?[index]?.zip
                                               .toString() ??

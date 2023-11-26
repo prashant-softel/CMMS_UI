@@ -57,7 +57,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text("/ ASSETS", style: Styles.greyLight14),
+                            child: Text("/ MASTER", style: Styles.greyLight14),
                           ),
                           Text(
                             "/ASSETS LIST",
