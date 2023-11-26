@@ -103,6 +103,7 @@ class ScheduleCheckPoint {
   int? clone_of_asset;
   String? clone_of_name;
   String? name;
+  int? assetsID;
   String? checklist_name;
   List<ChecklistObservation>? checklist_observation;
   List<ScheduleLinkJob>? schedule_link_job;
@@ -113,6 +114,7 @@ class ScheduleCheckPoint {
       this.clone_of_asset,
       this.clone_of_name,
       this.schedule_id,
+      this.assetsID,
       this.checklist_observation,
       this.schedule_link_job});
 
@@ -121,6 +123,7 @@ class ScheduleCheckPoint {
           name: json["asset_name"] ?? '',
           checklist_name: json["checklist_name"] ?? '',
           clone_of_asset: json["clone_of_asset"] ?? 0,
+          assetsID: json["assetsID"] ?? 0,
           clone_of_name: json["clone_of_name"] ?? '',
           schedule_id: json["schedule_id"] ?? 0,
           checklist_observation: List<ChecklistObservation>.from(
@@ -136,6 +139,7 @@ class ScheduleCheckPoint {
         "clone_of_asset": clone_of_asset,
         "clone_of_name": clone_of_name,
         "schedule_id": schedule_id,
+        "assetsID": assetsID,
         "checklist_observation": List<dynamic>.from(
             checklist_observation?.map((x) => x.toJson()) ?? []),
         "schedule_link_job":

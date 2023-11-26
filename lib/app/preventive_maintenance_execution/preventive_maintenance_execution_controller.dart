@@ -165,7 +165,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           refID: scheduleId.value,
           refType: AppConstants.kTask,
           remarks: "remarks",
-          toActorID: selectedItem?.schedule_id ?? 0,
+          toActorID: selectedItem?.assetsID ?? 0,
           // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
           toActorType: AppConstants.kInventory);
 

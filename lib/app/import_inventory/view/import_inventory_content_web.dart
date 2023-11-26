@@ -79,7 +79,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                               child: Text(" / MASTER",
                                   style: Styles.greyMediumLight12),
                             ),
-                            Text(" / IMPORT ASSET",
+                            Text(" / IMPORT USER",
                                 style: Styles.greyMediumLight12),
                           ],
                         )
@@ -164,7 +164,15 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "Import Assets file",
+                        controller.type == 1
+                            ? "Import Assets file"
+                            : controller.type == 2
+                                ? "Import User file"
+                                : controller.type == 5
+                                    ? "Import Material file"
+                                    : controller.type == 6
+                                        ? "Import PM Plan file"
+                                        : "Import Checkpoint file",
                         style: Styles.blackBold16,
                       ),
                     ),
