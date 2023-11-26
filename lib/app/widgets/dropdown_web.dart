@@ -93,7 +93,7 @@ class DropdownWebWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 borderSide: BorderSide(color: ColorValues.redColorDark),
               ),
-              contentPadding: Dimens.edgeInsets05_0_5_0,
+              contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 12),
               hintText: "Select",
             ),
           ),
