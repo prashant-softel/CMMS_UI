@@ -175,14 +175,14 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                 TextInputType.multiline,
                                             autofocus: false,
                                             style: TextStyle(
-                                                fontSize: 17.0,
+                                                fontSize: 15.0,
                                                 height: 1.0,
                                                 color: Colors.black),
                                             decoration: InputDecoration(
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
-                                              contentPadding:
-                                                  Dimens.edgeInsets05_10,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 5, right: 5),
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -283,14 +283,14 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                 TextInputType.multiline,
                                             autofocus: false,
                                             style: TextStyle(
-                                                fontSize: 17.0,
+                                                fontSize: 16.0,
                                                 height: 1.0,
                                                 color: Colors.black),
                                             decoration: InputDecoration(
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
-                                              contentPadding:
-                                                  Dimens.edgeInsets05_10,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 5, right: 5),
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:

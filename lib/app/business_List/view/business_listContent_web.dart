@@ -66,7 +66,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                   Container(
                     width: (Get.width * .30),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height / 1,
+                    height: Get.height / 1.3,
                     child: Card(
                       color: Color.fromARGB(255, 251, 252, 253),
                       elevation: 10,
@@ -154,25 +154,6 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   0.040,
                                               child: Obx(
                                                 () => DropdownWebWidget(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
                                                   controller: controller,
                                                   dropdownList: controller
                                                       .businessCategoryList,
@@ -234,6 +215,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             )),
                                       ],
                                     ),
+
                                     SizedBox(
                                       height: 10,
                                     ),
@@ -289,8 +271,13 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                       children: [
                                         Expanded(
                                             child: CustomRichText(
-                                                title: 'Contact ')),
+                                                title: 'Contact Name')),
                                         Container(
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.18),
+                                          height: 30,
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -313,20 +300,21 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .18),
                                           child: TextField(
                                             controller:
                                                 controller.contactpersonCtrlr,
                                             keyboardType:
                                                 TextInputType.multiline,
-                                            maxLines: 1,
                                             autofocus: false,
+                                            style: TextStyle(
+                                                fontSize: 17.0,
+                                                height: 1.0,
+                                                color: Colors.black),
                                             decoration: InputDecoration(
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
+                                              contentPadding:
+                                                  Dimens.edgeInsets05_10,
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -395,6 +383,11 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               title: 'Contact No '),
                                         ),
                                         Container(
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.18),
+                                          height: 30,
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -417,10 +410,6 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .20),
                                           child: TextField(
                                             controller:
                                                 controller.contactnumberCtrlr,
@@ -428,11 +417,15 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 TextInputType.multiline,
                                             maxLines: 1,
                                             autofocus: false,
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                height: 1.0,
+                                                color: Colors.black),
                                             decoration: InputDecoration(
                                               fillColor: ColorValues.whiteColor,
                                               filled: true,
-                                              contentPadding:
-                                                  Dimens.edgeInsets05_10,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 5, right: 5),
                                               border: InputBorder.none,
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -522,14 +515,10 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 BorderRadius.circular(5),
                                           ),
                                           child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: LoginCustomTextfield(
                                               textController:
                                                   controller.websiteCtrlr,
@@ -592,7 +581,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: LoginCustomTextfield(
                                               textController:
                                                   controller.locationCtrlr,
@@ -625,10 +614,6 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           ),
                                         ),
                                         Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.040,
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -652,14 +637,10 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 BorderRadius.circular(5),
                                           ),
                                           child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: LoginCustomTextfield(
                                               textController:
                                                   controller.addressCtrlr,
@@ -728,26 +709,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
                                               controller: controller,
                                               dropdownList:
                                                   controller.countryList,
@@ -821,26 +784,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
                                               controller: controller,
                                               dropdownList:
                                                   controller.stateList,
@@ -905,25 +850,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           width: (MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              .20),
+                                              .18),
                                           child: DropdownWebWidget(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
                                             controller: controller,
                                             dropdownList: controller.cityList,
                                             isValueSelected: controller
@@ -962,10 +890,6 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           ),
                                         ),
                                         Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.040,
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -989,14 +913,10 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 BorderRadius.circular(5),
                                           ),
                                           child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .20),
+                                                .18),
                                             child: LoginCustomTextfield(
                                               textController:
                                                   controller.zipCtrlr,
@@ -1103,7 +1023,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                     // margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: TextStyle(
-                                        fontSize: 17.0,
+                                        fontSize: 15.0,
                                         height: 1.0,
                                         color: Colors.black,
                                       ),
@@ -1122,7 +1042,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             width: 0.0,
                                           ),
                                         ),
-                                        contentPadding: Dimens.edgeInsets05_10,
+                                        contentPadding:
+                                            EdgeInsets.only(left: 5, right: 5),
                                         hintText: 'search'.tr,
                                         hintStyle: Styles.grey16,
                                       ),
@@ -1145,7 +1066,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                               child: Obx(
                                 () => DataTable2(
                                   key: UniqueKey(),
-                                  dataRowHeight: 60,
+                                  dataRowHeight: 90,
                                   columnSpacing: 10,
                                   border: TableBorder.all(
                                       color:
@@ -1160,7 +1081,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               fontWeight: FontWeight.bold),
                                         )),
                                     DataColumn2(
-                                        fixedWidth: 250,
+                                        fixedWidth: 120,
                                         label: Text(
                                           "Name",
                                           style: TextStyle(
@@ -1184,37 +1105,37 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           fontWeight: FontWeight.bold),
                                     )),
                                     DataColumn2(
-                                        fixedWidth: 100,
+                                        // fixedWidth: 100,
                                         label: Text(
-                                          "Contact Number",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Contact Number",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                     DataColumn2(
-                                        fixedWidth: 100,
+                                        // fixedWidth: 100,
                                         label: Text(
-                                          "Website",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Website",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                     DataColumn2(
-                                        fixedWidth: 100,
+                                        // fixedWidth: 100,
                                         label: Text(
-                                          "Location",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Location",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                     DataColumn2(
-                                        fixedWidth: 100,
+                                        // fixedWidth: 100,
                                         label: Text(
-                                          "Address",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "Address",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
