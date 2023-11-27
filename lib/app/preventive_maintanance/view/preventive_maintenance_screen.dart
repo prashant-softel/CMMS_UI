@@ -183,11 +183,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        _priventiveList(
-                            tittle: "PM Schedule",
-                            ontap: () {
-                              controller.pmSchedule();
-                            }),
+                        // _priventiveList(
+                        //     tittle: "PM Schedule",
+                        //     ontap: () {
+                        //       controller.pmSchedule();
+                        //     }),
 
                         _priventiveList(
                             tittle: "PM Tasks",
