@@ -15,8 +15,8 @@ import 'competency_list_presenter.dart';
 
 class CompetencyListController extends GetxController {
   CompetencyListController(
-      this.competencyListPresenter,
-      );
+    this.competencyListPresenter,
+  );
   CompetencyListPresenter competencyListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -28,8 +28,9 @@ class CompetencyListController extends GetxController {
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<CompetencyModel?>? competencyList =
-      <CompetencyModel?>[].obs;
+  RxList<CompetencyModel?>? competencyList = <CompetencyModel?>[].obs;
+  RxList<CompetencyModel> filteredData = <CompetencyModel>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -52,23 +53,19 @@ class CompetencyListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
     //   Future.delayed(Duration(seconds: 2), () {
-        getCompetencyList( true);
+    getCompetencyList(true);
     //   });
     // });
     super.onInit();
   }
 
-
-  Future<void> getCompetencyList(
-       bool isLoading) async {
+  Future<void> getCompetencyList(bool isLoading) async {
     competencyList?.value = <CompetencyModel>[];
     final _competencyList =
-    await competencyListPresenter.getCompetencyList(
-         isLoading: isLoading);
+        await competencyListPresenter.getCompetencyList(isLoading: isLoading);
 
     if (_competencyList != null) {
       competencyList!.value = _competencyList.cast<CompetencyModel?>();
@@ -95,19 +92,20 @@ class CompetencyListController extends GetxController {
   }
 
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<bool> createCompetency() async {
-    if (nameCtrlr.text.trim() == '' ) {
+    if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -119,20 +117,17 @@ class CompetencyListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (nameCtrlr.text.trim() == '' ||
-        descriptionCtrlr.text.trim()=='') {
+    if (nameCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _name = nameCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      CreateCompetency createCompetencyList = CreateCompetency(
-          name: _name,
-          description: _description
-      );
-      var competencyJsonString = 
-        createCompetencyList.toJson(); //createCheckListToJson([createCompetencyList]);
+      CreateCompetency createCompetencyList =
+          CreateCompetency(name: _name, description: _description);
+      var competencyJsonString = createCompetencyList
+          .toJson(); //createCheckListToJson([createCompetencyList]);
 
       print({"competencyJsonString", competencyJsonString});
       await competencyListPresenter.createCompetency(
@@ -156,14 +151,59 @@ class CompetencyListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getCompetencyList( true);
+      getCompetencyList(true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
   }
 
-  void isDeleteDialog({String? checklist_id, String? checklist}) {
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      competencyList?.value = filteredData;
+      // return;
+    }
+
+    competencyList?.value = filteredData
+        .where((item) =>
+            (item!.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+  }
+  // void search(String keyword) {
+  //   print('Keyword: $keyword');
+  //   if (keyword.isEmpty) {
+  //     competencyList?.value = BufferCompetencyList.value;
+  //     return;
+  //   }
+  //   List<CompetencyModel> filteredList = BufferCompetencyList.where((item) =>
+  //           (item.name
+  //                   ?.toString()
+  //                   .toLowerCase()
+  //                   .contains(keyword.toLowerCase()) ??
+  //               false) ||
+  //           (item.description
+  //                   ?.toString()
+  //                   .toLowerCase()
+  //                   .contains(keyword.toLowerCase()) ??
+  //               false) // Add this condition to filter by searchId
+  //       ).toList();
+  //   competencyList?.value = filteredList;
+  // }
+
+  void isDeleteDialog(
+      {String? checklist_id,
+      String? checklist,
+      String? business_id,
+      String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -200,7 +240,7 @@ class CompetencyListController extends GetxController {
                 onPressed: () {
                   deleteCompetencyList(checklist_id).then((value) {
                     Get.back();
-                    getCompetencyList( true);
+                    getCompetencyList(true);
                   });
                 },
                 child: Text('YES'),
@@ -226,12 +266,9 @@ class CompetencyListController extends GetxController {
     String _description = descriptionCtrlr.text.trim();
 
     CompetencyModel createCompetencyList = CompetencyModel(
-        id:checklistId,
-        name: _name,
-        description: _description
-    );
-    var competencyJsonString =
-    createCompetencyList.toJson(); //createCheckListToJson([createCompetencyList]);
+        id: checklistId, name: _name, description: _description);
+    var competencyJsonString = createCompetencyList
+        .toJson(); //createCheckListToJson([createCompetencyList]);
 
     print({"competencyJsonString", competencyJsonString});
     await competencyListPresenter.updateCompetency(
