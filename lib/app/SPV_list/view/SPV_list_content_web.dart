@@ -114,8 +114,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                               controller.isFormInvalid == false
                                                   ? controller.selectedItem ==
                                                           null
-                                                      ? "Facility added Successfully in the List."
-                                                      : "Facility updated Successfully in the List."
+                                                      ? "SPV Create Successfully in the List."
+                                                      : "SPV updated Successfully in the List."
                                                   : "Facility is not added.",
                                               style: TextStyle(
                                                   fontSize: 16,

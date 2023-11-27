@@ -261,32 +261,35 @@ class MastersDashboard extends GetView<MastersController> {
                           //     }))),
                           //   ],
                           // ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Facility",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 5 && e.add == 0)
+                                      .length >
+                                  0
+                              ? Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Facility",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 159, 156, 156),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors.grey,
+                                          height: 1,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                )
+                              : Dimens.box0,
                           GridView.count(
                             shrinkWrap: true,
                             primary: false,
@@ -313,18 +316,30 @@ class MastersDashboard extends GetView<MastersController> {
                                     : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Facility List",
-                                    onTap: () {
-                                      controller.goToFacilityTypeList();
-                                    });
+                                return varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id == 5 && e.add == 0)
+                                            .length >
+                                        0
+                                    ? createContentTile(
+                                        title: "Facility List",
+                                        onTap: () {
+                                          controller.goToFacilityTypeList();
+                                        })
+                                    : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Block List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
+                                return varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id == 5 && e.add == 0)
+                                            .length >
+                                        0
+                                    ? createContentTile(
+                                        title: "Block List",
+                                        onTap: () {
+                                          controller.goToBlockTypeList();
+                                        })
+                                    : Dimens.box0;
                               }))),
                             ],
                           ),

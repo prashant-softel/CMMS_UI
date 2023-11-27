@@ -188,30 +188,44 @@ class FacilityTypeListController extends GetxController {
   }
 
   void search(String keyword) {
-    print('Keyword: $keyword');
-
     if (keyword.isEmpty) {
-      print(
-          'facilityTypeList length (empty keyword): ${facilityTypeList.length}');
-      facilityTypeList.value = BufferFacilityTypeList.value;
-
-      return;
+      facilityTypeList?.value = filteredData;
+      // return;
     }
 
-    // Use print statements to debug the filtering logic
-    List<FacilityTypeListModel> filteredList = BufferFacilityTypeList.where(
-        (item) =>
-            item.name
-                ?.toString()
-                .toLowerCase()
-                .contains(keyword.toLowerCase()) ??
-            false).toList();
-
-    print('Filtered list length: ${filteredList.length}');
-
-    facilityTypeList.value = filteredList;
-    print(
-        'facilityTypeList length (non-empty keyword): ${facilityTypeList.length}');
+    facilityTypeList?.value = filteredData
+        .where((item) =>
+            (item!.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.spv
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.owner
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.operator
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.customer
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.city
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
   }
 
   Future<void> getCountryList() async {
