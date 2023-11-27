@@ -63,8 +63,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.manufacturerModelNameList,
-                                  isValueSelected: controller
-                                      .iswarrantymanufacturerSelected.value,
+                                  isValueSelected:
+                                      controller.isManufacturerSelected.value,
                                   selectedValue:
                                       controller.selectedmanufacturerName.value,
                                   onValueChanged: controller.onValueChanged,

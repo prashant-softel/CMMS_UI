@@ -55,9 +55,9 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                           Text(" /DASHBOARD", style: Styles.greyLight14),
                           GestureDetector(
                             onTap: () {
-                              Get.offNamed(Routes.inventory);
+                              Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text("/ ASSETS", style: Styles.greyLight14),
+                            child: Text("/ MASTER", style: Styles.greyLight14),
                           ),
                           Text(
                             "/ASSETS LIST",

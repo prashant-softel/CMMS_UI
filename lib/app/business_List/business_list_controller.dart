@@ -16,7 +16,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../domain/models/update_business_list_model.dart';
 import 'business_list_presenter.dart';
 
-
 class BusinessListController extends GetxController {
   BusinessListController(
     this.businessListPresenter,
@@ -25,14 +24,10 @@ class BusinessListController extends GetxController {
   RxList<BusinessListModel?> filteredData = <BusinessListModel>[].obs;
 
   final HomeController homecontroller = Get.find();
-  RxList<CountryModel?> countryList =
-      <CountryModel>[].obs;
-  RxList<CountryState?> stateList =
-      <CountryState>[].obs;
-  RxList<CityModel?> cityList =
-      <CityModel>[].obs;
-  RxList<BusinessTypeModel?>  businessCategoryList =
-      <BusinessTypeModel>[].obs;
+  RxList<CountryModel?> countryList = <CountryModel>[].obs;
+  RxList<CountryState?> stateList = <CountryState>[].obs;
+  RxList<CityModel?> cityList = <CityModel>[].obs;
+  RxList<BusinessTypeModel?> businessCategoryList = <BusinessTypeModel>[].obs;
   Rx<bool> isNameInvalid = false.obs;
   Rx<bool> isEmailInvalid = false.obs;
   Rx<bool> isPersonInvalid = false.obs;
@@ -52,9 +47,7 @@ class BusinessListController extends GetxController {
   int selectedStateId = 0;
   int selectedCityId = 0;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<BusinessListModel?>?
-  moduleList =
-      <BusinessListModel?>[].obs;
+  RxList<BusinessListModel?>? moduleList = <BusinessListModel?>[].obs;
   int facilityId = 0;
   // int businessType = 0;
   int type = 0;
@@ -62,7 +55,6 @@ class BusinessListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-
 
   BusinessListModel? moduleListModel;
   var isToggleOn = true.obs;
@@ -94,7 +86,6 @@ class BusinessListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-
     getBusinessTypeList();
     getCountryList();
 
@@ -115,7 +106,31 @@ class BusinessListController extends GetxController {
 
     moduleList?.value = filteredData
         .where((item) =>
-        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+            (item!.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.contactPerson
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.contactnumber
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.email
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.city
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
   }
 
@@ -124,24 +139,23 @@ class BusinessListController extends GetxController {
     //   businessCategoryList.value = <BusinessTypeModel>[];
     // }else{
     print("$selectedBusinessTypeId");
-      final list = await businessListPresenter.getBusinessTypeList();
+    final list = await businessListPresenter.getBusinessTypeList();
 
-      for (var _equipmentCategoryList in list) {
-        businessCategoryList.add(_equipmentCategoryList);
-      }
-          // if(selectedBusinessType.value != '')
+    for (var _equipmentCategoryList in list) {
+      businessCategoryList.add(_equipmentCategoryList);
+    }
+    // if(selectedBusinessType.value != '')
 
-      //   print("$selectedBusinessTypeId");
-      //
-      //   getBusinessList(selectedBusinessTypeId, true);
-      // }
+    //   print("$selectedBusinessTypeId");
+    //
+    //   getBusinessList(selectedBusinessTypeId, true);
+    // }
     print("$selectedBusinessTypeId");
     // }
     selectedBusinessType.value = businessCategoryList[0]?.name!;
-    selectedBusinessTypeId = businessCategoryList[0]?.id! ;
-    getBusinessList(selectedBusinessTypeId,true);
+    selectedBusinessTypeId = businessCategoryList[0]?.id!;
+    getBusinessList(selectedBusinessTypeId, true);
   }
-
 
   Future<void> getCountryList() async {
     final list = await businessListPresenter.getCountryList();
@@ -167,7 +181,8 @@ class BusinessListController extends GetxController {
   Future<void> getStateList(int selectedCountryId) async {
     stateList.clear();
     stateList.value = <CountryState>[];
-    final list = await businessListPresenter.getStateList(selectedCountryId : selectedCountryId);
+    final list = await businessListPresenter.getStateList(
+        selectedCountryId: selectedCountryId);
 
     if (list != null) {
       for (var _equipmentCategoryList in list) {
@@ -179,7 +194,8 @@ class BusinessListController extends GetxController {
   Future<void> getCityList(int selectedStateId) async {
     cityList.clear();
     cityList.value = <CityModel>[];
-    final list = await businessListPresenter.getCityList(selectedStateId : selectedStateId);
+    final list = await businessListPresenter.getCityList(
+        selectedStateId: selectedStateId);
 
     if (list != null) {
       for (var _equipmentCategoryList in list) {
@@ -188,61 +204,60 @@ class BusinessListController extends GetxController {
     }
   }
 
-    // Future<void> getCityList() async {
-    //   final list = await businessListPresenter.getCityList();
-    //
-    //   if (list != null) {
-    //     for (var _equipmentCategoryList in list) {
-    //       cityList.add(_equipmentCategoryList);
-    //     }
-    //   }
-    // }
+  // Future<void> getCityList() async {
+  //   final list = await businessListPresenter.getCityList();
+  //
+  //   if (list != null) {
+  //     for (var _equipmentCategoryList in list) {
+  //       cityList.add(_equipmentCategoryList);
+  //     }
+  //   }
+  // }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<BusinessTypeModel>:
         {
           int equipmentIndex =
-          businessCategoryList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = businessCategoryList[equipmentIndex]?.id ?? 0;
+              businessCategoryList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId =
+              businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
           getBusinessList(selectedBusinessTypeId!, true);
         }
 
         break;
-        case RxList<CountryModel>:
-          {
-            int frequencyIndex =
-            countryList.indexWhere((x) => x?.name == value);
-            selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
-            if (selectedCountryId > 0) {
-              isSelectedCountryType.value = true;
-            }
-            selectedCountry.value = value;
-            getStateList(selectedCountryId);
-            if(selectedStateId!=0 || selectedCityId!=0) {
-              selectedStateId=0;
-              selectedCityId=0;
-              selectedState = ''.obs;
-              selectedCity = ''.obs;
-              getStateList(selectedCountryId);
-              getCityList(selectedStateId);
-            }
+      case RxList<CountryModel>:
+        {
+          int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
+          selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
+          if (selectedCountryId > 0) {
+            isSelectedCountryType.value = true;
           }
+          selectedCountry.value = value;
+          getStateList(selectedCountryId);
+          if (selectedStateId != 0 || selectedCityId != 0) {
+            selectedStateId = 0;
+            selectedCityId = 0;
+            selectedState = ''.obs;
+            selectedCity = ''.obs;
+            getStateList(selectedCountryId);
+            getCityList(selectedStateId);
+          }
+        }
         break;
       case RxList<CountryState>:
         {
-          int frequencyIndex =
-          stateList.indexWhere((x) => x?.name == value);
+          int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
           selectedStateId = stateList[frequencyIndex]?.id ?? 0;
           if (selectedStateId > 0) {
             isSelectedStateType.value = true;
           }
           selectedState.value = value;
           getCityList(selectedStateId);
-          if(selectedCityId!=0){
+          if (selectedCityId != 0) {
             // selectedStateId=0;
-            selectedCityId=0;
+            selectedCityId = 0;
             // selectedState = ''.obs;
             selectedCity = ''.obs;
             // getStateList(selectedCountryId);
@@ -252,11 +267,9 @@ class BusinessListController extends GetxController {
         break;
       case RxList<CityModel>:
         {
-          int frequencyIndex =
-          cityList.indexWhere((x) => x?.name == value);
+          int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[frequencyIndex]?.id ?? 0;
           selectedCity.value = value;
-
         }
         break;
       default:
@@ -267,41 +280,36 @@ class BusinessListController extends GetxController {
     }
   }
 
-
   dynamic onFetchNameBusinessTypeFromId(dynamic value) {
-          int equipmentIndex =
-          businessCategoryList.indexWhere((x) => x?.id == value);
-          selectedBusinessType.value =
-              businessCategoryList[equipmentIndex]?.name ?? '';
-          // selectedBusinessType.value = value;
+    int equipmentIndex = businessCategoryList.indexWhere((x) => x?.id == value);
+    selectedBusinessType.value =
+        businessCategoryList[equipmentIndex]?.name ?? '';
+    // selectedBusinessType.value = value;
     return selectedBusinessType.value;
   }
 
-  Future<void> getBusinessList(selectedBusinessTypeId , bool isLoading)
-  async {
-      moduleList?.value = <BusinessListModel>[];
-      final _moduleList =
-      await businessListPresenter.getBusinessList(
-          businessType: selectedBusinessTypeId, isLoading: isLoading);
+  Future<void> getBusinessList(selectedBusinessTypeId, bool isLoading) async {
+    moduleList?.value = <BusinessListModel>[];
+    final _moduleList = await businessListPresenter.getBusinessList(
+        businessType: selectedBusinessTypeId, isLoading: isLoading);
 
-      if (_moduleList != null) {
-        moduleList!.value = _moduleList;
-        filteredData.value = moduleList!.value;
-        paginationController = PaginationController(
-          rowCount: moduleList?.length ?? 0,
-          rowsPerPage: 10,
-        );
+    if (_moduleList != null) {
+      moduleList!.value = _moduleList;
+      filteredData.value = moduleList!.value;
+      paginationController = PaginationController(
+        rowCount: moduleList?.length ?? 0,
+        rowsPerPage: 10,
+      );
 
-        if (filteredData.isNotEmpty) {
-          moduleListModel = filteredData[0];
-          var preventiveCheckListJson = moduleListModel?.toJson();
-          moduleListTableColumns.value = <String>[];
-          for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-            moduleListTableColumns.add(key);
-          }
+      if (filteredData.isNotEmpty) {
+        moduleListModel = filteredData[0];
+        var preventiveCheckListJson = moduleListModel?.toJson();
+        moduleListTableColumns.value = <String>[];
+        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+          moduleListTableColumns.add(key);
+        }
         // }
-    }
-
+      }
     }
   }
 
@@ -312,14 +320,15 @@ class BusinessListController extends GetxController {
   }
 
   void checkForm() {
-
-    if(selectedBusinessType.value == ''){
+    if (selectedBusinessType.value == '') {
       isSelectedBusinessType.value = false;
     }
 
-    if(isNameInvalid.value == true || isSelectedBusinessType.value == false ||
-        isEmailInvalid.value == false || isPersonInvalid.value == false || isNumberInvalid  .value == false
-    ){
+    if (isNameInvalid.value == true ||
+        isSelectedBusinessType.value == false ||
+        isEmailInvalid.value == false ||
+        isPersonInvalid.value == false ||
+        isNumberInvalid.value == false) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -327,48 +336,46 @@ class BusinessListController extends GetxController {
   }
 
   Future<bool> createBusinessListNumber() async {
+    // if (businesslistNumberCtrlr.text.trim() == '') {
+    //   isNameInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (businesslistNumberCtrlr.text.trim() == '' ) {
-      isNameInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (emailCtrlr.text.trim() == '') {
+    //   isEmailInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (emailCtrlr.text.trim() == '' ) {
-      isEmailInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (contactpersonCtrlr.text.trim() == '') {
+    //   isPersonInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (contactpersonCtrlr.text.trim() == '' ) {
-      isPersonInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (contactnumberCtrlr.text.trim() == '') {
+    //   isNumberInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (contactnumberCtrlr.text.trim() == '' ) {
-      isNumberInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return false;
+    // }
 
-
-
-    checkForm();
-    if (isFormInvalid.value) {
-      return false;
-    }
-
-
-    if (
-        websiteCtrlr.text.trim()== '' ||
-        emailCtrlr.text.trim() == ''  ||
-    contactpersonCtrlr.text.trim() == '' || contactnumberCtrlr.text.trim() == '' ||
-    locationCtrlr.text.trim() == '' || addressCtrlr.text.trim() == '' ||
-     zipCtrlr.text.trim() == '' ||
-    addressCtrlr.text.trim() == '' || selectedBusinessType == '' || selectedCity == '' ||
-        selectedCountry == '' || selectedState == ''
-    ) {
+    if (websiteCtrlr.text.trim() == '' ||
+        emailCtrlr.text.trim() == '' ||
+        contactpersonCtrlr.text.trim() == '' ||
+        contactnumberCtrlr.text.trim() == '' ||
+        locationCtrlr.text.trim() == '' ||
+        addressCtrlr.text.trim() == '' ||
+        zipCtrlr.text.trim() == '' ||
+        addressCtrlr.text.trim() == '' ||
+        selectedBusinessType == '' ||
+        selectedCity == '' ||
+        selectedCountry == '' ||
+        selectedState == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-
       String _businessListNumber = businesslistNumberCtrlr.text.trim();
       String _website = websiteCtrlr.text.trim();
       String _emailListNumber = emailCtrlr.text.trim();
@@ -381,26 +388,24 @@ class BusinessListController extends GetxController {
       // String formattedDateTime = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
 
       CreateBusinessListModel createBusinessList = CreateBusinessListModel(
-          name : _businessListNumber,
-          email: _emailListNumber,
-          contactPerson: _contactperson,
-          contactnumber: _contactNumber,
-          website: _website,
-          location: _location,
-          address: _address,
-          stateId: selectedStateId,
-          countryId: selectedCountryId,
-          cityId: selectedCityId,
-          zip: _zip,
-          type: selectedBusinessTypeId,
-          status : 1,
+        name: _businessListNumber,
+        email: _emailListNumber,
+        contactPerson: _contactperson,
+        contactnumber: _contactNumber,
+        website: _website,
+        location: _location,
+        address: _address,
+        stateId: selectedStateId,
+        countryId: selectedCountryId,
+        cityId: selectedCityId,
+        zip: _zip,
+        type: selectedBusinessTypeId,
+        status: 1,
       );
 
-      var businessListJsonString =
-      [
-        createBusinessList.toJson()//createCheckListToJson([createChecklist]);
+      var businessListJsonString = [
+        createBusinessList.toJson() //createCheckListToJson([createChecklist]);
       ];
-
 
       print({"checklistJsonString", businessListJsonString});
       await businessListPresenter.createBusinesslistNumber(
@@ -442,15 +447,11 @@ class BusinessListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({
-    String? business_id ,
-   String? business
-  }) {
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -495,7 +496,6 @@ class BusinessListController extends GetxController {
     );
   }
 
-
   Future<void> deleteBusiness(String? business_id) async {
     {
       await businessListPresenter.deleteBusiness(
@@ -505,7 +505,8 @@ class BusinessListController extends GetxController {
     }
   }
 
-  Future<bool> updateBusinesslistNumber(int? businessId ,int? status , String? addedAt) async {
+  Future<bool> updateBusinesslistNumber(
+      int? businessId, int? status, String? addedAt) async {
     print("BusinessId- ,$businessId");
     print("Status - ,$status");
     print("Addetd - ,$addedAt");
@@ -520,24 +521,22 @@ class BusinessListController extends GetxController {
     String _zip = zipCtrlr.text.trim();
 
     UpdateBusinessListModel updateBusinessList = UpdateBusinessListModel(
-        id:businessId,
-        name: _businessName,
-        email: _email,
-        contactPerson : _contactPerson,
-        contactnumber: _contactNumber,
-        website: _website,
-        location: _location,
-        address: _address,
-        zip: _zip,
-        type: selectedBusinessTypeId,
-        countryId: selectedCountryId,
-        stateId : selectedStateId,
-        cityId : selectedCityId,
-        status : status,
+      id: businessId,
+      name: _businessName,
+      email: _email,
+      contactPerson: _contactPerson,
+      contactnumber: _contactNumber,
+      website: _website,
+      location: _location,
+      address: _address,
+      zip: _zip,
+      type: selectedBusinessTypeId,
+      countryId: selectedCountryId,
+      stateId: selectedStateId,
+      cityId: selectedCityId,
+      status: status,
     );
-    var modulelistJsonString =
-      updateBusinessList.toJson();
-
+    var modulelistJsonString = updateBusinessList.toJson();
 
     print({"modulelistJsonString", modulelistJsonString});
     await businessListPresenter.updateBusinesslist(
@@ -547,4 +546,3 @@ class BusinessListController extends GetxController {
     return true;
   }
 }
-

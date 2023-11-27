@@ -1,3 +1,4 @@
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,7 @@ class LoginCustomTextfield extends GetView {
       height: maxLine == 1 ? 30 : null,
       width: width,
       child: TextFormField(
+        style: TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
         readOnly: readOnly,
         // keyboardType:keyboardType,
         enabled: enabled,
@@ -59,7 +61,7 @@ class LoginCustomTextfield extends GetView {
 
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 12),
           fillColor: readOnly == true
               ? Color.fromARGB(255, 206, 205, 205)
               : Colors.white,

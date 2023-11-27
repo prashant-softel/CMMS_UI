@@ -382,7 +382,7 @@ class ViewIncidentReportController extends GetxController {
     //Dispose the document.
     document.dispose();
     //Save and launch the file.
-    await saveAndLaunchFile(bytes, 'incidentReport.pdf');
+    // await saveAndLaunchFile(bytes, 'incidentReport.pdf');
   }
 
   PdfLayoutResult drawHeader(

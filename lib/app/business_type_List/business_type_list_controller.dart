@@ -13,13 +13,15 @@ import 'business_type_list_presenter.dart';
 
 class BusinessTypeListController extends GetxController {
   BusinessTypeListController(
-      this.businessTypepresenter,
-      );
+    this.businessTypepresenter,
+  );
   BusinessTypeListPresenter businessTypepresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
-  RxList<BusinessTypeModel?>? businessTypeList =
+  RxList<BusinessTypeModel?> businessTypeList = <BusinessTypeModel?>[].obs;
+  RxList<BusinessTypeModel?> bufferbusinessTypeList =
       <BusinessTypeModel?>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -43,7 +45,6 @@ class BusinessTypeListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -59,22 +60,30 @@ class BusinessTypeListController extends GetxController {
       return;
     }
 
-
     businessTypeList!.value = filteredData
         .where((item) =>
-        item!.name!.toString().contains(keyword))
+                (item!.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item!.description
+                        .toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) // Add this condition to filter by searchId
+            )
         .toList();
   }
 
   Future<void> getBusinessTypeList(
       int facilityId, int type, bool isLoading) async {
-    businessTypeList?.value = <BusinessTypeModel>[];
-    final _businessTypeList =
-    await businessTypepresenter.getBusinessTypeList(
-        businessType: facilityId,  isLoading: isLoading);
+    businessTypeList.value = <BusinessTypeModel>[];
+    final _businessTypeList = await businessTypepresenter.getBusinessTypeList(
+        businessType: facilityId, isLoading: isLoading);
 
     if (_businessTypeList != null) {
-      businessTypeList!.value = _businessTypeList;
+      businessTypeList.value = _businessTypeList;
       filteredData.value = _businessTypeList;
       paginationController = PaginationController(
         rowCount: businessTypeList?.length ?? 0,
@@ -98,21 +107,21 @@ class BusinessTypeListController extends GetxController {
     );
   }
 
-
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<bool> createBusinessType() async {
-    if (nameCtrlr.text.trim() == '' ) {
+    if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -121,20 +130,17 @@ class BusinessTypeListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (nameCtrlr.text.trim() == '' ||
-        descriptionCtrlr.text.trim() == '') {
+    if (nameCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _name = nameCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      CreateBusinessTypeListModel createBusinessType = CreateBusinessTypeListModel(
-          name: _name,
-          description : _description
-      );
-      var businessTypeJsonString =
-        createBusinessType.toJson(); //createCheckListToJson([createChecklist]);
+      CreateBusinessTypeListModel createBusinessType =
+          CreateBusinessTypeListModel(name: _name, description: _description);
+      var businessTypeJsonString = createBusinessType
+          .toJson(); //createCheckListToJson([createChecklist]);
 
       print({"businessTypeJsonString", businessTypeJsonString});
       await businessTypepresenter.createBusinessType(
@@ -229,12 +235,8 @@ class BusinessTypeListController extends GetxController {
     String _description = descriptionCtrlr.text.trim();
 
     BusinessTypeModel createChecklist = BusinessTypeModel(
-        id: checklistId,
-        name : _name,
-        description: _description
-    );
-    var businessTypeJsonString =
-      createChecklist.toJson();
+        id: checklistId, name: _name, description: _description);
+    var businessTypeJsonString = createChecklist.toJson();
 
     print({"businessTypeJsonString", businessTypeJsonString});
     await businessTypepresenter.updateBusinessType(
