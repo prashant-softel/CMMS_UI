@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
@@ -3767,34 +3768,34 @@ class ConnectHelper {
 
     // Check if the upload was successful
     if (response.statusCode == 200) {
-      if (importType == 1) {
+      if (importType == AppConstants.kImportAsset) {
         importInventory(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true,
             facilityId: facilityId);
-      } else if (importType == 2) {
+      } else if (importType == AppConstants.kImportUser) {
         importUser(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 3) {
+      } else if (importType == AppConstants.kImportChecklist) {
         importCheckpoint(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 4) {
-        importCheckpoint(
+      } else if (importType == AppConstants.kImportBussiness) {
+        importBusiness(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 5) {
+      } else if (importType == AppConstants.kImportMaterial) {
         importMaterial(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true,
             facilityId: facilityId);
-      } else if (importType == 6) {
+      } else if (importType == AppConstants.kImportPMPlan) {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),

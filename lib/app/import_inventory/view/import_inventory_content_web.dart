@@ -1,13 +1,12 @@
 import 'package:cmms/app/theme/theme.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../import_inventory_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'dart:convert';
 import 'dart:typed_data';
-// import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 import 'package:universal_html/html.dart' as universal;
 
@@ -39,7 +38,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                   ),
                 ],
               ),
-              child: controller.type == 1
+              child: controller.importType.value == AppConstants.kImportAsset
                   ? Row(
                       children: [
                         Icon(
@@ -61,7 +60,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                             style: Styles.greyMediumLight12),
                       ],
                     )
-                  : controller.type == 2
+                  : controller.importType.value == AppConstants.kImportUser
                       ? Row(
                           children: [
                             Icon(
@@ -83,7 +82,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                 style: Styles.greyMediumLight12),
                           ],
                         )
-                      : controller.type == 5
+                      : controller.importType.value ==
+                              AppConstants.kImportMaterial
                           ? Row(
                               children: [
                                 Icon(
@@ -105,7 +105,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                     style: Styles.greyMediumLight12),
                               ],
                             )
-                          : controller.type == 6
+                          : controller.importType.value ==
+                                  AppConstants.kImportPMPlan
                               ? Row(
                                   children: [
                                     Icon(
@@ -127,209 +128,260 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                         style: Styles.greyMediumLight12),
                                   ],
                                 )
-                              : Row(
-                                  children: [
-                                    Icon(
-                                      Icons.home,
-                                      color: ColorValues.greyLightColor,
-                                    ),
-                                    Text(
-                                      "DASHBOARD",
-                                      style: Styles.greyLight14,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Get.back();
-                                      },
-                                      child: Text(" / PREVENTIVE MAINTENANCE",
-                                          style: Styles.greyMediumLight12),
-                                    ),
-                                    Text(" / CHECK POINT CREATOR",
-                                        style: Styles.greyMediumLight12)
-                                  ],
-                                )),
+                              : controller.importType.value ==
+                                      AppConstants.kImportChecklist
+                                  ? Row(
+                                      children: [
+                                        Icon(
+                                          Icons.home,
+                                          color: ColorValues.greyLightColor,
+                                        ),
+                                        Text(
+                                          "DASHBOARD",
+                                          style: Styles.greyLight14,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: Text(
+                                              " / PREVENTIVE MAINTENANCE",
+                                              style: Styles.greyMediumLight12),
+                                        ),
+                                        Text(" / IMPORT CHECKLIST",
+                                            style: Styles.greyMediumLight12),
+                                      ],
+                                    )
+                                  : controller.importType.value ==
+                                          AppConstants.kImportBussiness
+                                      ? Row(
+                                          children: [
+                                            Icon(
+                                              Icons.home,
+                                              color: ColorValues.greyLightColor,
+                                            ),
+                                            Text(
+                                              "DASHBOARD",
+                                              style: Styles.greyLight14,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.back();
+                                              },
+                                              child: Text(" / MASTER",
+                                                  style:
+                                                      Styles.greyMediumLight12),
+                                            ),
+                                            Text(" / IMPORT BUSSINESS",
+                                                style:
+                                                    Styles.greyMediumLight12),
+                                          ],
+                                        )
+                                      : Dimens.box0),
           //  Dimens.boxHeight20,
           Flexible(
-            child: Container(
-              margin: EdgeInsets.all(20),
-              child: Card(
-                color: Color.fromARGB(255, 245, 248, 250),
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        controller.type == 1
-                            ? "Import Assets file"
-                            : controller.type == 2
-                                ? "Import User file"
-                                : controller.type == 5
-                                    ? "Import Material file"
-                                    : controller.type == 6
-                                        ? "Import PM Plan file"
-                                        : "Import Checkpoint file",
-                        style: Styles.blackBold16,
-                      ),
-                    ),
-                    Dimens.boxHeight20,
-                    Center(child: Text("File to  import")),
-                    Dimens.boxHeight20,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: (Get.width * .3) - 10,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.fileName.value == ""
-                                    ? 'File Name'
-                                    : controller.fileName.value,
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Dimens.boxWidth5,
-                        Container(
-                          height: 45,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: "Browse",
-                            onPressed: () async {
-                              final result =
-                                  await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                // for (var file in result.files) {
-                                controller.fileName.value =
-                                    result.files.single.name;
-                                controller.fileBytes =
-                                    result.files.single.bytes;
-                                //controller.filePath.value = file.;
-                                //  print({"filepathes", fileBytes});
-                                // }
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    Dimens.boxHeight20,
-                    GestureDetector(
-                      onTap: () async {
-                        //Replace 'assets/sample.xlsx' with the path to your XLSX file in the assets folder
-                        String assetPath = 'assets/files/Import_PM_Plan.xlsx';
-                        // String localPath =
-                        //     await controller.downloadXLSXFromAssets(assetPath);
-
-                        // TODO: Use the localPath to work with the XLSX file (e.g., open it with a package like 'excel')
-
-                        // print('XLSX file downloaded to: $localPath');
-
-                        // Replace 'assets/example.xls' with the actual path of your asset.
-                        // String assetPath = 'assets/example.xls';
-
-                        // Replace 'example.xls' with the desired name for the downloaded file.
-                        String fileName = 'example.xls';
-
-                        downloadFile(assetPath, fileName);
-                      },
-                      child: Center(
+            child: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.all(20),
+                child: Card(
+                  color: Color.fromARGB(255, 245, 248, 250),
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "Download template",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: ColorValues.blueColor),
+                          controller.importType.value ==
+                                  AppConstants.kImportAsset
+                              ? "Import Assets file"
+                              : controller.importType.value ==
+                                      AppConstants.kImportUser
+                                  ? "Import User file"
+                                  : controller.importType.value ==
+                                          AppConstants.kImportMaterial
+                                      ? "Import Material file"
+                                      : controller.importType.value ==
+                                              AppConstants.kImportPMPlan
+                                          ? "Import PM Plan file"
+                                          : controller.importType.value ==
+                                                  AppConstants.kImportChecklist
+                                              ? "Import Checklist file"
+                                              : controller.importType.value ==
+                                                      AppConstants
+                                                          .kImportBussiness
+                                                  ? "Import Bussiness file"
+                                                  : "",
+                          style: Styles.blackBold16,
                         ),
                       ),
-                    ),
-                    Dimens.boxHeight20,
-                    Container(
-                      margin: EdgeInsets.only(bottom: 30, top: 20),
-                      child: Row(
+                      Dimens.boxHeight20,
+                      Center(child: Text("File to  import")),
+                      Dimens.boxHeight20,
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Container(
-                          //   height: 35,
-                          //   child: CustomElevatedButton(
-                          //     backgroundColor: ColorValues.appDarkBlueColor,
-                          //     text: "Validate",
-                          //     onPressed: () {},
-                          //   ),
-                          // ),
-                          // SizedBox(
-                          //   width: 20,
-                          // ),
                           Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.greenColor,
-                              text: 'Import',
-                              onPressed: () {
-                                if (controller.fileName.value != "") {
-                                  controller
-                                      .browseFiles(
-                                    fileBytes: controller.fileBytes,
-                                  )
-                                      .then((value) {
-                                    controller.isSuccessDialog();
-
-                                    // Fluttertoast.showToast(
-                                    //     msg: "file upload  Successfully",
-                                    //     fontSize: 16.0);
-                                  });
-                                } else {
-                                  Fluttertoast.showToast(
-                                      msg: "Please Select file...",
-                                      fontSize: 16.0);
-                                }
-
-                                //  controller.savePmMapping();
-                              },
+                            height: 45,
+                            width: (Get.width * .3) - 10,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color.fromARGB(255, 227, 224, 224),
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 236, 234, 234)
+                                      .withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  controller.fileName.value == ""
+                                      ? 'File Name'
+                                      : controller.fileName.value,
+                                  maxLines: 3,
+                                  textAlign: TextAlign.center,
+                                  style: Styles.greyLight14,
+                                ),
+                              ),
                             ),
                           ),
-                          SizedBox(
-                            width: 20,
-                          ),
+                          Dimens.boxWidth5,
                           Container(
-                            height: 35,
+                            height: 45,
                             child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appRedColor,
-                              text: "Close",
-                              onPressed: () {
-                                Get.back();
+                              backgroundColor: ColorValues.appDarkBlueColor,
+                              text: "Browse",
+                              onPressed: () async {
+                                final result =
+                                    await FilePicker.platform.pickFiles();
+                                if (result != null) {
+                                  // for (var file in result.files) {
+                                  controller.fileName.value =
+                                      result.files.single.name;
+                                  controller.fileBytes =
+                                      result.files.single.bytes;
+                                  //controller.filePath.value = file.;
+                                  //  print({"filepathes", fileBytes});
+                                  // }
+                                }
                               },
                             ),
                           ),
                         ],
                       ),
-                    )
-                  ],
+                      Dimens.boxHeight20,
+                      GestureDetector(
+                        onTap: () async {
+                          String assetPath =
+                              'http://65.0.20.19/CMMS_API/api/CMMS/DownalodTemplateFile?id=${controller.importType.value}';
+
+                          String fileName = controller.importType.value ==
+                                  AppConstants.kImportAsset
+                              ? 'asset.xlsx'
+                              : controller.importType.value ==
+                                      AppConstants.kImportUser
+                                  ? 'user.xlsx'
+                                  : controller.importType.value ==
+                                          AppConstants.kImportMaterial
+                                      ? 'material.xlsx'
+                                      : controller.importType.value ==
+                                              AppConstants.kImportPMPlan
+                                          ? 'pmPlan.xlsx'
+                                          : controller.importType.value ==
+                                                  AppConstants.kImportChecklist
+                                              ? 'checklist.xlsx'
+                                              : controller.importType.value ==
+                                                      AppConstants
+                                                          .kImportBussiness
+                                                  ? 'checklist.xlsx'
+                                                  : 'example.xlsx';
+
+                          downloadFile(assetPath, fileName);
+                        },
+                        child: Center(
+                          child: Text(
+                            "Download template",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: ColorValues.blueColor),
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight20,
+                      Container(
+                        margin: EdgeInsets.only(bottom: 30, top: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Container(
+                            //   height: 35,
+                            //   child: CustomElevatedButton(
+                            //     backgroundColor: ColorValues.appDarkBlueColor,
+                            //     text: "Validate",
+                            //     onPressed: () {},
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   width: 20,
+                            // ),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.greenColor,
+                                text: 'Import',
+                                onPressed: () {
+                                  if (controller.fileName.value != "") {
+                                    controller
+                                        .browseFiles(
+                                      fileBytes: controller.fileBytes,
+                                    )
+                                        .then((value) {
+                                      controller.isSuccessDialog();
+
+                                      // Fluttertoast.showToast(
+                                      //     msg: "file upload  Successfully",
+                                      //     fontSize: 16.0);
+                                    });
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg: "Please Select file...",
+                                        fontSize: 16.0);
+                                  }
+
+                                  //  controller.savePmMapping();
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Close",
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -13,4 +13,9 @@ class ImportInventoryUsecase {
         fileBytes, fileName, importType, isLoading, facilityId);
     return true;
   }
+
+  void saveValue({String? importType}) async =>
+      repository.saveValue(LocalKeys.importType, importType);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.importType);
 }

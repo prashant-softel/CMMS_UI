@@ -9,4 +9,6 @@ class StockManagementDashboardUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await repository.getFacilityList(true);
+  void clearValueimportType() async =>
+      repository.clearData(LocalKeys.importType);
 }

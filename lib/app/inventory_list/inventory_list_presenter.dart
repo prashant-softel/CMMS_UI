@@ -23,6 +23,9 @@ class InventoryListPresenter {
     ///
   }
 
+  void clearValueimportType() async =>
+      inventoryListUsecase.clearValueimportType();
+
   Future<List<InventoryModel>> getInventoryAssetsList({
     required bool isLoading,
     required int? facility_id,

@@ -120,8 +120,12 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         icon: Icons.upload,
                                         label: 'importAsset'.tr,
                                         onPressed: () {
+                                          controller.clearValueimportType();
                                           Get.toNamed(Routes.importInventory,
-                                              arguments: 1);
+                                              arguments: {
+                                                'importType':
+                                                    AppConstants.kImportAsset
+                                              });
                                         },
                                         color: ColorValues.appDarkBlueColor,
                                       ),
@@ -168,36 +172,34 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },

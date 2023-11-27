@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_management/stock_management_presenter.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +52,12 @@ class StockManagementDashboardController extends GetxController {
     // );
   }
   Future<void> importMaterial() async {
-    Get.toNamed(Routes.importInventory, arguments: 5);
+    clearValueimportType();
+    Get.toNamed(Routes.importInventory,
+        arguments: {'importType': AppConstants.kImportMaterial});
+  }
+
+  void clearValueimportType() {
+    stockManagementDashboardPresenter.clearValueimportType();
   }
 }

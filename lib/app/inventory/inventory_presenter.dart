@@ -6,4 +6,5 @@ class InventoryPresenter {
   InventoryUsecase inventoryUsecase;
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await inventoryUsecase.getFacilityList();
+  void clearValueimportType() async => inventoryUsecase.clearValueimportType();
 }
