@@ -17,23 +17,43 @@ class ImportInventoryController extends GetxController {
   RxString fileName = "".obs;
   Uint8List? fileBytes;
 
-  int type = 0;
+  Rx<int> importType = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   final HomeController homeController = Get.find();
 
   @override
   void onInit() async {
-    type = Get.arguments;
+    await setImportType();
+
+    // importType = Get.arguments;
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
     });
     super.onInit();
   }
 
+  Future<void> setImportType() async {
+    try {
+      final _importType = await importInventoryPresenter.getValue();
+      if (_importType == null || _importType == '' || _importType == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        importType.value = dataFromPreviousScreen['importType'];
+        importInventoryPresenter.saveValue(
+            importType: importType.value.toString());
+      } else {
+        importType.value = int.tryParse(_importType) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'importType');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+
   Future<bool> browseFiles({Uint8List? fileBytes}) async {
     await importInventoryPresenter.browseFiles(
-        fileBytes, fileName.value, type, true, facilityId);
+        fileBytes, fileName.value, importType.value, true, facilityId);
     return true;
   }
 

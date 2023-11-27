@@ -133,7 +133,9 @@ class InventoryListController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {}
+    switch (list.runtimeType) {
+      
+    }
   }
 
   void showAddGoodsOrdersDetails({int? id}) {
@@ -149,7 +151,9 @@ class InventoryListController extends GetxController {
   void getPmTaskListByDate() {
     // getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
-
+  void clearValueimportType() {
+    inventoryListPresenter.clearValueimportType();
+  }
   // Future<void> deleteGoodsOrders(String? id) async {
   //   await inventoryListPresenter.deleteFacility(
   //     id,

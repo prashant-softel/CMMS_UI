@@ -404,8 +404,8 @@ class CreatePmPlanController extends GetxController {
           module_qty: 0,
           parent_id: 0,
           parent_name: "",
-          asset_id: int.tryParse(element[2]["value"] ?? '0'),
-          checklist_id: checkdropdownMapperData[element[5]["value"]]?.id);
+          asset_id: int.tryParse(element[1]["value"] ?? '0'),
+          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(
@@ -441,14 +441,20 @@ class CreatePmPlanController extends GetxController {
     List<AssetChecklist> mapAssetChecklist = [];
     // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
     rowItem.value.forEach((element) {
+      print({"object34534", element[4]["id"]});
       AssetChecklist item = AssetChecklist(
           name: "",
           checklist_name: "",
           module_qty: 0,
           parent_id: 0,
           parent_name: "",
-          asset_id: int.tryParse(element[2]["value"] ?? '0'),
-          checklist_id: int.tryParse('${element[5]["id"]}'));
+          asset_id: int.tryParse(element[1]["value"] ?? '0'),
+          checklist_id:
+              //  element[4]["id"] == ''
+              //     ? checkdropdownMapperData[element[4]["value"]]?.id
+              //     :
+              int.tryParse(
+                  '${element[4]["//////////////////***************************------------------------------------------------------------------/++*8888888"]}'));
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(

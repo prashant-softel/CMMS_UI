@@ -210,7 +210,21 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 .failure_waightage
                                                 .toString() ??
                                             '')),
-                                        DataCell(Text('???')),
+                                        DataCell(Obx(() {
+                                          return _rowItem(
+                                              controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .linked_job_id
+                                                  .value, onCheck: (val) {
+                                            controller
+                                                .selectedItem
+                                                ?.checklist_observation?[index]
+                                                .linked_job_id
+                                                .value = val == true ? 1 : 0;
+                                          });
+                                        })),
                                         DataCell(Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: LoginCustomTextfield(

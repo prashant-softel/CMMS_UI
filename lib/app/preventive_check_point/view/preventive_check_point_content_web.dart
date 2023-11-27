@@ -608,7 +608,11 @@ class PreventiveCheckPointContentWeb
                                           icon: Icons.upload,
                                           label: 'Import Check Point',
                                           onPressed: () {
-                                            Get.toNamed(Routes.importInventory);
+                                            Get.toNamed(Routes.importInventory,
+                                                arguments: {
+                                                  'importType': AppConstants
+                                                      .kImportChecklist
+                                                });
                                           },
                                           color: ColorValues.appDarkBlueColor,
                                         ),
