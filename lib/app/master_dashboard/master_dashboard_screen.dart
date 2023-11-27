@@ -777,7 +777,7 @@ class MastersDashboard extends GetView<MastersController> {
                           GridView.count(
                             shrinkWrap: true,
                             primary: false,
-                            padding: const EdgeInsets.all(16),
+                            padding: Dimens.edgeInsets15,
                             crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
@@ -850,39 +850,41 @@ class MastersDashboard extends GetView<MastersController> {
                               //         Routes.warrantyCertificate,
                               //       );
                               //     }),
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kWarrantyClaimFeatureId &&
-                                              e.view ==
-                                                  UserAccessConstants
-                                                      .kHaveViewAccess)
-                                          .length >
-                                      0
-                                  ? _inventoryList(
-                                      tittle: "Warranty Claims List",
-                                      ontap: () =>
-                                          controller.breakdownMaintenance(),
-                                    )
-                                  : Container(),
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kWarrantyClaimFeatureId &&
+                              //                 e.view ==
+                              //                     UserAccessConstants
+                              //                         .kHaveViewAccess)
+                              //             .length >
+                              //         0
+                              //     ?
+                              _inventoryList(
+                                tittle: "Warranty Claims List",
+                                ontap: () => controller.breakdownMaintenance(),
+                              )
+                              // : Container(),
 
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kWarrantyClaimFeatureId &&
-                                              e.add ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
-                                          .length >
-                                      0
-                                  ? _inventoryList(
-                                      tittle: "New Warranty Claim",
-                                      ontap: () {
-                                        controller.newWarrantyClaimList();
-                                      })
-                                  : Container(),
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kWarrantyClaimFeatureId &&
+                              //                 e.add ==
+                              //                     UserAccessConstants
+                              //                         .kHaveAddAccess)
+                              //             .length >
+                              //         0
+                              //     ?
+                              ,
+                              _inventoryList(
+                                  tittle: "New Warranty Claim",
+                                  ontap: () {
+                                    controller.newWarrantyClaimList();
+                                  })
+                              // : Container(),
 
                               // _inventoryList(
                               //     tittle: "Inventory Category",
