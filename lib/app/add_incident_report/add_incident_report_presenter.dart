@@ -1,5 +1,5 @@
-
 import 'package:cmms/domain/models/block_model.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -9,7 +9,6 @@ import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
 import 'package:cmms/domain/usecases/add_incident_report_usecase.dart';
-
 
 import '../../domain/models/facility_model.dart';
 
@@ -31,17 +30,26 @@ class AddIncidentReportPresenter {
     );
   }
 
-   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
-    bool? isLoading,  
+  Future<List<BusinessListModel?>?> getBusinessList({
+    int? businessType,
+    bool? isLoading,
+  }) async =>
+      await incidentReportUsecase.getBusinessList(
+        isLoading: isLoading ?? false,
+        businessType: businessType,
+      );
+
+  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
+    bool? isLoading,
     required int id,
   }) async {
-      return incidentReportUsecase.getIncidentReportDetail(
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+    return incidentReportUsecase.getIncidentReportDetail(
+      id: id,
+      isLoading: isLoading ?? false,
+    );
   }
 
-   Future<List<BlockModel?>?> getBlocksList({
+  Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -52,7 +60,8 @@ class AddIncidentReportPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<EmployeeListModel>> getIncidentInvestigationVerificationDoneByList({
+  Future<List<EmployeeListModel>>
+      getIncidentInvestigationVerificationDoneByList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -62,7 +71,7 @@ class AddIncidentReportPresenter {
     );
   }
 
-   Future<List<EmployeeListModel>> getVictimNameList({
+  Future<List<EmployeeListModel>> getVictimNameList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -72,7 +81,7 @@ class AddIncidentReportPresenter {
     );
   }
 
-   Future<List<RiskTypeModel>> getRiskTypeList({
+  Future<List<RiskTypeModel>> getRiskTypeList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -82,8 +91,7 @@ class AddIncidentReportPresenter {
     );
   }
 
-
- Future<List<EmployeeListModel>> getAssetRestorationActionTakenByList({
+  Future<List<EmployeeListModel>> getAssetRestorationActionTakenByList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -92,10 +100,8 @@ class AddIncidentReportPresenter {
       facility_id: facility_id,
     );
   }
-  
 
-
-   Future<Map<String, dynamic>?> createIncidentReport({
+  Future<Map<String, dynamic>?> createIncidentReport({
     createIncidentReport,
     required bool isLoading,
   }) async {
@@ -115,14 +121,9 @@ class AddIncidentReportPresenter {
     );
   }
 
-
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    {required int facility_id}
-   ) async =>
-      await incidentReportUsecase.getTypePermitList(
-        true,
-        facility_id
-        );
+  Future<List<TypePermitModel?>?> getTypePermitList(
+          {required int facility_id}) async =>
+      await incidentReportUsecase.getTypePermitList(true, facility_id);
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -149,8 +150,6 @@ class AddIncidentReportPresenter {
         isLoading: isLoading,
       );
 
-
-
   Future<List<IncidentReportListModel>> getIncidentReportList({
     required bool isLoading,
     required int? facility_id,
@@ -165,7 +164,6 @@ class AddIncidentReportPresenter {
     );
   }
 
- 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await incidentReportUsecase.getFacilityList();
 
