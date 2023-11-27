@@ -44,6 +44,8 @@ class DatePickerWidget extends GetView {
             textAlign: TextAlign.center,
             textStyle: Styles.blackBold16,
           ),
+          minDate: DateTime(DateTime.now().year, -100000),
+          maxDate: DateTime(DateTime.now().year, 100000, 0),
           selectionColor: ColorValues.primaryColor,
           todayHighlightColor: ColorValues.primaryColor,
           backgroundColor: ColorValues.whiteColor,
@@ -53,8 +55,7 @@ class DatePickerWidget extends GetView {
           rangeSelectionColor: ColorValues.primaryColor,
           rangeTextStyle: Styles.black14,
           onSelectionChanged: selectionChanges,
-          maxDate: maxDate,
-          minDate: minDate,
+
           initialSelectedRange: initialSelectedRange,
           showActionButtons: showActionButtons,
           onSubmit: onSubmit,

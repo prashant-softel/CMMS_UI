@@ -724,9 +724,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   right: 65,
                                   top: 230,
                                   child: DatePickerWidget(
-                                    minDate: DateTime(DateTime.now().year),
-                                    maxDate: DateTime(DateTime.now().year, 13,
-                                        0), // last date of this year
+                                    // last date of this year
                                     controller: DateRangePickerController(),
                                     selectionChanges: (p0) {
                                       print('po valu ${p0.value.toString()}');
