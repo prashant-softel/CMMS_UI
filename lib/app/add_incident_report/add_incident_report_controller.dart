@@ -5,12 +5,14 @@ import 'dart:math';
 import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -84,8 +86,19 @@ class AddIncidentReportController extends GetxController {
       <int>[].obs;
   int selectedIncidentInvestigationVerificationDoneById = 0;
 
+  ///Business List
+
+  RxList<BusinessListModel> businessList = <BusinessListModel>[].obs;
+  Map<String, BusinessListModel> dropdownBusinessListMapperData = {};
+
+  Rx<bool> isBusinessListSelected = true.obs;
+  Rx<String> selectedIBusinessList = ''.obs;
+  int selectedBusinessListId = 0;
+
   /// Victim Name List
   RxList<EmployeeListModel> victimNameList = <EmployeeListModel>[].obs;
+  Map<String, EmployeeListModel> dropdownVictimNameMapperData = {};
+
   RxList<EmployeeListModel?> filteredVictimNameList = <EmployeeListModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
 
@@ -194,6 +207,14 @@ class AddIncidentReportController extends GetxController {
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Map<String, InventoryModel> dropdownMapperData = {};
 
+  Map<String, GenderModel> dropdownGenderMapperData = {};
+  RxList<GenderModel> genderList = <GenderModel>[
+    GenderModel(name: "Please Select", id: "0"),
+    GenderModel(name: 'Male', id: "1"),
+    GenderModel(name: 'Female', id: "2"),
+    GenderModel(name: 'Other', id: "3"),
+  ].obs;
+
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
@@ -233,8 +254,15 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isOtherVictimNameInvalid = false.obs;
   var otherVictimNameTextCtrlr = TextEditingController();
 
+  Rx<bool> isTradeDesignationInvalid = false.obs;
+  var tradeDesignationTextCtrlr = TextEditingController();
+
   ///Propsed Row item
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
+  ///Details of njured Person
+  RxList<List<Map<String, String>>> rowInjuredPersonItem =
+      <List<Map<String, String>>>[].obs;
 
   //why why analysis
   RxList<List<Map<String, String>>> rowWhyWhyAnalysisItem =
@@ -414,6 +442,12 @@ class AddIncidentReportController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  ///Gender
+  var gender = 'Select Gender'.obs;
+  void updateGender(String value) {
+    gender.value = value;
+  }
+
   ///
   int? id = 0;
   @override
@@ -469,6 +503,9 @@ class AddIncidentReportController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getRiskTypeList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      getBusinessList();
     });
 
     super.onInit();
@@ -630,6 +667,21 @@ class AddIncidentReportController extends GetxController {
     update(['incidentInvestigationVerificationDoneBy_list']);
   }
 
+  void getBusinessList() async {
+    businessList.value = <BusinessListModel>[];
+    final _businessList = await incidentReportPresenter.getBusinessList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      businessType: 2,
+    );
+    print('Business List:$businessList');
+    for (var business_list in _businessList!) {
+      businessList.add(business_list!);
+    }
+
+    update(['business_list']);
+  }
+
   Future<void> getIncidentReportHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 131;
@@ -741,6 +793,7 @@ class AddIncidentReportController extends GetxController {
     addWhyWhyAnalysisRowItem();
     addRootCauseRowItem();
     addImmediateCorrectionRowItem();
+    addDetailsOfInjuredPersonRowItem();
   }
 
   void addRowItem() {
@@ -752,6 +805,35 @@ class AddIncidentReportController extends GetxController {
       },
       {'key': "Target Date ", "value": ''},
       {'key': "Remark", "value": ''},
+    ]);
+  }
+
+  void addDetailsOfInjuredPersonRowItem() {
+    rowInjuredPersonItem.add([
+      {
+        "key": "Name of Injured Person ",
+        "value": 'Please Select',
+      },
+      {
+        "key": "Gender ",
+        "value": 'Please Select',
+      },
+      {'key': "Trade/Designation ", "value": ''},
+      {'key': "Address ", "value": ''},
+      {
+        "key": "Name of Contractor ",
+        "value": 'Please Select',
+      },
+      {
+        "key": "Body part injured ",
+        "value": 'Please Select',
+      },
+      {'key': "work experience ", "value": ''},
+      {
+        "key": "Plant & Equipment ",
+        "value": 'Please Select',
+      },
+      {'key': "Exact Location ", "value": ''},
     ]);
   }
 
@@ -903,6 +985,15 @@ class AddIncidentReportController extends GetxController {
           selectedRiskTypeId = riskTypeList[riskTypeListIndex].id ?? 0;
           print('Risk Type id: $selectedRiskTypeId');
         }
+        break;
+      case RxList<BusinessListModel>:
+        {
+          int businessListIndex =
+              businessList.indexWhere((x) => x.name == value);
+          selectedBusinessListId = businessList[businessListIndex].id ?? 0;
+          print('name of contractor:$selectedBusinessListId');
+        }
+
         break;
 
       default:
@@ -1070,6 +1161,11 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
       String? _unsafeActCause =
           htmlEscape.convert(unsafeIncidentTextCtrlr.text.trim());
+      String? _legalApplicabilityRemark =
+          htmlEscape.convert(legalApplicabilityRemarkTextCtrlr.text.trim());
+      String? _esiApplicabilityRemark =
+          htmlEscape.convert(ESIApplicabilityRemarkTextCtrlr.text.trim());
+
       // late List<ExternalEmails> external_emails_list = [];
 
       // externalEmails.forEach((e) {
@@ -1120,50 +1216,64 @@ class AddIncidentReportController extends GetxController {
         immediateCorrectionItems.add(item);
       });
 
+      ///Proposed Action
+      List<ProposedActionPlan> proposedActionItems = [];
+      rowItem.forEach((element) {
+        ProposedActionPlan item = ProposedActionPlan(
+          incidents_id: 123,
+          actions_as_per_plan: element[0]["value"] ?? '0',
+          // responsibility: dropdownMapperData()
+        );
+
+        proposedActionItems.add(item);
+      });
+
       CreateIncidentReportModel createIncidentReportModel =
           CreateIncidentReportModel(
-              id: 0,
-              facility_id: facilityId,
-              block_id: selectedBlockId,
-              equipment_id: selectedEquipmentnameId,
-              risk_level: 1,
-              incident_datetime: startDateTimeCtrlrBuffer,
-              reporting_datetime: startDateTimeCtrlrBuffer,
-              // reporting_datetime: reportingDateTimeCtrlrBuffer,
-              // victim_id: selectedVictimNameId,
-              victim_id: 5,
-              action_taken_by: selectedAssetRestorationActionTakenById,
-              action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
-              inverstigated_by: selectedIncidentInvestigationDoneById,
-              verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: selectedRiskTypeId,
-              esi_applicability: esiApplicabilityValue.value,
-              legal_applicability: legalApplicabilityValue.value,
-              rca_required: rCAUploadRequiredValue.value,
-              damaged_cost:
-                  int.tryParse('${damagedAssetCostTextCtrlr.text}') ?? 0,
-              generation_loss:
-                  int.tryParse('${genLossAssetDamageTextCtrlr.text}') ?? 0,
-              job_id: 2061,
-              title: _title,
-              description: _incidentDescription,
-              is_insurance_applicable: insuranceApplicableValue.value,
-              insurance: _insuranceAvailable,
-              insurance_status: 2,
-              // insurance_remark: _insuranceRemark,
-              insurance_remark: _insuranceAvailable,
-              severity: selectedSeverity.value,
-              //new data adding
-              type_of_job: _jobType,
-              is_person_authorized: _personAuthorized,
-              instructions_given: _instruction,
-              safety_equipments: _safetyEquipment,
-              safe_procedure_observed: _correctSafetyProcedure,
-              unsafe_condition_contributed: _unsafeConditionContributed,
-              unsafe_act_cause: _unsafeActCause,
-              why_why_analysis: whyWhyAnalysisItems,
-              root_cause: rootCauseItems,
-              immediate_correction: immediateCorrectionItems);
+        id: 0,
+        facility_id: facilityId,
+        block_id: selectedBlockId,
+        equipment_id: selectedEquipmentnameId,
+        risk_level: 1,
+        incident_datetime: startDateTimeCtrlrBuffer,
+        reporting_datetime: startDateTimeCtrlrBuffer,
+        // reporting_datetime: reportingDateTimeCtrlrBuffer,
+        // victim_id: selectedVictimNameId,
+        victim_id: 5,
+        action_taken_by: selectedAssetRestorationActionTakenById,
+        action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
+        inverstigated_by: selectedIncidentInvestigationDoneById,
+        verified_by: selectedIncidentInvestigationVerificationDoneById,
+        risk_type: selectedRiskTypeId,
+        esi_applicability: esiApplicabilityValue.value,
+        legal_applicability: legalApplicabilityValue.value,
+        rca_required: rCAUploadRequiredValue.value,
+        damaged_cost: int.tryParse('${damagedAssetCostTextCtrlr.text}') ?? 0,
+        generation_loss:
+            int.tryParse('${genLossAssetDamageTextCtrlr.text}') ?? 0,
+        job_id: 2061,
+        title: _title,
+        description: _incidentDescription,
+        is_insurance_applicable: insuranceApplicableValue.value,
+        insurance: _insuranceAvailable,
+        insurance_status: 2,
+        // insurance_remark: _insuranceRemark,
+        insurance_remark: _insuranceAvailable,
+        severity: selectedSeverity.value,
+        //new data adding
+        type_of_job: _jobType,
+        is_person_authorized: _personAuthorized,
+        instructions_given: _instruction,
+        safety_equipments: _safetyEquipment,
+        safe_procedure_observed: _correctSafetyProcedure,
+        unsafe_condition_contributed: _unsafeConditionContributed,
+        legal_applicability_remark: _legalApplicabilityRemark,
+        esi_applicability_remark: _esiApplicabilityRemark,
+        unsafe_act_cause: _unsafeActCause,
+        why_why_analysis: whyWhyAnalysisItems,
+        root_cause: rootCauseItems,
+        immediate_correction: immediateCorrectionItems,
+      );
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
       Map<String, dynamic>? responseCreateIncidentReport =
