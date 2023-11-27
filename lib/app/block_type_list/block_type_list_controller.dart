@@ -54,6 +54,8 @@ class BlockTypeListController extends GetxController {
 
   ///SOP Permit List
   RxList<BlockTypeListModel> blockTypeList = <BlockTypeListModel>[].obs;
+  RxList<BlockTypeListModel> bufferblockTypeList = <BlockTypeListModel>[].obs;
+
   RxList<FacilityTypeListModel> facilityTypeList =
       <FacilityTypeListModel>[].obs;
   Rx<bool> isblockTypeListSelected = true.obs;
@@ -92,6 +94,32 @@ class BlockTypeListController extends GetxController {
     });
 
     super.onInit();
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+
+    if (keyword.isEmpty) {
+      print('blockTypeList length (empty keyword): ${blockTypeList.length}');
+      blockTypeList.value = bufferblockTypeList.value;
+
+      return;
+    }
+
+    // Use print statements to debug the filtering logic
+    List<BlockTypeListModel> filteredList = bufferblockTypeList
+        .where((item) =>
+            item.name
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false)
+        .toList();
+
+    print('Filtered list length: ${filteredList.length}');
+
+    blockTypeList.value = filteredList;
+    print('blockTypeList length (non-empty keyword): ${blockTypeList.length}');
   }
 
   Future<void> getFacilityList() async {

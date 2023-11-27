@@ -69,23 +69,23 @@ class SPVListController extends GetxController {
 
   void search(String keyword) {
     print('Keyword: $keyword');
-
     if (keyword.isEmpty) {
-      print('SPVList length (empty keyword): ${SPVList.length}');
       SPVList.value = BufferSPVList.value;
-
       return;
     }
-
-    // Use print statements to debug the filtering logic
     List<SPVListModel> filteredList = BufferSPVList.where((item) =>
-        item.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-        false).toList();
-
-    print('Filtered list length: ${filteredList.length}');
-
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) // Add this condition to filter by searchId
+        ).toList();
     SPVList.value = filteredList;
-    print('SPVList length (non-empty keyword): ${SPVList.length}');
   }
   // void search(String keyword) {
   //   print('Keyword: $keyword');

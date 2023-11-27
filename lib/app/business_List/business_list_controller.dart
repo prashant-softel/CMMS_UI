@@ -105,10 +105,32 @@ class BusinessListController extends GetxController {
     }
 
     moduleList?.value = filteredData
-        .where((item) => item!.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+        .where((item) =>
+            (item!.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.contactPerson
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.contactnumber
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.email
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.city
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
   }
 
