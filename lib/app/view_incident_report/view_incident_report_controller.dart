@@ -92,7 +92,7 @@ class ViewIncidentReportController extends GetxController {
       TextEditingController();
 
 //Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
+  // var incidentReportList = <IncidentReportListModel>[];
 
   ///Incident Report Details
   Rx<IncidentReportDetailsModel?> incidentReportDetailsModel =
