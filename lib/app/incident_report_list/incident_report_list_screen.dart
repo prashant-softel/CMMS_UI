@@ -60,12 +60,16 @@ class IncidentReportListScreen extends GetView<IncidentReportListController> {
               title: Text('Incident Report List'),
               centerTitle: true,
               elevation: 0,
-              leading: HomeDrawer(),
+
               // leading: IconButton(
               //   icon: Icon(Icons.arrow_back),
               //   onPressed: () => Get.back(),
               // ),
             ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,

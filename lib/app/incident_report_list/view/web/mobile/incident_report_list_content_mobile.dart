@@ -26,6 +26,7 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.15,
                           child: TextField(
+                            onChanged: (value) => controller.search(value),
                             style: TextStyle(
                               fontSize: 15.0,
                               height: 0.2,
@@ -67,7 +68,8 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                           return GestureDetector(
                             onTap: () {
                               // var _jobId = jobModel?.id ?? 0;
-                              // controller.goToJobDetailsScreen(_jobId);
+                              controller.viewIncidentReport(
+                                  id: incidentReportListModel?.id);
                             },
                             child: SizedBox(
                               width: double.infinity,
@@ -86,73 +88,33 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         ///start date: 2023-07-01, End date: 2023-12-31
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Incident : ',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Date of Observation :',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Contractor Name  : ',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Location of Observation:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Type of Observation:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Source of Observation:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Risk Type:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Contact Number:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Target Date:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Closer Date:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              Text(
-                                                'Cost type:',
-                                                style: TextStyle(
-                                                    color: Colors.grey),
-                                              ),
-                                              // Text(
-                                              //   'Status:',
-                                              //   style: TextStyle(color: Colors.grey),
-                                              // ),
-                                            ],
-                                          ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Id : ',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(
+                                              'Block Name :',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(
+                                              'Reported At: ',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                            Text(
+                                              'Reported By:',
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
+                                          ],
                                         ),
+                                        Dimens.boxWidth20,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -165,70 +127,21 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                               ),
                                             ),
                                             Text(
-                                              "14-01-2024",
+                                              "${incidentReportListModel?.block_name}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             Text(
-                                              "Madhuban",
+                                              "${incidentReportListModel?.reported_at}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             Text(
-                                              "UP",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Unsafe Act",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Source",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Bad",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "8808000000",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "14-01-2024",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "14-01-2024",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              "RS",
+                                              "${incidentReportListModel?.reported_by_name}",
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
@@ -236,26 +149,42 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                             ),
                                           ],
                                         ),
+                                        Spacer(),
                                         Column(
                                           children: [
                                             Row(
                                               children: [
-                                                Text(
-                                                  "Done",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: ColorValues
-                                                          .addNewColor),
+                                                Container(
+                                                  height: 20,
+                                                  width: 100,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    // border: Border.all(
+                                                    //   color: Colors.blue,
+                                                    //   width: 1,
+                                                    // ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Colors.green),
+                                                    ],
+                                                  ),
+                                                  child: Center(
+                                                      child: Text(
+                                                    '${incidentReportListModel?.status}',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12),
+                                                  )),
                                                 ),
-                                                Dimens.boxWidth10,
-                                                GestureDetector(
-                                                    onTap: () {
-                                                      // controller
-                                                      //     .goToCreateObservation();
-                                                    },
-                                                    child: Icon(Icons.edit)),
+                                                // Dimens.boxWidth10,
+                                                // GestureDetector(
+                                                //     onTap: () {
+                                                //       // controller
+                                                //       //     .goToCreateObservation();
+                                                //     },
+                                                //     child: Icon(Icons.edit)),
                                               ],
                                             )
                                           ],

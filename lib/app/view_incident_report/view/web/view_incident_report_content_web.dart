@@ -30,12 +30,12 @@ class ViewIncidentReportContentWeb
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: HeaderWidget(),
-          elevation: 0,
-          toolbarHeight: 60,
-          automaticallyImplyLeading: false,
-        ),
+        // appBar: AppBar(
+        //   title: HeaderWidget(),
+        //   elevation: 0,
+        //   toolbarHeight: 60,
+        //   automaticallyImplyLeading: false,
+        // ),
         body: Row(
           children: [
             Responsive.isMobile(context) || Responsive.isTablet(context)

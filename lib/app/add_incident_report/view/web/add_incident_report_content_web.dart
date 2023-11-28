@@ -1233,39 +1233,40 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 //                 ),
                                                 //                 Dimens
                                                 //                     .boxHeight5,
-                                                //                 Row(
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Plant & Equipment involved: ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     Dimens
-                                                //                         .boxWidth10,
-                                                //                     SizedBox(
-                                                //                       width: MediaQuery.of(context)
-                                                //                               .size
-                                                //                               .width /
-                                                //                           5,
-                                                //                       child:
-                                                //                           Obx(
-                                                //                         () =>
-                                                //                             DropdownWebWidget(
-                                                //                           dropdownList:
-                                                //                               controller.eqipmentNameList,
-                                                //                           isValueSelected: controller
-                                                //                               .isEquipmentNameSelected
-                                                //                               .value,
-                                                //                           selectedValue: controller
-                                                //                               .selectedEquipmentName
-                                                //                               .value,
-                                                //                           onValueChanged:
-                                                //                               controller.onValueChanged,
-                                                //                         ),
-                                                //                       ),
-                                                //                     ),
-                                                //                   ],
-                                                //                 ),
+                                                //                 // Row(
+                                                //                 //   children: [
+                                                //                 //     Text(
+                                                //                 //       'Plant & Equipment involved: ',
+                                                //                 //       style: Styles
+                                                //                 //           .black15,
+                                                //                 //     ),
+                                                //                 //     Dimens
+                                                //                 //         .boxWidth10,
+                                                //                 //     SizedBox(
+                                                //                 //       width: MediaQuery.of(context)
+                                                //                 //               .size
+                                                //                 //               .width /
+                                                //                 //           5,
+                                                //                 //       child:
+                                                //                 //           Obx(
+                                                //                 //         () =>
+                                                //                 //             DropdownWebWidget(
+                                                //                 //           dropdownList:
+                                                //                 //               controller.eqipmentNameList,
+                                                //                 //           isValueSelected: controller
+                                                //                 //               .isEquipmentNameSelected
+                                                //                 //               .value,
+                                                //                 //           selectedValue: controller
+                                                //                 //               .selectedEquipmentName
+                                                //                 //               .value,
+                                                //                 //           onValueChanged:
+                                                //                 //               controller.onValueChanged,
+                                                //                 //         ),
+                                                //                 //       ),
+                                                //                 //     ),
+                                                //                 //   ],
+                                                //                 // ),
+
                                                 //                 Dimens
                                                 //                     .boxHeight5,
                                                 //                 Row(
@@ -4287,7 +4288,7 @@ class AddPrposedAction extends StatelessWidget {
                                                 selectedValue: selectedValue
                                               });
                                               mapData["value"] = selectedValue;
-                                              controller.dropdownMapperData[
+                                              controller.dropdownEquipmentNameMapperData[
                                                       selectedValue] =
                                                   list.firstWhere(
                                                       (element) =>
@@ -4342,17 +4343,17 @@ class AddPrposedAction extends StatelessWidget {
                                               //       // ishint: controller
                                               //       //     .testDataTextCtrlr.text,
                                               //       ontap: () {
-                                              //         // pickTargetDateTime_web(
-                                              //         //   context,
-                                              //         //   new TextEditingController(
-                                              //         //       text: mapData[
-                                              //         //               "value"] ??
-                                              //         //           ''),
-                                              //         //   onChanged: (txt) {
-                                              //         //     mapData["value"] =
-                                              //         //         txt;
-                                              //         //   },
-                                              //         // );
+                                              //         pickTargetDateTime_web(
+                                              //             context,
+                                              //             new TextEditingController(
+                                              //                 text: mapData[
+                                              //                         "value"] ??
+                                              //                     '')
+                                              //             // onChanged: (txt) {
+                                              //             //   mapData["value"] =
+                                              //             //       txt;
+                                              //             // },
+                                              //             );
                                               //       },
                                               //       maxLine: 1,
                                               //       textController:
@@ -5694,7 +5695,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                       });
                                                                       mapData["value"] =
                                                                           selectedValue;
-                                                                      controller.dropdownMapperData[selectedValue] = list.firstWhere(
+                                                                      controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
                                                                           (element) =>
                                                                               element.name ==
                                                                               selectedValue,

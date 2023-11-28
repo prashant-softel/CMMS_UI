@@ -205,14 +205,14 @@ class AddIncidentReportController extends GetxController {
 
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  Map<String, InventoryModel> dropdownMapperData = {};
+  Map<String, InventoryModel> dropdownEquipmentNameMapperData = {};
 
   Map<String, GenderModel> dropdownGenderMapperData = {};
   RxList<GenderModel> genderList = <GenderModel>[
-    GenderModel(name: "Please Select", id: "0"),
-    GenderModel(name: 'Male', id: "1"),
-    GenderModel(name: 'Female', id: "2"),
-    GenderModel(name: 'Other', id: "3"),
+    GenderModel(name: "Please Select", id: 0),
+    GenderModel(name: 'Male', id: 1),
+    GenderModel(name: 'Female', id: 2),
+    GenderModel(name: 'Other', id: 3),
   ].obs;
 
   Rx<String> selectedEquipmentName = ''.obs;
@@ -1060,9 +1060,9 @@ class AddIncidentReportController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (selectedEquipmentName.value == '') {
-      isEquipmentNameSelected.value = false;
-    }
+    // if (selectedEquipmentName.value == '') {
+    //   isEquipmentNameSelected.value = false;
+    // }
     if (startDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Incident Date & Time Field cannot be empty',
@@ -1073,9 +1073,9 @@ class AddIncidentReportController extends GetxController {
     //       msg: 'Reporting Date & Time Field cannot be empty',
     //       timeInSecForIosWeb: 5);
     // }
-    if (selectedVictimNameIdList.length < 1) {
-      isVictimNameListSelected.value = false;
-    }
+    // if (selectedVictimNameIdList.length < 1) {
+    //   isVictimNameListSelected.value = false;
+    // }
     if (actionTakenDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Action Taken By Date & Time Field cannot be empty',
@@ -1123,8 +1123,8 @@ class AddIncidentReportController extends GetxController {
     //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
     // }
     if (isBlockSelected.value == false ||
-        isEquipmentNameSelected.value == false ||
-        isVictimNameListSelected.value == false ||
+        // isEquipmentNameSelected.value == false ||
+        // isVictimNameListSelected.value == false ||
         isAssetRestorationActionTakenByListSelected.value == false ||
         isincidentInvestigationDoneByListSelected.value == false ||
         isincidentInvestigationVerificationDoneByListSelected.value == false) {
@@ -1172,16 +1172,6 @@ class AddIncidentReportController extends GetxController {
       //   external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
       // });
 
-      // late List<SupplierActions> supplier_action_list = [];
-
-      // supplierActions.forEach((e) {
-      //   supplier_action_list.add(SupplierActions(
-      //     name: e.name,
-      //     required_by_date: e.required_by_date,
-      //     // is_required: e.is_required
-      //   ));
-      // });
-
       ///Why why analysis
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
@@ -1216,64 +1206,102 @@ class AddIncidentReportController extends GetxController {
         immediateCorrectionItems.add(item);
       });
 
-      ///Proposed Action
+      ///Details of Injured Person
+      List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
+      rowInjuredPersonItem.forEach((element) {
+        DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
+          incidents_id: 123,
+          person_id: dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          sex: dropdownGenderMapperData[element[1]["value"]]?.id,
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor:
+              dropdownBusinessListMapperData[element[4]["value"]]?.name,
+          body_part_and_nature_of_injury:
+              dropdownBusinessListMapperData[element[5]["value"]]?.name,
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved:
+              dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
+          location_of_incident: element[8]["value"] ?? '0',
+        );
+
+        detailsOfInjuredPersonItems.add(item);
+      });
+
+      ///Proposed Action Plan
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
         ProposedActionPlan item = ProposedActionPlan(
           incidents_id: 123,
           actions_as_per_plan: element[0]["value"] ?? '0',
-          // responsibility: dropdownMapperData()
+          responsibility:
+              dropdownEquipmentNameMapperData[element[1]["value"]]?.name,
+          target_date: element[2]["value"] ?? '0',
+          remarks: element[3]["value"] ?? '0',
         );
 
         proposedActionItems.add(item);
       });
 
+      ////investigation Team
+      late List<InvestigationTeam> investigation_team_list = [];
+
+      investigationTeam.forEach((e) {
+        investigation_team_list
+            .add(InvestigationTeam(name: e.name, designation: e.designation
+                // is_required: e.is_required
+                ));
+      });
+
       CreateIncidentReportModel createIncidentReportModel =
           CreateIncidentReportModel(
-        id: 0,
-        facility_id: facilityId,
-        block_id: selectedBlockId,
-        equipment_id: selectedEquipmentnameId,
-        risk_level: 1,
-        incident_datetime: startDateTimeCtrlrBuffer,
-        reporting_datetime: startDateTimeCtrlrBuffer,
-        // reporting_datetime: reportingDateTimeCtrlrBuffer,
-        // victim_id: selectedVictimNameId,
-        victim_id: 5,
-        action_taken_by: selectedAssetRestorationActionTakenById,
-        action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
-        inverstigated_by: selectedIncidentInvestigationDoneById,
-        verified_by: selectedIncidentInvestigationVerificationDoneById,
-        risk_type: selectedRiskTypeId,
-        esi_applicability: esiApplicabilityValue.value,
-        legal_applicability: legalApplicabilityValue.value,
-        rca_required: rCAUploadRequiredValue.value,
-        damaged_cost: int.tryParse('${damagedAssetCostTextCtrlr.text}') ?? 0,
-        generation_loss:
-            int.tryParse('${genLossAssetDamageTextCtrlr.text}') ?? 0,
-        job_id: 2061,
-        title: _title,
-        description: _incidentDescription,
-        is_insurance_applicable: insuranceApplicableValue.value,
-        insurance: _insuranceAvailable,
-        insurance_status: 2,
-        // insurance_remark: _insuranceRemark,
-        insurance_remark: _insuranceAvailable,
-        severity: selectedSeverity.value,
-        //new data adding
-        type_of_job: _jobType,
-        is_person_authorized: _personAuthorized,
-        instructions_given: _instruction,
-        safety_equipments: _safetyEquipment,
-        safe_procedure_observed: _correctSafetyProcedure,
-        unsafe_condition_contributed: _unsafeConditionContributed,
-        legal_applicability_remark: _legalApplicabilityRemark,
-        esi_applicability_remark: _esiApplicabilityRemark,
-        unsafe_act_cause: _unsafeActCause,
-        why_why_analysis: whyWhyAnalysisItems,
-        root_cause: rootCauseItems,
-        immediate_correction: immediateCorrectionItems,
-      );
+              id: 0,
+              facility_id: facilityId,
+              block_id: selectedBlockId,
+              equipment_id: selectedEquipmentnameId,
+              risk_level: 1,
+              incident_datetime: startDateTimeCtrlrBuffer,
+              reporting_datetime: startDateTimeCtrlrBuffer,
+              // reporting_datetime: reportingDateTimeCtrlrBuffer,
+              // victim_id: selectedVictimNameId,
+              victim_id: 5,
+              action_taken_by: selectedAssetRestorationActionTakenById,
+              action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
+              inverstigated_by: selectedIncidentInvestigationDoneById,
+              verified_by: selectedIncidentInvestigationVerificationDoneById,
+              risk_type: selectedRiskTypeId,
+              esi_applicability: esiApplicabilityValue.value,
+              legal_applicability: legalApplicabilityValue.value,
+              rca_required: rCAUploadRequiredValue.value,
+              damaged_cost:
+                  int.tryParse('${damagedAssetCostTextCtrlr.text}') ?? 0,
+              generation_loss:
+                  int.tryParse('${genLossAssetDamageTextCtrlr.text}') ?? 0,
+              job_id: 2061,
+              title: _title,
+              description: _incidentDescription,
+              is_insurance_applicable: insuranceApplicableValue.value,
+              insurance: _insuranceAvailable,
+              insurance_status: 2,
+              // insurance_remark: _insuranceRemark,
+              insurance_remark: _insuranceAvailable,
+              severity: selectedSeverity.value,
+              //new data adding
+              type_of_job: _jobType,
+              is_person_authorized: _personAuthorized,
+              instructions_given: _instruction,
+              safety_equipments: _safetyEquipment,
+              safe_procedure_observed: _correctSafetyProcedure,
+              unsafe_condition_contributed: _unsafeConditionContributed,
+              legal_applicability_remark: _legalApplicabilityRemark,
+              esi_applicability_remark: _esiApplicabilityRemark,
+              unsafe_act_cause: _unsafeActCause,
+              why_why_analysis: whyWhyAnalysisItems,
+              root_cause: rootCauseItems,
+              immediate_correction: immediateCorrectionItems,
+              proposed_action_plan: proposedActionItems,
+              injured_person: detailsOfInjuredPersonItems,
+              investigation_team: investigation_team_list);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
       Map<String, dynamic>? responseCreateIncidentReport =

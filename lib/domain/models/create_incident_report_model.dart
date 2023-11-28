@@ -45,8 +45,9 @@ class CreateIncidentReportModel {
   List<WhyWhyAnalysis?>? why_why_analysis;
   List<RootCause?>? root_cause;
   List<ImmediateCorrection?>? immediate_correction;
+  List<DetailsOfInjuredPerson?>? injured_person;
   List<ProposedActionPlan?>? proposed_action_plan;
-  // List<InvestigationTeam?>? investigationTeam;
+  List<InvestigationTeam?>? investigation_team;
 
   CreateIncidentReportModel({
     this.facility_id,
@@ -87,8 +88,9 @@ class CreateIncidentReportModel {
     this.why_why_analysis,
     this.root_cause,
     this.immediate_correction,
+    this.injured_person,
     this.proposed_action_plan,
-    // this.investigationTeam,
+    this.investigation_team,
   });
 
   factory CreateIncidentReportModel.fromJson(Map<String, dynamic> json) =>
@@ -140,14 +142,18 @@ class CreateIncidentReportModel {
             ? List<ImmediateCorrection>.from(json["immediate_correction"]
                 ?.map((x) => ImmediateCorrection.fromJson(x)))
             : [],
+        injured_person: json['injured_person'] != null
+            ? List<DetailsOfInjuredPerson>.from(json["injured_person"]
+                ?.map((x) => DetailsOfInjuredPerson.fromJson(x)))
+            : [],
         proposed_action_plan: json['proposed_action_plan'] != null
             ? List<ProposedActionPlan>.from(json["proposed_action_plan"]
                 ?.map((x) => ProposedActionPlan.fromJson(x)))
             : [],
-        // investigationTeam: json["supplierActions"] != null
-        //     ? List<InvestigationTeam>.from(json["supplierActions"]
-        //         ?.map((x) => InvestigationTeam.fromJson(x)))
-        //     : [],
+        investigation_team: json["investigation_team"] != null
+            ? List<InvestigationTeam>.from(json["investigation_team"]
+                ?.map((x) => InvestigationTeam.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -189,11 +195,72 @@ class CreateIncidentReportModel {
         "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),
         "immediate_correction":
             List<dynamic>.from(immediate_correction!.map((x) => x)),
+        "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
         "proposed_action_plan":
             List<dynamic>.from(proposed_action_plan!.map((x) => x)),
+        "investigation_team":
+            List<dynamic>.from(investigation_team!.map((x) => x)),
+      };
+}
 
-        // "investigationTeam":
-        //     List<dynamic>.from(investigationTeam!.map((x) => x)),
+///Details of Injured Person
+class DetailsOfInjuredPerson {
+  DetailsOfInjuredPerson(
+      {this.incidents_id,
+      this.person_id,
+      this.person_type,
+      this.age,
+      this.sex,
+      this.designation,
+      this.address,
+      this.name_contractor,
+      this.body_part_and_nature_of_injury,
+      this.work_experience_years,
+      this.plant_equipment_involved,
+      this.location_of_incident});
+
+  int? incidents_id;
+  String? person_id;
+  int? person_type;
+  int? age;
+  int? sex;
+  String? designation;
+  String? address;
+  String? name_contractor;
+  String? body_part_and_nature_of_injury;
+  int? work_experience_years;
+  String? plant_equipment_involved;
+  String? location_of_incident;
+
+  factory DetailsOfInjuredPerson.fromJson(Map<String, dynamic> json) =>
+      DetailsOfInjuredPerson(
+        incidents_id: json['incidents_id'],
+        person_id: json['person_id'],
+        person_type: json['person_type'],
+        age: json['age'],
+        sex: json['sex'],
+        designation: json['designation'],
+        address: json['address'],
+        name_contractor: json["name_contractor"],
+        body_part_and_nature_of_injury: json['body_part_and_nature_of_injury'],
+        work_experience_years: json['work_experience_years'],
+        plant_equipment_involved: json['plant_equipment_involved'],
+        location_of_incident: json['location_of_incident'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "person_id": person_id,
+        "person_type": person_type,
+        "age": age,
+        "sex": sex,
+        "designation": designation,
+        "address": address,
+        "name_contractor": name_contractor,
+        "body_part_and_nature_of_injury": body_part_and_nature_of_injury,
+        "work_experience_years": work_experience_years,
+        "plant_equipment_involved": plant_equipment_involved,
+        "location_of_incident": location_of_incident
       };
 }
 
@@ -300,36 +367,37 @@ class ImmediateCorrection {
 }
 
 class InvestigationTeam {
-  InvestigationTeam(
-      {this.srNumber,
-      this.name,
-      // this.is_required,
-      // this.required_by_date,
-
-      this.designation});
+  InvestigationTeam({
+    this.srNumber,
+    this.person_id,
+    this.name,
+    this.designation,
+    this.person_type,
+    this.investigation_date,
+  });
 
   String? srNumber;
+  String? person_id;
+  int? person_type;
   String? name;
-  // bool? is_required;
-  // String? required_by_date;
-
   String? designation;
+  String? investigation_date;
 
   factory InvestigationTeam.fromJson(Map<String, dynamic> json) =>
       InvestigationTeam(
           srNumber: json['srNumber'],
+          person_id: json['person_id'],
+          person_type: json['person_type'],
           name: json["name"],
-          // is_required: json["is_required"],
-          // required_by_date: json["required_by_date"],
-
-          designation: json['designation']);
+          designation: json['designation'],
+          investigation_date: json['investigation_date']);
 
   Map<String, dynamic> toJson() => {
         "srNumber": srNumber,
+        "person_id": person_id,
+        "person_type": person_type,
         "name": name,
-        // "is_required": is_required,
-        // "required_by_date": required_by_date,
-
-        "designation": designation
+        "designation": designation,
+        "investigation_date": investigation_date
       };
 }

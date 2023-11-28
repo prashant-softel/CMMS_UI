@@ -32,7 +32,7 @@ class TypeModel {
 
 class GenderModel {
   final String name;
-  final String? id;
+  final int? id;
 
   GenderModel({required this.name, this.id});
 
