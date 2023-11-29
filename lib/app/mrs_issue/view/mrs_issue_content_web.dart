@@ -310,8 +310,8 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                         .mrsDetailsModel
                                                         .value!
                                                         .cmmrsItems![index]
-                                                        .approval_required ==
-                                                    "Yes"
+                                                        .asset_type ==
+                                                    "Spare"
                                                 ? DataCell(
                                                     Padding(
                                                       padding:

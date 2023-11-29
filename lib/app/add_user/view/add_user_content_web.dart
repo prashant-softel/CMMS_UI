@@ -700,6 +700,52 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               ),
                                             ],
                                           ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Company Name: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.businessList,
+                                                  isValueSelected: controller
+                                                      .isBusinessListSelected
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedIBusinessList
+                                                      .value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                       Spacer(),
