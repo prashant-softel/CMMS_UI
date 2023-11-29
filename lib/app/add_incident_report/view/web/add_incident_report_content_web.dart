@@ -987,9 +987,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 //                             child:
                                                 //                                 CustomRichText(title: 'Other Victim Name: '),
                                                 //                           ),
-                                                //                           SizedBox(
-                                                //                               width: MediaQuery.of(context).size.width / 5,
-                                                //                               child: _buildOtherVictimNameTextField_web(context))
+                                                // SizedBox(
+                                                //     width: MediaQuery.of(context).size.width / 5,
+                                                //     child: _buildOtherVictimNameTextField_web(context))
                                                 //                         ],
                                                 //                       )
                                                 //                     : Dimens.box0,
@@ -1886,6 +1886,25 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 FileUploadDetailsWidgetWeb()),
                                                       ]),
                                                 ),
+
+                                                // Obx(() {
+                                                //   return Column(
+                                                //     children: controller
+                                                //         .victimNameList.reversed
+                                                //         .map((data) {
+                                                //       return Text(
+                                                //           '${data.toJson()}');
+                                                //     }).toList(),
+                                                //   );
+                                                // }),
+                                                // SizedBox(height: 20),
+                                                // ElevatedButton(
+                                                //   onPressed: () {
+                                                //     controller.addOneMoreData();
+                                                //   },
+                                                //   child:
+                                                //       Text('Add One More Data'),
+                                                // ),
                                               ],
                                             ),
                                           ),
@@ -3710,82 +3729,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     ]);
   }
 
-  Widget _buildOtherVictimNameTextField_web(BuildContext context) {
-    return Column(//
-        children: [
-      Dimens.boxHeight5,
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.44
-            : MediaQuery.of(context).size.width / 1.1,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.4,
-          child: TextField(
-            controller: controller.otherVictimNameTextCtrlr,
-            keyboardType: TextInputType.multiline,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              focusedErrorBorder: controller.isOtherVictimNameInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isOtherVictimNameInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText: controller.isOtherVictimNameInvalid.value
-                  ? "Required field"
-                  : null,
-            ),
-            onChanged: (value) {
-              if (value.trim().length > 3) {
-                controller.isOtherVictimNameInvalid.value = false;
-              } else {
-                controller.isOtherVictimNameInvalid.value = true;
-              }
-            },
-          ),
-        ),
-      ),
-    ]);
-  }
-
   Widget _buildInsuranceAvailableTextField_web(BuildContext context) {
     return Column(//
         children: [
@@ -5274,7 +5217,10 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                         selectedValue: mapData["value"],
                                         onValueChanged: (list, selectedValue) {
                                           print({selectedValue: selectedValue});
-
+                                          if (selectedValue != null) {
+                                            controller.updateSelectedOption(
+                                                selectedValue);
+                                          }
                                           mapData["value"] = selectedValue;
                                           controller.dropdownVictimNameMapperData[
                                                   selectedValue] =
@@ -5285,18 +5231,16 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                   orElse: null);
                                         },
                                       ),
-                                      // controller.victimNameList
-                                      //             .firstWhere(
-                                      //               (e) => "${e.id}" == "${2}",
-                                      //               orElse: () =>
-                                      //                   EmployeeListModel(
-                                      //                       name: ''),
-                                      //             )
-                                      //             .id ==
-                                      //         2
-                                      //     ? Text('hello every')
-                                      //     : Dimens.box0
-                                      //
+                                      controller.selectedOption == "Other"
+                                          ? SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              child:
+                                                  _buildOtherVictimNameTextField_web(
+                                                      context))
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 )
@@ -5775,5 +5719,81 @@ class DetailsOfInjuredPerson extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildOtherVictimNameTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      Dimens.boxHeight5,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.otherVictimNameTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isOtherVictimNameInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isOtherVictimNameInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isOtherVictimNameInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isOtherVictimNameInvalid.value = false;
+              } else {
+                controller.isOtherVictimNameInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
   }
 }
