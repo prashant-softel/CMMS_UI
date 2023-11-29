@@ -22,6 +22,7 @@ class CreateMrsController extends GetxController {
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   Map<String, GetAssetItemsModel> dropdownMapperData = {};
+
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
@@ -90,8 +91,7 @@ class CreateMrsController extends GetxController {
       update(["AssetList"]);
     }
     // assetItemList.value = [];
-
-    addRowItem();
+    //addRowItem();
   }
 
   void addRowItem() {

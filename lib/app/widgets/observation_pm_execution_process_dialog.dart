@@ -45,6 +45,26 @@ class ObservationPmExecutionViewDialog extends GetView {
           });
     }
 
+    Widget _rowBoolItem(int? defaultValue, {required Function(bool) onCheck}) {
+      return Checkbox(
+          value: defaultValue == 1 ? true : false,
+          checkColor: Colors.white,
+          activeColor: ColorValues.appGreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(2.0),
+          ),
+          side: MaterialStateBorderSide.resolveWith(
+            (states) => BorderSide(
+              width: 1.0,
+              color: ColorValues.blackColor,
+            ),
+          ),
+          onChanged: (val) {
+            controller.isToggleBoolOn.value = val!;
+            onCheck(val);
+          });
+    }
+
     return StatefulBuilder(builder: ((context, setState) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
@@ -251,19 +271,25 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                         index]
                                                     .check_point_type ==
                                                 1
-                                            ? DataCell(Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: LoginCustomTextfield(
-                                                  width: (Get.width * .4),
-                                                  textController: controller
-                                                          .selectedItem
-                                                          ?.checklist_observation?[
-                                                              index]
-                                                          .bool_text_value_controller
-                                                      as TextEditingController,
-                                                ),
-                                              ))
+                                            ? DataCell(Obx(() {
+                                                return _rowBoolItem(
+                                                    controller
+                                                        .selectedItem
+                                                        ?.checklist_observation?[
+                                                            index]
+                                                        .type_bool
+                                                        .value, onCheck: (val) {
+                                                  controller
+                                                      .selectedItem
+                                                      ?.checklist_observation?[
+                                                          index]
+                                                      .type_bool
+                                                      .value = val ==
+                                                          true
+                                                      ? 1
+                                                      : 0;
+                                                });
+                                              }))
                                             : controller
                                                         .selectedItem
                                                         ?.checklist_observation?[

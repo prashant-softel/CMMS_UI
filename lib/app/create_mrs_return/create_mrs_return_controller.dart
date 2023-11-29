@@ -20,9 +20,8 @@ class CreateMrsReturnController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
   Map<String, CmmrsItemsModel> dropdownMapperData = {};
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
@@ -70,7 +69,7 @@ class CreateMrsReturnController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
@@ -89,7 +88,7 @@ class CreateMrsReturnController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<CmmsItem> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
         asset_item_ID: dropdownMapperData[element[0]["value"]]?.id,
         issued_qty: dropdownMapperData[element[0]["value"]]?.quantity,

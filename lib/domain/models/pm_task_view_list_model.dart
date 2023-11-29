@@ -157,7 +157,9 @@ class ChecklistObservation {
 
   int? check_point_type;
   int? type_range;
-  int? type_bool;
+  // int? type_bool;
+  RxInt type_bool = RxInt(0);
+
   dynamic type_text;
   String? observation;
   RxInt linked_job_id = RxInt(0);
@@ -166,7 +168,6 @@ class ChecklistObservation {
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
-  TextEditingController? bool_text_value_controller;
   TextEditingController? renge_text_value_controller;
 
   ChecklistObservation(
@@ -181,15 +182,15 @@ class ChecklistObservation {
       required int cp_ok,
       this.observation,
       this.requirement,
-      this.type_bool,
+      required int type_bool,
       this.type_range,
       this.type_text,
       this.files,
       this.observation_value_controller,
-      this.bool_text_value_controller,
       this.renge_text_value_controller}) {
     this.linked_job_id.value = linked_job_id;
     this.cp_ok.value = cp_ok;
+    this.type_bool.value = type_bool;
   }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
@@ -210,9 +211,6 @@ class ChecklistObservation {
           cp_ok: json["cp_ok"] ?? 0,
           observation_value_controller: TextEditingController(
             text: json['observation'],
-          ),
-          bool_text_value_controller: TextEditingController(
-            text: json['type_bool'].toString(),
           ),
           renge_text_value_controller: TextEditingController(
             text: json['type_range'].toString(),
