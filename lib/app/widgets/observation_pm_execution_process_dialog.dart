@@ -33,6 +33,18 @@ class ObservationPmExecutionViewDialog extends GetView {
           });
     }
 
+    Widget _rowcpOkItem(int? defaultValue, {required Function(bool) onCheck}) {
+      return CustomSwitchTroggle(
+          value: defaultValue == 1 ? true : false,
+          onChanged: (value) {
+            print("object");
+            controller.isToggleokOn.value = value!;
+            onCheck(value);
+
+            //  controller.toggle();
+          });
+    }
+
     return StatefulBuilder(builder: ((context, setState) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
@@ -165,7 +177,15 @@ class ObservationPmExecutionViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 200,
                                           label: Text(
-                                            "CP ok ?",
+                                            "CP OK ?",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Type",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -211,20 +231,72 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 .toString() ??
                                             '')),
                                         DataCell(Obx(() {
-                                          return _rowItem(
+                                          return _rowcpOkItem(
                                               controller
                                                   .selectedItem
                                                   ?.checklist_observation?[
                                                       index]
-                                                  .linked_job_id
+                                                  .cp_ok
                                                   .value, onCheck: (val) {
                                             controller
                                                 .selectedItem
                                                 ?.checklist_observation?[index]
-                                                .linked_job_id
+                                                .cp_ok
                                                 .value = val == true ? 1 : 0;
                                           });
                                         })),
+                                        controller
+                                                    .selectedItem
+                                                    ?.checklist_observation?[
+                                                        index]
+                                                    .check_point_type ==
+                                                1
+                                            ? DataCell(Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: LoginCustomTextfield(
+                                                  width: (Get.width * .4),
+                                                  textController: controller
+                                                          .selectedItem
+                                                          ?.checklist_observation?[
+                                                              index]
+                                                          .bool_text_value_controller
+                                                      as TextEditingController,
+                                                ),
+                                              ))
+                                            : controller
+                                                        .selectedItem
+                                                        ?.checklist_observation?[
+                                                            index]
+                                                        .check_point_type ==
+                                                    2
+                                                ? DataCell(Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      children: [
+                                                        LoginCustomTextfield(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          textController: controller
+                                                                  .selectedItem
+                                                                  ?.checklist_observation?[
+                                                                      index]
+                                                                  .renge_text_value_controller
+                                                              as TextEditingController,
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text("Min:23"),
+                                                            Dimens.boxWidth15,
+                                                            Text("Max:50")
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ))
+                                                : DataCell(Text("")),
                                         DataCell(Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: LoginCustomTextfield(

@@ -59,8 +59,8 @@ class EmployeeStockReportController extends GetxController {
       selectedUser.value = userList[0]?.name ?? '';
       selectedUserId = userList[0]?.id ?? 0;
       Future.delayed(Duration(seconds: 1), () {
-        getEmployeeStockReportList(facilityId, selectedUserId, formattedTodate1,
-            formattedFromdate1, false);
+        getEmployeeStockReportList(
+            facilityId, 12, formattedTodate1, formattedFromdate1, false);
       });
     }
   }
@@ -90,9 +90,10 @@ class EmployeeStockReportController extends GetxController {
           int userIndex = userList.indexWhere((x) => x?.name == value);
           selectedUserId = userList[userIndex]?.id ?? 0;
           selectedUser.value = userList[userIndex]?.name ?? '';
-
-          getEmployeeStockReportList(facilityId, selectedUserId,
-              formattedTodate1, formattedFromdate1, false);
+          if (selectedUserId != null) {
+            getEmployeeStockReportList(facilityId, selectedUserId,
+                formattedTodate1, formattedFromdate1, false);
+          }
         }
         break;
       default:

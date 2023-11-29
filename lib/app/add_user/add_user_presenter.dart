@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
@@ -84,6 +85,13 @@ class AddUserPresenter {
       accessLevelJsonString: accessLevelJsonString,
       isLoading: isLoading,
     );
+  }
+
+  Future<List<BusinessListModel?>?> getBusinessList({
+    required int ListType,
+    required bool isLoading,
+  }) async {
+    return addUserUsecase.getBusinessList(type: ListType, isLoading: isLoading);
   }
 
   Future<bool> addUser({

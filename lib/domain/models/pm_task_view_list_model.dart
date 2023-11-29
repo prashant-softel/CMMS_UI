@@ -161,9 +161,13 @@ class ChecklistObservation {
   dynamic type_text;
   String? observation;
   RxInt linked_job_id = RxInt(0);
+  RxInt cp_ok = RxInt(0);
+
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
+  TextEditingController? bool_text_value_controller;
+  TextEditingController? renge_text_value_controller;
 
   ChecklistObservation(
       {this.check_point_id,
@@ -174,14 +178,18 @@ class ChecklistObservation {
       this.is_custom_check_point,
       this.is_file_required,
       required int linked_job_id,
+      required int cp_ok,
       this.observation,
       this.requirement,
       this.type_bool,
       this.type_range,
       this.type_text,
       this.files,
-      this.observation_value_controller}) {
+      this.observation_value_controller,
+      this.bool_text_value_controller,
+      this.renge_text_value_controller}) {
     this.linked_job_id.value = linked_job_id;
+    this.cp_ok.value = cp_ok;
   }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
@@ -199,8 +207,15 @@ class ChecklistObservation {
           type_bool: json["type_bool"] ?? 0,
           type_range: json["type_range"] ?? 0,
           type_text: json["type_text"],
+          cp_ok: json["cp_ok"] ?? 0,
           observation_value_controller: TextEditingController(
             text: json['observation'],
+          ),
+          bool_text_value_controller: TextEditingController(
+            text: json['type_bool'].toString(),
+          ),
+          renge_text_value_controller: TextEditingController(
+            text: json['type_range'].toString(),
           ),
           files: List<Files>.from(json["files"].map((x) => Files.fromJson(x))));
 
@@ -218,6 +233,7 @@ class ChecklistObservation {
         "type_bool": type_bool,
         "type_range": type_range,
         "type_text": type_text,
+        "cp_ok": cp_ok,
         "files": List<dynamic>.from(files?.map((x) => x.toJson()) ?? []),
       };
 }

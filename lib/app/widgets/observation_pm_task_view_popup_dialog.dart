@@ -121,21 +121,21 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          // fixedWidth: 300,
+                                          fixedWidth: 300,
                                           label: Text(
-                                        "Check Point",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                            "Check Point",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
-                                          // fixedWidth: 300,
+                                          fixedWidth: 300,
                                           label: Text(
-                                        "Requirement",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                            "Requirement",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
                                           fixedWidth: 150,
                                           label: Text(
@@ -153,13 +153,21 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 180,
                                           label: Text(
-                                            "Upload Images",
+                                            "Type",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           )),
+                                      // DataColumn2(
+                                      //     fixedWidth: 200,
+                                      //     label: Text(
+                                      //       "Upload Images",
+                                      //       style: TextStyle(
+                                      //           fontSize: 15,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     )),
                                       DataColumn2(
                                           fixedWidth: 300,
                                           label: Text(
@@ -205,8 +213,52 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 .failure_waightage
                                                 .toString() ??
                                             '')),
-                                        DataCell(Text('--')),
-                                        DataCell(Text('--')),
+                                        DataCell(Text(
+                                          controller
+                                                      .selectedItem
+                                                      ?.checklist_observation?[
+                                                          index]
+                                                      .cp_ok ==
+                                                  1
+                                              ? "OK"
+                                              : "Not OK",
+                                          style: controller
+                                                      .selectedItem
+                                                      ?.checklist_observation?[
+                                                          index]
+                                                      .cp_ok ==
+                                                  1
+                                              ? Styles.greencolor16
+                                              : Styles.redcolor16,
+                                        )),
+                                        controller
+                                                    .selectedItem
+                                                    ?.checklist_observation?[
+                                                        index]
+                                                    .check_point_type ==
+                                                1
+                                            ? DataCell(Text(
+                                                "${controller.selectedItem?.checklist_observation?[index].type_bool}"))
+                                            : controller
+                                                        .selectedItem
+                                                        ?.checklist_observation?[
+                                                            index]
+                                                        .check_point_type ==
+                                                    2
+                                                ? DataCell(Column(
+                                                    children: [
+                                                      Text(
+                                                          "${controller.selectedItem?.checklist_observation?[index].type_range}"),
+                                                      Row(
+                                                        children: [
+                                                          Text("min:23"),
+                                                          Dimens.boxWidth12,
+                                                          Text("Max:50")
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ))
+                                                : DataCell(Text('')),
                                         DataCell(Text(controller
                                                 .selectedItem
                                                 ?.checklist_observation?[index]

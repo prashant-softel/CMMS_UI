@@ -1,5 +1,6 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -19,6 +20,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/blood_model.dart';
+import '../../domain/models/business_list_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/get_notification_by_userid_model.dart';
 import '../../domain/models/role_model.dart';
@@ -105,6 +107,10 @@ class AddUserController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  RxList<BusinessListModel?> businessList = <BusinessListModel>[].obs;
+  Rx<String> selectedIBusinessList = 'Select Company'.obs;
+  Rx<bool> isBusinessListSelected = true.obs;
+  int selectedBusinessTypeId = 0;
 
   ///
   void onInit() async {
@@ -121,6 +127,9 @@ class AddUserController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getBusinessList(0);
       });
       if (userId.value != 0) {
         await getUserDetails();
@@ -213,6 +222,18 @@ class AddUserController extends GetxController {
     }
 
     facility_map[emp_id] = selectedfacilityNameIdList;
+  }
+
+  Future<void> getBusinessList(ListType) async {
+    final list = await addUserPresenter.getBusinessList(
+      ListType: ListType,
+      isLoading: true,
+    );
+    if (list!.length > 0) {
+      for (var _businessList in list) {
+        businessList.add(_businessList);
+      }
+    }
   }
 
   getImage(ImageSource imageSource) async {
@@ -427,6 +448,12 @@ class AddUserController extends GetxController {
           getRoleNotificationList(roleId: selectedRoleId, isloading: true);
         }
         break;
+      case RxList<BusinessListModel>:
+        {
+          int equipmentIndex = businessList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId = businessList[equipmentIndex]?.id ?? 0;
+        }
+        break;
       default:
         {
           //statements;
@@ -476,7 +503,7 @@ class AddUserController extends GetxController {
       // Get.offNamed(
       //   Routes.userList,
       // );
-        } else {
+    } else {
       Fluttertoast.showToast(
           msg: "Unable to update the access level", fontSize: 16.0);
     }
@@ -513,7 +540,7 @@ class AddUserController extends GetxController {
       Get.offAllNamed(
         Routes.userList,
       );
-        } else {
+    } else {
       Fluttertoast.showToast(
           msg: "Unable to update the  notification", fontSize: 16.0);
     }
@@ -558,6 +585,7 @@ class AddUserController extends GetxController {
                 ? 2
                 : 3,
         DOB: _dob,
+        company_id: selectedBusinessTypeId,
         city_id: selectedCityId,
         contact_no: _mobileno,
         country_id: selectedCountryId,

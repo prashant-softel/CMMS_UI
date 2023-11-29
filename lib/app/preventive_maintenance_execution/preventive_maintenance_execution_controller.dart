@@ -28,6 +28,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Rx<int> scheduleId = 0.obs;
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
+  var isToggleokOn = false.obs;
+
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
@@ -192,6 +194,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           execution_id: e.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
           job_create: e.linked_job_id.value,
+          text: e.check_point_type == 1
+              ? e.bool_text_value_controller?.text ?? ""
+              : e.check_point_type == 2
+                  ? e.renge_text_value_controller?.text ?? ""
+                  : "",
+          is_ok: e.cp_ok.value,
+          // boolean: 1,
           pm_files: []));
     });
     List<Schedules> schedule = <Schedules>[];
@@ -213,6 +222,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       isLoading: true,
     );
     // _updatedailog();
+    // Get.back();
     Fluttertoast.showToast(msg: "PM Schedule Successfully...", fontSize: 16.0);
   }
 

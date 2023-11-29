@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
@@ -82,6 +83,14 @@ class AddUserUsecase {
       await repository.saveAccessLevel(
         accessLevelJsonString,
         isLoading,
+      );
+  Future<List<BusinessListModel?>?> getBusinessList({
+    required int type,
+    bool isLoading = true,
+  }) async =>
+      await repository.getBusinessList(
+        businessType: type,
+        isLoading: isLoading,
       );
   Future<bool> addUser({
     adduserJsonString,
