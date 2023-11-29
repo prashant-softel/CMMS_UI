@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
@@ -94,6 +95,24 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isBusinessListSelected = true.obs;
   Rx<String> selectedIBusinessList = ''.obs;
   int selectedBusinessListId = 0;
+
+  // ///Dropdown testing
+  RxList<String> dataList = <String>['Data 1', 'Data 2'].obs;
+
+  // void addData(String newData) {
+  //   victimNameList.add(EmployeeListModel(name: newData));
+  // }
+
+  // Example of adding one more data
+  void addOneMoreData() {
+    victimNameList.add(EmployeeListModel(name: "Other"));
+    victimNameList.reversed.toList();
+  }
+
+  RxString selectedOption = ''.obs;
+  void updateSelectedOption(String newValue) {
+    selectedOption.value = newValue;
+  }
 
   /// Victim Name List
   RxList<EmployeeListModel> victimNameList = <EmployeeListModel>[].obs;
@@ -506,6 +525,9 @@ class AddIncidentReportController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getBusinessList();
+    });
+    Future.delayed(Duration(seconds: 1), () {
+      addOneMoreData();
     });
 
     super.onInit();
@@ -1165,6 +1187,8 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(legalApplicabilityRemarkTextCtrlr.text.trim());
       String? _esiApplicabilityRemark =
           htmlEscape.convert(ESIApplicabilityRemarkTextCtrlr.text.trim());
+      String? _otherVictimName =
+          htmlEscape.convert(otherVictimNameTextCtrlr.text.trim());
 
       // late List<ExternalEmails> external_emails_list = [];
 
@@ -1211,7 +1235,11 @@ class AddIncidentReportController extends GetxController {
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
           incidents_id: 123,
-          person_id: dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          person_id: selectedOption.value == "Other"
+              ? _otherVictimName
+              : dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          person_type: 1,
+          age: 30,
           sex: dropdownGenderMapperData[element[1]["value"]]?.id,
           designation: element[2]["value"] ?? '0',
           address: element[3]["value"] ?? '0',
@@ -1236,7 +1264,8 @@ class AddIncidentReportController extends GetxController {
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility:
               dropdownEquipmentNameMapperData[element[1]["value"]]?.name,
-          target_date: element[2]["value"] ?? '0',
+          // target_date: element[2]["value"] ?? '0',
+          target_date: "2023-11-26T12:00:00",
           remarks: element[3]["value"] ?? '0',
         );
 
@@ -1247,10 +1276,15 @@ class AddIncidentReportController extends GetxController {
       late List<InvestigationTeam> investigation_team_list = [];
 
       investigationTeam.forEach((e) {
-        investigation_team_list
-            .add(InvestigationTeam(name: e.name, designation: e.designation
-                // is_required: e.is_required
-                ));
+        investigation_team_list.add(InvestigationTeam(
+          name: e.name,
+          designation: e.designation,
+          person_id: "",
+          person_type: 1,
+          investigation_date: "2023-07-02T08:00:00",
+          srNumber: "",
+          // is_required: e.is_required
+        ));
       });
 
       CreateIncidentReportModel createIncidentReportModel =
@@ -1373,24 +1407,23 @@ class AddIncidentReportController extends GetxController {
               inverstigated_by: selectedIncidentInvestigationDoneById,
               verified_by: selectedIncidentInvestigationVerificationDoneById,
               risk_type: selectedRiskTypeId,
-              legal_applicability: incidentReportDetailsModel
-                          .value?.legal_applicability_name ==
-                      "YES"
-                  ? legalApplicabilityDetailValue.value
-                  : legalApplicabilityDetailFalseValue.value,
-              esi_applicability: incidentReportDetailsModel
-                          .value?.esi_applicability_name ==
-                      "YES"
-                  ? esiApplicabilityDetailValue.value
-                  : esiApplicabilityDetailFalseValue.value,
+              legal_applicability:
+                  incidentReportDetailsModel.value?.legal_applicability_name ==
+                          "YES"
+                      ? legalApplicabilityDetailValue.value
+                      : legalApplicabilityDetailFalseValue.value,
+              esi_applicability:
+                  incidentReportDetailsModel.value?.esi_applicability_name ==
+                          "YES"
+                      ? esiApplicabilityDetailValue.value
+                      : esiApplicabilityDetailFalseValue.value,
               incident_datetime: startDateTimeCtrlrBuffer,
               action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
               reporting_datetime: reportingDateTimeCtrlrBuffer,
               insurance: _insuranceAvailable,
               title: _title,
               rca_required:
-                  incidentReportDetailsModel.value?.rca_required_name ==
-                          "YES"
+                  incidentReportDetailsModel.value?.rca_required_name == "YES"
                       ? rCAUploadRequiredDetailValue.value
                       : rCAUploadRequiredDetailFalseValue.value,
               damaged_cost:
@@ -1402,7 +1435,24 @@ class AddIncidentReportController extends GetxController {
               is_insurance_applicable: true,
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
-              severity: selectedSeverity.value);
+              severity: selectedSeverity.value,
+
+              ///new data adding
+              type_of_job: "",
+              is_person_authorized: "",
+              instructions_given: "",
+              safety_equipments: "",
+              safe_procedure_observed: "",
+              unsafe_condition_contributed: "",
+              legal_applicability_remark: "",
+              esi_applicability_remark: "",
+              unsafe_act_cause: "",
+              why_why_analysis: [],
+              root_cause: [],
+              immediate_correction: [],
+              proposed_action_plan: [],
+              injured_person: [],
+              investigation_team: []);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
       Map<String, dynamic>? responseUpdateIncidentReport =
@@ -1416,5 +1466,10 @@ class AddIncidentReportController extends GetxController {
       }
       print('Update Incident Report data: $updateIncidentReportJsonString');
     }
+  }
+
+  Future<void> viewIncidentReport({int? id}) async {
+    Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
+    print('Argument$id');
   }
 }
