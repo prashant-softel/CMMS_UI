@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/save_user_notification_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,8 +40,14 @@ class AddUserController extends GetxController {
   AddUserPresenter addUserPresenter;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
   Rx<String> selectedCountry = 'Select Country'.obs;
+  Rx<String> selectedGender = 'Select Gender'.obs;
+
   Rx<bool> isSelectedCountry = true.obs;
+  Rx<bool> isSelectedGender = true.obs;
+
   int selectedCountryId = 0;
+  int selectedGenderId = 0;
+
   RxList<StateModel?> stateList = <StateModel>[].obs;
   Rx<String> selectedState = 'Select State'.obs;
   Rx<bool> isSelectedState = true.obs;
@@ -63,6 +70,12 @@ class AddUserController extends GetxController {
   RxString password = ''.obs;
   RxBool isPasswordValid = true.obs;
   bool isToastVisible = false;
+
+  RxList<GenderModel?> genderList = <GenderModel>[
+    GenderModel(name: 'Male', id: 1),
+    GenderModel(name: 'Female', id: 2),
+    GenderModel(name: 'Other', id: 3),
+  ].obs;
 
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
   RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
@@ -434,6 +447,12 @@ class AddUserController extends GetxController {
           selectedCityId = cityList[cityIndex]?.id ?? 0;
         }
         break;
+      case RxList<GenderModel>:
+        {
+          int genderIndex = genderList.indexWhere((x) => x?.name == value);
+          selectedGenderId = genderList[genderIndex]?.id ?? 0;
+        }
+        break;
       case RxList<BloodModel>:
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
@@ -579,11 +598,7 @@ class AddUserController extends GetxController {
         landline_number: _landline,
         last_name: _lastname,
         add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
+        gender_id: selectedGenderId,
         DOB: _dob,
         company_id: selectedBusinessTypeId,
         city_id: selectedCityId,
@@ -630,11 +645,7 @@ class AddUserController extends GetxController {
         landline_number: _landline,
         last_name: _lastname,
         add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
+        gender_id: selectedGenderId,
         DOB: _dob,
         city_id: selectedCityId,
         contact_no: _mobileno,

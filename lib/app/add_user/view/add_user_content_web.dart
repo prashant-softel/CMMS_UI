@@ -477,41 +477,52 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .width *
                                                     .2),
                                                 height: 35,
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton<String>(
-                                                    isExpanded: true,
-                                                    value:
-                                                        controller.gender.value,
-                                                    onChanged: (value) =>
-                                                        controller.updateGender(
-                                                            value!),
-                                                    items: <String>[
-                                                      'Select Gender',
-                                                      'Male',
-                                                      'Female',
-                                                      'Other'
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
-                                                          child: Text(
-                                                            value,
-                                                            style:
-                                                                Styles.black12,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
+                                                child: DropdownWebWidget(
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.genderList,
+                                                  isValueSelected: controller
+                                                      .isSelectedGender.value,
+                                                  selectedValue: controller
+                                                      .selectedGender.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
+                                                //   DropdownButtonHideUnderline(
+                                                //     child: DropdownButton<String>(
+                                                //       isExpanded: true,
+                                                //       value:
+                                                //           controller.gender.value,
+                                                //       onChanged: (value) =>
+                                                //           controller.updateGender(
+                                                //               value!),
+                                                //       items: <String>[
+                                                //         'Select Gender',
+                                                //         'Male',
+                                                //         'Female',
+                                                //         'Other'
+                                                //       ].map<
+                                                //               DropdownMenuItem<
+                                                //                   String>>(
+                                                //           (String value) {
+                                                //         return DropdownMenuItem<
+                                                //             String>(
+                                                //           value: value,
+                                                //           child: Container(
+                                                //             margin:
+                                                //                 EdgeInsets.only(
+                                                //                     left: 10),
+                                                //             child: Text(
+                                                //               value,
+                                                //               style:
+                                                //                   Styles.black12,
+                                                //             ),
+                                                //           ),
+                                                //         );
+                                                //       }).toList(),
+                                                //     ),
+                                                //   ),
+                                                // ),
                                               ),
                                             ],
                                           ),
@@ -558,8 +569,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1022,8 +1032,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1117,8 +1126,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 child: LoginCustomTextfield(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
