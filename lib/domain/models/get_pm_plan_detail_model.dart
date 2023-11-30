@@ -75,8 +75,8 @@ class PMPlanDetail {
       approved_at: parsedJson['approved_at'],
       approved_by_id: parsedJson['approved_by_id'],
       approved_by_name: parsedJson['approved_by_name'],
-      assign_to_id: parsedJson['assign_to_id'],
-      assign_to_name: parsedJson['assign_to_name'],
+      assign_to_id: parsedJson['assigned_to_id'],
+      assign_to_name: parsedJson['assigned_to_name'],
       category_id: parsedJson['category_id'],
       category_name: parsedJson['category_name'],
       created_at: parsedJson['created_at'],
@@ -134,42 +134,3 @@ class PMPlanDetail {
             List<dynamic>.from(mapAssetChecklist!.map((x) => x.toJson())),
       };
 }
-
-// class MapAssetChecklist {
-//   int? asset_id;
-//   String? asset_name;
-//   int? parent_id;
-//   String? parent_name;
-//   int? module_qty;
-//   int? checklist_id;
-//   String? checklist_name;
-//   MapAssetChecklist(
-//       {this.asset_id,
-//       this.asset_name,
-//       this.checklist_id,
-//       this.checklist_name,
-//       this.module_qty,
-//       this.parent_id,
-//       this.parent_name});
-
-//   factory MapAssetChecklist.fromJson(Map<String, dynamic> parsedJson) {
-//     return MapAssetChecklist(
-//       asset_id: parsedJson['asset_id'],
-//       asset_name: parsedJson['asset_name'],
-//       checklist_id: parsedJson['checklist_id'],
-//       checklist_name: parsedJson['checklist_name'],
-//       module_qty: parsedJson['module_qty'],
-//       parent_id: parsedJson['parent_id'],
-//       parent_name: parsedJson['parent_name'],
-//     );
-//   }
-//   Map<String, dynamic> toJson() => {
-//         "asset_id": asset_id,
-//         "parent_name": parent_name,
-//         "module_qty": module_qty,
-//         "checklist_id": checklist_id,
-//         "checklist_name": checklist_name,
-//         "asset_name": asset_name,
-//         "parent_id": parent_id,
-//       };
-// }

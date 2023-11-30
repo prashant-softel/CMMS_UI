@@ -29,6 +29,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
   var isToggleokOn = false.obs;
+  var isToggleBoolOn = false.obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
@@ -189,13 +190,14 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     for (var checkpoint in selectedItem!.checklist_observation ?? []) {
       checklistObservations?.value.add(checkpoint);
     }
+
     checklistObservations?.forEach((e) {
       addObservations.add(AddObservations(
           execution_id: e.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
           job_create: e.linked_job_id.value,
           text: e.check_point_type == 1
-              ? e.bool_text_value_controller?.text ?? ""
+              ? e.type_bool.value.toString()
               : e.check_point_type == 2
                   ? e.renge_text_value_controller?.text ?? ""
                   : "",

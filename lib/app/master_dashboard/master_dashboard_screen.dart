@@ -818,6 +818,7 @@ class MastersDashboard extends GetView<MastersController> {
                               _inventoryList(
                                   tittle: "Import Assets",
                                   ontap: () {
+                                    controller.clearStoreData();
                                     Get.toNamed(Routes.importInventory,
                                         arguments: {
                                           "importType":

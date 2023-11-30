@@ -157,7 +157,9 @@ class ChecklistObservation {
 
   int? check_point_type;
   int? type_range;
-  int? type_bool;
+  // int? type_bool;
+  RxInt type_bool = RxInt(0);
+
   dynamic type_text;
   String? observation;
   RxInt linked_job_id = RxInt(0);
@@ -166,9 +168,9 @@ class ChecklistObservation {
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
-  TextEditingController? bool_text_value_controller;
   TextEditingController? renge_text_value_controller;
-
+  int? min_range;
+  int? max_range;
   ChecklistObservation(
       {this.check_point_id,
       this.check_point_name,
@@ -181,15 +183,17 @@ class ChecklistObservation {
       required int cp_ok,
       this.observation,
       this.requirement,
-      this.type_bool,
+      required int type_bool,
       this.type_range,
       this.type_text,
       this.files,
+      this.max_range,
+      this.min_range,
       this.observation_value_controller,
-      this.bool_text_value_controller,
       this.renge_text_value_controller}) {
     this.linked_job_id.value = linked_job_id;
     this.cp_ok.value = cp_ok;
+    this.type_bool.value = type_bool;
   }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
@@ -208,11 +212,10 @@ class ChecklistObservation {
           type_range: json["type_range"] ?? 0,
           type_text: json["type_text"],
           cp_ok: json["cp_ok"] ?? 0,
+          max_range: json["max_range"] ?? 0,
+          min_range: json["min_range"] ?? 0,
           observation_value_controller: TextEditingController(
             text: json['observation'],
-          ),
-          bool_text_value_controller: TextEditingController(
-            text: json['type_bool'].toString(),
           ),
           renge_text_value_controller: TextEditingController(
             text: json['type_range'].toString(),
@@ -234,6 +237,8 @@ class ChecklistObservation {
         "type_range": type_range,
         "type_text": type_text,
         "cp_ok": cp_ok,
+        "min_range": min_range,
+        "max_range": max_range,
         "files": List<dynamic>.from(files?.map((x) => x.toJson()) ?? []),
       };
 }

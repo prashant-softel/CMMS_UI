@@ -21,6 +21,7 @@ import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
+import 'package:cmms/app/widgets/import_file_msg_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
@@ -3818,7 +3819,8 @@ class ConnectHelper {
       required bool isLoading,
       required int facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
+      // 'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
+      'Inventory/ImportInventories?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       false,
@@ -3827,6 +3829,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -3845,6 +3852,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -6058,6 +6070,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -6076,6 +6093,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -6094,6 +6116,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -6112,6 +6139,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ImportMsgDialog(
+      data: parsedJson['message'],
+    ));
     return responseModel;
   }
 
@@ -6251,6 +6283,7 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
+      //  'PMScheduleView/UpdatePMTaskExecution',
       'PMScheduleView/UpdatePMTaskExecution',
       Request.patch,
       updatePMTaskExecutionJsonString,

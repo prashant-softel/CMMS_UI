@@ -251,9 +251,11 @@ class ObservationPMTaskViewDialog extends GetView {
                                                           "${controller.selectedItem?.checklist_observation?[index].type_range}"),
                                                       Row(
                                                         children: [
-                                                          Text("min:23"),
+                                                          Text(
+                                                              "min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
                                                           Dimens.boxWidth12,
-                                                          Text("Max:50")
+                                                          Text(
+                                                              "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
                                                         ],
                                                       )
                                                     ],
