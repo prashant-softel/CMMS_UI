@@ -385,7 +385,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                     .issuccessCreatechecklist();
                                             });
                                           },
-                                          text: 'Create SPV ')
+                                          text: 'Create Business ')
                                       : CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
