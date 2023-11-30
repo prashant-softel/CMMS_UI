@@ -461,7 +461,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     .issuccessCreateBlock();
                                             });
                                           },
-                                          text: 'Create SPV ')
+                                          text: 'Create Block List ')
                                       : CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
