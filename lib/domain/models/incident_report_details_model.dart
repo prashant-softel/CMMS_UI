@@ -66,9 +66,10 @@ class IncidentReportDetailsModel {
     this.severity,
     this.reject_comment,
     this.lstHistory,
+    this.why_why_analysis,
+    this.root_cause,
+    this.immediate_correction,
 
-
-    
     // this.additionalEmailEmployees,
     // this.externalEmails,
     // this.supplierActions,
@@ -129,9 +130,10 @@ class IncidentReportDetailsModel {
   String? reject_comment;
   List<ListHistory?>? lstHistory;
 
+  List<WhyWhyAnalysisUpdate?>? why_why_analysis;
+  List<RootCauseUpdate?>? root_cause;
+  List<ImmediateCorrectionUpdate?>? immediate_correction;
 
-
-  
   // List<ExternalsEmailsList?>? externalEmails;
   // List<SuppliersActionsList?>? supplierActions;
 
@@ -199,10 +201,21 @@ class IncidentReportDetailsModel {
         severity: json['severity'] ?? '',
         reject_comment: json['reject_comment'] ?? '',
         lstHistory: json["lstHistory"] != null
-          ? List<ListHistory>.from(json["lstHistory"].map((x) => ListHistory.fromJson(x)))
-          : [],
-
-       
+            ? List<ListHistory>.from(
+                json["lstHistory"].map((x) => ListHistory.fromJson(x)))
+            : [],
+        why_why_analysis: json['why_why_analysis'] != null
+            ? List<WhyWhyAnalysisUpdate>.from(json["why_why_analysis"]
+                ?.map((x) => WhyWhyAnalysisUpdate.fromJson(x)))
+            : [],
+        root_cause: json['root_cause'] != null
+            ? List<RootCauseUpdate>.from(
+                json["root_cause"]?.map((x) => RootCauseUpdate.fromJson(x)))
+            : [],
+        immediate_correction: json['immediate_correction'] != null
+            ? List<ImmediateCorrectionUpdate>.from(json["immediate_correction"]
+                ?.map((x) => ImmediateCorrectionUpdate.fromJson(x)))
+            : [],
 
         // externalEmails: json["externalEmails"] != null
         //     ? List<ExternalsEmailsList>.from(json["externalEmails"]
@@ -218,7 +231,7 @@ class IncidentReportDetailsModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "facility_id": facility_id,
-         "facility_name": facility_name,
+        "facility_name": facility_name,
         "block_id": block_id,
         "block_name": block_name,
         "equipment_id": equipment_id,
@@ -270,34 +283,89 @@ class IncidentReportDetailsModel {
         "severity": severity,
         "reject_comment": reject_comment,
         "lstHistory": List<dynamic>.from(lstHistory!.map((x) => x)),
+        "why_why_analysis": List<dynamic>.from(why_why_analysis!.map((x) => x)),
+        "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),
+        "immediate_correction":
+            List<dynamic>.from(immediate_correction!.map((x) => x)),
 
-       
-       
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         // "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
       };
 }
 
-// class ExternalsEmailsList {
-//   ExternalsEmailsList({
-//     this.name,
-//     this.email,
-//   });
+///why wy analysis
+class WhyWhyAnalysisUpdate {
+  WhyWhyAnalysisUpdate({
+    this.incidents_id,
+    this.why,
+    this.cause,
+  });
 
-//   String? name;
-//   String? email;
+  int? incidents_id;
+  String? why;
+  String? cause;
 
-//   factory ExternalsEmailsList.fromJson(Map<String, dynamic> json) =>
-//       ExternalsEmailsList(
-//         name: json["name"],
-//         email: json["email"],
-//       );
+  factory WhyWhyAnalysisUpdate.fromJson(Map<String, dynamic> json) =>
+      WhyWhyAnalysisUpdate(
+        incidents_id: json['incidents_id'],
+        why: json['why'],
+        cause: json["cause"],
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "name": name,
-//         "email": email,
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "why": why,
+        "cause": cause,
+      };
+}
+
+///Root cause
+class RootCauseUpdate {
+  RootCauseUpdate({
+    this.root_item_id,
+    this.incidents_id,
+    this.cause,
+  });
+
+  int? root_item_id;
+  int? incidents_id;
+  String? cause;
+
+  factory RootCauseUpdate.fromJson(Map<String, dynamic> json) =>
+      RootCauseUpdate(
+        root_item_id: json['root_item_id'],
+        incidents_id: json['incidents_id'],
+        cause: json["cause"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "root_item_id": root_item_id,
+        "incidents_id": incidents_id,
+        "cause": cause,
+      };
+}
+
+///Imediate correction
+class ImmediateCorrectionUpdate {
+  ImmediateCorrectionUpdate({
+    this.incidents_id,
+    this.details,
+  });
+
+  int? incidents_id;
+  String? details;
+
+  factory ImmediateCorrectionUpdate.fromJson(Map<String, dynamic> json) =>
+      ImmediateCorrectionUpdate(
+        incidents_id: json['incidents_id'],
+        details: json["details"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "details": details,
+      };
+}
 
 class ListHistory {
   ListHistory({
@@ -309,8 +377,7 @@ class ListHistory {
   int? moduleType;
   String? comment;
 
-  factory ListHistory.fromJson(Map<String, dynamic> json) =>
-      ListHistory(
+  factory ListHistory.fromJson(Map<String, dynamic> json) => ListHistory(
         moduleRefId: json['moduleRefId'],
         moduleType: json["moduleType"],
         comment: json["comment"],
@@ -348,8 +415,7 @@ class ListHistory {
 //       };
 // }
 
-String listHistoryToJson(ListHistory data) =>
-    json.encode(data.toJson());
+String listHistoryToJson(ListHistory data) => json.encode(data.toJson());
 // String additionalEmailEmployeesListToJson(AdditionalEmailsEmployeesList data) =>
 //     json.encode(data.toJson());
 // String addSuppliersActionsListToJson(SuppliersActionsList data) =>

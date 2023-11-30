@@ -634,53 +634,64 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                child: controller
-                                                                            .id !=
-                                                                        null
-                                                                    ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
-                                                                            "YES"
-                                                                        ? Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.esiApplicabilityDetailValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.esiApplicabilityDetailValue.value = value;
-                                                                                print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        : Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.esiApplicabilityDetailFalseValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.esiApplicabilityDetailFalseValue.value = value;
-                                                                                print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                    : Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .esiApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.esiApplicabilityValue.value =
-                                                                                value;
-                                                                          },
-                                                                        ),
-                                                                      ),
+                                                                child:
+                                                                    // controller
+                                                                    //             .id !=
+                                                                    //         null
+                                                                    //     ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
+                                                                    //             "YES"
+                                                                    //         ? Obx(
+                                                                    //             () =>
+                                                                    //                 Switch(
+                                                                    //               activeColor: Colors.green,
+                                                                    //               value: controller.esiApplicabilityDetailValue.value,
+                                                                    //               onChanged: (value) {
+                                                                    //                 controller.esiApplicabilityDetailValue.value = value;
+                                                                    //                 print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //         : Obx(
+                                                                    //             () =>
+                                                                    //                 Switch(
+                                                                    //               activeColor: Colors.green,
+                                                                    //               value: controller.esiApplicabilityDetailFalseValue.value,
+                                                                    //               onChanged: (value) {
+                                                                    //                 controller.esiApplicabilityDetailFalseValue.value = value;
+                                                                    //                 print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //     :
+                                                                    Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .esiApplicabilityValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .esiApplicabilityValue
+                                                                          .value = value;
+                                                                    },
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
 
                                                           Dimens.boxHeight5,
+                                                          // controller
+                                                          //             .incidentReportDetailsModel
+                                                          //             .value
+                                                          //             ?.esi_applicability_name ==
+                                                          //         "YES"
+                                                          //     ? Text('Hello')
+                                                          //     : Dimens.box0,
+
                                                           Row(
                                                             children: [
                                                               controller.esiApplicabilityValue ==
@@ -716,49 +727,53 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                child: controller
-                                                                            .id !=
-                                                                        null
-                                                                    ? controller.incidentReportDetailsModel.value?.legal_applicability_name ==
-                                                                            "YES"
-                                                                        ? Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.legalApplicabilityDetailValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.legalApplicabilityDetailValue.value = value;
-                                                                                print('Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        : Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.legalApplicabilityDetailFalseValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.legalApplicabilityDetailFalseValue.value = value;
-                                                                                print('Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                    : Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .legalApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.legalApplicabilityValue.value =
-                                                                                value;
-                                                                            print('Legal applicability: ${controller.legalApplicabilityValue.value}');
-                                                                          },
-                                                                        ),
-                                                                      ),
+                                                                child:
+                                                                    // controller
+                                                                    //             .id !=
+                                                                    //         null
+                                                                    //     ? controller.incidentReportDetailsModel.value?.legal_applicability_name ==
+                                                                    //             "YES"
+                                                                    //         ? Obx(
+                                                                    //             () =>
+                                                                    //                 Switch(
+                                                                    //               activeColor: Colors.green,
+                                                                    //               value: controller.legalApplicabilityDetailValue.value,
+                                                                    //               onChanged: (value) {
+                                                                    //                 controller.legalApplicabilityDetailValue.value = value;
+                                                                    //                 print('Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //         : Obx(
+                                                                    //             () =>
+                                                                    //                 Switch(
+                                                                    //               activeColor: Colors.green,
+                                                                    //               value: controller.legalApplicabilityDetailFalseValue.value,
+                                                                    //               onChanged: (value) {
+                                                                    //                 controller.legalApplicabilityDetailFalseValue.value = value;
+                                                                    //                 print('Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //     :
+                                                                    Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .legalApplicabilityValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .legalApplicabilityValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -1523,67 +1538,67 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .size
                                                                   .width /
                                                               5,
-                                                      child: controller.id !=
-                                                              null
-                                                          ? controller
-                                                                      .incidentReportDetailsModel
-                                                                      .value
-                                                                      ?.legal_applicability_name ==
-                                                                  "YES"
-                                                              ? Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .legalApplicabilityDetailValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .legalApplicabilityDetailValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                    },
-                                                                  ),
-                                                                )
-                                                              : Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .whyWhyAnalysisFalseValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .whyWhyAnalysisFalseValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
-                                                                    },
-                                                                  ),
-                                                                )
-                                                          : Obx(
-                                                              () => Switch(
-                                                                activeColor:
-                                                                    Colors
-                                                                        .green,
-                                                                value: controller
-                                                                    .whyWhyAnalysisValue
-                                                                    .value,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  controller
-                                                                      .whyWhyAnalysisValue
-                                                                      .value = value;
-                                                                  print(
-                                                                      'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                },
-                                                              ),
-                                                            ),
+                                                      child:
+                                                          // controller.id !=
+                                                          //         null
+                                                          //     ? controller
+                                                          //                 .incidentReportDetailsModel
+                                                          //                 .value
+                                                          //                 ?.legal_applicability_name ==
+                                                          //             "YES"
+                                                          //         ? Obx(
+                                                          //             () => Switch(
+                                                          //               activeColor:
+                                                          //                   Colors
+                                                          //                       .green,
+                                                          //               value: controller
+                                                          //                   .legalApplicabilityDetailValue
+                                                          //                   .value,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 controller
+                                                          //                     .legalApplicabilityDetailValue
+                                                          //                     .value = value;
+                                                          //                 print(
+                                                          //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                          //               },
+                                                          //             ),
+                                                          //           )
+                                                          //         : Obx(
+                                                          //             () => Switch(
+                                                          //               activeColor:
+                                                          //                   Colors
+                                                          //                       .green,
+                                                          //               value: controller
+                                                          //                   .whyWhyAnalysisFalseValue
+                                                          //                   .value,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 controller
+                                                          //                     .whyWhyAnalysisFalseValue
+                                                          //                     .value = value;
+                                                          //                 print(
+                                                          //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
+                                                          //               },
+                                                          //             ),
+                                                          //           )
+                                                          //     :
+                                                          Obx(
+                                                        () => Switch(
+                                                          activeColor:
+                                                              Colors.green,
+                                                          value: controller
+                                                              .whyWhyAnalysisValue
+                                                              .value,
+                                                          onChanged: (value) {
+                                                            controller
+                                                                .whyWhyAnalysisValue
+                                                                .value = value;
+                                                            print(
+                                                                'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                          },
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1608,65 +1623,65 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .size
                                                                   .width /
                                                               5,
-                                                      child: controller.id !=
-                                                              null
-                                                          ? controller
-                                                                      .incidentReportDetailsModel
-                                                                      .value
-                                                                      ?.rca_required_name ==
-                                                                  "YES"
-                                                              ? Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .rCAUploadRequiredDetailValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .rCAUploadRequiredDetailValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
-                                                                    },
-                                                                  ),
-                                                                )
-                                                              : Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .rCAUploadRequiredDetailFalseValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .rCAUploadRequiredDetailFalseValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
-                                                                    },
-                                                                  ),
-                                                                )
-                                                          : Obx(
-                                                              () => Switch(
-                                                                activeColor:
-                                                                    Colors
-                                                                        .green,
-                                                                value: controller
-                                                                    .rCAUploadRequiredValue
-                                                                    .value,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  controller
-                                                                      .rCAUploadRequiredValue
-                                                                      .value = value;
-                                                                },
-                                                              ),
-                                                            ),
+                                                      child:
+                                                          // controller.id !=
+                                                          //         null
+                                                          //     ? controller
+                                                          //                 .incidentReportDetailsModel
+                                                          //                 .value
+                                                          //                 ?.rca_required_name ==
+                                                          //             "YES"
+                                                          //         ? Obx(
+                                                          //             () => Switch(
+                                                          //               activeColor:
+                                                          //                   Colors
+                                                          //                       .green,
+                                                          //               value: controller
+                                                          //                   .rCAUploadRequiredDetailValue
+                                                          //                   .value,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 controller
+                                                          //                     .rCAUploadRequiredDetailValue
+                                                          //                     .value = value;
+                                                          //                 print(
+                                                          //                     'RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
+                                                          //               },
+                                                          //             ),
+                                                          //           )
+                                                          //         : Obx(
+                                                          //             () => Switch(
+                                                          //               activeColor:
+                                                          //                   Colors
+                                                          //                       .green,
+                                                          //               value: controller
+                                                          //                   .rCAUploadRequiredDetailFalseValue
+                                                          //                   .value,
+                                                          //               onChanged:
+                                                          //                   (value) {
+                                                          //                 controller
+                                                          //                     .rCAUploadRequiredDetailFalseValue
+                                                          //                     .value = value;
+                                                          //                 print(
+                                                          //                     'RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
+                                                          //               },
+                                                          //             ),
+                                                          //           )
+                                                          //     :
+                                                          Obx(
+                                                        () => Switch(
+                                                          activeColor:
+                                                              Colors.green,
+                                                          value: controller
+                                                              .rCAUploadRequiredValue
+                                                              .value,
+                                                          onChanged: (value) {
+                                                            controller
+                                                                .rCAUploadRequiredValue
+                                                                .value = value;
+                                                          },
+                                                        ),
+                                                      ),
                                                     )
                                                   ],
                                                 ),

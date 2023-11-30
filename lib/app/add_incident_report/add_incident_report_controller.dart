@@ -427,6 +427,8 @@ class AddIncidentReportController extends GetxController {
   RxBool legalApplicabilityValue = false.obs;
   RxBool insuranceApplicableValue = false.obs;
 
+  RxBool esiText = false.obs;
+
   ///For Detail Switch
   RxBool esiApplicabilityDetailValue = true.obs;
   RxBool rCAUploadRequiredDetailValue = true.obs;
@@ -634,6 +636,39 @@ class AddIncidentReportController extends GetxController {
       selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
       selectedRiskTypeList.value =
           incidentReportDetailsModel.value?.risk_type_name ?? '';
+
+      ///new Data
+
+      // ESIApplicabilityRemarkTextCtrlr.text =
+      //     incidentReportDetailsModel.value?.esi_applicability_remark ?? '';
+      // legalApplicabilityRemarkTextCtrlr.text =
+      //     incidentReportDetailsModel.value?.legal_applicability_remark ?? '';
+      // print('ESI:${ESIApplicabilityRemarkTextCtrlr.text}');
+
+      ///why why Analysis
+      rowWhyWhyAnalysisItem.value = [];
+      _incidentReportDetails.why_why_analysis?.forEach((element) {
+        rowWhyWhyAnalysisItem.value.add([
+          {'key': "Why ", "value": '${element?.why}'},
+          {'key': "Cause ", "value": '${element?.cause}'},
+        ]);
+      });
+
+      ///Root cause
+      rowRootCauseItem.value = [];
+      _incidentReportDetails.root_cause?.forEach((element) {
+        rowRootCauseItem.value.add([
+          {'key': "Cause ", "value": '${element?.cause}'},
+        ]);
+      });
+
+      /// immediate correction
+      rowImmediateCorrectionItem.value = [];
+      _incidentReportDetails.immediate_correction?.forEach((element) {
+        rowImmediateCorrectionItem.value.add([
+          {'key': "Correction ", "value": '${element?.details}'},
+        ]);
+      });
     }
   }
 
@@ -812,9 +847,10 @@ class AddIncidentReportController extends GetxController {
     );
     update(['inventory_list']);
     addRowItem();
-    addWhyWhyAnalysisRowItem();
-    addRootCauseRowItem();
-    addImmediateCorrectionRowItem();
+
+    id == null ? addWhyWhyAnalysisRowItem() : Dimens.box0;
+    id == null ? addRootCauseRowItem() : Dimens.box0;
+    id == null ? addImmediateCorrectionRowItem() : Dimens.box0;
     addDetailsOfInjuredPersonRowItem();
   }
 
@@ -1385,15 +1421,45 @@ class AddIncidentReportController extends GetxController {
       //   external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
       // });
 
-      // late List<SupplierActions> supplier_action_list = [];
+      // late List<WhyWhyAnalysisUpdate> supplier_action_list = [];
 
-      // supplierActions.forEach((e) {
-      //   supplier_action_list.add(SupplierActions(
-      //     name: e.name,
-      //     required_by_date: e.required_by_date,
-      //     // is_required: e.is_required
+      // rowWhyWhyAnalysisItem.forEach((e) {
+      //   supplier_action_list.add(WhyWhyAnalysisUpdate(
+      //    cause:
       //   ));
       // });
+      List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
+      rowWhyWhyAnalysisItem.forEach((element) {
+        WhyWhyAnalysis item = WhyWhyAnalysis(
+          incidents_id: id,
+          why: element[0]["value"] ?? '0',
+          cause: element[1]["value"] ?? '0',
+        );
+
+        whyWhyAnalysisItems.add(item);
+      });
+
+      ///Root Cause
+      List<RootCause> rootCauseItems = [];
+      rowRootCauseItem.forEach((element) {
+        RootCause item = RootCause(
+          incidents_id: id,
+          cause: element[0]["value"] ?? '0',
+        );
+
+        rootCauseItems.add(item);
+      });
+
+      ///Immediate correction
+      List<ImmediateCorrection> immediateCorrectionItems = [];
+      rowImmediateCorrectionItem.forEach((element) {
+        ImmediateCorrection item = ImmediateCorrection(
+          incidents_id: id,
+          details: element[0]["value"] ?? '0',
+        );
+
+        immediateCorrectionItems.add(item);
+      });
 
       CreateIncidentReportModel updateIncidentReportModel =
           CreateIncidentReportModel(
@@ -1447,9 +1513,9 @@ class AddIncidentReportController extends GetxController {
               legal_applicability_remark: "",
               esi_applicability_remark: "",
               unsafe_act_cause: "",
-              why_why_analysis: [],
-              root_cause: [],
-              immediate_correction: [],
+              why_why_analysis: whyWhyAnalysisItems,
+              root_cause: rootCauseItems,
+              immediate_correction: immediateCorrectionItems,
               proposed_action_plan: [],
               injured_person: [],
               investigation_team: []);
