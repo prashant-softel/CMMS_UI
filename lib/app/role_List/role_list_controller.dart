@@ -28,6 +28,8 @@ class RoleListController extends GetxController {
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<RoleModel?>? roleList = <RoleModel?>[].obs;
+  RxList<RoleModel?> filteredData = <RoleModel?>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -128,6 +130,21 @@ class RoleListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      roleList!.value = filteredData;
+      return;
+    }
+
+    roleList!.value = filteredData
+        .where((item) => (item!.name
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false))
+        .toList();
   }
 
   void isDeleteDialog({String? module_id, String? module}) {
