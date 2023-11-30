@@ -24,7 +24,7 @@ class NewPermitListScreen extends GetView<NewPermitListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Job Card List'),
+              title: Text('New Permit List'),
               centerTitle: true,
               elevation: 0,
             ),
