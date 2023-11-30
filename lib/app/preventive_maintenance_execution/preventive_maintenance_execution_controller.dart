@@ -190,6 +190,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     for (var checkpoint in selectedItem!.checklist_observation ?? []) {
       checklistObservations?.value.add(checkpoint);
     }
+
     checklistObservations?.forEach((e) {
       addObservations.add(AddObservations(
           execution_id: e.execution_id ?? 0,

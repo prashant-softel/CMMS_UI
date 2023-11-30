@@ -314,9 +314,11 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                         ),
                                                         Row(
                                                           children: [
-                                                            Text("Min:23"),
+                                                            Text(
+                                                                "Min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
                                                             Dimens.boxWidth15,
-                                                            Text("Max:50")
+                                                            Text(
+                                                                "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
                                                           ],
                                                         )
                                                       ],
@@ -629,7 +631,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 text: "Update",
                                 onPressed: () {
                                   Get.back();
-                                  controller.transferItem();
+                                  //   controller.transferItem();
                                   controller.updatePmExecution();
                                 },
                               ),

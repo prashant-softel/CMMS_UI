@@ -169,7 +169,8 @@ class ChecklistObservation {
   int? is_file_required;
   TextEditingController? observation_value_controller;
   TextEditingController? renge_text_value_controller;
-
+  int? min_range;
+  int? max_range;
   ChecklistObservation(
       {this.check_point_id,
       this.check_point_name,
@@ -186,6 +187,8 @@ class ChecklistObservation {
       this.type_range,
       this.type_text,
       this.files,
+      this.max_range,
+      this.min_range,
       this.observation_value_controller,
       this.renge_text_value_controller}) {
     this.linked_job_id.value = linked_job_id;
@@ -209,6 +212,8 @@ class ChecklistObservation {
           type_range: json["type_range"] ?? 0,
           type_text: json["type_text"],
           cp_ok: json["cp_ok"] ?? 0,
+          max_range: json["max_range"] ?? 0,
+          min_range: json["min_range"] ?? 0,
           observation_value_controller: TextEditingController(
             text: json['observation'],
           ),
@@ -232,6 +237,8 @@ class ChecklistObservation {
         "type_range": type_range,
         "type_text": type_text,
         "cp_ok": cp_ok,
+        "min_range": min_range,
+        "max_range": max_range,
         "files": List<dynamic>.from(files?.map((x) => x.toJson()) ?? []),
       };
 }
