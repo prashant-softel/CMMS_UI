@@ -16,6 +16,7 @@ class LoginCustomTextfield extends GetView {
   Function()? ontap;
   Function(dynamic value)? onfieldSubmitted;
   int? maxLine;
+  final bool numberTextField;
   bool enabled;
   TextInputType? keyboardType;
   List<TextInputFormatter>? inputFormatters;
@@ -26,6 +27,7 @@ class LoginCustomTextfield extends GetView {
   LoginCustomTextfield({
     Key? key,
     this.ishint,
+    this.numberTextField = false,
     this.obscureText = false,
     this.textController,
     this.widget,

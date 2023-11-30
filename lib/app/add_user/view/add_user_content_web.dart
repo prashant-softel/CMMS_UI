@@ -309,7 +309,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'Password: '),
+                                                  title: 'First Name: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
@@ -346,48 +346,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    widget: MouseRegion(
-                                                      onEnter: (_) {
-                                                        if (!controller
-                                                            .isPasswordVisible
-                                                            .value) {
-                                                          controller
-                                                              .togglePasswordVisibility();
-                                                        }
-                                                      },
-                                                      onExit: (_) {
-                                                        if (controller
-                                                            .isPasswordVisible
-                                                            .value) {
-                                                          controller
-                                                              .togglePasswordVisibility();
-                                                        }
-                                                      },
-                                                      child: IconButton(
-                                                        icon: Icon(
-                                                            controller
-                                                                    .isPasswordVisible
-                                                                    .value
-                                                                ? Icons
-                                                                    .visibility
-                                                                : Icons
-                                                                    .visibility_off,
-                                                            color: Colors.grey),
-                                                        onPressed: () {
-                                                          controller
-                                                              .togglePasswordVisibility();
-                                                        },
-                                                      ),
-                                                    ),
-                                                    obscureText: !controller
-                                                        .isPasswordVisible
-                                                        .value,
-                                                    ishint: 'Enter Password',
+                                                    ishint: 'Enter First Name',
                                                     textController: controller
-                                                        .passwordCtrlr,
-                                                    onChanged: (value) {
-                                                      // controller.validatePassword(value);
-                                                    },
+                                                        .firstNameCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -395,7 +356,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'Last Name: '),
+                                                  title: 'Secandory E-mail: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
@@ -432,9 +393,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    ishint: 'Enter Last Name',
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(RegExp(r'\s')),
+                                                    ],
+                                                    ishint: 'Enter Email ID',
                                                     textController: controller
-                                                        .lastNameCtrlr,
+                                                        .secandoryIdCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -477,41 +442,52 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .width *
                                                     .2),
                                                 height: 35,
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton<String>(
-                                                    isExpanded: true,
-                                                    value:
-                                                        controller.gender.value,
-                                                    onChanged: (value) =>
-                                                        controller.updateGender(
-                                                            value!),
-                                                    items: <String>[
-                                                      'Select Gender',
-                                                      'Male',
-                                                      'Female',
-                                                      'Other'
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
-                                                          child: Text(
-                                                            value,
-                                                            style:
-                                                                Styles.black12,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
+                                                child: DropdownWebWidget(
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.genderList,
+                                                  isValueSelected: controller
+                                                      .isSelectedGender.value,
+                                                  selectedValue: controller
+                                                      .selectedGender.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
+                                                //   DropdownButtonHideUnderline(
+                                                //     child: DropdownButton<String>(
+                                                //       isExpanded: true,
+                                                //       value:
+                                                //           controller.gender.value,
+                                                //       onChanged: (value) =>
+                                                //           controller.updateGender(
+                                                //               value!),
+                                                //       items: <String>[
+                                                //         'Select Gender',
+                                                //         'Male',
+                                                //         'Female',
+                                                //         'Other'
+                                                //       ].map<
+                                                //               DropdownMenuItem<
+                                                //                   String>>(
+                                                //           (String value) {
+                                                //         return DropdownMenuItem<
+                                                //             String>(
+                                                //           value: value,
+                                                //           child: Container(
+                                                //             margin:
+                                                //                 EdgeInsets.only(
+                                                //                     left: 10),
+                                                //             child: Text(
+                                                //               value,
+                                                //               style:
+                                                //                   Styles.black12,
+                                                //             ),
+                                                //           ),
+                                                //         );
+                                                //       }).toList(),
+                                                //     ),
+                                                //   ),
+                                                // ),
                                               ),
                                             ],
                                           ),
@@ -558,8 +534,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -757,7 +732,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'Secandory E-mail: '),
+                                                  title: 'Password: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
@@ -794,13 +769,48 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter
-                                                          .deny(RegExp(r'\s')),
-                                                    ],
-                                                    ishint: 'Enter Email ID',
+                                                    widget: MouseRegion(
+                                                      onEnter: (_) {
+                                                        if (!controller
+                                                            .isPasswordVisible
+                                                            .value) {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        }
+                                                      },
+                                                      onExit: (_) {
+                                                        if (controller
+                                                            .isPasswordVisible
+                                                            .value) {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        }
+                                                      },
+                                                      child: IconButton(
+                                                        icon: Icon(
+                                                            controller
+                                                                    .isPasswordVisible
+                                                                    .value
+                                                                ? Icons
+                                                                    .visibility
+                                                                : Icons
+                                                                    .visibility_off,
+                                                            color: Colors.grey),
+                                                        onPressed: () {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        },
+                                                      ),
+                                                    ),
+                                                    obscureText: !controller
+                                                        .isPasswordVisible
+                                                        .value,
+                                                    ishint: 'Enter Password',
                                                     textController: controller
-                                                        .secandoryIdCtrlr,
+                                                        .passwordCtrlr,
+                                                    onChanged: (value) {
+                                                      // controller.validatePassword(value);
+                                                    },
                                                   )),
                                             ],
                                           ),
@@ -808,7 +818,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'First Name: '),
+                                                  title: 'Last Name: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
@@ -845,9 +855,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    ishint: 'Enter First Name',
+                                                    ishint: 'Enter Last Name',
                                                     textController: controller
-                                                        .firstNameCtrlr,
+                                                        .lastNameCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -956,9 +966,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    readOnly: true,
-                                                    // keyboardType: TextInputType.number,
-
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .allow(RegExp(
+                                                              r'^\d+\.?\d{0,2}'))
+                                                    ],
                                                     ishint:
                                                         'Enter Date of Joining',
                                                     textController: controller
@@ -1022,8 +1034,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1117,8 +1128,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 child: LoginCustomTextfield(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
