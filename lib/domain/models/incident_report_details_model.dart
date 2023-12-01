@@ -69,6 +69,19 @@ class IncidentReportDetailsModel {
     this.why_why_analysis,
     this.root_cause,
     this.immediate_correction,
+    this.proposed_action_plan,
+    this.esi_applicability_remark,
+    this.legal_applicability_remark,
+    this.location_of_incident,
+    this.type_of_job,
+    this.is_activities_trained,
+    this.is_person_authorized,
+    this.instructions_given,
+    this.safety_equipments,
+    this.safe_procedure_observed,
+    this.unsafe_condition_contributed,
+    this.unsafe_act_cause,
+    this.investigation_team,
 
     // this.additionalEmailEmployees,
     // this.externalEmails,
@@ -128,11 +141,24 @@ class IncidentReportDetailsModel {
   String? status_long;
   String? severity;
   String? reject_comment;
+  String? esi_applicability_remark;
+  String? legal_applicability_remark;
+  String? location_of_incident;
+  String? type_of_job;
+  String? is_activities_trained;
+  String? is_person_authorized;
+  String? instructions_given;
+  String? safety_equipments;
+  String? safe_procedure_observed;
+  String? unsafe_condition_contributed;
+  String? unsafe_act_cause;
   List<ListHistory?>? lstHistory;
 
   List<WhyWhyAnalysisUpdate?>? why_why_analysis;
   List<RootCauseUpdate?>? root_cause;
   List<ImmediateCorrectionUpdate?>? immediate_correction;
+  List<ProposedActionPlanUpdate?>? proposed_action_plan;
+  List<InvestigationTeamUpdate?>? investigation_team;
 
   // List<ExternalsEmailsList?>? externalEmails;
   // List<SuppliersActionsList?>? supplierActions;
@@ -200,6 +226,17 @@ class IncidentReportDetailsModel {
         status_long: json['status_long'],
         severity: json['severity'] ?? '',
         reject_comment: json['reject_comment'] ?? '',
+        esi_applicability_remark: json['esi_applicability_remark'],
+        legal_applicability_remark: json['legal_applicability_remark'],
+        location_of_incident: json['location_of_incident'],
+        type_of_job: json['type_of_job'],
+        is_activities_trained: json['is_activities_trained'],
+        is_person_authorized: json['is_person_authorized'],
+        instructions_given: json['instructions_given'],
+        safety_equipments: json['safety_equipments'],
+        safe_procedure_observed: json['safe_procedure_observed'],
+        unsafe_condition_contributed: json['unsafe_condition_contributed'],
+        unsafe_act_cause: json['unsafe_act_cause'],
         lstHistory: json["lstHistory"] != null
             ? List<ListHistory>.from(
                 json["lstHistory"].map((x) => ListHistory.fromJson(x)))
@@ -216,16 +253,14 @@ class IncidentReportDetailsModel {
             ? List<ImmediateCorrectionUpdate>.from(json["immediate_correction"]
                 ?.map((x) => ImmediateCorrectionUpdate.fromJson(x)))
             : [],
-
-        // externalEmails: json["externalEmails"] != null
-        //     ? List<ExternalsEmailsList>.from(json["externalEmails"]
-        //         ?.map((x) => ExternalsEmailsList.fromJson(x)))
-        //     : [],
-
-        // supplierActions: json["supplierActions"] != null
-        //     ? List<SuppliersActionsList>.from(json["supplierActions"]
-        //         ?.map((x) => SuppliersActionsList.fromJson(x)))
-        //     : [],
+        proposed_action_plan: json['proposed_action_plan'] != null
+            ? List<ProposedActionPlanUpdate>.from(json["proposed_action_plan"]
+                ?.map((x) => ProposedActionPlanUpdate.fromJson(x)))
+            : [],
+        investigation_team: json["investigation_team"] != null
+            ? List<InvestigationTeamUpdate>.from(json["investigation_team"]
+                ?.map((x) => InvestigationTeamUpdate.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -282,14 +317,100 @@ class IncidentReportDetailsModel {
         "status_long": status_long,
         "severity": severity,
         "reject_comment": reject_comment,
+        "esi_applicability_remark": esi_applicability_remark,
+        "legal_applicability_remark": legal_applicability_remark,
+        "location_of_incident": location_of_incident,
+        "type_of_job": type_of_job,
+        "is_activities_trained": is_activities_trained,
+        "is_person_authorized": is_person_authorized,
+        "instructions_given": instructions_given,
+        "safety_equipments": safety_equipments,
+        "safe_procedure_observed": safe_procedure_observed,
+        "unsafe_condition_contributed": unsafe_condition_contributed,
+        "unsafe_act_cause": unsafe_act_cause,
         "lstHistory": List<dynamic>.from(lstHistory!.map((x) => x)),
         "why_why_analysis": List<dynamic>.from(why_why_analysis!.map((x) => x)),
         "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),
         "immediate_correction":
             List<dynamic>.from(immediate_correction!.map((x) => x)),
+        "proposed_action_plan":
+            List<dynamic>.from(proposed_action_plan!.map((x) => x)),
+        "investigation_team":
+            List<dynamic>.from(investigation_team!.map((x) => x)),
 
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         // "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
+      };
+}
+
+//Investigation team
+class InvestigationTeamUpdate {
+  InvestigationTeamUpdate({
+    this.srNumber,
+    this.person_id,
+    this.name,
+    this.designation,
+    this.person_type,
+    this.investigation_date,
+  });
+
+  String? srNumber;
+  String? person_id;
+  int? person_type;
+  String? name;
+  String? designation;
+  String? investigation_date;
+
+  factory InvestigationTeamUpdate.fromJson(Map<String, dynamic> json) =>
+      InvestigationTeamUpdate(
+          srNumber: json['srNumber'],
+          person_id: json['person_id'],
+          person_type: json['person_type'],
+          name: json["name"],
+          designation: json['designation'],
+          investigation_date: json['investigation_date']);
+
+  Map<String, dynamic> toJson() => {
+        "srNumber": srNumber,
+        "person_id": person_id,
+        "person_type": person_type,
+        "name": name,
+        "designation": designation,
+        "investigation_date": investigation_date
+      };
+}
+
+///Proposed Action Plan
+class ProposedActionPlanUpdate {
+  ProposedActionPlanUpdate({
+    this.incidents_id,
+    this.actions_as_per_plan,
+    this.responsibility,
+    this.target_date,
+    this.remarks,
+  });
+
+  int? incidents_id;
+  String? actions_as_per_plan;
+  String? responsibility;
+  String? target_date;
+  String? remarks;
+
+  factory ProposedActionPlanUpdate.fromJson(Map<String, dynamic> json) =>
+      ProposedActionPlanUpdate(
+        incidents_id: json['incidents_id'],
+        actions_as_per_plan: json['actions_as_per_plan'],
+        responsibility: json['responsibility'],
+        target_date: json['target_date'],
+        remarks: json["remarks"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "actions_as_per_plan": actions_as_per_plan,
+        "responsibility": responsibility,
+        "target_date": target_date,
+        "remarks": remarks,
       };
 }
 
