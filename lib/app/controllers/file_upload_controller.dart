@@ -16,8 +16,8 @@ class FileUploadController extends GetxController {
 
   ///
   final Uri apiUrl =
-      // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile');
-      Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+      Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile');
+  // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
 
   Rx<bool> blnHiglight = false.obs;
   Rx<List<int>> progresses = Rx(<int>[]);

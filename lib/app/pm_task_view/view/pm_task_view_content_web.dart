@@ -452,7 +452,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                           "to_actor_type_id": 3
                                                         });
                                                   },
-                                                  text: "Add New Mrs",
+                                                  text: "Add New MRS",
                                                 ),
                                               ),
                                             ],
@@ -480,7 +480,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               DataColumn2(
                                                   fixedWidth: 130,
                                                   label: Text(
-                                                    "Mrs ID",
+                                                    "MRS ID",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -489,7 +489,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               DataColumn2(
                                                   // fixedWidth: 200,
                                                   label: Text(
-                                                "Mrs Items List ",
+                                                "MRS Items List ",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -519,16 +519,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                       ?.length ??
                                                   0,
                                               (index) => DataRow(cells: [
-                                                DataCell(Text(controller
-                                                        .listMrsByTaskId?[index]
-                                                        ?.jobCardId
-                                                        .toString() ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .listMrsByTaskId?[index]
-                                                        ?.mrsId
-                                                        .toString() ??
-                                                    '')),
+                                                DataCell(Text('${index + 1}')),
+                                                DataCell(Text(
+                                                    "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
                                                 DataCell(Text(controller
                                                         .listMrsByTaskId?[index]
                                                         ?.mrsItems ??
@@ -736,6 +729,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                         ),
                       )
                     : Dimens.box0,
+
                 controller.pmtaskViewModel.value?.status == 164 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -894,7 +888,30 @@ class PreventiveMaintenanceTaskViewContentWeb
                           },
                         ),
                       )
-                    : Dimens.box0
+                    : Dimens.box0,
+                Dimens.boxWidth10,
+                controller.pmtaskViewModel.value?.status == 169 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPmTaskFeatureId &&
+                                    e.add == UserAccessConstants.kHaveAddAccess)
+                                .length >
+                            0
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.keyboard_return_outlined,
+                          backgroundColor: ColorValues.linktopermitColor,
+                          text: "Return Mrs",
+                          onPressed: () {
+                            Get.toNamed(Routes.mrsReturnScreen,
+                                arguments:
+                                    controller.pmtaskViewModel.value?.id ?? 0);
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
               ],
             ),
           )

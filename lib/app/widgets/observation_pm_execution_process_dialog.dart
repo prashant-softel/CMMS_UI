@@ -179,7 +179,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 150,
+                                          fixedWidth: 145,
                                           label: Text(
                                             "Weightage",
                                             style: TextStyle(
@@ -195,7 +195,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                       //           fontWeight: FontWeight.bold),
                                       //     )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 100,
                                           label: Text(
                                             "CP OK ?",
                                             style: TextStyle(
@@ -205,7 +205,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 200,
                                           label: Text(
-                                            "Type",
+                                            "Input Type",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -219,7 +219,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 150,
+                                          fixedWidth: 100,
                                           label: Text(
                                             "Create Job",
                                             style: TextStyle(
@@ -304,7 +304,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                       children: [
                                                         LoginCustomTextfield(
                                                           width:
-                                                              (Get.width * .4),
+                                                              (Get.width * .8),
                                                           textController: controller
                                                                   .selectedItem
                                                                   ?.checklist_observation?[
@@ -450,7 +450,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                       DataColumn2(
                                           //  fixedWidth: 500,
                                           label: Text(
-                                        "Asset Name",
+                                        "Material Name",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
@@ -458,7 +458,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                       DataColumn2(
                                           // fixedWidth: 350,
                                           label: Text(
-                                        "Asset Type",
+                                        "Material Type",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
@@ -631,7 +631,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 text: "Update",
                                 onPressed: () {
                                   Get.back();
-                                  //   controller.transferItem();
+                                  controller.transferItem();
                                   controller.updatePmExecution();
                                 },
                               ),
