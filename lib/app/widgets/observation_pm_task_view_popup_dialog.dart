@@ -454,7 +454,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                   "to_actor_type_id": 3
                                                 });
                                           },
-                                          text: "Add New Mrs",
+                                          text: "Add New MRS",
                                         ),
                                       ),
                                     ],
@@ -481,7 +481,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 130,
                                           label: Text(
-                                            "Mrs ID",
+                                            "MRS ID",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -489,7 +489,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           // fixedWidth: 200,
                                           label: Text(
-                                        "Mrs Items List ",
+                                        "MRS Items List ",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),

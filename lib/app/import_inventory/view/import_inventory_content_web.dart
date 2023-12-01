@@ -285,8 +285,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                       GestureDetector(
                         onTap: () async {
                           String assetPath =
-                              // 'http://65.0.20.19/CMMS_API/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
-                              'http://172.20.43.9:83/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
+                              'http://65.0.20.19/CMMS_API/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
+                          // 'http://172.20.43.9:83/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
 
                           String fileName = controller.importType.value ==
                                   AppConstants.kImportAsset

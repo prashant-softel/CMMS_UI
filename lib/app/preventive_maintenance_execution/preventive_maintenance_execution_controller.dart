@@ -1,9 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
