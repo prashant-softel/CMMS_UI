@@ -304,6 +304,9 @@ class AddIncidentReportController extends GetxController {
   var exactLocationTextCtrlr = TextEditingController();
 
   ///Investigation Team Part
+  RxList<InvestigationTeamUpdate?>? investigationTeamList =
+      <InvestigationTeamUpdate?>[].obs;
+
   var investigationTeam = <InvestigationTeam>[].obs;
   void updateInvestigationTeamText(
       String srNumber,
@@ -374,7 +377,7 @@ class AddIncidentReportController extends GetxController {
 
   ///8
   Rx<bool> isUnsafeIncidentInvalid = false.obs;
-  var unsafeIncidentTextCtrlr = TextEditingController();
+  var unsafeActCauseTextCtrlr = TextEditingController();
 
   ///Legal Applicability Remark Textfield
   Rx<bool> isLegalApplicabilityInvalid = false.obs;
@@ -639,11 +642,26 @@ class AddIncidentReportController extends GetxController {
 
       ///new Data
 
-      // ESIApplicabilityRemarkTextCtrlr.text =
-      //     incidentReportDetailsModel.value?.esi_applicability_remark ?? '';
-      // legalApplicabilityRemarkTextCtrlr.text =
-      //     incidentReportDetailsModel.value?.legal_applicability_remark ?? '';
-      // print('ESI:${ESIApplicabilityRemarkTextCtrlr.text}');
+      ESIApplicabilityRemarkTextCtrlr.text =
+          incidentReportDetailsModel.value?.esi_applicability_remark ?? '';
+      legalApplicabilityRemarkTextCtrlr.text =
+          incidentReportDetailsModel.value?.legal_applicability_remark ?? '';
+      typeOfJbTextCtrlr.text =
+          incidentReportDetailsModel.value?.type_of_job ?? '';
+      personAuthorizedInvolvedTextCtrlr.text =
+          incidentReportDetailsModel.value?.is_person_authorized ?? '';
+      instructionsTextCtrlr.text =
+          incidentReportDetailsModel.value?.instructions_given ?? '';
+      SafetyEquipmetsTextCtrlr.text =
+          incidentReportDetailsModel.value?.safety_equipments ?? '';
+      correctSafeTextCtrlr.text =
+          incidentReportDetailsModel.value?.safe_procedure_observed ?? '';
+      unsafeConditionsTextCtrlr.text =
+          incidentReportDetailsModel.value?.unsafe_condition_contributed ?? '';
+      unsafeActCauseTextCtrlr.text =
+          incidentReportDetailsModel.value?.unsafe_act_cause ?? '';
+      investigationTeamList?.value =
+          incidentReportDetailsModel.value?.investigation_team ?? [];
 
       ///why why Analysis
       rowWhyWhyAnalysisItem.value = [];
@@ -668,6 +686,31 @@ class AddIncidentReportController extends GetxController {
         rowImmediateCorrectionItem.value.add([
           {'key': "Correction ", "value": '${element?.details}'},
         ]);
+      });
+
+      ///proposed action plan
+      rowItem.value = [];
+      _incidentReportDetails.proposed_action_plan?.forEach((element) {
+        rowItem.value.add([
+          {
+            'key': "Action as per plan ",
+            "value": '${element?.actions_as_per_plan}'
+          },
+          {
+            "key": "Drop_down",
+            "value": '${element?.responsibility}',
+          },
+          {
+            'key': "Target Date ",
+            "value":
+                '${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse('${element?.target_date}'))}'
+          },
+          {'key': "Remark", "value": '${element?.remarks}'},
+        ]);
+        // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
+        //     eqipmentNameList.firstWhere(
+        //         (e) => e?.name == element.responsibility,
+        //         orElse: null)!;
       });
     }
   }
@@ -846,8 +889,7 @@ class AddIncidentReportController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
-    addRowItem();
-
+    id == null ? addRowItem() : Dimens.box0;
     id == null ? addWhyWhyAnalysisRowItem() : Dimens.box0;
     id == null ? addRootCauseRowItem() : Dimens.box0;
     id == null ? addImmediateCorrectionRowItem() : Dimens.box0;
@@ -1218,7 +1260,7 @@ class AddIncidentReportController extends GetxController {
       String? _unsafeConditionContributed =
           htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
       String? _unsafeActCause =
-          htmlEscape.convert(unsafeIncidentTextCtrlr.text.trim());
+          htmlEscape.convert(unsafeActCauseTextCtrlr.text.trim());
       String? _legalApplicabilityRemark =
           htmlEscape.convert(legalApplicabilityRemarkTextCtrlr.text.trim());
       String? _esiApplicabilityRemark =
@@ -1402,12 +1444,23 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
       String _insuranceAvailable =
           htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
-      // // String _costOfReplacement =
-      // //     htmlEscape.convert(costOfReplacementTextController.text.trim());
-      // String _orderReferenceNo =
-      //     htmlEscape.convert(orderReferenceNoTextController.text.trim());
-      // String _affectedSerialNo =
-      //     htmlEscape.convert(affectedSerialNoTextController.text.trim());
+      String _esiApplicabilityRemark =
+          htmlEscape.convert(ESIApplicabilityRemarkTextCtrlr.text.trim());
+      String _legalApplicabilityRemark =
+          htmlEscape.convert(legalApplicabilityRemarkTextCtrlr.text.trim());
+      String _typeOfJob = htmlEscape.convert(typeOfJbTextCtrlr.text.trim());
+      String _personAuthorized =
+          htmlEscape.convert(personAuthorizedInvolvedTextCtrlr.text.trim());
+      String _instructionGiven =
+          htmlEscape.convert(instructionsTextCtrlr.text.trim());
+      String _safetyEquipments =
+          htmlEscape.convert(SafetyEquipmetsTextCtrlr.text.trim());
+      String _correctSafety =
+          htmlEscape.convert(correctSafeTextCtrlr.text.trim());
+      String _unsafeConditions =
+          htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
+      String _unsafeActCause =
+          htmlEscape.convert(unsafeActCauseTextCtrlr.text.trim());
 
       // int costOfReplacement =
       //     int.parse(costOfReplacementTextController.text.trim());
@@ -1415,11 +1468,6 @@ class AddIncidentReportController extends GetxController {
       // int? sopFileId = createSOPModel2.sop_fileId;
       // // int? jsaFileId = data.jsa_fileId;
       // print('SOPFileId:$sopFileId');
-      // late List<ExternalEmails> external_emails_list = [];
-
-      // externalEmails.forEach((e) {
-      //   external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
-      // });
 
       // late List<WhyWhyAnalysisUpdate> supplier_action_list = [];
 
@@ -1459,6 +1507,32 @@ class AddIncidentReportController extends GetxController {
         );
 
         immediateCorrectionItems.add(item);
+      });
+
+      ///Proposed Action Plan
+      List<ProposedActionPlan> proposedActionItems = [];
+      rowItem.forEach((element) {
+        ProposedActionPlan item = ProposedActionPlan(
+          incidents_id: id,
+          actions_as_per_plan: element[0]["value"] ?? '0',
+          responsibility: element[1]["value"],
+          // target_date: element[2]["value"] ?? '0',
+          target_date:
+              '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
+          remarks: element[3]["value"] ?? '0',
+        );
+
+        proposedActionItems.add(item);
+      });
+
+      ///Investigation Team
+      late List<InvestigationTeam> investigation_team_list = [];
+      investigationTeamList!.forEach((e) {
+        investigation_team_list.add(InvestigationTeam(
+            designation: e!.designation,
+            person_type: e.person_type,
+            investigation_date:
+                '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
       });
 
       CreateIncidentReportModel updateIncidentReportModel =
@@ -1504,21 +1578,21 @@ class AddIncidentReportController extends GetxController {
               severity: selectedSeverity.value,
 
               ///new data adding
-              type_of_job: "",
-              is_person_authorized: "",
-              instructions_given: "",
-              safety_equipments: "",
-              safe_procedure_observed: "",
-              unsafe_condition_contributed: "",
-              legal_applicability_remark: "",
-              esi_applicability_remark: "",
-              unsafe_act_cause: "",
+              type_of_job: _typeOfJob,
+              is_person_authorized: _personAuthorized,
+              instructions_given: _instructionGiven,
+              safety_equipments: _safetyEquipments,
+              safe_procedure_observed: _correctSafety,
+              unsafe_condition_contributed: _unsafeConditions,
+              legal_applicability_remark: _legalApplicabilityRemark,
+              esi_applicability_remark: _esiApplicabilityRemark,
+              unsafe_act_cause: _unsafeActCause,
               why_why_analysis: whyWhyAnalysisItems,
               root_cause: rootCauseItems,
               immediate_correction: immediateCorrectionItems,
-              proposed_action_plan: [],
+              proposed_action_plan: proposedActionItems,
               injured_person: [],
-              investigation_team: []);
+              investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
       Map<String, dynamic>? responseUpdateIncidentReport =

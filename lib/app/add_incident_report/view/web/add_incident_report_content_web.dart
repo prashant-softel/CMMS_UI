@@ -1727,23 +1727,96 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       Dimens.boxHeight10,
                                                       Obx(
                                                         () => Wrap(children: [
-                                                          Row(children: [
-                                                            Dimens.boxWidth80,
-                                                            Text('Sr.No.'),
-                                                            Dimens.boxWidth180,
-                                                            Text('Name'),
-                                                            SizedBox(
-                                                              width: 310,
-                                                            ),
-                                                            Text('Designation'),
-                                                            Dimens.boxWidth200,
-                                                            Text('Signature'),
+                                                          Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                // Spacer(),
+                                                                // Column(
+                                                                //   crossAxisAlignment:
+                                                                //       CrossAxisAlignment
+                                                                //           .start,
+                                                                //   children: [
+                                                                //     Text(
+                                                                //         'Sr.No.'),
+                                                                //   ],
+                                                                // ),
+                                                                // Spacer(),
+                                                                // Column(
+                                                                //   crossAxisAlignment:
+                                                                //       CrossAxisAlignment
+                                                                //           .start,
+                                                                //   children: [
+                                                                //     Text(
+                                                                //         'Name'),
+                                                                //   ],
+                                                                // ),
+                                                                // Spacer(),
+                                                                // Column(
+                                                                //   crossAxisAlignment:
+                                                                //       CrossAxisAlignment
+                                                                //           .start,
+                                                                //   children: [
+                                                                //     Text(
+                                                                //         'Designation'),
+                                                                //   ],
+                                                                // ),
+                                                                // Spacer(),
+                                                                // Column(
+                                                                //   crossAxisAlignment:
+                                                                //       CrossAxisAlignment
+                                                                //           .start,
+                                                                //   children: [
+                                                                //     Text(
+                                                                //         'Signature'),
+                                                                //   ],
+                                                                // ),
+                                                                // Spacer(),
 
-                                                            // Text('Action'),
-                                                          ]),
+                                                                Dimens
+                                                                    .boxWidth80,
+                                                                Text('Sr.No.'),
+                                                                Dimens
+                                                                    .boxWidth180,
+                                                                Text('Name'),
+                                                                SizedBox(
+                                                                  width: 310,
+                                                                ),
+                                                                Text(
+                                                                    'Designation'),
+                                                                Dimens
+                                                                    .boxWidth200,
+                                                                Text(
+                                                                    'Signature'),
+
+                                                                // Text('Action'),
+                                                              ]),
                                                           SizedBox(
                                                             height: 20,
                                                           ),
+
+                                                          controller.id != null
+                                                              ? Column(
+                                                                  children: []
+                                                                    ..addAll(controller
+                                                                        .investigationTeamList!
+                                                                        .map((element) =>
+                                                                            Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                              children: [
+                                                                                Padding(
+                                                                                  padding: const EdgeInsets.only(left: 150),
+                                                                                  child: Text('${element?.name}'),
+                                                                                ),
+                                                                                Padding(
+                                                                                  padding: const EdgeInsets.only(right: 160),
+                                                                                  child: Text('${element?.designation}'),
+                                                                                ),
+                                                                              ],
+                                                                            ))),
+                                                                )
+                                                              : Dimens.box0,
 
                                                           Column(
                                                             children: []
@@ -3392,7 +3465,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                 : position == 7
                                     ? controller.unsafeConditionsTextCtrlr
                                     : position == 8
-                                        ? controller.unsafeIncidentTextCtrlr
+                                        ? controller.unsafeActCauseTextCtrlr
                                         : null,
       ),
     );
