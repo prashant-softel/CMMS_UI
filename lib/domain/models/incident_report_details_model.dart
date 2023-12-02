@@ -82,6 +82,7 @@ class IncidentReportDetailsModel {
     this.unsafe_condition_contributed,
     this.unsafe_act_cause,
     this.investigation_team,
+    this.injured_person,
 
     // this.additionalEmailEmployees,
     // this.externalEmails,
@@ -159,6 +160,7 @@ class IncidentReportDetailsModel {
   List<ImmediateCorrectionUpdate?>? immediate_correction;
   List<ProposedActionPlanUpdate?>? proposed_action_plan;
   List<InvestigationTeamUpdate?>? investigation_team;
+  List<DetailsOfInjuredPersonUpdate?>? injured_person;
 
   // List<ExternalsEmailsList?>? externalEmails;
   // List<SuppliersActionsList?>? supplierActions;
@@ -261,6 +263,10 @@ class IncidentReportDetailsModel {
             ? List<InvestigationTeamUpdate>.from(json["investigation_team"]
                 ?.map((x) => InvestigationTeamUpdate.fromJson(x)))
             : [],
+        injured_person: json['injured_person'] != null
+            ? List<DetailsOfInjuredPersonUpdate>.from(json["injured_person"]
+                ?.map((x) => DetailsOfInjuredPersonUpdate.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -337,9 +343,71 @@ class IncidentReportDetailsModel {
             List<dynamic>.from(proposed_action_plan!.map((x) => x)),
         "investigation_team":
             List<dynamic>.from(investigation_team!.map((x) => x)),
+        "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
 
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         // "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
+      };
+}
+
+///Details of Injured Person
+class DetailsOfInjuredPersonUpdate {
+  DetailsOfInjuredPersonUpdate(
+      {this.incidents_id,
+      this.person_id,
+      this.person_type,
+      this.age,
+      this.sex,
+      this.designation,
+      this.address,
+      this.name_contractor,
+      this.body_part_and_nature_of_injury,
+      this.work_experience_years,
+      this.plant_equipment_involved,
+      this.location_of_incident});
+
+  int? incidents_id;
+  String? person_id;
+  int? person_type;
+  int? age;
+  int? sex;
+  String? designation;
+  String? address;
+  String? name_contractor;
+  String? body_part_and_nature_of_injury;
+  int? work_experience_years;
+  String? plant_equipment_involved;
+  String? location_of_incident;
+
+  factory DetailsOfInjuredPersonUpdate.fromJson(Map<String, dynamic> json) =>
+      DetailsOfInjuredPersonUpdate(
+        incidents_id: json['incidents_id'],
+        person_id: json['person_id'],
+        person_type: json['person_type'],
+        age: json['age'],
+        sex: json['sex'],
+        designation: json['designation'],
+        address: json['address'],
+        name_contractor: json["name_contractor"],
+        body_part_and_nature_of_injury: json['body_part_and_nature_of_injury'],
+        work_experience_years: json['work_experience_years'],
+        plant_equipment_involved: json['plant_equipment_involved'],
+        location_of_incident: json['location_of_incident'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "person_id": person_id,
+        "person_type": person_type,
+        "age": age,
+        "sex": sex,
+        "designation": designation,
+        "address": address,
+        "name_contractor": name_contractor,
+        "body_part_and_nature_of_injury": body_part_and_nature_of_injury,
+        "work_experience_years": work_experience_years,
+        "plant_equipment_involved": plant_equipment_involved,
+        "location_of_incident": location_of_incident
       };
 }
 

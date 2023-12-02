@@ -838,12 +838,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     cancelPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitCancelRequestButton(
-        auth: auth,
-        cancelPermitJsonString: cancelPermitJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          cancelPermitJsonString: cancelPermitJsonString,
+          isLoading: isLoading ?? false,
+          jobId: jobId);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -889,22 +890,26 @@ class DataRepository extends DomainRepository {
     required String auth,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitExtendButton(
         auth: auth,
         extendPermitJsonString: extendPermitJsonString,
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
 
   Future<ResponseModel> permitCloseButton({
     required String auth,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitCloseButton(
         auth: auth,
         closePermitJsonString: closePermitJsonString,
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
 
   Future<ResponseModel> rejectJobCard({

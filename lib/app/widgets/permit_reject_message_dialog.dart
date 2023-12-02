@@ -12,9 +12,14 @@ class PermitMessageRejectDialog extends GetView {
   String? createPermitData;
   String? data;
   String? ptwStatus;
+  int? jobId;
 
   PermitMessageRejectDialog(
-      {super.key, this.createPermitData, this.data, this.ptwStatus});
+      {super.key,
+      this.createPermitData,
+      this.data,
+      this.ptwStatus,
+      this.jobId});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -82,10 +87,10 @@ class PermitMessageRejectDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.offAllNamed(Routes.newPermitList);
-                // _controller.getNewPermitList(
-                //     _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
-                // Get.back();
+                jobId != 0
+                    ? Get.offAllNamed(Routes.jobDetails,
+                        arguments: {"jobId": jobId})
+                    : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),

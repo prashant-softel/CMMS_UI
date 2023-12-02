@@ -74,10 +74,12 @@ class ViewPermitUsecase {
   Future<Map<String, dynamic>> permitCloseButton({
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await repository.permitCloseButton(
         closePermitJsonString,
         isLoading,
+        jobId,
       );
 
   // Future<void> permitCancelRequestButton({
@@ -95,11 +97,10 @@ class ViewPermitUsecase {
   Future<Map<String, dynamic>> permitCancelRequestButton({
     cancelPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await repository.permitCancelRequestButton(
-        cancelPermitJsonString,
-        isLoading,
-      );
+          cancelPermitJsonString, isLoading, jobId);
 
   Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
@@ -116,11 +117,10 @@ class ViewPermitUsecase {
   Future<Map<String, dynamic>> permitExtendButton({
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await repository.permitExtendButton(
-        extendPermitJsonString,
-        isLoading,
-      );
+          extendPermitJsonString, isLoading, jobId);
 
   // Future<void> permitRejectButton({
   //   String? comment,
