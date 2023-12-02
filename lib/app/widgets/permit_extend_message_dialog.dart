@@ -11,10 +11,11 @@ import '../theme/styles.dart';
 class PermitMessageExtendDialog extends GetView {
   String? createPermitData;
   String? data;
+  int? jobId;
 
-  PermitMessageExtendDialog({super.key, this.createPermitData, this.data});
+  PermitMessageExtendDialog(
+      {super.key, this.createPermitData, this.data, this.jobId});
   final ViewPermitController _controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,10 @@ class PermitMessageExtendDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
-                      // SizedBox(height: 20,),
+                  Text('${data}',
+                      style: TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -80,9 +82,10 @@ class PermitMessageExtendDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
-                Get.offAllNamed(Routes.newPermitList);//Anas
-                Get.back();
+                jobId != 0
+                    ? Get.offAllNamed(Routes.jobDetails,
+                        arguments: {"jobId": jobId})
+                    : Get.offAllNamed(Routes.newPermitList);
               },
               child: const Text('Ok'),
             ),

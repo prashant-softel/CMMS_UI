@@ -1260,6 +1260,7 @@ class ConnectHelper {
     required String auth,
     cancelPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1276,8 +1277,8 @@ class ConnectHelper {
     print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        PermitMessageCancelRequestDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageCancelRequestDialog(
+        data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1368,6 +1369,7 @@ class ConnectHelper {
     required String auth,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1384,7 +1386,10 @@ class ConnectHelper {
     print('PermitExtendResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageExtendDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageExtendDialog(
+      data: parsedJson['message'],
+      jobId: jobId,
+    ));
 
     return responseModel;
   }
@@ -1393,6 +1398,7 @@ class ConnectHelper {
     required String auth,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1409,7 +1415,8 @@ class ConnectHelper {
     print('PermitCloseResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCloseDialog(data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1619,6 +1626,7 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(
       data: parsedJson['message'],
+      jobId: jobId,
       ptwStatus: ptwStatus,
     ));
 

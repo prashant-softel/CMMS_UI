@@ -712,6 +712,48 @@ class AddIncidentReportController extends GetxController {
         //         (e) => e?.name == element.responsibility,
         //         orElse: null)!;
       });
+
+      ///Details of Injured person
+
+      rowInjuredPersonItem.value = [];
+      _incidentReportDetails.injured_person?.forEach((element) {
+        rowInjuredPersonItem.value.add([
+          {
+            "key": "Name of Injured Person ",
+            "value": '${element?.person_id}',
+          },
+          {
+            "key": "Gender ",
+            "value": '${element?.sex}',
+          },
+          {'key': "Trade/Designation ", "value": '${element?.designation}'},
+          {'key': "Address ", "value": '${element?.address}'},
+          {
+            "key": "Name of Contractor ",
+            "value": '${element?.name_contractor}',
+          },
+          {
+            "key": "Body part injured ",
+            "value": '${element?.body_part_and_nature_of_injury}',
+          },
+          {
+            'key': "work experience ",
+            "value": '${element?.work_experience_years}'
+          },
+          {
+            "key": "Plant & Equipment ",
+            "value": '${element?.plant_equipment_involved}',
+          },
+          {
+            'key': "Exact Location ",
+            "value": '${element?.location_of_incident}'
+          },
+        ]);
+        // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
+        //     eqipmentNameList.firstWhere(
+        //         (e) => e?.name == element.responsibility,
+        //         orElse: null)!;
+      });
     }
   }
 
@@ -893,7 +935,7 @@ class AddIncidentReportController extends GetxController {
     id == null ? addWhyWhyAnalysisRowItem() : Dimens.box0;
     id == null ? addRootCauseRowItem() : Dimens.box0;
     id == null ? addImmediateCorrectionRowItem() : Dimens.box0;
-    addDetailsOfInjuredPersonRowItem();
+    id == null ? addDetailsOfInjuredPersonRowItem() : Dimens.box0;
   }
 
   void addRowItem() {
@@ -1461,6 +1503,8 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
       String _unsafeActCause =
           htmlEscape.convert(unsafeActCauseTextCtrlr.text.trim());
+      String? _otherVictimName =
+          htmlEscape.convert(otherVictimNameTextCtrlr.text.trim());
 
       // int costOfReplacement =
       //     int.parse(costOfReplacementTextController.text.trim());
@@ -1533,6 +1577,29 @@ class AddIncidentReportController extends GetxController {
             person_type: e.person_type,
             investigation_date:
                 '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
+      });
+
+      ///Details of Injured Person
+      List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
+      rowInjuredPersonItem.forEach((element) {
+        DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
+          incidents_id: id,
+          person_id: selectedOption.value == "Other"
+              ? _otherVictimName
+              : element[0]["value"],
+          person_type: 1,
+          age: 30,
+          sex: int.tryParse('${element[1]["value"]}'),
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor: element[4]["value"],
+          body_part_and_nature_of_injury: element[5]["value"],
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved: element[7]["value"],
+          location_of_incident: element[8]["value"] ?? '0',
+        );
+
+        detailsOfInjuredPersonItems.add(item);
       });
 
       CreateIncidentReportModel updateIncidentReportModel =

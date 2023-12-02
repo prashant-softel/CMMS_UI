@@ -562,7 +562,7 @@ class ViewPermitController extends GetxController {
   // }
 
   Future<void> permitCloseButton(
-      {String? permitId, List<dynamic>? closeFileIds}) async {
+      {String? permitId, List<dynamic>? closeFileIds, int? jobId}) async {
     //  String _closeComment = closeCommentTextFieldCtrlr.text.trim();
 
     // final _permitCloseBtn = await viewPermitPresenter.permitCloseButton(
@@ -593,6 +593,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCloseButton(
         closePermitJsonString: closePermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('closePermitRequest:$closePermitJsonString');
@@ -603,7 +604,7 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> permitCancelRequestButton(
-      {String? permitId, List<dynamic>? fileIds}) async {
+      {String? permitId, List<dynamic>? fileIds, int? jobId}) async {
     // String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
 
     // final _permitCancelRequestBtn =
@@ -635,6 +636,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCancelRequestButton(
         cancelPermitJsonString: cancelPermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('cancelPermitRequest:$cancelPermitJsonString');
@@ -645,7 +647,7 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> permitExtendButton(
-      {String? permitId, List<dynamic>? extendFileIds}) async {
+      {String? permitId, List<dynamic>? extendFileIds, int? jobId}) async {
     // String _reasonForExtensionComment =
     //     extendReasonCommentTextFieldCtrlr.text.trim();
     // String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
@@ -684,6 +686,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitExtendButton(
         extendPermitJsonString: extendPermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('extendPermitRequest:$extendPermitJsonString');

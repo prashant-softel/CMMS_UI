@@ -3164,19 +3164,19 @@ class Repository {
 
   ///Cancel Permit
   Future<Map<String, dynamic>> permitCancelRequestButton(
-    // String? comment,
-    // String? id,
-    cancelPermitJsonString,
-    bool? isLoading,
-  ) async {
+      // String? comment,
+      // String? id,
+      cancelPermitJsonString,
+      bool? isLoading,
+      int? jobId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitCancelRequestButton(
-        auth: auth,
-        cancelPermitJsonString: json.encode(cancelPermitJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          cancelPermitJsonString: json.encode(cancelPermitJsonString),
+          isLoading: isLoading ?? false,
+          jobId: jobId);
       print('PermitCancelRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -3296,15 +3296,16 @@ class Repository {
     // String? id,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitExtendButton(
-        auth: auth,
-        extendPermitJsonString: json.encode(extendPermitJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          extendPermitJsonString: json.encode(extendPermitJsonString),
+          isLoading: isLoading ?? false,
+          jobId: jobId);
       print('PermitExtendRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -3325,6 +3326,7 @@ class Repository {
     // String? id,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3333,6 +3335,7 @@ class Repository {
         auth: auth,
         closePermitJsonString: json.encode(closePermitJsonString),
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
       print('PermitCloseRequestResponse: ${res.data}');
 

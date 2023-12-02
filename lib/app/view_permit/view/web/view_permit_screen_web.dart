@@ -570,7 +570,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 // / PAGINATION
                                                                 Padding(
                                                                   padding: const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           25),
                                                                   child:
@@ -796,7 +796,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   /// PAGINATION
                                                                   Padding(
                                                                     padding: const EdgeInsets
-                                                                            .symmetric(
+                                                                        .symmetric(
                                                                         horizontal:
                                                                             25),
                                                                     child: ValueListenableBuilder(
@@ -1072,7 +1072,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   right: 250),
                                                           child: CustomRichText(
                                                               title: 'JSA: '),
@@ -2673,7 +2673,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     right: 450),
                                                             child: Column(
                                                               crossAxisAlignment:
@@ -2881,7 +2881,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3053,7 +3053,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3220,7 +3220,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -4054,6 +4054,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           Get.dialog(PermitExtendDialog(
                             permitId:
                                 '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            jobId: controller.jobId.value,
                           ));
                         },
                       ))
@@ -4087,6 +4088,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           Get.dialog(PermitCloseDialog(
                             permitId:
                                 '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            jobId: controller.jobId.value,
                           ));
                         },
                       ))
@@ -4207,9 +4209,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         text: "Cancel Permit",
                         icon: Icons.close,
                         onPressed: () {
-                          Get.dialog(PermitCancelReQuestDialog(
+                          Get.dialog(
+                            PermitCancelReQuestDialog(
                               permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
+                              jobId: controller.jobId.value,
+                            ),
+                          );
                         },
                       ))
                   : Dimens.box0,
