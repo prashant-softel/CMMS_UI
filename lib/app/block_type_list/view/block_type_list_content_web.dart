@@ -173,23 +173,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                 BorderRadius.circular(5),
                                           ),
                                           child: DropdownWebWidget(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
                                             controller: controller,
                                             // dropdownList:
                                             // controller: controller,

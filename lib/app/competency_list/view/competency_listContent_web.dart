@@ -74,7 +74,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                   Container(
                     width: (Get.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: 250,
+                    height: 310,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color.fromARGB(255, 251, 252, 253),

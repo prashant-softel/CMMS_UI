@@ -99,7 +99,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "CREATE SPV",
+                                      "Create SPV",
                                       style: Styles.blackBold16,
                                     ),
                                     SizedBox(
@@ -140,7 +140,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
 
                                         Expanded(
                                             child: CustomRichText(
-                                                title: 'Spv Name ')),
+                                                title: 'SPV Name ')),
                                         Container(
                                           width: (MediaQuery.of(context)
                                                   .size
@@ -501,7 +501,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                     DataColumn2(
                                         // fixedWidth: 150,
                                         label: Text(
-                                      "Spv Name",
+                                      "SPV Name",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
