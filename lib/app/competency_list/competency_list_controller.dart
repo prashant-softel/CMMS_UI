@@ -217,7 +217,7 @@ class CompetencyListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: checklist,
+                    text: "[${checklist}]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,

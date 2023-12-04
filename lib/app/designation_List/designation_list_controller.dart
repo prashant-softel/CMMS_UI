@@ -14,7 +14,9 @@ import 'designation_list_presenter.dart';
 // import 'module_list_presenter.dart';
 
 class DesignationListController extends GetxController {
-  DesignationListController(this.designationPresenter,);
+  DesignationListController(
+    this.designationPresenter,
+  );
 
   DesignationListPresenter designationPresenter;
   final HomeController homecontroller = Get.find();
@@ -25,9 +27,7 @@ class DesignationListController extends GetxController {
   // Rx<String> selectedequipment = ''.obs;
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<DesignationModel?>?
-  designationList =
-      <DesignationModel?>[].obs;
+  RxList<DesignationModel?>? designationList = <DesignationModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -35,10 +35,8 @@ class DesignationListController extends GetxController {
     rowsPerPage: 10,
   );
 
-
   DesignationModel? designationModel;
   final isSuccess = false.obs;
-
 
   RxList<String> moduleListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
@@ -58,7 +56,7 @@ class DesignationListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getDesignationList( true);
+        getDesignationList(true);
       });
     });
     super.onInit();
@@ -67,7 +65,7 @@ class DesignationListController extends GetxController {
   Future<void> getDesignationList(bool isLoading) async {
     designationList?.value = <DesignationModel>[];
     final _moduleList =
-    await designationPresenter.getDesignationList(isLoading: isLoading);
+        await designationPresenter.getDesignationList(isLoading: isLoading);
 
     if (_moduleList != null) {
       designationList!.value = _moduleList.cast<DesignationModel?>();
@@ -88,20 +86,21 @@ class DesignationListController extends GetxController {
   }
 
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<bool> createDesignation() async {
     print("CREATE CONTROLLER");
-    if (nameCtrlr.text.trim() == '' ) {
+    if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -120,13 +119,11 @@ class DesignationListController extends GetxController {
       String _name = nameCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      CreateDesignationModel createModuleList = CreateDesignationModel(
-          name : _name,
-          description: _description
-      );
+      CreateDesignationModel createModuleList =
+          CreateDesignationModel(name: _name, description: _description);
 
       var moduleListJsonString =
-      createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+          createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
       await designationPresenter.createDesignation(
@@ -145,6 +142,7 @@ class DesignationListController extends GetxController {
     // isToggleOn.value = false;
     await {cleardata()};
   }
+
   cleardata() {
     nameCtrlr.text = '';
     descriptionCtrlr.text = '';
@@ -171,7 +169,7 @@ class DesignationListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: module,
+                    text: "[${module}]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -219,21 +217,16 @@ class DesignationListController extends GetxController {
     String _name = nameCtrlr.text.trim();
     String _Description = descriptionCtrlr.text.trim();
 
-    DesignationModel createModulelist = DesignationModel(
-        id:moduleId,
-        name: _name,
-        description: _Description
-    );
+    DesignationModel createModulelist =
+        DesignationModel(id: moduleId, name: _name, description: _Description);
     var designationJsonString =
-    createModulelist.toJson(); //createCheckListToJson([createChecklist]);
+        createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"designationJsonString", designationJsonString});
     await designationPresenter.updateDesignation(
       designationJsonString: designationJsonString,
       isLoading: true,
-
     );
     return true;
   }
 }
-
