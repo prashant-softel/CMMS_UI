@@ -231,7 +231,7 @@ class AddIncidentReportController extends GetxController {
     GenderModel(name: "Please Select", id: 0),
     GenderModel(name: 'Male', id: 1),
     GenderModel(name: 'Female', id: 2),
-    GenderModel(name: 'Other', id: 3),
+    GenderModel(name: 'TransGender', id: 3),
   ].obs;
 
   Rx<String> selectedEquipmentName = ''.obs;
@@ -677,6 +677,7 @@ class AddIncidentReportController extends GetxController {
       _incidentReportDetails.root_cause?.forEach((element) {
         rowRootCauseItem.value.add([
           {'key': "Cause ", "value": '${element?.cause}'},
+          {'key': "Action ", "value": ''},
         ]);
       });
 
@@ -989,6 +990,7 @@ class AddIncidentReportController extends GetxController {
   void addRootCauseRowItem() {
     rowRootCauseItem.add([
       {'key': "Cause ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
