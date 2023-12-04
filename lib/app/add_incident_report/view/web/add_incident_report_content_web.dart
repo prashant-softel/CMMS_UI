@@ -97,8 +97,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                               child: Text(" / Incident Report",
                                   style: Styles.greyMediumLight12),
                             ),
-                            Text(" / Add Incident Report",
-                                style: Styles.greyMediumLight12)
+                            controller.id != null
+                                ? Text(" / Update Incident Report",
+                                    style: Styles.greyMediumLight12)
+                                : Text(" / Add Incident Report",
+                                    style: Styles.greyMediumLight12)
                           ],
                         ),
                       ),
@@ -118,8 +121,31 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                       () => Column(
                                         children: [
                                           CustomAppBar(
-                                            title: 'Add Incident Report'.tr,
-                                          ),
+                                              title: controller.id != null
+                                                  ? 'Update Incident Report'.tr
+                                                  : 'Add Incident Report'.tr,
+                                              action: controller.id != null
+                                                  ? Row(
+                                                      children: [
+                                                        Text(
+                                                          'Id: ',
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          '${controller.id}',
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Dimens.box0),
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 50),
@@ -2044,61 +2070,245 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         color: ColorValues
                                                             .greyLightColour,
                                                       ),
+                                                      // Column(
+                                                      //   children: [
+                                                      //     Row(
+                                                      //       children: [
+                                                      //         Text(
+                                                      //             "Time Stamp"),
+                                                      //         Text(
+                                                      //             "Posted By"),
+                                                      //         Text("Comment"),
+                                                      //         Text(
+                                                      //             "Location"),
+                                                      //         Text("Status"),
+                                                      //       ],
+                                                      //     )
+                                                      //   ]..addAll([
+                                                      //       ...(controller
+                                                      //               .historyList?.value ??
+                                                      //           [])
+                                                      //     ].map((e) {
+                                                      //       return Row(
+                                                      //         children: [
+                                                      //           Text(
+                                                      //               "${e?.createdAt??''}"),
+                                                      //           Text(
+                                                      //               "${e?.createdByName}"),
+                                                      //           Text(
+                                                      //               "${e?.comment}"),
+                                                      //           Text(
+                                                      //               "--"),
+                                                      //           Text(
+                                                      //               "${e?.status_name ??''}"),
+                                                      //         ],
+                                                      //       );
+                                                      //     })),
+                                                      // ),
+
                                                       Expanded(
-                                                        child:
-                                                            ScrollableTableView(
+                                                        child: DataTable2(
+                                                          border:
+                                                              TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
                                                           columns: [
-                                                            "Time Stamp",
-                                                            "Module Ref ID",
-                                                            "Comment",
-                                                            "Module Type",
-                                                            "Status",
-                                                          ].map((column) {
-                                                            return TableViewColumn(
-                                                              label: column,
-                                                              minWidth:
-                                                                  Get.width *
-                                                                      0.15,
-                                                            );
-                                                          }).toList(),
-                                                          rows: [
-                                                            ...List.generate(
-                                                              controller
-                                                                      .historyList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) {
-                                                                var getHistoryListDetails =
-                                                                    controller
-                                                                            .historyList?[
-                                                                        index];
-                                                                return [
-                                                                  '${getHistoryListDetails?.createdAt}',
-                                                                  '${getHistoryListDetails?.moduleRefId ?? ''}',
-                                                                  '${getHistoryListDetails?.comment ?? ''}',
-                                                                  '${getHistoryListDetails?.moduleType ?? ''}',
-                                                                  '${getHistoryListDetails?.status_name ?? ''}',
-                                                                ];
-                                                              },
-                                                            ),
-                                                            // [
-                                                          ].map((record) {
-                                                            return TableViewRow(
-                                                              height: 30,
-                                                              cells: record
-                                                                  .map((value) {
-                                                                return TableViewCell(
-                                                                  child: Text(
-                                                                      value),
-                                                                );
-                                                              }).toList(),
-                                                            );
-                                                          }).toList(),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Time Stamp",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Module Ref ID",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Comment",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Module Type",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Status",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                          ],
+                                                          rows: List<
+                                                              DataRow>.generate(
+                                                            controller
+                                                                    .historyList
+                                                                    ?.length ??
+                                                                0,
+                                                            (index) =>
+                                                                DataRow(cells: [
+                                                              DataCell(Text(controller
+                                                                      .historyList?[
+                                                                          index]
+                                                                      ?.createdAt
+                                                                      .toString() ??
+                                                                  '')),
+                                                              DataCell(Text(controller
+                                                                      .historyList?[
+                                                                          index]
+                                                                      ?.moduleRefId
+                                                                      .toString() ??
+                                                                  '')),
+                                                              DataCell(Text(controller
+                                                                      .historyList?[
+                                                                          index]
+                                                                      ?.comment
+                                                                      .toString() ??
+                                                                  '')),
+                                                              DataCell(Text(controller
+                                                                      .historyList?[
+                                                                          index]
+                                                                      ?.moduleType
+                                                                      .toString() ??
+                                                                  '')),
+                                                              DataCell(Text(controller
+                                                                      .historyList?[
+                                                                          index]
+                                                                      ?.status_name
+                                                                      .toString() ??
+                                                                  '')),
+                                                            ]),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                 )
+
+                                              // Container(
+                                              //     margin: Dimens.edgeInsets20,
+                                              //     height: ((controller
+                                              //                     .historyList
+                                              //                     ?.length ??
+                                              //                 0) *
+                                              //             33) +
+                                              //         120,
+                                              //     decoration: BoxDecoration(
+                                              //       border: Border.all(
+                                              //         color: ColorValues
+                                              //             .lightGreyColorWithOpacity35,
+                                              //         width: 1,
+                                              //       ),
+                                              //       boxShadow: [
+                                              //         BoxShadow(
+                                              //           color: ColorValues
+                                              //               .appBlueBackgroundColor,
+                                              //           spreadRadius: 2,
+                                              //           blurRadius: 5,
+                                              //           offset: Offset(0, 2),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+                                              //     child: Column(
+                                              //       children: [
+                                              //         Padding(
+                                              //           padding:
+                                              //               const EdgeInsets
+                                              //                   .all(10.0),
+                                              //           child: Row(
+                                              //             children: [
+                                              //               Text(
+                                              //                 "Incident Report History ",
+                                              //                 style: Styles
+                                              //                     .blue700,
+                                              //               ),
+                                              //             ],
+                                              //           ),
+                                              //         ),
+                                              //         Divider(
+                                              //           color: ColorValues
+                                              //               .greyLightColour,
+                                              //         ),
+                                              //         Expanded(
+                                              //           child:
+                                              //               ScrollableTableView(
+                                              //             columns: [
+                                              //               "Time Stamp",
+                                              //               "Module Ref ID",
+                                              //               "Comment",
+                                              //               "Module Type",
+                                              //               "Status",
+                                              //             ].map((column) {
+                                              //               return TableViewColumn(
+                                              //                 label: column,
+                                              //                 minWidth:
+                                              //                     Get.width *
+                                              //                         0.15,
+                                              //               );
+                                              //             }).toList(),
+                                              //             rows: [
+                                              //               ...List.generate(
+                                              //                 controller
+                                              //                         .historyList
+                                              //                         ?.length ??
+                                              //                     0,
+                                              //                 (index) {
+                                              //                   var getHistoryListDetails =
+                                              //                       controller
+                                              //                               .historyList?[
+                                              //                           index];
+                                              //                   return [
+                                              //                     '${getHistoryListDetails?.createdAt}',
+                                              //                     '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                              //                     '${getHistoryListDetails?.comment ?? ''}',
+                                              //                     '${getHistoryListDetails?.moduleType ?? ''}',
+                                              //                     '${getHistoryListDetails?.status_name ?? ''}',
+                                              //                   ];
+                                              //                 },
+                                              //               ),
+                                              //               // [
+                                              //             ].map((record) {
+                                              //               return TableViewRow(
+                                              //                 height: 30,
+                                              //                 cells: record
+                                              //                     .map((value) {
+                                              //                   return TableViewCell(
+                                              //                     child: Text(
+                                              //                         value),
+                                              //                   );
+                                              //                 }).toList(),
+                                              //               );
+                                              //             }).toList(),
+                                              //           ),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+                                              //   )
+
                                               : Container(),
 
                                           Row(
@@ -4905,6 +5115,13 @@ class RootCauseAnalysis extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
+                    DataColumn2(
+                        fixedWidth: 150,
+                        label: Text(
+                          "Action ",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
                   ],
                   rows: controller.rowRootCauseItem.value.map((record) {
                     return DataRow(
@@ -4955,7 +5172,29 @@ class RootCauseAnalysis extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              : Text(mapData['key'] ?? ''),
+                              : (mapData['key'] == "Action ")
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TableActionButton(
+                                            color: ColorValues.appRedColor,
+                                            icon: Icons.delete,
+                                            label: 'Remove',
+                                            message: '',
+                                            onPress: () {
+                                              controller.rowRootCauseItem
+                                                  .remove(record);
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : Text(mapData['key'] ?? ''),
                         );
                       }).toList(),
                     );

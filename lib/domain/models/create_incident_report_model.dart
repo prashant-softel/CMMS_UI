@@ -388,7 +388,7 @@ class InvestigationTeam {
           srNumber: json['srNumber'],
           person_id: json['person_id'],
           person_type: json['person_type'],
-          name: json["name"],
+          name: json["person_name"],
           designation: json['designation'],
           investigation_date: json['investigation_date']);
 
