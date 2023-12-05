@@ -157,7 +157,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Text(
-                                    " ${controller.jobCardDetailsModel.value?.status_short ?? ""}${controller.jobCardDetailsModel.value?.status ?? ""}",
+                                    " ${controller.jobCardDetailsModel.value?.status_short ?? ""}",
                                   )),
                             ],
                           ),
