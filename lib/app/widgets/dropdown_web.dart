@@ -42,7 +42,23 @@ class DropdownWebWidget extends StatelessWidget {
         width: width,
         margin: margin,
         decoration: BoxDecoration(
-          boxShadow: boxShadow,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),

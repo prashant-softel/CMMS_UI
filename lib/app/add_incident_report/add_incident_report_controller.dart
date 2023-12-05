@@ -669,6 +669,7 @@ class AddIncidentReportController extends GetxController {
         rowWhyWhyAnalysisItem.value.add([
           {'key': "Why ", "value": '${element?.why}'},
           {'key': "Cause ", "value": '${element?.cause}'},
+          {'key': "Action ", "value": ''},
         ]);
       });
 
@@ -686,6 +687,7 @@ class AddIncidentReportController extends GetxController {
       _incidentReportDetails.immediate_correction?.forEach((element) {
         rowImmediateCorrectionItem.value.add([
           {'key': "Correction ", "value": '${element?.details}'},
+          {'key': "Action ", "value": ''},
         ]);
       });
 
@@ -707,6 +709,7 @@ class AddIncidentReportController extends GetxController {
                 '${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse('${element?.target_date}'))}'
           },
           {'key': "Remark", "value": '${element?.remarks}'},
+          {'key': "Action ", "value": ''},
         ]);
         // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
         //     eqipmentNameList.firstWhere(
@@ -723,6 +726,7 @@ class AddIncidentReportController extends GetxController {
             "key": "Name of Injured Person ",
             "value": '${element?.person_id}',
           },
+          {'key': "Other Victim ", "value": ''},
           {
             "key": "Gender ",
             "value": '${element?.sex}',
@@ -749,6 +753,7 @@ class AddIncidentReportController extends GetxController {
             'key': "Exact Location ",
             "value": '${element?.location_of_incident}'
           },
+          {'key': "Action ", "value": ''},
         ]);
         // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
         //     eqipmentNameList.firstWhere(
@@ -948,6 +953,7 @@ class AddIncidentReportController extends GetxController {
       },
       {'key': "Target Date ", "value": ''},
       {'key': "Remark", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -957,6 +963,7 @@ class AddIncidentReportController extends GetxController {
         "key": "Name of Injured Person ",
         "value": 'Please Select',
       },
+      {'key': "Other Victim ", "value": ''},
       {
         "key": "Gender ",
         "value": 'Please Select',
@@ -977,6 +984,7 @@ class AddIncidentReportController extends GetxController {
         "value": 'Please Select',
       },
       {'key': "Exact Location ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -984,6 +992,7 @@ class AddIncidentReportController extends GetxController {
     rowWhyWhyAnalysisItem.add([
       {'key': "Why ", "value": ''},
       {'key': "Cause ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -997,6 +1006,7 @@ class AddIncidentReportController extends GetxController {
   void addImmediateCorrectionRowItem() {
     rowImmediateCorrectionItem.add([
       {'key': "Correction ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -1357,22 +1367,22 @@ class AddIncidentReportController extends GetxController {
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
           incidents_id: 123,
-          person_id: selectedOption.value == "Other"
-              ? _otherVictimName
-              : dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          person_id: dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          other_victim:
+              selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
-          sex: dropdownGenderMapperData[element[1]["value"]]?.id,
-          designation: element[2]["value"] ?? '0',
-          address: element[3]["value"] ?? '0',
+          sex: dropdownGenderMapperData[element[2]["value"]]?.id,
+          designation: element[3]["value"] ?? '0',
+          address: element[4]["value"] ?? '0',
           name_contractor:
-              dropdownBusinessListMapperData[element[4]["value"]]?.name,
-          body_part_and_nature_of_injury:
               dropdownBusinessListMapperData[element[5]["value"]]?.name,
-          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          body_part_and_nature_of_injury:
+              dropdownBusinessListMapperData[element[6]["value"]]?.name,
+          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
           plant_equipment_involved:
-              dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
-          location_of_incident: element[8]["value"] ?? '0',
+              dropdownEquipmentNameMapperData[element[8]["value"]]?.name,
+          location_of_incident: element[9]["value"] ?? '0',
         );
 
         detailsOfInjuredPersonItems.add(item);
@@ -1522,6 +1532,8 @@ class AddIncidentReportController extends GetxController {
       //    cause:
       //   ));
       // });
+
+      //Why why analysis for update
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
         WhyWhyAnalysis item = WhyWhyAnalysis(
@@ -1533,7 +1545,7 @@ class AddIncidentReportController extends GetxController {
         whyWhyAnalysisItems.add(item);
       });
 
-      ///Root Cause
+      ///Root Cause for update
       List<RootCause> rootCauseItems = [];
       rowRootCauseItem.forEach((element) {
         RootCause item = RootCause(
@@ -1544,7 +1556,7 @@ class AddIncidentReportController extends GetxController {
         rootCauseItems.add(item);
       });
 
-      ///Immediate correction
+      ///Immediate correction for update
       List<ImmediateCorrection> immediateCorrectionItems = [];
       rowImmediateCorrectionItem.forEach((element) {
         ImmediateCorrection item = ImmediateCorrection(
@@ -1555,7 +1567,7 @@ class AddIncidentReportController extends GetxController {
         immediateCorrectionItems.add(item);
       });
 
-      ///Proposed Action Plan
+      ///Proposed Action Plan for update
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
         ProposedActionPlan item = ProposedActionPlan(
@@ -1571,7 +1583,7 @@ class AddIncidentReportController extends GetxController {
         proposedActionItems.add(item);
       });
 
-      ///Investigation Team
+      ///Investigation Team for update
       late List<InvestigationTeam> investigation_team_list = [];
       investigationTeamList!.forEach((e) {
         investigation_team_list.add(InvestigationTeam(
@@ -1581,24 +1593,23 @@ class AddIncidentReportController extends GetxController {
                 '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
       });
 
-      ///Details of Injured Person
+      ///Details of Injured Person for update
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
           incidents_id: id,
-          person_id: selectedOption.value == "Other"
-              ? _otherVictimName
-              : element[0]["value"],
+          person_id: element[0]["value"],
+          other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
-          sex: int.tryParse('${element[1]["value"]}'),
-          designation: element[2]["value"] ?? '0',
-          address: element[3]["value"] ?? '0',
-          name_contractor: element[4]["value"],
-          body_part_and_nature_of_injury: element[5]["value"],
-          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
-          plant_equipment_involved: element[7]["value"],
-          location_of_incident: element[8]["value"] ?? '0',
+          sex: int.tryParse('${element[2]["value"]}'),
+          designation: element[3]["value"] ?? '0',
+          address: element[4]["value"] ?? '0',
+          name_contractor: element[5]["value"],
+          body_part_and_nature_of_injury: element[6]["value"],
+          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
+          plant_equipment_involved: element[8]["value"],
+          location_of_incident: element[9]["value"] ?? '0',
         );
 
         detailsOfInjuredPersonItems.add(item);
@@ -1660,7 +1671,7 @@ class AddIncidentReportController extends GetxController {
               root_cause: rootCauseItems,
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: proposedActionItems,
-              injured_person: [],
+              injured_person: detailsOfInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
