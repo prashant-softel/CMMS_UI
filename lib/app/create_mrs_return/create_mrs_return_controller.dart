@@ -28,7 +28,9 @@ class CreateMrsReturnController extends GetxController {
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
 
-  int whereUsedTypeId = 0;
+  Rx<int> whereUsedTypeId = 0.obs;
+  Rx<String> activity = ''.obs;
+
   var isSetTemplate = false.obs;
 
   void setTemplatetoggle() {
@@ -38,9 +40,11 @@ class CreateMrsReturnController extends GetxController {
   ///
   @override
   void onInit() async {
-    whereUsedTypeId = Get.arguments;
-    if (whereUsedTypeId != 0) {
-      whereUsedCtrlr.text = whereUsedTypeId.toString();
+    await setId();
+    //   whereUsedTypeId = Get.arguments;
+    if (whereUsedTypeId.value != 0) {
+      whereUsedCtrlr.text = whereUsedTypeId.value.toString();
+      activityCtrlr.text = activity.value;
     }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -51,6 +55,33 @@ class CreateMrsReturnController extends GetxController {
       });
     });
     super.onInit();
+  }
+
+  Future<void> setId() async {
+    try {
+      final _whereUsedTypeId = await createmrsReturnPresenter.getValue();
+      final _activity = await createmrsReturnPresenter.getactivityValue();
+
+      if (_whereUsedTypeId == null ||
+          _whereUsedTypeId == '' ||
+          _whereUsedTypeId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        activity.value = dataFromPreviousScreen['activity'];
+        whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
+
+        createmrsReturnPresenter.saveValue(
+            whereUsedTypeId: whereUsedTypeId.value.toString());
+        createmrsReturnPresenter.saveactivityValue(
+            activity: activity.value.toString());
+      } else {
+        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+        activity.value = _activity ?? "";
+      }
+    } catch (e) {
+      print(e.toString() + 'goId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getCmmsItemList(int _facilityId) async {
@@ -107,7 +138,7 @@ class CreateMrsReturnController extends GetxController {
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,
-        whereUsedTypeId: whereUsedTypeId,
+        whereUsedTypeId: whereUsedTypeId.value,
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();

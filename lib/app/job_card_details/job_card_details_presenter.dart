@@ -133,6 +133,27 @@ class JobCardDetailsPresenter {
     );
   }
 
+  Future<bool> approvecloseJob({
+    approveJsonString,
+    required bool isLoading,
+  }) async {
+    return jobCardDetailsUsecase.approvecloseJob(
+      approveJsonString: approveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  ///
+  Future<bool> rejectcloseJob({
+    rejectJsonString,
+    required bool isLoading,
+  }) async {
+    return jobCardDetailsUsecase.rejectcloseJob(
+      rejectJsonString: rejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   void saveValue({String? jobCardId}) async {
     return jobCardDetailsUsecase.saveValue(jobCardId: jobCardId);
   }

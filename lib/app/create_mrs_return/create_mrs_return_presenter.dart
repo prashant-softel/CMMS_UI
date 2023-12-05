@@ -19,4 +19,16 @@ class CreateMrsReturnPresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? whereUsedTypeId}) async {
+    return craetemrsReturnUsecase.saveValue(whereUsedTypeId: whereUsedTypeId);
+  }
+
+  Future<String?> getValue() async => await craetemrsReturnUsecase.getValue();
+  void saveactivityValue({String? activity}) async {
+    return craetemrsReturnUsecase.saveactivityValue(activity: activity);
+  }
+
+  Future<String?> getactivityValue() async =>
+      await craetemrsReturnUsecase.getactivityValue();
 }

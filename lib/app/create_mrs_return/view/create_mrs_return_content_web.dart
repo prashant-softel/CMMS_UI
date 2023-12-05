@@ -197,8 +197,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             height: 300,
                             child: ScrollableTableView(
                               columns: [
-                                "Equipment Name",
-                                "Issue Qty",
+                                "Material Name",
+                                "Available Qty",
                                 "Return Qty",
                                 "Is Faulty?",
                                 "Remark",
@@ -249,7 +249,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Container(
-                                                      width: (Get.width * .4),
+                                                      width: (Get.width * .9),
                                                       // padding: EdgeInsets.all(value),
                                                       decoration: BoxDecoration(
                                                         boxShadow: [
@@ -319,7 +319,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                               child: Container(
                                                                   width:
                                                                       (Get.width *
-                                                                          .4),
+                                                                          .5),
                                                                   // padding: EdgeInsets.all(value),
                                                                   decoration:
                                                                       BoxDecoration(

@@ -123,4 +123,7 @@ class PreventiveMaintenanceTaskViewPresenter {
       preventiveMaintenanceTaskViewUsecase.clearjobmodelValue();
   void clearpmTaskValue() async =>
       preventiveMaintenanceTaskViewUsecase.clearpmTaskValue();
+  void clearStoreTaskData() {
+    preventiveMaintenanceTaskViewUsecase.clearStoreTaskData();
+  }
 }

@@ -917,6 +917,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> rejectcloseJob({
+    auth,
+    bool? isLoading,
+    rejectJsonString,
+  }) async {
+    var response = await connectHelper.rejectcloseJob(
+        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    return response;
+  }
+
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     int? executionId,
@@ -1901,6 +1911,16 @@ class DataRepository extends DomainRepository {
     approveJsonString,
   }) async {
     var response = await connectHelper.approveJobCards(
+        auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approvecloseJob({
+    auth,
+    bool? isLoading,
+    approveJsonString,
+  }) async {
+    var response = await connectHelper.approvecloseJob(
         auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
     return response;
   }

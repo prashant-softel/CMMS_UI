@@ -54,5 +54,6 @@ class TranferItems {
         'remarks': remarks,
         'toActorID': toActorID,
         'toActorType': toActorType,
+        'mrsID': mrsID
       };
 }

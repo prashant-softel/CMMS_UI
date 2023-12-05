@@ -103,4 +103,5 @@ class PreventiveMaintenanceTaskViewUsecase {
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
   void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
 }
