@@ -1016,8 +1016,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                                       /// PAGINATION
                                                                       Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.symmetric(horizontal: 25),
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                25),
                                                                         child: ValueListenableBuilder(
                                                                             valueListenable: controller.employeeNamepaginationController,
                                                                             builder: (context, value, child) {
@@ -1580,7 +1582,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .only(
+                                                                .only(
                                                                 right: 50,
                                                                 top: 20),
                                                         child: Text(
@@ -1606,9 +1608,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      left: 70),
+                                                                          left:
+                                                                              70),
                                                                   child: Text(
                                                                     'Request a Permit For a PM',
                                                                     style: Styles
@@ -1616,12 +1620,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      top: 10,
-                                                                      left: 40,
-                                                                      right:
-                                                                          10),
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              40,
+                                                                          right:
+                                                                              10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1736,7 +1743,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ],
                                                             )
-                                                          : Container(),
+                                                          : Dimens.box0,
                                                       Dimens.boxHeight30,
                                                       controller.jobModel?.id !=
                                                               null
@@ -1751,9 +1758,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      left: 10),
+                                                                          left:
+                                                                              10),
                                                                   child: Text(
                                                                     'Request a Permit For a Job',
                                                                     style: Styles
@@ -1761,12 +1770,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: const EdgeInsets
+                                                                  padding:
+                                                                      const EdgeInsets
                                                                           .only(
-                                                                      top: 10,
-                                                                      left: 40,
-                                                                      right:
-                                                                          10),
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              40,
+                                                                          right:
+                                                                              10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1983,12 +1995,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ],
                                                             )
-                                                          : Container(),
+                                                          : Dimens.box0,
                                                       Dimens.boxHeight30,
 
                                                       SizedBox(
                                                         height: 20,
                                                       ),
+
                                                       Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -1999,6 +2012,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             //     MainAxisAlignment
                                                             //         .center,
                                                             children: [
+                                                              Spacer(),
                                                               Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -2084,15 +2098,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         0,
                                                                       ),
                                                                     ],
-                                                                  )
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
                                                                 ],
                                                               ),
+
                                                               Spacer(),
                                                               // Dimens.boxWidth47,
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         right:
                                                                             20),
                                                                 child: Column(
@@ -2168,6 +2185,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ],
                                                                 ),
                                                               ),
+                                                              Spacer(),
                                                               // Padding(
                                                               //   padding:
                                                               //       const EdgeInsets
@@ -2385,11 +2403,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           //     ],
                                                           //   ),
                                                           // ),
+
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
-                                                                    left: 17),
+                                                                    .only(
+                                                                    left: 150,
+                                                                    right: 130),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2404,15 +2424,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      // Spacer(),
 
                                                       SizedBox(
                                                         height: 10,
                                                       ),
+
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 19),
+                                                                .only(left: 70),
                                                         child: Row(
                                                           children: [
                                                             CustomRichText(
@@ -2450,7 +2470,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   margin: EdgeInsets
                                                                       .only(
                                                                           left:
-                                                                              5),
+                                                                              130),
                                                                   // alignment:
                                                                   //     Alignment
                                                                   //         .centerRight,
@@ -2871,278 +2891,154 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
 
                                                       //Tool box talk
-                                                      SizedBox(
-                                                        height: 450,
+                                                      Container(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
                                                                 .width /
-                                                            1.2,
-                                                        child: Center(
-                                                          child: Container(
-                                                            margin: Dimens
-                                                                .edgeInsets16,
-                                                            height: Get.height,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .withOpacity(
-                                                                          .3)),
+                                                            1.25,
+                                                        margin:
+                                                            EdgeInsets.all(20),
+                                                        // margin: Dimens
+                                                        //     .edgeInsets16,
+                                                        // height: Get.height,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      .3)),
+                                                        ),
+                                                        constraints:
+                                                            BoxConstraints(
+                                                          maxWidth: 1100,
+                                                        ),
+                                                        child: Column(
+                                                          children: [
+                                                            CustomAppBar(
+                                                              title:
+                                                                  'Tool Box Talk25'
+                                                                      .tr,
                                                             ),
-                                                            constraints:
-                                                                BoxConstraints(
-                                                              maxWidth: 1100,
-                                                            ),
-                                                            child: Column(
+                                                            Dimens.boxHeight10,
+                                                            Wrap(
                                                               children: [
-                                                                CustomAppBar(
-                                                                  title:
-                                                                      'Tool Box Talk'
-                                                                          .tr,
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Wrap(
+                                                                Column(
                                                                   children: [
-                                                                    Column(
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
                                                                       children: [
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceEvenly,
-                                                                          children: [
-                                                                            Text('TBT Type: '),
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: Obx(
-                                                                                () => DropdownWebWidget(
-                                                                                  dropdownList: controller.jobTypeList,
-                                                                                  isValueSelected: controller.isJobTypeListSelected.value,
-                                                                                  selectedValue: controller.selectedJobType.value,
-                                                                                  onValueChanged: controller.onValueChanged,
-                                                                                ),
-                                                                              ),
-
-                                                                              // LoginCustomTextfield(),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 20,
-                                                                            ),
-                                                                            Text('SOP: '),
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: Obx(
-                                                                                () => DropdownWebWidget(
-                                                                                  dropdownList: controller.sopPermitList,
-                                                                                  isValueSelected: controller.isSopPermitListSelected.value,
-                                                                                  selectedValue: controller.selectedSopPermit.value,
-                                                                                  onValueChanged: controller.onValueChanged,
-                                                                                ),
-                                                                              ),
-                                                                              // LoginCustomTextfield(),
-                                                                            ),
-                                                                          ],
-                                                                        ),
+                                                                        Text(
+                                                                            'TBT Type: '),
                                                                         SizedBox(
-                                                                          height:
-                                                                              40,
-                                                                        ),
-                                                                        Center(
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            children: [
-                                                                              Container(
-                                                                                  height: 30,
-                                                                                  child: CustomElevatedButton(
-                                                                                    backgroundColor: ColorValues.navyBlueColor,
-                                                                                    text: "View JSA",
-                                                                                    onPressed: () {
-                                                                                      // controller.createNewPermit();
-                                                                                      Get.dialog<void>(ViewJSADialog());
-                                                                                    },
-                                                                                  )),
-                                                                              SizedBox(
-                                                                                width: 10,
-                                                                              ),
-                                                                              Container(
-                                                                                  height: 30,
-                                                                                  child: CustomElevatedButton(
-                                                                                    backgroundColor: ColorValues.navyBlueColor,
-                                                                                    text: "View SOP",
-                                                                                    onPressed: () {
-                                                                                      Get.dialog<void>(ViewSOPDialog());
-                                                                                      // controller.createNewPermit();
-                                                                                    },
-                                                                                  )),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-
-                                                                        SizedBox(
-                                                                          height:
-                                                                              22,
-                                                                        ),
-
-                                                                        /// FILE UPLOAD WIDGET
-                                                                        Container(
-                                                                          height:
-                                                                              Get.height * 0.2,
                                                                           width:
-                                                                              Get.width,
-                                                                          child: Row(
-                                                                              //
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  flex: 2,
-                                                                                  child: FileUploadWidgetWithDropzone(),
-                                                                                ),
-                                                                                Dimens.boxWidth10,
-                                                                                Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
-                                                                              ]),
-                                                                        ),
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList: controller.jobTypeList,
+                                                                              isValueSelected: controller.isJobTypeListSelected.value,
+                                                                              selectedValue: controller.selectedJobType.value,
+                                                                              onValueChanged: controller.onValueChanged,
+                                                                            ),
+                                                                          ),
 
+                                                                          // LoginCustomTextfield(),
+                                                                        ),
                                                                         SizedBox(
-                                                                          height:
-                                                                              15,
+                                                                          width:
+                                                                              20,
                                                                         ),
-                                                                        // Padding(
-                                                                        //   padding: const EdgeInsets.only(left: 10, right: 10),
-                                                                        //   child: Row(
-                                                                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                                                                        //     children: [
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Conducted At Job-Site By:',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Text(
-                                                                        //             'Ramesh Singh',
-                                                                        //             style: Styles.black17,
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //       Spacer(),
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Date & Time',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Text(
-                                                                        //             '17:06:2022 09:30:00',
-                                                                        //             style: Styles.black17,
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //       Spacer(),
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Upload TBT Attendance Sheet',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Row(
-                                                                        //             // mainAxisAlignment: MainAxisAlignment.center,
-                                                                        //             children: [
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 width: 200,
-                                                                        //                 decoration: BoxDecoration(
-                                                                        //                   border: Border.all(
-                                                                        //                     color: Color.fromARGB(255, 227, 224, 224),
-                                                                        //                     width: 1,
-                                                                        //                   ),
-                                                                        //                   boxShadow: [
-                                                                        //                     BoxShadow(
-                                                                        //                       color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                        //                       spreadRadius: 2,
-                                                                        //                       blurRadius: 5,
-                                                                        //                       offset: Offset(0, 2),
-                                                                        //                     ),
-                                                                        //                   ],
-                                                                        //                 ),
-                                                                        //                 child: Padding(
-                                                                        //                   padding: const EdgeInsets.all(8.0),
-                                                                        //                   child: Align(
-                                                                        //                     alignment: Alignment.topLeft,
-                                                                        //                     child: Text(
-                                                                        //                       controller.fileName.value == ""
-                                                                        //                           ? 'Upload Photo'
-                                                                        //                           : controller.fileName.value,
-                                                                        //                       maxLines: 3,
-                                                                        //                       textAlign: TextAlign.center,
-                                                                        //                       style: Styles.greyLight14,
-                                                                        //                     ),
-                                                                        //                   ),
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //               Dimens.boxWidth5,
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 child: CustomElevatedButton(
-                                                                        //                   backgroundColor: ColorValues.appDarkBlueColor,
-                                                                        //                   text: "Browse",
-                                                                        //                   onPressed: () async {
-                                                                        //                     final result = await FilePicker.platform.pickFiles();
-                                                                        //                     if (result != null) {
-                                                                        //                       // for (var file in result.files) {
-                                                                        //                       controller.fileName.value = result.files.single.name;
-                                                                        //                       controller.fileBytes = result.files.single.bytes;
-                                                                        //                       //controller.filePath.value = file.;
-                                                                        //                       //  print({"filepathes", fileBytes});
-                                                                        //                       // }
-                                                                        //                     }
-                                                                        //                   },
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 child: CustomElevatedButton(
-                                                                        //                   backgroundColor: ColorValues.greenColor,
-                                                                        //                   text: 'Upload',
-                                                                        //                   onPressed: () {
-                                                                        //                     if (controller.fileName.value != "") {
-                                                                        //                       controller
-                                                                        //                           .browseFiles(
-                                                                        //                         fileBytes: controller.fileBytes,
-                                                                        //                       )
-                                                                        //                           .then((value) {
-                                                                        //                         controller.isSuccessDialog();
-
-                                                                        //                         // Fluttertoast.showToast(
-                                                                        //                         //     msg: "file upload  Successfully",
-                                                                        //                         //     fontSize: 16.0);
-                                                                        //                       });
-                                                                        //                     } else {
-                                                                        //                       Fluttertoast.showToast(
-                                                                        //                           msg: "Please Select file...", fontSize: 16.0);
-                                                                        //                     }
-
-                                                                        //                     //  controller.savePmMapping();
-                                                                        //                   },
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //             ],
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //     ],
-                                                                        //   ),
-                                                                        // ),
+                                                                        Text(
+                                                                            'SOP: '),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList: controller.sopPermitList,
+                                                                              isValueSelected: controller.isSopPermitListSelected.value,
+                                                                              selectedValue: controller.selectedSopPermit.value,
+                                                                              onValueChanged: controller.onValueChanged,
+                                                                            ),
+                                                                          ),
+                                                                          // LoginCustomTextfield(),
+                                                                        ),
                                                                       ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          40,
+                                                                    ),
+                                                                    Center(
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Container(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
+                                                                                backgroundColor: ColorValues.navyBlueColor,
+                                                                                text: "View JSA",
+                                                                                onPressed: () {
+                                                                                  // controller.createNewPermit();
+                                                                                  Get.dialog<void>(ViewJSADialog());
+                                                                                },
+                                                                              )),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                10,
+                                                                          ),
+                                                                          Container(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
+                                                                                backgroundColor: ColorValues.navyBlueColor,
+                                                                                text: "View SOP",
+                                                                                onPressed: () {
+                                                                                  Get.dialog<void>(ViewSOPDialog());
+                                                                                  // controller.createNewPermit();
+                                                                                },
+                                                                              )),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+
+                                                                    SizedBox(
+                                                                      height:
+                                                                          22,
+                                                                    ),
+
+                                                                    /// FILE UPLOAD WIDGET
+                                                                    Container(
+                                                                      height:
+                                                                          Get.height *
+                                                                              0.2,
+                                                                      width: Get
+                                                                          .width,
+                                                                      child: Row(
+                                                                          //
+                                                                          children: [
+                                                                            Expanded(
+                                                                              flex: 2,
+                                                                              child: FileUploadWidgetWithDropzone(),
+                                                                            ),
+                                                                            Dimens.boxWidth10,
+                                                                            Expanded(
+                                                                                flex: 8,
+                                                                                child: FileUploadDetailsWidgetWeb()),
+                                                                          ]),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
+                                                          ],
                                                         ),
                                                       ),
                                                       Dimens.boxHeight20,
@@ -3153,7 +3049,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     context)
                                                                 .size
                                                                 .width /
-                                                            1.25,
+                                                            1.3,
                                                         margin:
                                                             EdgeInsets.all(20),
                                                         decoration:
@@ -3186,7 +3082,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   Column(
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsets.only(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
                                                                             left:
                                                                                 10,
                                                                             right:
@@ -3498,138 +3395,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         ),
                                                       ),
 
-                                                      //  //Permit History
-
-                                                      // controller.historyList!.isEmpty
-                                                      //     ? Dimens.box0
-                                                      //     :
-                                                      //     controller.permitId != null
-                                                      //     ?Container(
-                                                      //         margin: Dimens.edgeInsets20,
-                                                      //         height: ((controller.historyList?.length ?? 0) * 50) + 125,
-                                                      //         decoration: BoxDecoration(
-                                                      //           border: Border.all(
-                                                      //             color: ColorValues.lightGreyColorWithOpacity35,
-                                                      //             width: 1,
-                                                      //           ),
-                                                      //           boxShadow: [
-                                                      //             BoxShadow(
-                                                      //               color: ColorValues.appBlueBackgroundColor,
-                                                      //               spreadRadius: 2,
-                                                      //               blurRadius: 5,
-                                                      //               offset: Offset(0, 2),
-                                                      //             ),
-                                                      //           ],
-                                                      //         ),
-                                                      //         child: Column(
-                                                      //           children: [
-                                                      //             Padding(
-                                                      //               padding: const EdgeInsets.all(10.0),
-                                                      //               child: Row(
-                                                      //                 children: [
-                                                      //                   Text(
-                                                      //                     "Permit History ",
-                                                      //                     style: Styles.blue700,
-                                                      //                   ),
-                                                      //                 ],
-                                                      //               ),
-                                                      //             ),
-                                                      //             Divider(
-                                                      //               color: ColorValues.greyLightColour,
-                                                      //             ),
-                                                      //             // Column(
-                                                      //             //   children: [
-                                                      //             //     Row(
-                                                      //             //       children: [
-                                                      //             //         Text(
-                                                      //             //             "Time Stamp"),
-                                                      //             //         Text(
-                                                      //             //             "Posted By"),
-                                                      //             //         Text("Comment"),
-                                                      //             //         Text(
-                                                      //             //             "Location"),
-                                                      //             //         Text("Status"),
-                                                      //             //       ],
-                                                      //             //     )
-                                                      //             //   ]..addAll([
-                                                      //             //       ...(controller
-                                                      //             //               .historyList?.value ??
-                                                      //             //           [])
-                                                      //             //     ].map((e) {
-                                                      //             //       return Row(
-                                                      //             //         children: [
-                                                      //             //           Text(
-                                                      //             //               "${e?.createdAt??''}"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.createdByName}"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.comment}"),
-                                                      //             //           Text(
-                                                      //             //               "--"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.status_name ??''}"),
-                                                      //             //         ],
-                                                      //             //       );
-                                                      //             //     })),
-                                                      //             // ),
-
-                                                      //             Expanded(
-                                                      //               child: DataTable2(
-                                                      //                 border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-                                                      //                 columns: [
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Time Stamp",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Posted By",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Comment",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Location",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Status",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                 ],
-                                                      //                 rows: List<DataRow>.generate(
-                                                      //                   controller.historyList?.length ?? 0,
-                                                      //                   (index) => DataRow(cells: [
-                                                      //                     DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
-                                                      //                     DataCell(Text('--')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
-                                                      //                   ]),
-                                                      //                 ),
-                                                      //               ),
-                                                      //             ),
-                                                      //           ],
-                                                      //         ),
-                                                      //       )
-                                                      //     :Dimens.box0,
-
                                                       ////  commented
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 17),
+                                                                .only(
+                                                                left: 28,
+                                                                right: 110),
                                                         child: Row(
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Remarks/Comments: '),
+                                                                    'Remarks/\nComments: '),
                                                             Expanded(
                                                               child:
                                                                   _buildWorkPermitCommentTextField_web(

@@ -209,6 +209,7 @@ class DetailsOfInjuredPerson {
       {this.incidents_id,
       this.person_id,
       this.person_type,
+      this.other_victim,
       this.age,
       this.sex,
       this.designation,
@@ -222,6 +223,7 @@ class DetailsOfInjuredPerson {
   int? incidents_id;
   String? person_id;
   int? person_type;
+  String? other_victim;
   int? age;
   int? sex;
   String? designation;
@@ -237,6 +239,7 @@ class DetailsOfInjuredPerson {
         incidents_id: json['incidents_id'],
         person_id: json['person_id'],
         person_type: json['person_type'],
+        other_victim: json['other_victim'],
         age: json['age'],
         sex: json['sex'],
         designation: json['designation'],
@@ -252,6 +255,7 @@ class DetailsOfInjuredPerson {
         "incidents_id": incidents_id,
         "person_id": person_id,
         "person_type": person_type,
+        "other_victim": other_victim,
         "age": age,
         "sex": sex,
         "designation": designation,
