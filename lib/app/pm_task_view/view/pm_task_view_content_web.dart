@@ -905,9 +905,14 @@ class PreventiveMaintenanceTaskViewContentWeb
                           backgroundColor: ColorValues.linktopermitColor,
                           text: "Return Mrs",
                           onPressed: () {
-                            Get.toNamed(Routes.mrsReturnScreen,
-                                arguments:
-                                    controller.pmtaskViewModel.value?.id ?? 0);
+                            controller.clearStoreTaskData();
+
+                            Get.toNamed(Routes.mrsReturnScreen, arguments: {
+                              "pmTaskId":
+                                  controller.pmtaskViewModel.value?.id ?? 0,
+                              "activity":
+                                  controller.pmtaskViewModel.value?.plan_title
+                            });
                           },
                         ),
                       )

@@ -60,6 +60,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 
+import '../../app/job_card_details/views/widgets/approve_jc_dailog.dart';
+import '../../app/job_card_details/views/widgets/reject_jc_dialog.dart';
 import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -3438,6 +3440,13 @@ class ConnectHelper {
       },
     );
     print('JobCard Response $responseModel');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ApproveJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb carry forward approved",
+    ));
     return responseModel;
   }
 
@@ -3457,6 +3466,74 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb carry forward reject",
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> approvecloseJob({
+    required String auth,
+    approveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/ApproveJC',
+      Request.put,
+      approveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('JobCard Response $responseModel');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    List<Map<String, dynamic>> parsedList =
+        List<Map<String, dynamic>>.from(parsedJson);
+
+    // Accessing the first item in the list
+    Map<String, dynamic> firstItem = parsedList.isNotEmpty ? parsedList[0] : {};
+
+    // Accessing 'id' key which holds a list
+    List<int> idList = List<int>.from(firstItem['id'] ?? []);
+
+    Get.dialog<void>(ApproveJcJobDialog(
+      message: firstItem['message'],
+      jobId: idList, // parsedJson['id'],
+      tittle: "JOb close approved",
+    ));
+    return responseModel;
+  }
+
+//
+  Future<ResponseModel> rejectcloseJob({
+    required String auth,
+    rejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/RejectJC',
+      Request.put,
+      rejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb close reject",
+    ));
     return responseModel;
   }
 

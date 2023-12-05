@@ -116,6 +116,20 @@ class JobCardDetailsUsecase {
   }) async =>
       await repository.rejectJobCard(
           rejectJsonString: rejectJsonString, isLoading: isLoading);
+  Future<bool> approvecloseJob({
+    approveJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.approvecloseJob(
+          approveJsonString: approveJsonString, isLoading: isLoading);
+
+  ///
+  Future<bool> rejectcloseJob({
+    rejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectcloseJob(
+          rejectJsonString: rejectJsonString, isLoading: isLoading);
 
   void saveValue({String? jobCardId}) async =>
       repository.saveValue(LocalKeys.jobCardId, jobCardId);
