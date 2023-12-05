@@ -291,7 +291,7 @@ class JobCardDetailsController extends GetxController {
 
         if (permit != null) {
           permitId = permit.permitId;
-          getPermitDetails();
+          // getPermitDetails();
         }
 
         permitDetails.value = {
