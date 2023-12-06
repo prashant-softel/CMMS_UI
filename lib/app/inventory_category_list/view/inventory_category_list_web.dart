@@ -61,7 +61,7 @@ class InventoryCategoryListContentWeb
                       Get.back();
                     },
                     child: Text(
-                      " / INVENTORY CATEGORY LIST ",
+                      " / ASSETS CATEGORY LIST ",
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -99,7 +99,7 @@ class InventoryCategoryListContentWeb
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Create Inventory Category",
+                                      "Create Assets Category",
                                       style: Styles.blackBold16,
                                     ),
                                     SizedBox(
@@ -114,9 +114,9 @@ class InventoryCategoryListContentWeb
                                               controller.isFormInvalid == false
                                                   ? controller.selectedItem ==
                                                           null
-                                                      ? "Create Inventory Category Successfully in the List."
-                                                      : "Create Inventory Category updated Successfully in the List."
-                                                  : "Create Inventory Category is not added.",
+                                                      ? "Create Assets Category Successfully in the List."
+                                                      : "Create Assets Category updated Successfully in the List."
+                                                  : "Create Assets Category is not added.",
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Color.fromARGB(
@@ -389,7 +389,7 @@ class InventoryCategoryListContentWeb
                                                     .issuccessCreatechecklist();
                                             });
                                           },
-                                          text: 'Create  Category')
+                                          text: 'Create Assets')
                                       : CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
@@ -432,7 +432,7 @@ class InventoryCategoryListContentWeb
                               child: Row(
                                 children: [
                                   Text(
-                                    "Inventory Category List",
+                                    "Assets Category List",
                                     style: Styles.blackBold16,
                                   ),
                                   Spacer(),
