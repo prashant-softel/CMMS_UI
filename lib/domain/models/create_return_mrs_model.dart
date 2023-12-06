@@ -7,25 +7,37 @@ class CreateReturnMrsModel {
 
   int? whereUsedType;
   int? whereUsedTypeId;
+  int? from_actor_type_id;
+  int? from_actor_id;
+  int? to_actor_type_id;
+  int? to_actor_id;
+
   List<CmmsItem>? cmmrsItems;
 
   CreateReturnMrsModel(
       {this.ID,
-      this.activity,
       this.facility_ID,
       this.setAsTemplate,
       this.cmmrsItems,
       this.remarks,
       this.whereUsedType,
-      this.whereUsedTypeId});
+      this.whereUsedTypeId,
+      this.from_actor_id,
+      this.from_actor_type_id,
+      this.to_actor_id,
+      this.to_actor_type_id,
+      this.activity});
 
   factory CreateReturnMrsModel.fromJson(Map<String, dynamic> json) =>
       CreateReturnMrsModel(
         ID: json["ID"],
         facility_ID: json["facility_ID"],
+        from_actor_id: json["from_actor_id"],
+        to_actor_id: json["to_actor_id"],
+        from_actor_type_id: json["from_actor_type_id"],
+        to_actor_type_id: json["to_actor_type_id"],
         remarks: json["remarks"],
         setAsTemplate: json["setAsTemplate"],
-        activity: json["activity"],
         whereUsedType: json["whereUsedType"],
         whereUsedTypeId: json["whereUsedTypeId"],
         cmmrsItems: List<CmmsItem>.from(
@@ -34,10 +46,13 @@ class CreateReturnMrsModel {
 
   Map<String, dynamic> toJson() => {
         "ID": ID,
+        "to_actor_type_id": to_actor_type_id,
+        "from_actor_type_id": from_actor_type_id,
+        "to_actor_id": to_actor_id,
+        "from_actor_id": from_actor_id,
         "facility_ID": facility_ID,
         "whereUsedTypeId": whereUsedTypeId,
         "whereUsedType": whereUsedType,
-        "activity": activity,
         "setAsTemplate": setAsTemplate,
         "remarks": remarks,
         "cmmrsItems": List<dynamic>.from(cmmrsItems!.map((x) => x.toJson())),
