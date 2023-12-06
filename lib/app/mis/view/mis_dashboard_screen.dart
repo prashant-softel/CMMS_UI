@@ -53,156 +53,62 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                 //
                 HomeDrawer(),
             Expanded(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
-                      Obx(
-                        () => //
-                            Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Card(
-                              shadowColor: ColorValues.greyColor,
-                              elevation: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    value: controller.selectedFacility.value,
-                                    icon: const Icon(
-                                        Icons.keyboard_arrow_down_outlined),
-                                    elevation: 7,
-                                    style: const TextStyle(color: Colors.black),
-                                    onChanged: (String? selectedValue) {
-                                      controller.isFacilitySelected.value =
-                                          true;
-                                      controller.selectedFacility.value =
-                                          selectedValue ?? '';
-                                    },
-                                    items: controller.facilityList
-                                        .map<DropdownMenuItem<String>>(
-                                            (facility) {
-                                      return DropdownMenuItem<String>(
-                                        value: facility?.name ?? '',
-                                        child: Text(facility?.name ?? ''),
-                                      );
-                                    }).toList(),
+              child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 40,
+                      ),
+                      if (Responsive.isMobile(context) ||
+                          Responsive.isTablet(context))
+                        Obx(
+                          () => //
+                              Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Card(
+                                shadowColor: ColorValues.greyColor,
+                                elevation: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      value: controller.selectedFacility.value,
+                                      icon: const Icon(
+                                          Icons.keyboard_arrow_down_outlined),
+                                      elevation: 7,
+                                      style:
+                                          const TextStyle(color: Colors.black),
+                                      onChanged: (String? selectedValue) {
+                                        controller.isFacilitySelected.value =
+                                            true;
+                                        controller.selectedFacility.value =
+                                            selectedValue ?? '';
+                                      },
+                                      items: controller.facilityList
+                                          .map<DropdownMenuItem<String>>(
+                                              (facility) {
+                                        return DropdownMenuItem<String>(
+                                          value: facility?.name ?? '',
+                                          child: Text(facility?.name ?? ''),
+                                        );
+                                      }).toList(),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "MIS",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        createContentTile(
-                          title: "List Of observation",
-                          onTap: () {
-                            controller.goToJobListScreen();
-                          },
-                        ),
-                        createContentTile(
-                          title: 'Create observation ',
-                          onTap: () {
-                            controller.goToCreateObservation();
-                          },
-                        ),
-                        // createContentTile(
-                        //   title: 'CheckList Inspection',
-                        //   onTap: () {
-                        //     controller.goToCheckListOfObservation();
-                        //   },
-                        // ),
-                        // createContentTile(
-                        //     title: 'Statutory',
-                        //     onTap: () {
-                        //       controller.goToStatutoryScreen();
-                        //     }),
-                        // createContentTile(
-                        //     title: 'Waste Data',
-                        //     onTap: () {
-                        //       controller.goToWasteDataScreen();
-                        //     })
-                      ],
-                    ),
-                    if (Responsive.isDesktop(context))
-
-                      /// GRID TILES
-
-                      /// GRID TILES
-                      GridView.count(
-                        shrinkWrap: true,
-                        primary: false,
-                        padding: Dimens.edgeInsets15,
-                        crossAxisSpacing: 70,
-                        mainAxisSpacing: 6,
-                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                        childAspectRatio: Responsive.isMobile(context)
-                            ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
-                        children: <Widget>[
-                          createContentTile(
-                              title: "Checklist Plan",
-                              onTap: () {
-                                controller.goToPlanListScreen();
-                              }),
-                          createContentTile(
-                              title: 'MIS Task',
-                              onTap: () {
-                                controller.goToMisTaskScreen();
-                              })
-                        ],
-                      ),
-                    if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Row(
                           children: [
                             Text(
-                              "Checklist",
+                              "MIS",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
@@ -223,149 +129,301 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           ],
                         ),
                       ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        createContentTile(
-                            title: "Check List",
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          createContentTile(
+                            title: "List Of observation",
                             onTap: () {
-                              controller.createChecklist();
-                            }),
-                        //  if (Responsive.isDesktop(context))
-                        createContentTile(
-                            title: "Check Point",
+                              controller.goToJobListScreen();
+                            },
+                          ),
+                          createContentTile(
+                            title: 'Create observation ',
                             onTap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
-                              controller.checkPoint();
-                            }),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Other",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
+                              controller.goToCreateObservation();
+                            },
                           ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
+                          // createContentTile(
+                          //   title: 'CheckList Inspection',
+                          //   onTap: () {
+                          //     controller.goToCheckListOfObservation();
+                          //   },
+                          // ),
+                          // createContentTile(
+                          //     title: 'Statutory',
+                          //     onTap: () {
+                          //       controller.goToStatutoryScreen();
+                          //     }),
+                          // createContentTile(
+                          //     title: 'Waste Data',
+                          //     onTap: () {
+                          //       controller.goToWasteDataScreen();
+                          //     })
                         ],
                       ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        // createContentTile(
-                        //   title: 'CheckList Inspection',
-                        //   onTap: () {
-                        //     controller.goToCheckListOfObservation();
-                        //   },
-                        // ),
-                        createContentTile(
-                            title: 'Statutory',
-                            onTap: () {
-                              controller.goToStatutoryScreen();
-                            }),
-                        createContentTile(
-                            title: 'Waste Data',
-                            onTap: () {
-                              controller.goToWasteDataScreen();
-                            })
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Master",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
+                      if (Responsive.isDesktop(context))
+
+                        /// GRID TILES
+
+                        /// GRID TILES
+                        GridView.count(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: Dimens.edgeInsets15,
+                          crossAxisSpacing: 70,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                          childAspectRatio: Responsive.isMobile(context)
+                              ? (itemWidth / itemHeight)
+                              : (itemWidth / itemHeightWeb),
+                          children: <Widget>[
+                            createContentTile(
+                                title: "Checklist Plan",
+                                onTap: () {
+                                  controller.goToPlanListScreen();
+                                }),
+                            createContentTile(
+                                title: 'MIS Task',
+                                onTap: () {
+                                  controller.goToMisTaskScreen();
+                                })
+                          ],
+                        ),
+                      if (Responsive.isDesktop(context))
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                "MIS Checklist",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 159, 156, 156),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      10), // Add some space between the text and the line
+                              Expanded(
+                                child: Divider(
+                                  color: Colors
+                                      .grey, // Customize the color of the line if needed
+                                  height:
+                                      1, // Adjust the height of the line if needed
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
+                        ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: const EdgeInsets.all(16),
+                        crossAxisSpacing: 40,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          createContentTile(
+                              title: "MIS Checklist",
+                              onTap: () {
+                                controller.createChecklist();
+                              }),
+                          //  if (Responsive.isDesktop(context))
+                          createContentTile(
+                              title: "Check Point",
+                              onTap: () {
+                                // Get.toNamed(
+                                //   Routes.preventive_checkPoint,
+                                // );
+                                controller.checkPoint();
+                              }),
                         ],
                       ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        OnHover(builder: (((isHovered) {
-                          return createContentTile(
-                              title: "Type of observation",
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Statutory",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                    1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          // createContentTile(
+                          //   title: 'CheckList Inspection',
+                          //   onTap: () {
+                          //     controller.goToCheckListOfObservation();
+                          //   },
+                          // ),
+                          createContentTile(
+                              title: 'Statutory Report',
                               onTap: () {
-                                controller.goToTypeOfObservation();
-                              });
-                        }))),
-                        OnHover(builder: (((isHovered) {
-                          return createContentTile(
-                              title: "Source of observation",
+                                controller.goToStatutoryScreen();
+                              }),
+                          createContentTile(
+                              title: 'Statutory List',
                               onTap: () {
-                                controller.goToSourceOfObservation();
-                              });
-                        }))),
-                        OnHover(builder: (((isHovered) {
-                          return createContentTile(
-                              title: "Risk Type",
+                                controller.goToWasteDataScreen();
+                              })
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Waste data",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                    1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          // createContentTile(
+                          //   title: 'CheckList Inspection',
+                          //   onTap: () {
+                          //     controller.goToCheckListOfObservation();
+                          //   },
+                          // ),
+                          createContentTile(
+                              title: 'Waste Date Report',
                               onTap: () {
-                                controller.goToRiskType();
-                              });
-                        }))),
-                      ],
-                    ),
-                  ]),
+                                // controller.goToStatutoryScreen();
+                              }),
+                          createContentTile(
+                              title: 'Waste Data',
+                              onTap: () {
+                                controller.goToWasteDataScreen();
+                              })
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Master",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                    1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          OnHover(builder: (((isHovered) {
+                            return createContentTile(
+                                title: "Type of observation",
+                                onTap: () {
+                                  controller.goToTypeOfObservation();
+                                });
+                          }))),
+                          OnHover(builder: (((isHovered) {
+                            return createContentTile(
+                                title: "Source of observation",
+                                onTap: () {
+                                  controller.goToSourceOfObservation();
+                                });
+                          }))),
+                          OnHover(builder: (((isHovered) {
+                            return createContentTile(
+                                title: "Risk Type",
+                                onTap: () {
+                                  controller.goToRiskType();
+                                });
+                          }))),
+                        ],
+                      ),
+                    ]),
+              ),
             ),
           ],
         ),

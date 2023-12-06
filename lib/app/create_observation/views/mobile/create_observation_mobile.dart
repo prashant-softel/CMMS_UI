@@ -23,37 +23,6 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Dimens.boxHeight10,
-                      CustomRichText(title: 'Contractor Name'),
-                      Dimens.boxHeight10,
-                      SizedBox(
-                        height: 45,
-                        child: Obx(
-                          () => DropdownWebStock(
-                            width: MediaQuery.of(context).size.width,
-                            dropdownList: controller.ownerList,
-                            isValueSelected:
-                                controller.isSelectedBusinessType.value,
-                            selectedValue:
-                                controller.selectedBusinessType.value,
-                            onValueChanged: controller.onValueChanged,
-                          ),
-                        ),
-                      ),
-                      Dimens.boxHeight10,
-                      CustomRichText(title: 'Location of Observation'),
-                      Dimens.boxHeight10,
-                      TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter Location of Observation',
-                          alignLabelWithHint: true,
-                        ),
-                      ),
-                      Dimens.boxHeight10,
                       CustomRichText(title: 'Type of Observation'),
                       Dimens.boxHeight10,
                       SizedBox(
@@ -70,6 +39,40 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           ),
                         ),
                       ),
+
+                      Dimens.boxHeight10,
+                      CustomRichText(title: 'Location of Observation'),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter Location of Observation',
+                          alignLabelWithHint: true,
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+
+                      CustomRichText(title: 'Contractor Name'),
+                      Dimens.boxHeight10,
+                      SizedBox(
+                        height: 45,
+                        child: Obx(
+                          () => DropdownWebStock(
+                            width: MediaQuery.of(context).size.width,
+                            dropdownList: controller.ownerList,
+                            isValueSelected:
+                                controller.isSelectedBusinessType.value,
+                            selectedValue:
+                                controller.selectedBusinessType.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
+                        ),
+                      ),
+
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Source of Observation'),
                       Dimens.boxHeight10,

@@ -398,7 +398,7 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                           child: ScrollableTableView(
                                             columns: [
                                               "Id",
-                                              "Observation Name ",
+                                              "Risk Name ",
                                               "Description ",
                                               "Action"
                                             ].map((column) {
@@ -439,7 +439,7 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                                 controller.paginationController,
                                             columns: [
                                               "Id",
-                                              "Observation Name ",
+                                              "Risk Name ",
                                               "Description ",
                                               // "Menu Image ",
 
