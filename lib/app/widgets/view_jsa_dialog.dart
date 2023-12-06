@@ -59,15 +59,19 @@ class ViewJSADialog extends GetView {
                             height: 70,
                             width: 150,
                             child: InkWell(
-                               onTap: () async {
-                                final url = '${_controller.jsaData}';
-                                print('JSAUrl:$url');
-                                if (await canLaunch(url)) {
-                                await launch(url);
-                                 }
+                                onTap: () async {
+                                  // final url = '${_controller.jsaData}';
+                                  final url =
+                                      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+                                  print('JSAUrl:$url');
+                                  if (await canLaunch(url)) {
+                                    await launch(url);
+                                  }
                                 },
-                              child: Image.asset('assets/files/pdf2.png'))),
-                                   SizedBox(height: 10,),
+                                child: Image.asset('assets/files/pdf2.png'))),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text('Click on Icon to View Document !!'),
                         // Text.rich(
                         //   TextSpan(
@@ -95,9 +99,8 @@ class ViewJSADialog extends GetView {
                         //   ),
                         // ),
 
-                           
                         /// FILE UPLOAD WIDGET
-                        
+
                         // Container(
                         //  height: Get.height * 0.35,
                         //   width: Get.width,
