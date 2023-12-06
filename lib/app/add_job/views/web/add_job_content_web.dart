@@ -678,6 +678,10 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                   ),
                                                   buttonIcon: Icon(
                                                       Icons.arrow_drop_down),
+                                                  initialValue: controller
+                                                      .toolsRequiredToWorkTypeList
+                                                      .toList(), // Select all items initially
+
                                                   items: controller
                                                       .toolsRequiredToWorkTypeList
                                                       .map((e) => MultiSelectItem(

@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomRichText extends StatelessWidget {
   String title;
   int? maxline;
