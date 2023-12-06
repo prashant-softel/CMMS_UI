@@ -65,7 +65,33 @@ class StatutoryMobile extends GetView<StatutoryController> {
                           color: Colors.black,
                         ),
                         decoration: InputDecoration(
-                          hintText: 'Select The Date',
+                          hintText: 'Select The received Date',
+                          alignLabelWithHint: true,
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              // Handle the tap on the suffix icon (e.g., show a date picker).
+                              // Add your logic here.
+                            },
+                            child: Icon(
+                              Icons.calendar_today,
+                              color: Colors
+                                  .grey, // You can customize the color as needed.
+                            ),
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                      Dimens.boxHeight10,
+                      CustomRichText(title: 'Date of Expiry'),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Select The expiry Date',
                           alignLabelWithHint: true,
                           suffixIcon: GestureDetector(
                             onTap: () {
@@ -84,6 +110,7 @@ class StatutoryMobile extends GetView<StatutoryController> {
                       CustomRichText(title: 'Validity (In months)'),
                       Dimens.boxHeight10,
                       TextField(
+                        readOnly: true,
                         style: TextStyle(
                           fontSize: 15.0,
                           height: 0.1,

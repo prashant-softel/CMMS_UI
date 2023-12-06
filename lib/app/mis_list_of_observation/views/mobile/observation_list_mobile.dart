@@ -79,6 +79,10 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
+                                          'Type of Observation:',
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Text(
                                           'Month Of Observation : ',
                                           style: TextStyle(color: Colors.grey),
                                         ),
@@ -94,10 +98,7 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                           'Location of Observation:',
                                           style: TextStyle(color: Colors.grey),
                                         ),
-                                        Text(
-                                          'Type of Observation:',
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
+
                                         Text(
                                           'Source of Observation:',
                                           style: TextStyle(color: Colors.grey),
@@ -134,6 +135,13 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
+                                        "Unsafe Act",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      Text(
                                         "April",
                                         style: TextStyle(
                                           fontSize: 14,
@@ -156,13 +164,6 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                       ),
                                       Text(
                                         "UP",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Unsafe Act",
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
