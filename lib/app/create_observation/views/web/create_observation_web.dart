@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,7 +41,7 @@ class CreateObservationWeb extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.misDashboard);
                   },
                   child: Text(" / MIS", style: Styles.greyMediumLight12),
                 ),
@@ -48,7 +49,8 @@ class CreateObservationWeb extends StatelessWidget {
               ],
             ),
           ),
-          Center(child: Text("CREATE OBSERVATION"))
+          Center(
+              child: Text("THIS CREATE OBSERVATION SCREEN ARE IN MOBILE VIEW "))
         ],
       ),
     );

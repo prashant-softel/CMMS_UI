@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,14 +41,14 @@ class StatutoryWeb extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.misDashboard);
                   },
                   child: Text(" / MIS", style: Styles.greyMediumLight12),
                 ),
               ],
             ),
           ),
-          Center(child: Text("STATUTORY"))
+          Center(child: Text(" THIS STATUTORY SCREEN ARE IN MOBILE VIEW "))
         ],
       ),
     );
