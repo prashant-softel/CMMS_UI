@@ -18,6 +18,8 @@ class HomeUsecase {
     return await _repository.generateToken();
   }
 
+  void clearValue() async => _repository.clearData(LocalKeys.userDetailId);
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,

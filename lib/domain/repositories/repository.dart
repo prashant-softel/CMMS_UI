@@ -8920,12 +8920,8 @@ class Repository {
     }
   }
 
-  Future<List<EmployeeStockReportListModel>?> getEmployeeStockReportList(
-      int? facilityId,
-      bool? isLoading,
-      int? userId,
-      dynamic startDate,
-      dynamic endDate) async {
+  Future<List<PlantStockListModel>?> getEmployeeStockReportList(int? facilityId,
+      bool? isLoading, int? userId, dynamic startDate, dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -8938,16 +8934,15 @@ class Repository {
           endDate: endDate);
 
       if (!res.hasError) {
-        final jsonEmployeeStockReportListModelModels = jsonDecode(res.data);
-        print(res.data);
-        final List<EmployeeStockReportListModel>
-            _EmployeeStockReportListModelList =
-            jsonEmployeeStockReportListModelModels
-                .map<EmployeeStockReportListModel>((m) =>
-                    EmployeeStockReportListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
+        final jsonPlantStockListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PlantStockListModel> _plantStockListModels =
+            jsonPlantStockListModels
+                .map<PlantStockListModel>((m) =>
+                    PlantStockListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
-        return _EmployeeStockReportListModelList;
+
+        return _plantStockListModels;
       } //
       else {
         Utility.showDialog(

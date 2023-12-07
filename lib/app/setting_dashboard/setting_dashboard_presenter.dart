@@ -6,4 +6,5 @@ class SettingDashboardPresenter {
   SettingDashboardUsecase settingDashboardUsecase;
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await settingDashboardUsecase.getFacilityList();
+  void clearValue() async => settingDashboardUsecase.clearValue();
 }

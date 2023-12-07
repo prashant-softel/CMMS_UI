@@ -139,10 +139,7 @@ class SettingDashboardScreen extends GetView<SettingDashboardController> {
                         _settingList(
                             tittle: "Profile",
                             ontap: () {
-                              final _flutterSecureStorage =
-                                  const FlutterSecureStorage();
-
-                              _flutterSecureStorage.delete(key: "userId");
+                              controller.clearStoreData();
                               Get.toNamed(Routes.profile, arguments: {
                                 'userId': varUserAccessModel.value.user_id
                               });

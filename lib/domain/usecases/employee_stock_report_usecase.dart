@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_employee_stock_report_model.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/user_list_model.dart';
@@ -16,7 +17,7 @@ class EmployeeStockReportUsecase {
         facilityId,
         isLoading,
       );
-  Future<List<EmployeeStockReportListModel>?> getEmployeeStockReportList(
+  Future<List<PlantStockListModel>?> getEmployeeStockReportList(
           {int? facilityId,
           bool? isLoading,
           int? userId,

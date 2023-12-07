@@ -60,8 +60,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
   RxString ptwFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "PM Plan Id": true,
-    "PM Plan Title": true,
+    "PM Task Id": true,
+    "PM Task Title": true,
     "Last Done Date": true,
     "Due Date": true,
     "Done Date": true,
@@ -72,8 +72,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
   Rx<int> pmTaskId = 0.obs;
 
   final Map<String, double> columnwidth = {
-    "PM Plan Id": 150,
-    "PM Plan Title": 300,
+    "PM Task Id": 150,
+    "PM Task Title": 300,
     "Last Done Date": 200,
     "Due Date": 200,
     "Done Date": 200,
@@ -92,8 +92,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "PM Plan Id": idFilterText,
-      "PM Plan Title": titleFilterText,
+      "PM Task Id": idFilterText,
+      "PM Task Title": titleFilterText,
       "Last Done Date": lastDoneDateFilterText,
       "Due Date": dueDateFilterText,
       "Done Date": doneDateFilterText,
