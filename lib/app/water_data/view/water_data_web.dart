@@ -308,17 +308,92 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                       rows: [
                                         [
                                           "0001",
-                                          "Checklist001",
-                                          "S1234590",
-                                          "2023-03-26 12:30",
-                                          "Weekly",
-                                          "",
-                                          "",
-                                          "",
-                                          "",
-                                          "",
-                                          "",
-                                          "",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
+                                          "Action",
+                                        ],
+                                        [
+                                          "0001",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
+                                          "Action",
+                                        ],
+                                        [
+                                          "0001",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
+                                          "Action",
+                                        ],
+                                        [
+                                          "0001",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
+                                          "Action",
+                                        ],
+                                        [
+                                          "0001",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
+                                          "Action",
+                                        ],
+                                        [
+                                          "0001",
+                                          "200",
+                                          "34590",
+                                          "20",
+                                          "10",
+                                          "40",
+                                          "400",
+                                          "435",
+                                          "453",
+                                          '546',
+                                          "6546",
+                                          "76",
                                           "Action",
                                         ],
                                       ].map((record) {
@@ -366,23 +441,23 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                           // }
                                                         },
                                                       ),
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .appGreenColor,
-                                                        icon: Icons.check,
-                                                        message:
-                                                            'Approve/Reject',
-                                                        onPress: () {
-                                                          // int id =
-                                                          //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                                          // if (id != 0) {
-                                                          //   Get.toNamed(
-                                                          //     Routes.viewMcPlaning,
-                                                          //     arguments: {'id': id, "type": 1},
-                                                          //   );
-                                                          // }
-                                                        },
-                                                      ),
+                                                      // TableActionButton(
+                                                      //   color: ColorValues
+                                                      //       .appGreenColor,
+                                                      //   icon: Icons.check,
+                                                      //   message:
+                                                      //       'Approve/Reject',
+                                                      //   onPress: () {
+                                                      //     // int id =
+                                                      //     //     AuditPlanPlanningListDetails?.planId ?? 0;
+                                                      //     // if (id != 0) {
+                                                      //     //   Get.toNamed(
+                                                      //     //     Routes.viewMcPlaning,
+                                                      //     //     arguments: {'id': id, "type": 1},
+                                                      //     //   );
+                                                      //     // }
+                                                      //   },
+                                                      // ),
                                                     ])
                                                   : value == "0001"
                                                       ? Column(
@@ -394,32 +469,32 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                               value,
                                                             ),
                                                             Dimens.boxHeight10,
-                                                            Align(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              child: Container(
-                                                                padding: Dimens
-                                                                    .edgeInsets8_2_8_2,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: ColorValues
-                                                                      .addNewColor,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4),
-                                                                ),
-                                                                child: Text(
-                                                                  'Schedule',
-                                                                  style: Styles
-                                                                      .white10
-                                                                      .copyWith(
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
+                                                            // Align(
+                                                            //   alignment: Alignment
+                                                            //       .centerRight,
+                                                            //   child: Container(
+                                                            //     padding: Dimens
+                                                            //         .edgeInsets8_2_8_2,
+                                                            //     decoration:
+                                                            //         BoxDecoration(
+                                                            //       color: ColorValues
+                                                            //           .addNewColor,
+                                                            //       borderRadius:
+                                                            //           BorderRadius
+                                                            //               .circular(
+                                                            //                   4),
+                                                            //     ),
+                                                            //     child: Text(
+                                                            //       '',
+                                                            //       style: Styles
+                                                            //           .white10
+                                                            //           .copyWith(
+                                                            //         color: Colors
+                                                            //             .white,
+                                                            //       ),
+                                                            //     ),
+                                                            //   ),
+                                                            // ),
                                                           ],
                                                         )
                                                       : Text(value),
@@ -430,55 +505,6 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                     ),
                                   ),
                                 )
-
-                                // controller.auditPlanList.isEmpty
-                                //     ? Center(child: Text('No data'))
-                                //     : Expanded(
-                                //         child: ValueListenableBuilder(
-                                //             valueListenable:
-                                //                 controller.columnVisibility,
-                                //             builder: (context, value, child) {
-                                //               final dataSource =
-                                //                   ChecklistMisPlanListDataSource(
-                                //                       controller);
-
-                                //               return PaginatedDataTable2(
-                                //                 columnSpacing: 10,
-                                //                 dataRowHeight: 70,
-                                //                 source:
-                                //                     dataSource, // Custom DataSource class
-                                //                 headingRowHeight:
-                                //                     Get.height * 0.12,
-                                //                 minWidth: Get.width * 1.2,
-                                //                 showCheckboxColumn: false,
-                                //                 rowsPerPage:
-                                //                     10, // Number of rows per page
-                                //                 availableRowsPerPage: [
-                                //                   10,
-                                //                   20,
-                                //                   30,
-                                //                   50
-                                //                 ],
-                                //                 columns: [
-                                //                   for (var entry
-                                //                       in value.entries)
-                                //                     if (entry.value)
-                                //                       buildDataColumn(
-                                //                         entry.key,
-                                //                         controller.filterText[
-                                //                             entry.key]!,
-                                //                         controller.columnwidth[
-                                //                             entry.key],
-                                //                       ),
-                                //                   buildDataColumn(
-                                //                     'Actions',
-                                //                     controller.planIdFilterText,
-                                //                     150,
-                                //                   ),
-                                //                 ],
-                                //               );
-                                //             }),
-                                //       ),
                               ],
                             ),
                           ),
