@@ -296,15 +296,15 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           //   },
                           // ),
                           createContentTile(
+                              title: 'Statutory List',
+                              onTap: () {
+                                // controller.goToWasteDataScreen();
+                              }),
+                          createContentTile(
                               title: 'Statutory Report',
                               onTap: () {
                                 controller.goToStatutoryScreen();
                               }),
-                          createContentTile(
-                              title: 'Statutory List',
-                              onTap: () {
-                                controller.goToWasteDataScreen();
-                              })
                         ],
                       ),
                       Container(
@@ -351,15 +351,15 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           //   },
                           // ),
                           createContentTile(
-                              title: 'Waste Date Report',
+                              title: 'Waste Data List',
                               onTap: () {
-                                // controller.goToStatutoryScreen();
+                                // controller.goToWasteDataScreen();
                               }),
                           createContentTile(
-                              title: 'Waste Data',
+                              title: 'Waste Data Report',
                               onTap: () {
                                 controller.goToWasteDataScreen();
-                              })
+                              }),
                         ],
                       ),
                       Container(

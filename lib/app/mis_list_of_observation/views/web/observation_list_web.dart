@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,7 @@ class ObservationListWeb extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.misDashboard);
                   },
                   child: Text(" / MIS", style: Styles.greyMediumLight12),
                 ),
@@ -52,7 +53,7 @@ class ObservationListWeb extends StatelessWidget {
               ],
             ),
           ),
-          Center(child: Text("MIS"))
+          Center(child: Text("THIS SCREEN ARE IN MOBILE VIEW "))
         ],
       ),
     );
