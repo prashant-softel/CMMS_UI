@@ -138,30 +138,10 @@ class CreateMrsReturnController extends GetxController {
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,
-        whereUsedTypeId: whereUsedTypeId.value,
+        // whereUsedTypeId: whereUsedTypeId.value,to_actor_id: ,to_actor_type_id: ,from_actor_type_id: ,from_actor_id: ,
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();
-    // var createReturnMrsJsonString = {
-    //   "ID": 0,
-    //   "facility_ID": 45,
-    //   "setAsTemplate": "T140",
-    //   "whereUsedType": 1,
-    //   "whereUsedTypeId": 9999,
-    //   "remarks": "Testing on live",
-    //   "activity": "return activity",
-    //   "cmmrsItems": [
-    //     {
-    //       "asset_item_ID": 12,
-    //       "approval_required": 1,
-    //       "return_remarks": "Test remarks",
-    //       "requested_qty": 99,
-    //       "issued_qty": 65,
-    //       "returned_qty": 10,
-    //       "is_faulty": 0
-    //     }
-    //   ]
-    // };
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});
     Map<String, dynamic>? responseCreateReturnMrs =

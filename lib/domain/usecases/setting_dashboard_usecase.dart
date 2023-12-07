@@ -9,4 +9,5 @@ class SettingDashboardUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+  void clearValue() async => _repository.clearData(LocalKeys.userDetailId);
 }

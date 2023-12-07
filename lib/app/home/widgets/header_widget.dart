@@ -136,11 +136,8 @@ class HeaderWidget extends GetView<HomeController> {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            final _flutterSecureStorage =
-                                                const FlutterSecureStorage();
+                                            controller.clearStoreData();
 
-                                            _flutterSecureStorage.delete(
-                                                key: "userId");
                                             Get.toNamed(Routes.profile,
                                                 arguments: {
                                                   'userId': varUserAccessModel

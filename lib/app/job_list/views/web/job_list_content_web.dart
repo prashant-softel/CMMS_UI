@@ -418,7 +418,7 @@ class JobDataSource extends DataTableSource {
       cells: [
         DataCell(
           Text(
-            '${jobDetails?.id ?? ''}',
+            'JOB${jobDetails?.id ?? ''}',
           ),
         ),
         DataCell(

@@ -118,6 +118,10 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  void clearStoreData() {
+    homePresenter.clearValue();
+  }
+
   Future<void> getBlocksList(int _facilityId) async {
     blocksList.value = <BlockModel>[];
     final _blockList =

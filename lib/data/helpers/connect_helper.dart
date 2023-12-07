@@ -6267,7 +6267,9 @@ class ConnectHelper {
           dynamic startDate,
           dynamic endDate}) async =>
       await apiWrapper.makeRequest(
-        'SMReports/GetEmployeeStockReport?facility_id=${facilityId}&Emp_id=${userId}&StartDate=${endDate}&EndDate=${startDate}',
+        'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=5&actorID=$userId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=',
+
+        // 'SMReports/GetEmployeeStockReport?facility_id=${facilityId}&Emp_id=${userId}&StartDate=${endDate}&EndDate=${startDate}',
         Request.get,
         null,
         isLoading ?? false,

@@ -415,8 +415,8 @@ class JobDataSource extends DataTableSource {
       },
       cells: [
         // '${JobDetails?.id ?? ''}',
-        '${JobDetails?.jobCardId ?? ''}',
-        '${JobDetails?.jobId ?? ''}', '${JobDetails?.permit_id ?? ''}',
+        'JC${JobDetails?.jobCardId ?? ''}',
+        'JOB${JobDetails?.jobId ?? ''}', '${JobDetails?.permit_id ?? ''}',
         '${JobDetails?.permit_no ?? ''}',
 
         '${JobDetails?.job_assinged_to ?? ''}',
