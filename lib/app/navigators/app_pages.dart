@@ -148,6 +148,8 @@ import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_s
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
 import 'package:cmms/app/waste_data/waste_data_binding.dart';
+import 'package:cmms/app/water_data/view/water_data_screen.dart';
+import 'package:cmms/app/water_data/water_data_binding.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../calibration_certificate/calibration_certificate_binding.dart';
@@ -1009,6 +1011,11 @@ class AppPages {
       name: _Paths.viewMisPlan,
       page: ViewMisPlanScreen.new,
       binding: ViewMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.waterDataScreen,
+      page: WaterDataScreen.new,
+      binding: WaterDataBinding(),
     ),
   ];
 }
