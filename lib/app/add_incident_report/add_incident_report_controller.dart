@@ -729,7 +729,8 @@ class AddIncidentReportController extends GetxController {
           {'key': "Other Victim ", "value": ''},
           {
             "key": "Gender ",
-            "value": '${element?.sex}',
+            "value":
+                '${element?.sex == 1 ? "Male" : element?.sex == 2 ? "Female" : element?.sex == 3 ? "TransGender" : "Please Select"}',
           },
           {'key': "Trade/Designation ", "value": '${element?.designation}'},
           {'key': "Address ", "value": '${element?.address}'},
@@ -1602,7 +1603,8 @@ class AddIncidentReportController extends GetxController {
           other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
-          sex: int.tryParse('${element[2]["value"]}'),
+          sex: int.tryParse(
+              '${element[2]["value"] == "Male" ? 1 : element[2]["value"] == "Female" ? 2 : element[2]["value"] == "TransGender" ? 3 : 0}'),
           designation: element[3]["value"] ?? '0',
           address: element[4]["value"] ?? '0',
           name_contractor: element[5]["value"],

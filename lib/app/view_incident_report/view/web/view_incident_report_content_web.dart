@@ -492,7 +492,7 @@ class ViewIncidentReportContentWeb
                                                             columns: [
                                                               DataColumn(
                                                                   label: Text(
-                                                                "Name Of Injured Person",
+                                                                "Name Of Injured\nPerson",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -512,7 +512,7 @@ class ViewIncidentReportContentWeb
                                                               )),
                                                               DataColumn(
                                                                   label: Text(
-                                                                "Trade/Designation",
+                                                                "Trade/\nDesignation",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -532,7 +532,7 @@ class ViewIncidentReportContentWeb
                                                               )),
                                                               DataColumn(
                                                                   label: Text(
-                                                                "Name Of Contractor",
+                                                                "Name Of\nContractor",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -542,7 +542,7 @@ class ViewIncidentReportContentWeb
                                                               )),
                                                               DataColumn(
                                                                   label: Text(
-                                                                "Body Part Injured",
+                                                                "Body Part\nInjured",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -562,7 +562,7 @@ class ViewIncidentReportContentWeb
                                                               )),
                                                               DataColumn(
                                                                   label: Text(
-                                                                "Plant & Equipment",
+                                                                "Plant &\nEquipment",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -595,11 +595,8 @@ class ViewIncidentReportContentWeb
                                                                             ?.person_id
                                                                             .toString() ??
                                                                         '')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.sex
-                                                                            .toString() ??
-                                                                        '')),
+                                                                    DataCell(Text(
+                                                                        '${controller.detailsOfInjuredPersonList?[index]?.sex == 1 ? "Male" : controller.detailsOfInjuredPersonList?[index]?.sex == 2 ? "Female" : controller.detailsOfInjuredPersonList?[index]?.sex == 3 ? "TransGender" : "".toString()}')),
                                                                     DataCell(Text(controller
                                                                             .detailsOfInjuredPersonList?[index]
                                                                             ?.designation
@@ -646,10 +643,10 @@ class ViewIncidentReportContentWeb
                                                     ),
                                                   ),
 
-                                            ///Investigation
-                                            controller
-                                                    .detailsOfInjuredPersonList!
-                                                    .isEmpty
+                                            ///Investigation Block
+                                            controller.incidentReportDetailsModel
+                                                        .value?.status_short ==
+                                                    null
                                                 ? Dimens.box0
                                                 : Container(
                                                     margin: EdgeInsets.all(20),
