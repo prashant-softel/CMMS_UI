@@ -144,7 +144,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon: "assets/files/misc.png",
                                               press: () {
                                                 Get.offAllNamed(Routes
-                                                    .incidentReportListWeb);
+                                                    .incidentReportDashboard);
                                               },
                                             ),
                                             MenuItem(

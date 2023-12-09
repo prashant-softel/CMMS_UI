@@ -3871,19 +3871,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //   width: MediaQuery.of(context).size.width * 0.19,
               // ),
 
-              ///Printing functionality
-              Container(
-                height: 45,
-                child: CustomElevatedButton(
-                  icon: Icons.print_outlined,
-                  backgroundColor: ColorValues.appDarkBlueColor,
-                  text: "Print",
-                  onPressed: () {
-                    controller.generateInvoice();
-                  },
-                ),
-              ),
-              Dimens.boxWidth10,
+              controller.viewPermitDetailsModel.value?.ptwStatus ==
+                      PermitStatusConstants.PTW_APPROVE //125
+                  ///Printing functionality
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        icon: Icons.print_outlined,
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        text: "Print",
+                        onPressed: () {
+                          controller.generateInvoice();
+                        },
+                      ),
+                    )
+                  : Dimens.box0,
+
               // Container(
               //     height: 45,
               //     child: CustomElevatedButton(
@@ -3924,9 +3927,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //           },
               //         ))
               //     : Container(),
-              SizedBox(
-                width: 10,
-              ),
 
               ///Approve Button
               varUserAccessModel.value.access_list!
@@ -3960,7 +3960,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           ));
                         },
                       ))
-                  : Container(),
+                  : Dimens.box0,
 
               varUserAccessModel.value.access_list!
                               .where((e) =>
@@ -3991,7 +3991,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Dimens.box0,
-              Dimens.boxWidth10,
+
               varUserAccessModel.value.access_list!
                               .where((e) =>
                                   e.feature_id ==
@@ -4021,9 +4021,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Dimens.box0,
-              SizedBox(
-                width: 10,
-              ),
 
               ///Extend Permit Button
               controller.viewPermitDetailsModel.value?.isExpired == 1 ||
@@ -4058,7 +4055,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           ));
                         },
                       ))
-                  : Container(),
+                  : Dimens.box0,
 
               ///Close Permit Request
               varUserAccessModel.value.access_list!
@@ -4093,8 +4090,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Dimens.box0,
-
-              Dimens.boxWidth10,
 
               ///Reject Button
               varUserAccessModel.value.access_list!
@@ -4138,10 +4133,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           ));
                         },
                       ))
-                  : Container(),
-              SizedBox(
-                width: 10,
-              ),
+                  : Dimens.box0,
 
               ///Permit cancel by Issuer
               // varUserAccessModel.value.access_list!
@@ -4219,7 +4211,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Dimens.box0,
-              Dimens.boxWidth20,
 
               // ////cancel approver
               // varUserAccessModel.value.access_list!
