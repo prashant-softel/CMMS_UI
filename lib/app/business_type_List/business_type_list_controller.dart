@@ -21,7 +21,7 @@ class BusinessTypeListController extends GetxController {
   RxList<BusinessTypeModel?> businessTypeList = <BusinessTypeModel?>[].obs;
   RxList<BusinessTypeModel?> bufferbusinessTypeList =
       <BusinessTypeModel?>[].obs;
-
+  RxBool isContainerVisible = false.obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -219,6 +219,10 @@ class BusinessTypeListController extends GetxController {
         ],
       ),
     );
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> deleteBusinessType(String? businesstype_id) async {
