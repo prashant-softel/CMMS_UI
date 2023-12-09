@@ -33,7 +33,7 @@ class BusinessListController extends GetxController {
   Rx<bool> isPersonInvalid = false.obs;
   Rx<bool> isNumberInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
-
+  RxBool isContainerVisible = false.obs;
   Rx<String?> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
   Rx<String> selectedState = ''.obs;
@@ -189,6 +189,10 @@ class BusinessListController extends GetxController {
         stateList.add(_equipmentCategoryList);
       }
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> getCityList(int selectedStateId) async {

@@ -26,6 +26,7 @@ class BlockTypeListController extends GetxController {
   }
 
   //checkbox
+  RxBool isContainerVisible = false.obs;
   RxBool isChecked = true.obs;
   BlockTypeListModel? selectedItem;
   Rx<bool> isNameInvalid = false.obs;
@@ -120,6 +121,10 @@ class BlockTypeListController extends GetxController {
 
     blockTypeList.value = filteredList;
     print('blockTypeList length (non-empty keyword): ${blockTypeList.length}');
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> getFacilityList() async {
