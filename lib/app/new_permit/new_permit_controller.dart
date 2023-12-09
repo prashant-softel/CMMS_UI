@@ -1449,7 +1449,7 @@ class NewPermitController extends GetxController {
   //       }
 
   ///Update New Permit
-  void updateNewPermit() async {
+  void updateNewPermit({List<dynamic>? fileIds}) async {
     {
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
@@ -1498,7 +1498,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
-          uploadfile_ids: [618, 619],
+          uploadfile_ids: fileIds,
           is_isolation_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,

@@ -68,7 +68,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / Incident Report",
+                            child: Text(" / Incident Report Dashboard",
                                 style: Styles.greyMediumLight12),
                           ),
                           // Text(" / Warranty Claim List",

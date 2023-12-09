@@ -1563,9 +1563,28 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       style: Styles
                                                           .greyMediumLight12),
                                                 ),
-                                                Text(" / ADD NEW PERMIT",
-                                                    style: Styles
-                                                        .greyMediumLight12),
+                                                controller.newPermitDetailsModel
+                                                            .value?.permitNo ==
+                                                        null
+                                                    ? Text(" / ADD NEW PERMIT",
+                                                        style: Styles
+                                                            .greyMediumLight12)
+                                                    : Text(
+                                                        " / Update NEW PERMIT",
+                                                        style: Styles
+                                                            .greyMediumLight12),
+                                                Spacer(),
+                                                controller.newPermitDetailsModel
+                                                            .value?.permitNo !=
+                                                        null
+                                                    ? Text(
+                                                        "Permit Id: ${controller.newPermitDetailsModel.value?.permitNo}",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )
+                                                    : Dimens.box0,
                                               ],
                                             ),
                                           ),
@@ -3425,7 +3444,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Remarks/\nComments: '),
+                                                                    'Comments: '),
                                                             Expanded(
                                                               child:
                                                                   _buildWorkPermitCommentTextField_web(
@@ -3514,7 +3533,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       backgroundColor: ColorValues.appDarkBlueColor,
                                                                                       text: "Update",
                                                                                       onPressed: () {
-                                                                                        controller.updateNewPermit();
+                                                                                        controller.updateNewPermit(fileIds: dropzoneController.fileIds);
                                                                                       },
                                                                                     )),
                                                                               )

@@ -42,8 +42,8 @@ class PermitRejectDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 200,
-            width: double.infinity,
+            height: MediaQuery.of(context).size.height / 2.8,
+            width: MediaQuery.of(context).size.width / 1.5,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -60,7 +60,7 @@ class PermitRejectDialog extends GetView {
                       ),
                       TextField(
                         controller: _controller.rejectCommentTextFieldCtrlr,
-                        maxLines: 4,
+                        maxLines: 6,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(
