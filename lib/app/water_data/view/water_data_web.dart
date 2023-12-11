@@ -28,6 +28,56 @@ class WaterDataWeb extends StatefulWidget {
   State<WaterDataWeb> createState() => _WaterDataWebState();
 }
 
+final List<Map<String, dynamic>> statutoryData = [
+  {
+    'Ground Water in KL units': 'Fire NOC status',
+    'Water Procured from Third Party for Module cleaning in KL units': '10',
+    'validity': '5',
+    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5',
+    'water used for drinking in KL units': '5',
+    'Water used for Module cleaning in KL units': '5',
+    'Water used for domestic and other purpose in KL units': '5',
+    'Total Water Withdrawal in KL units': '5',
+    'Total Water consumed in KL units': '5',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
+    'Total Groundwater Withdrawal Limit left in KL units': '5',
+  },
+  {
+    'Ground Water in KL units': 'Fire NOC status',
+    'Water Procured from Third Party for Module cleaning in KL units': '10',
+    'validity': '5',
+    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5',
+    'water used for drinking in KL units': '5',
+    'Water used for Module cleaning in KL units': '5',
+    'Water used for domestic and other purpose in KL units': '5',
+    'Total Water Withdrawal in KL units': '5',
+    'Total Water consumed in KL units': '5',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
+    'Total Groundwater Withdrawal Limit left in KL units': '5',
+  },
+  {
+    'Ground Water in KL units': 'Fire NOC status',
+    'Water Procured from Third Party for Module cleaning in KL units': '10',
+    'validity': '5',
+    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5',
+    'water used for drinking in KL units': '5',
+    'Water used for Module cleaning in KL units': '5',
+    'Water used for domestic and other purpose in KL units': '5',
+    'Total Water Withdrawal in KL units': '5',
+    'Total Water consumed in KL units': '5',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
+    'Total Groundwater Withdrawal Limit left in KL units': '5',
+  },
+
+  // Add more data as needed
+];
+
 class _WaterDataWebState extends State<WaterDataWeb> {
   @override
   Widget build(BuildContext context) {
@@ -78,409 +128,255 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                 children: [
                   Container(
                     width: Get.width * 7,
-                    margin: EdgeInsets.only(left: 10, top: 30, right: 10),
+                    margin: EdgeInsets.only(left: 10, top: 20, right: 10),
                     height: Get.height,
-                    child: Card(
-                      color: Color.fromARGB(255, 245, 248, 250),
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "WATER DATA",
-                                  style: Styles.blackBold14,
-                                ),
-                                Spacer(),
-                                Row(
-                                  children: [
-                                    CustomRichText(title: 'Date :'),
-                                    Dimens.boxWidth10,
-                                    CustomTextFieldForStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      numberTextField: true,
-                                      onTap: () {
-                                        controller
-                                                .openFromDateToStartDatePicker =
-                                            !controller
-                                                .openFromDateToStartDatePicker;
-                                        controller
-                                            .update(['stock_Mangement_Date']);
-                                      },
-                                      textController: controller.waterDateTc,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Container(
+                              margin:
+                                  EdgeInsets.only(left: 10, top: 10, right: 10),
+                              child: Column(
+                                children: [
+                                  Card(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                  ],
-                                ),
-                                Dimens.boxWidth10,
-                                ActionButton(
-                                  icon: Icons.add,
-                                  label: "Add New",
-                                  onPressed: () {
-                                    // controller.clearValue();
-                                    // Get.offNamed(
-                                    //   Routes.createMisPlan,
-                                    //   // arguments: {
-                                    //   //   'type': controller.type.value
-                                    //   // }
-                                    // );
-                                  },
-                                  color: ColorValues.addNewColor,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: ColorValues.greyLightColour,
-                          ),
-                          Row(
-                            children: [
-                              PopupMenuButton<String>(
-                                tooltip: "",
-                                elevation: 25.0,
-                                child: Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  padding: EdgeInsets.only(
-                                      top: 4, bottom: 4, right: 8, left: 8),
-                                  decoration: BoxDecoration(
-                                    color: ColorValues.appLightBlueColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    'Column Visibility',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                itemBuilder: (BuildContext context) =>
-                                    <PopupMenuEntry<String>>[]..addAll(
-                                          controller
-                                              .columnVisibility.value.entries
-                                              .map((e) {
-                                        return PopupMenuItem<String>(
-                                            child: ValueListenableBuilder(
-                                                valueListenable:
-                                                    controller.columnVisibility,
-                                                builder:
-                                                    (context, value, child) {
-                                                  return Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        value: value[e.key],
-                                                        onChanged: (newValue) {
-                                                          controller
-                                                              .setColumnVisibility(
-                                                                  e.key,
-                                                                  newValue!);
-                                                        },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 20,
+                                                top: 20,
+                                              ),
+                                              child: Text(
+                                                "Water Data",
+                                                style: Styles.blackBold16,
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text('Date :'),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      controller
+                                                              .openFromDateToStartDatePicker =
+                                                          !controller
+                                                              .openFromDateToStartDatePicker;
+                                                      controller.update([
+                                                        'stock_Mangement_Date'
+                                                      ]);
+                                                    },
+                                                    textController:
+                                                        controller.waterDateTc,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: ColorValues.greyLightColour,
+                                        ),
+                                        Container(
+                                          color: Color.fromARGB(
+                                              255, 245, 248, 250),
+                                          width: Get.width,
+                                          height: Get.height,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16),
+                                            child: DataTable2(
+                                              headingRowHeight: 45,
+                                              columnSpacing: 12,
+                                              horizontalMargin: 12,
+                                              minWidth: 600,
+                                              columns: [
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Ground Water in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Water Procured from Third Party for Module cleaning in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Water Procured from Third Party for Drinking in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Water Procured from Third Party for Domestic and others purposes in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'water used for drinking in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Water used for Module cleaning in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Water used for domestic and other purpose in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Total Water Withdrawal in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Total Water consumed in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    'Total Water withdrawal yearly limit as per NOC in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                ),
+                                                DataColumn2(
+                                                  label: Text(
+                                                    'Total Groundwater Withdrawal Limit left in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  size: ColumnSize.L,
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    'Action',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: statutoryData.map(
+                                                (data) {
+                                                  return DataRow(
+                                                    cells: [
+                                                      DataCell(Text(data[
+                                                          'Ground Water in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water Procured from Third Party for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water Procured from Third Party for Drinking in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water Procured from Third Party for Domestic and others purposes in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'water used for drinking in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water used for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water used for domestic and other purpose in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Total Water Withdrawal in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Total Water consumed in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Total Water withdrawal yearly limit as per NOC in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Total Groundwater Withdrawal Limit left in KL units'])),
+                                                      DataCell(
+                                                        Row(
+                                                          children: [
+                                                            TableActionButton(
+                                                              color: ColorValues
+                                                                  .viewColor,
+                                                              icon: Icons
+                                                                  .remove_red_eye_outlined,
+                                                              message: 'View',
+                                                            ),
+                                                            TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message: 'Edit',
+                                                              onPress: () {},
+                                                            ),
+                                                            TableActionButton(
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      156,
+                                                                      210,
+                                                                      156),
+                                                              icon:
+                                                                  Icons.replay,
+                                                              message: 'Re-New',
+                                                              onPress: () {},
+                                                            ),
+                                                            TableActionButton(
+                                                              color: ColorValues
+                                                                  .deleteColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              message: 'Delete',
+                                                              onPress: () {},
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
-                                                      Text(e.key),
                                                     ],
                                                   );
-                                                }));
-                                      })),
-                                onSelected: (String value) {
-                                  // Handle column selection
-                                },
-                              ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'Copy'),
-                              // ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'Excel'),
-                              // ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'PDF'),
-                              // ),
-                              Spacer(),
-                              Container(
-                                width: 200,
-                                height: 35,
-                                margin: Dimens.edgeInsets0_0_16_0,
-                                child: TextField(
-                                  onChanged: (value) {}, // =>
-                                  //       controller.search(value),
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
+                                                },
+                                              ).toList(),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    contentPadding: Dimens.edgeInsets10_0_0_0,
-                                    hintText: 'search'.tr,
-                                    hintStyle: Styles.grey12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: Dimens.edgeInsets15,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorValues.appBlueBackgroundColor,
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
                                   ),
                                 ],
                               ),
-                              child: ScrollableTableView(
-                                columns: [
-                                  // 'Water Data ID',
-                                  'Ground Water in KL units ',
-                                  'Water Procured from Third Party for Module cleaning in KL units ',
-                                  'Water Procured from Third Party for Drinking in KL units ',
-                                  'Water Procured from Third Party for Domestic and others purposes in KL units ',
-                                  'water used for drinking in KL units ',
-                                  'Water used for Module cleaning in KL units ',
-                                  'Water used for domestic and other purpose in KL units ',
-                                  'Total Water Withdrawal in KL units ',
-                                  'Total Water consumed in KL units ',
-                                  'Total Water withdrawal yearly limit as per NOC in KL units ',
-                                  'Total Groundwater Withdrawal Limit left in KL units',
-                                  "Action",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.15,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                  [
-                                    "200",
-                                    "34590",
-                                    "20",
-                                    "10",
-                                    "40",
-                                    "400",
-                                    "435",
-                                    "453",
-                                    '546',
-                                    "6546",
-                                    "76",
-                                    "Action",
-                                  ],
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 60,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: value == "Action"
-                                            ? Wrap(children: [
-                                                TableActionButton(
-                                                  color: ColorValues.viewColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  message: 'view',
-                                                  onPress: () {
-                                                    controller
-                                                        .clearStoreIdData();
-                                                    // controller.clearValue();
-                                                    int auditId =
-                                                        1; //AuditPlanPlanningListDetails?.id ?? 0;
-                                                    if (auditId != 0) {
-                                                      Get.toNamed(
-                                                        Routes.viewMisPlan,
-                                                        //  arguments: {
-                                                        //   'auditId': auditId,
-                                                        // 'type': controller.type.value
-                                                        // }
-                                                      );
-                                                    }
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: 'Edit',
-                                                  onPress: () {
-                                                    // int id =
-                                                    //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                                    // if (id != 0) {
-                                                    //   Get.toNamed(Routes.AuditPlanPlanning,
-                                                    //       arguments: {"id": id});
-                                                    // }
-                                                  },
-                                                ),
-                                                // TableActionButton(
-                                                //   color: ColorValues
-                                                //       .appGreenColor,
-                                                //   icon: Icons.check,
-                                                //   message:
-                                                //       'Approve/Reject',
-                                                //   onPress: () {
-                                                //     // int id =
-                                                //     //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                                //     // if (id != 0) {
-                                                //     //   Get.toNamed(
-                                                //     //     Routes.viewMcPlaning,
-                                                //     //     arguments: {'id': id, "type": 1},
-                                                //     //   );
-                                                //     // }
-                                                //   },
-                                                // ),
-                                              ])
-                                            : value == "0001"
-                                                ? Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        value,
-                                                      ),
-                                                      Dimens.boxHeight10,
-                                                      // Align(
-                                                      //   alignment: Alignment
-                                                      //       .centerRight,
-                                                      //   child: Container(
-                                                      //     padding: Dimens
-                                                      //         .edgeInsets8_2_8_2,
-                                                      //     decoration:
-                                                      //         BoxDecoration(
-                                                      //       color: ColorValues
-                                                      //           .addNewColor,
-                                                      //       borderRadius:
-                                                      //           BorderRadius
-                                                      //               .circular(
-                                                      //                   4),
-                                                      //     ),
-                                                      //     child: Text(
-                                                      //       '',
-                                                      //       style: Styles
-                                                      //           .white10
-                                                      //           .copyWith(
-                                                      //         color: Colors
-                                                      //             .white,
-                                                      //       ),
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
-                                                    ],
-                                                  )
-                                                : Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   if (controller.openFromDateToStartDatePicker)

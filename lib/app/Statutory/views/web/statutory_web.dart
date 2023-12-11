@@ -10,6 +10,42 @@ import '../../../theme/styles.dart';
 class StatutoryWeb extends StatelessWidget {
   StatutoryWeb({Key? key});
 
+  final List<Map<String, dynamic>> statutoryData = [
+    {
+      'compliance': 'Fire NOC status',
+      'status': 'Received',
+      'dateReceived': '10/07/2023',
+      'validity': '5',
+      'daysLeft': '28',
+      'expiresOn': '10/07/2024',
+    },
+    {
+      'compliance': 'Ground water Noc Status ',
+      'status': 'Applied',
+      'dateReceived': '10/07/2023',
+      'validity': '5',
+      'daysLeft': '28',
+      'expiresOn': '10/07/2024',
+    },
+    {
+      'compliance': 'Medical Tie up  ',
+      'status': 'Applied',
+      'dateReceived': '10/07/2023',
+      'validity': '5',
+      'daysLeft': '28',
+      'expiresOn': '10/07/2024',
+    },
+    {
+      'compliance': 'Hospital Tie Up  ',
+      'status': 'Applied',
+      'dateReceived': '10/07/2023',
+      'validity': '5',
+      'daysLeft': '28',
+      'expiresOn': '10/07/2024',
+    },
+    // Add more data as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +112,7 @@ class StatutoryWeb extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(left: 20, top: 20),
                               child: Text(
-                                "STATUTORY REPORT",
+                                "Statutory Report",
                                 style: Styles.blackBold16,
                               ),
                             ),
@@ -141,42 +177,45 @@ class StatutoryWeb extends StatelessWidget {
                                       ),
                                     ),
                                   ],
-                                  rows: List<DataRow>.generate(
-                                    4,
-                                    (index) => DataRow(
-                                      cells: [
-                                        DataCell(Text('Fire NOC status')),
-                                        DataCell(Text('Received')),
-                                        DataCell(Text('10/07/2023')),
-                                        DataCell(Text('5')),
-                                        DataCell(Text('28')),
-                                        DataCell(Text("10/07/2024")),
-                                        DataCell(
-                                          Row(
-                                            children: [
-                                              TableActionButton(
+                                  rows: statutoryData.map(
+                                    (data) {
+                                      return DataRow(
+                                        cells: [
+                                          DataCell(Text(data['compliance'])),
+                                          DataCell(Text(data['status'])),
+                                          DataCell(Text(data['dateReceived'])),
+                                          DataCell(Text(data['validity'])),
+                                          DataCell(Text(data['daysLeft'])),
+                                          DataCell(Text(data['expiresOn'])),
+                                          DataCell(
+                                            Row(
+                                              children: [
+                                                TableActionButton(
+                                                  color: ColorValues.viewColor,
+                                                  icon: Icons
+                                                      .remove_red_eye_outlined,
+                                                  message: 'View',
+                                                ),
+                                                TableActionButton(
                                                   color: ColorValues.editColor,
                                                   icon: Icons.edit,
                                                   message: 'Edit',
-                                                  onPress: () {}),
-                                              TableActionButton(
-                                                color: ColorValues.deleteColor,
-                                                icon: Icons.delete,
-                                                message: 'Delete',
-                                                onPress: () {},
-                                              ),
-                                              TableActionButton(
-                                                color: ColorValues.viewColor,
-                                                icon: Icons
-                                                    .remove_red_eye_outlined,
-                                                message: 'View',
-                                              )
-                                            ],
+                                                  onPress: () {},
+                                                ),
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.deleteColor,
+                                                  icon: Icons.delete,
+                                                  message: 'Delete',
+                                                  onPress: () {},
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                        ],
+                                      );
+                                    },
+                                  ).toList(),
                                 ),
                               ),
                             ),
