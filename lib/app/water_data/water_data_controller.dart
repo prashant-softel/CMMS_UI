@@ -66,6 +66,7 @@ class WaterDataController extends GetxController {
   }
 
   bool openFromDateToStartDatePicker = false;
+  var waterDateTc = TextEditingController();
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,

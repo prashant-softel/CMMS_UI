@@ -1,4 +1,5 @@
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -150,7 +151,29 @@ class StatutoryWeb extends StatelessWidget {
                                         DataCell(Text('5')),
                                         DataCell(Text('28')),
                                         DataCell(Text("10/07/2024")),
-                                        DataCell(Text("Action")),
+                                        DataCell(
+                                          Row(
+                                            children: [
+                                              TableActionButton(
+                                                  color: ColorValues.editColor,
+                                                  icon: Icons.edit,
+                                                  message: 'Edit',
+                                                  onPress: () {}),
+                                              TableActionButton(
+                                                color: ColorValues.deleteColor,
+                                                icon: Icons.delete,
+                                                message: 'Delete',
+                                                onPress: () {},
+                                              ),
+                                              TableActionButton(
+                                                color: ColorValues.viewColor,
+                                                icon: Icons
+                                                    .remove_red_eye_outlined,
+                                                message: 'View',
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
