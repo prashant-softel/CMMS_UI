@@ -12,6 +12,7 @@ import '../../domain/models/create_inventory_status.dart';
 
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 // import ''
 class InventoryTypeListController extends GetxController {
   InventoryTypeListController(
@@ -29,6 +30,7 @@ class InventoryTypeListController extends GetxController {
       <InventoryTypeListModel?>[].obs;
   RxList<InventoryTypeListModel?> filteredData =
       <InventoryTypeListModel?>[].obs;
+  RxBool isContainerVisible = false.obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -42,10 +44,14 @@ class InventoryTypeListController extends GetxController {
       // return;
     }
 
-    inventoryTypeList?.value = filteredData.where((item) =>
-        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+    inventoryTypeList?.value = filteredData
+        .where((item) => item!.name!
+            .toString()
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
         .toList();
   }
+
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
@@ -65,12 +71,11 @@ class InventoryTypeListController extends GetxController {
   void onInit() async {
     getInventoryTypeList(facilityId, type, true);
 
-
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
-      // Future.delayed(Duration(seconds: 2), () {
-      //   // getInventoryTypeList(facilityId, type, true);
-      // });
+    // Future.delayed(Duration(seconds: 2), () {
+    //   // getInventoryTypeList(facilityId, type, true);
+    // });
     // });
     super.onInit();
   }
@@ -93,6 +98,10 @@ class InventoryTypeListController extends GetxController {
         equipmentCategoryList.add(_equipmentCategoryList);
       }
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> getInventoryTypeList(
@@ -119,13 +128,15 @@ class InventoryTypeListController extends GetxController {
       }
     }
   }
+
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<void> createChecklist() async {
     Get.toNamed(
       Routes.createCheckList,
@@ -158,12 +169,12 @@ class InventoryTypeListController extends GetxController {
   }
 
   Future<bool> createChecklistNumber() async {
-    if (nameCtrlr.text.trim() == '' ) {
+    if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -182,13 +193,13 @@ class InventoryTypeListController extends GetxController {
       String _checklistNumber = nameCtrlr.text.trim();
       String _duration = descriptionCtrlr.text.trim();
 
-      CreateInventoryStatusListModel createChecklist = CreateInventoryStatusListModel(
-          // id : checklistId,
-          name : _checklistNumber,
-          description : _duration
-      );
+      CreateInventoryStatusListModel createChecklist =
+          CreateInventoryStatusListModel(
+              // id : checklistId,
+              name: _checklistNumber,
+              description: _duration);
       var checklistJsonString =
-        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+          createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", checklistJsonString});
       await inventoryTypeListPresenter.createInventoryType(
@@ -196,7 +207,6 @@ class InventoryTypeListController extends GetxController {
         isLoading: true,
       );
       return true;
-
     }
     getInventoryTypeList(facilityId, type, true);
     return true;
@@ -284,10 +294,7 @@ class InventoryTypeListController extends GetxController {
     String _manpower = manpowerCtrlr.text.trim();
 
     InventoryTypeListModel createChecklist = InventoryTypeListModel(
-        id : checklistId,
-        name : _checklistNumber,
-      description : _duration
-    );
+        id: checklistId, name: _checklistNumber, description: _duration);
     var checklistJsonString =
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 

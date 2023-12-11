@@ -367,7 +367,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         child: Row(
                           children: [
                             Text(
-                              "Water data",
+                              "Water data Report",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
@@ -406,7 +406,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           //   },
                           // ),
                           createContentTile(
-                              title: 'Water Data List',
+                              title: 'Water Data Report',
                               onTap: () {
                                 controller.goToWaterDataScreen();
                               }),

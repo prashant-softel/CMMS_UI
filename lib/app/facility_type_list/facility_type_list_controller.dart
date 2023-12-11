@@ -32,6 +32,7 @@ class FacilityTypeListController extends GetxController {
   }
 
   //checkbox
+  RxBool isContainerVisible = false.obs;
   RxBool isChecked = true.obs;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
   RxList<CountryState?> stateList = <CountryState>[].obs;
@@ -359,6 +360,10 @@ class FacilityTypeListController extends GetxController {
         }
       }
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> getSpvList() async {

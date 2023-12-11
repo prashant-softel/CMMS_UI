@@ -21,6 +21,7 @@ class SPVListController extends GetxController {
   SPVListModel? selectedItemupdate;
   Rx<bool> isFormInvalid = false.obs;
   RxBool isCheckedRequire = false.obs;
+  RxBool isContainerVisible = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
@@ -153,6 +154,10 @@ class SPVListController extends GetxController {
       rowsPerPage: 10,
     );
     update(['SPV_list']);
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<bool> createSPVlist() async {

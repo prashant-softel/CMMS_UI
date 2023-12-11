@@ -68,7 +68,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / Incident Report",
+                            child: Text(" / Incident Report Dashboard",
                                 style: Styles.greyMediumLight12),
                           ),
                           // Text(" / Warranty Claim List",
@@ -535,18 +535,17 @@ class IncidentReportListDataSource extends DataTableSource {
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
                               color: controller.incidentReportList
-                                              .firstWhere(
-                                                (e) =>
-                                                    e?.id ==
-                                                    incidentReportListDetails!
-                                                        .id,
-                                                orElse: () =>
-                                                    IncidentReportListModel(
-                                                        id: 00),
-                                              )
-                                              ?.status ==
-                                          "Submitted" ||
-                                      controller.incidentReportList
+                                          .firstWhere(
+                                            (e) =>
+                                                e?.id ==
+                                                incidentReportListDetails!.id,
+                                            orElse: () =>
+                                                IncidentReportListModel(id: 00),
+                                          )
+                                          ?.status ==
+                                      "Submitted"
+                                  ? ColorValues.appYellowColor
+                                  : controller.incidentReportList
                                               .firstWhere(
                                                 (e) =>
                                                     e?.id ==
@@ -558,8 +557,8 @@ class IncidentReportListDataSource extends DataTableSource {
                                               )
                                               ?.status ==
                                           "Approved"
-                                  ? ColorValues.appGreenColor
-                                  : ColorValues.appRedColor),
+                                      ? ColorValues.appGreenColor
+                                      : ColorValues.appRedColor),
                           child: Text(
                             '${incidentReportListDetails?.status}',
                             style: Styles.white10.copyWith(

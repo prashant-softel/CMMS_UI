@@ -52,6 +52,8 @@ import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.d
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
 import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
+import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart';
+import 'package:cmms/app/incident_report_dashboard/view/incident_report_dashboard_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
@@ -296,7 +298,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.login;
+  static const initial = Routes.waterDataScreen;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -789,6 +791,11 @@ class AppPages {
       name: _Paths.moduleCleaningDashboard,
       page: ModuleCleaningDashboardScreen.new,
       binding: ModuleCleaningDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.incidentReportDashboard,
+      page: IncidentReportDashboardScreen.new,
+      binding: IncidentReportDashboardBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.moduleCleaningPlanning,

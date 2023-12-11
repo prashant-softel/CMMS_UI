@@ -76,7 +76,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / NEW PERMIT LIST",
+                          Text(" / PERMIT LIST",
                               style: Styles.greyMediumLight12),
                         ],
                       ),
@@ -103,7 +103,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "New Permit List ",
+                                            "Permit List ",
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),

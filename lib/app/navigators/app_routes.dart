@@ -116,6 +116,7 @@ abstract class Routes {
   static const insuranceProvider = _Paths.insuranceProvider;
   static const editMrs = _Paths.editMrs;
   static const moduleCleaningDashboard = _Paths.moduleCleaningDashboard;
+  static const incidentReportDashboard = _Paths.incidentReportDashboard;
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
   static const roleNotification = _Paths.roleNotification;
   static const setting = _Paths.setting;
@@ -273,6 +274,7 @@ abstract class _Paths {
   static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';
   static const moduleCleaningDashboard = '/module-cleaning-dashboard';
+  static const incidentReportDashboard = '/incident-report-dashboard';
   static const moduleCleaningPlanning = '/module-cleaning-planning';
   static const roleNotification = '/role-notification';
   static const setting = '/setting';
