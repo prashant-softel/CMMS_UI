@@ -1,7 +1,14 @@
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/color_values.dart';
@@ -9,42 +16,6 @@ import '../../../theme/styles.dart';
 
 class ComplianceWeb extends StatelessWidget {
   ComplianceWeb({Key? key});
-
-  final List<Map<String, dynamic>> statutoryData = [
-    {
-      'compliance': 'Fire NOC status',
-      'status': 'Received',
-      'dateReceived': '10/07/2023',
-      'validity': '5',
-      'daysLeft': '28',
-      'expiresOn': '10/07/2024',
-    },
-    {
-      'compliance': 'Ground water Noc Status ',
-      'status': 'Applied',
-      'dateReceived': '10/07/2023',
-      'validity': '5',
-      'daysLeft': '28',
-      'expiresOn': '10/07/2024',
-    },
-    {
-      'compliance': 'Medical Tie up  ',
-      'status': 'Applied',
-      'dateReceived': '10/07/2023',
-      'validity': '5',
-      'daysLeft': '28',
-      'expiresOn': '10/07/2024',
-    },
-    {
-      'compliance': 'Hospital Tie Up  ',
-      'status': 'Applied',
-      'dateReceived': '10/07/2023',
-      'validity': '5',
-      'daysLeft': '28',
-      'expiresOn': '10/07/2024',
-    },
-    // Add more data as needed
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +68,7 @@ class ComplianceWeb extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.only(left: 10, top: 30, right: 10),
+                  margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                   child: Column(
                     children: [
                       Card(
@@ -122,100 +93,205 @@ class ComplianceWeb extends StatelessWidget {
                             Container(
                               color: Color.fromARGB(255, 245, 248, 250),
                               width: Get.width,
-                              height: Get.height,
+                              height: Get.height * 0.5,
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
-                                child: DataTable2(
-                                  headingRowHeight: 35,
-                                  columnSpacing: 12,
-                                  horizontalMargin: 12,
-                                  minWidth: 600,
-                                  columns: [
-                                    DataColumn2(
-                                      label: Text(
-                                        'Compliance',
-                                        style: Styles.blackBold14,
+                                child: Container(
+                                  margin: Dimens.edgeInsets20,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Compliance '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
+                                                    // textController:
+                                                    //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title:
+                                                          'Validity (In months) '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
+                                                    // textController:
+                                                    //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Days Left '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
+                                                    // textController:
+                                                    //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Received Date '),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      // controller
+                                                      //         .openReceivedPicker =
+                                                      //     !controller
+                                                      //         .openReceivedPicker;
+                                                      // controller.update(
+                                                      //     ['stock_Mangement']);
+                                                    },
+                                                    // textController:
+                                                    //     controller.receivedDateTc,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Expires on '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
+                                                    // textController:
+                                                    //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title:
+                                                          'Status of validity '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
+                                                    // textController:
+                                                    //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                        ],
                                       ),
-                                      size: ColumnSize.L,
-                                    ),
-                                    DataColumn2(
-                                      label: Text(
-                                        'Status OF Application',
-                                        style: Styles.blackBold14,
-                                      ),
-                                      size: ColumnSize.L,
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Date of received',
-                                        style: Styles.blackBold14,
-                                      ),
-                                    ),
-                                    DataColumn2(
-                                      label: Text(
-                                        'Validity (In months),',
-                                        style: Styles.blackBold14,
-                                      ),
-                                      size: ColumnSize.L,
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Days Left',
-                                        style: Styles.blackBold14,
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Expires on ',
-                                        style: Styles.blackBold14,
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'Action',
-                                        style: Styles.blackBold14,
-                                      ),
-                                    ),
-                                  ],
-                                  rows: statutoryData.map(
-                                    (data) {
-                                      return DataRow(
-                                        cells: [
-                                          DataCell(Text(data['compliance'])),
-                                          DataCell(Text(data['status'])),
-                                          DataCell(Text(data['dateReceived'])),
-                                          DataCell(Text(data['validity'])),
-                                          DataCell(Text(data['daysLeft'])),
-                                          DataCell(Text(data['expiresOn'])),
-                                          DataCell(
-                                            Row(
-                                              children: [
-                                                TableActionButton(
-                                                  color: ColorValues.viewColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  message: 'View',
+                                      Dimens.boxHeight20,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Row(children: [
+                                          Text('Comment: '),
+                                          Expanded(
+                                            child: TextField(
+                                              decoration: InputDecoration(
+                                                disabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: ColorValues
+                                                        .appLightGreyColor,
+                                                    width: 1.0,
+                                                  ),
                                                 ),
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: 'Edit',
-                                                  onPress: () {},
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: ColorValues
+                                                        .appLightBlueColor,
+                                                    width: 1.0,
+                                                  ),
                                                 ),
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.deleteColor,
-                                                  icon: Icons.delete,
-                                                  message: 'Delete',
-                                                  onPress: () {},
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: ColorValues
+                                                        .appLightBlueColor,
+                                                    width: 1.0,
+                                                  ),
                                                 ),
-                                              ],
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              minLines: 3,
+                                              maxLines: null,
                                             ),
                                           ),
+                                        ]),
+                                      ),
+                                      Dimens.boxHeight15,
+                                      Row(
+                                        children: [
+                                          Spacer(),
+                                          CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appRedColor,
+                                            text: 'cancel',
+                                            onPressed: () {
+                                              // controller.AddInventory();
+                                            },
+                                          ),
+                                          Dimens.boxWidth15,
+                                          CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Submit',
+                                            onPressed: () {
+                                              // controller.submitPurchaseOrderData();
+                                            },
+                                          ),
+                                          Spacer()
                                         ],
-                                      );
-                                    },
-                                  ).toList(),
+                                      ),
+                                      Dimens.boxHeight15,
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
