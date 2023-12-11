@@ -10,4 +10,6 @@ class MastersUsecase {
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
   void clearValue() async => _repository.clearData(LocalKeys.importType);
+  void clearStoreUserIdData() async =>
+      _repository.clearData(LocalKeys.userDetailId);
 }

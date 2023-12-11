@@ -298,7 +298,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     //  Dimens.boxWidth10,
                                     controller.auditPlanDetailModel.value
                                                     ?.status ==
-                                                401 &&
+                                                421 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>
@@ -328,7 +328,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     Dimens.boxWidth10,
                                     controller.auditPlanDetailModel.value
                                                     ?.status ==
-                                                401 &&
+                                                421 &&
                                             varUserAccessModel
                                                     .value.access_list!
                                                     .where((e) =>

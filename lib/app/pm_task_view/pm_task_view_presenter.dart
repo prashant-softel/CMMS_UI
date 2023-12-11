@@ -126,4 +126,20 @@ class PreventiveMaintenanceTaskViewPresenter {
   void clearStoreTaskData() {
     preventiveMaintenanceTaskViewUsecase.clearStoreTaskData();
   }
+
+  void clearStoreTaskActivityData() {
+    preventiveMaintenanceTaskViewUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    preventiveMaintenanceTaskViewUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    preventiveMaintenanceTaskViewUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    preventiveMaintenanceTaskViewUsecase.clearStoreTaskWhereUsedData();
+  }
 }

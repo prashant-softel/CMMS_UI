@@ -285,4 +285,8 @@ class MastersController extends GetxController {
   void clearStoreData() {
     mastersPresenter.clearValue();
   }
+
+  void clearStoreUserIdData() {
+    mastersPresenter.clearStoreUserIdData();
+  }
 }

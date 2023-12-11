@@ -496,6 +496,8 @@ class MastersDashboard extends GetView<MastersController> {
                                 return createContentTile(
                                     title: "Add User",
                                     onTap: () {
+                                      controller.clearStoreUserIdData();
+
                                       controller.goToAddUser();
                                     });
                               }))),

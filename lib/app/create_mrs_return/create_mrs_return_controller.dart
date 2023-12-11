@@ -30,6 +30,9 @@ class CreateMrsReturnController extends GetxController {
 
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<String> activity = ''.obs;
+  Rx<int> whereUsed = 0.obs;
+  Rx<int> fromActorTypeId = 0.obs;
+  Rx<int> to_actor_type_id = 0.obs;
 
   var isSetTemplate = false.obs;
 
@@ -69,6 +72,9 @@ class CreateMrsReturnController extends GetxController {
 
         activity.value = dataFromPreviousScreen['activity'];
         whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
+        whereUsed.value = dataFromPreviousScreen['whereUsed'];
+        fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+        to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
 
         createmrsReturnPresenter.saveValue(
             whereUsedTypeId: whereUsedTypeId.value.toString());
@@ -137,8 +143,12 @@ class CreateMrsReturnController extends GetxController {
         setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
-        whereUsedType: 2,
-        // whereUsedTypeId: whereUsedTypeId.value,to_actor_id: ,to_actor_type_id: ,from_actor_type_id: ,from_actor_id: ,
+        whereUsedType: whereUsed.value,
+        whereUsedTypeId: whereUsedTypeId.value,
+        to_actor_id: whereUsedTypeId.value,
+        to_actor_type_id: to_actor_type_id.value,
+        from_actor_type_id: fromActorTypeId.value,
+        from_actor_id: facilityId,
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();

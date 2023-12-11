@@ -397,15 +397,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       ],
                                     ),
                                   ),
-                                  // controller.listMrsByTaskId!.length > 0
-                                  //     ?
+
                                   Container(
                                     margin: Dimens.edgeInsets20,
                                     height:
-                                        ((controller.listMrsByTaskId?.length ??
-                                                    0) *
-                                                40) +
-                                            150,
+                                        controller.listMrsByTaskId!.length > 0
+                                            ? ((controller.listMrsByTaskId
+                                                            ?.length ??
+                                                        0) *
+                                                    40) +
+                                                150
+                                            : 55,
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: ColorValues
@@ -447,6 +449,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   .pmtaskViewModel
                                                                   .value
                                                                   ?.id,
+                                                          "activity": controller
+                                                              .pmtaskViewModel
+                                                              .value
+                                                              ?.plan_title,
                                                           "whereUsed": 27,
                                                           "fromActorTypeId": 2,
                                                           "to_actor_type_id": 3
@@ -462,143 +468,158 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         //   color:
                                         //       ColorValues.greyLightColour,
                                         // ),
-                                        Expanded(
-                                          child: DataTable2(
-                                            border: TableBorder.all(
-                                                color: Color.fromARGB(
-                                                    255, 206, 229, 234)),
-                                            columns: [
-                                              DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    "Sr. No.",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                              DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    "MRS ID",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                              DataColumn2(
-                                                  // fixedWidth: 200,
-                                                  label: Text(
-                                                "MRS Items List ",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                              DataColumn2(
-                                                  //  fixedWidth: 300,
-                                                  label: Text(
-                                                "Status",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                              DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                            ],
-                                            rows: List<DataRow>.generate(
-                                              controller.listMrsByTaskId
-                                                      ?.length ??
-                                                  0,
-                                              (index) => DataRow(cells: [
-                                                DataCell(Text('${index + 1}')),
-                                                DataCell(Text(
-                                                    "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
-                                                DataCell(Text(controller
-                                                        .listMrsByTaskId?[index]
-                                                        ?.mrsItems ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .listMrsByTaskId?[index]
-                                                        ?.status_short ??
-                                                    '')),
-                                                DataCell(Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .viewColor,
-                                                        icon: Icons
-                                                            .remove_red_eye,
-                                                        message: "View MRS",
-                                                        onPress: () {
-                                                          final _flutterSecureStorage =
-                                                              const FlutterSecureStorage();
-
-                                                          _flutterSecureStorage
-                                                              .delete(
-                                                                  key: "mrsId");
-                                                          String mrsId = controller
-                                                                  .listMrsByTaskId?[
-                                                                      index]
-                                                                  ?.mrsId
-                                                                  .toString() ??
-                                                              "";
-                                                          print(
-                                                              {"mrsId": mrsId});
-                                                          Get.toNamed(
-                                                              Routes
-                                                                  .mrsViewScreen,
-                                                              arguments: {
-                                                                'mrsId': int
-                                                                    .tryParse(
-                                                                        "$mrsId")
-                                                              });
-                                                        }),
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: "Edit MRS",
-                                                        onPress: () {
-                                                          final _flutterSecureStorage =
-                                                              const FlutterSecureStorage();
-
-                                                          _flutterSecureStorage
-                                                              .delete(
-                                                                  key: "mrsId");
-                                                          String mrsId = controller
-                                                                  .listMrsByTaskId?[
-                                                                      index]
-                                                                  ?.mrsId
-                                                                  .toString() ??
-                                                              "";
-                                                          print(
-                                                              {"mrsId": mrsId});
-                                                          Get.toNamed(
-                                                              Routes.editMrs,
-                                                              arguments: {
-                                                                'mrsId': int
-                                                                    .tryParse(
-                                                                        "$mrsId")
-                                                              });
-                                                        })
+                                        controller.listMrsByTaskId!.length > 0
+                                            ? Expanded(
+                                                child: DataTable2(
+                                                  border: TableBorder.all(
+                                                      color: Color.fromARGB(
+                                                          255, 206, 229, 234)),
+                                                  columns: [
+                                                    DataColumn2(
+                                                        fixedWidth: 100,
+                                                        label: Text(
+                                                          "Sr. No.",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                    DataColumn2(
+                                                        fixedWidth: 130,
+                                                        label: Text(
+                                                          "MRS ID",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                    DataColumn2(
+                                                        // fixedWidth: 200,
+                                                        label: Text(
+                                                      "MRS Items List ",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        //  fixedWidth: 300,
+                                                        label: Text(
+                                                      "Status",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        fixedWidth: 300,
+                                                        label: Text(
+                                                          'Action',
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
                                                   ],
-                                                )),
-                                              ]),
-                                            ),
-                                          ),
-                                        ),
+                                                  rows: List<DataRow>.generate(
+                                                    controller.listMrsByTaskId
+                                                            ?.length ??
+                                                        0,
+                                                    (index) => DataRow(cells: [
+                                                      DataCell(
+                                                          Text('${index + 1}')),
+                                                      DataCell(Text(
+                                                          "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
+                                                      DataCell(Text(controller
+                                                              .listMrsByTaskId?[
+                                                                  index]
+                                                              ?.mrsItems ??
+                                                          '')),
+                                                      DataCell(Text(controller
+                                                              .listMrsByTaskId?[
+                                                                  index]
+                                                              ?.status_short ??
+                                                          '')),
+                                                      DataCell(Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          TableActionButton(
+                                                              color: ColorValues
+                                                                  .viewColor,
+                                                              icon: Icons
+                                                                  .remove_red_eye,
+                                                              message:
+                                                                  "View MRS",
+                                                              onPress: () {
+                                                                final _flutterSecureStorage =
+                                                                    const FlutterSecureStorage();
+
+                                                                _flutterSecureStorage
+                                                                    .delete(
+                                                                        key:
+                                                                            "mrsId");
+                                                                String mrsId = controller
+                                                                        .listMrsByTaskId?[
+                                                                            index]
+                                                                        ?.mrsId
+                                                                        .toString() ??
+                                                                    "";
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .mrsViewScreen,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              }),
+                                                          TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message:
+                                                                  "Edit MRS",
+                                                              onPress: () {
+                                                                final _flutterSecureStorage =
+                                                                    const FlutterSecureStorage();
+
+                                                                _flutterSecureStorage
+                                                                    .delete(
+                                                                        key:
+                                                                            "mrsId");
+                                                                String mrsId = controller
+                                                                        .listMrsByTaskId?[
+                                                                            index]
+                                                                        ?.mrsId
+                                                                        .toString() ??
+                                                                    "";
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .editMrs,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              })
+                                                        ],
+                                                      )),
+                                                    ]),
+                                                  ),
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
@@ -906,8 +927,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                           text: "Return Mrs",
                           onPressed: () {
                             controller.clearStoreTaskData();
+                            controller.clearStoreTaskActivityData();
+                            controller.clearStoreTasktoActorData();
+                            controller.clearStoreTaskWhereUsedData();
+                            controller.clearStoreTaskfromActorData();
 
                             Get.toNamed(Routes.mrsReturnScreen, arguments: {
+                              "whereUsed": 27,
+                              "fromActorTypeId": 2,
+                              "to_actor_type_id": 3,
                               "pmTaskId":
                                   controller.pmtaskViewModel.value?.id ?? 0,
                               "activity":
