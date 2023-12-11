@@ -22,6 +22,7 @@ class InventoryCategoryListController extends GetxController {
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel2?> equipmentCategoryList =
       <InventoryCategoryModel2>[].obs;
+  RxBool isContainerVisible = false.obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   Rx<bool> isTitleInvalid = false.obs;
@@ -45,10 +46,14 @@ class InventoryCategoryListController extends GetxController {
       // return;
     }
 
-    inventoryStatusList?.value = filteredData.where((item) =>
-        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+    inventoryStatusList?.value = filteredData
+        .where((item) => item!.name!
+            .toString()
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
         .toList();
   }
+
   RxList<String> inventoryStatusListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
@@ -98,8 +103,8 @@ class InventoryCategoryListController extends GetxController {
   Future<void> getInventoryCategoryList(
       int facilityId, int type, bool isLoading) async {
     inventoryStatusList?.value = <InventoryCategoryModel2>[];
-    final _inventoryStatusList =
-        await inventoryStatusListPresenter.getInventoryCategoryList(isLoading: isLoading);
+    final _inventoryStatusList = await inventoryStatusListPresenter
+        .getInventoryCategoryList(isLoading: isLoading);
 
     if (_inventoryStatusList != null) {
       inventoryStatusList!.value = _inventoryStatusList;
@@ -123,6 +128,10 @@ class InventoryCategoryListController extends GetxController {
     Get.toNamed(
       Routes.createCheckList,
     );
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -151,7 +160,7 @@ class InventoryCategoryListController extends GetxController {
   }
 
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -161,12 +170,12 @@ class InventoryCategoryListController extends GetxController {
   //   print("CREATE CONTROLLER");
 
   Future<bool> createInventoryStatus() async {
-    if (nameCtrlr.text.trim() == '' ) {
+    if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -186,12 +195,11 @@ class InventoryCategoryListController extends GetxController {
       // String _duration = durationCtrlr.text.trim();
       String _manpower = descriptionCtrlr.text.trim();
 
-      CreateInventoryStatusListModel createChecklist = CreateInventoryStatusListModel(
-          name: _checklistNumber,
-          description: _manpower
-      );
+      CreateInventoryStatusListModel createChecklist =
+          CreateInventoryStatusListModel(
+              name: _checklistNumber, description: _manpower);
       var checklistJsonString =
-        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+          createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", checklistJsonString});
       await inventoryStatusListPresenter.createInventoryCategory(
@@ -206,9 +214,6 @@ class InventoryCategoryListController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-
-
-
 
     await {cleardata()};
   }
@@ -293,10 +298,7 @@ class InventoryCategoryListController extends GetxController {
     String _manpower = descriptionCtrlr.text.trim();
 
     InventoryStatusListModel createChecklist = InventoryStatusListModel(
-      id: checklistId,
-        name: _checklistNumber,
-        description: _manpower
-    );
+        id: checklistId, name: _checklistNumber, description: _manpower);
     var checklistJsonString =
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
