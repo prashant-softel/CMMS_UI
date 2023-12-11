@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/styles.dart';
 
-class StatutoryWeb extends StatelessWidget {
-  StatutoryWeb({Key? key});
+class ComplianceWeb extends StatelessWidget {
+  ComplianceWeb({Key? key});
 
   final List<Map<String, dynamic>> statutoryData = [
     {
@@ -200,11 +200,7 @@ class StatutoryWeb extends StatelessWidget {
                                                   color: ColorValues.editColor,
                                                   icon: Icons.edit,
                                                   message: 'Edit',
-                                                  onPress: () {
-                                                    Get.toNamed(
-                                                      Routes.complianceScreen,
-                                                    );
-                                                  },
+                                                  onPress: () {},
                                                 ),
                                                 TableActionButton(
                                                   color:

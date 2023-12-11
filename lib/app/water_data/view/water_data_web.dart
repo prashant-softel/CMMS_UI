@@ -1,22 +1,17 @@
-import 'package:cmms/app/audit_list/audit_list_controller.dart';
-import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/water_data/water_data_controller.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/action_button.dart';
 import '../../widgets/table_action_button.dart';
 
 class WaterDataWeb extends StatefulWidget {
@@ -116,10 +111,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                       style: Styles.greyLight14,
                     ),
                     GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Text(" / MIS", style: Styles.greyMediumLight12)),
+                      onTap: () {
+                        Get.offNamed(Routes.misDashboard);
+                      },
+                      child: Text(" / MIS", style: Styles.greyLight14),
+                    ),
                     Text(" / WATER DATA", style: Styles.greyMediumLight12)
                   ],
                 ),
