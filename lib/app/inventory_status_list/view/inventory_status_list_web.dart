@@ -20,6 +20,7 @@ class InventoryStatusListContentWeb
         width: Get.width,
         height: Get.height,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 45,
@@ -68,6 +69,22 @@ class InventoryStatusListContentWeb
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 25, top: 10),
+              child: ElevatedButton(
+                style: Styles.navyBlueElevatedButtonStyle,
+                onPressed: () {
+                  controller.toggleContainer();
+                },
+                child: Obx(() {
+                  return Text(
+                    controller.isContainerVisible.value
+                        ? 'Close Create Assets Status'
+                        : 'Open Create Assets Status',
+                  );
+                }),
+              ),
+            ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,338 +94,364 @@ class InventoryStatusListContentWeb
                   //             .length >
                   //         0
                   //     ?
-                  Container(
-                    width: (Get.width * .3),
-                    margin: EdgeInsets.only(left: 30, top: 30),
-                    constraints: BoxConstraints(maxHeight: 240, minHeight: 220),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color.fromARGB(255, 251, 252, 253),
-                    ),
-                    // height: MediaQuery.of(context).size.width * 0.2,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          // Text(
-                          //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10.0, right: 10, top: 10),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Create Assets Status",
-                                      style: Styles.blackBold16,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Visibility(
-                                      visible: controller.isSuccess.value,
-                                      child: Center(
-                                        child: Wrap(
-                                          children: [
-                                            Text(
-                                              controller.isFormInvalid == false
-                                                  ? controller.selectedItem ==
-                                                          null
-                                                      ? "Create Assets Status Successfully in the List."
-                                                      : "Create Assets Status updated Successfully in the List."
-                                                  : "Create Assets Status is not added.",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Color.fromARGB(
-                                                      255, 24, 243, 123)),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                          ],
+                  Visibility(
+                    visible: controller.isContainerVisible.value,
+                    child: Container(
+                      width: (Get.width * .3),
+                      margin: EdgeInsets.only(left: 30, top: 20),
+                      constraints:
+                          BoxConstraints(maxHeight: 240, minHeight: 220),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color.fromARGB(255, 251, 252, 253),
+                      ),
+                      // height: MediaQuery.of(context).size.width * 0.2,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // Text(
+                            //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10, top: 10),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Create Assets Status",
+                                        style: Styles.blackBold16,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Visibility(
+                                        visible: controller.isSuccess.value,
+                                        child: Center(
+                                          child: Wrap(
+                                            children: [
+                                              Text(
+                                                controller.isFormInvalid ==
+                                                        false
+                                                    ? controller.selectedItem ==
+                                                            null
+                                                        ? "Create Assets Status Successfully in the List."
+                                                        : "Create Assets Status updated Successfully in the List."
+                                                    : "Create Assets Status is not added.",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Color.fromARGB(
+                                                        255, 24, 243, 123)),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        // Text(
-                                        //   "Title",
-                                        //   style: Styles.blackBold16,
-                                        // ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          // Text(
+                                          //   "Title",
+                                          //   style: Styles.blackBold16,
+                                          // ),
 
-                                        Expanded(
-                                            child: CustomRichText(
-                                                title: 'Name: ')),
-                                        Container(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Name: ')),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: TextField(
-                                            controller: controller.nameCtrlr,
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            autofocus: false,
-                                            style: TextStyle(
-                                                fontSize: 15.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                            decoration: InputDecoration(
-                                              fillColor: ColorValues.whiteColor,
-                                              filled: true,
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedErrorBorder: controller
-                                                      .isTitleInvalid.value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : InputBorder.none,
-                                              errorBorder: controller
-                                                      .isTitleInvalid.value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : null,
-                                              errorText: controller
-                                                      .isTitleInvalid.value
-                                                  ? "Required field"
-                                                  : null,
-                                              // Set line height here
-                                              hintStyle: TextStyle(height: 2.0),
-                                            ),
-                                            onChanged: (value) {
-                                              if (value.trim().length > 1) {
-                                                controller.isTitleInvalid
-                                                    .value = false;
-                                              } else {
-                                                controller.isTitleInvalid
-                                                    .value = true;
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child: CustomRichText(
-                                                title: 'Description ')),
-                                        Container(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: TextField(
-                                            controller:
-                                                controller.descriptionCtrlr,
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            autofocus: false,
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                            decoration: InputDecoration(
-                                              fillColor: ColorValues.whiteColor,
-                                              filled: true,
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedErrorBorder: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : InputBorder.none,
-                                              errorBorder: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : null,
-                                              errorText: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? "Required field"
-                                                  : null,
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
-                                            onChanged: (value) {
-                                              if (value.trim().length > 1) {
-                                                controller.isDescriptionInvalid
-                                                    .value = false;
-                                              } else {
-                                                controller.isDescriptionInvalid
-                                                    .value = true;
-                                              }
-                                            },
+                                            child: TextField(
+                                              controller: controller.nameCtrlr,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              style: TextStyle(
+                                                  fontSize: 15.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isTitleInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isTitleInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isTitleInvalid.value
+                                                    ? "Required field"
+                                                    : null,
+                                                // Set line height here
+                                                hintStyle:
+                                                    TextStyle(height: 2.0),
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller.isTitleInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller.isTitleInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 40,
-                                    ),
-                                  ]),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description ')),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: TextField(
+                                              controller:
+                                                  controller.descriptionCtrlr,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? "Required field"
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller
+                                                      .isDescriptionInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller
+                                                      .isDescriptionInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                    ]),
+                              ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: (Get.width * .1),
-                                height: 40,
-                                child: CustomElevatedButton(
-                                    backgroundColor: ColorValues.appRedColor,
-                                    onPressed: () {
-                                      // controller.cleardata();
-                                    },
-                                    text: 'Cancel'),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                  width: (Get.width * .15),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: (Get.width * .1),
                                   height: 40,
-                                  child: controller.selectedItem == null
-                                      ? CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .createInventoryStatus()
-                                                .then((value) {
-                                              print("CREATE");
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Create Assets Status')
-                                      : CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .updateInventoryStatus(
-                                                    controller.selectedItem?.id)
-                                                .then((value) {
-                                              print("UPDATE");
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Update')),
-                            ],
-                          ),
-                        ],
+                                  child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.appRedColor,
+                                      onPressed: () {
+                                        // controller.cleardata();
+                                      },
+                                      text: 'Cancel'),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                    width: (Get.width * .15),
+                                    height: 40,
+                                    child: controller.selectedItem == null
+                                        ? CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .createInventoryStatus()
+                                                  .then((value) {
+                                                print("CREATE");
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Create Assets Status')
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updateInventoryStatus(
+                                                      controller
+                                                          .selectedItem?.id)
+                                                  .then((value) {
+                                                print("UPDATE");
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -416,7 +459,7 @@ class InventoryStatusListContentWeb
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 30),
+                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
