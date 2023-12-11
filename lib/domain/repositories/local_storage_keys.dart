@@ -27,6 +27,9 @@ abstract class LocalKeys {
   static const pmTaskId = 'pmTaskId';
   static const pmPlanId = 'pmPlanId';
   static const activity = 'activity';
+  static const fromActorTypeId = 'fromActorTypeId';
+  static const toactortypeid = 'to_actor_type_id';
+  static const whereUsed = 'whereUsed';
 
   static const mrsId = 'mrsId';
   static const userDetailId = 'userId';

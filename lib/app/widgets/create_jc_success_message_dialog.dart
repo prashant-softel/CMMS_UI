@@ -112,6 +112,7 @@ class CreateJobCardDialog extends GetView {
                   //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                   Get.offAllNamed(Routes.createMrs, arguments: {
                     "whereUsedId": jcId![0],
+                    "activity": "",
                     "whereUsed": 4,
                     "fromActorTypeId": 2,
                     "to_actor_type_id": 4

@@ -449,6 +449,10 @@ class ObservationPMTaskViewDialog extends GetView {
                                                       .pmtaskViewModel
                                                       .value
                                                       ?.id,
+                                                  "activity": controller
+                                                      .pmtaskViewModel
+                                                      .value
+                                                      ?.plan_title,
                                                   "whereUsed": 27,
                                                   "fromActorTypeId": 2,
                                                   "to_actor_type_id": 3

@@ -498,4 +498,20 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   void clearStoreTaskData() {
     preventiveMaintenanceTaskViewPresenter.clearStoreTaskData();
   }
+
+  void clearStoreTaskActivityData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskWhereUsedData();
+  }
 }

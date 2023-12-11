@@ -58,6 +58,9 @@ class CreateMrsController extends GetxController {
         if (arguments.containsKey('fromActorTypeId')) {
           fromActorTypeId.value = arguments['fromActorTypeId'];
         }
+        if (arguments.containsKey('activity')) {
+          activityCtrlr.text = arguments['activity'];
+        }
         if (whereUsedTypeId != 0) {
           whereUsedCtrlr.text = whereUsedTypeId.toString();
         }
