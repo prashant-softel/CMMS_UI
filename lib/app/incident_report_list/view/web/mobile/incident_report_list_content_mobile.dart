@@ -3,6 +3,7 @@ import 'package:cmms/app/incident_report_list/incident_report_list_controller.da
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class IncidentReportListMobile extends GetView<IncidentReportListController> {
   IncidentReportListMobile({Key? key}) : super(key: key);
@@ -26,12 +27,13 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.15,
                           child: TextField(
-                            onChanged: (value) => controller.search(value),
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              height: 0.2,
-                              color: Colors.black,
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
                             ),
+                            onChanged: (value) => controller.search(value),
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.only(top: 20, left: 20),

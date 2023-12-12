@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -2237,6 +2238,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTime_mobile(context);
               },
@@ -2329,6 +2334,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTimeTill_mobile(context);
               },
@@ -2561,6 +2570,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1.1,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.permitDescriptionCtrlr,
             keyboardType: TextInputType.multiline,
             maxLines: 5,
@@ -2661,6 +2674,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 3.7,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 position == 0
                     ? pickDateTime_web(context, 0)
@@ -2846,6 +2863,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.permitDescriptionCtrlr,
               keyboardType: TextInputType.multiline,
               maxLines: 5,
@@ -2942,6 +2963,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+
               controller: controller.titleTextCtrlr,
               keyboardType: TextInputType.multiline,
               // maxLines: 5,

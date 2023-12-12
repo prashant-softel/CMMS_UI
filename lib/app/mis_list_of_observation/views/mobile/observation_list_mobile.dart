@@ -3,6 +3,7 @@ import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dar
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ObservationListMobile extends GetView<ObservationListController> {
   ObservationListMobile({Key? key}) : super(key: key);
@@ -22,10 +23,9 @@ class ObservationListMobile extends GetView<ObservationListController> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 1.15,
                     child: TextField(
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        height: 0.2,
-                        color: Colors.black,
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                            fontSize: 16.0, height: 1.0, color: Colors.black),
                       ),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(top: 20, left: 20),

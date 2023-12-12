@@ -5,6 +5,7 @@ import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -208,6 +209,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             // width: MediaQuery.of(context).size.width / 1.5,/
                                             child: Obx(
                                               () => TextField(
+                                                style: GoogleFonts.lato(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 16.0,
+                                                      height: 1.0,
+                                                      color: Colors.black),
+                                                ),
                                                 controller:
                                                     controller.titleCtrlr,
                                                 keyboardType:
@@ -334,6 +341,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   30,
                                               child: Obx(
                                                 () => TextField(
+                                                  style: GoogleFonts.lato(
+                                                    textStyle: TextStyle(
+                                                        fontSize: 16.0,
+                                                        height: 1.0,
+                                                        color: Colors.black),
+                                                  ),
                                                   controller: controller
                                                       .descriptionCtrlr,
                                                   keyboardType:

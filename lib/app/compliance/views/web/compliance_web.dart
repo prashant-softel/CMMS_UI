@@ -10,6 +10,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/color_values.dart';
 import '../../../theme/styles.dart';
@@ -231,6 +232,12 @@ class ComplianceWeb extends StatelessWidget {
                                           Text('Comment: '),
                                           Expanded(
                                             child: TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
                                               decoration: InputDecoration(
                                                 disabledBorder:
                                                     OutlineInputBorder(

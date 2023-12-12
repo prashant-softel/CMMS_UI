@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -99,6 +100,12 @@ class ViewCalibrationTabWidget extends StatelessWidget {
                                                       .width /
                                                   5.1,
                                               child: TextField(
+                                                style: GoogleFonts.lato(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 16.0,
+                                                      height: 1.0,
+                                                      color: Colors.black),
+                                                ),
                                                 controller: controller
                                                     .calibrationRemaingCtrlr,
                                                 decoration: InputDecoration(

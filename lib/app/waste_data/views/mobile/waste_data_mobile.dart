@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WasteDataMobile extends GetView<WasteDataController> {
   WasteDataMobile({Key? key}) : super(key: key);
@@ -75,10 +76,11 @@ class WasteDataMobile extends GetView<WasteDataController> {
                           Container(
                             width: 150,
                             child: TextField(
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                height: 0.1,
-                                color: Colors.black,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
                               ),
                             ),
                           ),
@@ -89,10 +91,11 @@ class WasteDataMobile extends GetView<WasteDataController> {
                           Container(
                             width: 150,
                             child: TextField(
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                height: 0.1,
-                                color: Colors.black,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
                               ),
                             ),
                           ),

@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
@@ -150,6 +151,12 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                               height: 40,
                               margin: Dimens.edgeInsets0_0_16_0,
                               child: TextField(
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 16.0,
+                                      height: 1.0,
+                                      color: Colors.black),
+                                ),
                                 decoration: InputDecoration(
                                   enabledBorder: const OutlineInputBorder(
                                     borderSide: const BorderSide(

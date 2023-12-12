@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -266,10 +267,11 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                     width: 300,
                                     height: 40,
                                     child: TextField(
-                                      style: TextStyle(
-                                        fontSize: 17.0,
-                                        height: 1.0,
-                                        color: Colors.black,
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
                                       ),
                                       onChanged: (value) =>
                                           controller.search(value),

@@ -3,13 +3,14 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class PermitIssueDialog extends GetView {
- String? permitIssueDialog;
+  String? permitIssueDialog;
   bool safetyValue1 = true;
   bool safetyValue2 = true;
   bool safetyValue3 = true;
@@ -17,11 +18,10 @@ class PermitIssueDialog extends GetView {
   bool safetyValue5 = false;
   bool safetyValue6 = false;
   bool safetyValue7 = true;
-String? permitId;
- 
-  PermitIssueDialog({super.key, this.permitIssueDialog, this. permitId});
-  final NewPermitListController _controller = Get.find();
+  String? permitId;
 
+  PermitIssueDialog({super.key, this.permitIssueDialog, this.permitId});
+  final NewPermitListController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,80 +40,74 @@ String? permitId;
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return 
-             Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              height: 200,
-              width: double.infinity,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                      thickness: 1,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                       
-                       CustomRichText(title: 'Comment'),
-                       SizedBox(height: 20,),
-                       TextField(
+          return Container(
+            padding: Dimens.edgeInsets05_0_5_0,
+            height: 200,
+            width: double.infinity,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: ColorValues.greyLightColour,
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomRichText(title: 'Comment'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
+                        ),
                         controller: _controller.commentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black,),
-                          
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide( color: Colors.black),
-                           ),
-                          
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                         ),
-                       ),
-                       
-                       
-
-                      ],
-                    ),
-                    
-                  ]),
-            );
-          
+                      ),
+                    ],
+                  ),
+                ]),
+          );
         }),
         actions: [
-            SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          
-                          Dimens.boxWidth10,
-                          ElevatedButton(
-                            style: Styles.darkRedElevatedButtonStyle,
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                           Dimens.boxWidth20,
-                          ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
-                            onPressed: () {
-                              _controller.permitIssueButton(permitId:permitId);
-                              Get.back();
-                              // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
-
-                            },
-                            child: const Text('Issue Permit'),
-                          ),
-                        ]),
+          SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Dimens.boxWidth10,
+            ElevatedButton(
+              style: Styles.darkRedElevatedButtonStyle,
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('Cancel'),
+            ),
+            Dimens.boxWidth20,
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
+              onPressed: () {
+                _controller.permitIssueButton(permitId: permitId);
+                Get.back();
+                // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+              },
+              child: const Text('Issue Permit'),
+            ),
+          ]),
         ],
       );
     }));
- 
   }
 }

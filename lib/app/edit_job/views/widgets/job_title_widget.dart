@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
@@ -61,6 +62,10 @@ class JobTitleWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.jobTitleCtrlr,
             autofocus: false,
             decoration: InputDecoration(

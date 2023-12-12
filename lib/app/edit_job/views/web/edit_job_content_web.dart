@@ -2,6 +2,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../theme/dimens.dart';
 import '../../edit_job_controller.dart';
@@ -171,6 +172,13 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                       0.040,
                                                   child: Obx(
                                                     () => TextField(
+                                                      style: GoogleFonts.lato(
+                                                        textStyle: TextStyle(
+                                                            fontSize: 16.0,
+                                                            height: 1.0,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                       controller: controller
                                                           .jobTitleCtrlr,
                                                       autofocus: false,
@@ -840,6 +848,13 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                       .2),
                                                   child: Obx(
                                                     () => TextField(
+                                                      style: GoogleFonts.lato(
+                                                        textStyle: TextStyle(
+                                                            fontSize: 16.0,
+                                                            height: 1.0,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
                                                       controller: controller
                                                           .jobDescriptionCtrlr,
                                                       keyboardType:

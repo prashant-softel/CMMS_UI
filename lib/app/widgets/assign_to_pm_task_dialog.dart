@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -26,8 +27,8 @@ class AssignToPMTaskDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         // contentPadding: EdgeInsets.zero,
         title: Row(
-          mainAxisAlignment : MainAxisAlignment.center,
-          crossAxisAlignment : CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               "PM Task Id:",
@@ -163,11 +164,9 @@ class AssignToPMTaskDialog extends GetView {
 
   Widget _buildDueDateField_web(
     BuildContext context,
-    
   ) {
     return Column(//
         children: [
-     
       Dimens.boxHeight5,
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
@@ -197,6 +196,10 @@ class AssignToPMTaskDialog extends GetView {
               ? MediaQuery.of(context).size.width / 7
               : MediaQuery.of(context).size.width / 1.0,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             onTap: () {
               pickDateTime_web(context);
 

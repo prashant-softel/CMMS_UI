@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../domain/models/job_model.dart';
 import '../../../theme/color_values.dart';
@@ -314,11 +315,17 @@ class JobListContentWeb extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
+                  style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
                 onChanged: (value) {
                   filterText.value = value;
                 },
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
+              
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(

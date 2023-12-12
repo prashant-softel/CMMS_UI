@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/document_manager_model.dart';
 import '../../navigators/app_pages.dart';
@@ -135,6 +136,12 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                           height: 35,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: const BorderSide(

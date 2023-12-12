@@ -3,7 +3,7 @@ import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -55,6 +55,10 @@ class PermitCancelByApproverDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
+                        ),
                         controller:
                             _controller.cancelCommentByApproverTextFieldCtrlr,
                         maxLines: 4,
@@ -119,9 +123,11 @@ class PermitCancelByApproverDialog extends GetView {
                     permitId: permitId, ptwStatus: '$ptwStatus');
                 Get.back();
               },
-              child: Text( ptwStatus == '123' || ptwStatus == '130'
-              ? 'Cancel Permit By Approver'
-              : 'Cancel Permit Request',),
+              child: Text(
+                ptwStatus == '123' || ptwStatus == '130'
+                    ? 'Cancel Permit By Approver'
+                    : 'Cancel Permit Request',
+              ),
             ),
           ]),
         ],
