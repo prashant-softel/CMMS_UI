@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
@@ -2852,7 +2853,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           context)
                                                                       .size
                                                                       .width /
-                                                                  1.25,
+                                                                  1.3,
                                                               child: Center(
                                                                 child: Column(
                                                                   children: [
@@ -3062,7 +3063,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             Dimens.boxWidth10,
                                                                             Expanded(
                                                                                 flex: 8,
-                                                                                child: FileUploadDetailsWidgetWeb()),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.only(top: 15),
+                                                                                  child: FileUploadDetailsWidgetWeb2(),
+                                                                                )),
                                                                           ]),
                                                                     ),
                                                                   ],
