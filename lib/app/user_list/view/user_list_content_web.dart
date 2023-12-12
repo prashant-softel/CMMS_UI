@@ -264,8 +264,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                 columnSpacing: 10,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
@@ -327,42 +327,43 @@ class _UserListContentWebState extends State<UserListContentWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onChanged: (value) {
-                  filterText.value = value;
-                  //   onSearchCallBack(value);
-                },
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 header,
-                style: Styles.black16W500,
+                style: Styles.black15W600,
               ),
             ),
           ]),
