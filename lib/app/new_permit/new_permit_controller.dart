@@ -150,6 +150,10 @@ class NewPermitController extends GetxController {
   Rx<bool> isTitleTextInvalid = false.obs;
   Rx<bool> isWorPermitNumberTextInvalid = false.obs;
 
+  String? ptwData = "ptwString";
+  bool showColumn2 = true;
+  // RxList<String> ptwData = <String>[].obs;
+
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;

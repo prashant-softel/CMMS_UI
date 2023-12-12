@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
@@ -2591,224 +2592,231 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ),
 
                                     //Tool box talk / Pre Job Discussion
-                                    Container(
-                                      margin: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.3)),
-                                      ),
-                                      child: Container(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
-                                              style: Styles.blue700,
+                                    controller.viewPermitDetailsModel.value
+                                                ?.tbT_Done_By ==
+                                            null
+                                        ? Dimens.box0
+                                        : Container(
+                                            margin: EdgeInsets.all(20),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey
+                                                      .withOpacity(.3)),
                                             ),
-                                            Dimens.boxHeight10,
-                                            Wrap(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10,
-                                                              right: 10),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                            child: Container(
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Wrap(
+                                                    children: [
+                                                      Column(
                                                         children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Conducted At Job-Site By:',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
-                                                                style: Styles
-                                                                    .black17,
-                                                              ),
-                                                              // SizedBox(
-                                                              //   width: MediaQuery.of(
-                                                              //               context)
-                                                              //           .size
-                                                              //           .width /
-                                                              //       7,
-                                                              //   child: Obx(
-                                                              //     () =>
-                                                              //         DropdownWebWidget(
-                                                              //       dropdownList:
-                                                              //           controller
-                                                              //               .employeeList,
-                                                              //       isValueSelected:
-                                                              //           controller
-                                                              //               .isemployeeListSelected
-                                                              //               .value,
-                                                              //       selectedValue:
-                                                              //           controller
-                                                              //               .selectedEmployeeList
-                                                              //               .value,
-                                                              //       onValueChanged:
-                                                              //           controller
-                                                              //               .onValueChanged,
-                                                              //     ),
-                                                              //   ),
-                                                              // ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
                                                                     .only(
-                                                                    right: 450),
-                                                            child: Column(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child: Row(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .end,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
+                                                                      .start,
                                                               children: [
-                                                                Text(
-                                                                  'Date & Time',
-                                                                  style: Styles
-                                                                      .blackBold17,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Conducted At Job-Site By:',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                    // SizedBox(
+                                                                    //   width: MediaQuery.of(
+                                                                    //               context)
+                                                                    //           .size
+                                                                    //           .width /
+                                                                    //       7,
+                                                                    //   child: Obx(
+                                                                    //     () =>
+                                                                    //         DropdownWebWidget(
+                                                                    //       dropdownList:
+                                                                    //           controller
+                                                                    //               .employeeList,
+                                                                    //       isValueSelected:
+                                                                    //           controller
+                                                                    //               .isemployeeListSelected
+                                                                    //               .value,
+                                                                    //       selectedValue:
+                                                                    //           controller
+                                                                    //               .selectedEmployeeList
+                                                                    //               .value,
+                                                                    //       onValueChanged:
+                                                                    //           controller
+                                                                    //               .onValueChanged,
+                                                                    //     ),
+                                                                    //   ),
+                                                                    // ),
+                                                                  ],
                                                                 ),
+                                                                Spacer(),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          right:
+                                                                              450),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .end,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Date & Time',
+                                                                        style: Styles
+                                                                            .blackBold17,
+                                                                      ),
 
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
-                                                                  style: Styles
-                                                                      .black17,
-                                                                ),
-                                                                // _buildDateTimeField_web(
-                                                                //     context),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          Dimens.edgeInsets20,
-                                                      height: ((controller
-                                                                      .listEmployee
-                                                                      ?.length ??
-                                                                  0) *
-                                                              40) +
-                                                          130,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .lightGreyColorWithOpacity35,
-                                                          width: 1,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .appBlueBackgroundColor,
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Text(
-                                                                  'TBT Training Attended By',
-                                                                  style: Styles
-                                                                      .blue700,
+                                                                      Text(
+                                                                        '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                                        style: Styles
+                                                                            .black17,
+                                                                      ),
+                                                                      // _buildDateTimeField_web(
+                                                                      //     context),
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                          Expanded(
-                                                            child: DataTable2(
-                                                              border: TableBorder.all(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          206,
-                                                                          229,
-                                                                          234)),
-                                                              columns: [
-                                                                DataColumn(
-                                                                    label: Text(
-                                                                  "Employee Name",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                                DataColumn(
-                                                                    label: Text(
-                                                                  "Responsibility",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                              ],
-                                                              rows: List<
-                                                                  DataRow>.generate(
-                                                                controller
-                                                                        .listEmployee
-                                                                        ?.length ??
-                                                                    0,
-                                                                (index) =>
-                                                                    DataRow(
-                                                                        cells: [
-                                                                      DataCell(Text(controller
-                                                                              .listEmployee?[index]
-                                                                              ?.empName
-                                                                              .toString() ??
-                                                                          '')),
-                                                                      DataCell(Text(controller
-                                                                              .listEmployee?[index]
-                                                                              ?.resp
-                                                                              .toString() ??
-                                                                          '')),
-                                                                    ]),
+                                                          Container(
+                                                            margin: Dimens
+                                                                .edgeInsets20,
+                                                            height: ((controller
+                                                                            .listEmployee
+                                                                            ?.length ??
+                                                                        0) *
+                                                                    40) +
+                                                                130,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorValues
+                                                                    .lightGreyColorWithOpacity35,
+                                                                width: 1,
                                                               ),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: ColorValues
+                                                                      .appBlueBackgroundColor,
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  blurRadius: 5,
+                                                                  offset:
+                                                                      Offset(
+                                                                          0, 2),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          10.0),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        'TBT Training Attended By',
+                                                                        style: Styles
+                                                                            .blue700,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child:
+                                                                      DataTable2(
+                                                                    border: TableBorder.all(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            206,
+                                                                            229,
+                                                                            234)),
+                                                                    columns: [
+                                                                      DataColumn(
+                                                                          label:
+                                                                              Text(
+                                                                        "Employee Name",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                15,
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )),
+                                                                      DataColumn(
+                                                                          label:
+                                                                              Text(
+                                                                        "Responsibility",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                15,
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )),
+                                                                    ],
+                                                                    rows: List<
+                                                                        DataRow>.generate(
+                                                                      controller
+                                                                              .listEmployee
+                                                                              ?.length ??
+                                                                          0,
+                                                                      (index) =>
+                                                                          DataRow(
+                                                                              cells: [
+                                                                            DataCell(Text(controller.listEmployee?[index]?.empName.toString() ??
+                                                                                '')),
+                                                                            DataCell(Text(controller.listEmployee?[index]?.resp.toString() ??
+                                                                                '')),
+                                                                          ]),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                          ),
 
                                     //   SizedBox(height: 10),
 
@@ -3362,7 +3370,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             Expanded(
                                                                 flex: 8,
                                                                 child:
-                                                                    FileUploadDetailsWidgetWeb()),
+                                                                    FileUploadDetailsWidgetWeb2()),
                                                           ]),
                                                     ),
                                                   ),
@@ -3874,18 +3882,23 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               controller.viewPermitDetailsModel.value?.ptwStatus ==
                       PermitStatusConstants.PTW_APPROVE //125
                   ///Printing functionality
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        icon: Icons.print_outlined,
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        text: "Print",
-                        onPressed: () {
-                          controller.generateInvoice();
-                        },
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                        height: 45,
+                        child: CustomElevatedButton(
+                          icon: Icons.print_outlined,
+                          backgroundColor: ColorValues.appDarkBlueColor,
+                          text: "Print",
+                          onPressed: () {
+                            controller.generateInvoice();
+                          },
+                        ),
                       ),
                     )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               // Container(
               //     height: 45,
@@ -3942,24 +3955,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   // ||
                   // controller.viewPermitDetailsModel.value?.ptwStatus ==
                   //     PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appGreenColor,
-                        text: "Approve Permit",
-                        icon: Icons.add,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitApprovedDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appGreenColor,
+                            text: "Approve Permit",
+                            icon: Icons.add,
+                            onPressed: () {
+                              // controller
+                              //     .createNewPermit();
+                              Get.dialog(PermitApprovedDialog(
+                                permitId: controller
+                                    .viewPermitDetailsModel.value?.permitNo,
+                                ptwStatus:
+                                    '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
 
               varUserAccessModel.value.access_list!
@@ -3972,25 +3988,30 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
                           PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appGreenColor,
-                        text: "Extend Approve",
-                        icon: Icons.add,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitApprovedDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appGreenColor,
+                            text: "Extend Approve",
+                            icon: Icons.add,
+                            onPressed: () {
+                              // controller
+                              //     .createNewPermit();
+                              Get.dialog(PermitApprovedDialog(
+                                permitId: controller
+                                    .viewPermitDetailsModel.value?.permitNo,
+                                ptwStatus:
+                                    '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               varUserAccessModel.value.access_list!
                               .where((e) =>
@@ -4002,25 +4023,30 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
                           PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Extend Reject",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitRejectDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appRedColor,
+                            text: "Extend Reject",
+                            icon: Icons.close,
+                            onPressed: () {
+                              // controller
+                              //     .createNewPermit();
+                              Get.dialog(PermitRejectDialog(
+                                permitId: controller
+                                    .viewPermitDetailsModel.value?.permitNo,
+                                ptwStatus:
+                                    '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               ///Extend Permit Button
               controller.viewPermitDetailsModel.value?.isExpired == 1 ||
@@ -4040,22 +4066,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               0
                   //          ||
                   // controller.viewPermitDetailsModel.value?.ptwStatus == 135
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        text: "Extend Permit",
-                        icon: Icons.expand_outlined,
-                        onPressed: () {
-                          // controller
-                          Get.dialog(PermitExtendDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appDarkBlueColor,
+                            text: "Extend Permit",
+                            icon: Icons.expand_outlined,
+                            onPressed: () {
+                              // controller
+                              Get.dialog(PermitExtendDialog(
+                                permitId:
+                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               ///Close Permit Request
               varUserAccessModel.value.access_list!
@@ -4075,21 +4106,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       ||
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
                           PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appcloseRedColor,
-                        text: "Close Permit",
-                        icon: Icons.close,
-                        onPressed: () {
-                          Get.dialog(PermitCloseDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appcloseRedColor,
+                            text: "Close Permit",
+                            icon: Icons.close,
+                            onPressed: () {
+                              Get.dialog(PermitCloseDialog(
+                                permitId:
+                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               ///Reject Button
               varUserAccessModel.value.access_list!
@@ -4115,25 +4151,30 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   //                 UserAccessConstants.kHaveDeleteAccess)
                   //         .length >
                   //     0
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Reject Permit",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitRejectDialog(
-                            permitId: controller
-                                .viewPermitDetailsModel.value?.permitNo,
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId.value,
-                          ));
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appRedColor,
+                            text: "Reject Permit",
+                            icon: Icons.close,
+                            onPressed: () {
+                              // controller
+                              //     .createNewPermit();
+                              Get.dialog(PermitRejectDialog(
+                                permitId: controller
+                                    .viewPermitDetailsModel.value?.permitNo,
+                                ptwStatus:
+                                    '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                jobId: controller.jobId.value,
+                              ));
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               ///Permit cancel by Issuer
               // varUserAccessModel.value.access_list!
@@ -4194,23 +4235,28 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED ||
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
                           PermitStatusConstants.PTW_CANCEL_REQUEST_REJECTED
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Cancel Permit",
-                        icon: Icons.close,
-                        onPressed: () {
-                          Get.dialog(
-                            PermitCancelReQuestDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}',
-                              jobId: controller.jobId.value,
-                            ),
-                          );
-                        },
-                      ))
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appRedColor,
+                            text: "Cancel Permit",
+                            icon: Icons.close,
+                            onPressed: () {
+                              Get.dialog(
+                                PermitCancelReQuestDialog(
+                                  permitId:
+                                      '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                  jobId: controller.jobId.value,
+                                ),
+                              );
+                            },
+                          )),
+                    )
                   : Dimens.box0,
+
+              // Dimens.boxWidth5,
 
               // ////cancel approver
               // varUserAccessModel.value.access_list!

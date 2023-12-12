@@ -735,15 +735,28 @@ class PermitListDataSource extends DataTableSource {
                                       : Container(),
 
                                   varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.approve ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0 ||
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus !=
+                                                  PermitStatusConstants
+                                                      .PTW_REJECTED_BY_APPROVER //124
+                                          ||
                                           controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
