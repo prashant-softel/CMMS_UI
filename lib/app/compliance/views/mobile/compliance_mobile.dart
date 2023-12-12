@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ComplianceMobile extends GetView<StatutoryController> {
   ComplianceMobile({Key? key}) : super(key: key);
@@ -28,10 +29,9 @@ class ComplianceMobile extends GetView<StatutoryController> {
                       CustomRichText(title: 'Compliance'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Checklist Name',
@@ -59,10 +59,9 @@ class ComplianceMobile extends GetView<StatutoryController> {
                       CustomRichText(title: 'Date of received '),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Select The received Date',
@@ -85,10 +84,9 @@ class ComplianceMobile extends GetView<StatutoryController> {
                       CustomRichText(title: 'Date of Expiry'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Select The expiry Date',
@@ -111,10 +109,9 @@ class ComplianceMobile extends GetView<StatutoryController> {
                       Dimens.boxHeight10,
                       TextField(
                         readOnly: true,
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Checklist Name',

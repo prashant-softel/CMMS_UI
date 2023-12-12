@@ -3,7 +3,7 @@ import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_go
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -50,6 +50,10 @@ class GoodsOrderRejectDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
+                        ),
                         controller: _controller.rejectCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(

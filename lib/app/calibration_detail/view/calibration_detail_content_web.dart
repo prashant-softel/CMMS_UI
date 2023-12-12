@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
@@ -553,6 +554,12 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                                     width:
                                         MediaQuery.of(context).size.width / 1.1,
                                     child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
                                       keyboardType: TextInputType.multiline,
                                       maxLines: 5,
                                       autofocus: false,

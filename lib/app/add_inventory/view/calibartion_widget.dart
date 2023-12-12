@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -91,6 +92,12 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                       0.040,
                                   width: MediaQuery.of(context).size.width / 5,
                                   child: TextField(
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
+                                    ),
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.digitsOnly
                                     ],

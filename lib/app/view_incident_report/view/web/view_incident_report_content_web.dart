@@ -13,6 +13,7 @@ import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -1817,6 +1818,10 @@ class ViewIncidentReportContentWeb
                 ? MediaQuery.of(context).size.width / 3.7
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickActionTakenDateTime_web(context, 0);
 
@@ -1993,6 +1998,10 @@ class ViewIncidentReportContentWeb
                 ? MediaQuery.of(context).size.width / 3.7
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 position == 0
                     ? pickDateTime_web(context, 0)
@@ -2181,6 +2190,10 @@ class ViewIncidentReportContentWeb
           ),
           child: SizedBox(
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.incidentreportDescriptionCtrlr,
               keyboardType: TextInputType.multiline,
               maxLines: 5,
@@ -2279,6 +2292,10 @@ class ViewIncidentReportContentWeb
           ),
           child: SizedBox(
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.insuranceRemarkTextCtrlr,
               keyboardType: TextInputType.multiline,
               maxLines: 5,
@@ -2379,6 +2396,10 @@ class ViewIncidentReportContentWeb
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.titleTextCtrlr,
               keyboardType: TextInputType.multiline,
               autofocus: false,
@@ -2477,6 +2498,10 @@ class ViewIncidentReportContentWeb
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.victimNameTextCtrlr,
               keyboardType: TextInputType.multiline,
               autofocus: false,
@@ -2576,6 +2601,10 @@ class ViewIncidentReportContentWeb
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.damagedAssetCostTextCtrlr,
               keyboardType: TextInputType.multiline,
               autofocus: false,
@@ -2676,6 +2705,10 @@ class ViewIncidentReportContentWeb
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.genLossAssetDamageTextCtrlr,
               keyboardType: TextInputType.multiline,
               autofocus: false,

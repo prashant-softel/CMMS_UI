@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/request_calibration_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/business_list_model.dart';
 import '../../domain/models/calibration_list_model.dart';
@@ -97,7 +98,7 @@ class CalibrationListController extends GetxController {
     for (var supplier_list in _venderNameList) {
       venderNameList.add(supplier_list);
     }
-    }
+  }
 
   Future<void> calibrationHistory() async {
     Get.toNamed(
@@ -391,6 +392,10 @@ class CalibrationListController extends GetxController {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: TextField(
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                        fontSize: 16.0, height: 1.0, color: Colors.black),
+                  ),
                   controller: commentCtrlr,
                   keyboardType: TextInputType.multiline,
                   maxLines: 5,
@@ -515,6 +520,10 @@ class CalibrationListController extends GetxController {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: TextField(
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                          fontSize: 16.0, height: 1.0, color: Colors.black),
+                    ),
                     controller: commentCtrlr,
                     keyboardType: TextInputType.multiline,
                     maxLines: 5,

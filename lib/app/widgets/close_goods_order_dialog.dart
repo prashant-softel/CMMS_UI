@@ -2,6 +2,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // import '../theme/colors_value.dart';
 import '../receive_goods_order/receive_goods_order_controller.dart';
@@ -50,6 +51,10 @@ class GoodsOrderCloseDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
+                        ),
                         controller: _controller.closeCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(

@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -189,10 +190,12 @@ class InventoryCategoryListContentWeb
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
-                                              style: TextStyle(
-                                                  fontSize: 15.0,
-                                                  height: 1.0,
-                                                  color: Colors.black),
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -306,10 +309,12 @@ class InventoryCategoryListContentWeb
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  height: 1.0,
-                                                  color: Colors.black),
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -476,10 +481,11 @@ class InventoryCategoryListContentWeb
                                     height: 40,
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
-                                      style: TextStyle(
-                                        fontSize: 17.0,
-                                        height: 1.0,
-                                        color: Colors.black,
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
                                       ),
                                       onChanged: (value) =>
                                           controller.search(value),

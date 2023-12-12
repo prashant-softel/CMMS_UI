@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -207,6 +208,12 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               30,
                                           child: Obx(
                                             () => TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
                                               controller: controller.titleCtrlr,
                                               keyboardType:
                                                   TextInputType.multiline,
@@ -326,6 +333,12 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                 45,
                                             child: Obx(
                                               () => TextField(
+                                                style: GoogleFonts.lato(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 16.0,
+                                                      height: 1.0,
+                                                      color: Colors.black),
+                                                ),
                                                 controller:
                                                     controller.descriptionCtrlr,
                                                 keyboardType:

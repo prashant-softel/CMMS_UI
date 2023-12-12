@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CheckListOfObservationMobile
     extends GetView<CheckListOfObservationController> {
@@ -28,10 +29,9 @@ class CheckListOfObservationMobile
                       CustomRichText(title: 'Checklist Name'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Checklist Name',
@@ -42,10 +42,9 @@ class CheckListOfObservationMobile
                       CustomRichText(title: 'SOP Number'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter SOP Number',
@@ -90,10 +89,9 @@ class CheckListOfObservationMobile
                       CustomRichText(title: 'Date of Inspection'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Select The Date',
@@ -108,12 +106,13 @@ class CheckListOfObservationMobile
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1.6,
                             child: TextField(
-                              cursorHeight: 20,
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                height: 4,
-                                color: Colors.black,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
                               ),
+                              cursorHeight: 20,
                             ),
                           ),
                           Spacer(),
@@ -172,12 +171,13 @@ class CheckListOfObservationMobile
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          cursorHeight: 20,
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            height: 4,
-                            color: Colors.black,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
+                          cursorHeight: 20,
                         ),
                       ),
                       Dimens.boxHeight10,

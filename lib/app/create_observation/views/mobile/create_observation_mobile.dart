@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CreateObservationMobile extends GetView<CreateObservationController> {
   CreateObservationMobile({Key? key}) : super(key: key);
@@ -44,10 +45,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Location of Observation'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Location of Observation',
@@ -125,10 +125,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Corrective/Preventive Action'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Corrective',
@@ -155,10 +154,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Responsible Person'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Responsible Person',
@@ -169,10 +167,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Contact Number'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Contact Number*',
@@ -183,10 +180,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Target Date'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Target Date',
@@ -197,10 +193,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       CustomRichText(title: 'Action Taken'),
                       Dimens.boxHeight10,
                       TextField(
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          height: 0.1,
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
                         decoration: InputDecoration(
                           hintText: 'Enter Action Taken',
