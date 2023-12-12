@@ -767,7 +767,16 @@ class DataRepository extends DomainRepository {
         pmPlanApproveJsonString: pmPlanApproveJsonString,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> auditPlanApprovedButton({
+    required String auth,
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditPlanApprovedButton(
+        auth: auth,
+        auditPlanApproveJsonString: auditPlanApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -797,6 +806,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.pmPlanRejectButton(
         auth: auth,
         pmPlanRejectJsonString: pmPlanRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditPlanRejectButton({
+    required String auth,
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditPlanRejectButton(
+        auth: auth,
+        auditPlanRejectJsonString: auditPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> goodsOrderRejectButton({

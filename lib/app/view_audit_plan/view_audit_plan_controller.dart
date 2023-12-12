@@ -69,18 +69,18 @@ class ViewAuditPlanController extends GetxController {
     print({"auditPlandetailss", auditPlanDetailModel.value?.id});
   }
 
-  void pmPlanApprovedButton({int? id}) async {
+  void auditPlanApprovedButton({int? id}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentpmPlanAproveModel =
+      CommentModel commentauditPlanAproveModel =
           CommentModel(id: id, comment: _comment);
 
-      var pmPlanApproveJsonString = commentpmPlanAproveModel.toJson();
+      var auditPlanApproveJsonString = commentauditPlanAproveModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditPlanPresenter.pmPlanApprovedButton(
-        pmPlanApproveJsonString: pmPlanApproveJsonString,
+          await viewAuditPlanPresenter.auditPlanApprovedButton(
+        auditPlanApproveJsonString: auditPlanApproveJsonString,
         isLoading: true,
       );
       if (response == true) {
@@ -89,18 +89,18 @@ class ViewAuditPlanController extends GetxController {
     }
   }
 
-  void pmPlanRejectButton({int? id}) async {
+  void auditPlanRejectButton({int? id}) async {
     {
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentpmPlanRejectModel =
+      CommentModel commentauditPlanRejectModel =
           CommentModel(id: id, comment: _comment);
 
-      var pmPlanRejectJsonString = commentpmPlanRejectModel.toJson();
+      var auditPlanRejectJsonString = commentauditPlanRejectModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditPlanPresenter.pmPlanRejectButton(
-        pmPlanRejectJsonString: pmPlanRejectJsonString,
+          await viewAuditPlanPresenter.auditPlanRejectButton(
+        auditPlanRejectJsonString: auditPlanRejectJsonString,
         isLoading: true,
       );
       if (response == true) {

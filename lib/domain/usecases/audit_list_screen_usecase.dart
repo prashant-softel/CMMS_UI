@@ -18,5 +18,5 @@ class AuditListScreenUsecase {
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.type);
   void clearValue() async => repository.clearData(LocalKeys.type);
-  void clearStoreIdData() async => repository.clearData(LocalKeys.type);
+  void clearStoreIdData() async => repository.clearData(LocalKeys.auditId);
 }

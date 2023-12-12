@@ -5,22 +5,22 @@ class ViewAuditPlanPresenter {
   ViewAuditPlanPresenter(this.viewAuditPlanUsecase);
   ViewAuditPlanUsecase viewAuditPlanUsecase;
 
-  Future<Map<String, dynamic>?> pmPlanApprovedButton({
-    pmPlanApproveJsonString,
+  Future<Map<String, dynamic>?> auditPlanApprovedButton({
+    auditPlanApproveJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditPlanUsecase.pmPlanApprovedButton(
-      pmPlanApproveJsonString: pmPlanApproveJsonString,
+    return viewAuditPlanUsecase.auditPlanApprovedButton(
+      auditPlanApproveJsonString: auditPlanApproveJsonString,
       isLoading: isLoading,
     );
   }
 
-  Future<Map<String, dynamic>?> pmPlanRejectButton({
-    pmPlanRejectJsonString,
+  Future<Map<String, dynamic>?> auditPlanRejectButton({
+    auditPlanRejectJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditPlanUsecase.pmPlanRejectButton(
-      pmPlanRejectJsonString: pmPlanRejectJsonString,
+    return viewAuditPlanUsecase.auditPlanRejectButton(
+      auditPlanRejectJsonString: auditPlanRejectJsonString,
       isLoading: isLoading,
     );
   }

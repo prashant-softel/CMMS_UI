@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_controller.dart';
+import 'package:cmms/app/widgets/audit_reject_plan_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/pm_plan_approve_dialog.dart';
@@ -10,6 +11,8 @@ import 'package:cmms/app/widgets/reject_pm_plan_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import '../../widgets/audit_approve_dialog.dart';
 
 class ViewAuditPlanWeb extends StatefulWidget {
   ViewAuditPlanWeb({
@@ -318,7 +321,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               text: "Approve",
                                               icon: Icons.add,
                                               onPressed: () {
-                                                Get.dialog(PmPlanApprovedDialog(
+                                                Get.dialog(AuditApprovedDialog(
                                                     // id: controller.pmPlanId.value,
                                                     ));
                                               },
@@ -349,7 +352,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               icon: Icons.close,
                                               onPressed: () {
                                                 Get.dialog(
-                                                    PmPlanRejectDialog());
+                                                    AuditPlanRejectDialog());
                                               },
                                             ),
                                           )
