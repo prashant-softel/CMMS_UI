@@ -10,6 +10,8 @@ import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
+import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
+import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -1113,6 +1115,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> auditPlanApprovedButton({
+    required String auth,
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveAuditPlan',
+      Request.post,
+      auditPlanApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('pmplanApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditPlanMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -1180,6 +1206,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PMPlanMsgReceiveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditPlanRejectButton({
+    required String auth,
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/RejectAuditPlan',
+      Request.post,
+      auditPlanRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditPlanMsgReceiveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;

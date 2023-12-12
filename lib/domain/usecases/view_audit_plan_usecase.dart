@@ -7,20 +7,20 @@ class ViewAuditPlanUsecase {
   ViewAuditPlanUsecase(this.repository);
   Repository repository;
 
-  Future<Map<String, dynamic>> pmPlanApprovedButton({
-    pmPlanApproveJsonString,
+  Future<Map<String, dynamic>> auditPlanApprovedButton({
+    auditPlanApproveJsonString,
     bool? isLoading,
   }) async =>
-      await repository.pmPlanApprovedButton(
-        pmPlanApproveJsonString,
+      await repository.auditPlanApprovedButton(
+        auditPlanApproveJsonString,
         isLoading,
       );
-  Future<Map<String, dynamic>> pmPlanRejectButton({
-    pmPlanRejectJsonString,
+  Future<Map<String, dynamic>> auditPlanRejectButton({
+    auditPlanRejectJsonString,
     bool? isLoading,
   }) async =>
-      await repository.pmPlanRejectButton(
-        pmPlanRejectJsonString,
+      await repository.auditPlanRejectButton(
+        auditPlanRejectJsonString,
         isLoading,
       );
   Future<AuditPlanDetailModel?> getAuditPlanDetails({

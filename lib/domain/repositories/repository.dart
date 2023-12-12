@@ -2201,8 +2201,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        Utility.showDialog(res.errorCode.toString() + 'pmPlanRejectButton');
         //return '';
       }
       return Map();
@@ -9390,6 +9389,75 @@ class Repository {
     catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> auditPlanApprovedButton(
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditPlanApprovedButton(
+        auth: auth,
+        auditPlanApproveJsonString: auditPlanApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'auditPlanApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> auditPlanRejectButton(
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditPlanRejectButton(
+        auth: auth,
+        auditPlanRejectJsonString: auditPlanRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'auditPlanRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 
