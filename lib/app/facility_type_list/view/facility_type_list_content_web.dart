@@ -61,7 +61,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -84,7 +84,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .30),
-                      margin: EdgeInsets.only(left: 30, top: 20),
+                      margin: EdgeInsets.only(left: 10, top: 30),
                       height: Get.height / 1.40,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -1118,6 +1118,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Create Facility ')
@@ -1135,6 +1136,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Update')),
@@ -1149,7 +1151,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      margin: EdgeInsets.only(right: 10, left: 10, top: 20),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -1403,6 +1405,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         .selectedItem
                                                         ?.country ??
                                                     '';
+                                                controller.isContainerVisible
+                                                    .value = true;
 
                                                 // controller.descriptionCtrlr
                                                 //     .text = controller

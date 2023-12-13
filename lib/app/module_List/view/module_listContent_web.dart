@@ -73,7 +73,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -96,7 +96,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 30, top: 20),
+                      margin: EdgeInsets.only(left: 10, top: 10),
                       height: 380,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -477,6 +477,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatemodulelist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Module List')
@@ -494,6 +495,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatemodulelist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Update')),
@@ -504,11 +506,10 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                       ),
                     ),
                   ),
-                  Dimens.boxWidth10,
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      margin: EdgeInsets.only(right: 10, left: 10, top: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -747,6 +748,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                             1
                                                         ? true
                                                         : false;
+                                                controller.isContainerVisible
+                                                    .value = true;
                                                 // int spvId = int.tryParse(
                                                 //         moduleList?.name ??
                                                 //             "") ??

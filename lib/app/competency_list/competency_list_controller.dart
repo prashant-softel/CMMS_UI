@@ -25,6 +25,7 @@ class CompetencyListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   Rx<bool> isTitleInvalid = false.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -60,6 +61,10 @@ class CompetencyListController extends GetxController {
     //   });
     // });
     super.onInit();
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> getCompetencyList(bool isLoading) async {
