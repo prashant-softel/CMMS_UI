@@ -292,7 +292,8 @@ class MenuItem extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Dimens.boxHeight15,
-          GestureDetector(
+          InkWell(
+            mouseCursor: MaterialStateMouseCursor.clickable,
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

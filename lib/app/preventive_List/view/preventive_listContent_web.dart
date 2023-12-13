@@ -625,7 +625,7 @@ class PreventiveChecklistListContentWeb
                                                                                 icon: Icons.edit,
                                                                                 message: 'Edit',
                                                                                 onPress: () {
-                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
+                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "CL${element?.id}" == _preventiveCheckList[0]);
 
                                                                                   controller.checklistNumberCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                   controller.durationCtrlr.text = "${controller.selectedItem?.duration}";

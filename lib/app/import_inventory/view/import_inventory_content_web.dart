@@ -282,36 +282,38 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                         ],
                       ),
                       Dimens.boxHeight20,
-                      GestureDetector(
-                        onTap: () async {
-                          String assetPath =
-                              'http://65.0.20.19/CMMS_API/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
-                          // 'http://172.20.43.9:83/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
+                      Center(
+                        child: InkWell(
+                          mouseCursor: MaterialStateMouseCursor.clickable,
+                          onTap: () async {
+                            String assetPath =
+                                'http://65.0.20.19/CMMS_API/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
+                            // 'http://172.20.43.9:83/api/CMMS/DownloadFile?id=${controller.importType.value}&filePath=${''}';
 
-                          String fileName = controller.importType.value ==
-                                  AppConstants.kImportAsset
-                              ? 'asset.xlsx'
-                              : controller.importType.value ==
-                                      AppConstants.kImportUser
-                                  ? 'user.xlsx'
-                                  : controller.importType.value ==
-                                          AppConstants.kImportMaterial
-                                      ? 'material.xlsx'
-                                      : controller.importType.value ==
-                                              AppConstants.kImportPMPlan
-                                          ? 'pmPlan.xlsx'
-                                          : controller.importType.value ==
-                                                  AppConstants.kImportChecklist
-                                              ? 'checklist.xlsx'
-                                              : controller.importType.value ==
-                                                      AppConstants
-                                                          .kImportBussiness
-                                                  ? 'checklist.xlsx'
-                                                  : 'example.xlsx';
+                            String fileName = controller.importType.value ==
+                                    AppConstants.kImportAsset
+                                ? 'asset.xlsx'
+                                : controller.importType.value ==
+                                        AppConstants.kImportUser
+                                    ? 'user.xlsx'
+                                    : controller.importType.value ==
+                                            AppConstants.kImportMaterial
+                                        ? 'material.xlsx'
+                                        : controller.importType.value ==
+                                                AppConstants.kImportPMPlan
+                                            ? 'pmPlan.xlsx'
+                                            : controller.importType.value ==
+                                                    AppConstants
+                                                        .kImportChecklist
+                                                ? 'checklist.xlsx'
+                                                : controller.importType.value ==
+                                                        AppConstants
+                                                            .kImportBussiness
+                                                    ? 'checklist.xlsx'
+                                                    : 'example.xlsx';
 
-                          downloadFile(assetPath, fileName);
-                        },
-                        child: Center(
+                            downloadFile(assetPath, fileName);
+                          },
                           child: Text(
                             "Download template",
                             style: TextStyle(
