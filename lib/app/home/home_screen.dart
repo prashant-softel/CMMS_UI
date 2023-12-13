@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
   final controller = Get.find<HomeController>();
@@ -42,16 +41,15 @@ class HomeScreen extends GetView<HomeController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
-                    if (Responsive.isDesktop(context))
+                    if (Responsive.isMobile(context))
                       Expanded(
                         child: Align(
                             alignment: Alignment.center,
                             child: Text("Data Coming Soon......")),
+                      ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: DashBoardHomeWeb(),
                       )
                   ],
                 ),
