@@ -186,7 +186,7 @@ class BusinessTypeListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: businesstype,
+                    text: "[$businesstype]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,

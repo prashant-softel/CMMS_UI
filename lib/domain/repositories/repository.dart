@@ -2600,7 +2600,7 @@ class Repository {
 
       if (!res.hasError) {
         var facilityTypeList = SPVListModelFromJson(res.data);
-        return facilityTypeList;
+        return facilityTypeList.reversed.toList();
       }
       return [];
     } catch (error) {

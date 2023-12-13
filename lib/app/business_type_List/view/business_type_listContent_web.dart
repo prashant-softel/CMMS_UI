@@ -636,11 +636,11 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                             message: 'Delete',
                                             onPress: () {
                                               controller.isDeleteDialog(
-                                                  businesstype: controller
+                                                  businesstype_id: controller
                                                       .businessTypeList?[index]
                                                       ?.id
                                                       .toString(),
-                                                  businesstype_id: controller
+                                                  businesstype: controller
                                                       .businessTypeList?[index]
                                                       ?.name);
                                             },
