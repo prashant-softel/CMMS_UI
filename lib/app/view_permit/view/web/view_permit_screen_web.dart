@@ -2593,231 +2593,229 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ),
 
                                     //Tool box talk / Pre Job Discussion
-                                    controller.viewPermitDetailsModel.value
-                                                ?.tbT_Done_By ==
-                                            null
-                                        ? Dimens.box0
-                                        : Container(
-                                            margin: EdgeInsets.all(20),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
+                                    // controller.viewPermitDetailsModel.value
+                                    //             ?.tbT_Done_By ==
+                                    //         null
+                                    //     ? Dimens.box0
+                                    //     :
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+                                      child: Container(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                              style: Styles.blue700,
                                             ),
-                                            child: Container(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Column(
+                                            Dimens.boxHeight10,
+                                            Wrap(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10,
+                                                              right: 10),
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Text(
+                                                                'Conducted At Job-Site By:',
+                                                                style: Styles
+                                                                    .blackBold17,
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
+                                                                style: Styles
+                                                                    .black17,
+                                                              ),
+                                                              // SizedBox(
+                                                              //   width: MediaQuery.of(
+                                                              //               context)
+                                                              //           .size
+                                                              //           .width /
+                                                              //       7,
+                                                              //   child: Obx(
+                                                              //     () =>
+                                                              //         DropdownWebWidget(
+                                                              //       dropdownList:
+                                                              //           controller
+                                                              //               .employeeList,
+                                                              //       isValueSelected:
+                                                              //           controller
+                                                              //               .isemployeeListSelected
+                                                              //               .value,
+                                                              //       selectedValue:
+                                                              //           controller
+                                                              //               .selectedEmployeeList
+                                                              //               .value,
+                                                              //       onValueChanged:
+                                                              //           controller
+                                                              //               .onValueChanged,
+                                                              //     ),
+                                                              //   ),
+                                                              // ),
+                                                            ],
+                                                          ),
+                                                          Spacer(),
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
                                                                     .only(
-                                                                    left: 10,
-                                                                    right: 10),
-                                                            child: Row(
+                                                                    right: 450),
+                                                            child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .start,
+                                                                      .end,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
                                                               children: [
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Conducted At Job-Site By:',
-                                                                      style: Styles
-                                                                          .blackBold17,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Text(
-                                                                      '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
-                                                                      style: Styles
-                                                                          .black17,
-                                                                    ),
-                                                                    // SizedBox(
-                                                                    //   width: MediaQuery.of(
-                                                                    //               context)
-                                                                    //           .size
-                                                                    //           .width /
-                                                                    //       7,
-                                                                    //   child: Obx(
-                                                                    //     () =>
-                                                                    //         DropdownWebWidget(
-                                                                    //       dropdownList:
-                                                                    //           controller
-                                                                    //               .employeeList,
-                                                                    //       isValueSelected:
-                                                                    //           controller
-                                                                    //               .isemployeeListSelected
-                                                                    //               .value,
-                                                                    //       selectedValue:
-                                                                    //           controller
-                                                                    //               .selectedEmployeeList
-                                                                    //               .value,
-                                                                    //       onValueChanged:
-                                                                    //           controller
-                                                                    //               .onValueChanged,
-                                                                    //     ),
-                                                                    //   ),
-                                                                    // ),
-                                                                  ],
+                                                                Text(
+                                                                  'Date & Time',
+                                                                  style: Styles
+                                                                      .blackBold17,
                                                                 ),
-                                                                Spacer(),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          right:
-                                                                              450),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .end,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Date & Time',
-                                                                        style: Styles
-                                                                            .blackBold17,
-                                                                      ),
 
-                                                                      Text(
-                                                                        '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
-                                                                        style: Styles
-                                                                            .black17,
-                                                                      ),
-                                                                      // _buildDateTimeField_web(
-                                                                      //     context),
-                                                                    ],
-                                                                  ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                                  style: Styles
+                                                                      .black17,
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            margin: Dimens
-                                                                .edgeInsets20,
-                                                            height: ((controller
-                                                                            .listEmployee
-                                                                            ?.length ??
-                                                                        0) *
-                                                                    40) +
-                                                                130,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: ColorValues
-                                                                    .lightGreyColorWithOpacity35,
-                                                                width: 1,
-                                                              ),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: ColorValues
-                                                                      .appBlueBackgroundColor,
-                                                                  spreadRadius:
-                                                                      2,
-                                                                  blurRadius: 5,
-                                                                  offset:
-                                                                      Offset(
-                                                                          0, 2),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: Column(
-                                                              children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                          10.0),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        'TBT Training Attended By',
-                                                                        style: Styles
-                                                                            .blue700,
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  child:
-                                                                      DataTable2(
-                                                                    border: TableBorder.all(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            206,
-                                                                            229,
-                                                                            234)),
-                                                                    columns: [
-                                                                      DataColumn(
-                                                                          label:
-                                                                              Text(
-                                                                        "Employee Name",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                15,
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                      )),
-                                                                      DataColumn(
-                                                                          label:
-                                                                              Text(
-                                                                        "Responsibility",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                15,
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                      )),
-                                                                    ],
-                                                                    rows: List<
-                                                                        DataRow>.generate(
-                                                                      controller
-                                                                              .listEmployee
-                                                                              ?.length ??
-                                                                          0,
-                                                                      (index) =>
-                                                                          DataRow(
-                                                                              cells: [
-                                                                            DataCell(Text(controller.listEmployee?[index]?.empName.toString() ??
-                                                                                '')),
-                                                                            DataCell(Text(controller.listEmployee?[index]?.resp.toString() ??
-                                                                                '')),
-                                                                          ]),
-                                                                    ),
-                                                                  ),
-                                                                ),
+                                                                // _buildDateTimeField_web(
+                                                                //     context),
                                                               ],
                                                             ),
                                                           ),
                                                         ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
+                                                    ),
+                                                    Container(
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .listEmployee
+                                                                      ?.length ??
+                                                                  0) *
+                                                              40) +
+                                                          130,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  'TBT Training Attended By',
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Employee Name",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Responsibility",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .listEmployee
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .listEmployee?[index]
+                                                                              ?.empName
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .listEmployee?[index]
+                                                                              ?.resp
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
 
                                     //   SizedBox(height: 10),
 
@@ -4259,6 +4257,35 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               // Dimens.boxWidth5,
 
+              /// Edit Button
+              varUserAccessModel.value.access_list!
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.edit == UserAccessConstants.kHaveAddAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus ==
+                          PermitStatusConstants.PTW_CREATED //121
+
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appYellowColor,
+                            text: "Edit Permit",
+                            icon: Icons.close,
+                            onPressed: () {
+                              controller.editNewPermit(
+                                  permitId: controller
+                                      .viewPermitDetailsModel.value?.permitNo,
+                                  isChecked: controller.isChecked.value);
+                            },
+                          )),
+                    )
+                  : Dimens.box0,
+
               // ////cancel approver
               // varUserAccessModel.value.access_list!
               //                 .where((e) =>
@@ -4401,12 +4428,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
-               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTime_mobile(context);
               },
@@ -4476,12 +4501,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
-               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTimeTill_mobile(context);
               },
@@ -4691,12 +4714,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1.1,
           child: TextField(
-             style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.jobDescriptionCtrlr,
             keyboardType: TextInputType.multiline,
             maxLines: 5,
@@ -4778,12 +4799,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
             width: MediaQuery.of(context).size.width / 7,
             height: 30,
             child: TextField(
-               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTime_web(context);
               },
@@ -4904,12 +4923,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.4,
             child: TextField(
-               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.titleTextCtrlr,
               keyboardType: TextInputType.multiline,
               // maxLines: 5,

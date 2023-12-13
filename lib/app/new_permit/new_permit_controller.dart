@@ -254,6 +254,7 @@ class NewPermitController extends GetxController {
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
   Rx<bool> isemployeeNameListSelected = true.obs;
   Rx<String> selectedEmployeeNamesList = ''.obs;
+  int selectedTbtConductedId = 0;
 
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
@@ -827,6 +828,15 @@ class NewPermitController extends GetxController {
     //   rowsPerPage: 10,
     // );
     update(['safety_measure_list']);
+  }
+
+  void onValueTbtConductedChanged(dynamic list, dynamic value) {
+    print('Value Tbt Conducted By:${value}');
+
+    int tbtConductedIndex =
+        employeeNameList.indexWhere((x) => x?.name == value);
+    selectedTbtConductedId = employeeNameList[tbtConductedIndex]?.id ?? 0;
+    print('Tbt Conducted Id: $selectedTbtConductedId');
   }
 
   void onValueChanged(dynamic list, dynamic value) {

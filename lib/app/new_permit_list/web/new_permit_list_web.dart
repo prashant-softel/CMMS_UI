@@ -155,8 +155,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                     Get.toNamed(
                                                         Routes.newPermit);
                                                   },
-                                                  color: ColorValues
-                                                      .greenlightColor,
+                                                  color:
+                                                      ColorValues.addNewColor,
                                                 )
                                               : Dimens.box0
                                         ],
@@ -264,10 +264,12 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                           height: 35,
                                           margin: Dimens.edgeInsets0_0_16_0,
                                           child: TextField(
-                                              style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                  fontSize: 16.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                            ),
                                             onChanged: (value) =>
                                                 controller.search(value),
                                             decoration: InputDecoration(
@@ -503,7 +505,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
-                  style: GoogleFonts.lato(
+                style: GoogleFonts.lato(
                   textStyle: TextStyle(
                       fontSize: 16.0, height: 1.0, color: Colors.black),
                 ),
@@ -511,7 +513,6 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                   filterText.value = value;
                 },
                 textAlign: TextAlign.left,
-               
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(
@@ -579,8 +580,9 @@ class PermitListDataSource extends DataTableSource {
           (NewPermit?.approvedByName ?? '').toString().toLowerCase().contains(
               controller.ApprovedByNameFilterText.value.toLowerCase()) &&
           (NewPermit?.current_status_short ?? '').toString().toLowerCase().contains(
-              controller.CurrentStatusShortFilterText.value.toLowerCase()) &&
-          (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
+              controller.CurrentStatusShortFilterText.value.toLowerCase());
+      //      &&
+      // (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
     }).toList();
   }
 
@@ -632,7 +634,7 @@ class PermitListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${PermitDetails?.permitId}',
+                        'PTW${PermitDetails?.permitId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -860,6 +862,9 @@ class PermitListDataSource extends DataTableSource {
                                           icon: Icons.edit,
                                           message: 'Edit Permit',
                                           onPress: () {
+                                            // controller.viewNewPermitList(
+                                            //     permitId:
+                                            //         PermitDetails?.permitId);
                                             controller.editNewPermit(
                                                 permitId:
                                                     PermitDetails?.permitId,
