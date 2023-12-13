@@ -381,4 +381,10 @@ class ViewPermitUsecase {
       repository.saveValue(LocalKeys.jobId, jobId);
   Future<String?> getJobIdValue() async =>
       await repository.getStringValue(LocalKeys.jobId);
+
+  void clearValue() async => repository.clearData(LocalKeys.permitId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

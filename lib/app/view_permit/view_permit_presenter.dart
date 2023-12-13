@@ -405,4 +405,10 @@ class ViewPermitPresenter {
 
   Future<String?> getJobIdValue() async =>
       await viewPermitUsecase.getJobIdValue();
+
+  void clearValue() async => viewPermitUsecase.clearValue();
+  void clearTypeValue() async => viewPermitUsecase.clearTypeValue();
+  void clearisCheckedValue() async => viewPermitUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async => viewPermitUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async => viewPermitUsecase.clearpmTaskValue();
 }

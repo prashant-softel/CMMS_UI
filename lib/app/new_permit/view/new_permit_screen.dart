@@ -3147,7 +3147,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       dropdownList: controller.employeeNameList,
                                                                                       isValueSelected: controller.isemployeeNameListSelected.value,
                                                                                       selectedValue: controller.selectedEmployeeNamesList.value,
-                                                                                      onValueChanged: controller.onValueChanged,
+                                                                                      onValueChanged: controller.onValueTbtConductedChanged,
                                                                                     ),
                                                                                   ),
                                                                                 ),
@@ -3222,24 +3222,29 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   child: ScrollableTableView(
                                                                                                     // paginationController: controller.equipmentNamepaginationController,
                                                                                                     columns: [
-                                                                                                      'id',
+                                                                                                      // 'id',
                                                                                                       'name',
                                                                                                       // 'gender',
                                                                                                       'Contact No.',
+                                                                                                      'Responsibility',
 
                                                                                                       'action'.tr,
                                                                                                     ].map((column) {
                                                                                                       return TableViewColumn(
-                                                                                                        minWidth: Get.width * 0.185,
-                                                                                                        label: column == "id"
-                                                                                                            ? "Employee Id"
-                                                                                                            : column == "name"
+                                                                                                        minWidth: Get.width * 0.175,
+                                                                                                        label:
+                                                                                                            // column == "id"
+                                                                                                            //     ? "Employee Id"
+                                                                                                            //     :
+                                                                                                            column == "name"
                                                                                                                 ? "Employee Name"
                                                                                                                 // : column == "gender"
                                                                                                                 //     ? "Gender"
                                                                                                                 : column == "Contact No."
                                                                                                                     ? "Contact No."
-                                                                                                                    : "Action",
+                                                                                                                    : column == "Responsibility"
+                                                                                                                        ? "Responsibility"
+                                                                                                                        : "Action",
                                                                                                       );
                                                                                                     }).toList(),
                                                                                                     rows: //
@@ -3256,11 +3261,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                           // controller.id.value = employeeNameDetails?.id ?? 0;
                                                                                                           // print('Employee Idss5:${controller.id.value}');
                                                                                                           return [
-                                                                                                            '${employeeNameDetails?.id ?? ''}',
+                                                                                                            // '${employeeNameDetails?.id ?? ''}',
                                                                                                             '${employeeNameDetails?.name ?? ''}',
                                                                                                             // '${employeeNameDetails?.gender ?? ''}',
                                                                                                             '${employeeNameDetails?.mobileNumber ?? ''}',
-
+                                                                                                            '${employeeNameDetails?.name ?? ''}',
                                                                                                             'Actions'
                                                                                                           ];
                                                                                                         },
@@ -4566,6 +4571,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
                 filled: true,
+                // hintText: controller.selectedDateTime.value.toString(),
+                hintText: DateFormat('yyyy-MM-dd HH:mm')
+                    .format(controller.selectedDateTime.value),
+                hintStyle: TextStyle(
+                  // You can apply any TextStyle properties here
+                  color: Colors.black,
+                  // fontWeight: FontWeight.bold
+                ),
                 contentPadding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 5.0),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,

@@ -20,9 +20,11 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/extend_permit_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/material.dart';
@@ -119,6 +121,9 @@ class ViewPermitController extends GetxController {
   void _doSomething() {
     // Do something
   }
+
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   TextEditingController extendReasonCommentTextFieldCtrlr =
       TextEditingController();
@@ -2653,5 +2658,40 @@ class ViewPermitController extends GetxController {
     row.cells[6].value = quantity.toString();
 
     row.cells[7].value = total.toString();
+  }
+
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.newPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value
+    });
+    print('PermitIdArgument:$permitId');
+  }
+
+  void clearStoreData() {
+    viewPermitPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    viewPermitPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    viewPermitPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    viewPermitPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    viewPermitPresenter.clearpmTaskValue();
   }
 }
