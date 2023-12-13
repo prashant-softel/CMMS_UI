@@ -70,7 +70,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -98,7 +98,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 30, top: 18),
+                      margin: EdgeInsets.only(left: 10, top: 14),
                       constraints:
                           BoxConstraints(maxHeight: 240, minHeight: 220),
                       decoration: BoxDecoration(
@@ -428,6 +428,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Business ')
@@ -444,6 +445,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Update')),
@@ -454,7 +456,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                       ),
                     ),
                   ),
-                  Dimens.boxWidth10,
+
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
@@ -604,6 +606,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                         .selectedItem
                                                         ?.description ??
                                                     '';
+                                                controller.isContainerVisible
+                                                    .value = true;
                                                 // int spvId = int.tryParse(
                                                 //         businessTypeList?.name ??
                                                 //             "") ??

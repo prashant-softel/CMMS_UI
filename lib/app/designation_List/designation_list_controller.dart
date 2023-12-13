@@ -34,7 +34,7 @@ class DesignationListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-
+  RxBool isContainerVisible = false.obs;
   DesignationModel? designationModel;
   final isSuccess = false.obs;
 
@@ -83,6 +83,10 @@ class DesignationListController extends GetxController {
         }
       }
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   void checkForm() {

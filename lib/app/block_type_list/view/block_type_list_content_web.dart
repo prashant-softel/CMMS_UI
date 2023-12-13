@@ -73,7 +73,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -95,7 +95,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                   Visibility(
                     visible: controller.isContainerVisible.value,
                     child: Container(
-                      margin: EdgeInsets.only(left: 30, top: 20),
+                      margin: EdgeInsets.only(left: 10, top: 14),
                       height: 260,
                       width: (Get.width * .3),
                       constraints:
@@ -483,6 +483,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreateBlock();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Block List ')
@@ -499,6 +500,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreateBlock();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Update')),
@@ -509,11 +511,10 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                       ),
                     ),
                   ),
-                  Dimens.boxWidth10,
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -654,6 +655,8 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     controller.selectedItem
                                                             ?.name ??
                                                         '';
+                                                controller.isContainerVisible
+                                                    .value = true;
                                                 // controller.descriptionCtrlr
                                                 //     .text = controller
                                                 //         .selectedItem

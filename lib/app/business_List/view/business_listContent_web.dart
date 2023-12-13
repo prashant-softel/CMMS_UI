@@ -62,7 +62,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -85,8 +85,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .30),
-                      margin: EdgeInsets.only(left: 30, top: 20),
-                      height: Get.height / 1.2,
+                      margin: EdgeInsets.only(left: 10, top: 10),
+                      height: Get.height / 1.3,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
                         elevation: 10,
@@ -950,6 +950,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatebusinesslist();
+                                                  controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Create Business ')
@@ -970,6 +971,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatebusinesslist();
+                                                  controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Update')),
@@ -984,7 +986,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      margin: EdgeInsets.only(right: 10, left: 10, top: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -1172,6 +1174,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                         .selectedItem
                                                         ?.country ??
                                                     '';
+                                                controller.isContainerVisible
+                                                    .value = true;
                                               }),
                                           TableActionButton(
                                             color: ColorValues.deleteColor,

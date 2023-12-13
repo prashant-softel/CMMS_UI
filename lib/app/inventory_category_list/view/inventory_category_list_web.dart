@@ -71,7 +71,7 @@ class InventoryCategoryListContentWeb
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 25, top: 10),
+              padding: EdgeInsets.only(left: 10, top: 10),
               child: ElevatedButton(
                 style: Styles.navyBlueElevatedButtonStyle,
                 onPressed: () {
@@ -94,7 +94,7 @@ class InventoryCategoryListContentWeb
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 30, top: 20),
+                      margin: EdgeInsets.only(left: 10, top: 15),
                       constraints:
                           BoxConstraints(maxHeight: 240, minHeight: 220),
                       decoration: BoxDecoration(
@@ -425,6 +425,7 @@ class InventoryCategoryListContentWeb
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Assets')
@@ -442,6 +443,7 @@ class InventoryCategoryListContentWeb
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
+                                                controller.toggleContainer();
                                               });
                                             },
                                             text: 'Update')),
@@ -452,11 +454,10 @@ class InventoryCategoryListContentWeb
                       ),
                     ),
                   ),
-                  Dimens.boxWidth10,
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      margin: EdgeInsets.only(right: 10, left: 10, top: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -595,6 +596,8 @@ class InventoryCategoryListContentWeb
                                                         .selectedItem
                                                         ?.description ??
                                                     '';
+                                                controller.isContainerVisible
+                                                    .value = true;
                                               }),
                                           TableActionButton(
                                             color: ColorValues.deleteColor,
