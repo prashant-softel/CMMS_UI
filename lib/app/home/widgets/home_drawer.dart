@@ -183,7 +183,7 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
-                                              title: "HSC Report",
+                                              title: "HSE Report",
                                               icon: "assets/files/warranty.png",
                                               press: () {
                                                 Get.offAllNamed(

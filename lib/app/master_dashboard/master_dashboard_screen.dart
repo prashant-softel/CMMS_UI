@@ -444,7 +444,7 @@ class MastersDashboard extends GetView<MastersController> {
                               OnHover(
                                 builder: ((isHovered) {
                                   return createContentTile(
-                                      title: "Feature List",
+                                      title: "Modules List",
                                       onTap: () {
                                         controller.goToFeatureList();
                                       });
