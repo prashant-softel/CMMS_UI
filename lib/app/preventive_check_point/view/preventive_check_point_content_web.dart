@@ -790,7 +790,7 @@ class PreventiveCheckPointContentWeb
                                                                     controller.selectedItem = controller
                                                                         .preventiveCheckpoint!
                                                                         .firstWhere((element) =>
-                                                                            "${element?.id}" ==
+                                                                            "CP${element?.id}" ==
                                                                             record[0]);
 
                                                                     controller
