@@ -1,10 +1,8 @@
-import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:semicircle_indicator/semicircle_indicator.dart';
 
 class DashBoardHomeWeb extends StatefulWidget {
   DashBoardHomeWeb({
@@ -71,88 +69,300 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         ),
                                       ],
                                     ),
-                                    height: 300,
+                                    height: 250,
+                                    width: 400,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Overview",
+                                                  style: Styles.black20),
+                                              Dimens.boxHeight20,
+                                              Container(
+                                                  height: 130,
+                                                  width: 150,
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            "Total",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("50"),
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Completed",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("35")
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Pending",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("15")
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ))
+                                            ]),
+                                        Spacer(),
+                                        Container(
+                                            padding: EdgeInsets.only(
+                                                top: 30, right: 20, left: 10),
+                                            child: CircularPercentIndicator(
+                                              //circular progress indicator
+                                              radius: 120.0, //radius for circle
+                                              lineWidth:
+                                                  15.0, //width of circle line
+                                              animation:
+                                                  true, //animate when it shows progress indicator first
+                                              percent: 60 /
+                                                  100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                              center: Text(
+                                                "60.0%",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20.0),
+                                              ), //center text, you can set Icon as well
+                                              footer: Text(
+                                                "Order this Month",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 17.0),
+                                              ), //footer text
+                                              backgroundColor: Colors
+                                                      .lightGreen[
+                                                  300], //backround of progress bar
+                                              circularStrokeCap: CircularStrokeCap
+                                                  .round, //corner shape of progress bar at start/end
+                                              progressColor: Colors
+                                                  .redAccent, //progress bar color
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 20),
+                                    padding: EdgeInsets.only(left: 20, top: 10),
+                                    decoration: BoxDecoration(
+                                      color: ColorValues.lightBlueColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0.0, 1.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    height: 250,
                                     width: 400,
                                     child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Overview"),
-                                          Dimens.boxHeight20,
-                                          Row(
-                                            children: [
-                                              Column(
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(
+                                                    "Schedule Compliance",
+                                                    style: Styles.black15)),
+                                            Spacer(),
+                                            Container(
+                                              height: 90,
+                                              width: 125,
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 10, top: 10),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey,
+                                                      offset: Offset(0.0, 1.0),
+                                                      blurRadius: 6.0,
+                                                    ),
+                                                  ]),
+                                              child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Total"),
+                                                  Text("Total - 100"),
+                                                  // Dimens.boxHeight2,
+                                                  Text("Completed - 51"),
+                                                  // Dimens.boxHeight5,
+                                                  Text("Pending - 49"),
                                                 ],
                                               ),
-                                              Dimens.boxWidth10,
-                                              Column(
-                                                children: [
-                                                  Text("50"),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: ColorValues.greyLightColour,
-                                          ),
-                                          Dimens.boxHeight10,
-                                          Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text("Completed"),
-                                                ],
+                                            ),
+                                          ],
+                                        ),
+                                        // Dimens.boxHeight20,
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SemicircularIndicator(
+                                              radius: 100,
+                                              color: Color.fromARGB(
+                                                  255, 195, 146, 230),
+                                              backgroundColor:
+                                                  Colors.lightGreen,
+                                              strokeWidth: 13,
+                                              bottomPadding: 0,
+                                              child: Text(
+                                                '75%',
+                                                style: TextStyle(
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.redAccent),
                                               ),
-                                              Dimens.boxWidth10,
-                                              Column(
-                                                children: [
-                                                  Text("35"),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: ColorValues.greyLightColour,
-                                          ),
-                                          Dimens.boxHeight10,
-                                          Row(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text("Pending"),
-                                                ],
-                                              ),
-                                              Dimens.boxWidth10,
-                                              Column(
-                                                children: [
-                                                  Text("15"),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: ColorValues.greyLightColour,
-                                          ),
-                                        ]),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   Container(
-                                    height: 300,
+                                    margin: EdgeInsets.only(left: 20),
+                                    padding: EdgeInsets.only(left: 20, top: 10),
+                                    decoration: BoxDecoration(
+                                      color: ColorValues.lightBlueColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0.0, 1.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    height: 200,
                                     width: 400,
-                                    color: Color.fromARGB(255, 124, 30, 161),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Overview",
+                                                  style: Styles.black20),
+                                              Dimens.boxHeight20,
+                                              Container(
+                                                  height: 130,
+                                                  width: 150,
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            "Total",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("50"),
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Completed",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("35")
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            "Pending",
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                          Spacer(),
+                                                          Text("15")
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ))
+                                            ]),
+                                        Spacer(),
+                                        Container(
+                                            padding: EdgeInsets.only(
+                                                top: 30, right: 20, left: 10),
+                                            child: CircularPercentIndicator(
+                                              //circular progress indicator
+                                              radius: 120.0, //radius for circle
+                                              lineWidth:
+                                                  15.0, //width of circle line
+                                              animation:
+                                                  true, //animate when it shows progress indicator first
+                                              percent: 60 /
+                                                  100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                              center: Text(
+                                                "60.0%",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20.0),
+                                              ), //center text, you can set Icon as well
+                                              footer: Text(
+                                                "Order this Month",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 17.0),
+                                              ), //footer text
+                                              backgroundColor: Colors
+                                                      .lightGreen[
+                                                  300], //backround of progress bar
+                                              circularStrokeCap: CircularStrokeCap
+                                                  .round, //corner shape of progress bar at start/end
+                                              progressColor: Colors
+                                                  .redAccent, //progress bar color
+                                            )),
+                                      ],
+                                    ),
                                   ),
-                                  Container(
-                                    width: 400,
-                                    height: 300,
-                                    color: Color.fromARGB(255, 158, 97, 12),
-                                  )
                                 ],
                               ),
                             ],

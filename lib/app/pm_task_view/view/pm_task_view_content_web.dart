@@ -934,8 +934,8 @@ class PreventiveMaintenanceTaskViewContentWeb
 
                             Get.toNamed(Routes.mrsReturnScreen, arguments: {
                               "whereUsed": 27,
-                              "fromActorTypeId": 2,
-                              "to_actor_type_id": 3,
+                              "fromActorTypeId": 3,
+                              "to_actor_type_id": 2,
                               "pmTaskId":
                                   controller.pmtaskViewModel.value?.id ?? 0,
                               "activity":
