@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -157,54 +158,10 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               child: CustomRichText(
                                                   title: 'Module Name ')),
                                           Container(
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                textController: controller
-                                                    .modulelistNumberCtrlr,
-                                              )),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                              child: CustomRichText(
-                                                  title: 'Feature Name ')),
-                                          Container(
                                             width: (MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                .2),
+                                                0.20),
                                             height: 30,
                                             decoration: BoxDecoration(
                                               boxShadow: [
@@ -229,9 +186,202 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                             ),
-                                            child: LoginCustomTextfield(
-                                              textController:
+                                            child: TextField(
+                                              controller: controller
+                                                  .modulelistNumberCtrlr,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding:
+                                                    Dimens.edgeInsets05_10,
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isModuleNameListInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isModuleNameListInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isModuleNameListInvalid
+                                                        .value
+                                                    ? "Required field"
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller
+                                                      .isModuleNameListInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller
+                                                      .isModuleNameListInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Feature Name ')),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.20),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: TextField(
+                                              controller:
                                                   controller.featureCtrlr,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding:
+                                                    Dimens.edgeInsets05_10,
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isFeatureInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isFeatureInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isFeatureInvalid.value
+                                                    ? "Required field"
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller.isFeatureInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller.isFeatureInvalid
+                                                      .value = true;
+                                                }
+                                              },
                                             ),
                                           ),
                                         ],
@@ -477,7 +627,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatemodulelist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Module List')

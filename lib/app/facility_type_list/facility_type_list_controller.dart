@@ -113,9 +113,18 @@ class FacilityTypeListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
-  var addressCtrlr = TextEditingController();
-  var zipcodeCtrlr = TextEditingController();
+
+  //description
   var descriptionCtrlr = TextEditingController();
+  Rx<bool> isDescriptionInvalid = false.obs;
+
+  ///address
+  var addressCtrlr = TextEditingController();
+  Rx<bool> isAddressInvalid = false.obs;
+
+  ///Pin code
+  var zipcodeCtrlr = TextEditingController();
+  Rx<bool> isZipCodeInvalid = false.obs;
 
   @override
   void onInit() async {
@@ -452,11 +461,26 @@ class FacilityTypeListController extends GetxController {
     if (selectedCustomer.value == '') {
       isSelectedCustomer.value = false;
     }
+    if (selectedCountry.value == '') {
+      isSelectedCountryType.value = false;
+    }
+    if (selectedState.value == '') {
+      isSelectedStateType.value = false;
+    }
+    if (selectedCity.value == '') {
+      isSelectedCityType.value = false;
+    }
 
     if (isNameInvalid.value == true ||
+        isDescriptionInvalid.value == true ||
+        isAddressInvalid.value == true ||
         isSelectedSpv.value == false ||
         isSelectedOwner.value == false ||
-        isSelectedCustomer.value == false) {
+        isSelectedCountryType.value == false ||
+        isSelectedStateType.value == false ||
+        isSelectedCityType.value == false ||
+        isSelectedCustomer.value == false ||
+        isZipCodeInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -468,6 +492,18 @@ class FacilityTypeListController extends GetxController {
       isNameInvalid.value = true;
       isFormInvalid.value = true;
     }
+    if (descriptionCtrlr.text.trim() == '') {
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (addressCtrlr.text.trim() == '') {
+      isAddressInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (zipcodeCtrlr.text.trim() == '') {
+      isZipCodeInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
     checkForm();
     if (isFormInvalid.value) {
@@ -477,10 +513,16 @@ class FacilityTypeListController extends GetxController {
     print(
         "title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
     if (titleCtrlr.text.trim() == '' ||
+        descriptionCtrlr.text.trim() == '' ||
+        addressCtrlr.text.trim() == '' ||
+        zipcodeCtrlr.text.trim() == '' ||
         selectedOwner == '' ||
         selectedCustomer == '' ||
         selectedOperator == '' ||
-        selectedSpv == '') {
+        selectedSpv == '' ||
+        selectedCountry == '' ||
+        selectedState == '' ||
+        selectedCity == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter dat ato create");
