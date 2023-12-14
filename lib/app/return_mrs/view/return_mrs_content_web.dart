@@ -974,10 +974,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: "View",
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.returnMrsView,
                                 arguments: {'mrsId': mrsId});
@@ -988,10 +985,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'edit',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.editReturnMrs, arguments: mrsId);
                           },
@@ -1016,10 +1010,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.check,
                           message: 'Approve',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.approverReturnMrs,
                                 arguments: {'mrsId': mrsId});
@@ -1074,10 +1065,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.close,
                           message: 'Reject',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
 
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.approverReturnMrs,
@@ -1091,10 +1079,10 @@ class ReturnMrsListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        controller.clearStoreData();
+        int mrsId = MrsDetails?.id ?? 0;
 
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
+        Get.toNamed(Routes.returnMrsView, arguments: {'mrsId': mrsId});
       },
     );
   }
