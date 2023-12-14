@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 
 class DashBoardHomeWeb extends StatefulWidget {
@@ -45,7 +46,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                           child: Column(
                             children: [
                               Row(
-                                children: [Text("data")],
+                                children: [Text("Tabs Comming Soon")],
                               ),
                               Divider(
                                 color: ColorValues.greyLightColour,
@@ -253,116 +254,70 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(left: 20),
-                                    padding: EdgeInsets.only(left: 20, top: 10),
-                                    decoration: BoxDecoration(
-                                      color: ColorValues.lightBlueColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0.0, 1.0),
-                                          blurRadius: 6.0,
-                                        ),
-                                      ],
-                                    ),
-                                    height: 200,
-                                    width: 400,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      padding:
+                                          EdgeInsets.only(left: 20, top: 10),
+                                      decoration: BoxDecoration(
+                                        color: ColorValues.lightBlueColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0.0, 1.0),
+                                            blurRadius: 6.0,
+                                          ),
+                                        ],
+                                      ),
+                                      height: 250,
+                                      width: 400,
+                                      child: Row(
+                                        children: [
+                                          Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text("Category",
+                                                  style: Styles.black15)),
+                                          Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Text("Overview",
-                                                  style: Styles.black20),
-                                              Dimens.boxHeight20,
-                                              Container(
-                                                  height: 130,
-                                                  width: 150,
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            "Total",
-                                                            style:
-                                                                Styles.black17,
-                                                          ),
-                                                          Spacer(),
-                                                          Text("50"),
-                                                        ],
-                                                      ),
-                                                      Dimens.boxHeight10,
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Completed",
-                                                            style:
-                                                                Styles.black17,
-                                                          ),
-                                                          Spacer(),
-                                                          Text("35")
-                                                        ],
-                                                      ),
-                                                      Dimens.boxHeight10,
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                            "Pending",
-                                                            style:
-                                                                Styles.black17,
-                                                          ),
-                                                          Spacer(),
-                                                          Text("15")
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ))
-                                            ]),
-                                        Spacer(),
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                top: 30, right: 20, left: 10),
-                                            child: CircularPercentIndicator(
-                                              //circular progress indicator
-                                              radius: 120.0, //radius for circle
-                                              lineWidth:
-                                                  15.0, //width of circle line
-                                              animation:
-                                                  true, //animate when it shows progress indicator first
-                                              percent: 60 /
-                                                  100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
-                                              center: Text(
-                                                "60.0%",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.0),
-                                              ), //center text, you can set Icon as well
-                                              footer: Text(
-                                                "Order this Month",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17.0),
-                                              ), //footer text
-                                              backgroundColor: Colors
-                                                      .lightGreen[
-                                                  300], //backround of progress bar
-                                              circularStrokeCap: CircularStrokeCap
-                                                  .round, //corner shape of progress bar at start/end
-                                              progressColor: Colors
-                                                  .redAccent, //progress bar color
-                                            )),
-                                      ],
-                                    ),
-                                  ),
+                                              PieChart(
+                                                dataMap:
+                                                    controller.getDataMap(),
+                                                chartType: ChartType.ring,
+                                                chartRadius: 120,
+                                                colorList:
+                                                    controller.getColorList(),
+                                                // centerText: "Pie Chart",
+                                                legendOptions: LegendOptions(
+                                                  showLegendsInRow: true,
+                                                  legendPosition:
+                                                      LegendPosition.bottom,
+                                                  showLegends: true,
+                                                ),
+                                                chartValuesOptions:
+                                                    ChartValuesOptions(
+                                                  showChartValueBackground:
+                                                      false,
+                                                  showChartValues: true,
+                                                  showChartValuesInPercentage:
+                                                      true,
+                                                  showChartValuesOutside: false,
+                                                ),
+                                                // onTapCallback: (index) {
+                                                //   chartController
+                                                //       .onChartTapped(index);
+                                                // },
+                                              ),
+                                              SizedBox(height: 20),
+                                              // Text(
+                                              //   // 'Selected Section: ${chartController.selectedSection.value}',
+                                              //   // style: TextStyle(fontSize: 18),
+                                              // ),
+                                            ],
+                                          )
+                                        ],
+                                      )),
                                 ],
                               ),
                             ],
