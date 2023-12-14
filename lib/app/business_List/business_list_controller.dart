@@ -32,6 +32,10 @@ class BusinessListController extends GetxController {
   Rx<bool> isEmailInvalid = false.obs;
   Rx<bool> isPersonInvalid = false.obs;
   Rx<bool> isNumberInvalid = false.obs;
+  Rx<bool> isWebsiteInvalid = false.obs;
+  Rx<bool> isLocationInvalid = false.obs;
+  Rx<bool> isAddressInvalid = false.obs;
+  Rx<bool> isZipInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   RxBool isContainerVisible = false.obs;
   Rx<String?> selectedBusinessType = ''.obs;
@@ -82,6 +86,9 @@ class BusinessListController extends GetxController {
   var typeCtrlr = TextEditingController();
   var statusCtrlr = TextEditingController();
   var addedAtCtrlr = TextEditingController();
+
+  ///website
+
   BusinessListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
@@ -328,11 +335,29 @@ class BusinessListController extends GetxController {
       isSelectedBusinessType.value = false;
     }
 
+    if (selectedCountry.value == '') {
+      isSelectedCountryType.value = false;
+    }
+
+    if (selectedState.value == '') {
+      isSelectedStateType.value = false;
+    }
+    if (selectedCity.value == '') {
+      isSelectedCityType.value = false;
+    }
+
     if (isNameInvalid.value == true ||
+        isEmailInvalid.value == true ||
+        isPersonInvalid.value == true ||
+        isNumberInvalid.value == true ||
+        isWebsiteInvalid.value == true ||
+        isLocationInvalid.value == true ||
+        isAddressInvalid.value == true ||
+        isZipInvalid.value == true ||
         isSelectedBusinessType.value == false ||
-        isEmailInvalid.value == false ||
-        isPersonInvalid.value == false ||
-        isNumberInvalid.value == false) {
+        isSelectedCountryType.value == false ||
+        isSelectedStateType.value == false ||
+        isSelectedCityType.value == false) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -340,30 +365,50 @@ class BusinessListController extends GetxController {
   }
 
   Future<bool> createBusinessListNumber() async {
-    // if (businesslistNumberCtrlr.text.trim() == '') {
-    //   isNameInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
+    if (businesslistNumberCtrlr.text.trim() == '') {
+      isNameInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
-    // if (emailCtrlr.text.trim() == '') {
-    //   isEmailInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
+    if (emailCtrlr.text.trim() == '') {
+      isEmailInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
-    // if (contactpersonCtrlr.text.trim() == '') {
-    //   isPersonInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
+    if (contactpersonCtrlr.text.trim() == '') {
+      isPersonInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
-    // if (contactnumberCtrlr.text.trim() == '') {
-    //   isNumberInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
+    if (contactnumberCtrlr.text.trim() == '') {
+      isNumberInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return false;
-    // }
+    if (websiteCtrlr.text.trim() == '') {
+      isWebsiteInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (locationCtrlr.text.trim() == '') {
+      isLocationInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (addressCtrlr.text.trim() == '') {
+      isAddressInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (zipCtrlr.text.trim() == '') {
+      isZipInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
 
     if (websiteCtrlr.text.trim() == '' ||
         emailCtrlr.text.trim() == '' ||

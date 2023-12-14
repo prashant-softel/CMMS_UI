@@ -77,7 +77,12 @@ class ModuleListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var modulelistNumberCtrlr = TextEditingController();
+  Rx<bool> isModuleNameListInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   var featureCtrlr = TextEditingController();
+  Rx<bool> isFeatureInvalid = false.obs;
+
   ModuleListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
@@ -120,7 +125,31 @@ class ModuleListController extends GetxController {
     );
   }
 
+  void checkForm() {
+    if (isModuleNameListInvalid.value == true ||
+        isFeatureInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   Future<bool> createModuleListNumber() async {
+    if (modulelistNumberCtrlr.text.trim() == '') {
+      isModuleNameListInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (featureCtrlr.text.trim() == '') {
+      isFeatureInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
+
     if (modulelistNumberCtrlr.text.trim() == '' ||
         featureCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
