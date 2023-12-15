@@ -26,7 +26,9 @@ class ModuleListController extends GetxController {
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxBool isContainerVisible = false.obs;
-  RxList<ModuleListModel?>? moduleList = <ModuleListModel?>[].obs;
+  RxList<ModuleListModel> moduleList = <ModuleListModel>[].obs;
+  RxList<ModuleListModel> BufferModuleList = <ModuleListModel>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -98,11 +100,14 @@ class ModuleListController extends GetxController {
 
   Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
     moduleList?.value = <ModuleListModel>[];
+    BufferModuleList.value = <ModuleListModel>[];
+
     final _moduleList = await moduleListPresenter.getModuleList(
         facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<ModuleListModel?>();
+      moduleList!.value = _moduleList.cast<ModuleListModel>();
+      BufferModuleList.value = moduleList.value;
       paginationController = PaginationController(
         rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
@@ -110,6 +115,7 @@ class ModuleListController extends GetxController {
 
       if (moduleList != null && moduleList!.isNotEmpty) {
         moduleListModel = moduleList![0];
+
         var preventiveCheckListJson = moduleListModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
@@ -117,6 +123,27 @@ class ModuleListController extends GetxController {
         }
       }
     }
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      moduleList.value = BufferModuleList.value;
+      return;
+    }
+    List<ModuleListModel> filteredList = BufferModuleList.where((item) =>
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.featureName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) // Add this condition to filter by searchId
+        ).toList();
+    moduleList.value = filteredList;
   }
 
   Future<void> createModulelist() async {

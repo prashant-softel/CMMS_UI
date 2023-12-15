@@ -52,17 +52,26 @@ class InventoryStatusListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      inventoryStatusList?.value = filteredData;
-      // return;
+      inventoryStatusList!.value = filteredData.value;
+      return;
     }
-
-    inventoryStatusList?.value = filteredData
-        .where((item) => item!.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+    List<InventoryStatusListModel?> filteredList = filteredData
+        .where((item) =>
+                (item!.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.description
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) // Add this condition to filter by searchId
+            )
         .toList();
+    inventoryStatusList!.value = filteredList;
   }
 
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -103,12 +112,15 @@ class InventoryStatusListController extends GetxController {
   Future<void> getInventoryStatusList(
       int facilityId, int type, bool isLoading) async {
     inventoryStatusList?.value = <InventoryStatusListModel>[];
+    filteredData?.value = <InventoryStatusListModel>[];
+
     final _inventoryStatusList =
         await inventoryStatusListPresenter.getInventoryStatusList(
             facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_inventoryStatusList != null) {
       inventoryStatusList!.value = _inventoryStatusList;
+      filteredData.value = inventoryStatusList!.value;
       paginationController = PaginationController(
         rowCount: inventoryStatusList?.length ?? 0,
         rowsPerPage: 10,

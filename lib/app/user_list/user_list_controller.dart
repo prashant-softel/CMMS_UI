@@ -64,16 +64,30 @@ class UserListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      userList.value = filteredData;
+      userList.value = filteredData.value;
       return;
     }
-
-    userList.value = filteredData
-        .where(
-            (item) => item.name!.toLowerCase().contains(keyword.toLowerCase()))
+    List<UserListModel> filteredList = filteredData
+        .where((item) =>
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.role_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.contact_no
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['user_list']);
+    userList.value = filteredList;
   }
 
   @override
@@ -98,11 +112,14 @@ class UserListController extends GetxController {
 
   Future<void> getUserList(int facilityId, bool isLoading) async {
     userList.value = <UserListModel>[];
+    filteredData.value = <UserListModel>[];
+
     final _userList = await userListPresenter.getUserList(
         facilityId: facilityId, isLoading: isLoading);
 
     if (_userList != null) {
       userList.value = _userList;
+      filteredData.value = userList.value;
     }
     update(['user_list']);
   }

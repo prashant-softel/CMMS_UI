@@ -31,7 +31,7 @@ class InventoryCategoryListController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel2?>? inventoryStatusList =
       <InventoryCategoryModel2?>[].obs;
-  RxList<InventoryCategoryModel2?> filteredData =
+  RxList<InventoryCategoryModel2?>? filteredData =
       <InventoryCategoryModel2?>[].obs;
   int facilityId = 0;
   int type = 1;
@@ -42,16 +42,24 @@ class InventoryCategoryListController extends GetxController {
   InventoryCategoryModel2? inventoryStatusListModel;
   void search(String keyword) {
     if (keyword.isEmpty) {
-      inventoryStatusList?.value = filteredData;
-      // return;
+      inventoryStatusList?.value = filteredData!;
+      return;
     }
-
-    inventoryStatusList?.value = filteredData
-        .where((item) => item!.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+    List<InventoryCategoryModel2?> filteredList = filteredData!
+        .where((item) =>
+                (item?.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item!.description
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) // Add this condition to filter by searchId
+            )
         .toList();
+    inventoryStatusList!.value = filteredList;
   }
 
   RxList<String> inventoryStatusListTableColumns = <String>[].obs;
@@ -103,11 +111,14 @@ class InventoryCategoryListController extends GetxController {
   Future<void> getInventoryCategoryList(
       int facilityId, int type, bool isLoading) async {
     inventoryStatusList?.value = <InventoryCategoryModel2>[];
+    filteredData?.value = <InventoryCategoryModel2>[];
+
     final _inventoryStatusList = await inventoryStatusListPresenter
         .getInventoryCategoryList(isLoading: isLoading);
 
     if (_inventoryStatusList != null) {
       inventoryStatusList!.value = _inventoryStatusList;
+      filteredData?.value = inventoryStatusList!.value;
       paginationController = PaginationController(
         rowCount: inventoryStatusList?.length ?? 0,
         rowsPerPage: 10,

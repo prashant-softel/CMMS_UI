@@ -39,17 +39,26 @@ class InventoryTypeListController extends GetxController {
   );
   InventoryTypeListModel? inventoryTypeListModel;
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      inventoryTypeList?.value = filteredData;
-      // return;
+      inventoryTypeList!.value = filteredData.value;
+      return;
     }
-
-    inventoryTypeList?.value = filteredData
-        .where((item) => item!.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+    List<InventoryTypeListModel?> filteredList = filteredData
+        .where((item) =>
+                (item!.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.description
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) // Add this condition to filter by searchId
+            )
         .toList();
+    inventoryTypeList!.value = filteredList;
   }
 
   Rx<bool> isTitleInvalid = false.obs;
@@ -107,12 +116,15 @@ class InventoryTypeListController extends GetxController {
   Future<void> getInventoryTypeList(
       int facilityId, int type, bool isLoading) async {
     inventoryTypeList?.value = <InventoryTypeListModel>[];
+    filteredData?.value = <InventoryTypeListModel>[];
+
     final _inventoryTypeList =
         await inventoryTypeListPresenter.getInventoryTypeList(
             facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_inventoryTypeList != null) {
       inventoryTypeList!.value = _inventoryTypeList;
+      filteredData.value = inventoryTypeList!.value;
       paginationController = PaginationController(
         rowCount: inventoryTypeList?.length ?? 0,
         rowsPerPage: 10,
@@ -120,6 +132,7 @@ class InventoryTypeListController extends GetxController {
 
       if (inventoryTypeList != null && inventoryTypeList!.isNotEmpty) {
         inventoryTypeListModel = inventoryTypeList![0];
+
         var inventoryTypeListJson = inventoryTypeListModel?.toJson();
         inventoryTypeListTableColumns.value = <String>[];
         for (var key in inventoryTypeListJson?.keys.toList() ?? []) {
