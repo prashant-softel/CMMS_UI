@@ -428,7 +428,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Business ')

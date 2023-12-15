@@ -433,7 +433,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Assets Type')

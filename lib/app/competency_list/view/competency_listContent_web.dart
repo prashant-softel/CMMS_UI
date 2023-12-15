@@ -79,8 +79,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Create Business'
-                        : 'Open Create Business',
+                        ? 'Close Create Competency'
+                        : 'Open Create Competency',
                   );
                 }),
               ),
@@ -426,7 +426,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCompetency();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Competency')

@@ -1,11 +1,9 @@
-
 import '../../domain/models/frequency_model.dart';
 import '../../domain/usecases/frequency_list_usecase.dart';
 
 class FrequencyListPresenter {
   FrequencyListPresenter(this.frequencyUsecase);
   FrequencylistUsecase frequencyUsecase;
-
 
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
