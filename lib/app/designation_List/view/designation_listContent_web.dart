@@ -428,7 +428,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatemodulelist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Designations ')

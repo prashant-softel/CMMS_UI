@@ -425,7 +425,7 @@ class InventoryCategoryListContentWeb
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Assets')

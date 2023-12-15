@@ -45,6 +45,11 @@ class RoleListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var rolelistNumberCtrlr = TextEditingController();
+  Rx<bool> isRoleListInvalid = false.obs;
+
+  Rx<bool> isFormInvalid = false.obs;
+  RxBool isContainerVisible = false.obs;
+
   var featureCtrlr = TextEditingController();
   RoleModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -89,7 +94,23 @@ class RoleListController extends GetxController {
     );
   }
 
+  void checkForm() {
+    if (isRoleListInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   Future<bool> createRoleList() async {
+    if (rolelistNumberCtrlr.text.trim() == '') {
+      isRoleListInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (rolelistNumberCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
@@ -194,6 +215,10 @@ class RoleListController extends GetxController {
         ],
       ),
     );
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> deleteRoleList(String? module_id) async {

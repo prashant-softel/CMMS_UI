@@ -330,7 +330,11 @@ class FacilityTypeListController extends GetxController {
         {
           int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[frequencyIndex]?.id ?? 0;
+          if (selectedCityId > 0) {
+            isSelectedCityType.value = true;
+          }
           selectedCity.value = value;
+          print('CityId:${selectedCityId}');
         }
         break;
 

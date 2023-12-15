@@ -14,8 +14,8 @@ import 'frequency_list_presenter.dart';
 
 class FrequencyListController extends GetxController {
   FrequencyListController(
-      this.frequencyListPresenter,
-      );
+    this.frequencyListPresenter,
+  );
   FrequencyListPresenter frequencyListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -24,8 +24,7 @@ class FrequencyListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<FrequencyModel?>? frequencyList =
-      <FrequencyModel?>[].obs;
+  RxList<FrequencyModel?>? frequencyList = <FrequencyModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -58,18 +57,16 @@ class FrequencyListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getFrequencyList( true);
+        getFrequencyList(true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getFrequencyList(
-       bool isLoading)
-  async {
+  Future<void> getFrequencyList(bool isLoading) async {
     frequencyList?.value = <FrequencyModel>[];
     final _moduleList =
-    await frequencyListPresenter.getFrequencyList( isLoading: isLoading);
+        await frequencyListPresenter.getFrequencyList(isLoading: isLoading);
 
     if (_moduleList != null) {
       frequencyList!.value = _moduleList.cast<FrequencyModel?>();
@@ -155,19 +152,20 @@ class FrequencyListController extends GetxController {
   //   }
   // }
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '' ) {
+    if (checklistNumberCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (manpowerCtrlr.text.trim() == '' ) {
+    if (manpowerCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -230,7 +228,7 @@ class FrequencyListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList( true);
+      getFrequencyList(true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -319,5 +317,4 @@ class FrequencyListController extends GetxController {
   //     isLoading: true,
   //   );
   //   return true;
-
 }

@@ -410,7 +410,7 @@ class InventoryStatusListContentWeb
                                   child: CustomElevatedButton(
                                       backgroundColor: ColorValues.appRedColor,
                                       onPressed: () {
-                                        // controller.cleardata();
+                                        controller.cleardata();
                                       },
                                       text: 'Cancel'),
                                 ),
@@ -433,7 +433,7 @@ class InventoryStatusListContentWeb
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreatechecklist();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Assets Status')

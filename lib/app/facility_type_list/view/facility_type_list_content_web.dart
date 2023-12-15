@@ -1140,12 +1140,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       .isSelectedCityType.value,
                                                   selectedValue: controller
                                                       .selectedCity.value,
-                                                  // onValueChanged:
-                                                  //     controller.onValueChanged(46, 46),
-                                                  onValueChanged:
-                                                      controller.onValueChanged
-                                                  // },
-                                                  ),
+                                                  onValueChanged: controller
+                                                      .onValueChanged),
                                             ),
                                           ),
                                         ],

@@ -483,7 +483,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                 if (value == true)
                                                   controller
                                                       .issuccessCreateBlock();
-                                                controller.toggleContainer();
+                                                // controller.toggleContainer();
                                               });
                                             },
                                             text: 'Create Block List ')
