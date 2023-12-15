@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 
@@ -132,38 +132,38 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                   ))
                                             ]),
                                         Spacer(),
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                top: 30, right: 20, left: 10),
-                                            child: CircularPercentIndicator(
-                                              //circular progress indicator
-                                              radius: 120.0, //radius for circle
-                                              lineWidth:
-                                                  15.0, //width of circle line
-                                              animation:
-                                                  true, //animate when it shows progress indicator first
-                                              percent: 60 /
-                                                  100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
-                                              center: Text(
-                                                "60.0%",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.0),
-                                              ), //center text, you can set Icon as well
-                                              footer: Text(
-                                                "Order this Month",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17.0),
-                                              ), //footer text
-                                              backgroundColor: Colors
-                                                      .lightGreen[
-                                                  300], //backround of progress bar
-                                              circularStrokeCap: CircularStrokeCap
-                                                  .round, //corner shape of progress bar at start/end
-                                              progressColor: Colors
-                                                  .redAccent, //progress bar color
-                                            )),
+                                        // Container(
+                                        //     padding: EdgeInsets.only(
+                                        //         top: 30, right: 20, left: 10),
+                                        //     child: CircularPercentIndicator(
+                                        //       //circular progress indicator
+                                        //       radius: 120.0, //radius for circle
+                                        //       lineWidth:
+                                        //           15.0, //width of circle line
+                                        //       animation:
+                                        //           true, //animate when it shows progress indicator first
+                                        //       percent: 60 /
+                                        //           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                        //       center: Text(
+                                        //         "60.0%",
+                                        //         style: TextStyle(
+                                        //             fontWeight: FontWeight.bold,
+                                        //             fontSize: 20.0),
+                                        //       ), //center text, you can set Icon as well
+                                        //       footer: Text(
+                                        //         "Order this Month",
+                                        //         style: TextStyle(
+                                        //             fontWeight: FontWeight.bold,
+                                        //             fontSize: 17.0),
+                                        //       ), //footer text
+                                        //       backgroundColor: Colors
+                                        //               .lightGreen[
+                                        //           300], //backround of progress bar
+                                        //       circularStrokeCap: CircularStrokeCap
+                                        //           .round, //corner shape of progress bar at start/end
+                                        //       progressColor: Colors
+                                        //           .redAccent, //progress bar color
+                                        //     )),
                                       ],
                                     ),
                                   ),

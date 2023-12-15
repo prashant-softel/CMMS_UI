@@ -92,7 +92,6 @@ class FacilityTypeListController extends GetxController {
   RxList<FacilityTypeListModel> BufferFacilityTypeList =
       <FacilityTypeListModel>[].obs;
 
-  RxList<FacilityTypeListModel> filteredData = <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -175,8 +174,9 @@ class FacilityTypeListController extends GetxController {
   // }
 
   Future<void> getFacilityTypeList() async {
-    facilityTypeList.clear();
     facilityTypeList.value = <FacilityTypeListModel>[];
+    BufferFacilityTypeList.value = <FacilityTypeListModel>[];
+
     final _facilityTypePermitList =
         await facilityTypeListPresenter.getFacilityTypeList(
       isLoading: true,
@@ -186,6 +186,7 @@ class FacilityTypeListController extends GetxController {
     );
     for (var facilityType_list in _facilityTypePermitList) {
       facilityTypeList.add(facilityType_list);
+      BufferFacilityTypeList.add(facilityType_list);
     }
     // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
 
@@ -198,14 +199,14 @@ class FacilityTypeListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      facilityTypeList?.value = filteredData;
-      // return;
+      facilityTypeList.value = BufferFacilityTypeList.value;
+      return;
     }
-
-    facilityTypeList?.value = filteredData
-        .where((item) =>
-            (item!.name
+    List<FacilityTypeListModel> filteredList = BufferFacilityTypeList.where(
+        (item) =>
+            (item.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -234,8 +235,8 @@ class FacilityTypeListController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
-                false))
-        .toList();
+                false)).toList();
+    facilityTypeList.value = filteredList;
   }
 
   Future<void> getCountryList() async {

@@ -62,11 +62,14 @@ class RoleListController extends GetxController {
 
   Future<void> getRoleList(bool isLoading) async {
     roleList?.value = <RoleModel>[];
+    filteredData?.value = <RoleModel>[];
+
     final _moduleList =
         await roleListPresenter.getRoleList(isLoading: isLoading);
 
     if (_moduleList != null) {
       roleList!.value = _moduleList.cast<RoleModel?>();
+      filteredData.value = roleList!.value;
       paginationController = PaginationController(
         rowCount: roleList?.length ?? 0,
         rowsPerPage: 10,
@@ -133,18 +136,19 @@ class RoleListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      roleList!.value = filteredData;
+      roleList?.value = filteredData.value;
       return;
     }
-
-    roleList!.value = filteredData
-        .where((item) => (item!.name
+    List<RoleModel?> filteredList = filteredData
+        .where((item) => (item?.name
                 ?.toString()
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ??
             false))
         .toList();
+    roleList?.value = filteredList;
   }
 
   void isDeleteDialog({String? module_id, String? module}) {

@@ -59,6 +59,8 @@ class BlockTypeListController extends GetxController {
 
   RxList<FacilityTypeListModel> facilityTypeList =
       <FacilityTypeListModel>[].obs;
+  RxList<FacilityTypeListModel> BufferFacilityTypeList =
+      <FacilityTypeListModel>[].obs;
   Rx<bool> isblockTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -103,7 +105,6 @@ class BlockTypeListController extends GetxController {
     if (keyword.isEmpty) {
       print('blockTypeList length (empty keyword): ${blockTypeList.length}');
       blockTypeList.value = bufferblockTypeList.value;
-
       return;
     }
 
@@ -150,6 +151,8 @@ class BlockTypeListController extends GetxController {
 
   Future<void> getBlockTypeList(selectedFacilityId) async {
     blockTypeList.value = <BlockTypeListModel>[];
+    bufferblockTypeList.value = <BlockTypeListModel>[];
+
     final _blockTypePermitList = await blockTypeListPresenter.getBlockTypeList(
       isLoading: true,
       // categoryIds: categoryIds,
@@ -158,6 +161,7 @@ class BlockTypeListController extends GetxController {
     );
     for (var blockType_list in _blockTypePermitList) {
       blockTypeList.add(blockType_list);
+      bufferblockTypeList.add(blockType_list);
     }
     // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
 
