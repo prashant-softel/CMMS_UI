@@ -98,7 +98,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                   onTap: () {
                                     Get.back();
                                   },
-                                  child: Text(" / MASTER",
+                                  child: Text(" / STOCK MANAGEMENT",
                                       style: Styles.greyMediumLight12),
                                 ),
                                 Text(" / IMPORT  MATERIAL ",
@@ -121,7 +121,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                       onTap: () {
                                         Get.back();
                                       },
-                                      child: Text(" / MASTER",
+                                      child: Text(" / PREVENTIVE MAINTENANCE",
                                           style: Styles.greyMediumLight12),
                                     ),
                                     Text(" / IMPORT PLAN",
