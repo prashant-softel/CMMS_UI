@@ -350,7 +350,7 @@ class BusinessListController extends GetxController {
         isEmailInvalid.value == true ||
         isPersonInvalid.value == true ||
         isNumberInvalid.value == true ||
-        isWebsiteInvalid.value == true ||
+        // isWebsiteInvalid.value == true ||
         isLocationInvalid.value == true ||
         isAddressInvalid.value == true ||
         isZipInvalid.value == true ||
@@ -385,10 +385,10 @@ class BusinessListController extends GetxController {
       isFormInvalid.value = true;
     }
 
-    if (websiteCtrlr.text.trim() == '') {
-      isWebsiteInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (websiteCtrlr.text.trim() == '') {
+    //   isWebsiteInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
     if (locationCtrlr.text.trim() == '') {
       isLocationInvalid.value = true;
