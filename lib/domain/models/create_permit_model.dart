@@ -1,12 +1,10 @@
 import 'dart:convert';
 
-
-
 CreatePermitModel addCreatePermitModelFromJson(String str) =>
     CreatePermitModel.fromJson(json.decode(str));
 
-String addCreatePermitModelToJson(CreatePermitModel data) => json.encode(data.toJson());
-
+String addCreatePermitModelToJson(CreatePermitModel data) =>
+    json.encode(data.toJson());
 
 class CreatePermitModel {
   int? permit_id;
@@ -23,6 +21,7 @@ class CreatePermitModel {
   int? user_id;
   bool? is_isolation_required;
   bool? resubmit;
+
   String? start_datetime;
   String? end_datetime;
   String? description;
@@ -34,35 +33,38 @@ class CreatePermitModel {
   List<int?>? category_ids;
   List<dynamic>? uploadfile_ids;
   List<int?>? isolated_category_ids;
+  int? TBT_Done_by;
+  String? TBT_Done_at;
 
-   CreatePermitModel(
-       {
-      this.permit_id,
-      this.Loto_list,
-      this.approver_id,
-      this.blockId,
-      this.block_ids,
-      this.latitude,
-      this.longitude,
-      this.category_ids,
-      this.uploadfile_ids,
-      this.description,
-      this.title,
-      this.employee_list,
-      this.end_datetime,
-      this.facility_id,
-      this.is_isolation_required,
-      this.resubmit,
-      this.isolated_category_ids,
-      this.issuer_id,
-      this.lotoId,
-      this.safety_question_list,
-      this.sop_type_id,
-      this.start_datetime,
-      this.permitTypeId,
-      this.user_id,
-      this.job_type_id
-       });
+  CreatePermitModel({
+    this.permit_id,
+    this.Loto_list,
+    this.approver_id,
+    this.blockId,
+    this.block_ids,
+    this.latitude,
+    this.longitude,
+    this.category_ids,
+    this.uploadfile_ids,
+    this.description,
+    this.title,
+    this.employee_list,
+    this.end_datetime,
+    this.facility_id,
+    this.is_isolation_required,
+    this.resubmit,
+    this.isolated_category_ids,
+    this.issuer_id,
+    this.lotoId,
+    this.safety_question_list,
+    this.sop_type_id,
+    this.start_datetime,
+    this.permitTypeId,
+    this.user_id,
+    this.job_type_id,
+    this.TBT_Done_by,
+    this.TBT_Done_at,
+  });
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
       CreatePermitModel(
@@ -78,25 +80,38 @@ class CreatePermitModel {
         permitTypeId: json["permitTypeId"],
         sop_type_id: json["sop_type_id"],
         user_id: json["user_id"],
-        start_datetime: json["start_datetime"]??json['startDate'],
-        end_datetime: json["end_datetime"]??json['tillDate'],
+        start_datetime: json["start_datetime"] ?? json['startDate'],
+        end_datetime: json["end_datetime"] ?? json['tillDate'],
+        TBT_Done_at: json['TBT_Done_at'],
         description: json["description"],
         title: json["title"],
         is_isolation_required: json["is_isolation_required"],
         resubmit: json['resubmit'],
-        Loto_list: json["Loto_list"]!=null? List<LotoList>.from(
-            json["Loto_list"]?.map((x) => LotoList.fromJson(x))):[],
-        employee_list: json["employee_list"]!=null? List<Employeelist>.from(
-            json["employee_list"].map((x) => Employeelist.fromJson(x))):[],
-        safety_question_list:json["safety_question_list"]!=null? List<Safetyquestionlist>.from(
-            json["safety_question_list"]
-                .map((x) => Safetyquestionlist.fromJson(x))):[],
-        block_ids:json["block_ids"]!=null? List<int>.from(json["block_ids"].map((x) => x)):[],
-        isolated_category_ids:json["isolated_category_ids"]!=null?
-            List<int>.from(json["isolated_category_ids"].map((x) => x)):[],
-        category_ids:json["category_ids"]!=null? List<int>.from(json["category_ids"].map((x) => x)):[],
-        uploadfile_ids:json["uploadfile_ids"]!=null? List<int>.from(json["uploadfile_ids"].map((x) => x)):[],
-
+        Loto_list: json["Loto_list"] != null
+            ? List<LotoList>.from(
+                json["Loto_list"]?.map((x) => LotoList.fromJson(x)))
+            : [],
+        employee_list: json["employee_list"] != null
+            ? List<Employeelist>.from(
+                json["employee_list"].map((x) => Employeelist.fromJson(x)))
+            : [],
+        safety_question_list: json["safety_question_list"] != null
+            ? List<Safetyquestionlist>.from(json["safety_question_list"]
+                .map((x) => Safetyquestionlist.fromJson(x)))
+            : [],
+        block_ids: json["block_ids"] != null
+            ? List<int>.from(json["block_ids"].map((x) => x))
+            : [],
+        isolated_category_ids: json["isolated_category_ids"] != null
+            ? List<int>.from(json["isolated_category_ids"].map((x) => x))
+            : [],
+        category_ids: json["category_ids"] != null
+            ? List<int>.from(json["category_ids"].map((x) => x))
+            : [],
+        uploadfile_ids: json["uploadfile_ids"] != null
+            ? List<int>.from(json["uploadfile_ids"].map((x) => x))
+            : [],
+        TBT_Done_by: json['TBT_Done_by'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -113,19 +128,21 @@ class CreatePermitModel {
         "user_id": user_id,
         "start_datetime": start_datetime,
         "end_datetime": end_datetime,
+        "TBT_Done_at": TBT_Done_at,
         "description": description,
         "title": title,
         "is_isolation_required": is_isolation_required,
         "resubmit": resubmit,
         "Loto_list": List<dynamic>.from(Loto_list!.map((x) => x.toJson())),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),
-        "safety_question_list": List<dynamic>.from(safety_question_list!.map((x) => x)),
+        "safety_question_list":
+            List<dynamic>.from(safety_question_list!.map((x) => x)),
         "block_ids": List<dynamic>.from(block_ids!.map((x) => x)),
-        "isolated_category_ids": List<dynamic>.from(isolated_category_ids!.map((x) => x)),
+        "isolated_category_ids":
+            List<dynamic>.from(isolated_category_ids!.map((x) => x)),
         "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
-
-
+        "TBT_Done_by": TBT_Done_by
       };
 }
 
