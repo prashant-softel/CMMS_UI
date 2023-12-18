@@ -13,9 +13,9 @@ import '../theme/styles.dart';
 class ImportMsgDialog extends GetView {
   // String? approveIncidentReportData;
   String? data;
-  // int? taskId;
+  dynamic importLog;
 
-  ImportMsgDialog({super.key, this.data});
+  ImportMsgDialog({super.key, this.data, this.importLog});
   final ImportInventoryController controller = Get.find();
 
   @override
@@ -46,11 +46,17 @@ class ImportMsgDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Center(
-                    child: Text('${data}',
-                        style: TextStyle(color: Colors.green),
-                        textAlign: TextAlign.center),
-                  ),
+                  importLog == null
+                      ? Center(
+                          child: Text('${data}',
+                              style: TextStyle(color: Colors.green),
+                              textAlign: TextAlign.center),
+                        )
+                      : Center(
+                          child: Text('${importLog}',
+                              style: TextStyle(color: Colors.red),
+                              textAlign: TextAlign.center),
+                        ),
                   // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,

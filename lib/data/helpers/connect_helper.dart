@@ -3967,9 +3967,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson['message'],
-    ));
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -3990,9 +3991,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson['message'],
-    ));
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6213,9 +6215,11 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson[0]['message'],
-    ));
+    var import = parsedJson[0]['import_log'];
+    String logString = import.join('\n');
+
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson[0]['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6236,9 +6240,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson['message'],
-    ));
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6259,9 +6264,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson['message'],
-    ));
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6282,9 +6288,10 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ImportMsgDialog(
-      data: parsedJson['message'],
-    ));
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
