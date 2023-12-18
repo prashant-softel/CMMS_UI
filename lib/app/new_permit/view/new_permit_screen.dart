@@ -3265,7 +3265,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                             '${employeeNameDetails?.name ?? ''}',
                                                                                                             // '${employeeNameDetails?.gender ?? ''}',
                                                                                                             '${employeeNameDetails?.mobileNumber ?? ''}',
-                                                                                                            '${employeeNameDetails?.name ?? ''}',
+                                                                                                            '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}',
                                                                                                             'Actions'
                                                                                                           ];
                                                                                                         },
@@ -4725,7 +4725,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
               textStyle:
                   TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
             ),
-            // controller: controller.workPermitNumberTextCtrlr,
+            controller: controller.workPermitRemarkTextCtrlr,
             keyboardType: TextInputType.multiline,
             autofocus: false,
             maxLines: 5,

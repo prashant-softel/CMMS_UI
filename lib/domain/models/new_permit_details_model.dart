@@ -55,6 +55,7 @@ class NewPermitDetailModel {
   ExtendDetails? extendDetails;
   CancelDetails? cancelDetails;
   CloseDetails? closeDetails;
+  String? physical_iso_remark;
 
   // int? sop_type_id;
   // int? issuer_id;
@@ -114,6 +115,7 @@ class NewPermitDetailModel {
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
+    this.physical_iso_remark,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -197,6 +199,7 @@ class NewPermitDetailModel {
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
+        physical_iso_remark: json['physical_iso_remark'],
 
         // approver_id: json["approver_id"],
         // issuer_id: json["issuer_id"],
@@ -262,6 +265,7 @@ class NewPermitDetailModel {
         "extendDetails": extendDetails,
         "cancelDetails": cancelDetails,
         "closeDetails": closeDetails,
+        "physical_iso_remark": physical_iso_remark,
 
         // "approver_id": approver_id,
         // "issuer_id": issuer_id,
