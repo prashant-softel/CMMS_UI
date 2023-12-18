@@ -492,10 +492,10 @@ class AuditListListDataSource extends DataTableSource {
     var cellsBuffer = [
       "planId",
       '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.frequency ?? ''}',
+      '${AuditPlanPlanningListDetails?.checklist_name ?? ''}',
+      '${AuditPlanPlanningListDetails?.created_by ?? ''}',
+      '${AuditPlanPlanningListDetails?.schedule_Date ?? ''}',
+      '${AuditPlanPlanningListDetails?.frequency_name ?? ''}',
       'Actions',
     ];
     var cells = [];
