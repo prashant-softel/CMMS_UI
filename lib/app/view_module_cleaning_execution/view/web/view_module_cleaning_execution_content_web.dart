@@ -1058,88 +1058,103 @@ class ViewModuleCleaningExecutionContentWeb
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          SizedBox(
-                                            height: 150,
-                                          ),
-                                          SizedBox(
-                                            width: 15,
-                                          ),
-                                          CustomElevatedButton(
-                                            backgroundColor: Colors.red,
-                                            onPressed: () {
-                                              // controller.saveAsDraft();
-                                            },
-                                            text: 'Cancel',
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kModuleCleaningFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0
-                                              ? Container(
-                                                  height: 28,
-                                                  child: CustomElevatedButton(
-                                                    backgroundColor:
-                                                        ColorValues.rejectColor,
-                                                    text: "Reject",
-                                                    icon: Icons.close,
-                                                    onPressed: () {
-                                                      Get.dialog(
-                                                          RejectMcExecutionDialog(
-                                                        id: controller.id,
-                                                      ));
-                                                    },
-                                                  ),
-                                                )
-                                              : Dimens.box0,
-                                          Dimens.boxWidth10,
-                                          varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kModuleCleaningFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0
-                                              ? Container(
-                                                  height: 28,
-                                                  child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .appGreenColor,
-                                                    text: "Approve",
-                                                    icon: Icons.add,
-                                                    onPressed: () {
-                                                      Get.dialog(
-                                                          ApproveMcExecutionDialog(
-                                                        id: controller.id,
-                                                      ));
-                                                    },
-                                                  ),
-                                                )
-                                              : Dimens.box0,
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              icon: Icons.print_outlined,
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              text: "Print",
-                                              onPressed: () {
-                                                // controller.printScreen();
-                                              },
+                                          Dimens.boxHeight50,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                icon: Icons.print_outlined,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                text: "Print",
+                                                onPressed: () {
+                                                  // controller.printScreen();
+                                                },
+                                              ),
                                             ),
                                           ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                icon: Icons.close,
+                                                backgroundColor:
+                                                    ColorValues.rejectColor,
+                                                text: "Cancel",
+                                                onPressed: () {
+                                                  // controller.printScreen();
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .rejectColor,
+                                                      text: "Reject",
+                                                      icon: Icons.close,
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                            RejectMcExecutionDialog(
+                                                          id: controller.id,
+                                                        ));
+                                                      },
+                                                    ),
+                                                  ),
+                                                )
+                                              : Dimens.box0,
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      text: "Approve",
+                                                      icon: Icons.add,
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                            ApproveMcExecutionDialog(
+                                                          id: controller.id,
+                                                        ));
+                                                      },
+                                                    ),
+                                                  ),
+                                                )
+                                              : Dimens.box0,
                                         ],
                                       ),
                                     ],

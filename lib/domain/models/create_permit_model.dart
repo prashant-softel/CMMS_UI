@@ -35,6 +35,7 @@ class CreatePermitModel {
   List<int?>? isolated_category_ids;
   int? TBT_Done_by;
   String? TBT_Done_at;
+  String? PHYSICAL_ISO_REMARK;
 
   CreatePermitModel({
     this.permit_id,
@@ -64,6 +65,7 @@ class CreatePermitModel {
     this.job_type_id,
     this.TBT_Done_by,
     this.TBT_Done_at,
+    this.PHYSICAL_ISO_REMARK,
   });
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
@@ -112,6 +114,7 @@ class CreatePermitModel {
             ? List<int>.from(json["uploadfile_ids"].map((x) => x))
             : [],
         TBT_Done_by: json['TBT_Done_by'],
+        PHYSICAL_ISO_REMARK: json['PHYSICAL_ISO_REMARK'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -142,7 +145,8 @@ class CreatePermitModel {
             List<dynamic>.from(isolated_category_ids!.map((x) => x)),
         "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
-        "TBT_Done_by": TBT_Done_by
+        "TBT_Done_by": TBT_Done_by,
+        "PHYSICAL_ISO_REMARK": PHYSICAL_ISO_REMARK
       };
 }
 
@@ -173,16 +177,50 @@ class Employeelist {
   });
 
   int? employeeId;
+  // List<Responsibility>? responsibility;
   String? responsibility;
 
   factory Employeelist.fromJson(Map<String, dynamic> json) => Employeelist(
         responsibility: json["responsibility"],
+        // != null
+        //     ? List<Responsibility>.from(
+        //         json["responsibility"]?.map((x) => Responsibility.fromJson(x)))
+        //     : [],
         employeeId: json["employeeId"],
       );
 
   Map<String, dynamic> toJson() => {
         "responsibility": responsibility,
+        // List<dynamic>.from(responsibility!.map((x) => x.toJson())),
         "employeeId": employeeId,
+      };
+}
+
+class Responsibility {
+  Responsibility({
+    this.id,
+    this.name,
+    this.since,
+    this.experianceYears,
+  });
+
+  int? id;
+  String? name;
+  String? since;
+  int? experianceYears;
+
+  factory Responsibility.fromJson(Map<String, dynamic> json) => Responsibility(
+        id: json["id"],
+        name: json["name"],
+        since: json['since'],
+        experianceYears: json['experianceYears'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "since": since,
+        "experianceYears": experianceYears
       };
 }
 

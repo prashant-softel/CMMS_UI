@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
@@ -179,6 +180,7 @@ class NewPermitController extends GetxController {
   var assignToTextCtrlr = TextEditingController();
   var breakdownTimeTextCtrlr = TextEditingController();
   var workPermitNumberTextCtrlr = TextEditingController();
+  var workPermitRemarkTextCtrlr = TextEditingController();
 
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
@@ -577,6 +579,9 @@ class NewPermitController extends GetxController {
       print('Islation id:$idList');
       selectedEditEquipemntIsolationIdList.value = idList;
       print('Islation id:$selectedEditEquipemntIsolationIdList');
+
+      workPermitRemarkTextCtrlr.text =
+          newPermitDetailsModel.value?.physical_iso_remark ?? "";
 
       // print('EmployeeList:${listEmployee}');
     }
@@ -1110,9 +1115,9 @@ class NewPermitController extends GetxController {
     if (isCheckedJSA.value == false) {
       Fluttertoast.showToast(msg: 'JSA checkbox should be checked');
     }
-    if (isCheckedSOP.value == false) {
-      Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
-    }
+    // if (isCheckedSOP.value == false) {
+    //   Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
+    // }
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
@@ -1148,13 +1153,22 @@ class NewPermitController extends GetxController {
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
-      List<Employeelist> employee_map_list = [];
+
+      String _workPermitRemark =
+          htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
+      var data = filteredEmployeeNameList
+          .map((element) => element?.responsibility?.map((e) => e.name));
+
+      print('EmpoyeeData34:${data.toString()}');
+
+      List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
-        employee_map_list
-            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+        employee_map_list.add(
+            Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
       late List<LotoList> loto_map_list = [];
@@ -1218,7 +1232,8 @@ class NewPermitController extends GetxController {
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
               ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
-              : dateTimeCtrlr.text);
+              : dateTimeCtrlr.text,
+          PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.createNewPermit(
@@ -1249,13 +1264,19 @@ class NewPermitController extends GetxController {
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
-      List<Employeelist> employee_map_list = [];
+      String _workPermitRemark =
+          htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
+      var data = filteredEmployeeNameList
+          .map((element) => element?.responsibility?.map((e) => e.name));
+
+      List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
-        employee_map_list
-            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+        employee_map_list.add(
+            Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
       late List<LotoList> loto_map_list = [];
@@ -1319,7 +1340,8 @@ class NewPermitController extends GetxController {
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
               ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
-              : dateTimeCtrlr.text);
+              : dateTimeCtrlr.text,
+          PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
           await permitPresenter.createNewPermitForJob(
@@ -1352,13 +1374,19 @@ class NewPermitController extends GetxController {
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
-      List<Employeelist> employee_map_list = [];
+      String _workPermitRemark =
+          htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
+      var data = filteredEmployeeNameList
+          .map((element) => element?.responsibility?.map((e) => e.name));
+
+      List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
-        employee_map_list
-            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+        employee_map_list.add(
+            Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
       late List<LotoList> loto_map_list = [];
@@ -1422,7 +1450,8 @@ class NewPermitController extends GetxController {
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
               ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
-              : dateTimeCtrlr.text);
+              : dateTimeCtrlr.text,
+          PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
           await permitPresenter.createNewPermitForPm(
@@ -1478,13 +1507,19 @@ class NewPermitController extends GetxController {
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
-      List<Employeelist> employee_map_list = [];
+      String _workPermitRemark =
+          htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
+      var data = filteredEmployeeNameList
+          .map((element) => element?.responsibility?.map((e) => e.name));
+
+      List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
-        employee_map_list
-            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+        employee_map_list.add(
+            Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
       late List<LotoList> loto_map_list = [];
@@ -1530,8 +1565,10 @@ class NewPermitController extends GetxController {
           resubmit: isChecked.value,
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
-              : dateTimeCtrlr.text);
+              ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                  .format(selectedDateTime.value)
+              : dateTimeCtrlr.text,
+          PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
@@ -1553,13 +1590,19 @@ class NewPermitController extends GetxController {
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
-      List<Employeelist> employee_map_list = [];
+      String _workPermitRemark =
+          htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
+      var data = filteredEmployeeNameList
+          .map((element) => element?.responsibility?.map((e) => e.name));
+
+      List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
-        employee_map_list
-            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+        employee_map_list.add(
+            Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
       late List<LotoList> loto_map_list = [];
@@ -1602,7 +1645,13 @@ class NewPermitController extends GetxController {
           Loto_list: loto_map_list,
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
-          resubmit: true);
+          resubmit: true,
+          TBT_Done_by: selectedTbtConductedId,
+          TBT_Done_at: dateTimeCtrlr.text.isEmpty
+              ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                  .format(selectedDateTime.value)
+              : dateTimeCtrlr.text,
+          PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.resubmitPermit(
