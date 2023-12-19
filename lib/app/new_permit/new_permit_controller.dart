@@ -1115,9 +1115,9 @@ class NewPermitController extends GetxController {
     if (isCheckedJSA.value == false) {
       Fluttertoast.showToast(msg: 'JSA checkbox should be checked');
     }
-    // if (isCheckedSOP.value == false) {
-    //   Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
-    // }
+    if (isCheckedSOP.value == false) {
+      Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
+    }
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
