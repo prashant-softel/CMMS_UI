@@ -18,6 +18,7 @@ class MrsListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<MrsListModel?>? mrsList = <MrsListModel?>[].obs;
+  RxList<MrsListModel> filteredData = <MrsListModel>[].obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -86,9 +87,48 @@ class MrsListController extends GetxController {
     super.onInit();
   }
 
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      mrsList?.value = filteredData.value;
+      return;
+    }
+    List<MrsListModel> filteredList = filteredData
+        .where((item) =>
+            (item.requested_by_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.requestd_date
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.activity
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.whereUsedType
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    mrsList?.value = filteredList;
+  }
+
   Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     mrsList?.value = <MrsListModel>[];
+    filteredData?.value = <MrsListModel>[];
+
     final _mrsList = await mrsListPresenter.getMrsList(
         facilityId: facilityId,
         isLoading: isLoading,
@@ -103,6 +143,7 @@ class MrsListController extends GetxController {
       );
 
       if (mrsList != null && mrsList!.isNotEmpty) {
+        //  filteredData.value = mrsList!.value;
         mrsListModel = mrsList![0];
         var mrsListJson = mrsListModel?.toJson();
         mrsTableColumns.value = <String>[];

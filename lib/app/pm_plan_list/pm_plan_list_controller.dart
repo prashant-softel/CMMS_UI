@@ -111,22 +111,46 @@ class PmPlanListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      pmPlanList.value = filteredData;
+      pmPlanList.value = filteredData.value;
       return;
     }
-
-    // pmPlanList.value = filteredData
-    //     .where((item) => item!.maintenance_order_number!
-    //         .toLowerCase()
-    //         .contains(keyword.toLowerCase()))
-    //     .toList();
+    List<PmPlanListModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.plan_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.created_at
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.updated_at
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.plan_freq_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.created_by_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    pmPlanList.value = filteredList;
   }
 
   Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     pmPlanList.value = <PmPlanListModel>[];
-    // pmPlanList?.clear();
+    filteredData.value = <PmPlanListModel>[];
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
@@ -134,8 +158,7 @@ class PmPlanListController extends GetxController {
         endDate: endDate);
     if (_pmPlanList != null) {
       pmPlanList.value = _pmPlanList;
-      filteredData.value = pmPlanList;
-
+      filteredData.value = pmPlanList.value;
       paginationController = PaginationController(
         rowCount: filteredData.length,
         rowsPerPage: 10,
