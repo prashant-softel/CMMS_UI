@@ -231,8 +231,8 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                     // ),
                                     Spacer(),
                                     Container(
-                                      width: 200,
-                                      height: 35,
+                                      width: 300,
+                                      height: 40,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
                                         style: GoogleFonts.lato(
@@ -247,17 +247,21 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           enabledBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           focusedBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           contentPadding:
-                                              Dimens.edgeInsets10_0_0_0,
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
-                                          hintStyle: Styles.grey12,
+                                          hintStyle: Styles.grey16,
                                         ),
                                       ),
                                     ),
