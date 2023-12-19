@@ -315,17 +315,14 @@ class JobListContentWeb extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
-                  style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
-                                              ),
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
                 onChanged: (value) {
                   filterText.value = value;
                 },
                 textAlign: TextAlign.left,
-              
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(

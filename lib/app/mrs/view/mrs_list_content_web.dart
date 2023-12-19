@@ -234,8 +234,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                               // ),
                               Spacer(),
                               Container(
-                                width: 200,
-                                height: 35,
+                                width: 300,
+                                height: 40,
                                 margin: Dimens.edgeInsets0_0_16_0,
                                 child: TextField(
                                   style: GoogleFonts.lato(
@@ -244,18 +244,24 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                         height: 1.0,
                                         color: Colors.black),
                                   ),
+                                  onChanged: (value) =>
+                                      controller.search(value),
                                   decoration: InputDecoration(
                                     enabledBorder: const OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
+                                        color: Colors.grey,
+                                        width: 0.0,
+                                      ),
                                     ),
                                     focusedBorder: const OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
+                                        color: Colors.grey,
+                                        width: 0.0,
+                                      ),
                                     ),
-                                    contentPadding: Dimens.edgeInsets10_0_0_0,
+                                    contentPadding: Dimens.edgeInsets05_10,
                                     hintText: 'search'.tr,
-                                    hintStyle: Styles.grey12,
+                                    hintStyle: Styles.grey16,
                                   ),
                                 ),
                               ),

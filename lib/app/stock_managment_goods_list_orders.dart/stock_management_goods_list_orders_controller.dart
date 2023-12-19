@@ -16,7 +16,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   );
   StockManagementGoodsOrdersPresenter stockManagementGoodsOrdersPresenter;
   final HomeController homecontroller = Get.find();
-  RxList<GoodsOrdersListModel?> goodsOrdersList = <GoodsOrdersListModel?>[].obs;
+  RxList<GoodsOrdersListModel> goodsOrdersList = <GoodsOrdersListModel>[].obs;
   RxList<GoodsOrdersListModel> filteredData = <GoodsOrdersListModel>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -108,21 +108,52 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      goodsOrdersList.value = filteredData;
+      goodsOrdersList.value = filteredData.value;
       return;
     }
-
-    goodsOrdersList.value = filteredData
+    List<GoodsOrdersListModel> filteredList = filteredData
         .where((item) =>
-            item.asset_name!.toLowerCase().contains(keyword.toLowerCase()))
+            (item.vendor_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.challan_no
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.generatedBy
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.purchaseDate
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.cost
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['stock_Mangement_Date']);
+    goodsOrdersList.value = filteredList;
   }
 
   Future<void> getGoodsOrdersList(int facilityId, dynamic startDate,
       dynamic endDate, bool isLoading) async {
     goodsOrdersList.value = <GoodsOrdersListModel>[];
+    filteredData.value = <GoodsOrdersListModel>[];
+
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
       isLoading: true,
@@ -137,6 +168,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     );
 
     if (goodsOrdersList.isNotEmpty) {
+      filteredData.value = goodsOrdersList.value;
       goodsOrdersListModel = goodsOrdersList[0];
       var newPermitListJson = goodsOrdersListModel?.toJson();
       goodsOrdersListTableColumns.value = <String>[];
@@ -144,12 +176,10 @@ class StockManagementGoodsOrdersController extends GetxController {
         goodsOrdersListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   void showAddGoodsOrdersDetails({int? id}) {
