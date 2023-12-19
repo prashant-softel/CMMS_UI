@@ -173,29 +173,62 @@ class JobListContentWeb extends StatelessWidget {
                               text: 'columnVisibility'.tr,
                             ),
                           ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'Copy'),
+                          // ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'Excel'),
+                          // ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'PDF'),
+                          // ),
+
+                          Spacer(),
                           Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'Copy'),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'Excel'),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'PDF'),
+                            width: 300,
+                            height: 40,
+                            margin: Dimens.edgeInsets0_0_16_0,
+                            child: TextField(
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
+                              ),
+                              onChanged: (value) => controller.search(value),
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.0,
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.0,
+                                  ),
+                                ),
+                                contentPadding: Dimens.edgeInsets05_10,
+                                hintText: 'search'.tr,
+                                hintStyle: Styles.grey16,
+                              ),
+                            ),
                           ),
                         ],
                       ),
