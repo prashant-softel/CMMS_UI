@@ -1,25 +1,25 @@
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/usecases/water_data_usecase.dart';
 
-class WaterDataPresenter {
-  WaterDataPresenter(this.waterDataUsecase);
-  WaterDataUsecase waterDataUsecase;
+class WaterDataListPresenter {
+  WaterDataListPresenter(this.waterDataListUsecase);
+  WaterDataListUsecase waterDataListUsecase;
 
   Future<List<AuditPlanListModel>?> getAuditPlanList(
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate}) async =>
-      await waterDataUsecase.getAuditPlanList(
+      await waterDataListUsecase.getAuditPlanList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,
           startDate: startDate);
   void saveValue({String? type}) async {
-    return waterDataUsecase.saveValue(type: type);
+    return waterDataListUsecase.saveValue(type: type);
   }
 
-  Future<String?> getValue() async => await waterDataUsecase.getValue();
-  void clearValue() async => waterDataUsecase.clearValue();
-  void clearStoreIdData() async => waterDataUsecase.clearStoreIdData();
+  Future<String?> getValue() async => await waterDataListUsecase.getValue();
+  void clearValue() async => waterDataListUsecase.clearValue();
+  void clearStoreIdData() async => waterDataListUsecase.clearStoreIdData();
 }
