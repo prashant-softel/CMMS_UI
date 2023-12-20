@@ -26,49 +26,49 @@ class WaterDataWeb extends StatefulWidget {
 
 final List<Map<String, dynamic>> statutoryData = [
   {
-    'Ground Water in KL units': 'Fire NOC status',
-    'Water Procured from Third Party for Module cleaning in KL units': '10',
-    'validity': '5',
-    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5',
-    'water used for drinking in KL units': '5',
-    'Water used for Module cleaning in KL units': '5',
-    'Water used for domestic and other purpose in KL units': '5',
-    'Total Water Withdrawal in KL units': '5',
-    'Total Water consumed in KL units': '5',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
-    'Total Groundwater Withdrawal Limit left in KL units': '5',
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
   },
   {
-    'Ground Water in KL units': 'Fire NOC status',
-    'Water Procured from Third Party for Module cleaning in KL units': '10',
-    'validity': '5',
-    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Ground Water in KL units': '300',
+    'Water Procured from Third Party for Module cleaning in KL units': '789',
+    'validity': '699',
+    'Water Procured from Third Party for Drinking in KL units': '700',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5',
-    'water used for drinking in KL units': '5',
-    'Water used for Module cleaning in KL units': '5',
-    'Water used for domestic and other purpose in KL units': '5',
-    'Total Water Withdrawal in KL units': '5',
-    'Total Water consumed in KL units': '5',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
-    'Total Groundwater Withdrawal Limit left in KL units': '5',
+        '789',
+    'water used for drinking in KL units': '100',
+    'Water used for Module cleaning in KL units': '900',
+    'Water used for domestic and other purpose in KL units': '27',
+    'Total Water Withdrawal in KL units': '262',
+    'Total Water consumed in KL units': '89',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '577',
+    'Total Groundwater Withdrawal Limit left in KL units': '49',
   },
   {
-    'Ground Water in KL units': 'Fire NOC status',
-    'Water Procured from Third Party for Module cleaning in KL units': '10',
-    'validity': '5',
-    'Water Procured from Third Party for Drinking in KL units': '5',
+    'Ground Water in KL units': '305',
+    'Water Procured from Third Party for Module cleaning in KL units': '66',
+    'validity': '100',
+    'Water Procured from Third Party for Drinking in KL units': '22',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5',
-    'water used for drinking in KL units': '5',
-    'Water used for Module cleaning in KL units': '5',
-    'Water used for domestic and other purpose in KL units': '5',
-    'Total Water Withdrawal in KL units': '5',
-    'Total Water consumed in KL units': '5',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '5',
-    'Total Groundwater Withdrawal Limit left in KL units': '5',
+        '30',
+    'water used for drinking in KL units': '60',
+    'Water used for Module cleaning in KL units': '50',
+    'Water used for domestic and other purpose in KL units': '53',
+    'Total Water Withdrawal in KL units': '51',
+    'Total Water consumed in KL units': '59',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '80',
+    'Total Groundwater Withdrawal Limit left in KL units': '77',
   },
 
   // Add more data as needed
@@ -204,88 +204,94 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(16),
                                             child: DataTable2(
-                                              headingRowHeight: 45,
+                                              headingRowHeight: 130,
                                               columnSpacing: 12,
                                               horizontalMargin: 12,
                                               minWidth: 600,
                                               columns: [
                                                 DataColumn2(
+                                                  fixedWidth: 110,
                                                   label: Text(
-                                                    'Ground Water in KL units',
+                                                    'Ground Water\nin KL units',
                                                     style: Styles.blackBold14,
                                                   ),
-                                                  size: ColumnSize.L,
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Water Procured from\nThird Party for\nModule cleaning\nin KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Water Procured from\nThird Party for\nDrinking in KL\nunits',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes\nin KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'water used for\ndrinking in KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 130,
+                                                  label: Text(
+                                                    'Water used for\nModule cleaning\nin KL units',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Water Procured from Third Party for Module cleaning in KL units',
+                                                    'Water used for\ndomestic and other\npurpose in KL units',
                                                     style: Styles.blackBold14,
                                                   ),
-                                                  size: ColumnSize.L,
+                                                  // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Water Procured from Third Party for Drinking in KL units',
+                                                    'Total Water\nWithdrawal in KL\nunits',
                                                     style: Styles.blackBold14,
                                                   ),
-                                                  size: ColumnSize.L,
+                                                  // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Water Procured from Third Party for Domestic and others purposes in KL units',
+                                                    'Total Water\nconsumed in KL\nunits',
                                                     style: Styles.blackBold14,
                                                   ),
-                                                  size: ColumnSize.L,
+                                                  // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'water used for drinking in KL units',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  label: Text(
-                                                    'Water used for Module cleaning in KL units',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  label: Text(
-                                                    'Water used for domestic and other purpose in KL units',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  label: Text(
-                                                    'Total Water Withdrawal in KL units',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  label: Text(
-                                                    'Total Water consumed in KL units',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  size: ColumnSize.L,
-                                                ),
-                                                DataColumn(
-                                                  label: Text(
-                                                    'Total Water withdrawal yearly limit as per NOC in KL units',
+                                                    'Total Water withdrawal\nyearly limit as per\nNOC in KL units',
                                                     style: Styles.blackBold14,
                                                   ),
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Groundwater Withdrawal Limit left in KL units',
+                                                    'Total Groundwater\nWithdrawal Limit left\nin KL units',
                                                     style: Styles.blackBold14,
                                                   ),
-                                                  size: ColumnSize.L,
+                                                  // size: ColumnSize.L,
                                                 ),
-                                                DataColumn(
+                                                DataColumn2(
                                                   label: Text(
                                                     'Action',
                                                     style: Styles.blackBold14,
@@ -555,22 +561,7 @@ class ChecklistMisPlanListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color:
-                                // controller.AuditPlanListPlan
-                                //         .firstWhere(
-                                //           (e) =>
-                                //               e?.planId ==
-                                //               AuditPlanPlanningListDetails!
-                                //                   .planId,
-                                //           orElse: () =>
-                                //               AuditPlanListPlanModel(
-                                //                   planId: 00),
-                                //         )
-                                //         ?.status ==
-                                //     342
-                                // ? ColorValues.approveColor
-                                // :
-                                ColorValues.addNewColor,
+                            color: ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
