@@ -1231,7 +1231,7 @@ class NewPermitController extends GetxController {
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
+              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
               : dateTimeCtrlr.text,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
@@ -1339,7 +1339,7 @@ class NewPermitController extends GetxController {
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
+              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
               : dateTimeCtrlr.text,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
@@ -1449,7 +1449,7 @@ class NewPermitController extends GetxController {
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd HH:mm').format(selectedDateTime.value)
+              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
               : dateTimeCtrlr.text,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
