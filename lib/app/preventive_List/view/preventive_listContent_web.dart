@@ -1,14 +1,14 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_swich_toggle.dart';
-import '../preventive_list_controller.dart';
 
 class PreventiveChecklistListContentWeb
     extends GetView<PreventiveListController> {
@@ -17,12 +17,14 @@ class PreventiveChecklistListContentWeb
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
+    return Obx(() {
+      final dataSource = CheckListDataSource(controller);
+      return Container(
         color: Color.fromARGB(255, 234, 236, 238),
         width: Get.width,
         height: Get.height,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 45,
@@ -56,688 +58,624 @@ class PreventiveChecklistListContentWeb
                     },
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)
                         : controller.type.value == 2
                             ? Text(" / AUDIT", style: Styles.greyMediumLight12)
                             : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE CHECKLIST NUMBER",
-                      style: Styles.greyMediumLight12)
+                  Text(" / CREATE CHECKLIST NUMBER", style: Styles.greyLight14),
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, top: 10),
+              child: ElevatedButton(
+                style: Styles.navyBlueElevatedButtonStyle,
+                onPressed: () {
+                  controller.toggleContainer();
+                },
+                child: Obx(() {
+                  return Text(
+                    controller.isContainerVisible.value
+                        ? 'Close Create  Create Checklist'
+                        : 'Open Create  Create Checklist',
+                  );
+                }),
               ),
             ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 1)
-                              .length >
-                          0
-                      ? Container(
-                          width: (Get.width * .3),
-                          margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 1.9,
-                          child: Card(
-                            color: Color.fromARGB(255, 251, 252, 253),
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  // Text(
-                                  //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0, right: 10, top: 10),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Create Checklist",
-                                            style: Styles.blackBold16,
-                                          ),
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Visibility(
-                                            visible: controller.isSuccess.value,
-                                            child: Center(
-                                              child: Wrap(
-                                                children: [
-                                                  Text(
-                                                    controller.selectedItem ==
-                                                            null
-                                                        ? "CheckList added Successfully in the List."
-                                                        : "CheckList updated Successfully in the List.",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Color.fromARGB(
-                                                            255, 24, 243, 123)),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            // crossAxisAlignment:
-                                            //     CrossAxisAlignment.center,
+                  // varUserAccessModel.value.access_list!
+                  //             .where((e) => e.feature_id == 5 && e.add == 0)
+                  //             .length >
+                  //         0
+                  //     ?
+
+                  Visibility(
+                    visible: controller.isContainerVisible.value,
+                    child: Container(
+                      width: (Get.width * .3),
+                      margin: EdgeInsets.only(left: 10, top: 30),
+                      height: 400,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color.fromARGB(255, 251, 252, 253),
+                      ),
+                      // height: MediaQuery.of(context).size.width * 0.2,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // Text(
+                            //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 10, top: 10),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Create Checklist",
+                                        style: Styles.blackBold16,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Visibility(
+                                        visible: controller.isSuccess.value,
+                                        child: Center(
+                                          child: Wrap(
                                             children: [
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'CheckList:'),
-                                                    Dimens.boxHeight15,
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Category: '),
-                                                    Dimens.boxHeight20,
-                                                    CustomRichText(
-                                                        title: 'Frequency: '),
-                                                    Dimens.boxHeight20,
-                                                    Text(
-                                                      "Manpower: ",
-                                                      style: Styles.blackBold16,
-                                                    ),
-                                                    Dimens.boxHeight20,
-                                                    Text(
-                                                      "Duration(in Min.): ",
-                                                      style: Styles.blackBold16,
-                                                    ),
-                                                  ],
-                                                ),
+                                              Text(
+                                                controller.selectedItem == null
+                                                    ? "CheckList added Successfully in the List."
+                                                    : "CheckList updated Successfully in the List.",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Color.fromARGB(
+                                                        255, 24, 243, 123)),
                                               ),
-                                              Dimens.boxWidth30,
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            6,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          textController: controller
-                                                              .checklistNumberCtrlr,
-                                                        )),
-                                                    Dimens.boxHeight10,
-                                                    DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              6,
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .equipmentCategoryList,
-                                                      isValueSelected: controller
-                                                          .isSelectedequipment
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedequipment
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                    Dimens.boxHeight10,
-                                                    DropdownWebWidget(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              6,
-                                                      controller: controller,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      dropdownList: controller
-                                                          .frequencyList,
-                                                      isValueSelected: controller
-                                                          .isSelectedfrequency
-                                                          .value,
-                                                      selectedValue: controller
-                                                          .selectedfrequency
-                                                          .value,
-                                                      onValueChanged: controller
-                                                          .onValueChanged,
-                                                    ),
-                                                    Dimens.boxHeight10,
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            6,
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          textController:
-                                                              controller
-                                                                  .manpowerCtrlr,
-                                                        )),
-                                                    Dimens.boxHeight10,
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            6,
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          textController:
-                                                              controller
-                                                                  .durationCtrlr,
-                                                        )),
-                                                  ],
-                                                ),
+                                              SizedBox(
+                                                height: 5,
                                               ),
                                             ],
                                           ),
-                                        ]),
-                                  ),
-                                  Dimens.boxHeight20,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
+                                        ),
+                                      ),
+                                      Row(
+                                        // crossAxisAlignment:
+                                        //     CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'CheckList:'),
+                                                Dimens.boxHeight15,
+                                                CustomRichText(
+                                                    title:
+                                                        'Equipment Category: '),
+                                                Dimens.boxHeight20,
+                                                CustomRichText(
+                                                    title: 'Frequency: '),
+                                                Dimens.boxHeight20,
+                                                Text(
+                                                  "Manpower: ",
+                                                  style: Styles.blackBold16,
+                                                ),
+                                                Dimens.boxHeight20,
+                                                Text(
+                                                  "Duration(in Min.): ",
+                                                  style: Styles.blackBold16,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Dimens.boxWidth10,
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .6),
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: LoginCustomTextfield(
+                                                      textController: controller
+                                                          .checklistNumberCtrlr,
+                                                    )),
+                                                Dimens.boxHeight10,
+                                                DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      6,
+                                                  controller: controller,
+                                                  dropdownList: controller
+                                                      .equipmentCategoryList,
+                                                  isValueSelected: controller
+                                                      .isSelectedequipment
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedequipment.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                                Dimens.boxHeight10,
+                                                DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      6,
+                                                  controller: controller,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  dropdownList:
+                                                      controller.frequencyList,
+                                                  isValueSelected: controller
+                                                      .isSelectedfrequency
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedfrequency.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            6,
+                                                    child: LoginCustomTextfield(
+                                                      textController: controller
+                                                          .manpowerCtrlr,
+                                                    )),
+                                                Dimens.boxHeight10,
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            6,
+                                                    child: LoginCustomTextfield(
+                                                      textController: controller
+                                                          .durationCtrlr,
+                                                    )),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                    ]),
+                              ),
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: (Get.width * .1),
+                                  height: 40,
+                                  child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.appRedColor,
+                                      onPressed: () {
+                                        controller.cleardata();
+                                      },
+                                      text: 'Cancel'),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: (Get.width * .15),
+                                  height: 40,
+                                  child: controller.selectedItem == null
+                                      ? Container(
+                                          width: (Get.width * .15),
                                           height: 40,
                                           child: CustomElevatedButton(
                                               backgroundColor:
-                                                  ColorValues.appRedColor,
+                                                  ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller.cleardata();
-                                              },
-                                              text: 'Cancel')),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                          height: 40,
-                                          child: controller.selectedItem == null
-                                              ? CustomElevatedButton(
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  onPressed: () {
-                                                    controller
-                                                        .createChecklistNumber()
-                                                        .then((value) {
-                                                      print("value,$value");
-                                                      if (value == true)
-                                                        controller
-                                                            .issuccessCreatechecklist();
-                                                    });
-                                                  },
-                                                  text: 'Create CheckList')
-                                              : CustomElevatedButton(
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  onPressed: () {
-                                                    controller
-                                                        .updateChecklistNumber(
-                                                            controller
-                                                                .selectedItem
-                                                                ?.id)
-                                                        .then((value) {
-                                                      print("value,$value");
-                                                      if (value == true)
-                                                        controller
-                                                            .issuccessCreatechecklist();
-                                                    });
-                                                  },
-                                                  text: 'Update')),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(),
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 1)
-                              .length >
-                          0
-                      ? Expanded(
-                          child: Container(
-                            width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30),
-                            height: Get.height,
-                            child: Card(
-                              color: Color.fromARGB(255, 251, 252, 253),
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "Check List",
-                                      style: Styles.blackBold16,
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  Row(
-                                    children: [
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {
-                                      //         FlutterClipboard.copy(controller
-                                      //                 .preventiveCheckList![0]
-                                      //                 .toString())
-                                      //             .then((value) {
-                                      //           print("copy data");
-                                      //         });
-                                      //       },
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //         ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'columnVisibility'.tr,
-                                      //   ),
-                                      // )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  controller.preventiveCheckList!.isEmpty
-                                      ? Expanded(
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Checklist Id",
-                                              "Checklist ",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
-                                              "Action",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.16,
-                                              );
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.preventiveCheckList
-                                                        ?.length ??
-                                                    0,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 50,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        )
-                                      : Expanded(
-                                          child: ScrollableTableView(
-                                            paginationController:
-                                                controller.paginationController,
-                                            columns: [
-                                              "Checklist Id",
-                                              "Checklist",
-                                              "Active Status ",
-                                              "Category ",
-                                              "Frequency ",
-                                              "PM Manpower",
-                                              "PM Duration(in Min.)",
-                                              "Action"
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                minWidth: Get.width * 0.12,
-                                                label: column,
-                                              );
-                                            }).toList(),
-                                            rows: //
-                                                [
-                                              ...List.generate(
-                                                controller.preventiveCheckList
-                                                        ?.length ??
-                                                    0,
-                                                (index) {
-                                                  var preventiveCheckListModelListDetails =
+                                                controller
+                                                    .createChecklistNumber()
+                                                    .then(
+                                                  (value) {
+                                                    print("CREATE");
+                                                    print("value,$value");
+                                                    if (value == true) {
                                                       controller
-                                                              .preventiveCheckList?[
-                                                          index];
-                                                  return [
-                                                    'CL${preventiveCheckListModelListDetails?.id}',
+                                                          .issuccessCreatechecklist();
+                                                      // Close the Create SPV container
+                                                      controller
+                                                          .toggleContainer();
+                                                    }
+                                                  },
+                                                );
+                                              },
+                                              text: 'Create CheckList'))
+                                      : CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appDarkBlueColor,
+                                          onPressed: () {
+                                            controller
+                                                .updateChecklistNumber(
+                                                    controller.selectedItem?.id)
+                                                .then(
+                                              (value) {
+                                                print("UPDATE");
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                                controller.toggleContainer();
+                                              },
+                                            );
+                                          },
+                                          text: 'Update',
+                                        ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
 
-                                                    '${preventiveCheckListModelListDetails?.name}',
-                                                    "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                                    '${preventiveCheckListModelListDetails?.category_name}',
-                                                    '${preventiveCheckListModelListDetails?.frequency_name}',
-                                                    '${preventiveCheckListModelListDetails?.manPower}',
-                                                    '${preventiveCheckListModelListDetails?.duration}',
-                                                    "Action"
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((_preventiveCheckList) {
-                                              return TableViewRow(
-                                                  height: 50,
-                                                  cells: _preventiveCheckList
-                                                      .map((value) {
-                                                    return TableViewCell(
-                                                        child: (value == 'No')
-                                                            ? CustomSwitchTroggle(
-                                                                value: value ==
-                                                                        'No'
-                                                                    ? true
-                                                                    : false,
-                                                                onChanged:
-                                                                    (value) {},
-                                                              )
-                                                            : (value ==
-                                                                    "Action")
-                                                                ? Wrap(
-                                                                    children: [
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                                0
-                                                                            ? TableActionButton(
-                                                                                color: ColorValues.editColor,
-                                                                                icon: Icons.edit,
-                                                                                message: 'Edit',
-                                                                                onPress: () {
-                                                                                  controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "CL${element?.id}" == _preventiveCheckList[0]);
-
-                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                  controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                                  controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                  controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                                  controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                  controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                  controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
-                                                                                },
-                                                                              )
-                                                                            : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
-                                                                                0
-                                                                            ? TableActionButton(
-                                                                                color: ColorValues.deleteColor,
-                                                                                icon: Icons.delete,
-                                                                                message: 'Delete',
-                                                                                onPress: () {
-                                                                                  print(_preventiveCheckList[0]);
-                                                                                  controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
-                                                                                },
-                                                                              )
-                                                                            : Container()
-                                                                      ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
-                                                  }).toList());
-                                            }).toList(),
+                  Expanded(
+                    child: Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(right: 10, left: 10, top: 20),
+                      height: Get.height,
+                      child: Card(
+                        color: Color.fromARGB(255, 251, 252, 253),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Check List",
+                                    style: Styles.blackBold16,
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                    width: 300,
+                                    height: 40,
+                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (value) =>
+                                          controller.search(value),
+                                      decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
                                           ),
                                         ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 25),
-                                    child: ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.paginationController,
-                                        builder: (context, value, child) {
-                                          return Row(children: [
-                                            Text(
-                                                "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                            Row(children: [
-                                              IconButton(
-                                                onPressed: controller
-                                                            .paginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .paginationController
-                                                            .previous();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_back_ios_new_rounded,
-                                                  color: controller
-                                                              .paginationController
-                                                              .currentPage <=
-                                                          1
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                              IconButton(
-                                                onPressed: controller
-                                                            .paginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .paginationController
-                                                            .pageCount
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .paginationController
-                                                            .next();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: controller
-                                                              .paginationController
-                                                              .currentPage >=
-                                                          controller
-                                                              .paginationController
-                                                              .pageCount
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                            ]),
-                                          ]);
-                                        }),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        contentPadding: Dimens.edgeInsets05_10,
+                                        hintText: 'search'.tr,
+                                        hintStyle: Styles.grey16,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                        )
-                      : Container()
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Expanded(
+                                child: ValueListenableBuilder(
+                                    valueListenable:
+                                        controller.columnVisibility,
+                                    builder: (context, value, child) {
+                                      final dataSource =
+                                          CheckListDataSource(controller);
+
+                                      return PaginatedDataTable2(
+                                        columnSpacing: 10,
+                                        source: dataSource,
+
+                                        minWidth: 2000,
+                                        showCheckboxColumn: false,
+                                        rowsPerPage:
+                                            10, // Number of rows per page
+                                        availableRowsPerPage: [10, 20, 30, 50],
+                                        border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234)),
+                                        columns: [
+                                          for (var entry in value.entries)
+                                            if (entry.value)
+                                              buildDataColumn(
+                                                entry.key,
+                                                controller
+                                                    .columnwidth[entry.key],
+                                              ),
+                                          buildDataColumn(
+                                            'Actions',
+                                            150,
+                                          ),
+                                        ],
+                                      );
+                                    })),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
           ],
         ),
-      ),
+      );
+    });
+  }
+
+  DataColumn2 buildDataColumn(
+    String header,
+    double? fixedWidth,
+  ) {
+    return DataColumn2(
+      fixedWidth: fixedWidth,
+      label: Column(
+          mainAxisAlignment: MainAxisAlignment.center, //
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black15W600,
+              ),
+            ),
+          ]),
     );
   }
+}
+
+class CheckListDataSource extends DataTableSource {
+  final PreventiveListController controller;
+
+  late List<PreventiveCheckListModel?> checkList;
+
+  CheckListDataSource(this.controller) {
+    filterUsers();
+  }
+  void filterUsers() {
+    checkList = <PreventiveCheckListModel?>[];
+    checkList = controller.preventiveCheckList!.where((User) {
+      return (User?.id ?? '')
+          .toString()
+          .toLowerCase()
+          .contains(controller.idFilterText.value.toLowerCase());
+    }).toList();
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    // print({"getRow call"});
+
+    final checklistDetails = checkList[index];
+
+    var cellsBuffer = [
+      '${index + 1}',
+      'CL${checklistDetails?.id ?? ''}',
+      '${checklistDetails?.name ?? ''}',
+      'Active Status',
+      '${checklistDetails?.category_name ?? ''}',
+      '${checklistDetails?.frequency_name ?? ''}',
+      '${checklistDetails?.manPower ?? ''}',
+      '${checklistDetails?.duration ?? ''}',
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+    cells.add('Actions');
+
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'Actions')
+                ? Wrap(children: [
+                    TableActionButton(
+                      color: ColorValues.editColor,
+                      icon: Icons.edit,
+                      message: 'Edit',
+                      onPress: () {
+                        controller.selectedItem =
+                            controller.preventiveCheckList!.firstWhere(
+                          (element) =>
+                              "${element!.id}" ==
+                              controller.preventiveCheckList!?[index]?.id
+                                  .toString(),
+                        );
+
+                        controller.checklistNumberCtrlr.text =
+                            controller.selectedItem?.name ?? '';
+                        controller.durationCtrlr.text =
+                            controller.selectedItem?.duration.toString() ?? '';
+
+                        controller.manpowerCtrlr.text =
+                            controller.selectedItem?.manPower.toString() ?? '';
+                        controller.selectedfrequency.value =
+                            controller.selectedItem?.frequency_name ?? '';
+                        controller.selectedequipment.value =
+                            controller.selectedItem?.category_name.toString() ??
+                                '';
+                        controller.selectedEquipmentId =
+                            controller.selectedItem?.category_id ?? 0;
+                        controller.selectedfrequencyId =
+                            controller.selectedItem?.frequency_id ?? 0;
+                        controller.isContainerVisible.value = true;
+                      },
+                    ),
+                    TableActionButton(
+                      color: ColorValues.deleteColor,
+                      icon: Icons.delete,
+                      message: 'Delete',
+                      onPress: () {
+                        controller.isContainerVisible.value = true;
+                      },
+                    )
+                  ])
+                : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+    );
+  }
+
+  @override
+  int get rowCount => checkList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
