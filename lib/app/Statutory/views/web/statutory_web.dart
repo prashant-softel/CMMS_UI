@@ -37,7 +37,7 @@ class StatutoryWeb extends StatelessWidget {
     },
     {
       'compliance': 'Hospital Tie Up  ',
-      'status': 'Applied',
+      'status': 'Out of Due date',
       'dateReceived': '10/07/2023',
       'validity': '5',
       'daysLeft': '28',
@@ -127,9 +127,9 @@ class StatutoryWeb extends StatelessWidget {
                                 padding: const EdgeInsets.all(16),
                                 child: DataTable2(
                                   headingRowHeight: 35,
-                                  columnSpacing: 12,
-                                  horizontalMargin: 12,
-                                  minWidth: 600,
+                                  columnSpacing: 5,
+                                  // horizontalMargin: 100,
+                                  // minWidth: 600,
                                   columns: [
                                     DataColumn2(
                                       label: Text(
@@ -153,10 +153,10 @@ class StatutoryWeb extends StatelessWidget {
                                     ),
                                     DataColumn2(
                                       label: Text(
-                                        'Validity (In months),',
+                                        'Validity',
                                         style: Styles.blackBold14,
                                       ),
-                                      size: ColumnSize.L,
+                                      size: ColumnSize.S,
                                     ),
                                     DataColumn(
                                       label: Text(
@@ -190,29 +190,75 @@ class StatutoryWeb extends StatelessWidget {
                                           DataCell(
                                             Row(
                                               children: [
-                                                TableActionButton(
-                                                  color: ColorValues.viewColor,
-                                                  icon: Icons
-                                                      .remove_red_eye_outlined,
-                                                  message: 'View',
-                                                ),
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: 'Edit',
-                                                  onPress: () {
-                                                    Get.toNamed(
-                                                      Routes.complianceScreen,
-                                                    );
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.deleteColor,
-                                                  icon: Icons.delete,
-                                                  message: 'Delete',
-                                                  onPress: () {},
-                                                ),
+                                                Wrap(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.viewColor,
+                                                      icon: Icons
+                                                          .remove_red_eye_outlined,
+                                                      message: 'View',
+                                                      onPress: () {
+                                                        int viewStatutory = 1;
+
+                                                        Get.toNamed(
+                                                          Routes
+                                                              .complianceScreen,
+                                                          arguments: {
+                                                            'viewStatutory':
+                                                                viewStatutory
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        Get.toNamed(
+                                                          Routes
+                                                              .complianceScreen,
+                                                        );
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Color.fromARGB(
+                                                          255, 116, 78, 130),
+                                                      icon: Icons.ads_click,
+                                                      message: 'Re-New',
+                                                      onPress: () {
+                                                        int reNew = 1;
+                                                        Get.toNamed(
+                                                          Routes
+                                                              .complianceScreen,
+                                                          arguments: {
+                                                            'reNew': reNew
+                                                          },
+                                                        );
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: Color.fromARGB(
+                                                          255, 120, 110, 123),
+                                                      icon: Icons.history,
+                                                      message: 'Hostory',
+                                                      onPress: () {
+                                                        // Get.toNamed(
+                                                        //   Routes.complianceScreen,
+                                                        // );
+                                                      },
+                                                    ),
+                                                    // TableActionButton(
+                                                    //   color: ColorValues
+                                                    //       .deleteColor,
+                                                    //   icon: Icons.delete,
+                                                    //   message: 'Delete',
+                                                    //   onPress: () {},
+                                                    // ),
+                                                  ],
+                                                )
                                               ],
                                             ),
                                           ),

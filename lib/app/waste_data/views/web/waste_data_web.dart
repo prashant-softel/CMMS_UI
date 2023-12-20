@@ -42,12 +42,16 @@ class WasteDataWeb extends StatelessWidget {
                   onTap: () {
                     Get.back();
                   },
-                  child: Text(" / MIS", style: Styles.greyMediumLight12),
+                  child: Text(" / MIS", style: Styles.greyLight14),
+                ),
+                Text(
+                  " / WASTE DATA",
+                  style: Styles.greyLight14,
                 ),
               ],
             ),
           ),
-          Center(child: Text("STATUTORY"))
+          Center(child: Text("Waste Data"))
         ],
       ),
     );

@@ -350,11 +350,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           //     controller.goToCheckListOfObservation();
                           //   },
                           // ),
-                          createContentTile(
-                              title: 'Waste Data List',
-                              onTap: () {
-                                // controller.goToWasteDataScreen();
-                              }),
+                          // createContentTile(
+                          //     title: 'Waste Data List',
+                          //     onTap: () {
+                          //       // controller.goToWasteDataScreen();
+                          //     }),
                           createContentTile(
                               title: 'Waste Data Report',
                               onTap: () {

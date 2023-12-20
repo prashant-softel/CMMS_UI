@@ -20,6 +20,13 @@ class ComplianceWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve arguments
+    final arguments = Get.arguments as Map<String, dynamic>?;
+
+    // Check if arguments exist and contain 'reNew'
+    final int? reNew = arguments?['reNew'] ?? 0;
+    final int? viewStatutory = arguments?['viewStatutory'] ?? 0;
+
     return Scaffold(
       body: Container(
         color: Color.fromARGB(255, 234, 236, 238),
@@ -156,6 +163,33 @@ class ComplianceWeb extends StatelessWidget {
                                                   ),
                                                 ],
                                               ),
+                                              Dimens.boxHeight5,
+                                              if (reNew == 1)
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title: 'ReNew Date '),
+                                                    Dimens.boxWidth10,
+                                                    CustomTextFieldForStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      numberTextField: true,
+                                                      onTap: () {
+                                                        // controller
+                                                        //         .openReceivedPicker =
+                                                        //     !controller
+                                                        //         .openReceivedPicker;
+                                                        // controller.update(
+                                                        //     ['stock_Mangement']);
+                                                      },
+                                                      // textController:
+                                                      //     controller.receivedDateTc,
+                                                    ),
+                                                  ],
+                                                ),
                                             ],
                                           ),
                                           Spacer(),
@@ -273,29 +307,30 @@ class ComplianceWeb extends StatelessWidget {
                                         ]),
                                       ),
                                       Dimens.boxHeight15,
-                                      Row(
-                                        children: [
-                                          Spacer(),
-                                          CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appRedColor,
-                                            text: 'cancel',
-                                            onPressed: () {
-                                              // controller.AddInventory();
-                                            },
-                                          ),
-                                          Dimens.boxWidth15,
-                                          CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appGreenColor,
-                                            text: 'Submit',
-                                            onPressed: () {
-                                              // controller.submitPurchaseOrderData();
-                                            },
-                                          ),
-                                          Spacer()
-                                        ],
-                                      ),
+                                      if (viewStatutory == 0)
+                                        Row(
+                                          children: [
+                                            Spacer(),
+                                            CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appRedColor,
+                                              text: 'cancel',
+                                              onPressed: () {
+                                                // controller.AddInventory();
+                                              },
+                                            ),
+                                            Dimens.boxWidth15,
+                                            CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appGreenColor,
+                                              text: 'Submit',
+                                              onPressed: () {
+                                                // controller.submitPurchaseOrderData();
+                                              },
+                                            ),
+                                            Spacer()
+                                          ],
+                                        ),
                                       Dimens.boxHeight15,
                                     ],
                                   ),

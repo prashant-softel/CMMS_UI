@@ -97,7 +97,7 @@ class PreventiveChecklistListContentWeb
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 10, top: 30),
+                      margin: EdgeInsets.only(left: 10, top: 25),
                       height: 400,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
