@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -28,9 +29,11 @@ class PreventiveListController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<PreventiveCheckListModel?>? preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
+  RxList<PreventiveCheckListModel?>? BufferPreventiveCheckList =
+      <PreventiveCheckListModel?>[].obs;
   int facilityId = 0;
   Rx<int> type = 0.obs;
-
+  RxBool isContainerVisible = false.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -49,10 +52,57 @@ class PreventiveListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Sr No": true,
+    "Checklist Id": true, "Checklist Name": true,
+
+    "Active Status": true,
+    "Category": true,
+    "Frequency": true,
+    "PM Manpower": true, "PM Duration(in Min.)": true,
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Sr No": 50,
+    "Checklist Id": 130,
+    "Checklist Name": 220,
+    "Active Status": 200,
+    "Category": 150,
+    "Frequency": 150,
+    "PM Manpower": 150,
+    "PM Duration(in Min.)": 150,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
+
+  RxString srFilterText = ''.obs;
+  RxString idFilterText = ''.obs;
+  RxString nameFilterText = ''.obs;
+  RxString activityFilterText = ''.obs;
+  RxString categoryFilterText = ''.obs;
+  RxString feqFilterText = ''.obs;
+  RxString pmFilterText = ''.obs;
+  RxString durFilterText = ''.obs;
+
   @override
   void onInit() async {
     try {
       await setType();
+      this.filterText = {
+        "Sr No": srFilterText,
+        "Checklist Id": idFilterText,
+        "Checklist Name": nameFilterText,
+        "Active Status": activityFilterText,
+        "Category": categoryFilterText,
+        "Frequency": feqFilterText,
+        "PM Manpower": pmFilterText,
+        "PM Duration(in Min.)": durFilterText,
+      };
       getInventoryCategoryList();
       getFrequencyList();
 
@@ -69,6 +119,10 @@ class PreventiveListController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> setType() async {
@@ -108,28 +162,73 @@ class PreventiveListController extends GetxController {
     }
   }
 
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      preventiveCheckList!.value = BufferPreventiveCheckList!.value;
+      return;
+    }
+    List<PreventiveCheckListModel?> filteredList = BufferPreventiveCheckList!
+        .where((item) =>
+            (item!.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item!.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item!.category_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item!.frequency_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item!.manPower
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item!.duration
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    preventiveCheckList!.value = filteredList;
+  }
+
   Future<void> getPreventiveCheckList(
       int facilityId, int type, bool isLoading) async {
     preventiveCheckList?.value = <PreventiveCheckListModel>[];
+    BufferPreventiveCheckList?.value = <PreventiveCheckListModel>[];
+
     final _preventiveCheckList =
         await preventiveListPresenter.getPreventiveCheckList(
             facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_preventiveCheckList != null) {
       preventiveCheckList!.value = _preventiveCheckList;
-      paginationController = PaginationController(
-        rowCount: preventiveCheckList?.length ?? 0,
-        rowsPerPage: 10,
-      );
+      BufferPreventiveCheckList!.value = preventiveCheckList!.value;
+      // paginationController = PaginationController(
+      //   rowCount: preventiveCheckList?.length ?? 0,
+      //   rowsPerPage: 10,
+      // );
 
-      if (preventiveCheckList != null && preventiveCheckList!.isNotEmpty) {
-        preventiveCheckListModel = preventiveCheckList![0];
-        var preventiveCheckListJson = preventiveCheckListModel?.toJson();
-        preventiveCheckListTableColumns.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          preventiveCheckListTableColumns.add(key);
-        }
-      }
+      // if (preventiveCheckList != null && preventiveCheckList!.isNotEmpty) {
+      //   preventiveCheckListModel = preventiveCheckList![0];
+      //   var preventiveCheckListJson = preventiveCheckListModel?.toJson();
+      //   preventiveCheckListTableColumns.value = <String>[];
+      //   for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+      //     preventiveCheckListTableColumns.add(key);
+      //   }
+      // }
     }
   }
 
