@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/water_data/water_data_presenter.dart';
+import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class WaterDataController extends GetxController {
-  WaterDataController(
-    this.waterDataPresenter,
+class WaterDataListController extends GetxController {
+  WaterDataListController(
+    this.waterDataListPresenter,
   );
-  WaterDataPresenter waterDataPresenter;
+  WaterDataListPresenter waterDataListPresenter;
   final HomeController homecontroller = Get.find();
   RxList<AuditPlanListModel> auditPlanList = <AuditPlanListModel>[].obs;
   RxList<AuditPlanListModel> filteredData = <AuditPlanListModel>[].obs;
@@ -103,7 +103,7 @@ class WaterDataController extends GetxController {
       dynamic endDate, bool isLoading) async {
     auditPlanList.value = <AuditPlanListModel>[];
     // pmPlanList?.clear();
-    final _auditPlanList = await waterDataPresenter.getAuditPlanList(
+    final _auditPlanList = await waterDataListPresenter.getAuditPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
@@ -118,12 +118,12 @@ class WaterDataController extends GetxController {
   Future<void> setType() async {
     try {
       // Read jobId
-      String? _type = await waterDataPresenter.getValue();
+      String? _type = await waterDataListPresenter.getValue();
       if (_type == null || _type == '' || _type == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         type.value = dataFromPreviousScreen['type'];
-        waterDataPresenter.saveValue(type: type.value.toString());
+        waterDataListPresenter.saveValue(type: type.value.toString());
       } else {
         type.value = int.tryParse(_type) ?? 0;
       }
@@ -138,10 +138,10 @@ class WaterDataController extends GetxController {
   }
 
   Future<void> clearValue() async {
-    waterDataPresenter.clearValue();
+    waterDataListPresenter.clearValue();
   }
 
   void clearStoreIdData() {
-    waterDataPresenter.clearStoreIdData();
+    waterDataListPresenter.clearStoreIdData();
   }
 }

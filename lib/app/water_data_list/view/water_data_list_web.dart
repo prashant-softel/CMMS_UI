@@ -1,7 +1,7 @@
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/water_data/water_data_controller.dart';
+import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -15,13 +15,13 @@ import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/table_action_button.dart';
 
-class WaterDataWeb extends StatefulWidget {
-  WaterDataWeb({
+class WaterDataListWeb extends StatefulWidget {
+  WaterDataListWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<WaterDataWeb> createState() => _WaterDataWebState();
+  State<WaterDataListWeb> createState() => _WaterDataListWebState();
 }
 
 final List<Map<String, dynamic>> statutoryData = [
@@ -74,10 +74,10 @@ final List<Map<String, dynamic>> statutoryData = [
   // Add more data as needed
 ];
 
-class _WaterDataWebState extends State<WaterDataWeb> {
+class _WaterDataListWebState extends State<WaterDataListWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<WaterDataController>(
+    return GetBuilder<WaterDataListController>(
       id: 'stock_Mangement_Date',
       builder: (controller) {
         // final dataSource = AuditPlanPlanListDataSource(controller);
@@ -117,7 +117,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                       },
                       child: Text(" / MIS", style: Styles.greyLight14),
                     ),
-                    Text(" / WATER DATA", style: Styles.greyMediumLight12)
+                    Text(" / WATER DATA LIST", style: Styles.greyMediumLight12)
                   ],
                 ),
               ),
@@ -155,7 +155,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                 top: 20,
                                               ),
                                               child: Text(
-                                                "Water Data",
+                                                "Water Data List",
                                                 style: Styles.blackBold16,
                                               ),
                                             ),
@@ -473,7 +473,7 @@ DataColumn2 buildDataColumn(
 }
 
 class ChecklistMisPlanListDataSource extends DataTableSource {
-  final WaterDataController controller;
+  final WaterDataListController controller;
 
   late List<AuditPlanListModel?> filteredAuditPlanList;
 

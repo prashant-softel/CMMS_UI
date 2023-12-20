@@ -1,5 +1,5 @@
-import 'package:cmms/app/water_data/view/water_data_web.dart';
-import 'package:cmms/app/water_data/water_data_controller.dart';
+import 'package:cmms/app/water_data_list/view/water_data_list_web.dart';
+import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +8,8 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class WaterDataScreen extends GetView<WaterDataController> {
-  WaterDataScreen({super.key});
+class WaterDataListScreen extends GetView<WaterDataListController> {
+  WaterDataListScreen({super.key});
 
   ///
   @override
@@ -40,7 +40,7 @@ class WaterDataScreen extends GetView<WaterDataController> {
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: WaterDataWeb(),
+                        child: WaterDataListWeb(),
                       )
                   ],
                 ),
