@@ -117,7 +117,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                       },
                       child: Text(" / MIS", style: Styles.greyLight14),
                     ),
-                    Text(" / WATER DATA LIST", style: Styles.greyMediumLight12)
+                    Text(" / WATER DATA LIST", style: Styles.greyLight14)
                   ],
                 ),
               ),
@@ -339,7 +339,10 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                   .editColor,
                                                               icon: Icons.edit,
                                                               message: 'Edit',
-                                                              onPress: () {},
+                                                              onPress: () {
+                                                                Get.toNamed(Routes
+                                                                    .waterDataScreen);
+                                                              },
                                                             ),
                                                             TableActionButton(
                                                               color: Color
