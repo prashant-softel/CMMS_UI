@@ -1,5 +1,8 @@
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/water_data/water_data_controller.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,7 +49,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Add Goods Order Details",
+                                      "Water Data",
                                       style: Styles.blackBold16,
                                     ),
                                   ],
@@ -63,11 +66,77 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
-                                      children: [Text("data")],
+                                      children: [
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Month: '),
+                                            Dimens.boxWidth10,
+                                            DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              dropdownList: controller.month,
+                                              // selectedValue: ,
+                                              onValueChanged:
+                                                  (month, selectedValue) {},
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Surface Water in KL units'),
+                                            Dimens.boxWidth10,
+                                            GoodsOrderTextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+
+                                              // textController:
+                                              //     controller.girNoCtrlr,
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                            "Water Procured from Third Party for"),
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Module cleaning in KL units'),
+                                            Dimens.boxWidth10,
+                                            GoodsOrderTextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+
+                                              // textController:
+                                              //     controller.girNoCtrlr,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                     Spacer(),
                                     Column(
-                                      children: [Text("data")],
+                                      children: [
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Ground Water in KL units : '),
+                                            Dimens.boxWidth10,
+                                            GoodsOrderTextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+
+                                              // textController:
+                                              //     controller.girNoCtrlr,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                     Dimens.boxWidth30,
                                   ],
@@ -117,14 +186,16 @@ class _WaterDataWebState extends State<WaterDataWeb> {
               ),
               Dimens.boxWidth15,
               Container(
-                  height: 40,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.submitColor,
-                    text: 'Submit',
-                    onPressed: () {
-                      // controller.createGoodsOrder();
-                    },
-                  ))
+                height: 40,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.submitColor,
+                  text: 'Submit',
+                  onPressed: () {
+                    // controller.createGoodsOrder();
+                  },
+                ),
+              ),
+              Spacer(),
             ],
           ),
         );

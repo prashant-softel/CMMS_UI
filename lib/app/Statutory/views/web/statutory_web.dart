@@ -128,6 +128,7 @@ class StatutoryWeb extends StatelessWidget {
                                 child: DataTable2(
                                   headingRowHeight: 35,
                                   columnSpacing: 5,
+                                  minWidth: 1400,
                                   // horizontalMargin: 100,
                                   // minWidth: 600,
                                   columns: [
