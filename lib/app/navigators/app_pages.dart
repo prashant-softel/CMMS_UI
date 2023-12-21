@@ -31,6 +31,8 @@ import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_binding.dart';
 import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_screen.dart';
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
+import 'package:cmms/app/compliance_history/compliance_history_binding.dart';
+import 'package:cmms/app/compliance_history/views/compliance_history_screen.dart';
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
@@ -1037,6 +1039,11 @@ class AppPages {
       name: _Paths.complianceScreen,
       page: ComplianceScreen.new,
       binding: ComplianceBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.complianceHistoryScreen,
+      page: ComplianceHistoryScreen.new,
+      binding: ComplianceHistoryBinding(),
     ),
   ];
 }
