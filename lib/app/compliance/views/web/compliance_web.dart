@@ -4,14 +4,10 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_manage
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../theme/color_values.dart';
 import '../../../theme/styles.dart';
 
@@ -26,6 +22,29 @@ class ComplianceWeb extends StatelessWidget {
     // Check if arguments exist and contain 'reNew'
     final int? reNew = arguments?['reNew'] ?? 0;
     final int? viewStatutory = arguments?['viewStatutory'] ?? 0;
+    List<Map<String, String>> staticDataList = [
+      {
+        "Time Stamp Re New": "2023-10-07 10:00:00",
+        "postedBy": "Received",
+        "comment": "Static Comment 1",
+        "location": "2024-10-07 10:00:00",
+        "Approver Name": "Manager",
+      },
+      {
+        "Time Stamp Re New": "2022-10-07 10:00:00",
+        "postedBy": "Applied",
+        "comment": "Static Comment 1",
+        "location": "2023-10-07 10:00:00",
+        "Approver Name": "Manager2",
+      },
+      {
+        "Time Stamp Re New": "2021-10-07 10:00:00",
+        "postedBy": "Out of Due date",
+        "comment": "Static Comment 1",
+        "location": "2022-10-07 10:00:00",
+        "Approver Name": "Admin",
+      },
+    ];
 
     return Scaffold(
       body: Container(
@@ -62,7 +81,7 @@ class ComplianceWeb extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.offNamed(Routes.misDashboard);
+                      Get.offNamed(Routes.statutory);
                     },
                     child: Text(" / MIS", style: Styles.greyLight14),
                   ),
@@ -101,7 +120,7 @@ class ComplianceWeb extends StatelessWidget {
                             Container(
                               color: Color.fromARGB(255, 245, 248, 250),
                               width: Get.width,
-                              height: Get.height * 0.5,
+                              height: Get.height,
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Container(
@@ -129,6 +148,32 @@ class ComplianceWeb extends StatelessWidget {
 
                                                     // textController:
                                                     //     controller.challanNoCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Received Date '),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      // controller
+                                                      //         .openReceivedPicker =
+                                                      //     !controller
+                                                      //         .openReceivedPicker;
+                                                      // controller.update(
+                                                      //     ['stock_Mangement']);
+                                                    },
+                                                    // textController:
+                                                    //     controller.receivedDateTc,
                                                   ),
                                                 ],
                                               ),
@@ -164,32 +209,32 @@ class ComplianceWeb extends StatelessWidget {
                                                 ],
                                               ),
                                               Dimens.boxHeight5,
-                                              if (reNew == 1)
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'ReNew Date '),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        // controller
-                                                        //         .openReceivedPicker =
-                                                        //     !controller
-                                                        //         .openReceivedPicker;
-                                                        // controller.update(
-                                                        //     ['stock_Mangement']);
-                                                      },
-                                                      // textController:
-                                                      //     controller.receivedDateTc,
-                                                    ),
-                                                  ],
-                                                ),
+                                              // if (reNew == 1)
+                                              // Row(
+                                              //   children: [
+                                              //     CustomRichText(
+                                              //         title: 'ReNew Date '),
+                                              //     Dimens.boxWidth10,
+                                              //     CustomTextFieldForStock(
+                                              //       width:
+                                              //           MediaQuery.of(context)
+                                              //                   .size
+                                              //                   .width /
+                                              //               5,
+                                              //       numberTextField: true,
+                                              //       onTap: () {
+                                              //         // controller
+                                              //         //         .openReceivedPicker =
+                                              //         //     !controller
+                                              //         //         .openReceivedPicker;
+                                              //         // controller.update(
+                                              //         //     ['stock_Mangement']);
+                                              //       },
+                                              //       // textController:
+                                              //       //     controller.receivedDateTc,
+                                              //     ),
+                                              //   ],
+                                              // ),
                                             ],
                                           ),
                                           Spacer(),
@@ -200,25 +245,15 @@ class ComplianceWeb extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   CustomRichText(
-                                                      title: 'Received Date '),
+                                                      title:
+                                                          'Status of validity '),
                                                   Dimens.boxWidth10,
-                                                  CustomTextFieldForStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      // controller
-                                                      //         .openReceivedPicker =
-                                                      //     !controller
-                                                      //         .openReceivedPicker;
-                                                      // controller.update(
-                                                      //     ['stock_Mangement']);
-                                                    },
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+
                                                     // textController:
-                                                    //     controller.receivedDateTc,
+                                                    //     controller.challanNoCtrlr,
                                                   ),
                                                 ],
                                               ),
@@ -306,6 +341,122 @@ class ComplianceWeb extends StatelessWidget {
                                           ),
                                         ]),
                                       ),
+                                      Dimens.boxHeight10,
+                                      Container(
+                                        margin: Dimens.edgeInsets20,
+                                        height:
+                                            300, // Adjust the height as needed
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Fire NOC Status",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(
+                                              color:
+                                                  ColorValues.greyLightColour,
+                                            ),
+                                            Expanded(
+                                              child: DataTable2(
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn(
+                                                    label: Text(
+                                                      "Time Stamp Re New",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  DataColumn(
+                                                    label: Text(
+                                                      "Status",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  DataColumn(
+                                                    label: Text(
+                                                      "Comment",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  DataColumn(
+                                                    label: Text(
+                                                      "Expires Date",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  DataColumn(
+                                                    label: Text(
+                                                      "Approver Name",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  staticDataList.length,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(Text(staticDataList[
+                                                            index][
+                                                        "Time Stamp Re New"]!)),
+                                                    DataCell(Text(
+                                                        staticDataList[index]
+                                                            ["postedBy"]!)),
+                                                    DataCell(Text(
+                                                        staticDataList[index]
+                                                            ["comment"]!)),
+                                                    DataCell(Text(
+                                                        staticDataList[index]
+                                                            ["location"]!)),
+                                                    DataCell(Text(
+                                                        staticDataList[index][
+                                                            "Approver Name"]!)),
+                                                  ]),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                       Dimens.boxHeight15,
                                       if (viewStatutory == 0)
                                         Row(
@@ -323,7 +474,7 @@ class ComplianceWeb extends StatelessWidget {
                                             CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appGreenColor,
-                                              text: 'Submit',
+                                              text: 'Update',
                                               onPressed: () {
                                                 // controller.submitPurchaseOrderData();
                                               },
