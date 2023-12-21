@@ -98,7 +98,7 @@ class MisDashboardController extends GetxController {
   }
 
   void goToWaterDataScreen() {
-    Get.toNamed(Routes.waterDataScreen);
+    Get.toNamed(Routes.waterDataListScreen);
   }
 
   Future<void> goToTypeOfObservation() async {

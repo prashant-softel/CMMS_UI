@@ -204,7 +204,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           child: Row(
                             children: [
                               Text(
-                                "MIS Checklist",
+                                "MIS Master",
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 159, 156, 156),
                                   fontSize: 16,
