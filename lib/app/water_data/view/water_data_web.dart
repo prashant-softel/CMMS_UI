@@ -59,86 +59,193 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                 color: ColorValues.greyLightColour,
                               ),
                               Container(
-                                margin: Dimens.edgeInsets20,
-                                child: Row(
+                                margin: EdgeInsets.only(left: 20, right: 20),
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
+                                    Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
-                                            CustomRichText(title: 'Month: '),
-                                            Dimens.boxWidth10,
-                                            DropdownWebStock(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  5,
-                                              dropdownList: controller.month,
-                                              // selectedValue: ,
-                                              onValueChanged:
-                                                  (month, selectedValue) {},
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'Month: '),
+                                                Dimens.boxWidth10,
+                                                DropdownWebStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  dropdownList:
+                                                      controller.month,
+                                                  // selectedValue: ,
+                                                  onValueChanged:
+                                                      (month, selectedValue) {},
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Surface Water in KL units'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxHeight10,
-                                        Row(
+                                        Spacer(),
+                                        Column(
                                           children: [
-                                            CustomRichText(
-                                                title:
-                                                    'Surface Water in KL units'),
-                                            Dimens.boxWidth10,
-                                            GoodsOrderTextField(
-                                              keyboardType:
-                                                  TextInputType.number,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Ground Water in KL units : '),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
 
-                                              // textController:
-                                              //     controller.girNoCtrlr,
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                        Text(
-                                            "Water Procured from Third Party for"),
-                                        Row(
+                                        Dimens.boxWidth30,
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Text("Water Procured from Third Party for:",
+                                        style: Styles.blue14),
+                                    Dimens.boxHeight10,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
-                                            CustomRichText(
-                                                title:
-                                                    'Module cleaning in KL units'),
-                                            Dimens.boxWidth10,
-                                            GoodsOrderTextField(
-                                              keyboardType:
-                                                  TextInputType.number,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Module cleaning in KL units'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
 
-                                              // textController:
-                                              //     controller.girNoCtrlr,
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Domestic and others purposes in KL units'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Drinking in KL units'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Domestic and others purposes in KL units'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    Spacer(),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title:
-                                                    'Ground Water in KL units : '),
-                                            Dimens.boxWidth10,
-                                            GoodsOrderTextField(
-                                              keyboardType:
-                                                  TextInputType.number,
-
-                                              // textController:
-                                              //     controller.girNoCtrlr,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Dimens.boxWidth30,
                                   ],
                                 ),
                               ),
