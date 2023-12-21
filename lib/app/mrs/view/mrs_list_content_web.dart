@@ -244,8 +244,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                         height: 1.0,
                                         color: Colors.black),
                                   ),
-                                  onChanged: (value) =>
-                                      controller.search(value),
+                                  // onChanged: (value) =>
+                                  //     controller.search(value),
                                   decoration: InputDecoration(
                                     enabledBorder: const OutlineInputBorder(
                                       borderSide: const BorderSide(

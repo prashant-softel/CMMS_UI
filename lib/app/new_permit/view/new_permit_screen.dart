@@ -1018,10 +1018,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                                       /// PAGINATION
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                25),
+                                                                        padding:
+                                                                            const EdgeInsets.symmetric(horizontal: 25),
                                                                         child: ValueListenableBuilder(
                                                                             valueListenable: controller.employeeNamepaginationController,
                                                                             builder: (context, value, child) {
@@ -1603,7 +1601,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(
+                                                                    .only(
                                                                 right: 50,
                                                                 top: 20),
                                                         child: Text(
@@ -1629,11 +1627,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          left:
-                                                                              70),
+                                                                      left: 70),
                                                                   child: Text(
                                                                     'Request a Permit For a PM',
                                                                     style: Styles
@@ -1641,15 +1637,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              40,
-                                                                          right:
-                                                                              10),
+                                                                      top: 10,
+                                                                      left: 40,
+                                                                      right:
+                                                                          10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1779,11 +1772,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          left:
-                                                                              10),
+                                                                      left: 10),
                                                                   child: Text(
                                                                     'Request a Permit For a Job',
                                                                     style: Styles
@@ -1791,15 +1782,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              40,
-                                                                          right:
-                                                                              10),
+                                                                      top: 10,
+                                                                      left: 40,
+                                                                      right:
+                                                                          10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -2130,7 +2118,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         right:
                                                                             20),
                                                                 child: Column(
@@ -2428,7 +2416,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 150,
                                                                     right: 130),
                                                             child: Row(
@@ -3117,8 +3105,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   Column(
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
+                                                                        padding: const EdgeInsets.only(
                                                                             left:
                                                                                 10,
                                                                             right:
@@ -3447,7 +3434,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(
+                                                                    .only(
                                                                 left: 28,
                                                                 right: 110),
                                                         child: Row(
@@ -4572,8 +4559,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 fillColor: ColorValues.whiteColor,
                 filled: true,
                 // hintText: controller.selectedDateTime.value.toString(),
-                hintText: DateFormat('yyyy-MM-dd HH:mm')
-                    .format(controller.selectedDateTime.value),
+                // hintText: DateFormat('yyyy-MM-dd HH:mm')
+                //     .format(controller.selectedDateTime.value),
                 hintStyle: TextStyle(
                   // You can apply any TextStyle properties herex
                   color: Colors.black,
@@ -4613,15 +4600,20 @@ class NewPermitScreen extends GetView<NewPermitController> {
       time.hour,
       time.minute,
     );
-    controller.selectedDateTime.value = dateTime;
-    controller.dateTimeCtrlr
-      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.dateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
+    // controller.selectedDateTime.value = dateTime;
+    // controller.dateTimeCtrlr
+    //   ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
+    //   ..selection = TextSelection.fromPosition(
+    //     TextPosition(
+    //       offset: controller.dateTimeCtrlr.text.length,
+    //       affinity: TextAffinity.upstream,
+    //     ),
+    //   );
+    controller.dateTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+    controller.tbtDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .format(dateTime.add(Duration(hours: 8)));
     print('TBT DateTime:${controller.dateTimeCtrlr.text}');
   }
 
