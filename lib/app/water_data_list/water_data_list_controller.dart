@@ -57,6 +57,7 @@ class WaterDataListController extends GetxController {
     'Start Date': 250,
     'Frequency Name': 250,
   };
+
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
