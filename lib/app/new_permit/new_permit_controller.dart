@@ -169,6 +169,7 @@ class NewPermitController extends GetxController {
   var validTillTimeCtrlr = TextEditingController();
   var validTillTimeCtrlrBuffer;
   var startDateTimeCtrlrBuffer;
+  var tbtDateTimeCtrlrBuffer;
 
 //For date Time
   var dateTimeCtrlr = TextEditingController();
@@ -1230,9 +1231,7 @@ class NewPermitController extends GetxController {
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
-              : dateTimeCtrlr.text,
+          TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
@@ -1338,9 +1337,7 @@ class NewPermitController extends GetxController {
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
-              : dateTimeCtrlr.text,
+          TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
@@ -1448,9 +1445,7 @@ class NewPermitController extends GetxController {
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat('yyyy-MM-dd').format(selectedDateTime.value)
-              : dateTimeCtrlr.text,
+          TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
@@ -1564,10 +1559,7 @@ class NewPermitController extends GetxController {
           safety_question_list: safety_measure_map_list,
           resubmit: isChecked.value,
           TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                  .format(selectedDateTime.value)
-              : dateTimeCtrlr.text,
+          TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
@@ -1647,10 +1639,7 @@ class NewPermitController extends GetxController {
           safety_question_list: safety_measure_map_list,
           resubmit: true,
           TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: dateTimeCtrlr.text.isEmpty
-              ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                  .format(selectedDateTime.value)
-              : dateTimeCtrlr.text,
+          TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
