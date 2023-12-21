@@ -69,6 +69,134 @@ final List<Map<String, dynamic>> statutoryData = [
     'Total Water withdrawal yearly limit as per NOC in KL units': '80',
     'Total Groundwater Withdrawal Limit left in KL units': '77',
   },
+  {
+    "Month": "April",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "May",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Jun",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "July",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Agust",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Oct",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Nov",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Dec",
+    'Ground Water in KL units': '200',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'validity': '590',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
 
   // Add more data as needed
 ];
@@ -198,10 +326,21 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(16),
                                             child: DataTable2(
+                                              fixedLeftColumns: 1,
                                               headingRowHeight: 130,
                                               columnSpacing: 12,
                                               horizontalMargin: 12,
-                                              minWidth: 600,
+                                              headingRowColor:
+                                                  MaterialStateColor
+                                                      .resolveWith(
+                                                (states) {
+                                                  return ColorValues
+                                                      .lightGreyColor;
+                                                },
+                                              ),
+                                              fixedColumnsColor:
+                                                  ColorValues.appYellowColor,
+                                              minWidth: 2300,
                                               columns: [
                                                 DataColumn2(
                                                   fixedWidth: 70,
@@ -212,7 +351,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 114,
+                                                  fixedWidth: 130,
                                                   label: Text(
                                                     'Ground Water\nin KL units',
                                                     style: Styles.blackBold14,
@@ -220,7 +359,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 150,
+                                                  fixedWidth: 190,
                                                   label: Text(
                                                     'Water Procured from\nThird Party for\nModule cleaning\nin KL units',
                                                     style: Styles.blackBold14,
@@ -228,7 +367,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 150,
+                                                  fixedWidth: 190,
                                                   label: Text(
                                                     'Water Procured from\nThird Party for\nDrinking in KL\nunits',
                                                     style: Styles.blackBold14,
@@ -246,13 +385,13 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'water used for\ndrinking in KL units',
+                                                    'water used for\ndrinking in KL\nunits',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 130,
+                                                  fixedWidth: 150,
                                                   label: Text(
                                                     'Water used for\nModule cleaning\nin KL units',
                                                     style: Styles.blackBold14,
@@ -260,6 +399,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
+                                                  fixedWidth: 180,
                                                   label: Text(
                                                     'Water used for\ndomestic and other\npurpose in KL units',
                                                     style: Styles.blackBold14,
