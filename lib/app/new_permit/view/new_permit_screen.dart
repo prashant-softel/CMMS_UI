@@ -4575,7 +4575,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                 hintText: DateFormat('yyyy-MM-dd HH:mm')
                     .format(controller.selectedDateTime.value),
                 hintStyle: TextStyle(
-                  // You can apply any TextStyle properties here
+                  // You can apply any TextStyle properties herex
                   color: Colors.black,
                   // fontWeight: FontWeight.bold
                 ),

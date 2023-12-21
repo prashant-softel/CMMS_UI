@@ -47,3 +47,21 @@ class GenderModel {
     };
   }
 }
+
+class MonthModel {
+  final String name;
+  final String? id;
+
+  MonthModel({required this.name, this.id});
+
+  MonthModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        id = json['id'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'id': id,
+    };
+  }
+}

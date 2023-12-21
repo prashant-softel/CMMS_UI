@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data/water_data_presenter.dart';
-import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
-import 'package:cmms/domain/models/audit_plan_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class WaterDataController extends GetxController {
   WaterDataController(
@@ -23,6 +19,21 @@ class WaterDataController extends GetxController {
   int facilityId = 0;
   Rx<int> type = 0.obs;
 
+  RxList<MonthModel> month = <MonthModel>[
+    MonthModel(name: "Please Select", id: "0"),
+    MonthModel(name: 'Jan', id: "1"),
+    MonthModel(name: 'Feb', id: "2"),
+    MonthModel(name: 'March', id: "3"),
+    MonthModel(name: 'April', id: "4"),
+    MonthModel(name: 'May', id: "5"),
+    MonthModel(name: 'June', id: "6"),
+    MonthModel(name: 'July', id: "7"),
+    MonthModel(name: 'Aug', id: "8"),
+    MonthModel(name: 'Sept', id: "9"),
+    MonthModel(name: 'Oct', id: "10"),
+    MonthModel(name: 'Nov', id: "11"),
+    MonthModel(name: 'Dec', id: "12"),
+  ].obs;
   @override
   void onInit() async {
     //await setType();
