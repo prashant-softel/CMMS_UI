@@ -1,7 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
@@ -12,10 +10,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../../theme/color_values.dart';
-import '../../theme/styles.dart';
-import '../../widgets/table_action_button.dart';
 
 class WaterDataListWeb extends StatefulWidget {
   WaterDataListWeb({
@@ -28,6 +22,7 @@ class WaterDataListWeb extends StatefulWidget {
 
 final List<Map<String, dynamic>> statutoryData = [
   {
+    "Month": "Jan",
     'Ground Water in KL units': '200',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
     'validity': '590',
@@ -43,6 +38,7 @@ final List<Map<String, dynamic>> statutoryData = [
     'Total Groundwater Withdrawal Limit left in KL units': '622',
   },
   {
+    "Month": "Feb",
     'Ground Water in KL units': '300',
     'Water Procured from Third Party for Module cleaning in KL units': '789',
     'validity': '699',
@@ -58,6 +54,7 @@ final List<Map<String, dynamic>> statutoryData = [
     'Total Groundwater Withdrawal Limit left in KL units': '49',
   },
   {
+    "Month": "March",
     'Ground Water in KL units': '305',
     'Water Procured from Third Party for Module cleaning in KL units': '66',
     'validity': '100',
@@ -207,7 +204,15 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               minWidth: 600,
                                               columns: [
                                                 DataColumn2(
-                                                  fixedWidth: 110,
+                                                  fixedWidth: 70,
+                                                  label: Text(
+                                                    'Month',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 114,
                                                   label: Text(
                                                     'Ground Water\nin KL units',
                                                     style: Styles.blackBold14,
@@ -299,6 +304,8 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 (data) {
                                                   return DataRow(
                                                     cells: [
+                                                      DataCell(
+                                                          Text(data['Month'])),
                                                       DataCell(Text(data[
                                                           'Ground Water in KL units'])),
                                                       DataCell(Text(data[
