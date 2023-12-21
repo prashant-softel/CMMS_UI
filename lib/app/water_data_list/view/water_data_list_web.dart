@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -5,6 +6,7 @@ import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -167,7 +169,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                               child: Row(
                                                 children: [
-                                                  Text('Date :'),
+                                                  Text('Year :'),
                                                   Dimens.boxWidth10,
                                                   CustomTextFieldForStock(
                                                     width:
@@ -177,13 +179,8 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                             5,
                                                     numberTextField: true,
                                                     onTap: () {
-                                                      controller
-                                                              .openFromDateToStartDatePicker =
-                                                          !controller
-                                                              .openFromDateToStartDatePicker;
-                                                      controller.update([
-                                                        'stock_Mangement_Date'
-                                                      ]);
+                                                      _showYearPicker(
+                                                          context, controller);
                                                     },
                                                     textController:
                                                         controller.waterDateTc,
@@ -656,4 +653,50 @@ class ChecklistMisPlanListDataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+}
+
+_showYearPicker(BuildContext context, WaterDataListController controller) {
+  int selectedYear = DateTime.now().year;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Select Year"),
+        content: Container(
+          height: 200,
+          child: CupertinoPicker(
+            itemExtent: 40,
+            onSelectedItemChanged: (int index) {
+              selectedYear = DateTime.now().year - index;
+            },
+            children: List.generate(10, (index) {
+              return Center(
+                child: Text((DateTime.now().year - index).toString()),
+              );
+            }),
+          ),
+        ),
+        actions: <Widget>[
+          ActionButton(
+            label: "Cancel", color: ColorValues.appRedColor,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            // child: Text("Cancel"),
+          ),
+          Dimens.boxHeight10,
+          ActionButton(
+            color: ColorValues.addNewColor,
+            onPressed: () {
+              controller.waterDateTc.text = selectedYear.toString();
+              controller.update(['stock_Mangement_Date']);
+              Navigator.of(context).pop();
+            },
+            label: "Select",
+          ),
+        ],
+      );
+    },
+  );
 }

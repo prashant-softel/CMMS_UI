@@ -168,6 +168,7 @@ abstract class Routes {
   static const misTask = _Paths.misTask;
   static const waterDataListScreen = _Paths.waterDataListScreen;
   static const waterDataScreen = _Paths.waterDataScreen;
+  static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
 
   static const complianceScreen = _Paths.complianceScreen;
 }
@@ -333,4 +334,5 @@ abstract class _Paths {
   static const waterDataListScreen = '/waterDataListScreen';
   static const complianceScreen = '/complianceScreen';
   static const waterDataScreen = '/waterDataScreen';
+  static const complianceHistoryScreen = '/complianceHistoryScreen';
 }

@@ -245,9 +245,10 @@ class StatutoryWeb extends StatelessWidget {
                                                       icon: Icons.history,
                                                       message: 'Hostory',
                                                       onPress: () {
-                                                        // Get.toNamed(
-                                                        //   Routes.complianceScreen,
-                                                        // );
+                                                        Get.toNamed(
+                                                          Routes
+                                                              .complianceHistoryScreen,
+                                                        );
                                                       },
                                                     ),
                                                     // TableActionButton(
