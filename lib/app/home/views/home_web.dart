@@ -320,6 +320,12 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                       )),
                                 ],
                               ),
+                              Dimens.boxHeight10,
+                              Row(
+                                children: [
+                                  _gridList(tittle: "WO on-time", value: "25%")
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -331,54 +337,34 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
             ),
           ),
         );
-        // floatingActionButton: Obx(() => varUserAccessModel
-        //             .value.access_list!
-        //             .where((e) =>
-        //                 e.feature_id ==
-        //                     UserAccessConstants.kGoodsFeatureId &&
-        //                 e.add == UserAccessConstants.kHaveAddAccess)
-        //             .length >
-        //         0
-        //     ? Row(
-        //         children: [
-        //           Spacer(),
-        //           Container(
-        //             height: 40,
-        //             child: CustomElevatedButton(
-        //               backgroundColor: ColorValues.cancelColor,
-        //               text: 'Cancel',
-        //               onPressed: () {
-        //                 Get.back();
-        //               },
-        //             ),
-        //           ),
-        //           Dimens.boxWidth15,
-        //           Container(
-        //               height: 40,
-        //               child: CustomElevatedButton(
-        //                 backgroundColor: ColorValues.submitColor,
-        //                 text: 'Submit',
-        //                 onPressed: () {
-        //                   // controller.createGoodsOrder();
-        //                 },
-        //               )),
-        //           Container(
-        //             height: 40,
-        //             child: CustomElevatedButton(
-        //               backgroundColor: ColorValues.submitColor,
-        //               text: 'Update',
-        //               onPressed: () {
-        //                 // controller.updateGoodsOrder();
-        //               },
-        //             ),
-        //           ),
-        //           Spacer()
-        //         ],
-        //       )
-        //     : Dimens.box0));
-
-        // );
       },
+    );
+  }
+
+  _gridList({
+    required String tittle,
+    required String value,
+  }) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Container(
+        width: 150,
+        decoration: BoxDecoration(
+          color: ColorValues.skyBlueColor,
+          borderRadius: BorderRadius.circular(2),
+        ),
+        padding: EdgeInsets.all(9),
+        child: Expanded(
+          child: Text(
+            tittle,
+            style: TextStyle(
+                color: ColorValues.whiteColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w700),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
     );
   }
 }
