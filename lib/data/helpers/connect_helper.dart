@@ -4380,10 +4380,9 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest(
-        'POST',
-        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
