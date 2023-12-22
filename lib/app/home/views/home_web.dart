@@ -70,8 +70,9 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         ),
                                       ],
                                     ),
-                                    height: 250,
-                                    width: 400,
+                                    height: 220,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.25,
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -181,8 +182,9 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         ),
                                       ],
                                     ),
-                                    height: 250,
-                                    width: 400,
+                                    height: 220,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.25,
                                     child: Column(
                                       children: [
                                         Row(
@@ -269,8 +271,9 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                           ),
                                         ],
                                       ),
-                                      height: 250,
-                                      width: 400,
+                                      height: 220,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.25,
                                       child: Row(
                                         children: [
                                           Align(
@@ -285,7 +288,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 dataMap:
                                                     controller.getDataMap(),
                                                 chartType: ChartType.ring,
-                                                chartRadius: 120,
+                                                chartRadius: 100,
                                                 colorList:
                                                     controller.getColorList(),
                                                 // centerText: "Pie Chart",
@@ -309,21 +312,28 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 //       .onChartTapped(index);
                                                 // },
                                               ),
-                                              SizedBox(height: 20),
-                                              // Text(
-                                              //   // 'Selected Section: ${chartController.selectedSection.value}',
-                                              //   // style: TextStyle(fontSize: 18),
-                                              // ),
                                             ],
                                           )
                                         ],
                                       )),
                                 ],
                               ),
-                              Dimens.boxHeight10,
+                              Dimens.boxHeight20,
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  _gridList(tittle: "WO on-time", value: "25%")
+                                  _gridList(
+                                      tittle: "WO on-time", percent: "30%"),
+                                  _gridList(tittle: "WO delay", percent: "45%"),
+                                  _gridList(
+                                      tittle: "WO backlog", percent: "15%"),
+                                  _gridList(
+                                      tittle: "Low stock items",
+                                      percent: "03%"),
+                                  _gridList(
+                                      tittle: "PO Items Awaited",
+                                      percent: "05%"),
                                 ],
                               )
                             ],
@@ -343,25 +353,61 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
 
   _gridList({
     required String tittle,
-    required String value,
+    required String percent,
   }) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: Container(
-        width: 150,
         decoration: BoxDecoration(
-          color: ColorValues.skyBlueColor,
-          borderRadius: BorderRadius.circular(2),
+          color: Color(0xFF353F4F),
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 1.0),
+              blurRadius: 6.0,
+            ),
+          ],
         ),
-        padding: EdgeInsets.all(9),
+        margin: EdgeInsets.only(left: 10, right: 10),
+        width: 200,
+        height: 60,
+        padding: EdgeInsets.only(left: 10, right: 10, top: 5),
         child: Expanded(
-          child: Text(
-            tittle,
-            style: TextStyle(
-                color: ColorValues.whiteColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
-            textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Row(
+                  children: [
+                    Text(
+                      tittle,
+                      style: TextStyle(
+                          color: ColorValues.whiteColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w200),
+                      textAlign: TextAlign.center,
+                    ),
+                    // Dimens.boxWidth10,
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Dimens.boxWidth40,
+                  Spacer(),
+                  Text(
+                    percent,
+                    style: TextStyle(
+                        color: ColorValues.whiteColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
+                  ),
+                  Spacer(),
+                ],
+              ),
+            ],
           ),
         ),
       ),

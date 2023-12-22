@@ -292,7 +292,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'drinking in KL units'),
+                                                        'Drinking in KL units'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
@@ -330,7 +330,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'domestic and other purpose in KL units'),
+                                                        'Domestic and other purpose in KL units'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
@@ -413,7 +413,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'consumed in KL units'),
+                                                        'Consumed in KL units'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
@@ -475,7 +475,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'yearly limit as per NOC in KL units'),
+                                                        'Yearly limit as per NOC in KL units'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
