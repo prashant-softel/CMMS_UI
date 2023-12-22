@@ -1,3 +1,4 @@
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -13,6 +14,69 @@ class DashBoardHomeWeb extends StatefulWidget {
   @override
   State<DashBoardHomeWeb> createState() => _DashBoardHomeWebState();
 }
+
+final List<Map<String, dynamic>> statutoryData = [
+  {
+    "Site name": "Alote",
+    'WO number': '123456',
+    'WO description': 'Preventive maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+  {
+    "Site name": "Aurad",
+    'WO number': '123456',
+    'WO description': 'Preventive maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+  {
+    "Site name": "Barod",
+    'WO number': '123456',
+    'WO description': 'Preventive maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+  {
+    "Site name": "Bellary",
+    'WO number': '123456',
+    'WO description': 'Preventive maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+  {
+    "Site name": "Alote",
+    'WO number': '123456',
+    'WO description': 'Corrective maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+  {
+    "Site name": "Aurad",
+    'WO number': '123456',
+    'WO description': 'Corrective maintenance',
+    'Status': 'Under Progress ',
+    'Asset category': 'Inverter',
+    'Asset Id': 'ICR1_Inv1',
+    'Schedule start date': '01-04-2023 18:00',
+    'Schedule end date': '01-04-2023 19:00',
+  },
+];
 
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
   @override
@@ -335,7 +399,133 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                       tittle: "PO Items Awaited",
                                       percent: "05%"),
                                 ],
-                              )
+                              ),
+                              Dimens.boxHeight10,
+                              Container(
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                width: Get.width,
+                                height: Get.height,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: DataTable2(
+                                    headingRowHeight: 50,
+                                    columnSpacing: 12,
+                                    horizontalMargin: 12,
+                                    headingRowColor:
+                                        MaterialStateColor.resolveWith(
+                                      (states) {
+                                        return ColorValues.lightGreyColor;
+                                      },
+                                    ),
+                                    minWidth: 1000,
+                                    columns: [
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Site name',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'WO number',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        // fixedWidth: 130,
+                                        label: Text(
+                                          'WO description',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Status',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 120,
+                                        label: Text(
+                                          'Asset category',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 100,
+                                        label: Text(
+                                          'Asset Id',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        fixedWidth: 170,
+                                        label: Text(
+                                          'Schedule start date',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        // fixedWidth: 150,
+                                        label: Text(
+                                          'Schedule end date',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        // size: ColumnSize.L,
+                                      ),
+                                      DataColumn2(
+                                        label: Text(
+                                          'Action',
+                                          style: Styles.blackBold14,
+                                        ),
+                                      ),
+                                    ],
+                                    rows: statutoryData.map(
+                                      (data) {
+                                        return DataRow(
+                                          cells: [
+                                            DataCell(Text(data['Site name'])),
+                                            DataCell(Text(data['WO number'])),
+                                            DataCell(
+                                                Text(data['WO description'])),
+                                            DataCell(Text(data['Status'])),
+                                            DataCell(
+                                                Text(data['Asset category'])),
+                                            DataCell(Text(data['Asset Id'])),
+                                            DataCell(Text(
+                                                data['Schedule start date'])),
+                                            DataCell(Text(
+                                                data['Schedule end date'])),
+                                            DataCell(
+                                              Row(
+                                                children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.viewColor,
+                                                    icon: Icons
+                                                        .remove_red_eye_outlined,
+                                                    message: 'View',
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ).toList(),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

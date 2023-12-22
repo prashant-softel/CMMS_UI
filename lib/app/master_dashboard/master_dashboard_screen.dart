@@ -302,43 +302,49 @@ class MastersDashboard extends GetView<MastersController> {
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
-                                return varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id == 5 && e.add == 0)
-                                            .length >
-                                        0
-                                    ? createContentTile(
+                                return
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
                                         title: "SPV List",
                                         onTap: () {
                                           controller.goToSPVList();
-                                        })
-                                    : Dimens.box0;
+                                        });
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id == 5 && e.add == 0)
-                                            .length >
-                                        0
-                                    ? createContentTile(
+                                return
+                                    //  varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
                                         title: "Facility List",
                                         onTap: () {
                                           controller.goToFacilityTypeList();
-                                        })
-                                    : Dimens.box0;
+                                        });
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id == 5 && e.add == 0)
-                                            .length >
-                                        0
-                                    ? createContentTile(
+                                return
+                                    //  varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
                                         title: "Block List",
                                         onTap: () {
                                           controller.goToBlockTypeList();
-                                        })
-                                    : Dimens.box0;
+                                        });
+                                // : Dimens.box0;
                               }))),
                             ],
                           ),
