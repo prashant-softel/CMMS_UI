@@ -195,9 +195,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           text: e.check_point_type == 1
               ? e.type_bool.value.toString()
               : e.check_point_type == 2
-                  ? e.renge_text_value_controller?.text ?? ""
+                  ? e.type_text_value_controller?.text ?? ""
                   : "",
-          is_ok: e.cp_ok.value,
+          cp_ok: e.cp_ok.value,
           // boolean: 1,
           pm_files: []));
     });

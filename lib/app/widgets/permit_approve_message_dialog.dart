@@ -87,13 +87,14 @@ class PermitMessageApproveDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                jobId != 0
-                    ? Get.offAllNamed(Routes.jobDetails,
-                        arguments: {"jobId": jobId})
-                    : Get.offAllNamed(Routes.newPermitList);
+                // jobId != 0 || jobId != null
+                //     ? Get.offAllNamed(Routes.jobDetails,
+                //         arguments: {"jobId": jobId})
+                //     :
+                Get.offAllNamed(Routes.newPermitList);
                 // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
               },
-              child: const Text('Ok'),
+              child: const Text('Ok1'),
             ),
           ),
         ],

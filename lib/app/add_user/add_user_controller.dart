@@ -649,6 +649,7 @@ class AddUserController extends GetxController {
         DOB: _dob,
         city_id: selectedCityId,
         contact_no: _mobileno,
+        company_id: selectedBusinessTypeId,
         country_id: selectedCountryId,
         joiningDate: _joiningdate,
         blood_group_id: selectedBloodId,

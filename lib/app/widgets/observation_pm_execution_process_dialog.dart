@@ -309,7 +309,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                   .selectedItem
                                                                   ?.checklist_observation?[
                                                                       index]
-                                                                  .renge_text_value_controller
+                                                                  .type_text_value_controller
                                                               as TextEditingController,
                                                         ),
                                                         Row(

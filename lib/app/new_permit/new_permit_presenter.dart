@@ -221,11 +221,13 @@ class NewPermitPresenter {
   Future<Map<String, dynamic>?> createNewPermitForPm({
     newPermit,
     required int pmTaskId,
+    String? activity,
     required bool isLoading,
   }) async {
     return newPermitUsecase.createNewPermitForPm(
       newPermit: newPermit,
       pmTaskId: pmTaskId,
+      activity: activity,
       isLoading: isLoading,
     );
   }

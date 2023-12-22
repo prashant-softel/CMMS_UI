@@ -40,16 +40,16 @@ class PreventiveMaintenanceTaskViewPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<Map<String, dynamic>?> scheduleLinkToPermit({
-    int? scheduleId,
-    int? permitId,
-    bool? isLoading,
-  }) async =>
-      await preventiveMaintenanceTaskViewUsecase.scheduleLinkToPermit(
-        scheduleId: scheduleId,
-        permitId: permitId,
-        isLoading: isLoading,
-      );
+  // Future<Map<String, dynamic>?> scheduleLinkToPermit({
+  //   int? scheduleId,
+  //   int? permitId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await preventiveMaintenanceTaskViewUsecase.scheduleLinkToPermit(
+  //       scheduleId: scheduleId,
+  //       permitId: permitId,
+  //       isLoading: isLoading,
+  //     );
   Future<Map<String, dynamic>?> setPmTask({
     int? scheduleId,
     bool? isLoading,

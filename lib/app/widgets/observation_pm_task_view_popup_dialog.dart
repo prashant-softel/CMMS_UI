@@ -238,7 +238,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                     .check_point_type ==
                                                 1
                                             ? DataCell(Text(
-                                                "${controller.selectedItem?.checklist_observation?[index].type_bool}"))
+                                                "${controller.selectedItem?.checklist_observation?[index].type_text}"))
                                             : controller
                                                         .selectedItem
                                                         ?.checklist_observation?[
@@ -248,7 +248,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 ? DataCell(Column(
                                                     children: [
                                                       Text(
-                                                          "${controller.selectedItem?.checklist_observation?[index].type_range}"),
+                                                          "${controller.selectedItem?.checklist_observation?[index].type_text}"),
                                                       Row(
                                                         children: [
                                                           Text(

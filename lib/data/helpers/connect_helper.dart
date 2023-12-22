@@ -5847,6 +5847,7 @@ class ConnectHelper {
     required String auth,
     scheduleId,
     permitId,
+    activity,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -5864,7 +5865,9 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'], taskId: scheduleId //parsedJson['id']
+        data: parsedJson['message'],
+        taskId: scheduleId,
+        activity: activity //parsedJson['id']
         ));
     print('jcId2:${parsedJson['id']}');
     return responseModel;
