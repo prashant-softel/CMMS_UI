@@ -3496,7 +3496,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                 () {
                                                                               // var jobId = controller.jobModel?.id ?? 0;
                                                                               // print('JobId'),
-                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id, fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
+                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id, activity: controller.pmtaskViewModel?.plan_title, fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
                                                                               // controller.linkToPermit(jobId: controller.jobModel?.id);
                                                                             },
                                                                           )),

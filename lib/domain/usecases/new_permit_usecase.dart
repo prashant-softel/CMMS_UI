@@ -217,12 +217,12 @@ class NewPermitUsecase {
       );
   Future<Map<String, dynamic>> createNewPermitForPm({
     newPermit,
-    pmTaskId,
+    pmTaskId,activity,
     bool? isLoading,
   }) async =>
       await repository.createNewPermitForPm(
         newPermit,
-        pmTaskId,
+        pmTaskId,activity,
         isLoading,
       );
   Future<Map<String, dynamic>> updateNewPermit(

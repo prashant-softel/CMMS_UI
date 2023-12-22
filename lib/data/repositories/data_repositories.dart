@@ -3453,12 +3453,14 @@ class DataRepository extends DomainRepository {
     required String auth,
     scheduleId,
     permitId,
+    activity,
     bool? isLoading,
   }) async =>
       await connectHelper.scheduleLinkToPermit(
         auth: auth,
         scheduleId: scheduleId,
         permitId: permitId,
+        activity: activity,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> setPmTask({

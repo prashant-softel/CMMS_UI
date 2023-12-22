@@ -300,7 +300,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                       backgroundColor:
                                                           ColorValues
                                                               .appDarkBlueColor,
-                                                      text: "Clone Of",
+                                                      text: "Clone",
                                                       onPressed: () {
                                                         controller
                                                                 .selectedItem =

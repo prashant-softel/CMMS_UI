@@ -400,6 +400,7 @@ class Repository {
   Future<Map<String, dynamic>> createNewPermitForPm(
     newPermit,
     pmTaskId,
+    activity,
     bool? isLoading,
   ) async {
     try {
@@ -430,7 +431,7 @@ class Repository {
           var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null) {
-            scheduleLinkToPermit(pmTaskId, permitForJob[0], true);
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true);
           }
           return responseMap;
         }
@@ -8551,6 +8552,7 @@ class Repository {
 
   Future<Map<String, dynamic>> scheduleLinkToPermit(
     scheduleId,
+    activity,
     permitId,
     bool? isLoading,
   ) async {
@@ -8560,6 +8562,7 @@ class Repository {
         auth: auth,
         scheduleId: scheduleId,
         permitId: permitId,
+        activity: activity,
         isLoading: isLoading ?? false,
       );
 

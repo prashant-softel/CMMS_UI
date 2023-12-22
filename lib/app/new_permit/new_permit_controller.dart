@@ -1355,7 +1355,8 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void createNewPermitForPm({int? pmTaskId, List<dynamic>? fileIds}) async {
+  void createNewPermitForPm(
+      {int? pmTaskId, String? activity, List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1452,6 +1453,7 @@ class NewPermitController extends GetxController {
           await permitPresenter.createNewPermitForPm(
         newPermit: jobJsonString,
         pmTaskId: pmTaskId!,
+        activity: activity,
         isLoading: true,
       );
       if (responseNewPermitCreatedForJob != null) {

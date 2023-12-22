@@ -168,7 +168,7 @@ class ChecklistObservation {
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
-  TextEditingController? renge_text_value_controller;
+  TextEditingController? type_text_value_controller;
   int? min_range;
   int? max_range;
   ChecklistObservation(
@@ -190,7 +190,7 @@ class ChecklistObservation {
       this.max_range,
       this.min_range,
       this.observation_value_controller,
-      this.renge_text_value_controller}) {
+      this.type_text_value_controller}) {
     this.linked_job_id.value = linked_job_id;
     this.cp_ok.value = cp_ok;
     this.type_bool.value = type_bool;
@@ -217,8 +217,8 @@ class ChecklistObservation {
           observation_value_controller: TextEditingController(
             text: json['observation'],
           ),
-          renge_text_value_controller: TextEditingController(
-            text: json['type_range'].toString(),
+          type_text_value_controller: TextEditingController(
+            text: json['type_text'].toString(),
           ),
           files: List<Files>.from(json["files"].map((x) => Files.fromJson(x))));
 
