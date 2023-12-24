@@ -99,13 +99,13 @@ class AddObservations {
 
 class PmFiles {
   PmFiles({
-    required this.file_id,
-    required this.file_desc,
-    required this.pm_event,
+    this.file_id,
+    this.file_desc,
+    this.pm_event,
   });
-  int file_id;
-  String file_desc;
-  int pm_event;
+  int? file_id;
+  String? file_desc;
+  int? pm_event;
 
   factory PmFiles.fromJson(Map<String, dynamic> json) => PmFiles(
         file_id: json["file_id"],
