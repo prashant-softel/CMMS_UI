@@ -601,7 +601,7 @@ class PermitListDataSource extends DataTableSource {
       '${PermitDetails?.workingAreaName ?? ''}',
       '${PermitDetails?.requestByName ?? ''}\n${PermitDetails?.requestDatetime}',
       '${PermitDetails?.approvedByName ?? ''}\n${PermitDetails?.approvedDatetime}',
-      '${PermitDetails?.current_status_short ?? ''}',
+      '${PermitDetails?.ptwStatus ?? ''}',
       '${PermitDetails?.ptwStatus ?? ''}',
 
       'Actions',
