@@ -6578,7 +6578,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
   Future<ResponseModel> getGrievanceList({
     required String auth,
     bool? isLoading,
@@ -6588,7 +6588,17 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Grievance/GetGrievanceList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
-=======
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getAuditPlanDetails({
     required String? auth,
     int? auditPlanId,
@@ -6596,22 +6606,14 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/GetAuditPlanByID?id=$auditPlanId',
->>>>>>> c91523ab24d3e04b9fbba6494e2ee0f06334a1e1
       Request.get,
       null,
-      isLoading ?? false,
+      isLoading ?? true,
       {
-<<<<<<< HEAD
         'Authorization': 'Bearer $auth',
       },
     );
 
-=======
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
->>>>>>> c91523ab24d3e04b9fbba6494e2ee0f06334a1e1
     return responseModel;
   }
 }
