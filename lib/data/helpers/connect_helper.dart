@@ -6313,4 +6313,24 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getGrievanceList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    bool? self_view,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/GetGrievanceList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

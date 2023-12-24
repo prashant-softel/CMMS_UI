@@ -37,6 +37,7 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -2948,6 +2949,42 @@ class Repository {
         return _jobModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getJobList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GrievanceModel?>?> getGrievanceList(
+    String auth,
+    int? facilityId,
+    bool? isLoading,
+    bool? self_view,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+
+      final res = await _dataRepository.getJobList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        userId: userId,
+        self_view: self_view,
+        isLoading: isLoading ?? false,
+      );
+      // print({"res.data", res.data});
+      if (!res.hasError) {
+        final jsonGrievanceModels = jsonDecode(res.data);
+        final List<GrievanceModel> _grievanceModelList = jsonGrievanceModels
+            .map<GrievanceModel>(
+                (m) => GrievanceModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _grievanceModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getGrievanceList');
         return [];
       }
     } catch (error) {
