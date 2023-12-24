@@ -171,6 +171,12 @@ abstract class Routes {
   static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
 
   static const complianceScreen = _Paths.complianceScreen;
+  static const grievanceList = _Paths.grievanceList;
+  static const addGrievance = _Paths.addGrievance;
+  static const grievanceCard = _Paths.grievanceCardDetails;
+  static const grievanceDetails = _Paths.grievanceDetails;
+  static const grievanceCardList = _Paths.grievanceCardList;
+  static const editGrievance = _Paths.editGrievance;
 }
 
 abstract class _Paths {
@@ -335,4 +341,12 @@ abstract class _Paths {
   static const complianceScreen = '/complianceScreen';
   static const waterDataScreen = '/waterDataScreen';
   static const complianceHistoryScreen = '/complianceHistoryScreen';
+  static const grievanceList = '/grievance-list';
+  static const addGrievance = '/add-grievance';
+  static const grievanceCardDetails = '/grievance-card-details';
+  static const grievanceDetails = '/grievance-details-screen';
+  static const editGrievance = '/edit-grievance-screen';
+  static const grievanceCardList = '/grievance-card-list';
+
+// static const editPermitWebScreen = '/edit-permit-web-screen';
 }

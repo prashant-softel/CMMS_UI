@@ -80,6 +80,10 @@ abstract class UserAccessConstants {
 
   static int kHaveSelfViewAccess = 1;
   static int kNotHaveSelfViewAccess = 0;
+
+  /// Grievance ACCESS
+  static int kGrievanceFeatureId = 2;
+  static String kFeatureGrievanceName = "Grievance";
 }
 
 AppFlavor? appFlavor;
