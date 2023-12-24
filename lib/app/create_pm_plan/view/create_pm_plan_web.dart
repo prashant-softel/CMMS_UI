@@ -78,7 +78,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                     child: Stack(
                       children: [
                         Container(
-                          height: Get.height,
+                          // height: Get.height,
                           child: Card(
                             margin: EdgeInsets.all(20),
                             color: ColorValues.whiteColor,
@@ -319,10 +319,12 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 //     ?
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.filteredInventoryNameList
-                                              .length) *
-                                          40) +
-                                      150,
+                                  height: //50,
+                                      //  height: 200,
+                                      ((controller.filteredInventoryNameList
+                                                  .length) *
+                                              30) +
+                                          100,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -358,15 +360,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                               color: Color.fromARGB(
                                                   255, 206, 229, 234)),
                                           columns: [
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Sr. No.",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
                                             DataColumn2(
                                                 //fixedWidth: 150,
                                                 label: Text(
@@ -428,12 +421,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                               mapData["value"],
                                                           onValueChanged: (list,
                                                               selectedValue) {
-                                                            // print(
-                                                            //     'paifcghb:${controller.preventiveCheckList}');
-                                                            // print({
-                                                            //   selectedValue:
-                                                            //       selectedValue
-                                                            // });
                                                             mapData["value"] =
                                                                 selectedValue;
                                                             controller.checkdropdownMapperData[
@@ -447,38 +434,8 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                                         null);
                                                           },
                                                         )
-                                                      // SizedBox(
-                                                      //     child: DropdownWebStock(
-                                                      //       width: (MediaQuery.of(
-                                                      //                   context)
-                                                      //               .size
-                                                      //               .width *
-                                                      //           .2),
-                                                      //       controller:
-                                                      //           controller,
-                                                      //       dropdownList: controller
-                                                      //           .preventiveCheckList,
-                                                      //       isValueSelected:
-                                                      //           controller
-                                                      //               .isSelectedChecklist
-                                                      //               .value,
-                                                      //       selectedValue: controller
-                                                      //           .selectedChecklist
-                                                      //           .value,
-                                                      //       onValueChanged:
-                                                      //           controller
-                                                      //               .onValueChanged,
-                                                      //     ),
-                                                      //   )
-
-                                                      : (mapData['key'] ==
-                                                              "srNo")
-                                                          ? Text(mapData[
-                                                                  'value'] ??
-                                                              "")
-                                                          : Text(mapData[
-                                                                  'value'] ??
-                                                              ''),
+                                                      : Text(mapData['value'] ??
+                                                          ''),
                                                 );
                                               }).toList(),
                                             );
@@ -493,13 +450,13 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 Row(
                                   children: [
                                     Spacer(),
-                                    CustomElevatedButton(
-                                      backgroundColor: ColorValues.appRedColor,
-                                      text: 'cancel',
-                                      onPressed: () {
-                                        // controller.AddInventory();
-                                      },
-                                    ),
+                                    // CustomElevatedButton(
+                                    //   backgroundColor: ColorValues.appRedColor,
+                                    //   text: 'cancel',
+                                    //   onPressed: () {
+                                    //     // controller.AddInventory();
+                                    //   },
+                                    // ),
                                     Dimens.boxWidth15,
                                     controller.pmPlanId != 0
                                         ? CustomElevatedButton(
@@ -507,7 +464,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                 ColorValues.updateColor,
                                             text: 'Update',
                                             onPressed: () {
-                                              // controller.createPmPlan();
+                                              controller.updatePmPlan();
                                             },
                                           )
                                         : CustomElevatedButton(

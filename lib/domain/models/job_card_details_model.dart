@@ -38,20 +38,20 @@ class JobCardDetailsModel {
       this.created_by,
       this.jC_Start_By_Name});
 
-  String? plantName;
-  String? assetCategoryName;
-  String? jcApprovedByName;
-  String? updatedByName;
+  dynamic plantName;
+  dynamic assetCategoryName;
+  dynamic jcApprovedByName;
+  dynamic updatedByName;
   int? id;
   int? currentEmpId;
   dynamic currentStatus;
-  String? jcClosedByName;
-  String? jcRejectedByName;
-  String? description;
+  dynamic jcClosedByName;
+  dynamic jcRejectedByName;
+  dynamic description;
   int? jobId;
   int? ptwId;
-  String? title;
-  String? created_by;
+  dynamic title;
+  dynamic created_by;
   List<LstCmjcJobDetailList>? lstCmjcJobDetailList;
   List<LstPermitDetailList>? lstPermitDetailList;
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
@@ -59,9 +59,9 @@ class JobCardDetailsModel {
   List<dynamic>? lstCmjcEmpList;
   List<dynamic>? fileList;
   int? status;
-  String? status_short;
-  String? status_long;
-  String? jC_Start_By_Name;
+  dynamic status_short;
+  dynamic status_long;
+  dynamic jC_Start_By_Name;
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
         plantName: json["plant_name"],

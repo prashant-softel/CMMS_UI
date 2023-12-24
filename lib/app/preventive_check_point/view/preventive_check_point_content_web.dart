@@ -55,8 +55,12 @@ class PreventiveCheckPointContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / PREVENTIVE MAINTENANCE",
-                        style: Styles.greyMediumLight12),
+                    child: controller.type.value == 1
+                        ? Text(" / PREVENTIVE MAINTENANCE",
+                            style: Styles.greyMediumLight12)
+                        : controller.type.value == 2
+                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
+                            : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
                   Text(" / CHECK POINT CREATOR",
                       style: Styles.greyMediumLight12)
@@ -81,386 +85,230 @@ class PreventiveCheckPointContentWeb
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10, top: 10),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Check Point Creator",
-                                          style: Styles.blackBold16,
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Visibility(
-                                          visible: controller.isSuccess.value,
-                                          child: Center(
-                                            child: Wrap(
-                                              children: [
-                                                Text(
-                                                  "CheckPoint added Successfully in the List.",
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Color.fromARGB(
-                                                          255, 24, 243, 123)),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                              ],
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, right: 10, top: 10),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Check Point Creator",
+                                            style: Styles.blackBold16,
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          Visibility(
+                                            visible: controller.isSuccess.value,
+                                            child: Center(
+                                              child: Wrap(
+                                                children: [
+                                                  Text(
+                                                    "CheckPoint added Successfully in the List.",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Color.fromARGB(
+                                                            255, 24, 243, 123)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Check List No. '),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 5.0),
-                                                child: DropdownWebWidget(
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.checkList,
-                                                  isValueSelected: controller
-                                                      .isSelectedchecklist
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedchecklist.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Check List No. '),
+                                              SizedBox(
+                                                width: 15,
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Check Point'),
-                                            SizedBox(
-                                              width: 37,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5.0),
+                                                  child: DropdownWebWidget(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            30,
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  child: LoginCustomTextfield(
-                                                    ishint: 'Enter Check Point',
-                                                    textController: controller
-                                                        .checkPointCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Requirement'),
-                                            SizedBox(
-                                              width: 35,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  child: LoginCustomTextfield(
-                                                    ishint: 'Enter Requirement',
-                                                    textController: controller
-                                                        .requirementCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          // mainAxisAlignment:
-                                          //     MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Image Upload?'),
-                                            SizedBox(
-                                              width: 35,
-                                            ),
-                                            Text("No"),
-                                            CustomSwitchTroggle(
-                                                value:
-                                                    controller.isToggleOn.value,
-                                                onChanged: (value) {
-                                                  controller.toggle();
-                                                }),
-                                            Text("Yes"),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Failure Weightage'),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: 100,
-                                                child: LoginCustomTextfield(
-                                                  // ishint: 'Enter Check Point',
-                                                  textController: controller
-                                                      .failurewtgCtrlr,
-                                                )),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(title: 'Type '),
-                                            SizedBox(
-                                              width: 90,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(6),
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2),
-                                                height: 35,
-                                                child:
-                                                    DropdownButtonHideUnderline(
-                                                  child: DropdownButton<String>(
-                                                    isExpanded: true,
-                                                    value: controller
-                                                        .checkpointType.value,
-                                                    onChanged: (value) =>
-                                                        controller
-                                                          ..updatecheCkpointType(
-                                                              value!),
-                                                    items: <String>[
-                                                      '',
-                                                      'Text',
-                                                      'Bool',
-                                                      'Range'
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10),
-                                                          child: Text(
-                                                            value,
-                                                            style:
-                                                                Styles.black12,
-                                                          ),
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
                                                         ),
-                                                      );
-                                                    }).toList(),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.checkList,
+                                                    isValueSelected: controller
+                                                        .isSelectedchecklist
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedchecklist
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Check Point'),
+                                              SizedBox(
+                                                width: 37,
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Visibility(
-                                          visible:
-                                              controller.checkpointType.value ==
-                                                  "Range",
-                                          child: Row(
+                                              Expanded(
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            30,
+                                                    child: LoginCustomTextfield(
+                                                      ishint:
+                                                          'Enter Check Point',
+                                                      textController: controller
+                                                          .checkPointCtrlr,
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Requirement'),
+                                              SizedBox(
+                                                width: 35,
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            30,
+                                                    child: LoginCustomTextfield(
+                                                      ishint:
+                                                          'Enter Requirement',
+                                                      textController: controller
+                                                          .requirementCtrlr,
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
                                             // mainAxisAlignment:
                                             //     MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Spacer(),
-                                              CustomRichText(title: 'Min'),
+                                              CustomRichText(
+                                                  title: 'Image Upload?'),
                                               SizedBox(
-                                                width: 10,
+                                                width: 35,
                                               ),
-                                              Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: 100,
-                                                  child: LoginCustomTextfield(
-                                                    // ishint: 'Enter Chec',
-                                                    textController: controller
-                                                        .minRangeCtrlr,
-                                                  )),
-                                              // Dimens.boxWidth20,
-                                              Spacer(),
-                                              CustomRichText(title: 'Max'),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
+                                              Text("No"),
+                                              CustomSwitchTroggle(
+                                                  value: controller
+                                                      .isToggleOn.value,
+                                                  onChanged: (value) {
+                                                    controller.toggle();
+                                                  }),
+                                              Text("Yes"),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight10,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Failure Weightage'),
+                                              Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -489,68 +337,241 @@ class PreventiveCheckPointContentWeb
                                                   child: LoginCustomTextfield(
                                                     // ishint: 'Enter Check Point',
                                                     textController: controller
-                                                        .maxRangeCtrlr,
+                                                        .failurewtgCtrlr,
                                                   )),
-                                              Spacer(),
                                             ],
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ]),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 40,
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appRedColor,
-                                          onPressed: () {
-                                            controller.cleardata();
-                                          },
-                                          text: 'Cancel'),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Container(
-                                        height: 40,
-                                        child: controller.selectedItem == null
-                                            ? CustomElevatedButton(
-                                                backgroundColor: ColorValues
-                                                    .appDarkBlueColor,
-                                                onPressed: () {
-                                                  controller
-                                                      .createCheckpoint()
-                                                      .then((value) {
-                                                    if (value)
-                                                      controller
-                                                          .issuccessCreatecheckpont();
-                                                  });
-                                                },
-                                                text: 'Create Check Point')
-                                            : CustomElevatedButton(
-                                                backgroundColor: ColorValues
-                                                    .appDarkBlueColor,
-                                                onPressed: () {
-                                                  controller
-                                                      .updateCheckPoint(
+                                          Dimens.boxHeight10,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              CustomRichText(title: 'Type '),
+                                              SizedBox(
+                                                width: 90,
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  height: 35,
+                                                  child:
+                                                      DropdownButtonHideUnderline(
+                                                    child:
+                                                        DropdownButton<String>(
+                                                      isExpanded: true,
+                                                      value: controller
+                                                          .checkpointType.value,
+                                                      onChanged: (value) =>
                                                           controller
-                                                              .selectedItem?.id)
-                                                      .then((value) {
-                                                    print("value,$value");
-                                                    if (value == true)
-                                                      controller
-                                                          .issuccessCreatecheckpont();
-                                                  });
-                                                },
-                                                text: 'Update')),
-                                  ],
-                                ),
-                              ],
+                                                            ..updatecheCkpointType(
+                                                                value!),
+                                                      items: <String>[
+                                                        '',
+                                                        'Text',
+                                                        'Bool',
+                                                        'Range'
+                                                      ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    left: 10),
+                                                            child: Text(
+                                                              value,
+                                                              style: Styles
+                                                                  .black12,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Visibility(
+                                            visible: controller
+                                                    .checkpointType.value ==
+                                                "Range",
+                                            child: Row(
+                                              // mainAxisAlignment:
+                                              //     MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Spacer(),
+                                                CustomRichText(title: 'Min'),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width: 100,
+                                                    child: LoginCustomTextfield(
+                                                      // ishint: 'Enter Chec',
+                                                      textController: controller
+                                                          .minRangeCtrlr,
+                                                    )),
+                                                // Dimens.boxWidth20,
+                                                Spacer(),
+                                                CustomRichText(title: 'Max'),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width: 100,
+                                                    child: LoginCustomTextfield(
+                                                      // ishint: 'Enter Check Point',
+                                                      textController: controller
+                                                          .maxRangeCtrlr,
+                                                    )),
+                                                Spacer(),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ]),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appRedColor,
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
+                                            text: 'Cancel'),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                          height: 40,
+                                          child: controller.selectedItem == null
+                                              ? CustomElevatedButton(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  onPressed: () {
+                                                    controller
+                                                        .createCheckpoint()
+                                                        .then((value) {
+                                                      if (value)
+                                                        controller
+                                                            .issuccessCreatecheckpont();
+                                                    });
+                                                  },
+                                                  text: 'Create Check Point')
+                                              : CustomElevatedButton(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                  onPressed: () {
+                                                    controller
+                                                        .updateCheckPoint(
+                                                            controller
+                                                                .selectedItem
+                                                                ?.id)
+                                                        .then((value) {
+                                                      print("value,$value");
+                                                      if (value == true)
+                                                        controller
+                                                            .issuccessCreatecheckpont();
+                                                    });
+                                                  },
+                                                  text: 'Update')),
+                                    ],
+                                  ),
+                                  Dimens.boxHeight10
+                                ],
+                              ),
                             ),
                           ),
                         )
@@ -587,7 +608,11 @@ class PreventiveCheckPointContentWeb
                                           icon: Icons.upload,
                                           label: 'Import Check Point',
                                           onPressed: () {
-                                            Get.toNamed(Routes.importInventory);
+                                            Get.toNamed(Routes.importInventory,
+                                                arguments: {
+                                                  'importType': AppConstants
+                                                      .kImportChecklist
+                                                });
                                           },
                                           color: ColorValues.appDarkBlueColor,
                                         ),
@@ -722,7 +747,7 @@ class PreventiveCheckPointContentWeb
                                                             .preventiveCheckpoint?[
                                                         index];
                                                 return [
-                                                  '${preventiveCheckPointModelListDetails?.id}',
+                                                  'CP${preventiveCheckPointModelListDetails?.id}',
                                                   '${preventiveCheckPointModelListDetails?.checklist_name}',
                                                   '${preventiveCheckPointModelListDetails?.check_point}',
                                                   '${preventiveCheckPointModelListDetails?.requirement}',
@@ -765,7 +790,7 @@ class PreventiveCheckPointContentWeb
                                                                     controller.selectedItem = controller
                                                                         .preventiveCheckpoint!
                                                                         .firstWhere((element) =>
-                                                                            "${element?.id}" ==
+                                                                            "CP${element?.id}" ==
                                                                             record[0]);
 
                                                                     controller

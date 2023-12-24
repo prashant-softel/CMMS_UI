@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -70,12 +71,13 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.back();
+                              // Get.back();
+                              Get.offAllNamed(Routes.breakdown);
                             },
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / NEW PERMIT LIST",
+                          Text(" / PERMIT LIST",
                               style: Styles.greyMediumLight12),
                         ],
                       ),
@@ -102,7 +104,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "New Permit List ",
+                                            "Permit List ",
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),
@@ -153,8 +155,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                     Get.toNamed(
                                                         Routes.newPermit);
                                                   },
-                                                  color: ColorValues
-                                                      .greenlightColor,
+                                                  color:
+                                                      ColorValues.addNewColor,
                                                 )
                                               : Dimens.box0
                                         ],
@@ -262,6 +264,12 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                           height: 35,
                                           margin: Dimens.edgeInsets0_0_16_0,
                                           child: TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                  fontSize: 16.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                            ),
                                             onChanged: (value) =>
                                                 controller.search(value),
                                             decoration: InputDecoration(
@@ -497,11 +505,14 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
                 onChanged: (value) {
                   filterText.value = value;
                 },
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(
@@ -570,7 +581,7 @@ class PermitListDataSource extends DataTableSource {
               controller.ApprovedByNameFilterText.value.toLowerCase()) &&
           (NewPermit?.current_status_short ?? '').toString().toLowerCase().contains(
               controller.CurrentStatusShortFilterText.value.toLowerCase());
-      //     &&
+      //      &&
       // (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
     }).toList();
   }
@@ -590,8 +601,9 @@ class PermitListDataSource extends DataTableSource {
       '${PermitDetails?.workingAreaName ?? ''}',
       '${PermitDetails?.requestByName ?? ''}\n${PermitDetails?.requestDatetime}',
       '${PermitDetails?.approvedByName ?? ''}\n${PermitDetails?.approvedDatetime}',
-      '${PermitDetails?.current_status_short ?? ''}',
       '${PermitDetails?.ptwStatus ?? ''}',
+      '${PermitDetails?.ptwStatus ?? ''}',
+
       'Actions',
     ];
     var cells = [];
@@ -622,7 +634,7 @@ class PermitListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${PermitDetails?.permitId}',
+                        'PTW${PermitDetails?.permitId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -734,15 +746,28 @@ class PermitListDataSource extends DataTableSource {
                                       : Container(),
 
                                   varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.approve ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0 ||
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus !=
+                                                  PermitStatusConstants
+                                                      .PTW_REJECTED_BY_APPROVER //124
+                                          ||
                                           controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
@@ -837,6 +862,9 @@ class PermitListDataSource extends DataTableSource {
                                           icon: Icons.edit,
                                           message: 'Edit Permit',
                                           onPress: () {
+                                            // controller.viewNewPermitList(
+                                            //     permitId:
+                                            //         PermitDetails?.permitId);
                                             controller.editNewPermit(
                                                 permitId:
                                                     PermitDetails?.permitId,
@@ -1202,7 +1230,9 @@ class PermitListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        controller.viewNewPermitList(permitId: PermitDetails?.permitId);
+      },
     );
   }
 

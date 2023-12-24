@@ -2,12 +2,13 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/employee_stock_report/employee_stock_report_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/dropdown_web.dart';
 
 class EmployeeStockReportContentWeb
@@ -20,8 +21,10 @@ class EmployeeStockReportContentWeb
     return GetBuilder<EmployeeStockReportController>(
         id: 'employeeReport',
         builder: (controller) {
-          return Obx(
-            () => Container(
+          return Obx(() {
+            final dataSource = PlantListDataSource(controller);
+
+            return Container(
               color: Color.fromARGB(255, 234, 236, 238),
               width: Get.width,
               height: Get.height,
@@ -95,6 +98,45 @@ class EmployeeStockReportContentWeb
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
+                                        Text(
+                                          'User Login ID: ',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        Dimens.boxWidth20,
+                                        Container(
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
+                                          child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            controller: controller,
+                                            dropdownList: controller.userList,
+                                            isValueSelected:
+                                                controller.isSelectedUser.value,
+                                            selectedValue:
+                                                controller.selectedUser.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                        Spacer(),
                                         Row(
                                           children: [
                                             CustomRichText(title: 'Date Range'),
@@ -153,22 +195,79 @@ class EmployeeStockReportContentWeb
                                       //       onPressed: () {},
                                       //       text: 'PDF'),
                                       // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //         ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'columnVisibility'.tr,
-                                      //   ),
-                                      // ),
+                                      PopupMenuButton<String>(
+                                        tooltip: "",
+                                        elevation: 25.0,
+                                        child: Container(
+                                          height: 35,
+                                          margin: EdgeInsets.only(left: 10),
+                                          padding: EdgeInsets.only(
+                                              top: 4,
+                                              bottom: 4,
+                                              right: 8,
+                                              left: 8),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            'Column Visibility',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
+                                        onSelected: (String value) {
+                                          // Handle column selection
+                                        },
+                                      ),
+
                                       Spacer(),
                                       Container(
                                         width: 200,
                                         height: 35,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black),
+                                          ),
                                           decoration: InputDecoration(
                                             enabledBorder:
                                                 const OutlineInputBorder(
@@ -191,174 +290,54 @@ class EmployeeStockReportContentWeb
                                       ),
                                     ],
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.all(20),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'User Login ID: ',
-                                          style: Styles.blackBold14,
-                                        ),
-                                        Dimens.boxWidth20,
-                                        Container(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          child: DropdownWebWidget(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            controller: controller,
-                                            dropdownList: controller.userList,
-                                            isValueSelected:
-                                                controller.isSelectedUser.value,
-                                            selectedValue:
-                                                controller.selectedUser.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  controller.assetItemList.isEmpty
-                                      ? Expanded(
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Assets ID",
-                                              "Assets Name",
-                                              "Assets Code",
-                                              "Requested By",
-                                              "Open",
-                                              "Inward",
-                                              "Outward",
-                                              "Balance",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.16,
-                                              );
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.assetItemList.length,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 50,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        )
+                                  Dimens.boxHeight5,
+                                  controller.StockDetailsList?.isEmpty == true
+                                      ? Center(child: Text('No data'))
                                       : Expanded(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets15,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: ColorValues
-                                                    .lightGreyColorWithOpacity35,
-                                                width: 1,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: ColorValues
-                                                      .appBlueBackgroundColor,
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: ScrollableTableView(
-                                                // paginationController:
-                                                //     controller.paginationController,
-                                                columns: [
-                                                  "Assets ID",
-                                                  "Assets Name",
-                                                  "Assets Code",
-                                                  "Requested By",
-                                                  "Open",
-                                                  "Inward",
-                                                  "Outward",
-                                                  "Balance",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth: Get.width * 0.13,
-                                                  );
-                                                }).toList(),
-                                                rows: controller.assetItemList
-                                                    .map((stockDetails) =>
-                                                        TableViewRow(
-                                                            height: 50,
-                                                            cells: [
-                                                              TableViewCell(
-                                                                child: Text(
-                                                                  '${stockDetails?.assetItemID ?? ""}',
-                                                                ),
-                                                              ),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.asset_name ?? ""}',
-                                                              )),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.asset_code ?? ""}',
-                                                              )),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.requested_by_name ?? ""}',
-                                                              )),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.opening ?? ""}',
-                                                              )),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.inward ?? ""}',
-                                                              )),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                      '${stockDetails?.outward}')),
-                                                              TableViewCell(
-                                                                  child: Text(
-                                                                '${stockDetails?.balance ?? ""}',
-                                                              )),
-                                                            ]))
-                                                    .toList()),
-                                          ),
-                                        ),
+                                          child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                final dataSource =
+                                                    PlantListDataSource(
+                                                        controller);
+
+                                                return PaginatedDataTable2(
+                                                  // fixedLeftColumns: 1,
+                                                  dataRowHeight:
+                                                      70, //Get.height * 0.10,
+                                                  columnSpacing: 10,
+                                                  source:
+                                                      dataSource, // Custom DataSource class
+                                                  headingRowHeight:
+                                                      Get.height * 0.12,
+                                                  minWidth:
+                                                      2000, //Get.width * 1.2,
+                                                  showCheckboxColumn: false,
+                                                  rowsPerPage:
+                                                      10, // Number of rows per page
+                                                  availableRowsPerPage: [
+                                                    10,
+                                                    20,
+                                                    30,
+                                                    50
+                                                  ],
+                                                  columns: [
+                                                    for (var entry
+                                                        in value.entries)
+                                                      if (entry.value)
+                                                        buildDataColumn(
+                                                          entry.key,
+                                                          controller.filterText[
+                                                              entry.key]!,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key],
+                                                        ),
+                                                  ],
+                                                );
+                                              }),
+                                        )
                                 ],
                               ),
                             ),
@@ -412,8 +391,176 @@ class EmployeeStockReportContentWeb
                   ),
                 ],
               ),
-            ),
-          );
+            );
+          });
         });
   }
+
+  DataColumn2 buildDataColumn(
+    // String columnName,
+    String header,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+    //  {required Function(String) onSearchCallBack}
+  ) {
+    return //
+        DataColumn2(
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
+      label: //
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            SizedBox(
+              height: Get.height * 0.05,
+              child: TextField(
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
+                onChanged: (value) {
+                  filterText.value = value;
+                  //   onSearchCallBack(value);
+                },
+                textAlign: TextAlign.left,
+                decoration: InputDecoration(
+                  hintText: 'Filter',
+                  contentPadding: EdgeInsets.fromLTRB(
+                      5, 0, 5, 0), // Reduced vertical padding
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black16W500,
+              ),
+            ),
+          ]),
+      // ),
+    );
+  }
+}
+
+class PlantListDataSource extends DataTableSource {
+  final EmployeeStockReportController controller;
+
+  late List<StockDetails?> filteredPlantList;
+
+  PlantListDataSource(this.controller) {
+    filterMrss();
+  }
+
+  ///
+  void filterMrss() {
+    filteredPlantList = <StockDetails?>[];
+    filteredPlantList = controller.StockDetailsList!.where((Plant) {
+      return (Plant?.asset_name ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.assetNameFilterText.value.toLowerCase()) &&
+          (Plant?.asset_code ?? '')
+              .toLowerCase()
+              .contains(controller.assetsCodeFilterText.value.toLowerCase()) &&
+          (Plant?.opening ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.openingFilterText.value.toLowerCase()) &&
+          (Plant?.inward ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.inwardFilterText.value.toLowerCase()) &&
+          (Plant?.outward ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.outwardFilterText.value.toLowerCase()) &&
+          (Plant?.balance ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.balanceFilterText.value.toLowerCase()) &&
+          (Plant?.asset_type ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.assetTypeFilterText.value.toLowerCase());
+
+      // Add other filter conditions as needed
+    }).toList();
+    // print({"filteredPlantList": filteredPlantList});
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    // print({"getRow call"});
+    final PlantDetails = filteredPlantList[index];
+
+    // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
+    var cellsBuffer = [
+      '${PlantDetails?.asset_name ?? ''}',
+      '${PlantDetails?.asset_code ?? ''}',
+      '${PlantDetails?.asset_type ?? ''}',
+      '${PlantDetails?.opening ?? ''}',
+      '${PlantDetails?.inward ?? ''}',
+      '${PlantDetails?.outward ?? ''}',
+      '${PlantDetails?.balance ?? ''}',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      onSelectChanged: (_) {
+        // final _flutterSecureStorage = const FlutterSecureStorage();
+
+        // _flutterSecureStorage.delete(key: "mrsId");
+        // Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredPlantList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }

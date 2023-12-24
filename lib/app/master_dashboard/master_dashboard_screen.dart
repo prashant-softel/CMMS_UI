@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/master_dashboard/master_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -258,32 +260,35 @@ class MastersDashboard extends GetView<MastersController> {
                           //     }))),
                           //   ],
                           // ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Facility",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                          varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 5 && e.add == 0)
+                                      .length >
+                                  0
+                              ? Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Facility",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 159, 156, 156),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors.grey,
+                                          height: 1,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                )
+                              : Dimens.box0,
                           GridView.count(
                             shrinkWrap: true,
                             primary: false,
@@ -297,25 +302,49 @@ class MastersDashboard extends GetView<MastersController> {
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "SPV List",
-                                    onTap: () {
-                                      controller.goToSPVList();
-                                    });
+                                return
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
+                                        title: "SPV List",
+                                        onTap: () {
+                                          controller.goToSPVList();
+                                        });
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Facility List",
-                                    onTap: () {
-                                      controller.goToFacilityTypeList();
-                                    });
+                                return
+                                    //  varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
+                                        title: "Facility List",
+                                        onTap: () {
+                                          controller.goToFacilityTypeList();
+                                        });
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Block List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
+                                return
+                                    //  varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 5 && e.add == 0)
+                                    //             .length >
+                                    //         0
+                                    //     ?
+                                    createContentTile(
+                                        title: "Block List",
+                                        onTap: () {
+                                          controller.goToBlockTypeList();
+                                        });
+                                // : Dimens.box0;
                               }))),
                             ],
                           ),
@@ -421,13 +450,12 @@ class MastersDashboard extends GetView<MastersController> {
                               OnHover(
                                 builder: ((isHovered) {
                                   return createContentTile(
-                                      title: "Feature List",
+                                      title: "Modules List",
                                       onTap: () {
                                         controller.goToFeatureList();
                                       });
                                 }),
                               ),
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Roles",
@@ -474,6 +502,8 @@ class MastersDashboard extends GetView<MastersController> {
                                 return createContentTile(
                                     title: "Add User",
                                     onTap: () {
+                                      controller.clearStoreUserIdData();
+
                                       controller.goToAddUser();
                                     });
                               }))),
@@ -514,12 +544,11 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Designation",
@@ -746,7 +775,7 @@ class MastersDashboard extends GetView<MastersController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "MIS",
+                                  "Assets",
                                   style: TextStyle(
                                     color: Color.fromARGB(255, 159, 156, 156),
                                     fontSize: 16,
@@ -755,13 +784,13 @@ class MastersDashboard extends GetView<MastersController> {
                                 ),
                                 SizedBox(
                                     width:
-                                    10), // Add some space between the text and the line
+                                        10), // Add some space between the text and the line
                                 Expanded(
                                   child: Divider(
                                     color: Colors
                                         .grey, // Customize the color of the line if needed
                                     height:
-                                    1, // Adjust the height of the line if needed
+                                        1, // Adjust the height of the line if needed
                                   ),
                                 ),
                               ],
@@ -774,36 +803,314 @@ class MastersDashboard extends GetView<MastersController> {
                             crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
-                            Responsive.isMobile(context) ? 2 : 5,
+                                Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Type of observation",
-                                    onTap: () {
-                                      controller.goToTypeOfObservation();
-                                    });
-                              }))),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Source of observation",
-                                    onTap: () {
-                                      controller.goToSourceOfObservation();
-                                    });
-                              }))),
-
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Risk Type",
-                                    onTap: () {
-                                      controller.goToRiskType();
-                                    });
-                              }))),
+                              _inventoryList(
+                                  tittle: "Assets List",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.inventoryList,
+                                    );
+                                    //  controller.createChecklist();
+                                  }),
+                              _inventoryList(
+                                  tittle: "Add Assets",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.addInventoryScreen,
+                                    );
+                                  }),
+                              _inventoryList(
+                                  tittle: "Import Assets",
+                                  ontap: () {
+                                    controller.clearStoreData();
+                                    Get.toNamed(Routes.importInventory,
+                                        arguments: {
+                                          "importType":
+                                              AppConstants.kImportAsset
+                                        });
+                                  }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Category",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.assetTypeListScreen,
+                              //       );
+                              //     }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Type",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //       Routes.inventoryTypeListScreen,
+                              //     );
+                              //   }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Status",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.inventoryStatusListScreen,
+                              //       );
+                              //     }),
                             ],
                           ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: const EdgeInsets.all(16),
+                            crossAxisSpacing: 70,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              // _inventoryList(
+                              //     tittle: "Warranty Certificates",
+                              //     ontap: () {
+                              //       // controller.pmSchedule();
+                              //       Get.toNamed(
+                              //         Routes.warrantyCertificate,
+                              //       );
+                              //     }),
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kWarrantyClaimFeatureId &&
+                              //                 e.view ==
+                              //                     UserAccessConstants
+                              //                         .kHaveViewAccess)
+                              //             .length >
+                              //         0
+                              //     ?
+                              _inventoryList(
+                                tittle: "Warranty Claims List",
+                                ontap: () => controller.breakdownMaintenance(),
+                              )
+                              // : Container(),
 
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kWarrantyClaimFeatureId &&
+                              //                 e.add ==
+                              //                     UserAccessConstants
+                              //                         .kHaveAddAccess)
+                              //             .length >
+                              //         0
+                              //     ?
+                              ,
+                              _inventoryList(
+                                  tittle: "New Warranty Claim",
+                                  ontap: () {
+                                    controller.newWarrantyClaimList();
+                                  })
+                              // : Container(),
+
+                              // _inventoryList(
+                              //     tittle: "Inventory Category",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.assetTypeListScreen,
+                              //       );
+                              //     }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Type",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //       Routes.inventoryTypeListScreen,
+                              //     );
+                              //   }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Status",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.inventoryStatusListScreen,
+                              //       );
+                              //     }),
+                            ],
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: const EdgeInsets.all(16),
+                            crossAxisSpacing: 70,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              // _inventoryList(
+                              //     tittle: "Calibration Certificates",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.calibrationCertificate,
+                              //       );
+                              //     }),
+                              _inventoryList(
+                                  tittle: "Calibration List",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.calibrationList,
+                                    );
+                                  }),
+                              _inventoryList(
+                                  tittle: "WC Certificates List",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.warrantyCertificatesList,
+                                    );
+                                  }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Category",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.assetTypeListScreen,
+                              //       );
+                              //     }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Type",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //       Routes.inventoryTypeListScreen,
+                              //     );
+                              //   }),
+                              // _inventoryList(
+                              //     tittle: "Inventory Status",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.inventoryStatusListScreen,
+                              //       );
+                              //     }),
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Masters",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: const EdgeInsets.all(16),
+                            crossAxisSpacing: 70,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+                              _inventoryList(
+                                  tittle: "Assets Category",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.inventoryCategory,
+                                    );
+                                  }),
+                              _inventoryList(
+                                  tittle: "Assets Type",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.inventoryTypeListScreen,
+                                    );
+                                  }),
+                              _inventoryList(
+                                  tittle: "Assets Status",
+                                  ontap: () {
+                                    controller.inventoryStatusScreen();
+                                  }),
+                            ],
+                          ),
+                          // Container(
+                          //   margin: EdgeInsets.only(left: 20),
+                          //   child: Row(
+                          //     children: [
+                          //       Text(
+                          //         "MIS",
+                          //         style: TextStyle(
+                          //           color: Color.fromARGB(255, 159, 156, 156),
+                          //           fontSize: 16,
+                          //           fontWeight: FontWeight.w400,
+                          //         ),
+                          //       ),
+                          //       SizedBox(
+                          //           width:
+                          //               10), // Add some space between the text and the line
+                          //       Expanded(
+                          //         child: Divider(
+                          //           color: Colors
+                          //               .grey, // Customize the color of the line if needed
+                          //           height:
+                          //               1, // Adjust the height of the line if needed
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          // GridView.count(
+                          //   shrinkWrap: true,
+                          //   primary: false,
+                          //   padding: Dimens.edgeInsets15,
+                          //   crossAxisSpacing: 70,
+                          //   mainAxisSpacing: 6,
+                          //   crossAxisCount:
+                          //       Responsive.isMobile(context) ? 2 : 5,
+                          //   childAspectRatio: Responsive.isMobile(context)
+                          //       ? (itemWidth / itemHeight)
+                          //       : (itemWidth / itemHeightWeb),
+                          //   children: <Widget>[
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Type of observation",
+                          //           onTap: () {
+                          //             controller.goToTypeOfObservation();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Source of observation",
+                          //           onTap: () {
+                          //             controller.goToSourceOfObservation();
+                          //           });
+                          //     }))),
+                          //     OnHover(builder: (((isHovered) {
+                          //       return createContentTile(
+                          //           title: "Risk Type",
+                          //           onTap: () {
+                          //             controller.goToRiskType();
+                          //           });
+                          //     }))),
+                          //   ],
+                          // ),
                         ],
                       )),
                     ),
@@ -827,8 +1134,7 @@ class MastersDashboard extends GetView<MastersController> {
           ),
           // padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
 
-        child:
-          Row(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -849,4 +1155,39 @@ class MastersDashboard extends GetView<MastersController> {
       ),
     );
   }
+}
+
+_inventoryList({required String tittle, Function()? ontap}) {
+  return MouseRegion(
+    cursor: SystemMouseCursors.click,
+    child: GestureDetector(
+      onTap: ontap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorValues.skyBlueColor,
+          borderRadius: BorderRadius.circular(2),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        // padding: EdgeInsets.all(9),
+        child:
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            Center(
+          child: Text(
+            tittle,
+            style: TextStyle(
+                color: ColorValues.whiteColor,
+                fontSize: 15,
+                fontWeight: FontWeight.w700),
+
+            textAlign: TextAlign.center, // Updated
+          ),
+          // ),
+          // ],
+        ),
+      ),
+    ),
+  );
 }

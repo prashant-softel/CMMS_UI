@@ -41,16 +41,15 @@ class AuditListScreenController extends GetxController {
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    'Audit Plan ID': true,
+    'Plan ID': true,
     'Title': true,
     'Checklist': true,
     'Site Name': true,
-    'Start Date': true, 'Frequency Name': true,
-
-    // "search": true,
+    'Start Date': true,
+    'Frequency Name': true,
   });
   final Map<String, double> columnwidth = {
-    'Audit Plan ID': 153,
+    'Plan ID': 153,
     'Title': 320,
     'Checklist': 220,
     'Site Name': 200,
@@ -65,13 +64,6 @@ class AuditListScreenController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
-  // String get formattedFromdate =>
-  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
-  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  // String get formattedFromdate1 =>
-  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
-
   bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(
@@ -80,11 +72,14 @@ class AuditListScreenController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  Rx<int> type = 0.obs;
 
   @override
   void onInit() async {
+    await setType();
+
     this.filterText = {
-      'Audit Plan ID': planIdFilterText,
+      'Plan ID': planIdFilterText,
       'Title': planTitleFilterText,
       'Checklist': noOfDaysFilterText,
       'Site Name': createdByFilterText,
@@ -116,5 +111,35 @@ class AuditListScreenController extends GetxController {
     }
 
     update(['pmPlan_list']);
+  }
+
+  Future<void> setType() async {
+    try {
+      // Read jobId
+      String? _type = await auditListPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        auditListPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
+  }
+
+  void getAuditListByDate() {
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+
+  Future<void> clearValue() async {
+    auditListPresenter.clearValue();
+  }
+
+  void clearStoreIdData() {
+    auditListPresenter.clearStoreIdData();
   }
 }

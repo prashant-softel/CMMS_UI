@@ -42,7 +42,23 @@ class DropdownWebWidget extends StatelessWidget {
         width: width,
         margin: margin,
         decoration: BoxDecoration(
-          boxShadow: boxShadow,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
         ),
@@ -68,6 +84,7 @@ class DropdownWebWidget extends StatelessWidget {
           popupProps: PopupProps.menu(
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(
+                isDense: true,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
@@ -84,6 +101,7 @@ class DropdownWebWidget extends StatelessWidget {
           items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(
+              // isDense: true,
               border: InputBorder.none,
               enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
               focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
@@ -91,7 +109,7 @@ class DropdownWebWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 borderSide: BorderSide(color: ColorValues.redColorDark),
               ),
-              contentPadding: Dimens.edgeInsets05_0_5_0,
+              contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               hintText: "Select",
             ),
           ),

@@ -95,7 +95,7 @@ class FileUploadDetailsWidgetWeb extends StatelessWidget {
                               ),
                             ),
                           ),
-                          minLines: 3,
+                          minLines: 5,
                           maxLines: null,
                           controller: _fileUploadController
                                       .descriptionCtrlrs.length >

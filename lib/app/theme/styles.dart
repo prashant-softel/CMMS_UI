@@ -148,9 +148,6 @@ abstract class Styles {
     fontSize: Dimens.seventeen,
   );
 
-  
-  
-
   static TextStyle blackBold17 = TextStyle(
     // color: ColorValues.blackColor,
     fontWeight: FontWeight.bold,
@@ -322,7 +319,14 @@ abstract class Styles {
     color: ColorValues.whiteColor,
     fontSize: Dimens.sixteen,
   );
-
+  static TextStyle greencolor16 = TextStyle(
+    color: ColorValues.appGreenColor,
+    fontSize: Dimens.sixteen,
+  );
+  static TextStyle redcolor16 = TextStyle(
+    color: ColorValues.appRedColor,
+    fontSize: Dimens.sixteen,
+  );
   static TextStyle whiteBold16 = TextStyle(
     // color: ColorValues.whiteColor,
     fontWeight: FontWeight.bold,
@@ -803,12 +807,12 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     fontSize: Dimens.seventeen,
   );
-   static TextStyle blue25 = TextStyle(
+  static TextStyle blue25 = TextStyle(
     color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.w700,
     fontSize: Dimens.twentyFive,
   );
-   static TextStyle blue20 = TextStyle(
+  static TextStyle blue20 = TextStyle(
     color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.w700,
     fontSize: Dimens.twenty,

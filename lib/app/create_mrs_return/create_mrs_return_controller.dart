@@ -20,16 +20,20 @@ class CreateMrsReturnController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
   Map<String, CmmrsItemsModel> dropdownMapperData = {};
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
 
-  int whereUsedTypeId = 0;
+  Rx<int> whereUsedTypeId = 0.obs;
+  Rx<String> activity = ''.obs;
+  Rx<int> whereUsed = 0.obs;
+  Rx<int> fromActorTypeId = 0.obs;
+  Rx<int> to_actor_type_id = 0.obs;
+
   var isSetTemplate = false.obs;
 
   void setTemplatetoggle() {
@@ -39,9 +43,11 @@ class CreateMrsReturnController extends GetxController {
   ///
   @override
   void onInit() async {
-    whereUsedTypeId = Get.arguments;
-    if (whereUsedTypeId != 0) {
-      whereUsedCtrlr.text = whereUsedTypeId.toString();
+    await setId();
+    //   whereUsedTypeId = Get.arguments;
+    if (whereUsedTypeId.value != 0) {
+      whereUsedCtrlr.text = whereUsedTypeId.value.toString();
+      activityCtrlr.text = activity.value;
     }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -52,6 +58,36 @@ class CreateMrsReturnController extends GetxController {
       });
     });
     super.onInit();
+  }
+
+  Future<void> setId() async {
+    try {
+      final _whereUsedTypeId = await createmrsReturnPresenter.getValue();
+      final _activity = await createmrsReturnPresenter.getactivityValue();
+
+      if (_whereUsedTypeId == null ||
+          _whereUsedTypeId == '' ||
+          _whereUsedTypeId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        activity.value = dataFromPreviousScreen['activity'];
+        whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
+        whereUsed.value = dataFromPreviousScreen['whereUsed'];
+        fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+        to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+
+        createmrsReturnPresenter.saveValue(
+            whereUsedTypeId: whereUsedTypeId.value.toString());
+        createmrsReturnPresenter.saveactivityValue(
+            activity: activity.value.toString());
+      } else {
+        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+        activity.value = _activity ?? "";
+      }
+    } catch (e) {
+      print(e.toString() + 'goId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getCmmsItemList(int _facilityId) async {
@@ -70,7 +106,7 @@ class CreateMrsReturnController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
@@ -89,7 +125,7 @@ class CreateMrsReturnController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<CmmsItem> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
         asset_item_ID: dropdownMapperData[element[0]["value"]]?.id,
         issued_qty: dropdownMapperData[element[0]["value"]]?.quantity,
@@ -107,31 +143,15 @@ class CreateMrsReturnController extends GetxController {
         setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
-        whereUsedType: 2,
-        whereUsedTypeId: whereUsedTypeId,
+        whereUsedType: whereUsed.value,
+        whereUsedTypeId: whereUsedTypeId.value,
+        to_actor_id: whereUsedTypeId.value,
+        to_actor_type_id: to_actor_type_id.value,
+        from_actor_type_id: fromActorTypeId.value,
+        from_actor_id: facilityId,
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();
-    // var createReturnMrsJsonString = {
-    //   "ID": 0,
-    //   "facility_ID": 45,
-    //   "setAsTemplate": "T140",
-    //   "whereUsedType": 1,
-    //   "whereUsedTypeId": 9999,
-    //   "remarks": "Testing on live",
-    //   "activity": "return activity",
-    //   "cmmrsItems": [
-    //     {
-    //       "asset_item_ID": 12,
-    //       "approval_required": 1,
-    //       "return_remarks": "Test remarks",
-    //       "requested_qty": 99,
-    //       "issued_qty": 65,
-    //       "returned_qty": 10,
-    //       "is_faulty": 0
-    //     }
-    //   ]
-    // };
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});
     Map<String, dynamic>? responseCreateReturnMrs =

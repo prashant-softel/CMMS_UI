@@ -22,8 +22,7 @@ class GoodsOrdersReqDetailController extends GetxController {
   );
   GoodsOrdersReqDetailPresenter goodsOrdersReqDetailPresenter;
   final HomeController homecontroller = Get.find();
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   RxList<GetRODetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
@@ -131,7 +130,7 @@ class GoodsOrdersReqDetailController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {
         "key": "Drop_down",
         "value": 'Please Select',
@@ -157,9 +156,9 @@ class GoodsOrdersReqDetailController extends GetxController {
 
       print(
           'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
-      rowItem.value = [];
+      rowItem = <List<Map<String, String>>>[].obs;
       _getPurchaseDetailsById.request_order_items?.forEach((element) {
-        rowItem.value.add([
+        rowItem.add([
           {
             "key": "Drop_down",
             "value": '${element.name}',
@@ -180,7 +179,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   void submitPurchaseOrderData() async {
     List<SubmitItems> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: 0,
           assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
@@ -215,7 +214,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   void updatePurchaseOrderData() async {
     List<SubmitItems> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: int.tryParse('${element[0]["itemID"]}'),
           assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),

@@ -7,4 +7,6 @@ class MastersPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await mastersUsecase.getFacilityList();
+  void clearValue() async => mastersUsecase.clearValue();
+  void clearStoreUserIdData() async => mastersUsecase.clearStoreUserIdData();
 }

@@ -54,7 +54,7 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / USERS", style: Styles.greyMediumLight12),
+                    child: Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
                   GestureDetector(
                     onTap: () {

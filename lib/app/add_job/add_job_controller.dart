@@ -181,8 +181,9 @@ class AddJobController extends GetxController {
       workTypeIds: workTypeIds,
     );
     toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
-    str = toolsRequiredToWorkTypeList.join(" , ");
 
+    // str = toolsRequiredToWorkTypeList.join(" , ");
+    // print({"str", str});
     update(['toolsRequiredToWorkTypeList']);
   }
 
@@ -472,8 +473,7 @@ class AddJobController extends GetxController {
     }
     print('SelectBlock:$selectedBlockIdList');
     // var worktypeid = selectedWorkTypeIdList.join(', ').toString();
-    var blockid =
-        selectedBlockIdList.map((id) => id.toString()).join(',');
+    var blockid = selectedBlockIdList.map((id) => id.toString()).join(',');
     // getToolsRequiredToWorkTypeList(blockid);
   }
 

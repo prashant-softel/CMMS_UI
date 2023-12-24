@@ -193,20 +193,20 @@ class SchedulePermitListTableDialog
                               ),
                             ),
                             Text(controller.responseMessage.value),
-                            controller.responseMessage.value.isEmpty
-                                ? CustomElevatedButton(
-                                    text: 'Link',
-                                    onPressed: () => controller.linkToPermit(),
-                                  )
-                                : //controller.isPermitLinked.value == false
-                                // ?
-                                CustomElevatedButton(
-                                    text: 'Start',
-                                    onPressed: () {
-                                      controller.setPmTask();
-                                    } // =>
-                                    // controller.goToJobDetailsScreen(),
-                                    ),
+                            // controller.responseMessage.value.isEmpty
+                            //     ? CustomElevatedButton(
+                            //         text: 'Link',
+                            //         //onPressed: () => controller.linkToPermit(),
+                            //       )
+                            //     : //controller.isPermitLinked.value == false
+                            //     // ?
+                            CustomElevatedButton(
+                                text: 'Start',
+                                onPressed: () {
+                                  controller.setPmTask();
+                                } // =>
+                                // controller.goToJobDetailsScreen(),
+                                ),
                             // : CustomElevatedButton(
                             //     text: 'Execution',
                             //     onPressed: () {

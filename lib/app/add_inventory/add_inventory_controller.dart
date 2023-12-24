@@ -63,6 +63,8 @@ class AddInventoryController extends GetxController {
   //currancy
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<bool> isManufacturerSelected = true.obs;
+
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
@@ -132,6 +134,8 @@ class AddInventoryController extends GetxController {
   /// manufacturer name
   RxList<ManufacturerModel?> manufacturerModelNameList =
       <ManufacturerModel>[].obs;
+  RxList<String?> selectedmanufacturerNameList = <String>[].obs;
+
   Rx<String> selectedmanufacturerName = ''.obs;
   Rx<bool> iswarrantymanufacturerSelected = true.obs;
   int selectedmanufacturerNameId = 0;
@@ -188,64 +192,52 @@ class AddInventoryController extends GetxController {
       <AddInventoryDetailsModel?>[].obs;
 
   ///
-  int? id = 0;
+  Rx<int> inventoryId = 0.obs;
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('Inventory Id:$id');
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
 
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-
-      Future.delayed(Duration(seconds: 1), () {
         getBlocksList(facilityId);
+        getuserAccessData();
+        getFacilityList();
+        getInventoryList();
+        getFrequencyList();
+        getWarrantyTypeList();
+        getWarrantyUsageTermList();
+        getUnitCurrencyList();
+        getmanufacturerList();
+        getSupplierList();
+        getInventoryCategoryList();
+        getInventoryTypeList(isLoading: true, facilityId: facilityId);
+        getInventoryStatusList(isLoading: true);
+        if (inventoryId != 0) {
+          getAddInventoryDetail(id: inventoryId.value);
+        }
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getInventoryStatusList(isLoading: true, facilityId: facilityId);
-      });
-    });
-    if (id != null) {
-      Future.delayed(Duration(seconds: 1), () {
-        getAddInventoryDetail(id: id!);
-      });
-    }
-
-    Future.delayed(Duration(seconds: 1), () async {
-      await getuserAccessData();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getInventoryList();
-    // });
-    Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyTypeList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyUsageTermList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getmanufacturerList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getSupplierList();
-    });
-
-    // await getTypePermitList();
-    await getInventoryCategoryList();
-    await getInventoryTypeList(isLoading: true, facilityId: facilityId);
-    await getInventoryCategoryList();
+    } catch (e) {}
     super.onInit();
   }
 
-  //
+  Future<void> setUserId() async {
+    try {
+      final _inventoryId = await addInventoryPresenter.getValue();
+      if (_inventoryId == null ||
+          _inventoryId == '' ||
+          _inventoryId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        inventoryId.value = dataFromPreviousScreen['inventoryId'];
+      } else {
+        inventoryId.value = int.tryParse(_inventoryId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'inventoryId');
+    }
+  }
+
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
     final _unitCUrrencyList = await addInventoryPresenter.getUnitCurrencyList(
@@ -261,9 +253,6 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> getAddInventoryDetail({required int id}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
-    //  editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
-
     final _addInventoryDetails =
         await addInventoryPresenter.getAddInventoryDetail(id: id);
     print('Add Inventory Detail:$_addInventoryDetails');
@@ -363,7 +352,7 @@ class AddInventoryController extends GetxController {
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
-            id: id,
+            id: inventoryId.value,
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
@@ -404,24 +393,24 @@ class AddInventoryController extends GetxController {
     return true;
   }
 
-  // void getInventoryList() async {
-  //   eqipmentNameList.value = <InventoryModel>[];
-  //   final _inventoryList = await addInventoryPresenter.getInventoryList(
-  //     isLoading: true,
-  //     categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   //  print('equipment Name List:$inventoryNameList');
-  //   for (var inventory_list in _inventoryList) {
-  //     eqipmentNameList.add(inventory_list);
-  //   }
-  //   inventoryList = _inventoryList;
-  //   paginationController = PaginationController(
-  //     rowCount: eqipmentNameList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['inventory_list']);
-  // }
+  void getInventoryList() async {
+    eqipmentNameList.value = <InventoryModel>[];
+    final _inventoryList = await addInventoryPresenter.getInventoryList(
+      isLoading: true,
+      categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    //  print('equipment Name List:$inventoryNameList');
+    for (var inventory_list in _inventoryList) {
+      eqipmentNameList.add(inventory_list);
+    }
+    inventoryList = _inventoryList;
+    paginationController = PaginationController(
+      rowCount: eqipmentNameList.length,
+      rowsPerPage: 10,
+    );
+    update(['inventory_list']);
+  }
 
   //
   Future<void> getFrequencyList() async {
@@ -473,7 +462,7 @@ class AddInventoryController extends GetxController {
     String _modelNoCtrlr = modelNoCtrlr.text.trim();
     String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
     String _costCtrlr = costCtrlr.text.trim();
-    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _calibrationRemainderInTc = calibrationRemaingCtrlr.text.trim();
     String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
     String _expireDateTc = expireDateTc.text.trim();
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
@@ -510,9 +499,10 @@ class AddInventoryController extends GetxController {
             serialNumber: _serialNoCtrlr,
             parentId: selectedEquipmentnameId,
             calibrationFrequency: selectedfrequencyId,
-            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
-            calibrationLastDate: "2023-01-10",
-            calibrationFirstDueDate: "2023-01-10",
+            calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
+            calibrationLastDate: _lastCalibrationDateTc,
+
+            //  calibrationFirstDueDate: _lastCalibrationDateTc,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -552,11 +542,12 @@ class AddInventoryController extends GetxController {
 
   Future<void> getmanufacturerList() async {
     manufacturerModelNameList.value = <ManufacturerModel>[];
-    final _manufacturerList = await addInventoryPresenter.getmanufacturerList(
+    final _manufacturerModelNameList =
+        await addInventoryPresenter.getmanufacturerList(
       isLoading: true,
       BusinessType: 8,
     );
-    for (var manufacturerName in _manufacturerList) {
+    for (var manufacturerName in _manufacturerModelNameList) {
       manufacturerModelNameList.add(manufacturerName);
     }
   }
@@ -574,10 +565,10 @@ class AddInventoryController extends GetxController {
 
   Future<void> getInventoryStatusList({
     required bool isLoading,
-    required int facilityId,
+    // required int facilityId,
   }) async {
-    final _statusList = await addInventoryPresenter.getInventoryStatusList(
-        facilityId: 45, isLoading: true);
+    final _statusList =
+        await addInventoryPresenter.getInventoryStatusList(isLoading: true);
 
     if (_statusList != null) {
       for (var status in _statusList) {
@@ -601,8 +592,8 @@ class AddInventoryController extends GetxController {
         typeNameList.add(type);
       }
 
-      selectedStatusName.value = statusNameList[0]?.name ?? '';
-      selectedStatusNameId = statusNameList[0]?.id ?? 0;
+      // selectedStatusName.value = statusNameList[0]?.name ?? '';
+      // selectedStatusNameId = statusNameList[0]?.id ?? 0;
     }
   }
 
@@ -612,17 +603,6 @@ class AddInventoryController extends GetxController {
       selectedEquipmentCategoryIdList.add(_selectedCategoryId);
     }
   }
-
-  // Future<void> getTypePermitList() async {
-  //   final _permitTypeList =
-  //       await addInventoryPresenter.getTypePermitList(facility_id: facilityId);
-
-  //   if (_permitTypeList != null) {
-  //     for (var permitType in _permitTypeList) {
-  //       typePermitList.add(permitType);
-  //     }
-  //   }
-  // }
 
   Future<void> getBlocksList(int _facilityId) async {
     blocksList.value = <BlockModel>[];
@@ -704,10 +684,10 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<ManufacturerModel>:
         {
-          int manufacturerIndex =
+          int manufacturerModelNameIndex =
               manufacturerModelNameList.indexWhere((x) => x?.name == value);
           selectedmanufacturerNameId =
-              manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+              manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
           selectedmanufacturerName.value = value;
         }
         break;
@@ -765,13 +745,6 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryModel>:
         {
-          // for (var workAreaName in selectedWorkAreaNameList) {
-          //   int workAreaIndex =
-          //       workAreaList.indexWhere((x) => x?.name == workAreaName);
-          //   selectedWorkAreaIdList.add(workAreaIndex);
-          // }
-          // int workAreaIndex = workAreaList.indexWhere((x) => x?.name == value);
-          // selectedWarrentyNameId = frequencyList[workAreaIndex]?.id ?? 0;
           int eqipmentNameListIndex =
               eqipmentNameList.indexWhere((x) => x?.name == value);
           selectedEquipmentnameId =
@@ -781,13 +754,6 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryCategoryModel>:
         {
-          // for (var equipCat in selectedEquipmentCategoryList) {
-          //   int equipCatIndex =
-          //       equipmentCategoryList.indexWhere((x) => x?.name == value);
-          //   selectedEquipmentCategoryIdList.add(equipCatIndex);
-          //   // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
-          //   print('First Category Id:$selectedEquipmentCategoryList');
-          // }
           int equipCatIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentCategoryNameId =
@@ -796,22 +762,13 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryStatusListModel>:
         {
-          // for (var statusName in statusNameList) {
-          //   int statusIndex =
-          //       statusNameList.indexWhere((x) => x?.name == statusName);
-          //   selectedWorkAreaIdList.add(statusIndex);
-          // }
           int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
           selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
         }
         break;
+
       case RxList<InventoryTypeListModel>:
         {
-          // for (var typeName in typeNameList) {
-          //   int typeNameIndex =
-          //       typeNameList.indexWhere((x) => x?.name == typeName);
-          //   selectedWorkAreaIdList.add(typeNameIndex);
-          // }
           int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
           selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
         }

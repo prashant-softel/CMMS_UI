@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -360,6 +361,10 @@ class ViewEscalationMatrixContentWeb
                 ? MediaQuery.of(context).size.width / 3.7
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickActionTakenDateTime_web(context, 0);
 
@@ -536,6 +541,10 @@ class ViewEscalationMatrixContentWeb
                 ? MediaQuery.of(context).size.width / 3.7
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 position == 0
                     ? pickDateTime_web(context, 0)

@@ -1,4 +1,3 @@
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -7,6 +6,7 @@ import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -167,34 +167,36 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -229,27 +231,37 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                     // ),
                                     Spacer(),
                                     Container(
-                                      width: 200,
-                                      height: 35,
+                                      width: 300,
+                                      height: 40,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
                                           enabledBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           focusedBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           contentPadding:
-                                              Dimens.edgeInsets10_0_0_0,
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
-                                          hintStyle: Styles.grey12,
+                                          hintStyle: Styles.grey16,
                                         ),
                                       ),
                                     ),
@@ -384,12 +396,15 @@ DataColumn2 buildDataColumn(
           SizedBox(
             height: Get.height * 0.05,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onChanged: (value) {
                 filterText.value = value;
                 //   onSearchCallBack(value);
               },
               textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
                 contentPadding:
@@ -592,17 +607,29 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                                   planId: 00),
                                         )
                                         .status ==
-                                    353 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kModuleCleaningFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
+                                    353 ||
+                                controller.moduleCleaningListPlan
+                                            .firstWhere(
+                                              (e) =>
+                                                  e.planId ==
+                                                  ModuleCleaningPlanningListDetails!
+                                                      .planId,
+                                              orElse: () =>
+                                                  ModuleCleaningListPlanModel(
+                                                      planId: 00),
+                                            )
+                                            .status ==
+                                        351 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0
                             ? TableActionButton(
                                 color: ColorValues.appGreenColor,
                                 icon: Icons.add,

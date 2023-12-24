@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -200,6 +201,12 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
@@ -223,7 +230,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                   ],
                                 ),
                                 Container(
-                                  margin: EdgeInsets.all(20),
+                                  margin: EdgeInsets.only(
+                                      left: 20, right: 20, top: 10, bottom: 10),
                                   child: Row(
                                     children: [
                                       Text(
@@ -358,13 +366,45 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                                     .onValueChanged,
                                                           ),
                                                         )
-                                                      : Dimens.box0
+                                                      : controller.selectedactorTypeId ==
+                                                              AppConstants
+                                                                  .kJobCard
+                                                          ? Container(
+                                                              width: (MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  .2),
+                                                              child:
+                                                                  DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    2,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .jobList,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isSelectedJob
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedJob
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueChanged,
+                                                              ),
+                                                            )
+                                                          : Dimens.box0
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
                                 controller.transactionReportList.isEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(
@@ -492,12 +532,15 @@ DataColumn2 buildDataColumn(
           SizedBox(
             height: Get.height * 0.05,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onChanged: (value) {
                 filterText.value = value;
                 //   onSearchCallBack(value);
               },
               textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
                 contentPadding:

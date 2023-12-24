@@ -99,6 +99,8 @@ class PurchaseGoodsorderListController extends GetxController {
   Future<void> getRequestOrderList(int facilityId, dynamic startDate,
       dynamic endDate, bool isLoading) async {
     goodsOrdersList.value = <GetRequestOrderListModel>[];
+    filteredData.value = <GetRequestOrderListModel>[];
+
     final _goodsordersList =
         await purchaseGoodsorderListPresenter.getRequestOrderList(
       isLoading: true,
@@ -113,6 +115,8 @@ class PurchaseGoodsorderListController extends GetxController {
     );
 
     if (goodsOrdersList.isNotEmpty) {
+      filteredData.value = goodsOrdersList.value;
+
       goodsOrdersListModel = goodsOrdersList[0];
       var newPermitListJson = goodsOrdersListModel?.toJson();
       goodsOrdersListTableColumns.value = <String>[];
@@ -132,16 +136,40 @@ class PurchaseGoodsorderListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      goodsOrdersList.value = filteredData;
+      goodsOrdersList.value = filteredData.value;
       return;
     }
-
-    goodsOrdersList.value = filteredData
+    List<GetRequestOrderListModel> filteredList = filteredData
         .where((item) =>
-            item.go_items!.toLowerCase().contains(keyword.toLowerCase()))
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.generatedBy
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.generatedAt
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.cost
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['stock_Mangement_Date']);
+    goodsOrdersList.value = filteredList;
   }
 
   void isDeleteDialog({String? id, String? generatedBy}) {

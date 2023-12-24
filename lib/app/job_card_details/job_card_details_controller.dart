@@ -291,7 +291,7 @@ class JobCardDetailsController extends GetxController {
 
         if (permit != null) {
           permitId = permit.permitId;
-          getPermitDetails();
+          // getPermitDetails();
         }
 
         permitDetails.value = {
@@ -356,7 +356,7 @@ class JobCardDetailsController extends GetxController {
       Map<String, dynamic>? responseMapJobCardUpdated =
           await jobCardDetailsPresenter.updateJobCard(
         jobCard,
-        false,
+        true,
       );
 
       if (responseMapJobCardUpdated != null) {
@@ -394,7 +394,7 @@ class JobCardDetailsController extends GetxController {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.createJobCard(
         jobId: jobId,
-        isLoading: false,
+        isLoading: true,
       );
 
       if (responseMapJobCardStarted != null &&
@@ -416,7 +416,7 @@ class JobCardDetailsController extends GetxController {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.startJobCard(
         jcCard: jcCard,
-        isLoading: false,
+        isLoading: true,
       );
 
       if (responseMapJobCardStarted != null &&
@@ -490,7 +490,7 @@ class JobCardDetailsController extends GetxController {
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.closeJob(
       jobCard,
-      false,
+      true,
     );
 
     if (responseCarryForwardJCModel == null) {
@@ -533,7 +533,7 @@ class JobCardDetailsController extends GetxController {
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.carryForwardJob(
       jobCard,
-      false,
+      true,
     );
 
     if (responseCarryForwardJCModel == null) {
@@ -623,6 +623,73 @@ class JobCardDetailsController extends GetxController {
       var rejectJsonString = commentCalibrationModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.rejectJobCard(
+        rejectJsonString: rejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void approvecloseJob() async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: jobCardId.value, comment: _comment);
+
+      var approveJsonString = commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await jobCardDetailsPresenter.approvecloseJob(
+        approveJsonString: approveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        try {
+          Get.put(FileUploadController());
+
+          // final _flutterSecureStorage = const FlutterSecureStorage();
+
+          // await _flutterSecureStorage.delete(key: "JcId");
+
+          //   await controller.setJcId();
+
+          jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
+                jobCardId: jobCardId.value,
+                isLoading: true,
+              ) ??
+              [];
+          getHistory();
+          createPlantDetailsTableData();
+
+          createJobDetailsTableData();
+          createPermitDetailsTableData();
+          //  createJcDetailsTableData();
+          getEmployeeList();
+          //  getPermitDetails();
+
+          responsibilityCtrlrs.add(TextEditingController());
+          currentIndex.value = -1;
+        } catch (e) {
+          print(e);
+        }
+        //
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void rejectcloseJob() async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: jobCardId.value, comment: _comment);
+
+      var rejectJsonString = commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await jobCardDetailsPresenter.rejectcloseJob(
         rejectJsonString: rejectJsonString,
         isLoading: true,
       );

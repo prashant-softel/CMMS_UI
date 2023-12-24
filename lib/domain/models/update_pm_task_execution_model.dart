@@ -55,25 +55,33 @@ class AddObservations {
       this.observation,
       this.job_create,
       this.pm_files,
-      this.boolean,
-      this.observation_value_controller});
+      // this.boolean,
+      this.cp_ok,
+      this.text,
+      this.observation_value_controller,
+      this.text_value_controller});
 
   int? execution_id;
   String? observation;
   int? job_create;
-  int? boolean; // 1 for ok ,0 for not ok
-
+  // int? boolean; // 1 for ok ,0 for not ok
+  int? cp_ok;
+  String? text;
   List<PmFiles>? pm_files;
   TextEditingController? observation_value_controller;
+  TextEditingController? text_value_controller;
 
   factory AddObservations.fromJson(Map<String, dynamic> json) =>
       AddObservations(
         execution_id: json["execution_id"],
         observation: json["observation"],
         job_create: json["job_create"],
-        boolean: json["boolean"],
+        // boolean: json["boolean"],
+        cp_ok: json["cp_ok"],
+        text: json["text"],
         observation_value_controller:
             TextEditingController(text: json["observation"]),
+        text_value_controller: TextEditingController(text: json["text"]),
         pm_files: List<PmFiles>.from(
             json["pm_files"].map((x) => PmFiles.fromJson(x))),
       );
@@ -82,20 +90,22 @@ class AddObservations {
         "execution_id": execution_id,
         "observation": observation,
         "job_create": job_create,
-        "boolean": boolean,
+        // "boolean": boolean,
+        "cp_ok": cp_ok,
+        "text": text,
         "pm_files": List<dynamic>.from(pm_files!.map((x) => x.toJson())),
       };
 }
 
 class PmFiles {
   PmFiles({
-    required this.file_id,
-    required this.file_desc,
-    required this.pm_event,
+    this.file_id,
+    this.file_desc,
+    this.pm_event,
   });
-  int file_id;
-  String file_desc;
-  int pm_event;
+  int? file_id;
+  String? file_desc;
+  int? pm_event;
 
   factory PmFiles.fromJson(Map<String, dynamic> json) => PmFiles(
         file_id: json["file_id"],

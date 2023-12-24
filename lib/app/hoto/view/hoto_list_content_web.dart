@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -17,8 +18,7 @@ class HotoListContentWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<HotoListContentWeb> createState() =>
-      _PurchaseGoodsorderListWebState();
+  State<HotoListContentWeb> createState() => _PurchaseGoodsorderListWebState();
 }
 
 class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
@@ -164,34 +164,36 @@ class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -230,6 +232,12 @@ class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
@@ -257,8 +265,7 @@ class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
                                 ),
                                 controller.moduleCleaningListPlan.isNotEmpty
                                     ? Center(child: Text('No data'))
-                                    : 
-                                    Expanded(
+                                    : Expanded(
                                         child: ValueListenableBuilder(
                                             valueListenable:
                                                 controller.columnVisibility,
@@ -382,12 +389,15 @@ DataColumn2 buildDataColumn(
           SizedBox(
             height: Get.height * 0.05,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onChanged: (value) {
                 filterText.value = value;
                 //   onSearchCallBack(value);
               },
               textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
                 contentPadding:
@@ -452,7 +462,7 @@ class HotoListDataSource extends DataTableSource {
       //         .toString()
       //         .contains(controller.statusFilterText.value.toLowerCase());
 
-       return (GoodsOrderList.planId ?? '')
+      return (GoodsOrderList.planId ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
           (GoodsOrderList.title ?? '')
@@ -470,7 +480,6 @@ class HotoListDataSource extends DataTableSource {
           (GoodsOrderList.status ?? '')
               .toString()
               .contains(controller.statusFilterText.value.toLowerCase());
-        
 
       // Add other filter conditions as needed
     }).toList();

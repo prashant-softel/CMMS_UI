@@ -42,20 +42,18 @@ class AuditController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    Get.toNamed(
-      Routes.preventiveList,
-    );
+    auditPresenter.clearValue();
+
+    Get.toNamed(Routes.preventiveList, arguments: {'type': 2});
   }
 
   Future<void> checkPoint() async {
-    Get.toNamed(
-      Routes.preventiveCheckPoint,
-    );
+    auditPresenter.clearValue();
+
+    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 2});
   }
 
   Future<void> auditList() async {
-    Get.toNamed(
-      Routes.auditListScreen,
-    );
+    Get.toNamed(Routes.auditListScreen, arguments: {'type': 2});
   }
 }

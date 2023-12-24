@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class UpdateIncidentReportDialog extends GetView {
 
   UpdateIncidentReportDialog({super.key, this.incidentReportId, this.data});
   // final WarrantyClaimController controller = Get.find();
+  final AddIncidentReportController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,6 @@ class UpdateIncidentReportDialog extends GetView {
                                 .bold, // Set any additional styles as needed
                           ),
                         ),
-                       
                       ],
                     ),
                   ),
@@ -64,18 +65,37 @@ class UpdateIncidentReportDialog extends GetView {
         }),
         actions: [
           Dimens.boxWidth10,
-          Center(
-            child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SizedBox(
+              width: 15,
+            ),
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.incidentReportListWeb);
-                // controller.getNewPermitList(_controller.facilityId, _controller.userId);
-                // controller.getWarrantyClaimList();
-                Get.back();
               },
-              child: const Text('Ok'),
+              child: const Text('Incident Report List'),
             ),
-          ),
+            SizedBox(
+              width: 5,
+            ),
+            // ElevatedButton(
+            //   style: Styles.darkBlueElevatedButtonStyle,
+            //   onPressed: () {
+            //     Get.offAllNamed(Routes.incidentReportListWeb);
+            //   },
+            //   child: const Text('Ok'),
+            // ),
+
+            ElevatedButton(
+              style: Styles.yellowElevatedButtonStyle,
+              onPressed: () {
+                controller.viewIncidentReport(id: incidentReportId![0]);
+                print('Incident Report Id${incidentReportId![0]}');
+              },
+              child: const Text('View This Incident Report'),
+            ),
+          ]),
         ],
       );
     }));

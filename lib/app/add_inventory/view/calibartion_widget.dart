@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -36,152 +37,130 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                     style: Styles.blackBold18,
                   ),
                   Container(
-                    width: double.infinity,
-                    child: Wrap(
+                    margin: Dimens.edgeInsets20,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Row(
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        CustomRichText(
-                                            title: "  Calibration Frequency"),
-                                        Dimens.boxWidth5,
-                                        SizedBox(
-                                          child: DropdownWebWidget(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            margin: Dimens.edgeInsets5,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            controller: controller,
-                                            dropdownList:
-                                                controller.frequencyList,
-                                            isValueSelected: controller
-                                                .isSelectedfrequency.value,
-                                            selectedValue: controller
-                                                .selectedfrequency.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
-                                          ),
+                                CustomRichText(title: "Calibration Frequency"),
+                                Dimens.boxWidth5,
+                                SizedBox(
+                                  child: DropdownWebWidget(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: const Offset(
+                                          5.0,
+                                          5.0,
                                         ),
-                                        Dimens.boxWidth30,
-                                        Dimens.boxWidth5,
-                                      ],
-                                    ),
-                                    Dimens.boxHeight5,
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Row(
-                                        children: [
-                                          CustomRichText(
-                                              title:
-                                                  "Calibration remainder In"),
-                                          SizedBox(width: 10),
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5.1,
-                                            child: TextField(
-                                              inputFormatters: <
-                                                  TextInputFormatter>[
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly
-                                              ],
-                                              controller: controller
-                                                  .calibrationRemaingCtrlr,
-                                              decoration: InputDecoration(
-                                                contentPadding:
-                                                    Dimens.edgeInsets5,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(width: .2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(2),
-                                                ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(width: .2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(2),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text("Day"),
-                                        ],
+                                        blurRadius: 5.0,
+                                        spreadRadius: 1.0,
                                       ),
-                                    ),
-                                  ],
+                                      BoxShadow(
+                                        color: ColorValues.whiteColor,
+                                        offset: const Offset(0.0, 0.0),
+                                        blurRadius: 0.0,
+                                        spreadRadius: 0.0,
+                                      ),
+                                    ],
+                                    margin: Dimens.edgeInsets5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    controller: controller,
+                                    dropdownList: controller.frequencyList,
+                                    isValueSelected:
+                                        controller.isSelectedfrequency.value,
+                                    selectedValue:
+                                        controller.selectedfrequency.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
-                                Column(
-                                  children: [
-                                    CustomTextField(
-                                      // numberTextField: true,
-                                      onTap: () {
-                                        controller
-                                                .openLastCalibrationDatePicker =
-                                            !controller
-                                                .openLastCalibrationDatePicker;
-                                        controller.update(['calibration_tab']);
-                                      },
-                                      textController:
-                                          controller.lastCalibrationDateTc,
-                                      label: 'Last calibration date: *',
+                              ],
+                            ),
+                            Dimens.boxHeight5,
+                            Row(
+                              children: [
+                                CustomRichText(
+                                    title: "Calibration remainder In"),
+                                SizedBox(width: 10),
+                                Container(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.040,
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  child: TextField(
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
                                     ),
-                                    Container(
-                                      margin: Dimens.edgeInsets5,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text('Calibration certificate'),
-                                          Dimens.boxWidth10,
-                                          ActionButton(
-                                            label: 'Upload certification file',
-                                            onPressed: () {},
-                                            icon: Icons.file_upload_outlined,
-                                            color:
-                                                ColorValues.appLightBlueColor,
-                                          )
-                                        ],
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    controller:
+                                        controller.calibrationRemaingCtrlr,
+                                    decoration: InputDecoration(
+                                      contentPadding: Dimens.edgeInsets5,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width: .2),
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width: .2),
+                                        borderRadius: BorderRadius.circular(2),
                                       ),
                                     ),
-                                  ],
-                                )
+                                  ),
+                                ),
+                                // SizedBox(
+                                //   width: 20,
+                                // ),
+                                // Text("Day"),
                               ],
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: [
+                                CustomRichText(title: 'Received Date  : '),
+                                Dimens.boxWidth10,
+                                CustomTextFieldForStock(
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  numberTextField: true,
+                                  onTap: () {
+                                    controller.openLastCalibrationDatePicker =
+                                        !controller
+                                            .openLastCalibrationDatePicker;
+                                    controller.update(['calibration_tab']);
+                                  },
+                                  textController:
+                                      controller.lastCalibrationDateTc,
+                                ),
+                              ],
+                            ),
+                            Dimens.boxHeight5,
+                            Container(
+                              child: Row(
+                                children: [
+                                  Text('Calibration certificate'),
+                                  Dimens.boxWidth20,
+                                  ActionButton(
+                                    label: 'Upload certification file',
+                                    onPressed: () {},
+                                    icon: Icons.file_upload_outlined,
+                                    color: ColorValues.appLightBlueColor,
+                                  ),
+                                  Dimens.boxWidth70,
+                                ],
+                              ),
                             ),
                           ],
                         ),

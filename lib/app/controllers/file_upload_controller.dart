@@ -17,6 +17,8 @@ class FileUploadController extends GetxController {
   ///
   final Uri apiUrl =
       Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile');
+  // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+
   Rx<bool> blnHiglight = false.obs;
   Rx<List<int>> progresses = Rx(<int>[]);
   Rx<int> progress = 0.obs;
@@ -29,8 +31,7 @@ class FileUploadController extends GetxController {
   Rx<double?> tileHeight = 0.0.obs;
 
   ///fileIDs
-     List<dynamic> fileIds = [];
-  
+  List<dynamic> fileIds = [];
 
   ///
   @override
@@ -134,14 +135,13 @@ class FileUploadController extends GetxController {
     print('File Upload Response:$response');
 
     if (response.statusCode == 200) {
-    var respStr = await response.stream.bytesToString();
-    var jsonResponse = json.decode(respStr);
-      
+      var respStr = await response.stream.bytesToString();
+      var jsonResponse = json.decode(respStr);
+
       var id = jsonResponse['id'];
       print('File Id,${id[0]}');
       fileIds.addAll(jsonResponse['id']);
       print('Files uploaded successfully,$fileIds');
-      
     } else {
       print('Failed to upload files: ${response.reasonPhrase}');
     }

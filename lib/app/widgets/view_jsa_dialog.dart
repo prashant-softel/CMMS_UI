@@ -59,15 +59,25 @@ class ViewJSADialog extends GetView {
                             height: 70,
                             width: 150,
                             child: InkWell(
-                               onTap: () async {
-                                final url = '${_controller.jsaData}';
-                                print('JSAUrl:$url');
-                                if (await canLaunch(url)) {
-                                await launch(url);
-                                 }
+                                onTap: () async {
+                                  // final url = '${_controller.jsaData}';
+                                  // "https://www.w3.org/1999/xhtml/"
+                                  String baseUrl = 'http://65.0.20.19/O3_Files';
+                                  String endpoint = '${_controller.sopData}';
+
+                                  // Concatenate the links
+                                  String fullUrl = baseUrl + endpoint;
+                                  // final url =
+                                  //     'http://65.0.20.19/O3_Files${_controller.jsaData}';
+                                  print('JSAUrl:$fullUrl');
+                                  if (await canLaunch(fullUrl)) {
+                                    await launch(fullUrl);
+                                  }
                                 },
-                              child: Image.asset('assets/files/pdf2.png'))),
-                                   SizedBox(height: 10,),
+                                child: Image.asset('assets/files/pdf2.png'))),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text('Click on Icon to View Document !!'),
                         // Text.rich(
                         //   TextSpan(
@@ -95,9 +105,8 @@ class ViewJSADialog extends GetView {
                         //   ),
                         // ),
 
-                           
                         /// FILE UPLOAD WIDGET
-                        
+
                         // Container(
                         //  height: Get.height * 0.35,
                         //   width: Get.width,

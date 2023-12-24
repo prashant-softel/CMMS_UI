@@ -291,7 +291,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                                       .value
                                                       ?.mapAssetChecklist?[
                                                           index]
-                                                      .asset_name
+                                                      .name
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller

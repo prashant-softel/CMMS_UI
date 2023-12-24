@@ -25,16 +25,16 @@ class ModuleListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<ModuleListModel?>?
-  moduleList =
-      <ModuleListModel?>[].obs;
+  RxBool isContainerVisible = false.obs;
+  RxList<ModuleListModel> moduleList = <ModuleListModel>[].obs;
+  RxList<ModuleListModel> BufferModuleList = <ModuleListModel>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-
 
   ModuleListModel? moduleListModel;
   var isToggleOn = false.obs;
@@ -49,21 +49,27 @@ class ModuleListController extends GetxController {
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
   }
+
   void toggle1() {
     isToggle1On.value = !isToggle1On.value;
   }
+
   void toggle2() {
     isToggle2On.value = !isToggle2On.value;
   }
+
   void toggle3() {
     isToggle3On.value = !isToggle3On.value;
   }
+
   void toggle4() {
     isToggle4On.value = !isToggle4On.value;
   }
+
   void toggle5() {
     isToggle5On.value = !isToggle5On.value;
   }
+
   void toggle6() {
     isToggle6On.value = !isToggle6On.value;
   }
@@ -73,12 +79,16 @@ class ModuleListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var modulelistNumberCtrlr = TextEditingController();
+  Rx<bool> isModuleNameListInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   var featureCtrlr = TextEditingController();
+  Rx<bool> isFeatureInvalid = false.obs;
+
   ModuleListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -88,16 +98,16 @@ class ModuleListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getModuleList(
-      int facilityId, int type, bool isLoading)
-  async {
+  Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
     moduleList?.value = <ModuleListModel>[];
-    final _moduleList =
-        await moduleListPresenter.getModuleList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    BufferModuleList.value = <ModuleListModel>[];
+
+    final _moduleList = await moduleListPresenter.getModuleList(
+        facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<ModuleListModel?>();
+      moduleList!.value = _moduleList.cast<ModuleListModel>();
+      BufferModuleList.value = moduleList.value;
       paginationController = PaginationController(
         rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
@@ -105,6 +115,7 @@ class ModuleListController extends GetxController {
 
       if (moduleList != null && moduleList!.isNotEmpty) {
         moduleListModel = moduleList![0];
+
         var preventiveCheckListJson = moduleListModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
@@ -114,16 +125,60 @@ class ModuleListController extends GetxController {
     }
   }
 
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      moduleList.value = BufferModuleList.value;
+      return;
+    }
+    List<ModuleListModel> filteredList = BufferModuleList.where((item) =>
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.featureName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) // Add this condition to filter by searchId
+        ).toList();
+    moduleList.value = filteredList;
+  }
+
   Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
 
+  void checkForm() {
+    if (isModuleNameListInvalid.value == true ||
+        isFeatureInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 
   Future<bool> createModuleListNumber() async {
+    if (modulelistNumberCtrlr.text.trim() == '') {
+      isModuleNameListInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (featureCtrlr.text.trim() == '') {
+      isFeatureInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
+
     if (modulelistNumberCtrlr.text.trim() == '' ||
-        featureCtrlr.text.trim() == ''  ) {
+        featureCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
@@ -131,20 +186,20 @@ class ModuleListController extends GetxController {
       String _featureNumber = featureCtrlr.text.trim();
 
       CreateModuleListModel createModuleList = CreateModuleListModel(
-          moduleName : _moduleListNumber,
-          featureName : _featureNumber,
-          menuImage : null,
-          add : isToggleOn.value?1:0,
-          edit: isToggle1On.value?1:0,
-          delete: isToggle2On.value?1:0,
-          view: isToggle3On.value?1:0,
-          approve: isToggle4On.value?1:0,
-          issue: isToggle5On.value?1:0,
-          selfView: isToggle6On.value?1:0,
+        moduleName: _moduleListNumber,
+        featureName: _featureNumber,
+        menuImage: null,
+        add: isToggleOn.value ? 1 : 0,
+        edit: isToggle1On.value ? 1 : 0,
+        delete: isToggle2On.value ? 1 : 0,
+        view: isToggle3On.value ? 1 : 0,
+        approve: isToggle4On.value ? 1 : 0,
+        issue: isToggle5On.value ? 1 : 0,
+        selfView: isToggle6On.value ? 1 : 0,
       );
 
       var moduleListJsonString =
-        createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+          createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
       await moduleListPresenter.createModulelistNumber(
@@ -155,6 +210,10 @@ class ModuleListController extends GetxController {
     }
     getModuleList(facilityId, type, true);
     return true;
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> issuccessCreatemodulelist() async {
@@ -246,18 +305,18 @@ class ModuleListController extends GetxController {
     String _featurelistNumber = featureCtrlr.text.trim();
 
     ModuleListModel createModulelist = ModuleListModel(
-        id:moduleId,
-        name: _modulelistNumber,
-        featureName: _featurelistNumber,
-        menuImage : null,
-        add : isToggleOn.value?1:0,
-        edit: isToggle1On.value?1:0,
-        delete: isToggle2On.value?1:0,
-        view: isToggle3On.value?1:0,
-        approve: isToggle4On.value?1:0,
-        issue: isToggle5On.value?1:0,
-        selfView: isToggle6On.value?1:0,
-    )  ;
+      id: moduleId,
+      name: _modulelistNumber,
+      featureName: _featurelistNumber,
+      menuImage: null,
+      add: isToggleOn.value ? 1 : 0,
+      edit: isToggle1On.value ? 1 : 0,
+      delete: isToggle2On.value ? 1 : 0,
+      view: isToggle3On.value ? 1 : 0,
+      approve: isToggle4On.value ? 1 : 0,
+      issue: isToggle5On.value ? 1 : 0,
+      selfView: isToggle6On.value ? 1 : 0,
+    );
     var modulelistJsonString =
         createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -269,4 +328,3 @@ class ModuleListController extends GetxController {
     return true;
   }
 }
-

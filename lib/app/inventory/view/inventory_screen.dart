@@ -110,7 +110,9 @@ class InventoryScreen extends GetView<InventoryController> {
                         _inventoryList(
                             tittle: "Import Assets",
                             ontap: () {
-                              Get.toNamed(Routes.importInventory, arguments: 1);
+                              Get.toNamed(Routes.importInventory, arguments: {
+                                'importType': AppConstants.kImportAsset
+                              });
                             }),
                         // _inventoryList(
                         //     tittle: "Inventory Category",
@@ -231,6 +233,13 @@ class InventoryScreen extends GetView<InventoryController> {
                             ontap: () {
                               Get.toNamed(
                                 Routes.calibrationList,
+                              );
+                            }),
+                        _inventoryList(
+                            tittle: "WC Certificates List",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.warrantyCertificatesList,
                               );
                             }),
                         // _inventoryList(

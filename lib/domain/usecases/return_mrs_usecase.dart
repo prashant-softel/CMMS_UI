@@ -10,4 +10,5 @@ class ReturnMrsListUsecase {
     bool? isLoading,
   }) async =>
       await _repository.getReturnMrsList(facilityId, isLoading);
+  void clearValue() async => _repository.clearData(LocalKeys.mrsId);
 }

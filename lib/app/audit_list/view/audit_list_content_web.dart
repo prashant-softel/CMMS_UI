@@ -2,13 +2,13 @@ import 'package:cmms/app/audit_list/audit_list_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
@@ -68,11 +68,17 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / AUDIT LIST",
-                                style: Styles.greyMediumLight12),
+                            child: controller.type.value == 3
+                                ? Text(" / MIS",
+                                    style: Styles.greyMediumLight12)
+                                : Text(" / AUDIT LIST",
+                                    style: Styles.greyMediumLight12),
                           ),
-                          Text(" / AUDIT LIST SCREEN",
-                              style: Styles.greyMediumLight12)
+                          controller.type.value == 3
+                              ? Text(" / OBSERVATION PLAN",
+                                  style: Styles.greyMediumLight12)
+                              : Text(" / AUDIT LIST SCREEN",
+                                  style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),
@@ -97,10 +103,15 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "Audit List Screen",
-                                        style: Styles.blackBold16,
-                                      ),
+                                      controller.type.value == 3
+                                          ? Text(
+                                              "Observation Plan",
+                                              style: Styles.blackBold14,
+                                            )
+                                          : Text(
+                                              "Audit List Screen",
+                                              style: Styles.blackBold16,
+                                            ),
                                       Spacer(),
                                       Row(
                                         children: [
@@ -130,7 +141,11 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          Get.offNamed(Routes.createAudit);
+                                          controller.clearValue();
+                                          Get.offNamed(Routes.createAudit,
+                                              arguments: {
+                                                'type': controller.type.value
+                                              });
                                         },
                                         color: ColorValues.addNewColor,
                                       ),
@@ -167,34 +182,36 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -232,6 +249,12 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) {}, // =>
                                         //       controller.search(value),
                                         decoration: InputDecoration(
@@ -340,7 +363,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                     ? controller.toDate.value = dropDate
                                     : controller.toDate.value = pickUpDate;
 
-                                //  controller.getPmTaskListByDate();
+                                controller.getAuditListByDate();
                                 controller.openFromDateToStartDatePicker =
                                     !controller.openFromDateToStartDatePicker;
                                 controller.update(['stock_Mangement_Date']);
@@ -383,12 +406,15 @@ DataColumn2 buildDataColumn(
           SizedBox(
             height: Get.height * 0.05,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onChanged: (value) {
                 filterText.value = value;
                 //   onSearchCallBack(value);
               },
               textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
                 contentPadding:
@@ -433,25 +459,6 @@ class AuditListListDataSource extends DataTableSource {
   void filtersModuleCliningPlan() {
     filteredAuditPlanList = <AuditPlanListModel?>[];
     filteredAuditPlanList = controller.auditPlanList.where((auditList) {
-      // return (auditList.planId ?? '')
-      //         .toString()
-      //         .contains(controller.planIdFilterText.value.toLowerCase()) &&
-      //     (auditList.title ?? '')
-      //         .toString()
-      //         .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-      //     (auditList.noOfCleaningDays ?? '')
-      //         .toString()
-      //         .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-      //     (auditList.createdBy ?? '')
-      //         .toString()
-      //         .contains(controller.createdByFilterText.value.toLowerCase()) &&
-      //     (auditList.frequency ?? '')
-      //         .toString()
-      //         .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-      //     (auditList.status ?? '')
-      //         .toString()
-      //         .contains(controller.statusFilterText.value.toLowerCase());
-
       return (auditList.id ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
@@ -485,10 +492,10 @@ class AuditListListDataSource extends DataTableSource {
     var cellsBuffer = [
       "planId",
       '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.status ?? ''}',
-      '${AuditPlanPlanningListDetails?.frequency ?? ''}',
+      '${AuditPlanPlanningListDetails?.checklist_name ?? ''}',
+      '${AuditPlanPlanningListDetails?.created_by ?? ''}',
+      '${AuditPlanPlanningListDetails?.schedule_Date ?? ''}',
+      '${AuditPlanPlanningListDetails?.frequency_name ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -519,7 +526,7 @@ class AuditListListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '',
+                        '${AuditPlanPlanningListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -527,24 +534,26 @@ class AuditListListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            // color: controller.AuditPlanListPlan
-                            //             .firstWhere(
-                            //               (e) =>
-                            //                   e?.planId ==
-                            //                   AuditPlanPlanningListDetails!
-                            //                       .planId,
-                            //               orElse: () =>
-                            //                   AuditPlanListPlanModel(
-                            //                       planId: 00),
-                            //             )
-                            //             ?.status ==
-                            //         342
-                            //     ? ColorValues.approveColor
-                            //     : ColorValues.addNewColor,
+                            color:
+                                // controller.AuditPlanListPlan
+                                //         .firstWhere(
+                                //           (e) =>
+                                //               e?.planId ==
+                                //               AuditPlanPlanningListDetails!
+                                //                   .planId,
+                                //           orElse: () =>
+                                //               AuditPlanListPlanModel(
+                                //                   planId: 00),
+                                //         )
+                                //         ?.status ==
+                                //     342
+                                // ? ColorValues.approveColor
+                                // :
+                                ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '',
+                            '${AuditPlanPlanningListDetails?.short_status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -560,12 +569,15 @@ class AuditListListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.viewMcPlaning,
-                            //       arguments: {'id': id});
-                            // }
+                            controller.clearStoreIdData();
+                            // controller.clearValue();
+                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+                            if (auditId != 0) {
+                              Get.toNamed(Routes.viewAuditPlan, arguments: {
+                                'auditId': auditId,
+                                'type': controller.type.value
+                              });
+                            }
                           },
                         ),
                         TableActionButton(
@@ -581,58 +593,60 @@ class AuditListListDataSource extends DataTableSource {
                             // }
                           },
                         ),
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.add,
-                          message: 'Approve/Reject',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(
-                            //     Routes.viewMcPlaning,
-                            //     arguments: {'id': id, "type": 1},
-                            //   );
-                            // }
-                          },
-                        ),
-                        TableActionButton(
-                          color: Color.fromARGB(255, 141, 183, 180),
-                          icon: Icons.add,
-                          // label: 'Execute',
-                          message: 'Schedule Execution',
-                          onPress: () {
-                            // Get.dialog(AddMCExecutionDialog(
-                            //   planId: AuditPlanPlanningListDetails?.planId,
-                            //   frequency:
-                            //       AuditPlanPlanningListDetails?.frequency,
-                            // ));
-                            //   int id =
-                            //       AuditPlanPlanningListDetails?.planId ??
-                            //           0;
-                            //   if (id != 0) {
-                            //     Get.toNamed(Routes.purchaseGoodsorderView,
-                            //         arguments: {'id': id, "type": 1});
-                            //   }
-                            // },
-                            // onPress: () {
-                            //   controller.viewAddGoodsOrdersDetails(
-                            //       planId: int.tryParse('${record[0]}'));
-                          },
-                        )
+                        // TableActionButton(
+                        //   color: ColorValues.appGreenColor,
+                        //   icon: Icons.add,
+                        //   message: 'Approve/Reject',
+                        //   onPress: () {
+                        //     // int id =
+                        //     //     AuditPlanPlanningListDetails?.planId ?? 0;
+                        //     // if (id != 0) {
+                        //     //   Get.toNamed(
+                        //     //     Routes.viewMcPlaning,
+                        //     //     arguments: {'id': id, "type": 1},
+                        //     //   );
+                        //     // }
+                        //   },
+                        // ),
+                        // TableActionButton(
+                        //   color: Color.fromARGB(255, 141, 183, 180),
+                        //  icon: Icons.add,
+                        // label: 'Execute',
+                        // message: 'Schedule Execution',
+                        // onPress: () {
+                        // Get.dialog(AddMCExecutionDialog(
+                        //   planId: AuditPlanPlanningListDetails?.planId,
+                        //   frequency:
+                        //       AuditPlanPlanningListDetails?.frequency,
+                        // ));
+                        //   int id =
+                        //       AuditPlanPlanningListDetails?.planId ??
+                        //           0;
+                        //   if (id != 0) {
+                        //     Get.toNamed(Routes.purchaseGoodsorderView,
+                        //         arguments: {'id': id, "type": 1});
+                        //   }
+                        // },
+                        // onPress: () {
+                        //   controller.viewAddGoodsOrdersDetails(
+                        //       planId: int.tryParse('${record[0]}'));
+                        //},
+                        //  )
                       ])
                     : Text(value.toString()),
           ),
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "UserId");
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        controller.clearStoreIdData();
+        // controller.clearValue();
+        int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+        if (auditId != 0) {
+          Get.toNamed(Routes.viewAuditPlan,
+              arguments: {'auditId': auditId, 'type': controller.type.value});
+        }
+      },
     );
   }
 

@@ -22,3 +22,46 @@ class TypeModel {
     };
   }
 }
+
+// class TypeModel {
+//   final String name;
+//   final String id;
+
+//   TypeModel({required this.name, required this.id});
+// }
+
+class GenderModel {
+  final String name;
+  final int? id;
+
+  GenderModel({required this.name, this.id});
+
+  GenderModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        id = json['id'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'id': id,
+    };
+  }
+}
+
+class MonthModel {
+  final String name;
+  final String? id;
+
+  MonthModel({required this.name, this.id});
+
+  MonthModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        id = json['id'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'id': id,
+    };
+  }
+}

@@ -1,9 +1,11 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/save_user_notification_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,6 +21,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/blood_model.dart';
+import '../../domain/models/business_list_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/get_notification_by_userid_model.dart';
 import '../../domain/models/role_model.dart';
@@ -37,8 +40,14 @@ class AddUserController extends GetxController {
   AddUserPresenter addUserPresenter;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
   Rx<String> selectedCountry = 'Select Country'.obs;
+  Rx<String> selectedGender = 'Select Gender'.obs;
+
   Rx<bool> isSelectedCountry = true.obs;
+  Rx<bool> isSelectedGender = true.obs;
+
   int selectedCountryId = 0;
+  int selectedGenderId = 0;
+
   RxList<StateModel?> stateList = <StateModel>[].obs;
   Rx<String> selectedState = 'Select State'.obs;
   Rx<bool> isSelectedState = true.obs;
@@ -61,6 +70,12 @@ class AddUserController extends GetxController {
   RxString password = ''.obs;
   RxBool isPasswordValid = true.obs;
   bool isToastVisible = false;
+
+  RxList<GenderModel?> genderList = <GenderModel>[
+    GenderModel(name: 'Male', id: 1),
+    GenderModel(name: 'Female', id: 2),
+    GenderModel(name: 'Other', id: 3),
+  ].obs;
 
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
   RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
@@ -105,6 +120,10 @@ class AddUserController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  RxList<BusinessListModel?> businessList = <BusinessListModel>[].obs;
+  Rx<String> selectedIBusinessList = 'Select Company'.obs;
+  Rx<bool> isBusinessListSelected = true.obs;
+  int selectedBusinessTypeId = 0;
 
   ///
   void onInit() async {
@@ -121,6 +140,9 @@ class AddUserController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getBusinessList(0);
       });
       if (userId.value != 0) {
         await getUserDetails();
@@ -213,6 +235,18 @@ class AddUserController extends GetxController {
     }
 
     facility_map[emp_id] = selectedfacilityNameIdList;
+  }
+
+  Future<void> getBusinessList(ListType) async {
+    final list = await addUserPresenter.getBusinessList(
+      ListType: ListType,
+      isLoading: true,
+    );
+    if (list!.length > 0) {
+      for (var _businessList in list) {
+        businessList.add(_businessList);
+      }
+    }
   }
 
   getImage(ImageSource imageSource) async {
@@ -413,6 +447,12 @@ class AddUserController extends GetxController {
           selectedCityId = cityList[cityIndex]?.id ?? 0;
         }
         break;
+      case RxList<GenderModel>:
+        {
+          int genderIndex = genderList.indexWhere((x) => x?.name == value);
+          selectedGenderId = genderList[genderIndex]?.id ?? 0;
+        }
+        break;
       case RxList<BloodModel>:
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
@@ -425,6 +465,12 @@ class AddUserController extends GetxController {
           selectedRoleId = roleList[roleIndex]?.id ?? 0;
           getRoleAccessList(roleId: selectedRoleId, isloading: true);
           getRoleNotificationList(roleId: selectedRoleId, isloading: true);
+        }
+        break;
+      case RxList<BusinessListModel>:
+        {
+          int equipmentIndex = businessList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId = businessList[equipmentIndex]?.id ?? 0;
         }
         break;
       default:
@@ -476,7 +522,7 @@ class AddUserController extends GetxController {
       // Get.offNamed(
       //   Routes.userList,
       // );
-        } else {
+    } else {
       Fluttertoast.showToast(
           msg: "Unable to update the access level", fontSize: 16.0);
     }
@@ -513,7 +559,7 @@ class AddUserController extends GetxController {
       Get.offAllNamed(
         Routes.userList,
       );
-        } else {
+    } else {
       Fluttertoast.showToast(
           msg: "Unable to update the  notification", fontSize: 16.0);
     }
@@ -552,12 +598,9 @@ class AddUserController extends GetxController {
         landline_number: _landline,
         last_name: _lastname,
         add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
+        gender_id: selectedGenderId,
         DOB: _dob,
+        company_id: selectedBusinessTypeId,
         city_id: selectedCityId,
         contact_no: _mobileno,
         country_id: selectedCountryId,
@@ -602,14 +645,11 @@ class AddUserController extends GetxController {
         landline_number: _landline,
         last_name: _lastname,
         add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
+        gender_id: selectedGenderId,
         DOB: _dob,
         city_id: selectedCityId,
         contact_no: _mobileno,
+        company_id: selectedBusinessTypeId,
         country_id: selectedCountryId,
         joiningDate: _joiningdate,
         blood_group_id: selectedBloodId,

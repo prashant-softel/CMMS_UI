@@ -61,6 +61,13 @@ abstract class AppConstants {
   static const int kEngineer = 5;
   static const int kInventory = 6;
   static const int kScrap = 7;
+  static const int kImportChecklist = 1;
+  static const int kImportUser = 2;
+  static const int kImportMaterial = 3;
+  static const int kImportAsset = 4;
+  static const int kImportPMPlan = 5;
+  static const int kImportMCPlan = 6;
+  static const int kImportBussiness = 7;
 }
 
 AppFlavor? appFlavor;

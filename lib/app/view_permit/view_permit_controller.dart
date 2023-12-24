@@ -20,9 +20,11 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/extend_permit_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/material.dart';
@@ -119,6 +121,9 @@ class ViewPermitController extends GetxController {
   void _doSomething() {
     // Do something
   }
+
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   TextEditingController extendReasonCommentTextFieldCtrlr =
       TextEditingController();
@@ -562,7 +567,7 @@ class ViewPermitController extends GetxController {
   // }
 
   Future<void> permitCloseButton(
-      {String? permitId, List<dynamic>? closeFileIds}) async {
+      {String? permitId, List<dynamic>? closeFileIds, int? jobId}) async {
     //  String _closeComment = closeCommentTextFieldCtrlr.text.trim();
 
     // final _permitCloseBtn = await viewPermitPresenter.permitCloseButton(
@@ -593,6 +598,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCloseButton(
         closePermitJsonString: closePermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('closePermitRequest:$closePermitJsonString');
@@ -603,7 +609,7 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> permitCancelRequestButton(
-      {String? permitId, List<dynamic>? fileIds}) async {
+      {String? permitId, List<dynamic>? fileIds, int? jobId}) async {
     // String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
 
     // final _permitCancelRequestBtn =
@@ -635,6 +641,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitCancelRequestButton(
         cancelPermitJsonString: cancelPermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('cancelPermitRequest:$cancelPermitJsonString');
@@ -645,7 +652,7 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> permitExtendButton(
-      {String? permitId, List<dynamic>? extendFileIds}) async {
+      {String? permitId, List<dynamic>? extendFileIds, int? jobId}) async {
     // String _reasonForExtensionComment =
     //     extendReasonCommentTextFieldCtrlr.text.trim();
     // String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
@@ -684,6 +691,7 @@ class ViewPermitController extends GetxController {
       Map<String, dynamic>? response =
           await viewPermitPresenter.permitExtendButton(
         extendPermitJsonString: extendPermitJsonString,
+        jobId: jobId,
         isLoading: true,
       );
       print('extendPermitRequest:$extendPermitJsonString');
@@ -1624,7 +1632,7 @@ class ViewPermitController extends GetxController {
     //Dispose the document.
     document.dispose();
     //Save and launch the file.
-    // await saveAndLaunchFile(bytes, 'permit.pdf');
+    await saveAndLaunchFile(bytes, 'permit.pdf');
   }
 
   PdfLayoutResult drawHeader(
@@ -2650,5 +2658,40 @@ class ViewPermitController extends GetxController {
     row.cells[6].value = quantity.toString();
 
     row.cells[7].value = total.toString();
+  }
+
+  Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.newPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value
+    });
+    print('PermitIdArgument:$permitId');
+  }
+
+  void clearStoreData() {
+    viewPermitPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    viewPermitPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    viewPermitPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    viewPermitPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    viewPermitPresenter.clearpmTaskValue();
   }
 }

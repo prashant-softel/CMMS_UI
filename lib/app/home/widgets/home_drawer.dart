@@ -81,16 +81,6 @@ class HomeDrawer extends GetView<HomeController> {
                                                     Routes.breakdown);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "MIS",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes
-                                                    .stockManagementDashboardScreen);
-                                              },
-                                            ),
 
                                             // MenuItem(
                                             ////                                              isexpand: controller.isExpanded.valu
@@ -136,17 +126,17 @@ class HomeDrawer extends GetView<HomeController> {
                                                 Get.offAllNamed(Routes.home);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Assets",
-                                              icon:
-                                                  "assets/files/maintenance.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.inventory);
-                                              },
-                                            ),
+                                            // MenuItem(
+                                            //   isexpand:
+                                            //       controller.isExpanded.value,
+                                            //   title: "Assets",
+                                            //   icon:
+                                            //       "assets/files/maintenance.png",
+                                            //   press: () {
+                                            //     Get.offAllNamed(
+                                            //         Routes.inventory);
+                                            //   },
+                                            // ),
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -154,7 +144,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon: "assets/files/misc.png",
                                               press: () {
                                                 Get.offAllNamed(Routes
-                                                    .incidentReportListWeb);
+                                                    .incidentReportDashboard);
                                               },
                                             ),
                                             MenuItem(
@@ -193,8 +183,19 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
+                                              title: "HSE Report",
+                                              icon: "assets/files/warranty.png",
+                                              press: () {
+                                                Get.offAllNamed(
+                                                    Routes.misDashboard);
+                                              },
+                                            ),
+
+                                            MenuItem(
+                                              isexpand:
+                                                  controller.isExpanded.value,
                                               title: "Audit",
-                                              icon: "assets/files/setting.png",
+                                              icon: "assets/files/images.png",
                                               press: () {
                                                 Get.offAllNamed(Routes.audit);
                                               },
@@ -291,7 +292,8 @@ class MenuItem extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Dimens.boxHeight15,
-          GestureDetector(
+          InkWell(
+            mouseCursor: MaterialStateMouseCursor.clickable,
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

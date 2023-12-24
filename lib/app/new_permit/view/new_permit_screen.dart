@@ -8,11 +8,13 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -1016,10 +1018,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                                       /// PAGINATION
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                                25),
+                                                                        padding:
+                                                                            const EdgeInsets.symmetric(horizontal: 25),
                                                                         child: ValueListenableBuilder(
                                                                             valueListenable: controller.employeeNamepaginationController,
                                                                             builder: (context, value, child) {
@@ -1563,9 +1563,28 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       style: Styles
                                                           .greyMediumLight12),
                                                 ),
-                                                Text(" / ADD NEW PERMIT",
-                                                    style: Styles
-                                                        .greyMediumLight12),
+                                                controller.newPermitDetailsModel
+                                                            .value?.permitNo ==
+                                                        null
+                                                    ? Text(" / ADD NEW PERMIT",
+                                                        style: Styles
+                                                            .greyMediumLight12)
+                                                    : Text(
+                                                        " / Update NEW PERMIT",
+                                                        style: Styles
+                                                            .greyMediumLight12),
+                                                Spacer(),
+                                                controller.newPermitDetailsModel
+                                                            .value?.permitNo !=
+                                                        null
+                                                    ? Text(
+                                                        "Permit Id: ${controller.newPermitDetailsModel.value?.permitNo}",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )
+                                                    : Dimens.box0,
                                               ],
                                             ),
                                           ),
@@ -1582,7 +1601,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(
+                                                                    .only(
                                                                 right: 50,
                                                                 top: 20),
                                                         child: Text(
@@ -1608,11 +1627,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          left:
-                                                                              70),
+                                                                      left: 70),
                                                                   child: Text(
                                                                     'Request a Permit For a PM',
                                                                     style: Styles
@@ -1620,15 +1637,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              40,
-                                                                          right:
-                                                                              10),
+                                                                      top: 10,
+                                                                      left: 40,
+                                                                      right:
+                                                                          10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1743,7 +1757,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ],
                                                             )
-                                                          : Container(),
+                                                          : Dimens.box0,
                                                       Dimens.boxHeight30,
                                                       controller.jobModel?.id !=
                                                               null
@@ -1758,11 +1772,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          left:
-                                                                              10),
+                                                                      left: 10),
                                                                   child: Text(
                                                                     'Request a Permit For a Job',
                                                                     style: Styles
@@ -1770,15 +1782,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
+                                                                  padding: const EdgeInsets
                                                                           .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              40,
-                                                                          right:
-                                                                              10),
+                                                                      top: 10,
+                                                                      left: 40,
+                                                                      right:
+                                                                          10),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -1995,12 +2004,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ],
                                                             )
-                                                          : Container(),
+                                                          : Dimens.box0,
                                                       Dimens.boxHeight30,
 
                                                       SizedBox(
                                                         height: 20,
                                                       ),
+
                                                       Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -2011,6 +2021,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             //     MainAxisAlignment
                                                             //         .center,
                                                             children: [
+                                                              Spacer(),
                                                               Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -2096,15 +2107,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         0,
                                                                       ),
                                                                     ],
-                                                                  )
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
                                                                 ],
                                                               ),
+
                                                               Spacer(),
                                                               // Dimens.boxWidth47,
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         right:
                                                                             20),
                                                                 child: Column(
@@ -2180,6 +2194,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ],
                                                                 ),
                                                               ),
+                                                              Spacer(),
                                                               // Padding(
                                                               //   padding:
                                                               //       const EdgeInsets
@@ -2397,11 +2412,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           //     ],
                                                           //   ),
                                                           // ),
+
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
-                                                                    left: 17),
+                                                                        .only(
+                                                                    left: 150,
+                                                                    right: 130),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2416,15 +2433,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           ),
                                                         ],
                                                       ),
-                                                      // Spacer(),
 
                                                       SizedBox(
                                                         height: 10,
                                                       ),
+
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 19),
+                                                                .only(left: 70),
                                                         child: Row(
                                                           children: [
                                                             CustomRichText(
@@ -2462,7 +2479,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   margin: EdgeInsets
                                                                       .only(
                                                                           left:
-                                                                              5),
+                                                                              130),
                                                                   // alignment:
                                                                   //     Alignment
                                                                   //         .centerRight,
@@ -2474,67 +2491,79 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 SizedBox(
                                                                   width: 5,
                                                                 ),
-                                                                controller.permitId
-                                                                            .value >
-                                                                        0
-                                                                    ? SizedBox(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                5,
-                                                                        child:
-                                                                            CustomMultiSelectDialogField(
-                                                                          buttonText:
-                                                                              'Select Equipment Isolation',
-                                                                          title:
-                                                                              'Equipment Isolation',
-                                                                          initialValue: (controller.selectedEditEquipemntIsolationIdList.isNotEmpty)
-                                                                              ? controller.selectedEditEquipemntIsolationIdList
-                                                                              : [],
-                                                                          items: controller
-                                                                              .equipmentIsolationList
-                                                                              .map(
-                                                                                (equipmentIsolation) => MultiSelectItem(
-                                                                                  equipmentIsolation?.id,
-                                                                                  equipmentIsolation?.name ?? '',
-                                                                                ),
-                                                                              )
-                                                                              .toList(),
-                                                                          onConfirm:
-                                                                              (selectedOptionsList) => {
-                                                                            controller.equipmentIsolationSelected(selectedOptionsList),
-                                                                            print('Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
-                                                                          },
-                                                                        ),
-                                                                      )
-                                                                    : SizedBox(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                5,
-                                                                        child:
-                                                                            CustomMultiSelectDialogField(
-                                                                          buttonText:
-                                                                              'Select Equipment Isolation',
-                                                                          title:
-                                                                              'Equipment Isolation',
-                                                                          initialValue: (controller.selectedEquipmentIsolationIdList.isNotEmpty)
-                                                                              ? controller.selectedEquipmentIsolationIdList
-                                                                              : [],
-                                                                          items: controller
-                                                                              .equipmentIsolationList
-                                                                              .map(
-                                                                                (equipmentIsolation) => MultiSelectItem(
-                                                                                  equipmentIsolation?.id,
-                                                                                  equipmentIsolation?.name ?? '',
-                                                                                ),
-                                                                              )
-                                                                              .toList(),
-                                                                          onConfirm:
-                                                                              (selectedOptionsList) => {
-                                                                            controller.equipmentIsolationSelected(selectedOptionsList),
-                                                                            print('Equipment Isolation list5: ${controller.equipmentIsolationList}')
-                                                                          },
-                                                                        ),
-                                                                      )
+                                                                // controller.permitId
+                                                                //             .value >
+                                                                //         0
+                                                                //     ? SizedBox(
+                                                                //         width:
+                                                                //             MediaQuery.of(context).size.width /
+                                                                //                 5,
+                                                                //         child:
+                                                                //             CustomMultiSelectDialogField(
+                                                                //           buttonText:
+                                                                //               'Select Equipment Isolation',
+                                                                //           title:
+                                                                //               'Equipment Isolation EDit',
+                                                                //           initialValue: (controller.selectedEditEquipemntIsolationIdList.isNotEmpty)
+                                                                //               ? controller.selectedEditEquipemntIsolationIdList
+                                                                //               : [],
+                                                                //           items: controller
+                                                                //               .equipmentIsolationList
+                                                                //               .map(
+                                                                //                 (equipmentIsolation) => MultiSelectItem(
+                                                                //                   equipmentIsolation?.id,
+                                                                //                   equipmentIsolation?.name ?? '',
+                                                                //                 ),
+                                                                //               )
+                                                                //               .toList(),
+                                                                //           onConfirm:
+                                                                //               (selectedOptionsList) => {
+                                                                //             controller.equipmentIsolationSelected(selectedOptionsList),
+                                                                //             print('Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
+                                                                //           },
+                                                                //         ),
+                                                                //       )
+                                                                //     :
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child:
+                                                                      CustomMultiSelectDialogField(
+                                                                    buttonText:
+                                                                        'Select Equipment Isolation',
+                                                                    title:
+                                                                        'Equipment Isolation',
+                                                                    initialValue: (controller
+                                                                            .selectedEquipmentIsolationIdList
+                                                                            .isNotEmpty)
+                                                                        ? controller
+                                                                            .selectedEquipmentIsolationIdList
+                                                                        : [],
+                                                                    items: controller
+                                                                        .equipmentIsolationList
+                                                                        .map(
+                                                                          (equipmentIsolation) =>
+                                                                              MultiSelectItem(
+                                                                            equipmentIsolation?.id,
+                                                                            equipmentIsolation?.name ??
+                                                                                '',
+                                                                          ),
+                                                                        )
+                                                                        .toList(),
+                                                                    onConfirm:
+                                                                        (selectedOptionsList) =>
+                                                                            {
+                                                                      controller
+                                                                          .equipmentIsolationSelected(
+                                                                              selectedOptionsList),
+                                                                      print(
+                                                                          'Equipment Isolation list5: ${controller.equipmentIsolationList}')
+                                                                    },
+                                                                  ),
+                                                                )
                                                               ],
                                                             )
                                                           : Text(
@@ -2583,7 +2612,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         title: 'Loto Equipment List'
                                                                             .tr,
                                                                         action: ActionButton(
-                                                                            label: 'Add New',
+                                                                            label: 'Add New1',
                                                                             icon: Icons.add,
                                                                             onPressed: () {
                                                                               //  showEquipmentNameAlertBox();
@@ -2610,167 +2639,168 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               //         2,
                                                                               //   ),
                                                                               // ),
-                                                                              controller.permitId.value > 0
-                                                                                  ? SizedBox(
-                                                                                      width: MediaQuery.of(context).size.width * 2,
-                                                                                      child: Container(
-                                                                                        height: ((controller.filteredEquipmentNameList.length) * 25) + 90,
-                                                                                        child: Column(
-                                                                                            //
-                                                                                            children: [
-                                                                                              Expanded(
-                                                                                                child: //
-                                                                                                    Theme(
-                                                                                                  data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                                                  child: ScrollableTableView(
-                                                                                                    // paginationController: controller.equipmentNamepaginationController,
-                                                                                                    columns: [
-                                                                                                      'name',
-                                                                                                      'serialNumber',
-                                                                                                      'action'.tr,
-                                                                                                    ].map((column) {
-                                                                                                      return TableViewColumn(
-                                                                                                        minWidth: Get.width * 0.25,
-                                                                                                        label: column == "name"
-                                                                                                            ? "Loto Applied On"
-                                                                                                            : column == "serialNumber"
-                                                                                                                ? "Serial Number"
-                                                                                                                : "Action",
-                                                                                                      );
-                                                                                                    }).toList(),
-                                                                                                    rows: //
-                                                                                                        [
-                                                                                                      ...List.generate(
-                                                                                                        ///controller.selectedEquipmentNameIdList
-                                                                                                        controller.listLoto!.length,
+                                                                              // controller.permitId.value > 0
+                                                                              //     ? SizedBox(
+                                                                              //         width: MediaQuery.of(context).size.width * 2,
+                                                                              //         child: Container(
+                                                                              //           height: ((controller.filteredEquipmentNameList.length) * 25) + 90,
+                                                                              //           child: Column(
+                                                                              //               //
+                                                                              //               children: [
+                                                                              //                 Expanded(
+                                                                              //                   child: //
+                                                                              //                       Theme(
+                                                                              //                     data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
+                                                                              //                     child: ScrollableTableView(
+                                                                              //                       // paginationController: controller.equipmentNamepaginationController,
+                                                                              //                       columns: [
+                                                                              //                         'name',
+                                                                              //                         'serialNumber',
+                                                                              //                         'action'.tr,
+                                                                              //                       ].map((column) {
+                                                                              //                         return TableViewColumn(
+                                                                              //                           minWidth: Get.width * 0.25,
+                                                                              //                           label: column == "name"
+                                                                              //                               ? "Loto Applied On"
+                                                                              //                               : column == "serialNumber"
+                                                                              //                                   ? "Serial Number"
+                                                                              //                                   : "Action",
+                                                                              //                         );
+                                                                              //                       }).toList(),
+                                                                              //                       rows: //
+                                                                              //                           [
+                                                                              //                         ...List.generate(
+                                                                              //                           ///controller.selectedEquipmentNameIdList
+                                                                              //                           controller.listLoto!.length,
 
-                                                                                                        (index) {
-                                                                                                          var inventoryEquipmentName = controller.listLoto![index];
+                                                                              //                           (index) {
+                                                                              //                             var inventoryEquipmentName = controller.listLoto![index];
 
-                                                                                                          //_jobId = jobDetails?.id;
+                                                                              //                             //_jobId = jobDetails?.id;
 
-                                                                                                          // controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                                          print('Equipment Isss5:${controller.id.value}');
-                                                                                                          return [
-                                                                                                            '${inventoryEquipmentName?.asset_name ?? ''}',
-                                                                                                            '${inventoryEquipmentName?.locksrno ?? ''}',
-                                                                                                            'Actions'
-                                                                                                          ];
-                                                                                                        },
-                                                                                                      ),
-                                                                                                    ].map((_inventoryDetailList) {
-                                                                                                      return TableViewRow(
-                                                                                                          onTap: () => {
-                                                                                                                print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                              },
-                                                                                                          height: 25,
-                                                                                                          cells: _inventoryDetailList.map((value) {
-                                                                                                            return TableViewCell(
-                                                                                                              //key: ,
-                                                                                                              child: (value == 'Actions')
-                                                                                                                  ? Wrap(
-                                                                                                                      children: [
-                                                                                                                        TableActionButton(
-                                                                                                                          color: Colors.red,
-                                                                                                                          icon: Icons.delete_outline,
-                                                                                                                          message: 'Remove',
-                                                                                                                          onPress: () {
-                                                                                                                            // controller.showNewPermitListDetails(
-                                                                                                                            //     controller.permitId.value);
-                                                                                                                          },
-                                                                                                                        ),
-                                                                                                                      ],
-                                                                                                                    )
-                                                                                                                  : Text(value.toString()),
-                                                                                                            );
-                                                                                                          }).toList());
-                                                                                                    }).toList(),
-                                                                                                  ),
+                                                                              //                             // controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                              //                             print('Equipment Isss5:${controller.id.value}');
+                                                                              //                             return [
+                                                                              //                               '${inventoryEquipmentName?.asset_name ?? ''}',
+                                                                              //                               '${inventoryEquipmentName?.locksrno ?? ''}',
+                                                                              //                               'Actions'
+                                                                              //                             ];
+                                                                              //                           },
+                                                                              //                         ),
+                                                                              //                       ].map((_inventoryDetailList) {
+                                                                              //                         return TableViewRow(
+                                                                              //                             onTap: () => {
+                                                                              //                                   print('ZERO = ${_inventoryDetailList[0]}')
+                                                                              //                                 },
+                                                                              //                             height: 25,
+                                                                              //                             cells: _inventoryDetailList.map((value) {
+                                                                              //                               return TableViewCell(
+                                                                              //                                 //key: ,
+                                                                              //                                 child: (value == 'Actions')
+                                                                              //                                     ? Wrap(
+                                                                              //                                         children: [
+                                                                              //                                           TableActionButton(
+                                                                              //                                             color: Colors.red,
+                                                                              //                                             icon: Icons.delete_outline,
+                                                                              //                                             message: 'Remove',
+                                                                              //                                             onPress: () {
+                                                                              //                                               // controller.showNewPermitListDetails(
+                                                                              //                                               //     controller.permitId.value);
+                                                                              //                                             },
+                                                                              //                                           ),
+                                                                              //                                         ],
+                                                                              //                                       )
+                                                                              //                                     : Text(value.toString()),
+                                                                              //                               );
+                                                                              //                             }).toList());
+                                                                              //                       }).toList(),
+                                                                              //                     ),
+                                                                              //                   ),
+                                                                              //                 ),
+                                                                              //               ]),
+                                                                              //         ),
+                                                                              //       )
+                                                                              //     :
+                                                                              SizedBox(
+                                                                                width: MediaQuery.of(context).size.width * 2,
+                                                                                child: Container(
+                                                                                  height: ((controller.filteredEquipmentNameList.length) * 25) + 90,
+                                                                                  child: Column(
+                                                                                      //
+                                                                                      children: [
+                                                                                        Expanded(
+                                                                                          child: //
+                                                                                              Theme(
+                                                                                            data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
+                                                                                            child: ScrollableTableView(
+                                                                                              // paginationController: controller.equipmentNamepaginationController,
+                                                                                              columns: [
+                                                                                                'name',
+                                                                                                'serialNumber',
+                                                                                                'action'.tr,
+                                                                                              ].map((column) {
+                                                                                                return TableViewColumn(
+                                                                                                  minWidth: Get.width * 0.25,
+                                                                                                  label: column == "name"
+                                                                                                      ? "Loto Applied On"
+                                                                                                      : column == "serialNumber"
+                                                                                                          ? "Serial Number"
+                                                                                                          : "Action",
+                                                                                                );
+                                                                                              }).toList(),
+                                                                                              rows: //
+                                                                                                  [
+                                                                                                ...List.generate(
+                                                                                                  ///controller.selectedEquipmentNameIdList
+                                                                                                  controller.filteredEquipmentNameList.length,
+
+                                                                                                  (index) {
+                                                                                                    var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
+
+                                                                                                    //_jobId = jobDetails?.id;
+
+                                                                                                    controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                                    print('Equipment Isss5:${controller.id.value}');
+                                                                                                    return [
+                                                                                                      '${inventoryEquipmentName?.name ?? ''}',
+                                                                                                      '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                                                                      'Actions'
+                                                                                                    ];
+                                                                                                  },
                                                                                                 ),
-                                                                                              ),
-                                                                                            ]),
-                                                                                      ),
-                                                                                    )
-                                                                                  : SizedBox(
-                                                                                      width: MediaQuery.of(context).size.width * 2,
-                                                                                      child: Container(
-                                                                                        height: ((controller.filteredEquipmentNameList.length) * 25) + 90,
-                                                                                        child: Column(
-                                                                                            //
-                                                                                            children: [
-                                                                                              Expanded(
-                                                                                                child: //
-                                                                                                    Theme(
-                                                                                                  data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                                                  child: ScrollableTableView(
-                                                                                                    // paginationController: controller.equipmentNamepaginationController,
-                                                                                                    columns: [
-                                                                                                      'name',
-                                                                                                      'serialNumber',
-                                                                                                      'action'.tr,
-                                                                                                    ].map((column) {
-                                                                                                      return TableViewColumn(
-                                                                                                        minWidth: Get.width * 0.25,
-                                                                                                        label: column == "name"
-                                                                                                            ? "Loto Applied On"
-                                                                                                            : column == "serialNumber"
-                                                                                                                ? "Serial Number"
-                                                                                                                : "Action",
-                                                                                                      );
-                                                                                                    }).toList(),
-                                                                                                    rows: //
-                                                                                                        [
-                                                                                                      ...List.generate(
-                                                                                                        ///controller.selectedEquipmentNameIdList
-                                                                                                        controller.filteredEquipmentNameList.length,
-
-                                                                                                        (index) {
-                                                                                                          var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
-
-                                                                                                          //_jobId = jobDetails?.id;
-
-                                                                                                          controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                                          print('Equipment Isss5:${controller.id.value}');
-                                                                                                          return [
-                                                                                                            '${inventoryEquipmentName?.name ?? ''}',
-                                                                                                            '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                                            'Actions'
-                                                                                                          ];
+                                                                                              ].map((_inventoryDetailList) {
+                                                                                                return TableViewRow(
+                                                                                                    onTap: () => {
+                                                                                                          print('ZERO = ${_inventoryDetailList[0]}')
                                                                                                         },
-                                                                                                      ),
-                                                                                                    ].map((_inventoryDetailList) {
-                                                                                                      return TableViewRow(
-                                                                                                          onTap: () => {
-                                                                                                                print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                              },
-                                                                                                          height: 25,
-                                                                                                          cells: _inventoryDetailList.map((value) {
-                                                                                                            return TableViewCell(
-                                                                                                              //key: ,
-                                                                                                              child: (value == 'Actions')
-                                                                                                                  ? Wrap(
-                                                                                                                      children: [
-                                                                                                                        TableActionButton(
-                                                                                                                          color: Colors.red,
-                                                                                                                          icon: Icons.delete_outline,
-                                                                                                                          message: 'Remove',
-                                                                                                                          onPress: () {
-                                                                                                                            // controller.showNewPermitListDetails(
-                                                                                                                            //     controller.permitId.value);
-                                                                                                                          },
-                                                                                                                        ),
-                                                                                                                      ],
-                                                                                                                    )
-                                                                                                                  : Text(value.toString()),
-                                                                                                            );
-                                                                                                          }).toList());
-                                                                                                    }).toList(),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ]),
-                                                                                      ),
-                                                                                    ),
+                                                                                                    height: 25,
+                                                                                                    cells: _inventoryDetailList.map((value) {
+                                                                                                      return TableViewCell(
+                                                                                                        //key: ,
+                                                                                                        child: (value == 'Actions')
+                                                                                                            ? Wrap(
+                                                                                                                children: [
+                                                                                                                  TableActionButton(
+                                                                                                                    color: Colors.red,
+                                                                                                                    icon: Icons.delete_outline,
+                                                                                                                    message: 'Remove',
+                                                                                                                    onPress: () {
+                                                                                                                      // controller.showNewPermitListDetails(
+                                                                                                                      //     controller.permitId.value);
+                                                                                                                    },
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              )
+                                                                                                            : Text(value.toString()),
+                                                                                                      );
+                                                                                                    }).toList());
+                                                                                              }).toList(),
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ]),
+                                                                                ),
+                                                                              ),
 
                                                                               // SizedBox(
                                                                               //   width:
@@ -2811,7 +2841,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           context)
                                                                       .size
                                                                       .width /
-                                                                  1.25,
+                                                                  1.3,
                                                               child: Center(
                                                                 child: Column(
                                                                   children: [
@@ -2883,278 +2913,155 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
 
                                                       //Tool box talk
-                                                      SizedBox(
-                                                        height: 450,
+                                                      Container(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
                                                                 .width /
-                                                            1.2,
-                                                        child: Center(
-                                                          child: Container(
-                                                            margin: Dimens
-                                                                .edgeInsets16,
-                                                            height: Get.height,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .withOpacity(
-                                                                          .3)),
+                                                            1.25,
+                                                        margin:
+                                                            EdgeInsets.all(20),
+                                                        // margin: Dimens
+                                                        //     .edgeInsets16,
+                                                        // height: Get.height,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      .3)),
+                                                        ),
+                                                        constraints:
+                                                            BoxConstraints(
+                                                          maxWidth: 1100,
+                                                        ),
+                                                        child: Column(
+                                                          children: [
+                                                            CustomAppBar(
+                                                              title: 'SOP'.tr,
                                                             ),
-                                                            constraints:
-                                                                BoxConstraints(
-                                                              maxWidth: 1100,
-                                                            ),
-                                                            child: Column(
+                                                            Dimens.boxHeight10,
+                                                            Wrap(
                                                               children: [
-                                                                CustomAppBar(
-                                                                  title:
-                                                                      'Tool Box Talk'
-                                                                          .tr,
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Wrap(
+                                                                Column(
                                                                   children: [
-                                                                    Column(
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
                                                                       children: [
-                                                                        Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceEvenly,
-                                                                          children: [
-                                                                            Text('TBT Type: '),
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: Obx(
-                                                                                () => DropdownWebWidget(
-                                                                                  dropdownList: controller.jobTypeList,
-                                                                                  isValueSelected: controller.isJobTypeListSelected.value,
-                                                                                  selectedValue: controller.selectedJobType.value,
-                                                                                  onValueChanged: controller.onValueChanged,
-                                                                                ),
-                                                                              ),
-
-                                                                              // LoginCustomTextfield(),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: 20,
-                                                                            ),
-                                                                            Text('SOP: '),
-                                                                            SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: Obx(
-                                                                                () => DropdownWebWidget(
-                                                                                  dropdownList: controller.sopPermitList,
-                                                                                  isValueSelected: controller.isSopPermitListSelected.value,
-                                                                                  selectedValue: controller.selectedSopPermit.value,
-                                                                                  onValueChanged: controller.onValueChanged,
-                                                                                ),
-                                                                              ),
-                                                                              // LoginCustomTextfield(),
-                                                                            ),
-                                                                          ],
-                                                                        ),
+                                                                        Text(
+                                                                            'JOB Type: '),
                                                                         SizedBox(
-                                                                          height:
-                                                                              40,
-                                                                        ),
-                                                                        Center(
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            children: [
-                                                                              Container(
-                                                                                  height: 30,
-                                                                                  child: CustomElevatedButton(
-                                                                                    backgroundColor: ColorValues.navyBlueColor,
-                                                                                    text: "View JSA",
-                                                                                    onPressed: () {
-                                                                                      // controller.createNewPermit();
-                                                                                      Get.dialog<void>(ViewJSADialog());
-                                                                                    },
-                                                                                  )),
-                                                                              SizedBox(
-                                                                                width: 10,
-                                                                              ),
-                                                                              Container(
-                                                                                  height: 30,
-                                                                                  child: CustomElevatedButton(
-                                                                                    backgroundColor: ColorValues.navyBlueColor,
-                                                                                    text: "View SOP",
-                                                                                    onPressed: () {
-                                                                                      Get.dialog<void>(ViewSOPDialog());
-                                                                                      // controller.createNewPermit();
-                                                                                    },
-                                                                                  )),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-
-                                                                        SizedBox(
-                                                                          height:
-                                                                              22,
-                                                                        ),
-
-                                                                        /// FILE UPLOAD WIDGET
-                                                                        Container(
-                                                                          height:
-                                                                              Get.height * 0.2,
                                                                           width:
-                                                                              Get.width,
-                                                                          child: Row(
-                                                                              //
-                                                                              children: [
-                                                                                Expanded(
-                                                                                  flex: 2,
-                                                                                  child: FileUploadWidgetWithDropzone(),
-                                                                                ),
-                                                                                Dimens.boxWidth10,
-                                                                                Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
-                                                                              ]),
-                                                                        ),
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList: controller.jobTypeList,
+                                                                              isValueSelected: controller.isJobTypeListSelected.value,
+                                                                              selectedValue: controller.selectedJobType.value,
+                                                                              onValueChanged: controller.onValueChanged,
+                                                                            ),
+                                                                          ),
 
+                                                                          // LoginCustomTextfield(),
+                                                                        ),
                                                                         SizedBox(
-                                                                          height:
-                                                                              15,
+                                                                          width:
+                                                                              20,
                                                                         ),
-                                                                        // Padding(
-                                                                        //   padding: const EdgeInsets.only(left: 10, right: 10),
-                                                                        //   child: Row(
-                                                                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                                                                        //     children: [
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Conducted At Job-Site By:',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Text(
-                                                                        //             'Ramesh Singh',
-                                                                        //             style: Styles.black17,
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //       Spacer(),
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Date & Time',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Text(
-                                                                        //             '17:06:2022 09:30:00',
-                                                                        //             style: Styles.black17,
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //       Spacer(),
-                                                                        //       Column(
-                                                                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                                                                        //         children: [
-                                                                        //           Text(
-                                                                        //             'Upload TBT Attendance Sheet',
-                                                                        //             style: Styles.blackBold17,
-                                                                        //           ),
-                                                                        //           Row(
-                                                                        //             // mainAxisAlignment: MainAxisAlignment.center,
-                                                                        //             children: [
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 width: 200,
-                                                                        //                 decoration: BoxDecoration(
-                                                                        //                   border: Border.all(
-                                                                        //                     color: Color.fromARGB(255, 227, 224, 224),
-                                                                        //                     width: 1,
-                                                                        //                   ),
-                                                                        //                   boxShadow: [
-                                                                        //                     BoxShadow(
-                                                                        //                       color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                        //                       spreadRadius: 2,
-                                                                        //                       blurRadius: 5,
-                                                                        //                       offset: Offset(0, 2),
-                                                                        //                     ),
-                                                                        //                   ],
-                                                                        //                 ),
-                                                                        //                 child: Padding(
-                                                                        //                   padding: const EdgeInsets.all(8.0),
-                                                                        //                   child: Align(
-                                                                        //                     alignment: Alignment.topLeft,
-                                                                        //                     child: Text(
-                                                                        //                       controller.fileName.value == ""
-                                                                        //                           ? 'Upload Photo'
-                                                                        //                           : controller.fileName.value,
-                                                                        //                       maxLines: 3,
-                                                                        //                       textAlign: TextAlign.center,
-                                                                        //                       style: Styles.greyLight14,
-                                                                        //                     ),
-                                                                        //                   ),
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //               Dimens.boxWidth5,
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 child: CustomElevatedButton(
-                                                                        //                   backgroundColor: ColorValues.appDarkBlueColor,
-                                                                        //                   text: "Browse",
-                                                                        //                   onPressed: () async {
-                                                                        //                     final result = await FilePicker.platform.pickFiles();
-                                                                        //                     if (result != null) {
-                                                                        //                       // for (var file in result.files) {
-                                                                        //                       controller.fileName.value = result.files.single.name;
-                                                                        //                       controller.fileBytes = result.files.single.bytes;
-                                                                        //                       //controller.filePath.value = file.;
-                                                                        //                       //  print({"filepathes", fileBytes});
-                                                                        //                       // }
-                                                                        //                     }
-                                                                        //                   },
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //               Container(
-                                                                        //                 height: 45,
-                                                                        //                 child: CustomElevatedButton(
-                                                                        //                   backgroundColor: ColorValues.greenColor,
-                                                                        //                   text: 'Upload',
-                                                                        //                   onPressed: () {
-                                                                        //                     if (controller.fileName.value != "") {
-                                                                        //                       controller
-                                                                        //                           .browseFiles(
-                                                                        //                         fileBytes: controller.fileBytes,
-                                                                        //                       )
-                                                                        //                           .then((value) {
-                                                                        //                         controller.isSuccessDialog();
-
-                                                                        //                         // Fluttertoast.showToast(
-                                                                        //                         //     msg: "file upload  Successfully",
-                                                                        //                         //     fontSize: 16.0);
-                                                                        //                       });
-                                                                        //                     } else {
-                                                                        //                       Fluttertoast.showToast(
-                                                                        //                           msg: "Please Select file...", fontSize: 16.0);
-                                                                        //                     }
-
-                                                                        //                     //  controller.savePmMapping();
-                                                                        //                   },
-                                                                        //                 ),
-                                                                        //               ),
-                                                                        //             ],
-                                                                        //           ),
-                                                                        //         ],
-                                                                        //       ),
-                                                                        //     ],
-                                                                        //   ),
-                                                                        // ),
+                                                                        Text(
+                                                                            'SOP: '),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList: controller.sopPermitList,
+                                                                              isValueSelected: controller.isSopPermitListSelected.value,
+                                                                              selectedValue: controller.selectedSopPermit.value,
+                                                                              onValueChanged: controller.onValueChanged,
+                                                                            ),
+                                                                          ),
+                                                                          // LoginCustomTextfield(),
+                                                                        ),
                                                                       ],
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          40,
+                                                                    ),
+                                                                    Center(
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Container(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
+                                                                                backgroundColor: ColorValues.navyBlueColor,
+                                                                                text: "Create JSA",
+                                                                                onPressed: () {
+                                                                                  // controller.createNewPermit();
+                                                                                  Get.dialog<void>(ViewJSADialog());
+                                                                                },
+                                                                              )),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                10,
+                                                                          ),
+                                                                          Container(
+                                                                              height: 30,
+                                                                              child: CustomElevatedButton(
+                                                                                backgroundColor: ColorValues.navyBlueColor,
+                                                                                text: "View SOP",
+                                                                                onPressed: () {
+                                                                                  Get.dialog<void>(ViewSOPDialog());
+                                                                                  // controller.createNewPermit();
+                                                                                },
+                                                                              )),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+
+                                                                    SizedBox(
+                                                                      height:
+                                                                          22,
+                                                                    ),
+
+                                                                    /// FILE UPLOAD WIDGET
+                                                                    Container(
+                                                                      height:
+                                                                          Get.height *
+                                                                              0.2,
+                                                                      width: Get
+                                                                          .width,
+                                                                      child: Row(
+                                                                          //
+                                                                          children: [
+                                                                            Expanded(
+                                                                              flex: 2,
+                                                                              child: FileUploadWidgetWithDropzone(),
+                                                                            ),
+                                                                            Dimens.boxWidth10,
+                                                                            Expanded(
+                                                                                flex: 8,
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.only(top: 15),
+                                                                                  child: FileUploadDetailsWidgetWeb2(),
+                                                                                )),
+                                                                          ]),
                                                                     ),
                                                                   ],
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
+                                                          ],
                                                         ),
                                                       ),
                                                       Dimens.boxHeight20,
@@ -3165,7 +3072,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     context)
                                                                 .size
                                                                 .width /
-                                                            1.25,
+                                                            1.3,
                                                         margin:
                                                             EdgeInsets.all(20),
                                                         decoration:
@@ -3198,8 +3105,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   Column(
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
+                                                                        padding: const EdgeInsets.only(
                                                                             left:
                                                                                 10,
                                                                             right:
@@ -3228,7 +3134,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       dropdownList: controller.employeeNameList,
                                                                                       isValueSelected: controller.isemployeeNameListSelected.value,
                                                                                       selectedValue: controller.selectedEmployeeNamesList.value,
-                                                                                      onValueChanged: controller.onValueChanged,
+                                                                                      onValueChanged: controller.onValueTbtConductedChanged,
                                                                                     ),
                                                                                   ),
                                                                                 ),
@@ -3256,174 +3162,43 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       ),
 
                                                                       ///TBT Training Attended By
-                                                                      controller.permitId.value <=
-                                                                              0
-                                                                          ? Container(
-                                                                              margin: Dimens.edgeInsets20,
-                                                                              decoration: BoxDecoration(
-                                                                                border: Border.all(color: Colors.grey.withOpacity(.3)),
-                                                                              ),
-                                                                              constraints: BoxConstraints(
-                                                                                maxWidth: 1100,
-                                                                              ),
-                                                                              child: Column(children: [
-                                                                                CustomAppBar(
-                                                                                  title: 'TBT Training Attended By'.tr,
-                                                                                  action: ActionButton(
-                                                                                    label: 'Add Employee',
-                                                                                    icon: Icons.add,
-                                                                                    onPressed: () {
-                                                                                      Get.dialog<void>(AddEmployeeListAlertBox());
-                                                                                    },
-                                                                                    color: ColorValues.appGreenColor,
-                                                                                  ),
+                                                                      // controller.permitId.value <=
+                                                                      //         0
+                                                                      //     ?
+                                                                      Container(
+                                                                        margin:
+                                                                            Dimens.edgeInsets20,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          border:
+                                                                              Border.all(color: Colors.grey.withOpacity(.3)),
+                                                                        ),
+                                                                        constraints:
+                                                                            BoxConstraints(
+                                                                          maxWidth:
+                                                                              1100,
+                                                                        ),
+                                                                        child: Column(
+                                                                            children: [
+                                                                              CustomAppBar(
+                                                                                title: 'TBT Training Attended By'.tr,
+                                                                                action: ActionButton(
+                                                                                  label: 'Add Employee',
+                                                                                  icon: Icons.add,
+                                                                                  onPressed: () {
+                                                                                    Get.dialog<void>(AddEmployeeListAlertBox());
+                                                                                  },
+                                                                                  color: ColorValues.appGreenColor,
                                                                                 ),
-                                                                                Dimens.boxHeight10,
-                                                                                Wrap(children: [
-                                                                                  Column(children: [
-                                                                                    Obx(
-                                                                                      () => SizedBox(
-                                                                                        width: MediaQuery.of(context).size.width * 1.5,
-                                                                                        child: Container(
-                                                                                          height: ((controller.filteredEmployeeNameList.length) * 30) + 110,
-                                                                                          child: Column(
-                                                                                              //
-                                                                                              children: [
-                                                                                                Expanded(
-                                                                                                  child: //
-                                                                                                      Theme(
-                                                                                                    data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                                                    child: ScrollableTableView(
-                                                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                                                      columns: [
-                                                                                                        'id',
-                                                                                                        'name',
-                                                                                                        // 'gender',
-                                                                                                        'Contact No.',
-
-                                                                                                        'action'.tr,
-                                                                                                      ].map((column) {
-                                                                                                        return TableViewColumn(
-                                                                                                          minWidth: Get.width * 0.185,
-                                                                                                          label: column == "id"
-                                                                                                              ? "Employee Id"
-                                                                                                              : column == "name"
-                                                                                                                  ? "Employee Name"
-                                                                                                                  // : column == "gender"
-                                                                                                                  //     ? "Gender"
-                                                                                                                  : column == "Contact No."
-                                                                                                                      ? "Contact No."
-                                                                                                                      : "Action",
-                                                                                                        );
-                                                                                                      }).toList(),
-                                                                                                      rows: //
-                                                                                                          [
-                                                                                                        ...List.generate(
-                                                                                                          ///controller.selectedEquipmentNameIdList
-                                                                                                          controller.filteredEmployeeNameList.length,
-
-                                                                                                          (index) {
-                                                                                                            var employeeNameDetails = controller.filteredEmployeeNameList[index];
-
-                                                                                                            //_jobId = jobDetails?.id;
-
-                                                                                                            // controller.id.value = employeeNameDetails?.id ?? 0;
-                                                                                                            print('Employee Idss5:${controller.id.value}');
-                                                                                                            return [
-                                                                                                              '${employeeNameDetails?.id ?? ''}',
-                                                                                                              '${employeeNameDetails?.name ?? ''}',
-                                                                                                              // '${employeeNameDetails?.gender ?? ''}',
-                                                                                                              '${employeeNameDetails?.mobileNumber ?? ''}',
-
-                                                                                                              'Actions'
-                                                                                                            ];
-                                                                                                          },
-                                                                                                        ),
-                                                                                                      ].map((_inventoryDetailList) {
-                                                                                                        print('ListData = ${_inventoryDetailList}');
-
-                                                                                                        return TableViewRow(
-                                                                                                            onTap: () => {
-                                                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                                },
-                                                                                                            height: 25,
-                                                                                                            cells: _inventoryDetailList.map((value) {
-                                                                                                              return TableViewCell(
-                                                                                                                //key: ,
-                                                                                                                child: (value == 'Actions')
-                                                                                                                    ? Wrap(children: [
-                                                                                                                        TableActionButton(
-                                                                                                                          color: Colors.red,
-                                                                                                                          icon: Icons.delete_outline,
-                                                                                                                          message: 'Remove',
-                                                                                                                          onPress: () {
-                                                                                                                            // controller.showNewPermitListDetails(
-                                                                                                                            //     controller.permitId.value);
-                                                                                                                            controller.removeRow(id: int.tryParse(_inventoryDetailList[0]) ?? 0);
-                                                                                                                            print('InventoryEmployeeList$_inventoryDetailList');
-                                                                                                                          },
-                                                                                                                        ),
-                                                                                                                      ])
-                                                                                                                    : Text(value.toString()),
-                                                                                                              );
-                                                                                                            }).toList());
-                                                                                                      }).toList(),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ]),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ]),
-                                                                                ]),
-                                                                              ]),
-                                                                            )
-                                                                          : Container(
-                                                                              margin: Dimens.edgeInsets20,
-                                                                              decoration: BoxDecoration(
-                                                                                border: Border.all(color: Colors.grey.withOpacity(.3)),
                                                                               ),
-                                                                              constraints: BoxConstraints(
-                                                                                maxWidth: 1100,
-                                                                              ),
-                                                                              child: Column(children: [
-                                                                                CustomAppBar(
-                                                                                  title: 'TBT Training Attended By'.tr,
-                                                                                  action: ActionButton(
-                                                                                    label: 'Add Employee',
-                                                                                    icon: Icons.add,
-                                                                                    onPressed: () {
-                                                                                      Get.dialog<void>(AddEmployeeListAlertBox());
-                                                                                    },
-                                                                                    color: Colors.green,
-                                                                                  ),
-                                                                                ),
-                                                                                Dimens.boxHeight10,
-                                                                                Wrap(children: [
-                                                                                  Column(children: [
-                                                                                    // Row(
-                                                                                    //   mainAxisAlignment:
-                                                                                    //       MainAxisAlignment
-                                                                                    //           .spaceEvenly,
-                                                                                    //   children: [
-                                                                                    //     Text(
-                                                                                    //         'Name'),
-                                                                                    //     Text(
-                                                                                    //         'Designation'),
-                                                                                    //     Text(
-                                                                                    //         'Responsibility'),
-                                                                                    //     Text(
-                                                                                    //         'Competeness'),
-                                                                                    //     Text(
-                                                                                    //         'Remove'),
-                                                                                    //   ],
-                                                                                    // ),
-
-                                                                                    SizedBox(
+                                                                              Dimens.boxHeight10,
+                                                                              Wrap(children: [
+                                                                                Column(children: [
+                                                                                  Obx(
+                                                                                    () => SizedBox(
                                                                                       width: MediaQuery.of(context).size.width * 1.5,
                                                                                       child: Container(
-                                                                                        height: ((controller.listEmployee!.length) * 30) + 200,
+                                                                                        height: ((controller.filteredEmployeeNameList.length) * 30) + 110,
                                                                                         child: Column(
                                                                                             //
                                                                                             children: [
@@ -3434,40 +3209,57 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                   child: ScrollableTableView(
                                                                                                     // paginationController: controller.equipmentNamepaginationController,
                                                                                                     columns: [
-                                                                                                      'empName',
-                                                                                                      'resp',
+                                                                                                      // 'id',
+                                                                                                      'name',
+                                                                                                      // 'gender',
+                                                                                                      'Contact No.',
+                                                                                                      'Responsibility',
+
                                                                                                       'action'.tr,
                                                                                                     ].map((column) {
                                                                                                       return TableViewColumn(
-                                                                                                        minWidth: Get.width * 0.19,
-                                                                                                        label: column == "empName"
-                                                                                                            ? "Employee Name"
-                                                                                                            : column == "resp"
-                                                                                                                ? "Responsibility"
-                                                                                                                : "Action",
+                                                                                                        minWidth: Get.width * 0.175,
+                                                                                                        label:
+                                                                                                            // column == "id"
+                                                                                                            //     ? "Employee Id"
+                                                                                                            //     :
+                                                                                                            column == "name"
+                                                                                                                ? "Employee Name"
+                                                                                                                // : column == "gender"
+                                                                                                                //     ? "Gender"
+                                                                                                                : column == "Contact No."
+                                                                                                                    ? "Contact No."
+                                                                                                                    : column == "Responsibility"
+                                                                                                                        ? "Responsibility"
+                                                                                                                        : "Action",
                                                                                                       );
                                                                                                     }).toList(),
                                                                                                     rows: //
                                                                                                         [
                                                                                                       ...List.generate(
                                                                                                         ///controller.selectedEquipmentNameIdList
-                                                                                                        controller.listEmployee!.length,
+                                                                                                        controller.filteredEmployeeNameList.length,
 
                                                                                                         (index) {
-                                                                                                          var employeeNameDetails = controller.listEmployee![index];
+                                                                                                          var employeeNameDetails = controller.filteredEmployeeNameList[index];
 
                                                                                                           //_jobId = jobDetails?.id;
 
-                                                                                                          // controller.id.value = employeeNameDetails?.empName ?? 0;
-                                                                                                          print('Employee Idss5:${controller.id.value}');
+                                                                                                          // controller.id.value = employeeNameDetails?.id ?? 0;
+                                                                                                          // print('Employee Idss5:${controller.id.value}');
                                                                                                           return [
-                                                                                                            '${employeeNameDetails?.empName ?? ''}',
-                                                                                                            '${employeeNameDetails?.resp ?? ''}',
+                                                                                                            // '${employeeNameDetails?.id ?? ''}',
+                                                                                                            '${employeeNameDetails?.name ?? ''}',
+                                                                                                            // '${employeeNameDetails?.gender ?? ''}',
+                                                                                                            '${employeeNameDetails?.mobileNumber ?? ''}',
+                                                                                                            '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}',
                                                                                                             'Actions'
                                                                                                           ];
                                                                                                         },
                                                                                                       ),
                                                                                                     ].map((_inventoryDetailList) {
+                                                                                                      print('ListData = ${_inventoryDetailList}');
+
                                                                                                       return TableViewRow(
                                                                                                           onTap: () => {
                                                                                                                 print('ZERO = ${_inventoryDetailList[0]}')
@@ -3485,6 +3277,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                         onPress: () {
                                                                                                                           // controller.showNewPermitListDetails(
                                                                                                                           //     controller.permitId.value);
+                                                                                                                          controller.removeRow(id: int.tryParse(_inventoryDetailList[0]) ?? 0);
+                                                                                                                          print('InventoryEmployeeList$_inventoryDetailList');
                                                                                                                         },
                                                                                                                       ),
                                                                                                                     ])
@@ -3498,10 +3292,135 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                             ]),
                                                                                       ),
                                                                                     ),
-                                                                                  ])
+                                                                                  ),
                                                                                 ]),
                                                                               ]),
-                                                                            ),
+                                                                            ]),
+                                                                      )
+                                                                      // :
+                                                                      // Container(
+                                                                      //     margin: Dimens.edgeInsets20,
+                                                                      //     decoration: BoxDecoration(
+                                                                      //       border: Border.all(color: Colors.grey.withOpacity(.3)),
+                                                                      //     ),
+                                                                      //     constraints: BoxConstraints(
+                                                                      //       maxWidth: 1100,
+                                                                      //     ),
+                                                                      //     child: Column(children: [
+                                                                      //       CustomAppBar(
+                                                                      //         title: 'TBT Training Attended By'.tr,
+                                                                      //         action: ActionButton(
+                                                                      //           label: 'Add Employee',
+                                                                      //           icon: Icons.add,
+                                                                      //           onPressed: () {
+                                                                      //             Get.dialog<void>(AddEmployeeListAlertBox());
+                                                                      //           },
+                                                                      //           color: Colors.green,
+                                                                      //         ),
+                                                                      //       ),
+                                                                      //       Dimens.boxHeight10,
+                                                                      //       Wrap(children: [
+                                                                      //         Column(children: [
+                                                                      //           // Row(
+                                                                      //           //   mainAxisAlignment:
+                                                                      //           //       MainAxisAlignment
+                                                                      //           //           .spaceEvenly,
+                                                                      //           //   children: [
+                                                                      //           //     Text(
+                                                                      //           //         'Name'),
+                                                                      //           //     Text(
+                                                                      //           //         'Designation'),
+                                                                      //           //     Text(
+                                                                      //           //         'Responsibility'),
+                                                                      //           //     Text(
+                                                                      //           //         'Competeness'),
+                                                                      //           //     Text(
+                                                                      //           //         'Remove'),
+                                                                      //           //   ],
+                                                                      //           // ),
+
+                                                                      //           SizedBox(
+                                                                      //             width: MediaQuery.of(context).size.width * 1.5,
+                                                                      //             child: Container(
+                                                                      //               height: ((controller.listEmployee!.length) * 30) + 200,
+                                                                      //               child: Column(
+                                                                      //                   //
+                                                                      //                   children: [
+                                                                      //                     Expanded(
+                                                                      //                       child: //
+                                                                      //                           Theme(
+                                                                      //                         data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
+                                                                      //                         child: ScrollableTableView(
+                                                                      //                           // paginationController: controller.equipmentNamepaginationController,
+                                                                      //                           columns: [
+                                                                      //                             'empName',
+                                                                      //                             'resp',
+                                                                      //                             'action'.tr,
+                                                                      //                           ].map((column) {
+                                                                      //                             return TableViewColumn(
+                                                                      //                               minWidth: Get.width * 0.19,
+                                                                      //                               label: column == "empName"
+                                                                      //                                   ? "Employee Name"
+                                                                      //                                   : column == "resp"
+                                                                      //                                       ? "Responsibility"
+                                                                      //                                       : "Action",
+                                                                      //                             );
+                                                                      //                           }).toList(),
+                                                                      //                           rows: //
+                                                                      //                               [
+                                                                      //                             ...List.generate(
+                                                                      //                               ///controller.selectedEquipmentNameIdList
+                                                                      //                               controller.listEmployee!.length,
+
+                                                                      //                               (index) {
+                                                                      //                                 var employeeNameDetails = controller.listEmployee![index];
+
+                                                                      //                                 //_jobId = jobDetails?.id;
+
+                                                                      //                                 // controller.id.value = employeeNameDetails?.empName ?? 0;
+                                                                      //                                 print('Employee Idss5:${controller.id.value}');
+                                                                      //                                 return [
+                                                                      //                                   '${employeeNameDetails?.empName ?? ''}',
+                                                                      //                                   '${employeeNameDetails?.resp ?? ''}',
+                                                                      //                                   'Actions'
+                                                                      //                                 ];
+                                                                      //                               },
+                                                                      //                             ),
+                                                                      //                           ].map((_inventoryDetailList) {
+                                                                      //                             return TableViewRow(
+                                                                      //                                 onTap: () => {
+                                                                      //                                       print('ZERO = ${_inventoryDetailList[0]}')
+                                                                      //                                     },
+                                                                      //                                 height: 25,
+                                                                      //                                 cells: _inventoryDetailList.map((value) {
+                                                                      //                                   return TableViewCell(
+                                                                      //                                     //key: ,
+                                                                      //                                     child: (value == 'Actions')
+                                                                      //                                         ? Wrap(children: [
+                                                                      //                                             TableActionButton(
+                                                                      //                                               color: Colors.red,
+                                                                      //                                               icon: Icons.delete_outline,
+                                                                      //                                               message: 'Remove',
+                                                                      //                                               onPress: () {
+                                                                      //                                                 // controller.showNewPermitListDetails(
+                                                                      //                                                 //     controller.permitId.value);
+                                                                      //                                               },
+                                                                      //                                             ),
+                                                                      //                                           ])
+                                                                      //                                         : Text(value.toString()),
+                                                                      //                                   );
+                                                                      //                                 }).toList());
+                                                                      //                           }).toList(),
+                                                                      //                         ),
+                                                                      //                       ),
+                                                                      //                     ),
+                                                                      //                   ]),
+                                                                      //             ),
+                                                                      //           ),
+                                                                      //         ])
+                                                                      //       ]),
+                                                                      //     ]),
+                                                                      //   ),
                                                                     ],
                                                                   ),
                                                                 ],
@@ -3511,138 +3430,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         ),
                                                       ),
 
-                                                      //  //Permit History
-
-                                                      // controller.historyList!.isEmpty
-                                                      //     ? Dimens.box0
-                                                      //     :
-                                                      //     controller.permitId != null
-                                                      //     ?Container(
-                                                      //         margin: Dimens.edgeInsets20,
-                                                      //         height: ((controller.historyList?.length ?? 0) * 50) + 125,
-                                                      //         decoration: BoxDecoration(
-                                                      //           border: Border.all(
-                                                      //             color: ColorValues.lightGreyColorWithOpacity35,
-                                                      //             width: 1,
-                                                      //           ),
-                                                      //           boxShadow: [
-                                                      //             BoxShadow(
-                                                      //               color: ColorValues.appBlueBackgroundColor,
-                                                      //               spreadRadius: 2,
-                                                      //               blurRadius: 5,
-                                                      //               offset: Offset(0, 2),
-                                                      //             ),
-                                                      //           ],
-                                                      //         ),
-                                                      //         child: Column(
-                                                      //           children: [
-                                                      //             Padding(
-                                                      //               padding: const EdgeInsets.all(10.0),
-                                                      //               child: Row(
-                                                      //                 children: [
-                                                      //                   Text(
-                                                      //                     "Permit History ",
-                                                      //                     style: Styles.blue700,
-                                                      //                   ),
-                                                      //                 ],
-                                                      //               ),
-                                                      //             ),
-                                                      //             Divider(
-                                                      //               color: ColorValues.greyLightColour,
-                                                      //             ),
-                                                      //             // Column(
-                                                      //             //   children: [
-                                                      //             //     Row(
-                                                      //             //       children: [
-                                                      //             //         Text(
-                                                      //             //             "Time Stamp"),
-                                                      //             //         Text(
-                                                      //             //             "Posted By"),
-                                                      //             //         Text("Comment"),
-                                                      //             //         Text(
-                                                      //             //             "Location"),
-                                                      //             //         Text("Status"),
-                                                      //             //       ],
-                                                      //             //     )
-                                                      //             //   ]..addAll([
-                                                      //             //       ...(controller
-                                                      //             //               .historyList?.value ??
-                                                      //             //           [])
-                                                      //             //     ].map((e) {
-                                                      //             //       return Row(
-                                                      //             //         children: [
-                                                      //             //           Text(
-                                                      //             //               "${e?.createdAt??''}"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.createdByName}"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.comment}"),
-                                                      //             //           Text(
-                                                      //             //               "--"),
-                                                      //             //           Text(
-                                                      //             //               "${e?.status_name ??''}"),
-                                                      //             //         ],
-                                                      //             //       );
-                                                      //             //     })),
-                                                      //             // ),
-
-                                                      //             Expanded(
-                                                      //               child: DataTable2(
-                                                      //                 border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-                                                      //                 columns: [
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Time Stamp",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Posted By",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Comment",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Location",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                   DataColumn(
-                                                      //                       label: Text(
-                                                      //                     "Status",
-                                                      //                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                      //                   )),
-                                                      //                 ],
-                                                      //                 rows: List<DataRow>.generate(
-                                                      //                   controller.historyList?.length ?? 0,
-                                                      //                   (index) => DataRow(cells: [
-                                                      //                     DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
-                                                      //                     DataCell(Text('--')),
-                                                      //                     DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
-                                                      //                   ]),
-                                                      //                 ),
-                                                      //               ),
-                                                      //             ),
-                                                      //           ],
-                                                      //         ),
-                                                      //       )
-                                                      //     :Dimens.box0,
-
                                                       ////  commented
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 17),
+                                                                    .only(
+                                                                left: 28,
+                                                                right: 110),
                                                         child: Row(
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Remarks/Comments: '),
+                                                                    'Comments: '),
                                                             Expanded(
                                                               child:
                                                                   _buildWorkPermitCommentTextField_web(
@@ -3697,7 +3496,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                 () {
                                                                               // var jobId = controller.jobModel?.id ?? 0;
                                                                               // print('JobId'),
-                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id, fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
+                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id, activity: controller.pmtaskViewModel?.plan_title, fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
                                                                               // controller.linkToPermit(jobId: controller.jobModel?.id);
                                                                             },
                                                                           )),
@@ -3722,17 +3521,20 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   : Row(
                                                                       children: [
                                                                         Spacer(),
-                                                                        Center(
-                                                                          child: Container(
-                                                                              height: 45,
-                                                                              child: CustomElevatedButton(
-                                                                                backgroundColor: ColorValues.appDarkBlueColor,
-                                                                                text: "Update",
-                                                                                onPressed: () {
-                                                                                  controller.updateNewPermit();
-                                                                                },
-                                                                              )),
-                                                                        ),
+                                                                        controller.newPermitDetailsModel.value?.ptwStatus ==
+                                                                                121
+                                                                            ? Center(
+                                                                                child: Container(
+                                                                                    height: 45,
+                                                                                    child: CustomElevatedButton(
+                                                                                      backgroundColor: ColorValues.appDarkBlueColor,
+                                                                                      text: "Update",
+                                                                                      onPressed: () {
+                                                                                        controller.updateNewPermit(fileIds: dropzoneController.fileIds);
+                                                                                      },
+                                                                                    )),
+                                                                              )
+                                                                            : Dimens.box0,
                                                                         Dimens
                                                                             .boxWidth20,
                                                                         controller.newPermitDetailsModel.value?.ptwStatus ==
@@ -3827,6 +3629,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
 //           child: SizedBox(
 //             width: MediaQuery.of(context).size.width / 1.1,
 //             child: TextField(
+  // style: GoogleFonts.lato(
+  //               textStyle: TextStyle(
+  //                   fontSize: 16.0, height: 1.0, color: Colors.black),
+  //             ),
 //               onTap: () {
 //                 pickDateTime_mobile(context);
 //               },
@@ -3919,6 +3725,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
 //           child: SizedBox(
 //             width: MediaQuery.of(context).size.width / 1.1,
 //             child: TextField(
+  // style: GoogleFonts.lato(
+  //               textStyle: TextStyle(
+  //                   fontSize: 16.0, height: 1.0, color: Colors.black),
+  //             ),
 //               onTap: () {
 //                 pickDateTimeTill_mobile(context);
 //               },
@@ -4153,6 +3963,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               controller: controller.permitDescriptionCtrlr,
               keyboardType: TextInputType.multiline,
               maxLines: 5,
@@ -4255,6 +4069,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
               ? MediaQuery.of(context).size.width / 5
               : MediaQuery.of(context).size.width / 1.0,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             onTap: () {
               position == 0
                   ? pickDateTime_web(context, 0)
@@ -4445,6 +4263,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.permitDescriptionCtrlr,
             keyboardType: TextInputType.multiline,
             maxLines: 5,
@@ -4543,6 +4365,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.titleTextCtrlr,
             keyboardType: TextInputType.multiline,
             autofocus: false,
@@ -4638,6 +4464,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1,
           child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
             controller: controller.workPermitNumberTextCtrlr,
             keyboardType: TextInputType.multiline,
             autofocus: false,
@@ -4716,6 +4546,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
             width: MediaQuery.of(context).size.width / 7,
             height: 30,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onTap: () {
                 pickDateTimeTBT_web(context);
               },
@@ -4724,6 +4558,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
                 filled: true,
+                // hintText: controller.selectedDateTime.value.toString(),
+                // hintText: DateFormat('yyyy-MM-dd HH:mm')
+                //     .format(controller.selectedDateTime.value),
+                hintStyle: TextStyle(
+                  // You can apply any TextStyle properties herex
+                  color: Colors.black,
+                  // fontWeight: FontWeight.bold
+                ),
                 contentPadding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 5.0),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -4758,15 +4600,21 @@ class NewPermitScreen extends GetView<NewPermitController> {
       time.hour,
       time.minute,
     );
-    controller.selectedDateTime.value = dateTime;
-    controller.dateTimeCtrlr
-      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
-      ..selection = TextSelection.fromPosition(
-        TextPosition(
-          offset: controller.dateTimeCtrlr.text.length,
-          affinity: TextAffinity.upstream,
-        ),
-      );
+    // controller.selectedDateTime.value = dateTime;
+    // controller.dateTimeCtrlr
+    //   ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
+    //   ..selection = TextSelection.fromPosition(
+    //     TextPosition(
+    //       offset: controller.dateTimeCtrlr.text.length,
+    //       affinity: TextAffinity.upstream,
+    //     ),
+    //   );
+    controller.dateTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+    controller.tbtDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .format(dateTime.add(Duration(hours: 8)));
+    print('TBT DateTime:${controller.dateTimeCtrlr.text}');
   }
 
   Future<DateTime?> pickDateTBT_web(BuildContext context) async {
@@ -4857,7 +4705,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
         child: SizedBox(
           width: MediaQuery.of(context).size.width / 1,
           child: TextField(
-            // controller: controller.workPermitNumberTextCtrlr,
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
+            controller: controller.workPermitRemarkTextCtrlr,
             keyboardType: TextInputType.multiline,
             autofocus: false,
             maxLines: 5,
@@ -5039,7 +4891,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Select Employee Name',
+          'Select Employee NameHIIIII',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),

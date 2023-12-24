@@ -62,6 +62,7 @@ class HomeController extends GetxController {
   Rx<bool> isInventorySelected = true.obs;
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
+  var selectedSection = 0.obs;
 
   ////
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -83,6 +84,23 @@ class HomeController extends GetxController {
   String get facilityName1 => _facilityName.value;
   Rx<int> selectedIndex = 0.obs;
   var isExpanded = false.obs;
+  Map<String, double> getDataMap() {
+    return {
+      "BM": 5,
+      "PM": 3,
+      "MC": 2,
+      "PTW": 7,
+    };
+  }
+
+  List<Color> getColorList() {
+    return [
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.red,
+    ];
+  }
 
   void toggleExpansion() {
     isExpanded.toggle();
@@ -116,6 +134,14 @@ class HomeController extends GetxController {
     // await getTypePermitList();
 
     super.onInit();
+  }
+
+  void clearStoreData() {
+    homePresenter.clearValue();
+  }
+
+  void onChartTapped(int index) {
+    selectedSection.value = index;
   }
 
   Future<void> getBlocksList(int _facilityId) async {

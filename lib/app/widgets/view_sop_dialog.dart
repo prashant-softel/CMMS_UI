@@ -57,6 +57,8 @@ class ViewSOPDialog extends GetView {
                             child: InkWell(
                                 onTap: () async {
                                   final url = '${_controller.sopData}';
+                                  // final url =
+                                  //     'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
                                   print('SOPUrl:$url');
                                   if (await canLaunch(url)) {
                                     await launch(url);

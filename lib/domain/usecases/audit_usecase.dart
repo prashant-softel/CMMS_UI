@@ -9,4 +9,5 @@ class AuditUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+  void clearValue() async => _repository.clearData(LocalKeys.type);
 }

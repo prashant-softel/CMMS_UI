@@ -649,8 +649,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                       child: Row(
                                                                                         children: [
                                                                                           Text(
-                                                                                            'Name: ',
-                                                                                            style: Styles.black12,
+                                                                                            ' Name: ',
+                                                                                            style: Styles.black14,
                                                                                           ),
                                                                                           Container(
                                                                                             decoration: BoxDecoration(
@@ -676,7 +676,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                       children: [
                                                                                         Text(
                                                                                           '  Email: ',
-                                                                                          style: Styles.black12,
+                                                                                          style: Styles.black14,
                                                                                         ),
                                                                                         Container(
                                                                                           decoration: BoxDecoration(
@@ -703,7 +703,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                       children: [
                                                                                         Text(
                                                                                           'Mobile: ',
-                                                                                          style: Styles.black12,
+                                                                                          style: Styles.black14,
                                                                                         ),
                                                                                         Container(
                                                                                           decoration: BoxDecoration(
@@ -840,11 +840,12 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                           Column(
                                             children: [
                                               Row(
-                                                mainAxisSize: MainAxisSize.min,
+                                                // mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   SizedBox(
                                                     height: 80,
                                                     child: CustomTextField(
+                                                      width: 550,
                                                       textController: controller
                                                           .immediateCorrectiveActionTextController,
                                                       label:
@@ -859,16 +860,52 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                           // SizedBox(
                                           //   width: 210,
                                           // ),
-                                          Column(
+                                          Row(
                                             children: [
-                                              CustomTextField(
-                                                textController: controller
-                                                    .requestManufactureTextController,
-                                                readOnly: true,
-                                                label: 'Request to Supplier: ',
-                                                hintText:
-                                                    '${controller.inventoryDetailsModel.value?.supplierName}',
+                                              Text(
+                                                'Request to Supplier: ',
+                                                style: Styles.black14,
                                               ),
+                                              Container(
+                                                // color: Color.fromARGB(
+                                                //     255, 206, 205, 205),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                  color: Color(0xFE50000),
+                                                  // width: 0.5,
+                                                )),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.070,
+                                                // width: 500,
+                                                // margin: Dimens.edgeInsets5,
+                                                constraints: BoxConstraints(
+                                                    // maxWidth:
+                                                    //     MediaQuery.of(context)
+                                                    //             .size
+                                                    //             .width /
+                                                    //         7,
+                                                    // minWidth: 200,
+                                                    ),
+                                                child: LoginCustomTextfield(
+                                                  width: 400,
+                                                  readOnly: true,
+                                                  ishint:
+                                                      '${controller.inventoryDetailsModel.value?.supplierName}',
+                                                  textController: controller
+                                                      .requestManufactureTextController,
+                                                ),
+                                              ),
+                                              //  CustomTextField(
+                                              //   textController: controller
+                                              //       .requestManufactureTextController,
+                                              //   readOnly: true,
+                                              //   label:
+                                              //       'Request to Supplier: ',
+                                              //   hintText:
+                                              //       '${controller.inventoryDetailsModel.value?.supplierName}',
+                                              // ),
                                             ],
                                           ),
                                         ],

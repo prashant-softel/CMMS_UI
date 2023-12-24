@@ -6,18 +6,15 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
-import 'package:cmms/domain/models/request_order_list.model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class IncidentReportListWeb extends StatefulWidget {
@@ -72,7 +69,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / Incident Report",
+                            child: Text(" / Incident Report Dashboard",
                                 style: Styles.greyMediumLight12),
                           ),
                           // Text(" / Warranty Claim List",
@@ -183,34 +180,36 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -249,6 +248,12 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
@@ -400,12 +405,15 @@ DataColumn2 buildDataColumn(
           SizedBox(
             height: Get.height * 0.05,
             child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               onChanged: (value) {
                 filterText.value = value;
                 //   onSearchCallBack(value);
               },
               textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
                 contentPadding:
@@ -537,18 +545,17 @@ class IncidentReportListDataSource extends DataTableSource {
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
                               color: controller.incidentReportList
-                                              .firstWhere(
-                                                (e) =>
-                                                    e?.id ==
-                                                    incidentReportListDetails!
-                                                        .id,
-                                                orElse: () =>
-                                                    IncidentReportListModel(
-                                                        id: 00),
-                                              )
-                                              ?.status ==
-                                          "Submitted" ||
-                                      controller.incidentReportList
+                                          .firstWhere(
+                                            (e) =>
+                                                e?.id ==
+                                                incidentReportListDetails!.id,
+                                            orElse: () =>
+                                                IncidentReportListModel(id: 00),
+                                          )
+                                          ?.status ==
+                                      "Submitted"
+                                  ? ColorValues.appYellowColor
+                                  : controller.incidentReportList
                                               .firstWhere(
                                                 (e) =>
                                                     e?.id ==
@@ -560,8 +567,8 @@ class IncidentReportListDataSource extends DataTableSource {
                                               )
                                               ?.status ==
                                           "Approved"
-                                  ? ColorValues.appGreenColor
-                                  : ColorValues.appRedColor),
+                                      ? ColorValues.appGreenColor
+                                      : ColorValues.appRedColor),
                           child: Text(
                             '${incidentReportListDetails?.status}',
                             style: Styles.white10.copyWith(
@@ -681,11 +688,10 @@ class IncidentReportListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      // controller.clearStoreData();
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        // controller.clearStoreData();
+        controller.viewIncidentReport(id: incidentReportListDetails?.id);
+      },
     );
   }
 

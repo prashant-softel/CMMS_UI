@@ -25,6 +25,8 @@ class JobListController extends GetxController {
 
   ///
   RxList<JobModel?> jobList = <JobModel?>[].obs;
+  RxList<JobModel?> filteredData = <JobModel?>[].obs;
+
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
@@ -103,11 +105,57 @@ class JobListController extends GetxController {
     }
   }
 
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      jobList.value = filteredData.value;
+      return;
+    }
+    List<JobModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.assignedToName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipmentCat
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.breakdownTime
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.workType?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.raisedByName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    jobList.value = filteredList;
+  }
+
   Future<void> getJobList(
     int userId,
     bool self_view,
   ) async {
     jobList.value = <JobModel>[];
+    filteredData.value = <JobModel>[];
+
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
@@ -124,6 +172,8 @@ class JobListController extends GetxController {
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {
+        filteredData.value = _jobList;
+
         jobList.value = _jobList;
         update(["jobList"]);
         paginationController = PaginationController(
@@ -240,7 +290,7 @@ class JobListController extends GetxController {
       excel.updateCell(
           sheetName,
           CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: i + 1),
-          job?.jobDetails ?? '');
+          job?.name ?? '');
       excel.updateCell(
           sheetName,
           CellIndex.indexByColumnRow(columnIndex: 7, rowIndex: i + 1),

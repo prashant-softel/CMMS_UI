@@ -27,7 +27,7 @@ class CreateJobCardDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Create Job Card',
+          'Job Card Created !!',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -46,9 +46,19 @@ class CreateJobCardDialog extends GetView {
                     thickness: 1,
                   ),
                   Center(
-                    child: Text('${data}',
-                        style: TextStyle(color: Colors.green),
-                        textAlign: TextAlign.center),
+                    child: Row(
+                      children: [
+                        Text('${data}',
+                            style: TextStyle(color: Colors.green),
+                            textAlign: TextAlign.center),
+                        Text(' with Id ',
+                            style: TextStyle(color: Colors.black),
+                            textAlign: TextAlign.center),
+                        Text('${jcId![0]}',
+                            style: TextStyle(color: Colors.green),
+                            textAlign: TextAlign.center),
+                      ],
+                    ),
                   ),
                   // SizedBox(height: 20,),
                   // Row(
@@ -80,26 +90,39 @@ class CreateJobCardDialog extends GetView {
         }),
         actions: [
           Dimens.boxWidth10,
-          Center(
-            child: ElevatedButton(
-              style: Styles.yellowElevatedButtonStyle,
-              onPressed: () {
-                // _controller.getIncidentReportList(
-                //     _controller.facilityId,
-                //     _controller.formattedTodate,
-                //     _controller.formattedFromdate,
-                //     false);
-                //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                Get.offAllNamed(Routes.createMrs, arguments: {
-                  "whereUsedId": jcId![0],
-                  "whereUsed": 4,
-                  "fromActorTypeId": 2,
-                  "to_actor_type_id": 4
-                });
-                Get.back();
-              },
-              child: const Text('Add Mrs'),
-            ),
+          Row(
+            children: [
+              Spacer(),
+              ElevatedButton(
+                style: Styles.darkRedElevatedButtonStyle,
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('Cancel'),
+              ),
+              Spacer(),
+              ElevatedButton(
+                style: Styles.greenElevatedButtonStyle,
+                onPressed: () {
+                  // _controller.getIncidentReportList(
+                  //     _controller.facilityId,
+                  //     _controller.formattedTodate,
+                  //     _controller.formattedFromdate,
+                  //     false);
+                  //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                  Get.offAllNamed(Routes.createMrs, arguments: {
+                    "whereUsedId": jcId![0],
+                    "activity": "",
+                    "whereUsed": 4,
+                    "fromActorTypeId": 2,
+                    "to_actor_type_id": 4
+                  });
+                  Get.back();
+                },
+                child: const Text('Add Mrs'),
+              ),
+              Spacer(),
+            ],
           ),
         ],
       );

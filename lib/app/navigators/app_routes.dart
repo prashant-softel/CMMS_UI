@@ -24,12 +24,16 @@ abstract class Routes {
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
   static const breakdown = _Paths.breakdown;
+  static const misDashboard = _Paths.misDashboard;
+
   static const newPermit = _Paths.newPermit;
   static const newPermitList = _Paths.newPermitList;
   static const warrantyClaimList = _Paths.warrantyClaimList;
   static const preventiveMaintenanceMapping =
       _Paths.preventiveMaintenanceMapping;
   static const calibrationList = _Paths.calibrationList;
+  static const warrantyCertificatesList = _Paths.warrantyCertificatesList;
+
   static const CalibrationHistory = _Paths.calibrationHistory;
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
   static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
@@ -112,6 +116,7 @@ abstract class Routes {
   static const insuranceProvider = _Paths.insuranceProvider;
   static const editMrs = _Paths.editMrs;
   static const moduleCleaningDashboard = _Paths.moduleCleaningDashboard;
+  static const incidentReportDashboard = _Paths.incidentReportDashboard;
   static const moduleCleaningPlanning = _Paths.moduleCleaningPlanning;
   static const roleNotification = _Paths.roleNotification;
   static const setting = _Paths.setting;
@@ -151,6 +156,21 @@ abstract class Routes {
   static const auditListScreen = _Paths.auditListScreen;
   static const audit = _Paths.audit;
   static const createAudit = _Paths.createAudit;
+  static const observationListScreen = _Paths.observationListScreen;
+  static const createObservation = _Paths.createObservation;
+  static const checkListOfObservation = _Paths.checkListOfObservation;
+  static const viewAuditPlan = _Paths.viewAuditPlan;
+  static const statutory = _Paths.statutory;
+  static const wasteData = _Paths.wasteData;
+  static const checklistMisPlan = _Paths.checklistMisPlan;
+  static const createMisPlan = _Paths.createMisPlan;
+  static const viewMisPlan = _Paths.viewMisPlan;
+  static const misTask = _Paths.misTask;
+  static const waterDataListScreen = _Paths.waterDataListScreen;
+  static const waterDataScreen = _Paths.waterDataScreen;
+  static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
+
+  static const complianceScreen = _Paths.complianceScreen;
   static const grievanceList = _Paths.grievanceList;
   static const addGrievance = _Paths.addGrievance;
   static const grievanceCard = _Paths.grievanceCardDetails;
@@ -178,6 +198,8 @@ abstract class _Paths {
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
+  static const misDashboard = '/misDashboard';
+
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
   static const preventiveList =
@@ -190,6 +212,7 @@ abstract class _Paths {
 
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
+  static const warrantyCertificatesList = '/warranty-certificates-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim';
@@ -261,6 +284,7 @@ abstract class _Paths {
   static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';
   static const moduleCleaningDashboard = '/module-cleaning-dashboard';
+  static const incidentReportDashboard = '/incident-report-dashboard';
   static const moduleCleaningPlanning = '/module-cleaning-planning';
   static const roleNotification = '/role-notification';
   static const setting = '/setting';
@@ -302,6 +326,21 @@ abstract class _Paths {
   static const auditListScreen = '/audit-list-screen';
   static const audit = '/audit';
   static const createAudit = '/create-audit';
+  static const observationListScreen = '/observationListScreen';
+  static const createObservation = '/createObservation';
+  static const checkListOfObservation = '/checkListOfObservation';
+  static const viewAuditPlan = '/viewAuditPlan';
+  static const statutory = '/statutory';
+  static const wasteData = '/wasteData';
+  static const checklistMisPlan = '/checklistMisPlan';
+  static const createMisPlan = '/createMisPlan';
+
+  static const viewMisPlan = '/viewMisPlan';
+  static const misTask = '/misTask';
+  static const waterDataListScreen = '/waterDataListScreen';
+  static const complianceScreen = '/complianceScreen';
+  static const waterDataScreen = '/waterDataScreen';
+  static const complianceHistoryScreen = '/complianceHistoryScreen';
   static const grievanceList = '/grievance-list';
   static const addGrievance = '/add-grievance';
   static const grievanceCardDetails = '/grievance-card-details';

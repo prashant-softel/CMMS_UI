@@ -1,4 +1,6 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_presenter.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -42,15 +44,15 @@ class PreventiveController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    Get.toNamed(
-      Routes.preventiveList,
-    );
+    preventivePresenter.clearValue();
+
+    Get.toNamed(Routes.preventiveList, arguments: {'type': 1});
   }
 
   Future<void> checkPoint() async {
-    Get.toNamed(
-      Routes.preventiveCheckPoint,
-    );
+    preventivePresenter.clearValue();
+
+    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 1});
   }
 
   Future<void> pmMapping() async {
@@ -78,11 +80,15 @@ class PreventiveController extends GetxController {
   }
 
   Future<void> importChecklist() async {
-    Get.toNamed(Routes.importInventory, arguments: 3);
+    clearValueimportType();
+    Get.toNamed(Routes.importInventory,
+        arguments: {'importType': AppConstants.kImportChecklist});
   }
 
   Future<void> importPlan() async {
-    Get.toNamed(Routes.importInventory, arguments: 6);
+    clearValueimportType();
+    Get.toNamed(Routes.importInventory,
+        arguments: {'importType': AppConstants.kImportPMPlan});
   }
 
   Future<void> createPmPlan() async {
@@ -101,5 +107,9 @@ class PreventiveController extends GetxController {
     Get.toNamed(
       Routes.pmPlanList,
     );
+  }
+
+  void clearValueimportType() {
+    preventivePresenter.clearValueimportType();
   }
 }

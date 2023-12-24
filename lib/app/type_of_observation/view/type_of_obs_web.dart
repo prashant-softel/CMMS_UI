@@ -60,7 +60,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" /TYPE OBSERVATION LIST",
+                    child: Text(" / OBSERVATION LIST",
                         style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
@@ -98,7 +98,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Type Observation ",
+                                          "Create Observation Type",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -335,7 +335,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
-                                      "Type Of Observation List",
+                                      "Observation List",
                                       style: Styles.blackBold16,
                                     ),
                                   ),

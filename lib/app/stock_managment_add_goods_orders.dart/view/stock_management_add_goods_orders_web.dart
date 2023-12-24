@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -724,9 +722,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   right: 65,
                                   top: 230,
                                   child: DatePickerWidget(
-                                    minDate: DateTime(DateTime.now().year),
-                                    maxDate: DateTime(DateTime.now().year, 13,
-                                        0), // last date of this year
+                                    // last date of this year
                                     controller: DateRangePickerController(),
                                     selectionChanges: (p0) {
                                       print('po valu ${p0.value.toString()}');
@@ -826,11 +822,11 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ],
         ),
         child: Column(children: [
-          Column(
-              children: []..addAll(controller.rowItem.value.map((e) {
-                  return Text(jsonEncode(e));
-                }))),
-          Text(jsonEncode(controller.dropdownMapperData)),
+          // Column(
+          //     children: []..addAll(controller.rowItem.value.map((e) {
+          //         return Text(jsonEncode(e));
+          //       }))),
+          // Text(jsonEncode(controller.dropdownMapperData)),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(

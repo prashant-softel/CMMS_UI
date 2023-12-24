@@ -3,6 +3,7 @@ import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
@@ -42,8 +43,8 @@ class PermitRejectDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 200,
-            width: double.infinity,
+            height: MediaQuery.of(context).size.height / 2.8,
+            width: MediaQuery.of(context).size.width / 1.5,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -59,8 +60,12 @@ class PermitRejectDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 16.0, height: 1.0, color: Colors.black),
+                        ),
                         controller: _controller.rejectCommentTextFieldCtrlr,
-                        maxLines: 4,
+                        maxLines: 6,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(

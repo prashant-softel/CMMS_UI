@@ -1,6 +1,8 @@
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../theme/color_values.dart';
 import '../theme/styles.dart';
@@ -15,6 +17,7 @@ class LoginCustomTextfield extends GetView {
   Function()? ontap;
   Function(dynamic value)? onfieldSubmitted;
   int? maxLine;
+  final bool numberTextField;
   bool enabled;
   TextInputType? keyboardType;
   List<TextInputFormatter>? inputFormatters;
@@ -25,6 +28,7 @@ class LoginCustomTextfield extends GetView {
   LoginCustomTextfield({
     Key? key,
     this.ishint,
+    this.numberTextField = false,
     this.obscureText = false,
     this.textController,
     this.widget,
@@ -45,6 +49,11 @@ class LoginCustomTextfield extends GetView {
       height: maxLine == 1 ? 30 : null,
       width: width,
       child: TextFormField(
+        style: GoogleFonts.lato(
+          textStyle:
+              TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+        ),
+        //TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
         readOnly: readOnly,
         // keyboardType:keyboardType,
         enabled: enabled,
@@ -56,8 +65,13 @@ class LoginCustomTextfield extends GetView {
         obscureText: obscureText,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
+
         decoration: InputDecoration(
-          fillColor: ColorValues.whiteColor,
+          isDense: true,
+          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 12),
+          fillColor: readOnly == true
+              ? Color.fromARGB(255, 206, 205, 205)
+              : Colors.white,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           filled: true,
           errorBorder: OutlineInputBorder(
@@ -75,7 +89,7 @@ class LoginCustomTextfield extends GetView {
             height: 0,
           ),
           errorText: errorController,
-          contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+          // contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
           suffixIcon: widget,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),

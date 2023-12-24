@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -139,98 +140,110 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
                                     ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'Column Visibility',
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'Copy'),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'Excel'),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'PDF'),
-                                    ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor:
+                                    //         ColorValues.appLightBlueColor,
+                                    //     onPressed: () {},
+                                    //     text: 'Column Visibility',
+                                    //   ),
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'Copy'),
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'Excel'),
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'PDF'),
+                                    // ),
                                     Spacer(),
                                     Container(
-                                      width: 200,
-                                      height: 35,
+                                      width: 300,
+                                      height: 40,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
                                           enabledBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           focusedBorder:
                                               const OutlineInputBorder(
                                             borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
                                           ),
                                           contentPadding:
-                                              Dimens.edgeInsets10_0_0_0,
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
-                                          hintStyle: Styles.grey12,
+                                          hintStyle: Styles.grey16,
                                         ),
                                       ),
                                     ),
@@ -255,8 +268,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                 columnSpacing: 10,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
@@ -318,39 +331,43 @@ class _UserListContentWebState extends State<UserListContentWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                onChanged: (value) {
-                  filterText.value = value;
-                  //   onSearchCallBack(value);
-                },
-                textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 header,
-                style: Styles.black16W500,
+                style: Styles.black15W600,
               ),
             ),
           ]),

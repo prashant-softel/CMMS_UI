@@ -146,6 +146,9 @@ class ViewAddInventoryPresenter {
     );
   }
 
+  // void saveValue({String? inventoryId}) async =>
+  //     viewaddInventoryUsecase.saveValue(LocalKeys.inventoryId, inventoryId);
+
   ///
   Future<List<ManufacturerModel>> getmanufacturerList({
     required bool isLoading,
@@ -162,4 +165,6 @@ class ViewAddInventoryPresenter {
     return viewaddInventoryUsecase.getSupplierList(
         isLoading: isLoading, BusinessType: BusinessType);
   }
+
+  Future<String?> getValue() async => await viewaddInventoryUsecase.getValue();
 }

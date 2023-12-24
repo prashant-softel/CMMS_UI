@@ -400,7 +400,7 @@ class EditJobController extends GetxController {
           await editJobPresenter.assignReAssignJob(
         jobId: jobID.value,
         assignedToId: selectedAssignedToId,
-        isLoading: false,
+        isLoading: true,
       );
       if (responseMapJobUpdated != null && responseMapJobUpdated.length > 0) {
         var _jobId = 0;

@@ -455,6 +455,19 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getInventoryAssetsList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryAssetsList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
   Future<ResponseModel> getEquipmentModelList({
     int? facilityId,
     required bool isLoading,
@@ -754,7 +767,16 @@ class DataRepository extends DomainRepository {
         pmPlanApproveJsonString: pmPlanApproveJsonString,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> auditPlanApprovedButton({
+    required String auth,
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditPlanApprovedButton(
+        auth: auth,
+        auditPlanApproveJsonString: auditPlanApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -784,6 +806,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.pmPlanRejectButton(
         auth: auth,
         pmPlanRejectJsonString: pmPlanRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditPlanRejectButton({
+    required String auth,
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditPlanRejectButton(
+        auth: auth,
+        auditPlanRejectJsonString: auditPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> goodsOrderRejectButton({
@@ -825,12 +857,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     cancelPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitCancelRequestButton(
-        auth: auth,
-        cancelPermitJsonString: cancelPermitJsonString,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          cancelPermitJsonString: cancelPermitJsonString,
+          isLoading: isLoading ?? false,
+          jobId: jobId);
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
@@ -876,22 +909,26 @@ class DataRepository extends DomainRepository {
     required String auth,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitExtendButton(
         auth: auth,
         extendPermitJsonString: extendPermitJsonString,
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
 
   Future<ResponseModel> permitCloseButton({
     required String auth,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async =>
       await connectHelper.permitCloseButton(
         auth: auth,
         closePermitJsonString: closePermitJsonString,
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
 
   Future<ResponseModel> rejectJobCard({
@@ -900,6 +937,16 @@ class DataRepository extends DomainRepository {
     rejectJsonString,
   }) async {
     var response = await connectHelper.rejectJobCard(
+        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectcloseJob({
+    auth,
+    bool? isLoading,
+    rejectJsonString,
+  }) async {
+    var response = await connectHelper.rejectcloseJob(
         auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
     return response;
   }
@@ -1068,6 +1115,20 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           categoryId: categoryId,
           frequencyid: frequencyid);
+  Future<ResponseModel> getPreventiveCheckListForAudit(
+          {required String auth,
+          int? facilityId,
+          int? type,
+          bool? isLoading,
+          int? frequencyid,
+          int? categoryId}) async =>
+      await connectHelper.getPreventiveCheckListForAudit(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
 
   Future<ResponseModel> getModuleList({
     required String auth,
@@ -1096,12 +1157,12 @@ class DataRepository extends DomainRepository {
       );
   Future<ResponseModel> getInventoryStatusList({
     required String auth,
-    int? facilityId,
+    // int? facilityId,
     bool? isLoading,
   }) async =>
       await connectHelper.getInventoryStatusList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        // facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
 
@@ -1878,6 +1939,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> approvecloseJob({
+    auth,
+    bool? isLoading,
+    approveJsonString,
+  }) async {
+    var response = await connectHelper.approvecloseJob(
+        auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
+    return response;
+  }
+
 //
   Future<ResponseModel> abandonExecutionButton({
     required String auth,
@@ -2580,6 +2651,18 @@ class DataRepository extends DomainRepository {
         categoryId: categoryId);
   }
 
+  Future<ResponseModel> inventoryListviaCategory(
+      {int? facilityId,
+      required bool isLoading,
+      required String auth,
+      int? categoryId}) async {
+    return await connectHelper.inventoryListviaCategory(
+        isLoading: isLoading,
+        auth: auth,
+        facilityId: facilityId,
+        categoryId: categoryId);
+  }
+
   Future<ResponseModel> startCalibration({
     auth,
     bool? isLoading,
@@ -3011,6 +3094,16 @@ class DataRepository extends DomainRepository {
         createPmPlanJsonString: createPmPlanJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updatePmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePmPlan(
+        auth: auth,
+        createPmPlanJsonString: createPmPlanJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getIncidentRiskTypeList({
     // int? job_type_id,
     required bool isLoading,
@@ -3096,6 +3189,18 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getPmPlanDetails(
       auth: auth,
       pmPlanId: pmPlanId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getAuditPlanDetails({
+    String? auth,
+    int? auditPlanId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getAuditPlanDetails(
+      auth: auth,
+      auditPlanId: auditPlanId,
       isLoading: isLoading,
     );
   }
@@ -3348,12 +3453,14 @@ class DataRepository extends DomainRepository {
     required String auth,
     scheduleId,
     permitId,
+    activity,
     bool? isLoading,
   }) async =>
       await connectHelper.scheduleLinkToPermit(
         auth: auth,
         scheduleId: scheduleId,
         permitId: permitId,
+        activity: activity,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> setPmTask({

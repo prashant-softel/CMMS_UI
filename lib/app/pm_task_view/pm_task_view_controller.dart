@@ -229,21 +229,21 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
   }
 
-  void linkToPermit() async {
-    Map<String, dynamic>? responseMapPermitLinked =
-        await preventiveMaintenanceTaskViewPresenter.scheduleLinkToPermit(
-      permitId: selectedPermitId.value,
-      scheduleId: scheduleId.value,
-      isLoading: false,
-    );
-    if (responseMapPermitLinked != null && responseMapPermitLinked.length > 0) {
-      // var _jobId = responseMapPermitLinked["id"][0];
+  // void linkToPermit() async {
+  //   Map<String, dynamic>? responseMapPermitLinked =
+  //       await preventiveMaintenanceTaskViewPresenter.scheduleLinkToPermit(
+  //     permitId: selectedPermitId.value,
+  //     scheduleId: scheduleId.value,
+  //     isLoading: false,
+  //   );
+  //   if (responseMapPermitLinked != null && responseMapPermitLinked.length > 0) {
+  //     // var _jobId = responseMapPermitLinked["id"][0];
 
-      // isPermitLinked.value = true;
-      Get.back();
-      getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
-    }
-  }
+  //     // isPermitLinked.value = true;
+  //     Get.back();
+  //     getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+  //   }
+  // }
 
   void setPmTask() async {
     Map<String, dynamic>? responseMapStart =
@@ -493,5 +493,25 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   void clearpmTaskValue() {
     preventiveMaintenanceTaskViewPresenter.clearpmTaskValue();
+  }
+
+  void clearStoreTaskData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreTaskWhereUsedData();
   }
 }

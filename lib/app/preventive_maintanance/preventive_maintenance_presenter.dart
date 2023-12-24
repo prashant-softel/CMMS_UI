@@ -6,4 +6,6 @@ class PreventivePresenter {
   PreventiveUsecase preventiveUsecase;
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await preventiveUsecase.getFacilityList();
+  void clearValue() async => preventiveUsecase.clearValue();
+  void clearValueimportType() async => preventiveUsecase.clearValueimportType();
 }

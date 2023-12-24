@@ -37,6 +37,16 @@ class CreatePmPlanPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updatePmPlan({
+    createPmPlanJsonString,
+    required bool isLoading,
+  }) async {
+    return createPmPlanUsecase.updatePmPlan(
+      createPmPlanJsonString: createPmPlanJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForPm(
           {int? facilityId,
           int? type,

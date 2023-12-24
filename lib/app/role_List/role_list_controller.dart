@@ -28,6 +28,8 @@ class RoleListController extends GetxController {
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<RoleModel?>? roleList = <RoleModel?>[].obs;
+  RxList<RoleModel?> filteredData = <RoleModel?>[].obs;
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -43,6 +45,11 @@ class RoleListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var rolelistNumberCtrlr = TextEditingController();
+  Rx<bool> isRoleListInvalid = false.obs;
+
+  Rx<bool> isFormInvalid = false.obs;
+  RxBool isContainerVisible = false.obs;
+
   var featureCtrlr = TextEditingController();
   RoleModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -60,11 +67,14 @@ class RoleListController extends GetxController {
 
   Future<void> getRoleList(bool isLoading) async {
     roleList?.value = <RoleModel>[];
+    filteredData?.value = <RoleModel>[];
+
     final _moduleList =
         await roleListPresenter.getRoleList(isLoading: isLoading);
 
     if (_moduleList != null) {
       roleList!.value = _moduleList.cast<RoleModel?>();
+      filteredData.value = roleList!.value;
       paginationController = PaginationController(
         rowCount: roleList?.length ?? 0,
         rowsPerPage: 10,
@@ -87,7 +97,23 @@ class RoleListController extends GetxController {
     );
   }
 
+  void checkForm() {
+    if (isRoleListInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   Future<bool> createRoleList() async {
+    if (rolelistNumberCtrlr.text.trim() == '') {
+      isRoleListInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (rolelistNumberCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
@@ -128,6 +154,22 @@ class RoleListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      roleList?.value = filteredData.value;
+      return;
+    }
+    List<RoleModel?> filteredList = filteredData
+        .where((item) => (item?.name
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false))
+        .toList();
+    roleList?.value = filteredList;
   }
 
   void isDeleteDialog({String? module_id, String? module}) {
@@ -177,6 +219,10 @@ class RoleListController extends GetxController {
         ],
       ),
     );
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> deleteRoleList(String? module_id) async {

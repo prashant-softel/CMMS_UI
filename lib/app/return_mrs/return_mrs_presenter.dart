@@ -13,4 +13,5 @@ class ReturnMrsListPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  void clearValue() async => returnmrsListUsecase.clearValue();
 }

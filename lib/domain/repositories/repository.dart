@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
+import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_detail_model.dart';
@@ -400,6 +401,7 @@ class Repository {
   Future<Map<String, dynamic>> createNewPermitForPm(
     newPermit,
     pmTaskId,
+    activity,
     bool? isLoading,
   ) async {
     try {
@@ -430,7 +432,7 @@ class Repository {
           var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (pmTaskId != null) {
-            scheduleLinkToPermit(pmTaskId, permitForJob[0], true);
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true);
           }
           return responseMap;
         }
@@ -1108,6 +1110,41 @@ class Repository {
     } catch (error) {
       await _deviceRepository.generateToken();
       print(error.toString());
+    }
+  }
+
+  Future<List<InventoryModel>> getInventoryAssetsList({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInventoryAssetsList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getinventoryList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsoninventoryListModels = jsonDecode(res.data);
+        // print(res.data); `6
+        final List<InventoryModel> _inventoryModelList = jsoninventoryListModels
+            .map<InventoryModel>(
+                (m) => InventoryModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _inventoryModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
@@ -2166,8 +2203,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        Utility.showDialog(res.errorCode.toString() + 'pmPlanRejectButton');
         //return '';
       }
       return Map();
@@ -2566,7 +2602,7 @@ class Repository {
 
       if (!res.hasError) {
         var facilityTypeList = SPVListModelFromJson(res.data);
-        return facilityTypeList;
+        return facilityTypeList.reversed.toList();
       }
       return [];
     } catch (error) {
@@ -2745,7 +2781,10 @@ class Repository {
     }
   }
 
+// inventory list
+
   ///Incident Report List
+
   Future<List<IncidentReportListModel>> getIncidentReportList({
     required int? facility_id,
     String? start_date,
@@ -2767,7 +2806,7 @@ class Repository {
 
       if (!res.hasError) {
         var incidentReportList = incidentReportListModelFromJson(res.data);
-        return incidentReportList;
+        return incidentReportList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
@@ -3162,19 +3201,19 @@ class Repository {
 
   ///Cancel Permit
   Future<Map<String, dynamic>> permitCancelRequestButton(
-    // String? comment,
-    // String? id,
-    cancelPermitJsonString,
-    bool? isLoading,
-  ) async {
+      // String? comment,
+      // String? id,
+      cancelPermitJsonString,
+      bool? isLoading,
+      int? jobId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitCancelRequestButton(
-        auth: auth,
-        cancelPermitJsonString: json.encode(cancelPermitJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          cancelPermitJsonString: json.encode(cancelPermitJsonString),
+          isLoading: isLoading ?? false,
+          jobId: jobId);
       print('PermitCancelRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -3294,15 +3333,16 @@ class Repository {
     // String? id,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitExtendButton(
-        auth: auth,
-        extendPermitJsonString: json.encode(extendPermitJsonString),
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          extendPermitJsonString: json.encode(extendPermitJsonString),
+          isLoading: isLoading ?? false,
+          jobId: jobId);
       print('PermitExtendRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -3323,6 +3363,7 @@ class Repository {
     // String? id,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3331,6 +3372,7 @@ class Repository {
         auth: auth,
         closePermitJsonString: json.encode(closePermitJsonString),
         isLoading: isLoading ?? false,
+        jobId: jobId,
       );
       print('PermitCloseRequestResponse: ${res.data}');
 
@@ -4557,6 +4599,44 @@ class Repository {
     }
   }
 
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForAudit(
+      {int? type,
+      int? facilityId,
+      bool? isLoading,
+      int? frequencyid,
+      int? categoryId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPreventiveCheckListForAudit(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<PreventiveCheckListModel>((m) =>
+                    PreventiveCheckListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckListForPm');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList(
       {int? type,
       int? facilityId,
@@ -4666,14 +4746,14 @@ class Repository {
   }
 
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
-    int? facilityId,
+    // int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryStatusList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        // facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
 
@@ -5465,6 +5545,53 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.rejectJobCard(
+          auth: auth,
+          isLoading: isLoading,
+          rejectJsonString: json.encode(rejectJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> approvecloseJob({bool? isLoading, approveJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approvecloseJob(
+          auth: auth,
+          isLoading: isLoading,
+          approveJsonString: json.encode(approveJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Get.offAllNamed(Routes.jobList);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectcloseJob({bool? isLoading, rejectJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectcloseJob(
           auth: auth,
           isLoading: isLoading,
           rejectJsonString: json.encode(rejectJsonString));
@@ -6875,6 +7002,34 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.inventoryList(
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+          categoryId: categoryId);
+      // print('Inventory List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var inventoryList = inventoryModelFromJson(res.data);
+        return inventoryList.reversed.toList();
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<InventoryModel>> inventoryListviaCategory(
+      {required int? facilityId,
+      required bool isLoading,
+      int? categoryId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.inventoryListviaCategory(
           facilityId: facilityId,
           isLoading: isLoading,
           auth: auth,
@@ -8434,6 +8589,7 @@ class Repository {
 
   Future<Map<String, dynamic>> scheduleLinkToPermit(
     scheduleId,
+    activity,
     permitId,
     bool? isLoading,
   ) async {
@@ -8443,6 +8599,7 @@ class Repository {
         auth: auth,
         scheduleId: scheduleId,
         permitId: permitId,
+        activity: activity,
         isLoading: isLoading ?? false,
       );
 
@@ -8802,12 +8959,8 @@ class Repository {
     }
   }
 
-  Future<List<EmployeeStockReportListModel>?> getEmployeeStockReportList(
-      int? facilityId,
-      bool? isLoading,
-      int? userId,
-      dynamic startDate,
-      dynamic endDate) async {
+  Future<List<PlantStockListModel>?> getEmployeeStockReportList(int? facilityId,
+      bool? isLoading, int? userId, dynamic startDate, dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -8820,16 +8973,15 @@ class Repository {
           endDate: endDate);
 
       if (!res.hasError) {
-        final jsonEmployeeStockReportListModelModels = jsonDecode(res.data);
+        final jsonPlantStockListModels = jsonDecode(res.data);
         // print(res.data);
-        final List<EmployeeStockReportListModel>
-            _EmployeeStockReportListModelList =
-            jsonEmployeeStockReportListModelModels
-                .map<EmployeeStockReportListModel>((m) =>
-                    EmployeeStockReportListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
+        final List<PlantStockListModel> _plantStockListModels =
+            jsonPlantStockListModels
+                .map<PlantStockListModel>((m) =>
+                    PlantStockListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
-        return _EmployeeStockReportListModelList;
+
+        return _plantStockListModels;
       } //
       else {
         Utility.showDialog(
@@ -8891,7 +9043,43 @@ class Repository {
       print('Response Create Goods order : ${resourceData}');
 
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: " Mrs Add Successfully...", fontSize: 16.0);
+        Fluttertoast.showToast(msg: "  Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createMrs');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updatePmPlan(
+    createPmPlanJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePmPlan(
+        auth: auth,
+        createPmPlanJsonString: createPmPlanJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " update Successfully...", fontSize: 16.0);
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -9216,6 +9404,103 @@ class Repository {
       return false;
     }
   }
+
+  Future<AuditPlanDetailModel?> getAuditPlanDetails(
+    int? auditPlanId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAuditPlanDetails(
+        auth: auth,
+        auditPlanId: auditPlanId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final AuditPlanDetailModel _auditPlanDetailModel =
+            auditPlanDetailModelFromJson(res.data);
+        return _auditPlanDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getPmPlanDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> auditPlanApprovedButton(
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditPlanApprovedButton(
+        auth: auth,
+        auditPlanApproveJsonString: auditPlanApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'auditPlanApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> auditPlanRejectButton(
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditPlanRejectButton(
+        auth: auth,
+        auditPlanRejectJsonString: auditPlanRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'auditPlanRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //end
   //end
 }

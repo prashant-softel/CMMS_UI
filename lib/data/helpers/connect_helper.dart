@@ -3,12 +3,15 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
+import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
+import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -20,6 +23,7 @@ import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
+import 'package:cmms/app/widgets/import_file_msg_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
@@ -58,6 +62,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 
+import '../../app/job_card_details/views/widgets/approve_jc_dailog.dart';
+import '../../app/job_card_details/views/widgets/reject_jc_dialog.dart';
 import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -601,6 +607,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getInventoryAssetsList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getEquipmentModelList({
     required bool isLoading,
     required String auth,
@@ -1092,6 +1115,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> auditPlanApprovedButton({
+    required String auth,
+    auditPlanApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveAuditPlan',
+      Request.post,
+      auditPlanApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('pmplanApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditPlanMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -1159,6 +1206,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PMPlanMsgReceiveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditPlanRejectButton({
+    required String auth,
+    auditPlanRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/RejectAuditPlan',
+      Request.post,
+      auditPlanRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditPlanMsgReceiveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -1241,6 +1312,7 @@ class ConnectHelper {
     required String auth,
     cancelPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1257,8 +1329,8 @@ class ConnectHelper {
     print('PermitCancelRequestResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        PermitMessageCancelRequestDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageCancelRequestDialog(
+        data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1349,6 +1421,7 @@ class ConnectHelper {
     required String auth,
     extendPermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1365,7 +1438,10 @@ class ConnectHelper {
     print('PermitExtendResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageExtendDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageExtendDialog(
+      data: parsedJson['message'],
+      jobId: jobId,
+    ));
 
     return responseModel;
   }
@@ -1374,6 +1450,7 @@ class ConnectHelper {
     required String auth,
     closePermitJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
@@ -1390,7 +1467,8 @@ class ConnectHelper {
     print('PermitCloseResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+    Get.dialog<void>(
+        PermitMessageCloseDialog(data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1600,6 +1678,7 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(
       data: parsedJson['message'],
+      jobId: jobId,
       ptwStatus: ptwStatus,
     ));
 
@@ -1737,13 +1816,38 @@ class ConnectHelper {
       int? type,
       int? frequencyid,
       int? categoryId}) async {
-    var categoryIdsParam = (categoryId != 0) ? '&category_id=$categoryId' : 0;
+    var categoryIdsParam =
+        (categoryId != null) ? '&category_id=$categoryId' : 0;
     var frequencyIdsParam =
-        (frequencyid != 0) ? '&frequency_id=$frequencyid' : 0;
+        (frequencyid != null) ? '&frequency_id=$frequencyid' : 0;
 
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type' +
           categoryIdsParam.toString() +
+          frequencyIdsParam.toString(),
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPreventiveCheckListForAudit(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? type,
+      int? frequencyid,
+      int? categoryId}) async {
+    var frequencyIdsParam =
+        (frequencyid != null) ? '&frequency_id=$frequencyid' : 0;
+
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckList?facility_id=$facilityId&type=$type' +
           frequencyIdsParam.toString(),
       Request.get,
       null,
@@ -1797,7 +1901,7 @@ class ConnectHelper {
   Future<ResponseModel> getInventoryStatusList({
     required String auth,
     bool? isLoading,
-    int? facilityId,
+    // int? facilityId,
     int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -3189,7 +3293,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'PM/DeletePMPlan?planId=$planId',
-      Request.delete,
+      Request.put,
       planId,
       isLoading ?? false,
       {
@@ -3386,6 +3490,13 @@ class ConnectHelper {
       },
     );
     print('JobCard Response $responseModel');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ApproveJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb carry forward approved",
+    ));
     return responseModel;
   }
 
@@ -3405,6 +3516,74 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb carry forward reject",
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> approvecloseJob({
+    required String auth,
+    approveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/ApproveJC',
+      Request.put,
+      approveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('JobCard Response $responseModel');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    List<Map<String, dynamic>> parsedList =
+        List<Map<String, dynamic>>.from(parsedJson);
+
+    // Accessing the first item in the list
+    Map<String, dynamic> firstItem = parsedList.isNotEmpty ? parsedList[0] : {};
+
+    // Accessing 'id' key which holds a list
+    List<int> idList = List<int>.from(firstItem['id'] ?? []);
+
+    Get.dialog<void>(ApproveJcJobDialog(
+      message: firstItem['message'],
+      jobId: idList, // parsedJson['id'],
+      tittle: "JOb close approved",
+    ));
+    return responseModel;
+  }
+
+//
+  Future<ResponseModel> rejectcloseJob({
+    required String auth,
+    rejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/RejectJC',
+      Request.put,
+      rejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectJcJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+      tittle: "JOb close reject",
+    ));
     return responseModel;
   }
 
@@ -3713,6 +3892,7 @@ class ConnectHelper {
       required int facilityId}) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
@@ -3725,34 +3905,34 @@ class ConnectHelper {
 
     // Check if the upload was successful
     if (response.statusCode == 200) {
-      if (importType == 1) {
+      if (importType == AppConstants.kImportAsset) {
         importInventory(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true,
             facilityId: facilityId);
-      } else if (importType == 2) {
+      } else if (importType == AppConstants.kImportUser) {
         importUser(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 3) {
+      } else if (importType == AppConstants.kImportChecklist) {
         importCheckpoint(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 4) {
-        importCheckpoint(
+      } else if (importType == AppConstants.kImportBussiness) {
+        importBusiness(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
-      } else if (importType == 5) {
+      } else if (importType == AppConstants.kImportMaterial) {
         importMaterial(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true,
             facilityId: facilityId);
-      } else if (importType == 6) {
+      } else if (importType == AppConstants.kImportPMPlan) {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
@@ -3775,7 +3955,8 @@ class ConnectHelper {
       required bool isLoading,
       required int facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
+      // 'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
+      'Inventory/ImportInventories?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       false,
@@ -3784,6 +3965,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -3802,6 +3989,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -4189,6 +4382,8 @@ class ConnectHelper {
   }) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -4216,6 +4411,8 @@ class ConnectHelper {
   }) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
     request.headers.addAll({'Authorization': 'Bearer $auth'});
@@ -4387,6 +4584,24 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> inventoryList(
+      {required bool isLoading,
+      required String auth,
+      int? facilityId,
+      int? categoryId}) async {
+    var categoryIdsParam = (categoryId != 0) ? '&categoryIds=$categoryId' : '';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facilityId',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> inventoryListviaCategory(
       {required bool isLoading,
       required String auth,
       int? facilityId,
@@ -5125,6 +5340,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updatePmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/UpdatePMPlan',
+      Request.post,
+      createPmPlanJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createRiskType({
     required String auth,
     bool? isLoading,
@@ -5613,6 +5846,7 @@ class ConnectHelper {
     required String auth,
     scheduleId,
     permitId,
+    activity,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -5630,7 +5864,9 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'], taskId: scheduleId //parsedJson['id']
+        data: parsedJson['message'],
+        taskId: scheduleId,
+        activity: activity //parsedJson['id']
         ));
     print('jcId2:${parsedJson['id']}');
     return responseModel;
@@ -5979,6 +6215,13 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson[0]['import_log'];
+    String logString = import.join('\n');
+
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson[0]['message'], importLog: logString));
     return responseModel;
   }
 
@@ -5997,6 +6240,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6015,6 +6264,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6033,6 +6288,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var import = parsedJson['import_log'];
+    String logString = import.join('\n');
+    Get.dialog<void>(
+        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
     return responseModel;
   }
 
@@ -6066,7 +6327,9 @@ class ConnectHelper {
           dynamic startDate,
           dynamic endDate}) async =>
       await apiWrapper.makeRequest(
-        'SMReports/GetEmployeeStockReport?facility_id=${facilityId}&Emp_id=${userId}&StartDate=${endDate}&EndDate=${startDate}',
+        'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=5&actorID=$userId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=',
+
+        // 'SMReports/GetEmployeeStockReport?facility_id=${facilityId}&Emp_id=${userId}&StartDate=${endDate}&EndDate=${startDate}',
         Request.get,
         null,
         isLoading ?? false,
@@ -6172,6 +6435,7 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
+      //  'PMScheduleView/UpdatePMTaskExecution',
       'PMScheduleView/UpdatePMTaskExecution',
       Request.patch,
       updatePMTaskExecutionJsonString,
@@ -6314,6 +6578,7 @@ class ConnectHelper {
     return responseModel;
   }
 
+<<<<<<< HEAD
   Future<ResponseModel> getGrievanceList({
     required String auth,
     bool? isLoading,
@@ -6323,14 +6588,30 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Grievance/GetGrievanceList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
+=======
+  Future<ResponseModel> getAuditPlanDetails({
+    required String? auth,
+    int? auditPlanId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/GetAuditPlanByID?id=$auditPlanId',
+>>>>>>> c91523ab24d3e04b9fbba6494e2ee0f06334a1e1
       Request.get,
       null,
       isLoading ?? false,
       {
+<<<<<<< HEAD
         'Authorization': 'Bearer $auth',
       },
     );
 
+=======
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+>>>>>>> c91523ab24d3e04b9fbba6494e2ee0f06334a1e1
     return responseModel;
   }
 }

@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -139,6 +140,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                           height: 40,
                           margin: Dimens.edgeInsets0_0_16_0,
                           child: TextField(
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
                             decoration: InputDecoration(
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -189,7 +196,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.16,
+                                    minWidth: Get.width * 0.12,
                                   );
                                 }).toList(),
                                 rows: [
@@ -235,12 +242,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.15,
+                                    minWidth: Get.width * 0.12,
                                   );
                                 }).toList(),
                                 rows: controller.calibrationList!
                                     .map((calibrationListListDetails) =>
-                                        TableViewRow(height: 100, cells: [
+                                        TableViewRow(height: 90, cells: [
                                           TableViewCell(
                                               child: Text(
                                             '${calibrationListListDetails?.category_name}',

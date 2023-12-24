@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -160,6 +161,12 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     0.040,
                                                 child: Obx(
                                                   () => TextField(
+                                                    style: GoogleFonts.lato(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 16.0,
+                                                          height: 1.0,
+                                                          color: Colors.black),
+                                                    ),
                                                     controller: controller
                                                         .jobTitleCtrlr,
                                                     autofocus: false,
@@ -249,7 +256,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title: 'Work Type :'),
+                                                  title:
+                                                      'Equipment Categories :'),
                                               Dimens.boxWidth10,
                                               Container(
                                                 decoration: BoxDecoration(
@@ -282,7 +290,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     searchable: true,
                                                     validator: (selectedItems) {
                                                       if (controller
-                                                              .isWorkTypeSelected
+                                                              .isEquipmentCategorySelected
                                                               .value ==
                                                           false) {
                                                         return "Required field";
@@ -295,7 +303,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: controller
-                                                                    .isWorkTypeSelected
+                                                                    .isEquipmentCategorySelected
                                                                     .value ==
                                                                 false
                                                             ? Colors.red
@@ -310,20 +318,25 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     buttonIcon: Icon(
                                                         Icons.arrow_drop_down),
                                                     items: controller
-                                                        .workTypeList
-                                                        .map((e) =>
-                                                            MultiSelectItem(
-                                                                e,
-                                                                e?.workType ??
-                                                                    ''))
+                                                        .equipmentCategoryList
+                                                        .map(
+                                                          (equipCat) =>
+                                                              MultiSelectItem<
+                                                                  InventoryCategoryModel?>(
+                                                            equipCat,
+                                                            equipCat?.name ??
+                                                                '',
+                                                          ),
+                                                        )
                                                         .toList(),
                                                     onConfirm:
                                                         (selectedOptionsList) =>
                                                             {
-                                                      controller.workTypesSelected(
-                                                          selectedOptionsList),
                                                       controller
-                                                              .isWorkTypeSelected
+                                                          .equipmentCategoriesSelected(
+                                                              selectedOptionsList),
+                                                      controller
+                                                              .isEquipmentCategorySelected
                                                               .value =
                                                           selectedOptionsList
                                                               .isNotEmpty,
@@ -527,8 +540,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           Row(
                                             children: [
                                               CustomRichText(
-                                                  title:
-                                                      'Equipment Categories :'),
+                                                  title: 'Work Type :'),
                                               Dimens.boxWidth10,
                                               Container(
                                                 decoration: BoxDecoration(
@@ -561,7 +573,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     searchable: true,
                                                     validator: (selectedItems) {
                                                       if (controller
-                                                              .isEquipmentCategorySelected
+                                                              .isWorkTypeSelected
                                                               .value ==
                                                           false) {
                                                         return "Required field";
@@ -574,7 +586,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: controller
-                                                                    .isEquipmentCategorySelected
+                                                                    .isWorkTypeSelected
                                                                     .value ==
                                                                 false
                                                             ? Colors.red
@@ -589,25 +601,20 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     buttonIcon: Icon(
                                                         Icons.arrow_drop_down),
                                                     items: controller
-                                                        .equipmentCategoryList
-                                                        .map(
-                                                          (equipCat) =>
-                                                              MultiSelectItem<
-                                                                  InventoryCategoryModel?>(
-                                                            equipCat,
-                                                            equipCat?.name ??
-                                                                '',
-                                                          ),
-                                                        )
+                                                        .workTypeList
+                                                        .map((e) =>
+                                                            MultiSelectItem(
+                                                                e,
+                                                                e?.workType ??
+                                                                    ''))
                                                         .toList(),
                                                     onConfirm:
                                                         (selectedOptionsList) =>
                                                             {
+                                                      controller.workTypesSelected(
+                                                          selectedOptionsList),
                                                       controller
-                                                          .equipmentCategoriesSelected(
-                                                              selectedOptionsList),
-                                                      controller
-                                                              .isEquipmentCategorySelected
+                                                              .isWorkTypeSelected
                                                               .value =
                                                           selectedOptionsList
                                                               .isNotEmpty,
@@ -619,7 +626,6 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               ),
                                             ],
                                           ),
-
                                           Dimens.boxHeight10,
                                           Row(
                                             children: [
@@ -679,6 +685,10 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                   ),
                                                   buttonIcon: Icon(
                                                       Icons.arrow_drop_down),
+                                                  initialValue: controller
+                                                      .toolsRequiredToWorkTypeList
+                                                      .toList(), // Select all items initially
+
                                                   items: controller
                                                       .toolsRequiredToWorkTypeList
                                                       .map((e) => MultiSelectItem(
@@ -822,6 +832,12 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 .width),
                                             child: Obx(
                                               () => TextField(
+                                                style: GoogleFonts.lato(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 16.0,
+                                                      height: 1.0,
+                                                      color: Colors.black),
+                                                ),
                                                 controller: controller
                                                     .jobDescriptionCtrlr,
                                                 keyboardType:

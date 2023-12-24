@@ -26,13 +26,12 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
       () => //
           (Responsive.isDesktop(context))
               ? Container(
-                  height: Get.height * 3,
+                  height: Get.height * 0.16,
                   child: //
                       ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: //
                         Container(
-                          
                       padding: EdgeInsets.all(3),
                       child: DottedBorder(
                         borderType: BorderType.RRect,
@@ -66,7 +65,7 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
 
                                       /// CHOOSE FILE BUTTON
                                       SizedBox(
-                                        height: Get.height * 0.05,
+                                        height: Get.height * 0.03,
                                         child: ElevatedButton.icon(
                                           onPressed: () {
                                             controller.selectFiles();
@@ -94,13 +93,20 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                                       Dimens.boxHeight5,
 
                                       /// UPLOAD BUTTON
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            {controller.uploadSelectedFiles()},
-                                        child: const Text('Upload'),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
+                                      SizedBox(
+                                        height: Get.height * 0.03,
+                                        child: ElevatedButton(
+                                          onPressed: () => {
+                                            controller.uploadSelectedFiles()
+                                          },
+                                          child: const Text(
+                                            'Upload',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                          ),
                                         ),
                                       ),
                                     ]),

@@ -95,7 +95,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                         child: Row(
                           children: [
                             Text(
-                              "Masters",
+                              "Preventive Maintenance",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
@@ -128,47 +128,14 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _priventiveList(
-                            tittle: "Check List",
-                            ontap: () {
-                              controller.createChecklist();
-                            }),
-                        //  if (Responsive.isDesktop(context))
-                        _priventiveList(
-                            tittle: "Check Point",
-                            ontap: () {
-                              // Get.toNamed(
-                              //   Routes.preventive_checkPoint,
-                              // );
-                              controller.checkPoint();
-                            }),
-                        // _priventiveList(
-                        //     tittle: "CheckList Mapping",
-                        //     ontap: () {
-                        //       Get.toNamed(
-                        //         Routes.preventiveMaintenanceMapping,
-                        //       );
-                        //       //    controller.pmMapping();
-                        //     }),
-                        _priventiveList(
-                            tittle: "Import Checklist",
-                            ontap: () {
-                              controller.importChecklist();
-                            }),
-
-                        // _priventiveList(
-                        //     tittle: "Create PM Plan",
-                        //     ontap: () {
-                        //       controller.createPmPlan();
-                        //     }),
-                        // _priventiveList(
-                        //     tittle: "View PM Plan",
-                        //     ontap: () {
-                        //       controller.viewPmPlanScreen();
-                        //     }),
-                        _priventiveList(
                             tittle: "PM Plans",
                             ontap: () {
                               controller.pmPlanList();
+                            }),
+                        _priventiveList(
+                            tittle: "Import Plan",
+                            ontap: () {
+                              controller.importPlan();
                             }),
                       ],
                     ),
@@ -184,29 +151,66 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _priventiveList(
-                            tittle: "PM Schedule",
-                            ontap: () {
-                              controller.pmSchedule();
-                            }),
-
-                        _priventiveList(
                             tittle: "PM Tasks",
                             ontap: () {
                               controller.pmTask();
                             }),
-                        _priventiveList(
-                            tittle: "Import Plan",
-                            ontap: () {
-                              controller.importPlan();
-                            }),
-                        // _priventiveList(
-                        //     tittle: "PM Execution",
-                        //     ontap: () {
-                        //       controller.pmExecution();
-                        //     }),
-                        //  _priventiveList(tittle: "Maintenance Report"),
                       ],
-                    )
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Masters",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 40,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        _priventiveList(
+                            tittle: "Check List",
+                            ontap: () {
+                              controller.createChecklist();
+                            }),
+                        _priventiveList(
+                            tittle: "Check Point",
+                            ontap: () {
+                              controller.checkPoint();
+                            }),
+                        _priventiveList(
+                            tittle: "Import Checklist",
+                            ontap: () {
+                              controller.importChecklist();
+                            }),
+                      ],
+                    ),
                   ]),
             ),
           ],

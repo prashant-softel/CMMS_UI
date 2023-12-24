@@ -12,9 +12,14 @@ class LinkToPermitDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
   int? taskId;
+  String? activity;
 
   LinkToPermitDialog(
-      {super.key, this.approveIncidentReportData, this.data, this.taskId});
+      {super.key,
+      this.approveIncidentReportData,
+      this.data,
+      this.taskId,
+      this.activity});
   final NewPermitController controller = Get.find();
 
   @override
@@ -92,6 +97,7 @@ class LinkToPermitDialog extends GetView {
                 //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                 Get.offAllNamed(Routes.createMrs, arguments: {
                   "whereUsedId": taskId,
+                  "activity": activity,
                   "whereUsed": 27,
                   "fromActorTypeId": 2,
                   "to_actor_type_id": 3

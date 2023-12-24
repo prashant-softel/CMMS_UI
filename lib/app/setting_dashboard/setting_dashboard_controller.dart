@@ -28,6 +28,10 @@ class SettingDashboardController extends GetxController {
     selectedFacility.value = value;
   }
 
+  void clearStoreData() {
+    settingDashboardPresenter.clearValue();
+  }
+
   Future<void> getFacilityList() async {
     final _facilityList = await settingDashboardPresenter.getFacilityList();
 

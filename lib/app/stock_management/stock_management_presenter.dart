@@ -7,4 +7,6 @@ class StockManagementDashboardPresenter {
   StockManagementDashboardUsecase stockmanagementdashboardUsecase;
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await stockmanagementdashboardUsecase.getFacilityList();
+  void clearValueimportType() async =>
+      stockmanagementdashboardUsecase.clearValueimportType();
 }

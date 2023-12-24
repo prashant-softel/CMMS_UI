@@ -94,7 +94,7 @@ class IncidentReportListController extends GetxController {
   //Incident Report Grid
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "Id": true,
+    "IR": true,
     "Description": true,
     "Block Name": true,
     "Equipment Name": true,
@@ -107,15 +107,15 @@ class IncidentReportListController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "Id": 153,
-    "Description": 320,
-    "Block Name": 220,
+    "IR": 153,
+    "Description": 220,
+    "Block Name": 200,
     "Equipment Name": 200,
-    "Approved By": 250,
-    "Approved At": 250,
-    "Reported By": 250,
-    "Reported At": 250,
-    "Status": 250,
+    "Approved By": 150,
+    "Approved At": 150,
+    "Reported By": 150,
+    "Reported At": 150,
+    "Status": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -153,7 +153,7 @@ class IncidentReportListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "Id": incidentReportIdFilterText,
+      "IR": incidentReportIdFilterText,
       "Description": descriptionFilterText,
       "Block Name": block_nameFilterText,
       "Equipment Name": equipment_nameFilterText,
@@ -237,8 +237,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading,
-        start_date: startDate, //// "2020-01-01",
-        end_date: endDate, ////   "2023-12-31",
+        start_date: "2020-01-01", //startDate,
+        end_date: "2023-12-31", //endDate,
         facility_id: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');

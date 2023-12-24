@@ -114,7 +114,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 textController: controller.activityCtrlr,
                               )),
                           Spacer(),
-                          Text('Where Used: '),
+                          Text('ID: '),
                           Dimens.boxWidth10,
                           Container(
                               decoration: BoxDecoration(
@@ -250,7 +250,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                   Dimens.boxHeight5,
                                                   Row(
                                                     children: [
-                                                      Text("Approval :"),
+                                                      Text(
+                                                          "Approval required:"),
                                                       Dimens.boxWidth10,
                                                       Text(
                                                           "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")

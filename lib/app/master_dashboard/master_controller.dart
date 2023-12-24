@@ -242,15 +242,51 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> pmSchedule() async {
+    Get.toNamed(
+      Routes.pmSchedule,
+    );
+  }
+
+  Future<void> newWarrantyClaimList() async {
+    Get.toNamed(
+      Routes.newWarrantyClaimList,
+    );
+  }
+
+  Future<void> breakdownMaintenance() async {
+    Get.toNamed(
+      Routes.warrantyClaimListWeb,
+    );
+  }
+
+  Future<void> inventoryStatusScreen() async {
+    Get.toNamed(
+      Routes.inventoryStatusListScreen,
+    );
+  }
+
   Future<void> goToAddUser() async {
     Get.toNamed(Routes.addUser, arguments: {'userId': 0});
   }
 
   Future<void> goToImportUser() async {
-    Get.toNamed(Routes.importInventory, arguments: 2);
+    clearStoreData();
+    Get.toNamed(Routes.importInventory,
+        arguments: {'importType': AppConstants.kImportUser});
   }
 
   Future<void> goToImportBusiness() async {
-    Get.toNamed(Routes.importInventory, arguments: 4);
+    clearStoreData();
+    Get.toNamed(Routes.importInventory,
+        arguments: {'importType': AppConstants.kImportBussiness});
+  }
+
+  void clearStoreData() {
+    mastersPresenter.clearValue();
+  }
+
+  void clearStoreUserIdData() {
+    mastersPresenter.clearStoreUserIdData();
   }
 }

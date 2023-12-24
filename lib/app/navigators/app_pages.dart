@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/Statutory/statutory_binding.dart';
+import 'package:cmms/app/Statutory/views/statutory_screen.dart';
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_binding.dart';
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_screen.dart';
 import 'package:cmms/app/add_incident_report/add_incident_report_binding.dart';
@@ -23,11 +25,22 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
+import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
+import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
+import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_binding.dart';
+import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_screen.dart';
+import 'package:cmms/app/compliance/compliance_binding.dart';
+import 'package:cmms/app/compliance/views/compliance_screen.dart';
+import 'package:cmms/app/compliance_history/compliance_history_binding.dart';
+import 'package:cmms/app/compliance_history/views/compliance_history_screen.dart';
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
+import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
+import 'package:cmms/app/create_mis_plan/view/create_mis_plan_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
+import 'package:cmms/app/create_observation/views/create_observation_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -43,10 +56,18 @@ import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.d
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
 import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
+import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart';
+import 'package:cmms/app/incident_report_dashboard/view/incident_report_dashboard_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
+import 'package:cmms/app/mis/mis_dashboard_binding.dart';
+import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
+import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
+import 'package:cmms/app/mis_list_of_observation/views/observation_list_screen.dart';
+import 'package:cmms/app/mis_task/mis_task_binding.dart';
+import 'package:cmms/app/mis_task/view/mis_task_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
@@ -68,8 +89,11 @@ import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
+import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
+import 'package:cmms/app/view_mis_plan/view/view_mis_plan_screen.dart';
+import 'package:cmms/app/view_mis_plan/view_mis_plan_binding.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
@@ -125,13 +149,22 @@ import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
+import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
+import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
+import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
+import 'package:cmms/app/waste_data/waste_data_binding.dart';
+import 'package:cmms/app/water_data/view/water_data_screen.dart';
+import 'package:cmms/app/water_data/water_data_binding.dart';
+import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
+import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../calibration_certificate/calibration_certificate_binding.dart';
 import '../calibration_certificate/view/calibration_certificate_screen.dart';
 import '../change_password/change_password_binding.dart';
 import '../change_password/view/change_password_screen.dart';
+import '../create_observation/create_observation_binding.dart';
 import '../employee_stock_report/employee_stock_report_binding.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
@@ -218,6 +251,7 @@ import '../source_of_observation/view/source_of_obs_screen.dart';
 import '../transaction_report/transaction_report_list_binding.dart';
 import '../type_of_observation/type_of_obs_binding.dart';
 import '../type_of_observation/view/type_of_obs_screen.dart';
+import '../view_audit_plan/view/view_audit_plan_screen.dart';
 import '../view_request_orders/view/request_goods_orders_view_screen.dart';
 import '../receive_goods_order/receive_goods_order_binding.dart';
 import '../receive_goods_order/receive_goods_order_screen.dart';
@@ -395,6 +429,11 @@ class AppPages {
       binding: CalibrationListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.warrantyCertificatesList,
+      page: WarrantyCertificatesListScreen.new,
+      binding: WarrantyCertificatesListBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.calibrationHistory,
       page: CalibrationHistoryScreen.new,
       binding: CalibrationHistoryBinding(),
@@ -403,6 +442,10 @@ class AppPages {
         name: _Paths.breakdown,
         page: BreakdownMaintenanceScreen.new,
         binding: BreakdownMaintenanceBinding()),
+    GetPage<dynamic>(
+        name: _Paths.misDashboard,
+        page: MisDashboardScreen.new,
+        binding: MisDashboardBinding()),
     GetPage<dynamic>(
         name: _Paths.viewWarrantyClaim,
         page: ViewWarrantyClaimWeb.new,
@@ -756,6 +799,11 @@ class AppPages {
       binding: ModuleCleaningDashboardBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.incidentReportDashboard,
+      page: IncidentReportDashboardScreen.new,
+      binding: IncidentReportDashboardBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.moduleCleaningPlanning,
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
@@ -925,15 +973,77 @@ class AppPages {
       page: CreateAuditScreen.new,
       binding: CreateAuditBinding(),
     ),
-    // GetPage<dynamic>(
-    //   name: _Paths.viewAudit,
-    //   page: ViewAuditDetailScreen.new,
-    //   binding: ViewAuditDetailBinding(),
-    // ),
-    // GetPage<dynamic>(
-    //   name: _Paths.transactionReport,
-    //   page: TransactionStockReportScreen.new,
-    //   binding: TransactionStockReportBinding(),
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.observationListScreen,
+      page: ObservationListScreen.new,
+      binding: ObservationListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createObservation,
+      page: CreateObservationScreen.new,
+      binding: CreateObservationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.checkListOfObservation,
+      page: CheckListOfObservationScreen.new,
+      binding: CheckListOfObservationBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.viewAuditPlan,
+      page: ViewAuditPlanScreen.new,
+      binding: ViewAuditPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.statutory,
+      page: StatutoryScreen.new,
+      binding: StatutoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.wasteData,
+      page: WasteDataScreen.new,
+      binding: WasteDataBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.misTask,
+      page: MisTaskScreen.new,
+      binding: MisTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.checklistMisPlan,
+      page: ChecklistMisPlanScreen.new,
+      binding: ChecklistMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createMisPlan,
+      page: CreateMisPlanScreen.new,
+      binding: CreateMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewMisPlan,
+      page: ViewMisPlanScreen.new,
+      binding: ViewMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.waterDataListScreen,
+      page: WaterDataListScreen.new,
+      binding: WaterDataListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.waterDataScreen,
+      page: WaterDataScreen.new,
+      binding: WaterDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.complianceScreen,
+      page: ComplianceScreen.new,
+      binding: ComplianceBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.complianceHistoryScreen,
+      page: ComplianceHistoryScreen.new,
+      binding: ComplianceHistoryBinding(),
+    ),
   ];
 }

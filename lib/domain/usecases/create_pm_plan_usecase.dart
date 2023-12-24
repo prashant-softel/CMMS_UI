@@ -13,7 +13,7 @@ class CreatePmPlanUsecase {
   Repository repository;
   Future<List<InventoryModel?>?> inventoryList(
       {required bool isLoading, int? facilityId, int? categoryId}) async {
-    return repository.inventoryList(
+    return repository.inventoryListviaCategory(
         isLoading: isLoading, facilityId: facilityId, categoryId: categoryId);
   }
 
@@ -38,6 +38,14 @@ class CreatePmPlanUsecase {
     bool? isLoading,
   }) async =>
       await repository.createPmPlan(
+        createPmPlanJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> updatePmPlan({
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updatePmPlan(
         createPmPlanJsonString,
         isLoading,
       );

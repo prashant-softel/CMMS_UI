@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/file_upload_controller.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
@@ -142,6 +143,12 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                         Text('Description of work done: '),
                         Expanded(
                           child: TextField(
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
                             controller: controller.descriptionOfWorkDoneCtrlr,
                             enabled: controller.isJobCardStarted.value,
                             decoration: InputDecoration(

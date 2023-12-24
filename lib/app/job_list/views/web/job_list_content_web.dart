@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../domain/models/job_model.dart';
 import '../../../theme/color_values.dart';
@@ -172,29 +173,62 @@ class JobListContentWeb extends StatelessWidget {
                               text: 'columnVisibility'.tr,
                             ),
                           ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'Copy'),
+                          // ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'Excel'),
+                          // ),
+                          // Container(
+                          //   height: 35,
+                          //   margin: EdgeInsets.only(left: 10),
+                          //   child: CustomElevatedButton(
+                          //       backgroundColor: ColorValues.appLightBlueColor,
+                          //       onPressed: () {},
+                          //       text: 'PDF'),
+                          // ),
+
+                          Spacer(),
                           Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'Copy'),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'Excel'),
-                          ),
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () {},
-                                text: 'PDF'),
+                            width: 300,
+                            height: 40,
+                            margin: Dimens.edgeInsets0_0_16_0,
+                            child: TextField(
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
+                              ),
+                              onChanged: (value) => controller.search(value),
+                              decoration: InputDecoration(
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.0,
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.0,
+                                  ),
+                                ),
+                                contentPadding: Dimens.edgeInsets05_10,
+                                hintText: 'search'.tr,
+                                hintStyle: Styles.grey16,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -314,11 +348,14 @@ class JobListContentWeb extends StatelessWidget {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
                 onChanged: (value) {
                   filterText.value = value;
                 },
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(
@@ -368,7 +405,7 @@ class JobDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.idFilterText.value.toLowerCase()) &&
-          (job?.jobDetails ?? '')
+          (job?.name ?? '')
               .toLowerCase()
               .contains(controller.jobDetailsFilterText.value.toLowerCase()) &&
           (job?.jobDate ?? '')
@@ -418,7 +455,7 @@ class JobDataSource extends DataTableSource {
       cells: [
         DataCell(
           Text(
-            '${jobDetails?.id ?? ''}',
+            'JOB${jobDetails?.id ?? ''}',
           ),
         ),
         DataCell(
@@ -426,7 +463,7 @@ class JobDataSource extends DataTableSource {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${jobDetails?.jobDetails ?? ''}'),
+              Text('${jobDetails?.name ?? ''}'),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
@@ -498,7 +535,7 @@ class JobDataSource extends DataTableSource {
                           icon: Icons.assignment_ind,
                           message: 'Re-Assign',
                           onPress: () {
-                                                                  controller.clearStoreData();
+                            controller.clearStoreData();
 
                             controller.goToEditJobScreen(
                                 int.tryParse('${jobDetails?.id}'));
@@ -536,7 +573,7 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
-                                           controller.clearStoreData();
+        controller.clearStoreData();
 
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },

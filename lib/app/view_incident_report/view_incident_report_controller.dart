@@ -92,13 +92,27 @@ class ViewIncidentReportController extends GetxController {
       TextEditingController();
 
 //Incident Report List
-  var incidentReportList = <IncidentReportListModel>[];
+  // var incidentReportList = <IncidentReportListModel>[];
 
   ///Incident Report Details
   Rx<IncidentReportDetailsModel?> incidentReportDetailsModel =
       IncidentReportDetailsModel().obs;
   RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
       <IncidentReportDetailsModel?>[].obs;
+
+  RxList<DetailsOfInjuredPersonUpdate?>? detailsOfInjuredPersonList =
+      <DetailsOfInjuredPersonUpdate?>[].obs;
+  RxList<WhyWhyAnalysisUpdate?>? whyWhyAnalysisList =
+      <WhyWhyAnalysisUpdate?>[].obs;
+
+  RxList<RootCauseUpdate?>? rootCauseList = <RootCauseUpdate?>[].obs;
+  RxList<ImmediateCorrectionUpdate?>? immediateCorrectionList =
+      <ImmediateCorrectionUpdate?>[].obs;
+  RxList<ProposedActionPlanUpdate?>? proposedActionPlanList =
+      <ProposedActionPlanUpdate?>[].obs;
+
+  RxList<InvestigationTeamUpdate?>? investiagtionTeamList =
+      <InvestigationTeamUpdate?>[].obs;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -257,6 +271,19 @@ class ViewIncidentReportController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.action_taken_datetime}'))}';
       reportingDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
+
+      ///New Data adding
+      detailsOfInjuredPersonList?.value =
+          incidentReportDetailsModel.value?.injured_person ?? [];
+      whyWhyAnalysisList?.value =
+          incidentReportDetailsModel.value?.why_why_analysis ?? [];
+      rootCauseList?.value = incidentReportDetailsModel.value?.root_cause ?? [];
+      immediateCorrectionList?.value =
+          incidentReportDetailsModel.value?.immediate_correction ?? [];
+      proposedActionPlanList?.value =
+          incidentReportDetailsModel.value?.proposed_action_plan ?? [];
+      investiagtionTeamList?.value =
+          incidentReportDetailsModel.value?.investigation_team ?? [];
     }
   }
 
@@ -382,7 +409,7 @@ class ViewIncidentReportController extends GetxController {
     //Dispose the document.
     document.dispose();
     //Save and launch the file.
-    // await saveAndLaunchFile(bytes, 'incidentReport.pdf');
+    await saveAndLaunchFile(bytes, 'incidentReport.pdf');
   }
 
   PdfLayoutResult drawHeader(

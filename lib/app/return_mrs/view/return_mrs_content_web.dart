@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -177,6 +178,12 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                   height: 35,
                                   margin: Dimens.edgeInsets0_0_16_0,
                                   child: TextField(
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
+                                    ),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -749,12 +756,15 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
                 onChanged: (value) {
                   filterText.value = value;
                   //   onSearchCallBack(value);
                 },
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(
@@ -964,28 +974,21 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: "View",
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.returnMrsView,
                                 arguments: {'mrsId': mrsId});
-                                                    },
+                          },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,
                           icon: Icons.edit,
                           message: 'edit',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.editReturnMrs,
-                                arguments: mrsId);
-                                                    },
+                            Get.toNamed(Routes.editReturnMrs, arguments: mrsId);
+                          },
                         ),
                         // controller.mrsList!
                         //                 .firstWhere(
@@ -1007,14 +1010,11 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.check,
                           message: 'Approve',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.approverReturnMrs,
                                 arguments: {'mrsId': mrsId});
-                                                    },
+                          },
                         ),
                         //     : Dimens.box0,
                         // controller.mrsList!
@@ -1065,15 +1065,12 @@ class ReturnMrsListDataSource extends DataTableSource {
                           icon: Icons.close,
                           message: 'Reject',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
-
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            controller.clearStoreData();
 
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.approverReturnMrs,
                                 arguments: {'mrsId': mrsId});
-                                                    },
+                          },
                         ),
                       ])
                     : Text(value.toString()),
@@ -1082,10 +1079,10 @@ class ReturnMrsListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        controller.clearStoreData();
+        int mrsId = MrsDetails?.id ?? 0;
 
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
+        Get.toNamed(Routes.returnMrsView, arguments: {'mrsId': mrsId});
       },
     );
   }

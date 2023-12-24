@@ -76,7 +76,7 @@ class NewPermitListController extends GetxController {
   RxString RequestByNameFilterText = ''.obs;
   RxString ApprovedByNameFilterText = ''.obs;
   RxString CurrentStatusShortFilterText = ''.obs;
-  RxString PtwStatusFilterText = ''.obs;
+  // RxString PtwStatusFilterText = ''.obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 

@@ -3,6 +3,7 @@ import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/file_upload_controller.dart';
 import '../../../theme/color_values.dart';
@@ -361,6 +362,12 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                   Text('Description of work done: '),
                                   Expanded(
                                     child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
                                       controller:
                                           controller.descriptionOfWorkDoneCtrlr,
                                       // enabled: controller.isJobCardStarted.value,
@@ -420,7 +427,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       // ),
                                     ])
                               : //
-                              controller.jobCardList[0]!.status == 152 ||
+                              controller.jobCardList[0]!.status == 157 ||
+                                      controller.jobCardList[0]!.status ==
+                                          152 ||
                                       controller.jobCardList[0]!.status == 154
                                   ? Row(
                                       mainAxisAlignment:
@@ -500,9 +509,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                           ),
                                           Dimens.boxWidth10,
                                         ])
-                                  : controller.jobCardList[0]!.status == 153 ||
-                                          controller.jobCardList[0]!.status ==
-                                              156
+                                  : controller.jobCardList[0]!.status == 153
+                                      // ||
+                                      //         controller.jobCardList[0]!.status ==
+                                      //             156
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -557,35 +567,35 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               Dimens.boxWidth10,
 
                                               varUserAccessModel.value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          4 &&
-                                                                      e.approve ==
-                                                                          1)
-                                                                  .length >
-                                                              0 &&
-                                                          controller
-                                                                  .jobCardList[
-                                                                      0]!
-                                                                  .status ==
-                                                              153 ||
-                                                      varUserAccessModel.value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          4 &&
-                                                                      e.approve ==
-                                                                          1)
-                                                                  .length >
-                                                              0 &&
-                                                          controller
-                                                                  .jobCardList[0]!
-                                                                  .status ==
-                                                              156
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      4 &&
+                                                                  e.approve ==
+                                                                      1)
+                                                              .length >
+                                                          0 &&
+                                                      controller.jobCardList[0]!
+                                                              .status ==
+                                                          153
+                                                  //         ||
+                                                  // varUserAccessModel.value
+                                                  //             .access_list!
+                                                  //             .where((e) =>
+                                                  //                 e.feature_id ==
+                                                  //                     4 &&
+                                                  //                 e.approve ==
+                                                  //                     1)
+                                                  //             .length >
+                                                  //         0 &&
+                                                  //     controller
+                                                  //             .jobCardList[0]!
+                                                  //             .status ==
+                                                  //         156
                                                   ? Container(
                                                       height: 30,
-                                                      child: CustomElevatedButton(
+                                                      child:
+                                                          CustomElevatedButton(
                                                         backgroundColor:
                                                             ColorValues
                                                                 .appGreenColor,
@@ -606,35 +616,35 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   : Container(),
                                               Dimens.boxWidth10,
                                               varUserAccessModel.value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          4 &&
-                                                                      e.approve ==
-                                                                          1)
-                                                                  .length >
-                                                              0 &&
-                                                          controller
-                                                                  .jobCardList[
-                                                                      0]!
-                                                                  .status ==
-                                                              153 ||
-                                                      varUserAccessModel.value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          4 &&
-                                                                      e.approve ==
-                                                                          1)
-                                                                  .length >
-                                                              0 &&
-                                                          controller
-                                                                  .jobCardList[0]!
-                                                                  .status ==
-                                                              156
+                                                              .access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      4 &&
+                                                                  e.approve ==
+                                                                      1)
+                                                              .length >
+                                                          0 &&
+                                                      controller.jobCardList[0]!
+                                                              .status ==
+                                                          153
+                                                  //          ||
+                                                  // varUserAccessModel.value
+                                                  //             .access_list!
+                                                  //             .where((e) =>
+                                                  //                 e.feature_id ==
+                                                  //                     4 &&
+                                                  //                 e.approve ==
+                                                  //                     1)
+                                                  //             .length >
+                                                  //         0 &&
+                                                  //     controller
+                                                  //             .jobCardList[0]!
+                                                  //             .status ==
+                                                  //         156
                                                   ? Container(
                                                       height: 30,
-                                                      child: CustomElevatedButton(
+                                                      child:
+                                                          CustomElevatedButton(
                                                         backgroundColor:
                                                             ColorValues
                                                                 .rejectColor,
@@ -654,7 +664,59 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       ))
                                                   : Container(),
                                             ])
-                                      : Container(),
+                                      : controller.jobCardList[0]!.status == 156
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              //
+                                              children: [
+                                                  Container(
+                                                      height: 30,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text: "Approve",
+                                                        icon: Icons.add,
+                                                        onPressed: () {
+                                                          // controller
+                                                          //     .createNewPermit();
+                                                          Get.dialog(
+                                                              JobCardApproveDialog(
+                                                            JobCardId:
+                                                                '${controller.jobCardId.value}',
+                                                            type: 1,
+                                                            // ptwStatus:
+                                                            //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                          ));
+                                                        },
+                                                      )),
+                                                  Dimens.boxWidth10,
+                                                  Container(
+                                                      height: 30,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .rejectColor,
+                                                        text: "Reject",
+                                                        icon: Icons.add,
+                                                        onPressed: () {
+                                                          // controller
+                                                          //     .createNewPermit();
+                                                          Get.dialog(
+                                                              JobCardRejectDialog(
+                                                            JobCardId:
+                                                                '${controller.jobCardId.value}',
+                                                            type: 1,
+                                                            // ptwStatus:
+                                                            //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                          ));
+                                                        },
+                                                      ))
+                                                ])
+                                          : Container(),
 
                           Dimens.boxHeight20,
                         ]),

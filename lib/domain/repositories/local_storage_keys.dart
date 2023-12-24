@@ -9,9 +9,13 @@ abstract class LocalKeys {
   static const setUserAccess = 'set-user-access';
   static const jobId = 'jobId';
   static const goId = 'goId';
+  static const inventoryId = 'inventoryId';
+
   static const goType = 'goType';
   static const roType = 'roType';
   static const types = 'types';
+  static const type = 'type';
+  static const auditId = 'auditId';
 
   static const roId = 'roId';
   static const permitId = 'permitId';
@@ -22,9 +26,15 @@ abstract class LocalKeys {
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';
   static const pmPlanId = 'pmPlanId';
+  static const activity = 'activity';
+  static const fromActorTypeId = 'fromActorTypeId';
+  static const toactortypeid = 'to_actor_type_id';
+  static const whereUsed = 'whereUsed';
+
   static const mrsId = 'mrsId';
   static const userDetailId = 'userId';
   static const jobCardId = 'JcId';
+  static const importType = 'importType';
 
   static const refreshToken = 'refresh-token';
   static const userType = 'userType';

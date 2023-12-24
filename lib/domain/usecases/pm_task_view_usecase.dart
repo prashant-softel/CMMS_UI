@@ -27,16 +27,16 @@ class PreventiveMaintenanceTaskViewUsecase {
         selfView,
         isLoading,
       );
-  Future<Map<String, dynamic>?> scheduleLinkToPermit({
-    int? scheduleId,
-    int? permitId,
-    bool? isLoading,
-  }) async =>
-      await repository.scheduleLinkToPermit(
-        scheduleId,
-        permitId,
-        isLoading,
-      );
+  // Future<Map<String, dynamic>?> scheduleLinkToPermit({
+  //   int? scheduleId,
+  //   int? permitId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.scheduleLinkToPermit(
+  //       scheduleId,
+  //       permitId,
+  //       isLoading,a
+  //     );
 
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
@@ -103,4 +103,13 @@ class PreventiveMaintenanceTaskViewUsecase {
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
   void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+  void clearStoreTaskData() async => repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      repository.clearData(LocalKeys.activity);
+  void clearStoreTaskfromActorData() async =>
+      repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      repository.clearData(LocalKeys.whereUsed);
 }

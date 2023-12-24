@@ -4,10 +4,11 @@ import 'package:cmms/app/utils/strings/string_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -15,11 +16,13 @@ import '../theme/styles.dart';
 class PermitCloseDialog extends GetView {
   String? permitCloseDialog;
   String? permitId;
+  int? jobId;
 
-  PermitCloseDialog({super.key, this.permitCloseDialog, this.permitId});
+  PermitCloseDialog(
+      {super.key, this.permitCloseDialog, this.permitId, this.jobId});
   final ViewPermitController controller = Get.find();
-  final FileUploadController dropzoneController = Get.put(FileUploadController());
-
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   Widget build(BuildContext context) {
@@ -136,46 +139,50 @@ class PermitCloseDialog extends GetView {
                               //     )
                               //   ],
                               // ),
-                             
-                             Column(
-                                  children: []..addAll(controller.permitCloseConditionList!.map((element) => Column(
-                                        // mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                           Row(
+
+                              Column(
+                                children: []..addAll(controller
+                                    .permitCloseConditionList!
+                                    .map((element) => Column(
+                                          // mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
                                               children: [
-                                                
-                                                  // Text('${element!.isChecked}'),
+                                                // Text('${element!.isChecked}'),
                                                 // Obx(
-                                                //   () => 
-                                                
-                                                  Checkbox(
-                                                    value: element!.isChecked,
-                                                    onChanged: (bool? value) {
-                                                      // controller.toggleItemSelection(index);
-                                                      setState(() {
-                                                        element.isChecked = !element.isChecked!;
-                                                      },);
-                                                       print('Element Close:${ element.isChecked}');
-                                                    },
-                                                  ),
+                                                //   () =>
+
+                                                Checkbox(
+                                                  value: element!.isChecked,
+                                                  onChanged: (bool? value) {
+                                                    // controller.toggleItemSelection(index);
+                                                    setState(
+                                                      () {
+                                                        element.isChecked =
+                                                            !element.isChecked!;
+                                                      },
+                                                    );
+                                                    print(
+                                                        'Element Close:${element.isChecked}');
+                                                  },
+                                                ),
                                                 // ),
-                                                
-                                          
+
                                                 Expanded(
                                                     child: Text(
-                                                      "${element.name}",
-                                                      style: Styles.black17,
-                                                    ))
+                                                  "${element.name}",
+                                                  style: Styles.black17,
+                                                ))
                                               ],
                                             ),
-                                          
-                                        ],
-                                      ))),
-                                ),
-                             
-                             
+                                          ],
+                                        ))),
+                              ),
+
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
@@ -400,24 +407,26 @@ class PermitCloseDialog extends GetView {
                               //     ),
                               //   ],
                               // ),
-                              
+
                               //  Dimens.boxHeight10,
 
-                            /// FILE UPLOAD WIDGET
-                            Container(
-                              height: Get.height * 0.2,
-                              width: Get.width,
-                              child: Row(
-                                  //
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: FileUploadWidgetWithDropzone(),
-                                    ),
-                                    Dimens.boxWidth10,
-                                    Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
-                                  ]),
-                            ),
+                              /// FILE UPLOAD WIDGET
+                              Container(
+                                height: Get.height * 0.2,
+                                width: Get.width,
+                                child: Row(
+                                    //
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: FileUploadWidgetWithDropzone(),
+                                      ),
+                                      Dimens.boxWidth10,
+                                      Expanded(
+                                          flex: 8,
+                                          child: FileUploadDetailsWidgetWeb2()),
+                                    ]),
+                              ),
                             ],
                           ),
                         ),
@@ -426,6 +435,12 @@ class PermitCloseDialog extends GetView {
                           height: 20,
                         ),
                         TextField(
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
+                          ),
                           controller: controller.closeCommentTextFieldCtrlr,
                           maxLines: 4,
                           decoration: InputDecoration(
@@ -486,7 +501,11 @@ class PermitCloseDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                controller.permitCloseButton(permitId: permitId, closeFileIds: dropzoneController.fileIds);
+                controller.permitCloseButton(
+                  permitId: permitId,
+                  closeFileIds: dropzoneController.fileIds,
+                  jobId: jobId,
+                );
                 Get.back();
               },
               child: const Text('Close Permit'),

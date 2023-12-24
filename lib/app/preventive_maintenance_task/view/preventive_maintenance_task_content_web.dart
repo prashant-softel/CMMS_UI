@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -180,33 +181,34 @@ class _PreventiveMaintenanceTaskContentWebState
                                         ),
                                       ),
                                     ),
-                                    itemBuilder: (BuildContext context) => <
-                                        PopupMenuEntry<String>>[]..addAll(
-                                          controller
-                                              .columnVisibility.value.entries
-                                              .map((e) {
-                                        return PopupMenuItem<String>(
-                                            child: ValueListenableBuilder(
-                                                valueListenable:
-                                                    controller.columnVisibility,
-                                                builder:
-                                                    (context, value, child) {
-                                                  return Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        value: value[e.key],
-                                                        onChanged: (newValue) {
-                                                          controller
-                                                              .setColumnVisibility(
-                                                                  e.key,
-                                                                  newValue!);
-                                                        },
-                                                      ),
-                                                      Text(e.key),
-                                                    ],
-                                                  );
-                                                }));
-                                      })),
+                                    itemBuilder: (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                     onSelected: (String value) {
                                       // Handle column selection
                                     },
@@ -217,6 +219,12 @@ class _PreventiveMaintenanceTaskContentWebState
                                     height: 35,
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
                                       decoration: InputDecoration(
                                         enabledBorder: const OutlineInputBorder(
                                           borderSide: const BorderSide(
@@ -362,12 +370,15 @@ class _PreventiveMaintenanceTaskContentWebState
             SizedBox(
               height: Get.height * 0.05,
               child: TextField(
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
                 onChanged: (value) {
                   filterText.value = value;
                   //   onSearchCallBack(value);
                 },
                 textAlign: TextAlign.left,
-                style: TextStyle(height: 1.0),
                 decoration: InputDecoration(
                   hintText: 'Filter',
                   contentPadding: EdgeInsets.fromLTRB(
@@ -489,7 +500,7 @@ class PmTaskDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${pmTaskDetails?.id}',
+                        'PMT${pmTaskDetails?.id}',
                       ),
                       Dimens.boxHeight5,
                       Align(

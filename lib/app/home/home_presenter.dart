@@ -16,6 +16,8 @@ class HomePresenter {
     return await homeUsecase.generateToken();
   }
 
+  void clearValue() async => homeUsecase.clearValue();
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,

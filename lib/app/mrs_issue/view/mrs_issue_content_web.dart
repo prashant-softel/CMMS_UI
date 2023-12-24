@@ -175,7 +175,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(
-                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
+                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}${controller.mrsDetailsModel.value?.whereUsedRefID ?? ""}",
                                       style: Styles.blue17),
                                 ],
                               )
@@ -259,6 +259,13 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                     )),
                                     DataColumn(
                                         label: Text(
+                                      "Serial Number",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
                                       "Issued Qyt.",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -299,6 +306,56 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                 .cmmrsItems![index]
                                                 .requested_qty
                                                 .toString())),
+                                            controller
+                                                        .mrsDetailsModel
+                                                        .value!
+                                                        .cmmrsItems![index]
+                                                        .asset_type ==
+                                                    "Spare"
+                                                ? DataCell(
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Container(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                offset:
+                                                                    const Offset(
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
+                                                                blurRadius: 5.0,
+                                                                spreadRadius:
+                                                                    1.0,
+                                                              ),
+                                                            ],
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                          child:
+                                                              LoginCustomTextfield(
+                                                            textController: controller
+                                                                    .mrsDetailsModel
+                                                                    .value!
+                                                                    .cmmrsItems![
+                                                                        index]
+                                                                    .serial_number_controller
+                                                                as TextEditingController,
+                                                          )),
+                                                    ),
+                                                  )
+                                                : DataCell(Text("")),
                                             DataCell(
                                               Padding(
                                                 padding:

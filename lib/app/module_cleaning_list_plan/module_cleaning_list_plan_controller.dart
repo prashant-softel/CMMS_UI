@@ -30,7 +30,6 @@ class ModuleCleaningListPlanController extends GetxController {
   bool openStartDatePicker = false;
   var startDateTimeCtrlr = TextEditingController();
 
-
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
@@ -96,6 +95,8 @@ class ModuleCleaningListPlanController extends GetxController {
 
   Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading) async {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
+    filteredData.value = <ModuleCleaningListPlanModel>[];
+
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
       isLoading: true,
@@ -108,6 +109,8 @@ class ModuleCleaningListPlanController extends GetxController {
     );
 
     if (moduleCleaningListPlan.isNotEmpty) {
+      filteredData.value = moduleCleaningListPlan.value;
+
       moduleCleaningListModel = moduleCleaningListPlan[0];
       var newPermitListJson = moduleCleaningListModel?.toJson();
       moduleCleaningListTableColumns.value = <String>[];
@@ -115,24 +118,46 @@ class ModuleCleaningListPlanController extends GetxController {
         moduleCleaningListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      moduleCleaningListPlan.value = filteredData;
+      moduleCleaningListPlan.value = filteredData.value;
       return;
     }
-
-    moduleCleaningListPlan.value = filteredData
+    List<ModuleCleaningListPlanModel> filteredList = filteredData
         .where((item) =>
-            item.description!.toLowerCase().contains(keyword.toLowerCase()))
+            (item.title
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.noOfCleaningDays
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.createdBy
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.frequency
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.planId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['stock_Mangement_Date']);
+    moduleCleaningListPlan.value = filteredList;
   }
 }

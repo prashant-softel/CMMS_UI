@@ -76,11 +76,12 @@ class ViewPermitPresenter {
   Future<Map<String, dynamic>?> permitCloseButton({
     closePermitJsonString,
     required bool isLoading,
+    int? jobId,
   }) async {
     return viewPermitUsecase.permitCloseButton(
-      closePermitJsonString: closePermitJsonString,
-      isLoading: isLoading,
-    );
+        closePermitJsonString: closePermitJsonString,
+        isLoading: isLoading,
+        jobId: jobId);
   }
 
   Future<CreateSOPModel?> browseFiles(
@@ -111,19 +112,23 @@ class ViewPermitPresenter {
   Future<Map<String, dynamic>?> permitCancelRequestButton({
     cancelPermitJsonString,
     required bool isLoading,
+    int? jobId,
   }) async {
     return viewPermitUsecase.permitCancelRequestButton(
       cancelPermitJsonString: cancelPermitJsonString,
       isLoading: isLoading,
+      jobId: jobId,
     );
   }
 
   Future<Map<String, dynamic>?> permitExtendButton({
     extendPermitJsonString,
     required bool isLoading,
+    int? jobId,
   }) async {
     return viewPermitUsecase.permitExtendButton(
       extendPermitJsonString: extendPermitJsonString,
+      jobId: jobId,
       isLoading: isLoading,
     );
   }
@@ -400,4 +405,10 @@ class ViewPermitPresenter {
 
   Future<String?> getJobIdValue() async =>
       await viewPermitUsecase.getJobIdValue();
+
+  void clearValue() async => viewPermitUsecase.clearValue();
+  void clearTypeValue() async => viewPermitUsecase.clearTypeValue();
+  void clearisCheckedValue() async => viewPermitUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async => viewPermitUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async => viewPermitUsecase.clearpmTaskValue();
 }

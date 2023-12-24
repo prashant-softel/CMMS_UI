@@ -21,6 +21,7 @@ class SPVListController extends GetxController {
   SPVListModel? selectedItemupdate;
   Rx<bool> isFormInvalid = false.obs;
   RxBool isCheckedRequire = false.obs;
+  RxBool isContainerVisible = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
@@ -53,6 +54,7 @@ class SPVListController extends GetxController {
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   RxList<SPVListModel> SPVList = <SPVListModel>[].obs;
+  RxList<SPVListModel> BufferSPVList = <SPVListModel>[].obs;
   Rx<bool> isSPVListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -65,19 +67,47 @@ class SPVListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      SPVList.value = filteredData;
+      SPVList.value = BufferSPVList.value;
       return;
     }
-
-    SPVList.value = filteredData
-        .where((item) => item.name!
-            .toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
-        .toList();
+    List<SPVListModel> filteredList = BufferSPVList.where((item) =>
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) // Add this condition to filter by searchId
+        ).toList();
+    SPVList.value = filteredList;
   }
+  // void search(String keyword) {
+  //   print('Keyword: $keyword');
+
+  //   if (keyword.isEmpty) {
+  //     SPVList.value = filteredData.toList();
+  //     print('SPVList length (empty keyword): ${SPVList.length}');
+  //     return;
+  //   }
+
+  //   SPVList.value = filteredData
+  //       .where((item) =>
+  //           item.name
+  //               ?.toString()
+  //               .toLowerCase()
+  //               .contains(keyword.toLowerCase()) ??
+  //           false)
+  //       .toList();
+
+  //   print('SPVList length (non-empty keyword): ${SPVList.length}');
+  // }
 
   //Facility list / demo plant
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -105,6 +135,7 @@ class SPVListController extends GetxController {
 
   Future<void> getSPVList() async {
     SPVList.value = <SPVListModel>[];
+    BufferSPVList.value = <SPVListModel>[];
     final _spvList = await sPVListPresenter.getSPVList(
       isLoading: true,
       // categoryIds: categoryIds,
@@ -113,15 +144,20 @@ class SPVListController extends GetxController {
     );
     for (var facilityType_list in _spvList) {
       SPVList.add(facilityType_list);
+      BufferSPVList.add(facilityType_list);
     }
     // selectedSopPermit.value = _SPVList[0].name ?? '';
-  
+
     // supplierNameList = _supplierNameList;
     SPVListPaginationController = PaginationController(
       rowCount: SPVList.length,
       rowsPerPage: 10,
     );
     update(['SPV_list']);
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<bool> createSPVlist() async {
@@ -224,7 +260,7 @@ class SPVListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: business,
+                    text: "[$business]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,

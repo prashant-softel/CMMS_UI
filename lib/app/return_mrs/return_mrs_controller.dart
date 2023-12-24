@@ -104,4 +104,8 @@ class ReturnMrsListController extends GetxController {
       }
     }
   }
+
+  void clearStoreData() {
+    returnmrsListPresenter.clearValue();
+  }
 }

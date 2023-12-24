@@ -26,7 +26,7 @@ class PreventiveCheckPointController extends GetxController {
   Rx<String> selectedchecklist = ''.obs;
   Rx<bool> isSelectedchecklist = true.obs;
   int facilityId = 0;
-  int type = 1;
+  Rx<int> type = 0.obs;
   var checkPointCtrlr = TextEditingController();
   var minRangeCtrlr = TextEditingController();
   var maxRangeCtrlr = TextEditingController();
@@ -49,17 +49,40 @@ class PreventiveCheckPointController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
+    try {
+      await setType();
 
-      Future.delayed(Duration(seconds: 1), () {
-        getPreventiveCheckList(
-          facilityId,
-          type,
-        );
-      });
-    });
-    super.onInit();
+      if (type.value != 0) {
+        facilityIdStreamSubscription =
+            homecontroller.facilityId$.listen((event) {
+          facilityId = event;
+          Future.delayed(Duration(seconds: 2), () {
+            getPreventiveCheckList(facilityId, type.value);
+          });
+        });
+      }
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setType() async {
+    try {
+      // Read jobId
+      String? _type = await preventiveCheckPointPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        preventiveCheckPointPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   var checkpointType = ''.obs;
@@ -140,8 +163,10 @@ class PreventiveCheckPointController extends GetxController {
         checkpointJsonString: checkpointJsonString,
         isLoading: true,
       );
-      return true;
-        }
+      if (rsponse != null) {
+        return true;
+      }
+    }
     return false;
   }
 

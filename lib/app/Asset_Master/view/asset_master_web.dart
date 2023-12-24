@@ -473,402 +473,390 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                   //   ),
                   // )
                   //     : Container(),
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
-                              .length >
-                          0
-                      ? Expanded(
-                          child: Container(
-                            width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30),
-                            height: Get.height / 1.1,
-                            child: Card(
-                              color: Color.fromARGB(255, 251, 252, 253),
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomAppBar(
-                                    title: 'Material Master',
-                                    action: Row(children: [
-                                      Dimens.boxWidth10,
-                                      ActionButton(
-                                        icon: Icons.add,
-                                        label: 'Add Material'.tr,
-                                        onPressed: () {},
-                                        color: ColorValues.appGreenColor,
+                  // varUserAccessModel.value.access_list!
+                  //             .where((e) => e.feature_id == 5 && e.view == 0)
+                  //             .length >
+                  //         0
+                  //     ?
+                  Expanded(
+                    child: Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(left: 10, top: 30),
+                      height: Get.height / 1.1,
+                      child: Card(
+                        color: Color.fromARGB(255, 251, 252, 253),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomAppBar(
+                              title: 'Material Master',
+                              action: Row(children: [
+                                Dimens.boxWidth10,
+                                ActionButton(
+                                  icon: Icons.add,
+                                  label: 'Add Material'.tr,
+                                  onPressed: () {},
+                                  color: ColorValues.appGreenColor,
+                                ),
+                                Dimens.boxWidth10,
+                              ]),
+                            ),
+                            Divider(
+                              color: ColorValues.greyLightColour,
+                            ),
+                            Row(
+                              children: [
+                                // Container(
+                                //   height: 45,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //       backgroundColor:
+                                //           ColorValues.appLightBlueColor,
+                                //       onPressed: () {
+                                //         FlutterClipboard.copy(controller
+                                //                 .moduleList![0]
+                                //                 .toString())
+                                //             .then((value) {
+                                //           print("copy data");
+                                //         });
+                                //       },
+                                //       text: 'Copy'),
+                                // ),
+                                // Container(
+                                //   height: 45,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //       backgroundColor:
+                                //           ColorValues.appLightBlueColor,
+                                //       onPressed: () {},
+                                //       text: 'Excel'),
+                                // ),
+                                // Container(
+                                //   height: 45,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //       backgroundColor:
+                                //           ColorValues.appLightBlueColor,
+                                //       onPressed: () {},
+                                //       text: 'PDF'),
+                                // ),
+                                // Container(
+                                //   height: 45,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //     backgroundColor:
+                                //         ColorValues.appLightBlueColor,
+                                //     onPressed: () {},
+                                //     text: 'columnVisibility'.tr,
+                                //   ),
+                                // )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            controller.moduleList!.isEmpty
+                                ? Container(
+                                    height: Get.height / 1.85,
+                                    margin: Dimens.edgeInsets20,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
                                       ),
-                                      Dimens.boxWidth10,
-                                    ]),
-                                  ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  Row(
-                                    children: [
-                                      // Container(
-                                      //   height: 45,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {
-                                      //         FlutterClipboard.copy(controller
-                                      //                 .moduleList![0]
-                                      //                 .toString())
-                                      //             .then((value) {
-                                      //           print("copy data");
-                                      //         });
-                                      //       },
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 45,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 45,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
-                                      // Container(
-                                      //   height: 45,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //         ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'columnVisibility'.tr,
-                                      //   ),
-                                      // )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  controller.moduleList!.isEmpty
-                                      ? Container(
-                                          height: Get.height / 1.85,
-                                          margin: Dimens.edgeInsets20,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "MDM Code",
-                                              "Material Name",
-                                              "AC/DC",
-                                              "Material Type",
-                                              "Material Category ",
-                                              "Min. Required Qty ",
-                                              "Min. Reorder Qty ",
-                                              "Description",
-                                              "Unit Of Measurement",
-                                              "Approval Required"
-                                                  "Action"
-                                            ].map((column) {
-                                              if (column == "Action") {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width *
-                                                      0.08, // Set the desired width for the "Action" column
-                                                );
-                                              } else if (column ==
-                                                      "Description" ||
-                                                  column == "Material Name") {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width *
-                                                      0.25, // Set the desired width for the "Description" column
-                                                );
-                                              } else {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width * 0.16,
-                                                );
-                                              }
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.moduleList?.length ??
-                                                    0,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 60,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        )
-                                      : Container(
-                                          height: Get.height / 2.08,
-                                          margin: Dimens.edgeInsets20,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: ScrollableTableView(
-                                            paginationController:
-                                                controller.paginationController,
-                                            columns: [
-                                              "MDM Code",
-                                              "Material Name",
-                                              "AC/DC",
-                                              "Material Type",
-                                              "Material Category ",
-                                              "Min. Required Qty ",
-                                              "Min. Reorder Qty ",
-                                              "Description",
-                                              "Unit Of Measurement",
-                                              "Approval Required",
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ScrollableTableView(
+                                      columns: [
+                                        "MDM Code",
+                                        "Material Name",
+                                        "AC/DC",
+                                        "Material Type",
+                                        "Material Category ",
+                                        "Min. Required Qty ",
+                                        "Min. Reorder Qty ",
+                                        "Description",
+                                        "Unit Of Measurement",
+                                        "Approval Required"
+                                            "Action"
+                                      ].map((column) {
+                                        if (column == "Action") {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width *
+                                                0.08, // Set the desired width for the "Action" column
+                                          );
+                                        } else if (column == "Description" ||
+                                            column == "Material Name") {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width *
+                                                0.25, // Set the desired width for the "Description" column
+                                          );
+                                        } else {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width * 0.16,
+                                          );
+                                        }
+                                      }).toList(),
+                                      rows: [
+                                        ...List.generate(
+                                          controller.moduleList?.length ?? 0,
+                                          (index) {
+                                            return [
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                              '',
+                                            ];
+                                          },
+                                        ),
+                                      ].map((record) {
+                                        return TableViewRow(
+                                          height: 60,
+                                          cells: record.map((value) {
+                                            return TableViewCell(
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  )
+                                : Container(
+                                    height: Get.height / 2.08,
+                                    margin: Dimens.edgeInsets20,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ScrollableTableView(
+                                      paginationController:
+                                          controller.paginationController,
+                                      columns: [
+                                        "MDM Code",
+                                        "Material Name",
+                                        "AC/DC",
+                                        "Material Type",
+                                        "Material Category ",
+                                        "Min. Required Qty ",
+                                        "Min. Reorder Qty ",
+                                        "Description",
+                                        "Unit Of Measurement",
+                                        "Approval Required",
+                                        "Action"
+                                      ].map((column) {
+                                        if (column == "Action") {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width *
+                                                0.12, // Set the desired width for the "Action" column
+                                          );
+                                        } else if (column == "Description" ||
+                                            column == "Material Name") {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width *
+                                                0.25, // Set the desired width for the "Description" column
+                                          );
+                                        } else {
+                                          return TableViewColumn(
+                                            label: column,
+                                            minWidth: Get.width * 0.16,
+                                          );
+                                        }
+                                      }).toList(),
+                                      rows: //
+                                          [
+                                        ...List.generate(
+                                          controller.moduleList?.length ?? 0,
+                                          (index) {
+                                            var moduleListDetails =
+                                                controller.moduleList?[index];
+                                            return [
+                                              '${moduleListDetails?.asset_code}',
+                                              '${moduleListDetails?.asset_name}',
+                                              'AC',
+                                              '${moduleListDetails?.asset_type}',
+                                              '${moduleListDetails?.cat_name}',
+                                              '2',
+                                              '2',
+                                              '${moduleListDetails?.description}',
+                                              '${moduleListDetails?.measurement}',
+                                              '${moduleListDetails?.approval_required}',
                                               "Action"
-                                            ].map((column) {
-                                              if (column == "Action") {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width *
-                                                      0.12, // Set the desired width for the "Action" column
-                                                );
-                                              } else if (column ==
-                                                      "Description" ||
-                                                  column == "Material Name") {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width *
-                                                      0.25, // Set the desired width for the "Description" column
-                                                );
-                                              } else {
-                                                return TableViewColumn(
-                                                  label: column,
-                                                  minWidth: Get.width * 0.16,
-                                                );
-                                              }
-                                            }).toList(),
-                                            rows: //
-                                                [
-                                              ...List.generate(
-                                                controller.moduleList?.length ??
-                                                    0,
-                                                (index) {
-                                                  var moduleListDetails =
-                                                      controller
-                                                          .moduleList?[index];
-                                                  return [
-                                                    '${moduleListDetails?.asset_code}',
-                                                    '${moduleListDetails?.asset_name}',
-                                                    'AC',
-                                                    '${moduleListDetails?.asset_type}',
-                                                    '${moduleListDetails?.cat_name}',
-                                                    '2',
-                                                    '2',
-                                                    '${moduleListDetails?.description}',
-                                                    '${moduleListDetails?.measurement}',
-                                                    '${moduleListDetails?.approval_required}',
-                                                    "Action"
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((_moduleList) {
-                                              return TableViewRow(
-                                                  height: 130,
-                                                  cells:
-                                                      _moduleList.map((value) {
-                                                    return TableViewCell(
-                                                        child:
-                                                            Column(children: [
-                                                      Divider(
-                                                        color: ColorValues
-                                                            .greyLightColour,
+                                            ];
+                                          },
+                                        ),
+                                      ].map((_moduleList) {
+                                        return TableViewRow(
+                                            height: 130,
+                                            cells: _moduleList.map((value) {
+                                              return TableViewCell(
+                                                  child: Column(children: [
+                                                Divider(
+                                                  color: ColorValues
+                                                      .greyLightColour,
+                                                ),
+                                                // (value == 'No')
+                                                //     ? CustomSwitchTroggle(
+                                                //   value: value ==
+                                                //       'No'
+                                                //       ? true
+                                                //       : false,
+                                                //   onChanged:
+                                                //       (value) {},
+                                                // )
+                                                //     :
+                                                (value == "Action")
+                                                    ? Row(children: [
+                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                        //     0
+                                                        //     ?
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .appLightBlueColor,
+                                                          icon: Icons.edit,
+                                                          message: 'Edit',
+                                                          onPress: () {},
+                                                        ),
+                                                        //     : Container(),
+                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
+                                                        //     0
+                                                        //     ?
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .appRedColor,
+                                                          icon: Icons.delete,
+                                                          message: 'Delete',
+                                                          onPress: () {
+                                                            print(
+                                                                _moduleList[0]);
+                                                            controller.isDeleteDialog(
+                                                                module_id:
+                                                                    _moduleList[
+                                                                        0],
+                                                                module:
+                                                                    _moduleList[
+                                                                        1]);
+                                                          },
+                                                        )
+                                                        // : Container()
+                                                      ])
+                                                    : Text(
+                                                        value,
                                                       ),
-                                                      // (value == 'No')
-                                                      //     ? CustomSwitchTroggle(
-                                                      //   value: value ==
-                                                      //       'No'
-                                                      //       ? true
-                                                      //       : false,
-                                                      //   onChanged:
-                                                      //       (value) {},
-                                                      // )
-                                                      //     :
-                                                      (value == "Action")
-                                                          ? Row(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //     0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appLightBlueColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                message: 'Edit',
-                                                                onPress: () {},
-                                                              ),
-                                                              //     : Container(),
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
-                                                              //     0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                message:
-                                                                    'Delete',
-                                                                onPress: () {
-                                                                  print(
-                                                                      _moduleList[
-                                                                          0]);
-                                                                  controller.isDeleteDialog(
-                                                                      module_id:
-                                                                          _moduleList[
-                                                                              0],
-                                                                      module:
-                                                                          _moduleList[
-                                                                              1]);
-                                                                },
-                                                              )
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ),
-                                                    ]));
-                                                  }).toList());
-                                            }).toList(),
+                                              ]));
+                                            }).toList());
+                                      }).toList(),
+                                    ),
+                                  ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: ValueListenableBuilder(
+                                  valueListenable:
+                                      controller.paginationController,
+                                  builder: (context, value, child) {
+                                    return Row(children: [
+                                      Text(
+                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                      Row(children: [
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage <=
+                                                  1
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .previous();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_back_ios_new_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage <=
+                                                    1
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
                                           ),
                                         ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 25),
-                                    child: ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.paginationController,
-                                        builder: (context, value, child) {
-                                          return Row(children: [
-                                            Text(
-                                                "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                            Row(children: [
-                                              IconButton(
-                                                onPressed: controller
-                                                            .paginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .paginationController
-                                                            .previous();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_back_ios_new_rounded,
-                                                  color: controller
-                                                              .paginationController
-                                                              .currentPage <=
-                                                          1
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                              IconButton(
-                                                onPressed: controller
-                                                            .paginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .paginationController
-                                                            .pageCount
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .paginationController
-                                                            .next();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: controller
-                                                              .paginationController
-                                                              .currentPage >=
-                                                          controller
-                                                              .paginationController
-                                                              .pageCount
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                            ]),
-                                          ]);
-                                        }),
-                                  ),
-                                ],
-                              ),
+                                        IconButton(
+                                          onPressed: controller
+                                                      .paginationController
+                                                      .currentPage >=
+                                                  controller
+                                                      .paginationController
+                                                      .pageCount
+                                              ? null
+                                              : () {
+                                                  controller
+                                                      .paginationController
+                                                      .next();
+                                                },
+                                          iconSize: 20,
+                                          splashRadius: 20,
+                                          icon: Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: controller
+                                                        .paginationController
+                                                        .currentPage >=
+                                                    controller
+                                                        .paginationController
+                                                        .pageCount
+                                                ? Colors.black26
+                                                : Theme.of(context)
+                                                    .primaryColor,
+                                          ),
+                                        ),
+                                      ]),
+                                    ]);
+                                  }),
                             ),
-                          ),
-                        )
-                      : Container()
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  //  : Container()
                 ],
               ),
             ),
