@@ -48,7 +48,7 @@ class _AddWasteDataWebState extends State<AddWasteDataWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "AddWaste Data",
+                                      "Add Waste Data",
                                       style: Styles.blackBold16,
                                     ),
                                   ],
@@ -70,21 +70,42 @@ class _AddWasteDataWebState extends State<AddWasteDataWeb> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 100),
+                                              child: Container(
+                                                width: 160,
+                                                color: ColorValues.cancelColor,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Waste Generated",
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Dimens.boxHeight10,
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Month: '),
+                                                    title:
+                                                        'Solid Waste Generated'),
                                                 Dimens.boxWidth10,
-                                                DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  dropdownList:
-                                                      controller.month,
-                                                  // selectedValue: ,
-                                                  onValueChanged:
-                                                      (month, selectedValue) {},
+                                                GoodsOrderTextField(),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'E- waste in kgs'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
                                                 ),
                                               ],
                                             ),
@@ -93,7 +114,85 @@ class _AddWasteDataWebState extends State<AddWasteDataWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'Surface AddWaste in KL units'),
+                                                        'Battery Waste in number'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Solar Module waste in number'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'Haz waste Oil'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz Waste grease in kgs'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'Haz solid waste'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz waste oil barrel generated in No'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
@@ -108,12 +207,141 @@ class _AddWasteDataWebState extends State<AddWasteDataWeb> {
                                         ),
                                         Spacer(),
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 100),
+                                              child: Container(
+                                                width: 160,
+                                                color: ColorValues.addNewColor,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Waste Disposed",
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Dimens.boxHeight10,
                                             Row(
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'Ground AddWaste in KL units : '),
+                                                        'Solid Waste Disposed'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'E- waste Disposed in kgs'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Battery Waste Disposed in number'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Solar module waste in number'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz waste oil Disposed in litres'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz waste Grease in Kgs'),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz Solid waste Disposed in Kgs '),
+                                                Dimens.boxWidth10,
+                                                GoodsOrderTextField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+
+                                                  // textController:
+                                                  //     controller.girNoCtrlr,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Haz waste oil barrel Disposed in No'),
                                                 Dimens.boxWidth10,
                                                 GoodsOrderTextField(
                                                   keyboardType:
@@ -129,391 +357,7 @@ class _AddWasteDataWebState extends State<AddWasteDataWeb> {
                                         Dimens.boxWidth30,
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 227, 224, 224),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 236, 234, 234)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 10, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Dimens.boxHeight10,
-                                    Text(
-                                        "AddWaste Procured from Third Party for:",
-                                        style: Styles.blue14),
-                                    Dimens.boxHeight10,
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Module cleaning in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Domestic and others purposes in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Drinking in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Domestic and others purposes in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 227, 224, 224),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 236, 234, 234)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 10, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Dimens.boxHeight10,
-                                    Text("Consumption  AddWaste used for:",
-                                        style: Styles.blue14),
-                                    Dimens.boxHeight10,
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Drinking in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Module cleaning in KL unit'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Domestic and other purpose in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 227, 224, 224),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 236, 234, 234)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 10, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Dimens.boxHeight10,
-                                    Text("Total AddWaste:",
-                                        style: Styles.blue14),
-                                    Dimens.boxHeight10,
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Withdrawal in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Consumed in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 227, 224, 224),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 236, 234, 234)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 10, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Dimens.boxHeight10,
-                                    Text("Total GroundAddWaste Withdrawal:",
-                                        style: Styles.blue14),
-                                    Dimens.boxHeight10,
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Yearly limit as per NOC in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Limit left in KL units'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-
-                                                  // textController:
-                                                  //     controller.girNoCtrlr,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                    Dimens.boxHeight30
                                   ],
                                 ),
                               ),
@@ -620,7 +464,7 @@ class AppBarGoodsOrder extends StatelessWidget {
             child: Text(" / MIS", style: Styles.greyLight14),
           ),
           GestureDetector(
-              child: Text(" / AddWaste DATA", style: Styles.greyLight14)),
+              child: Text(" / ADD WASTE DATA", style: Styles.greyLight14)),
         ],
       ),
     );
