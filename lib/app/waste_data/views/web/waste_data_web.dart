@@ -615,8 +615,8 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                               icon: Icons.edit,
                                                               message: 'Edit',
                                                               onPress: () {
-                                                                // Get.toNamed(Routes
-                                                                //     .waterDataScreen);
+                                                                Get.toNamed(Routes
+                                                                    .addWasteDataScreen);
                                                               },
                                                             ),
                                                           ],

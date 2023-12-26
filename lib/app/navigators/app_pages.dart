@@ -13,6 +13,8 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
+import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
+import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
 import 'package:cmms/app/audit/view/audit_screen.dart';
@@ -1044,6 +1046,11 @@ class AppPages {
       name: _Paths.complianceHistoryScreen,
       page: ComplianceHistoryScreen.new,
       binding: ComplianceHistoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addWasteDataScreen,
+      page: AddWasteDataScreen.new,
+      binding: AddWasteDataBinding(),
     ),
   ];
 }
