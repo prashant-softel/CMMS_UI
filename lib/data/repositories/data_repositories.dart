@@ -3821,5 +3821,20 @@ class DataRepository extends DomainRepository {
         transferItemJsonString: transferItemJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getGrievanceList({
+    required String auth,
+    int? facilityId,
+    int? userId,
+    bool? self_view,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getGrievanceList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        userId: userId,
+        self_view: self_view,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

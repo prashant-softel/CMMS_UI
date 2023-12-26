@@ -81,4 +81,6 @@ abstract class LocalKeys {
   static const fcmTopicId = 'fcmTopicId';
   static const showOnboardingScreens = 'showOnboardingScreens';
   static const freeSignupCredit = 'freeSignupCredit';
+
+  static const grievanceId = 'grievanceId';
 }
