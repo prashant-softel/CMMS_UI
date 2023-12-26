@@ -169,6 +169,7 @@ abstract class Routes {
   static const waterDataListScreen = _Paths.waterDataListScreen;
   static const waterDataScreen = _Paths.waterDataScreen;
   static const complianceHistoryScreen = _Paths.complianceHistoryScreen;
+  static const addWasteDataScreen = _Paths.addWasteDataScreen;
 
   static const complianceScreen = _Paths.complianceScreen;
   static const grievanceList = _Paths.grievanceList;
@@ -341,6 +342,7 @@ abstract class _Paths {
   static const complianceScreen = '/complianceScreen';
   static const waterDataScreen = '/waterDataScreen';
   static const complianceHistoryScreen = '/complianceHistoryScreen';
+  static const addWasteDataScreen = '/addWasteDataScreen';
   static const grievanceList = '/grievance-list';
   static const addGrievance = '/add-grievance';
   static const grievanceCardDetails = '/grievance-card-details';
