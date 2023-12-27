@@ -7,6 +7,8 @@ import 'package:cmms/app/waste_data/waste_data_presenter.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WasteDataController extends GetxController {
@@ -26,6 +28,9 @@ class WasteDataController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
+
+  bool openFromDateToStartDatePicker = false;
+  var waterDateTc = TextEditingController();
 
   ///
   @override

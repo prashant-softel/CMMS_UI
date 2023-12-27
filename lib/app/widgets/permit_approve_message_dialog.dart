@@ -94,7 +94,7 @@ class PermitMessageApproveDialog extends GetView {
                 Get.offAllNamed(Routes.newPermitList);
                 // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
               },
-              child: const Text('Ok1'),
+              child: const Text('Ok'),
             ),
           ),
         ],
