@@ -144,11 +144,15 @@ class CreateAuditController extends GetxController {
     String _startDate = startDateDateTc.text.trim();
 
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
-        plan_number: _planTitle,
-        Facility_id: facilityId,
-        auditee_id: 101,
-        auditor_id: facilityId,
-        ApplyFrequency: selectedfrequencyId);
+      plan_number: _planTitle,
+      Facility_id: facilityId,
+      auditee_id: 101,
+      auditor_id: facilityId,
+      Checklist_id: int.tryParse(selectedchecklistId.value),
+      Description: _description,
+      Schedule_Date: _startDate,
+      ApplyFrequency: selectedfrequencyId,
+    );
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 
