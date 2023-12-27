@@ -20,6 +20,8 @@ import 'package:cmms/app/audit/audit_binding.dart';
 import 'package:cmms/app/audit/view/audit_screen.dart';
 import 'package:cmms/app/audit_list/audit_list_binding.dart';
 import 'package:cmms/app/audit_list/view/audit_list_screen.dart';
+import 'package:cmms/app/audit_task/audit_task_binding.dart';
+import 'package:cmms/app/audit_task/view/audit_task_screen.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
@@ -64,6 +66,8 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
+import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
+import 'package:cmms/app/master_responsibility/view/responsivility_screen.dart';
 import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
@@ -1051,6 +1055,16 @@ class AppPages {
       name: _Paths.addWasteDataScreen,
       page: AddWasteDataScreen.new,
       binding: AddWasteDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.responsibility,
+      page: ResponsibilityListScreen.new,
+      binding: ResponsibilityListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.auditTask,
+      page: AuditTaskScreen.new,
+      binding: AuditTaskBinding(),
     ),
   ];
 }

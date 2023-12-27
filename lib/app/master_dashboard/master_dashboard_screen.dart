@@ -514,6 +514,15 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToImportUser();
                                     });
                               }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Responsibility",
+                                    onTap: () {
+                                      // controller.clearStoreUserIdData();
+
+                                      controller.goToResponsibility();
+                                    });
+                              }))),
                               // OnHover(builder: (((isHovered) {
                               //   return createContentTile(
                               //       title: "Designation",

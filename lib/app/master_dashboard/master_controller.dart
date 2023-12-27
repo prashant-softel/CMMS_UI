@@ -270,6 +270,10 @@ class MastersController extends GetxController {
     Get.toNamed(Routes.addUser, arguments: {'userId': 0});
   }
 
+  Future<void> goToResponsibility() async {
+    Get.toNamed(Routes.responsibility);
+  }
+
   Future<void> goToImportUser() async {
     clearStoreData();
     Get.toNamed(Routes.importInventory,
