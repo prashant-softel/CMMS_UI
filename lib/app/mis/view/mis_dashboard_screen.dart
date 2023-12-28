@@ -108,7 +108,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         child: Row(
                           children: [
                             Text(
-                              "MIS",
+                              "Checklist & Observations",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
@@ -129,6 +129,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           ],
                         ),
                       ),
+
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
@@ -170,6 +171,34 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           //     })
                         ],
                       ),
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: const EdgeInsets.all(16),
+                        crossAxisSpacing: 40,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          createContentTile(
+                              title: "MIS Checklist",
+                              onTap: () {
+                                controller.createChecklist();
+                              }),
+                          //  if (Responsive.isDesktop(context))
+                          createContentTile(
+                              title: "Check Point",
+                              onTap: () {
+                                // Get.toNamed(
+                                //   Routes.preventive_checkPoint,
+                                // );
+                                controller.checkPoint();
+                              }),
+                        ],
+                      ),
+
                       if (Responsive.isDesktop(context))
 
                         /// GRID TILES
@@ -411,33 +440,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           ],
                         ),
                       ),
-                      GridView.count(
-                        shrinkWrap: true,
-                        primary: false,
-                        padding: const EdgeInsets.all(16),
-                        crossAxisSpacing: 40,
-                        mainAxisSpacing: 6,
-                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                        childAspectRatio: Responsive.isMobile(context)
-                            ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
-                        children: <Widget>[
-                          createContentTile(
-                              title: "MIS Checklist",
-                              onTap: () {
-                                controller.createChecklist();
-                              }),
-                          //  if (Responsive.isDesktop(context))
-                          createContentTile(
-                              title: "Check Point",
-                              onTap: () {
-                                // Get.toNamed(
-                                //   Routes.preventive_checkPoint,
-                                // );
-                                controller.checkPoint();
-                              }),
-                        ],
-                      ),
+
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
