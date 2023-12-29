@@ -1,29 +1,21 @@
-import 'dart:convert';
-
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   AddIncidentReportContentWeb({super.key});
@@ -431,7 +423,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                           ],
                                                         ),
-
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
@@ -508,76 +499,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                           ],
                                                         ),
-
-                                                        // Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     SizedBox(
-                                                        //       width: 140,
-                                                        //       child: CustomRichText(
-                                                        //           title:
-                                                        //               'Corrective & Preventive action taken By: '),
-                                                        //     ),
-                                                        //     Dimens.boxWidth10,
-                                                        //     SizedBox(
-                                                        //       width: MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width /
-                                                        //           5,
-                                                        //       child: Obx(
-                                                        //         () =>
-                                                        //             DropdownWebWidget(
-                                                        //           dropdownList:
-                                                        //               controller
-                                                        //                   .incidentInvestigationVerificationDoneByList,
-                                                        //           isValueSelected:
-                                                        //               controller
-                                                        //                   .isincidentInvestigationVerificationDoneByListSelected
-                                                        //                   .value,
-                                                        //           selectedValue:
-                                                        //               controller
-                                                        //                   .selectedIncidentInvestigationVerificationDoneByList
-                                                        //                   .value,
-                                                        //           onValueChanged:
-                                                        //               controller
-                                                        //                   .onValueIncidentVerificationChanged,
-                                                        //         ),
-                                                        //       ),
-                                                        //       // _buildCorrectiveActionTextField_web(
-                                                        //       //     context)
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-
-                                                        //   Dimens.boxHeight5,
-                                                        // /// FILE UPLOAD WIDGET
-                                                        // SizedBox(
-                                                        //    width: MediaQuery.of(
-                                                        //             context)
-                                                        //         .size
-                                                        //         .width /
-                                                        //     3,
-                                                        //   child: Container(
-                                                        //     height: Get.height * 0.2,
-                                                        //     width: Get.width,
-                                                        //     child: Row(
-                                                        //         //
-                                                        //         children: [
-                                                        //           Expanded(
-                                                        //             flex: 2,
-                                                        //             child:
-                                                        //                 FileUploadWidgetWithDropzone(),
-                                                        //           ),
-                                                        //           Dimens.boxWidth10,
-                                                        //           Expanded(
-                                                        //               flex: 8,
-                                                        //               child:
-                                                        //                   FileUploadDetailsWidgetWeb()),
-                                                        //         ]),
-                                                        //   ),
-                                                        // ),
-
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
@@ -619,46 +540,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         context)),
                                                           ],
                                                         ),
-
-                                                        // Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Remark: '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     SizedBox(
-                                                        //         width: MediaQuery.of(
-                                                        //                     context)
-                                                        //                 .size
-                                                        //                 .width /
-                                                        //             5,
-                                                        //         child:
-                                                        //             _buildInsuranceRemarkField_web(
-                                                        //                 context)),
-                                                        //   ],
-                                                        // ),
-                                                        // Dimens.boxHeight20,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     SizedBox(
-                                                        //       width: 140,
-                                                        //       child: CustomRichText(
-                                                        //           title:
-                                                        //               'Verified/Approved by: '),
-                                                        //     ),
-                                                        //     Dimens.boxWidth10,
-                                                        //     SizedBox(
-                                                        //         width: MediaQuery.of(
-                                                        //                     context)
-                                                        //                 .size
-                                                        //                 .width /
-                                                        //             5,
-                                                        //         child:
-                                                        //             _buildVerifiedApprovedTextField_web(
-                                                        //                 context)),
-                                                        //   ],
-                                                        // ),
                                                       ],
                                                     ),
 
@@ -760,25 +641,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ],
                                                           ),
 
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Reporting date & Time: '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     SizedBox(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       child:
-                                                          //           _buildReportingDateTimeField_web(
-                                                          //         context,
-                                                          //       ),
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
                                                           Dimens.boxHeight30,
                                                           Row(
                                                             children: [
@@ -797,46 +659,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     SizedBox(
-                                                          //       width: 200,
-                                                          //       child:
-                                                          //           CustomRichText(
-                                                          //         // title:'Incident Investigation Verification Done By: '
-                                                          //         title:
-                                                          //             'Responsible Person Name',
-                                                          //       ),
-                                                          //     ),
-                                                          //     Dimens.boxWidth10,
-                                                          //     SizedBox(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       child: Obx(
-                                                          //         () =>
-                                                          //             DropdownWebWidget(
-                                                          //           dropdownList:
-                                                          //               controller
-                                                          //                   .incidentInvestigationVerificationDoneByList,
-                                                          //           isValueSelected:
-                                                          //               controller
-                                                          //                   .isincidentInvestigationVerificationDoneByListSelected
-                                                          //                   .value,
-                                                          //           selectedValue:
-                                                          //               controller
-                                                          //                   .selectedIncidentInvestigationVerificationDoneByList
-                                                          //                   .value,
-                                                          //           onValueChanged:
-                                                          //               controller
-                                                          //                   .onValueIncidentVerificationChanged,
-                                                          //         ),
-                                                          //       ),
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
 
                                                           Dimens.boxHeight20,
                                                           Row(
@@ -944,36 +766,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                child:
-                                                                    // controller
-                                                                    //             .id !=
-                                                                    //         null
-                                                                    //     ? controller.incidentReportDetailsModel.value?.legal_applicability_name ==
-                                                                    //             "YES"
-                                                                    //         ? Obx(
-                                                                    //             () =>
-                                                                    //                 Switch(
-                                                                    //               activeColor: Colors.green,
-                                                                    //               value: controller.legalApplicabilityDetailValue.value,
-                                                                    //               onChanged: (value) {
-                                                                    //                 controller.legalApplicabilityDetailValue.value = value;
-                                                                    //                 print('Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //         : Obx(
-                                                                    //             () =>
-                                                                    //                 Switch(
-                                                                    //               activeColor: Colors.green,
-                                                                    //               value: controller.legalApplicabilityDetailFalseValue.value,
-                                                                    //               onChanged: (value) {
-                                                                    //                 controller.legalApplicabilityDetailFalseValue.value = value;
-                                                                    //                 print('Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //     :
-                                                                    Obx(
+                                                                child: Obx(
                                                                   () => Switch(
                                                                     activeColor:
                                                                         Colors
@@ -1016,46 +809,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   : Container(),
                                                             ],
                                                           ),
-
-                                                          // Dimens.boxHeight5,
-
-                                                          // Dimens.boxHeight100,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Insurance Status'),
-                                                          //     Dimens.boxWidth10,
-                                                          //     SizedBox(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       child: Text(
-                                                          //           '${controller.incidentReportDetailsModel.value?.insurance_status_name}'),
-                                                          //       // Obx(
-                                                          //       //   () =>
-                                                          //       //       DropdownWebWidget(
-                                                          //       //     dropdownList:
-                                                          //       //         controller
-                                                          //       //             .typePermitList,
-                                                          //       //     isValueSelected:
-                                                          //       //         controller
-                                                          //       //             .isTypePermitSelected
-                                                          //       //             .value,
-                                                          //       //     selectedValue:
-                                                          //       //         controller
-                                                          //       //             .selectedTypePermit
-                                                          //       //             .value,
-                                                          //       //     onValueChanged:
-                                                          //       //         controller
-                                                          //       //             .onValueChanged,
-                                                          //       //   ),
-                                                          //       // ),
-                                                          //     ),
-                                                          //   ],
-                                                          // )
                                                         ],
                                                       ),
                                                     ),
@@ -1120,416 +873,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                 ///Personal Details
                                                 DetailsOfInjuredPerson(),
-                                                // Container(
-                                                //   margin: EdgeInsets.all(20),
-                                                //   decoration: BoxDecoration(
-                                                //     border: Border.all(
-                                                //         color: Colors.grey
-                                                //             .withOpacity(.3)),
-                                                //   ),
-                                                //   child: Container(
-                                                //     color: Color.fromARGB(
-                                                //         255, 237, 240, 242),
-                                                //     padding:
-                                                //         const EdgeInsets.all(
-                                                //             8.0),
-                                                //     child: Column(
-                                                //       crossAxisAlignment:
-                                                //           CrossAxisAlignment
-                                                //               .start,
-                                                //       children: [
-                                                //         Text(
-                                                //           "Details of injured person involved",
-                                                //           style: Styles.blue700,
-                                                //         ),
-                                                //         Dimens.boxHeight10,
-                                                //         Row(
-                                                //           crossAxisAlignment:
-                                                //               CrossAxisAlignment
-                                                //                   .start,
-                                                //           children: [
-                                                //             Column(
-                                                //               crossAxisAlignment:
-                                                //                   CrossAxisAlignment
-                                                //                       .end,
-                                                //               children: [
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Dimens
-                                                //                         .boxHeight10,
-                                                //                     Row(
-                                                //                       children: [
-                                                //                         // CustomRichText(
-                                                //                         //     title:
-                                                //                         //         'Victim Name: '),
-                                                //                         Text(
-                                                //                           'Name of the person involved/ injured: ',
-                                                //                           style:
-                                                //                               Styles.black15,
-                                                //                         ),
-                                                //                         Dimens
-                                                //                             .boxWidth10,
-                                                //                         SizedBox(
-                                                //                           width:
-                                                //                               MediaQuery.of(context).size.width / 5,
-                                                //                           child:
-                                                //                               CustomMultiSelectDialogField(
-                                                //                             buttonText:
-                                                //                                 'Select Victim Name',
-                                                //                             title:
-                                                //                                 'Victim Name',
-                                                //                             // initialValue: [],
-                                                //                             initialValue: (controller.selectedVictimNameIdList.isNotEmpty)
-                                                //                                 ? controller.selectedVictimNameIdList
-                                                //                                 : [],
-                                                //                             items: controller.victimNameList
-                                                //                                 .map(
-                                                //                                   (victimName) => MultiSelectItem(
-                                                //                                     victimName.id,
-                                                //                                     victimName.name ?? '',
-                                                //                                   ),
-                                                //                                 )
-                                                //                                 .toList(),
-                                                //                             onConfirm: (selectedOptionsList) =>
-                                                //                                 {
-                                                //                               controller.victimNameSelected(selectedOptionsList),
-                                                //                               print('Victim Name list Ids ${controller.selectedVictimNameIdList}')
-                                                //                             },
-                                                //                           ),
-                                                //                         ),
-                                                //                       ],
-                                                //                     ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 controller.filteredVictimNameList
-                                                //                             .firstWhere(
-                                                //                               (e) => "${e!.id}" == "${2}",
-                                                //                               orElse: () => EmployeeListModel(name: ''),
-                                                //                             )!
-                                                //                             .id ==
-                                                //                         2
-                                                //                     ? Row(
-                                                //                         children: [
-                                                //                           SizedBox(
-                                                //                             width:
-                                                //                                 178,
-                                                //                             child:
-                                                //                                 CustomRichText(title: 'Other Victim Name: '),
-                                                //                           ),
-                                                // SizedBox(
-                                                //     width: MediaQuery.of(context).size.width / 5,
-                                                //     child: _buildOtherVictimNameTextField_web(context))
-                                                //                         ],
-                                                //                       )
-                                                //                     : Dimens.box0,
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Gender:',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     // buildGenderRadioButton(
-                                                //                     //     'Male',
-                                                //                     //     context),
-                                                //                     // buildGenderRadioButton(
-                                                //                     //     'Female',
-                                                //                     //     context),
-                                                //                     // Container(
-                                                //                     //   decoration:
-                                                //                     //       BoxDecoration(
-                                                //                     //     borderRadius:
-                                                //                     //         BorderRadius.circular(6),
-                                                //                     //     border:
-                                                //                     //         Border.all(
-                                                //                     //       color: Color.fromARGB(
-                                                //                     //           255,
-                                                //                     //           227,
-                                                //                     //           224,
-                                                //                     //           224),
-                                                //                     //       width:
-                                                //                     //           1,
-                                                //                     //     ),
-                                                //                     //     boxShadow: [
-                                                //                     //       BoxShadow(
-                                                //                     //         color:
-                                                //                     //             Colors.black26,
-                                                //                     //         offset:
-                                                //                     //             const Offset(
-                                                //                     //           5.0,
-                                                //                     //           5.0,
-                                                //                     //         ),
-                                                //                     //         blurRadius:
-                                                //                     //             5.0,
-                                                //                     //         spreadRadius:
-                                                //                     //             1.0,
-                                                //                     //       ),
-                                                //                     //       BoxShadow(
-                                                //                     //         color:
-                                                //                     //             ColorValues.whiteColor,
-                                                //                     //         offset:
-                                                //                     //             const Offset(0.0, 0.0),
-                                                //                     //         blurRadius:
-                                                //                     //             0.0,
-                                                //                     //         spreadRadius:
-                                                //                     //             0.0,
-                                                //                     //       ),
-                                                //                     //     ],
-                                                //                     //   ),
-                                                //                     //   width: (MediaQuery.of(context)
-                                                //                     //           .size
-                                                //                     //           .width *
-                                                //                     //       .2),
-                                                //                     //   height:
-                                                //                     //       35,
-                                                //                     //   child:
-                                                //                     //       DropdownButtonHideUnderline(
-                                                //                     //     child: DropdownButton<
-                                                //                     //         String>(
-                                                //                     //       isExpanded:
-                                                //                     //           true,
-                                                //                     //       value: controller
-                                                //                     //           .gender
-                                                //                     //           .value,
-                                                //                     //       onChanged: (value) =>
-                                                //                     //           controller.updateGender(value!),
-                                                //                     //       items:
-                                                //                     //           <String>[
-                                                //                     //         'Select Gender',
-                                                //                     //         'Male',
-                                                //                     //         'Female',
-                                                //                     //         'Other'
-                                                //                     //       ].map<DropdownMenuItem<String>>((String value) {
-                                                //                     //         return DropdownMenuItem<String>(
-                                                //                     //           value: value,
-                                                //                     //           child: Container(
-                                                //                     //             margin: EdgeInsets.only(left: 10),
-                                                //                     //             child: Text(
-                                                //                     //               value,
-                                                //                     //               style: Styles.black12,
-                                                //                     //             ),
-                                                //                     //           ),
-                                                //                     //         );
-                                                //                     //       }).toList(),
-                                                //                     //     ),
-                                                //                     //   ),
-                                                //                     // ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Trade/ designation:  ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                         width:
-                                                //                             MediaQuery.of(context).size.width /
-                                                //                                 5,
-                                                //                         child: _buildTradeDesignatonTextField_web(
-                                                //                             context)
-                                                //                         // _buildCorrectiveActionTextField_web(
-                                                //                         //     context)
-                                                //                         ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Address:  ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                         width:
-                                                //                             MediaQuery.of(context).size.width /
-                                                //                                 5,
-                                                //                         child: _buildAddressTextField_web(
-                                                //                             context)
-                                                //                         // _buildCorrectiveActionTextField_web(
-                                                //                         //     context)
-                                                //                         ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Dimens
-                                                //                     .boxHeight5,
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Name of the contractor:  ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                       width: MediaQuery.of(context)
-                                                //                               .size
-                                                //                               .width /
-                                                //                           5,
-                                                //                       child:
-                                                //                           Obx(
-                                                //                         () =>
-                                                //                             DropdownWebWidget(
-                                                //                           dropdownList:
-                                                //                               controller.businessList,
-                                                //                           isValueSelected: controller
-                                                //                               .isBusinessListSelected
-                                                //                               .value,
-                                                //                           selectedValue: controller
-                                                //                               .selectedIBusinessList
-                                                //                               .value,
-                                                //                           onValueChanged:
-                                                //                               controller.onValueChanged,
-                                                //                         ),
-                                                //                       ),
-                                                //                       // _buildCorrectiveActionTextField_web(
-                                                //                       //     context)
-                                                //                     ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Dimens
-                                                //                     .boxHeight5,
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Body part injured / involved & nature of injury:   ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                       width: MediaQuery.of(context)
-                                                //                               .size
-                                                //                               .width /
-                                                //                           5,
-                                                //                       child:
-                                                //                           Obx(
-                                                //                         () =>
-                                                //                             DropdownWebWidget(
-                                                //                           dropdownList:
-                                                //                               controller.incidentInvestigationVerificationDoneByList,
-                                                //                           isValueSelected: controller
-                                                //                               .isincidentInvestigationVerificationDoneByListSelected
-                                                //                               .value,
-                                                //                           selectedValue: controller
-                                                //                               .selectedIncidentInvestigationVerificationDoneByList
-                                                //                               .value,
-                                                //                           onValueChanged:
-                                                //                               controller.onValueIncidentVerificationChanged,
-                                                //                         ),
-                                                //                       ),
-                                                //                       // _buildCorrectiveActionTextField_web(
-                                                //                       //     context)
-                                                //                     ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Dimens
-                                                //                     .boxHeight5,
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Work experience (in years):  ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                         width:
-                                                //                             MediaQuery.of(context).size.width /
-                                                //                                 5,
-                                                //                         child: _buildWorkExperienceTextField_web(
-                                                //                             context)
-                                                //                         // _buildCorrectiveActionTextField_web(
-                                                //                         //     context)
-                                                //                         ),
-                                                //                   ],
-                                                //                 ),
-                                                //                 Dimens
-                                                //                     .boxHeight5,
-                                                //                 // Row(
-                                                //                 //   children: [
-                                                //                 //     Text(
-                                                //                 //       'Plant & Equipment involved: ',
-                                                //                 //       style: Styles
-                                                //                 //           .black15,
-                                                //                 //     ),
-                                                //                 //     Dimens
-                                                //                 //         .boxWidth10,
-                                                //                 //     SizedBox(
-                                                //                 //       width: MediaQuery.of(context)
-                                                //                 //               .size
-                                                //                 //               .width /
-                                                //                 //           5,
-                                                //                 //       child:
-                                                //                 //           Obx(
-                                                //                 //         () =>
-                                                //                 //             DropdownWebWidget(
-                                                //                 //           dropdownList:
-                                                //                 //               controller.eqipmentNameList,
-                                                //                 //           isValueSelected: controller
-                                                //                 //               .isEquipmentNameSelected
-                                                //                 //               .value,
-                                                //                 //           selectedValue: controller
-                                                //                 //               .selectedEquipmentName
-                                                //                 //               .value,
-                                                //                 //           onValueChanged:
-                                                //                 //               controller.onValueChanged,
-                                                //                 //         ),
-                                                //                 //       ),
-                                                //                 //     ),
-                                                //                 //   ],
-                                                //                 // ),
-
-                                                //                 Dimens
-                                                //                     .boxHeight5,
-                                                //                 Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .start,
-                                                //                   children: [
-                                                //                     Text(
-                                                //                       'Exact location of incident:   ',
-                                                //                       style: Styles
-                                                //                           .black15,
-                                                //                     ),
-                                                //                     SizedBox(
-                                                //                         width:
-                                                //                             MediaQuery.of(context).size.width /
-                                                //                                 5,
-                                                //                         child: _buildExactLocationTextField_web(
-                                                //                             context)
-                                                //                         // _buildCorrectiveActionTextField_web(
-                                                //                         //     context)
-                                                //                         ),
-                                                //                   ],
-                                                //                 ),
-                                                //               ],
-                                                //             ),
-                                                //           ],
-                                                //         ),
-                                                //       ],
-                                                //     ),
-                                                //   ),
-                                                // ),
 
                                                 ///Investigation Block
                                                 Dimens.boxHeight5,
@@ -1840,52 +1183,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   .size
                                                                   .width /
                                                               5,
-                                                      child:
-                                                          // controller.id !=
-                                                          //         null
-                                                          //     ? controller
-                                                          //                 .incidentReportDetailsModel
-                                                          //                 .value
-                                                          //                 ?.rca_required_name ==
-                                                          //             "YES"
-                                                          //         ? Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .rCAUploadRequiredDetailValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .rCAUploadRequiredDetailValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //         : Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .rCAUploadRequiredDetailFalseValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .rCAUploadRequiredDetailFalseValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //     :
-                                                          Obx(
+                                                      child: Obx(
                                                         () => Switch(
                                                           activeColor:
                                                               Colors.green,
@@ -1933,25 +1231,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 FileUploadDetailsWidgetWeb()),
                                                       ]),
                                                 ),
-
-                                                // Obx(() {
-                                                //   return Column(
-                                                //     children: controller
-                                                //         .victimNameList.reversed
-                                                //         .map((data) {
-                                                //       return Text(
-                                                //           '${data.toJson()}');
-                                                //     }).toList(),
-                                                //   );
-                                                // }),
-                                                // SizedBox(height: 20),
-                                                // ElevatedButton(
-                                                //   onPressed: () {
-                                                //     controller.addOneMoreData();
-                                                //   },
-                                                //   child:
-                                                //       Text('Add One More Data'),
-                                                // ),
                                               ],
                                             ),
                                           ),
@@ -2003,42 +1282,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         color: ColorValues
                                                             .greyLightColour,
                                                       ),
-                                                      // Column(
-                                                      //   children: [
-                                                      //     Row(
-                                                      //       children: [
-                                                      //         Text(
-                                                      //             "Time Stamp"),
-                                                      //         Text(
-                                                      //             "Posted By"),
-                                                      //         Text("Comment"),
-                                                      //         Text(
-                                                      //             "Location"),
-                                                      //         Text("Status"),
-                                                      //       ],
-                                                      //     )
-                                                      //   ]..addAll([
-                                                      //       ...(controller
-                                                      //               .historyList?.value ??
-                                                      //           [])
-                                                      //     ].map((e) {
-                                                      //       return Row(
-                                                      //         children: [
-                                                      //           Text(
-                                                      //               "${e?.createdAt??''}"),
-                                                      //           Text(
-                                                      //               "${e?.createdByName}"),
-                                                      //           Text(
-                                                      //               "${e?.comment}"),
-                                                      //           Text(
-                                                      //               "--"),
-                                                      //           Text(
-                                                      //               "${e?.status_name ??''}"),
-                                                      //         ],
-                                                      //       );
-                                                      //     })),
-                                                      // ),
-
                                                       Expanded(
                                                         child: DataTable2(
                                                           border:
@@ -2141,107 +1384,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     ],
                                                   ),
                                                 )
-
-                                              // Container(
-                                              //     margin: Dimens.edgeInsets20,
-                                              //     height: ((controller
-                                              //                     .historyList
-                                              //                     ?.length ??
-                                              //                 0) *
-                                              //             33) +
-                                              //         120,
-                                              //     decoration: BoxDecoration(
-                                              //       border: Border.all(
-                                              //         color: ColorValues
-                                              //             .lightGreyColorWithOpacity35,
-                                              //         width: 1,
-                                              //       ),
-                                              //       boxShadow: [
-                                              //         BoxShadow(
-                                              //           color: ColorValues
-                                              //               .appBlueBackgroundColor,
-                                              //           spreadRadius: 2,
-                                              //           blurRadius: 5,
-                                              //           offset: Offset(0, 2),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //     child: Column(
-                                              //       children: [
-                                              //         Padding(
-                                              //           padding:
-                                              //               const EdgeInsets
-                                              //                   .all(10.0),
-                                              //           child: Row(
-                                              //             children: [
-                                              //               Text(
-                                              //                 "Incident Report History ",
-                                              //                 style: Styles
-                                              //                     .blue700,
-                                              //               ),
-                                              //             ],
-                                              //           ),
-                                              //         ),
-                                              //         Divider(
-                                              //           color: ColorValues
-                                              //               .greyLightColour,
-                                              //         ),
-                                              //         Expanded(
-                                              //           child:
-                                              //               ScrollableTableView(
-                                              //             columns: [
-                                              //               "Time Stamp",
-                                              //               "Module Ref ID",
-                                              //               "Comment",
-                                              //               "Module Type",
-                                              //               "Status",
-                                              //             ].map((column) {
-                                              //               return TableViewColumn(
-                                              //                 label: column,
-                                              //                 minWidth:
-                                              //                     Get.width *
-                                              //                         0.15,
-                                              //               );
-                                              //             }).toList(),
-                                              //             rows: [
-                                              //               ...List.generate(
-                                              //                 controller
-                                              //                         .historyList
-                                              //                         ?.length ??
-                                              //                     0,
-                                              //                 (index) {
-                                              //                   var getHistoryListDetails =
-                                              //                       controller
-                                              //                               .historyList?[
-                                              //                           index];
-                                              //                   return [
-                                              //                     '${getHistoryListDetails?.createdAt}',
-                                              //                     '${getHistoryListDetails?.moduleRefId ?? ''}',
-                                              //                     '${getHistoryListDetails?.comment ?? ''}',
-                                              //                     '${getHistoryListDetails?.moduleType ?? ''}',
-                                              //                     '${getHistoryListDetails?.status_name ?? ''}',
-                                              //                   ];
-                                              //                 },
-                                              //               ),
-                                              //               // [
-                                              //             ].map((record) {
-                                              //               return TableViewRow(
-                                              //                 height: 30,
-                                              //                 cells: record
-                                              //                     .map((value) {
-                                              //                   return TableViewCell(
-                                              //                     child: Text(
-                                              //                         value),
-                                              //                   );
-                                              //                 }).toList(),
-                                              //               );
-                                              //             }).toList(),
-                                              //           ),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   )
-
                                               : Container(),
 
                                           Row(
@@ -2351,7 +1493,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
             )),
           ),
           Spacer(),
-
           SizedBox(
             width: MediaQuery.of(context).size.width / 5,
             child: Container(
@@ -2363,32 +1504,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
             )),
           ),
           Spacer(),
-          // SizedBox(
-          //   width: MediaQuery.of(context).size.width / 5,
-          //   child: Container(
-          //       child: Container(
-          //     height: 30,
-          //     // decoration:
-          //     //     BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
-          //     child: Center(child: Text('')),
-          //   )),
-          // ),
-          // Spacer(),
-
-          // position == 1 || position == 2 || position == 3
-          // ?
-          // ActionButton(
-          //   icon: Icons.remove,
-          //   label: 'Delete',
-          //   // onPress:
-          //   //     () async {},
-          //   color: Colors.red,
-          //   onPressed: () {
-          //     controller.removeRow(index: 0);
-          //   },
-          // )
-
-          // : Text('data')
         ],
       ),
     );
@@ -2451,32 +1566,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                suffixIcon: Icon(Icons.calendar_month)
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-                ),
+                suffixIcon: Icon(Icons.calendar_month)),
           ),
         ),
       ),
@@ -2514,14 +1604,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
           affinity: TextAffinity.upstream,
         ),
       );
-    // controller.validTillTimeCtrlr.text =
-    //     DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
-    // controller.validTillTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime.add(Duration(hours: 8)));
-    // controller.startDateTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime);
+
     controller.actionTakenDateTimeCtrlrBuffer =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
     print(
@@ -2623,32 +1706,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                suffixIcon: Icon(Icons.calendar_month)
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-                ),
+                suffixIcon: Icon(Icons.calendar_month)),
           ),
         ),
       ),
@@ -2686,14 +1744,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
           affinity: TextAffinity.upstream,
         ),
       );
-    // controller.validTillTimeCtrlr.text =
-    //     DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
-    // controller.validTillTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime.add(Duration(hours: 8)));
-    // controller.startDateTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    //         .format(dateTime);
+
     controller.reportingDateTimeCtrlrBuffer =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
     print('Reporting Date & Time ${controller.reportingDateTimeCtrlrBuffer}');
@@ -2793,32 +1844,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
-                suffixIcon: Icon(Icons.calendar_month)
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
-                ),
+                suffixIcon: Icon(Icons.calendar_month)),
           ),
         ),
       ),
@@ -2911,26 +1937,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   Widget _buildIncidentReportDescriptionField_web(BuildContext context) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: 'Permit Description: ',
-      //           style: Styles.blackBold16,
-      //           children: [
-      //             TextSpan(
-      //               text: '*',
-      //               style: TextStyle(
-      //                 color: ColorValues.orangeColor,
-      //                 fontWeight: FontWeight.bold,
-      //               ),
-      //             ),
-      //           ]),
-      //     ),
-      //   ),
-      // ),
       Dimens.boxHeight5,
       Container(
         // margin: EdgeInsets.only(left: 5, right: 10),
@@ -3011,26 +2017,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   Widget _buildInsuranceRemarkField_web(BuildContext context) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: 'Permit Description: ',
-      //           style: Styles.blackBold16,
-      //           children: [
-      //             TextSpan(
-      //               text: '*',
-      //               style: TextStyle(
-      //                 color: ColorValues.orangeColor,
-      //                 fontWeight: FontWeight.bold,
-      //               ),
-      //             ),
-      //           ]),
-      //     ),
-      //   ),
-      // ),
       Dimens.boxHeight5,
       Container(
         // width: 500,
@@ -3165,25 +2151,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   Widget _buildVerifiedApprovedTextField_web(BuildContext context) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text:
-      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-      //         TextSpan(
-      //           text: '*',
-      //           style: TextStyle(
-      //             color: ColorValues.orangeColor,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ]),
-      //     ),
-      //   ),
-      // ),
-
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
         width: Responsive.isDesktop(context)
@@ -3263,25 +2230,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   Widget _buildCorrectiveActionTextField_web(BuildContext context) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text:
-      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-      //         TextSpan(
-      //           text: '*',
-      //           style: TextStyle(
-      //             color: ColorValues.orangeColor,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ]),
-      //     ),
-      //   ),
-      // ),
-
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
         width: Responsive.isDesktop(context)
@@ -3362,11 +2310,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     return Column(//
         children: [
       Container(
-        // height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.44
-        //     : MediaQuery.of(context).size.width / 1.1,
-        // margin: EdgeInsets.only(left: 10, right: 18),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -3443,10 +2386,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         children: [
       Dimens.boxHeight5,
       Container(
-        // height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.44
-        //     : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -3524,10 +2463,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         children: [
       Dimens.boxHeight5,
       Container(
-        // height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.44
-        //     : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -3693,91 +2628,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     );
   }
 
-  // Widget _buildRCATextField_web(BuildContext context) {
-  //   return Column(//
-  //       children: [
-  //     Dimens.boxHeight5,
-  //     Container(
-  //       // height: MediaQuery.of(context).size.height * 0.050,
-  //       // width: Responsive.isDesktop(context)
-  //       //     ? MediaQuery.of(context).size.width / 1.44
-  //       //     : MediaQuery.of(context).size.width / 1.1,
-  //       decoration: BoxDecoration(
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.black26,
-  //             offset: const Offset(
-  //               5.0,
-  //               5.0,
-  //             ),
-  //             blurRadius: 5.0,
-  //             spreadRadius: 1.0,
-  //           ),
-  //           BoxShadow(
-  //             color: ColorValues.whiteColor,
-  //             offset: const Offset(0.0, 0.0),
-  //             blurRadius: 0.0,
-  //             spreadRadius: 0.0,
-  //           ),
-  //         ],
-  //         color: ColorValues.whiteColor,
-  //         borderRadius: BorderRadius.circular(5),
-  //       ),
-  //       child: SizedBox(
-  //         width: MediaQuery.of(context).size.width / 1.3,
-  //         child: TextField(
-  //           controller: controller.rcaTextCtrlr,
-  //           keyboardType: TextInputType.multiline,
-  //           autofocus: false,
-  //           decoration: InputDecoration(
-  //             fillColor: ColorValues.whiteColor,
-  //             filled: true,
-  //             contentPadding: Dimens.edgeInsets05_10,
-  //             border: InputBorder.none,
-  //             enabledBorder: InputBorder.none,
-  //             focusedBorder: InputBorder.none,
-  //             focusedErrorBorder: controller.isRCAInvalid.value
-  //                 ? OutlineInputBorder(
-  //                     borderRadius: BorderRadius.circular(5),
-  //                     borderSide: BorderSide(
-  //                       color: ColorValues.redColorDark,
-  //                     ),
-  //                   )
-  //                 : InputBorder.none,
-  //             errorBorder: controller.isRCAInvalid.value
-  //                 ? OutlineInputBorder(
-  //                     borderRadius: BorderRadius.circular(5),
-  //                     borderSide: BorderSide(
-  //                       color: ColorValues.redColorDark,
-  //                     ),
-  //                   )
-  //                 : null,
-  //             errorText:
-  //                 controller.isRCAInvalid.value ? "Required field" : null,
-  //           ),
-  //           onChanged: (value) {
-  //             if (value.trim().length > 3) {
-  //               controller.isRCAInvalid.value = false;
-  //             } else {
-  //               controller.isRCAInvalid.value = true;
-  //             }
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   ]);
-  // }
-
   //Exact location Textfield
   Widget _buildExactLocationTextField_web(BuildContext context) {
     return Column(//
         children: [
       Dimens.boxHeight5,
       Container(
-        // height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.44
-        //     : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -3856,10 +2712,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         children: [
       Dimens.boxHeight5,
       Container(
-        // height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.44
-        //     : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -4376,11 +3228,6 @@ class AddPrposedAction extends StatelessWidget {
         child: Stack(
           children: [
             Column(children: [
-              // Column(
-              //     children: []..addAll(controller.rowItem.value.map((e) {
-              //         return Text(jsonEncode(e));
-              //       }))),
-              // Text(jsonEncode(controller.dropdownMapperData)),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -4687,31 +3534,6 @@ class AddPrposedAction extends StatelessWidget {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 suffixIcon: Icon(Icons.calendar_month),
-
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
               ),
             ),
           ),
@@ -5629,71 +4451,6 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                   orElse: null);
                                         },
                                       ),
-                                      // controller.selectedOption == "Other"
-                                      //     ? SizedBox(
-                                      //         width: MediaQuery.of(context)
-                                      //                 .size
-                                      //                 .width /
-                                      //             5,
-                                      //         child: Padding(
-                                      //           padding:
-                                      //               EdgeInsets.only(top: 10),
-                                      //           child: Column(
-                                      //             mainAxisAlignment:
-                                      //                 MainAxisAlignment.start,
-                                      //             crossAxisAlignment:
-                                      //                 CrossAxisAlignment.start,
-                                      //             children: [
-                                      //               Container(
-                                      //                   decoration:
-                                      //                       BoxDecoration(
-                                      //                     boxShadow: [
-                                      //                       BoxShadow(
-                                      //                         color: Colors
-                                      //                             .black26,
-                                      //                         offset:
-                                      //                             const Offset(
-                                      //                           5.0,
-                                      //                           5.0,
-                                      //                         ),
-                                      //                         blurRadius: 5.0,
-                                      //                         spreadRadius: 1.0,
-                                      //                       ),
-                                      //                     ],
-                                      //                     color: ColorValues
-                                      //                         .whiteColor,
-                                      //                     borderRadius:
-                                      //                         BorderRadius
-                                      //                             .circular(5),
-                                      //                   ),
-                                      //                   child:
-                                      //                       LoginCustomTextfield(
-                                      //                     // ishint:
-                                      //                     //     mapData["value"] =
-                                      //                     //         "",
-                                      //                     keyboardType:
-                                      //                         TextInputType
-                                      //                             .text,
-                                      //                     // inputFormatters: <
-                                      //                     //     TextInputFormatter>[
-                                      //                     //   FilteringTextInputFormatter
-                                      //                     //       .digitsOnly
-                                      //                     // ],
-                                      //                     maxLine: 1,
-                                      //                     textController:
-                                      //                         new TextEditingController(
-                                      //                             text: mapData[
-                                      //                                     "value"] ??
-                                      //                                 ''),
-                                      //                     onChanged: (txt) {
-                                      //                       mapData["value"] =
-                                      //                           txt;
-                                      //                     },
-                                      //                   )),
-                                      //             ],
-                                      //           ),
-                                      //         ))
-                                      //     : Dimens.box0,
                                     ],
                                   ),
                                 )
@@ -5813,70 +4570,6 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                           orElse: null);
                                                 },
                                               ),
-                                              // Container(
-                                              //   decoration: BoxDecoration(
-                                              //     borderRadius:
-                                              //         BorderRadius.circular(6),
-                                              //     border: Border.all(
-                                              //       color: Color.fromARGB(
-                                              //           255, 227, 224, 224),
-                                              //       width: 1,
-                                              //     ),
-                                              //     boxShadow: [
-                                              //       BoxShadow(
-                                              //         color: Colors.black26,
-                                              //         offset: const Offset(
-                                              //           5.0,
-                                              //           5.0,
-                                              //         ),
-                                              //         blurRadius: 5.0,
-                                              //         spreadRadius: 1.0,
-                                              //       ),
-                                              //       BoxShadow(
-                                              //         color: ColorValues.whiteColor,
-                                              //         offset:
-                                              //             const Offset(0.0, 0.0),
-                                              //         blurRadius: 0.0,
-                                              //         spreadRadius: 0.0,
-                                              //       ),
-                                              //     ],
-                                              //   ),
-                                              //   width: (MediaQuery.of(context)
-                                              //           .size
-                                              //           .width *
-                                              //       .2),
-                                              //   height: 35,
-                                              //   child: DropdownButtonHideUnderline(
-                                              //     child: DropdownButton<String>(
-                                              //       isExpanded: true,
-                                              //       value: controller.gender.value,
-                                              //       onChanged: (value) {
-                                              //         controller
-                                              //             .updateGender(value!);
-                                              //       },
-                                              //       items: <String>[
-                                              //         'Select Gender',
-                                              //         'Male',
-                                              //         'Female',
-                                              //         'Other'
-                                              //       ].map<DropdownMenuItem<String>>(
-                                              //           (String value) {
-                                              //         return DropdownMenuItem<
-                                              //             String>(
-                                              //           value: value,
-                                              //           child: Container(
-                                              //             margin: EdgeInsets.only(
-                                              //                 left: 10),
-                                              //             child: Text(
-                                              //               value,
-                                              //               style: Styles.black12,
-                                              //             ),
-                                              //           ),
-                                              //         );
-                                              //       }).toList(),
-                                              //     ),
-                                              //   ),
-                                              // ),
                                             ],
                                           ),
                                         )
