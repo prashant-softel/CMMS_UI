@@ -20,7 +20,7 @@ class CreateIncidentReportModel {
   int? action_taken_by;
   String? action_taken_datetime;
   int? inverstigated_by;
-  int? verified_by;
+  // int? verified_by;
   int? risk_type;
   bool? esi_applicability;
   bool? legal_applicability;
@@ -63,7 +63,7 @@ class CreateIncidentReportModel {
     this.action_taken_by,
     this.action_taken_datetime,
     this.inverstigated_by,
-    this.verified_by,
+    // this.verified_by,
     this.risk_type,
     this.esi_applicability,
     this.legal_applicability,
@@ -108,7 +108,7 @@ class CreateIncidentReportModel {
         action_taken_by: json['action_taken_by'],
         action_taken_datetime: json['action_taken_datetime'],
         inverstigated_by: json['inverstigated_by'],
-        verified_by: json['verified_by'],
+        // verified_by: json['verified_by'],
         risk_type: json['risk_type'],
         esi_applicability: json['esi_applicability'],
         legal_applicability: json['legal_applicability'],
@@ -170,7 +170,7 @@ class CreateIncidentReportModel {
         "action_taken_by": action_taken_by,
         "action_taken_datetime": action_taken_datetime,
         "inverstigated_by": inverstigated_by,
-        "verified_by": verified_by,
+        // "verified_by": verified_by,
         "risk_type": risk_type,
         "esi_applicability": esi_applicability,
         "legal_applicability": legal_applicability,
