@@ -141,14 +141,18 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                   : Dimens.box0),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 10, top: 10),
+                                                left: 10, top: 10, right: 10),
                                             child: Column(
                                               children: [
                                                 Row(
                                                   children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Incident Title: '),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 50),
+                                                      child: CustomRichText(
+                                                          title:
+                                                              'Incident Title: '),
+                                                    ),
                                                     Expanded(
                                                       child:
                                                           _buildIncidentReportTitleTextField_web(
@@ -156,7 +160,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     ),
                                                   ],
                                                 ),
-
+                                                Dimens.boxHeight10,
                                                 Row(
                                                   children: [
                                                     CustomRichText(
@@ -593,20 +597,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               ),
                                                             ],
                                                           ),
-                                                          Dimens.boxHeight15,
-                                                          Column(
+                                                          Dimens.boxHeight10,
+                                                          Row(
                                                             children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                            163),
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Incident Severity: '),
-                                                              ),
-                                                              Row(
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Incident Severity: '),
+                                                              Column(
                                                                 children: [
                                                                   buildRadioButton(
                                                                       'Critical',
@@ -622,6 +619,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       Colors
                                                                           .white,
                                                                       context),
+                                                                ],
+                                                              ),
+                                                              Dimens.boxWidth10,
+                                                              Column(
+                                                                children: [
                                                                   buildRadioButton(
                                                                       'Medium',
                                                                       Colors
@@ -637,11 +639,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                           .white,
                                                                       context),
                                                                 ],
-                                                              ),
+                                                              )
                                                             ],
                                                           ),
 
-                                                          Dimens.boxHeight30,
+                                                          Dimens.boxHeight10,
                                                           Row(
                                                             children: [
                                                               CustomRichText(
@@ -869,7 +871,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         : Container(),
                                                   ],
                                                 ),
-                                                Dimens.boxHeight10,
+                                                Dimens.boxHeight20,
 
                                                 ///Personal Details
                                                 DetailsOfInjuredPerson(),
@@ -2100,6 +2102,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         height: 35,
         width: MediaQuery.of(context).size.width / 10,
         child: RadioListTile(
+          contentPadding: EdgeInsets.zero,
           // contentPadding: EdgeInsets.all(5),
           dense: true,
           title: Container(
@@ -4292,7 +4295,8 @@ class DetailsOfInjuredPerson extends StatelessWidget {
               //       }))),
               // Text(jsonEncode(controller.dropdownMapperData)),
               Padding(
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 10, left: 10, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
