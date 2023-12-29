@@ -288,6 +288,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           Dimens.boxHeight10
                                                         ],
                                                       ),
+
                                                       Obx(
                                                         () => Wrap(children: [
                                                           Row(
@@ -4462,12 +4463,12 @@ class AddPrposedAction extends StatelessWidget {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
                     DataColumn2(
-                        // fixedWidth: 150,
+                        fixedWidth: 90,
                         label: Text(
-                      "Action ",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    )),
+                          "Action ",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
                   ],
                   rows: controller.rowItem.value.map((record) {
                     return DataRow(
