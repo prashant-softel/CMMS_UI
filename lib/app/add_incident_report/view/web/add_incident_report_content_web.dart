@@ -143,6 +143,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             padding: const EdgeInsets.only(
                                                 left: 10, top: 10, right: 10),
                                             child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -1172,41 +1174,47 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     : Dimens.box0,
 
                                                 ///Root Cause
-                                                Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            '           RCA Upload Required: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      child: Obx(
-                                                        () => Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .rCAUploadRequiredValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .rCAUploadRequiredValue
-                                                                .value = value;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
+                                                Dimens.boxHeight10,
+                                                // Row(
+                                                //   children: [
+                                                //     CustomRichText(
+                                                //         title:
+                                                //             'RCA Upload Required: '),
+                                                //     Dimens.boxWidth10,
+                                                //     // SizedBox(
+                                                //     //   width:
+                                                //     //       MediaQuery.of(context)
+                                                //     //               .size
+                                                //     //               .width /
+                                                //     //           5,
+                                                //     //   child: Obx(
+                                                //     //     () => Switch(
+                                                //     //       activeColor:
+                                                //     //           Colors.green,
+                                                //     //       value: controller
+                                                //     //           .rCAUploadRequiredValue
+                                                //     //           .value,
+                                                //     //       onChanged: (value) {
+                                                //     //         controller
+                                                //     //             .rCAUploadRequiredValue
+                                                //     //             .value = value;
+                                                //     //       },
+                                                //     //     ),
+                                                //     //   ),
+                                                //     // )
+                                                //   ],
+                                                // ),
+                                                Text(
+                                                  "RCA Upload Required",
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                Dimens.boxHeight5,
-                                                controller.rCAUploadRequiredValue ==
-                                                        true
-                                                    ? RootCauseAnalysis()
-                                                    : Dimens.box0,
+                                                Dimens.boxHeight10,
+
+                                                // controller.rCAUploadRequiredValue ==
+                                                //         true
+                                                // ?
+                                                RootCauseAnalysis(),
+                                                // : Dimens.box0,
 
                                                 ///Immediate Correction
                                                 ImmediateCorrection(),
@@ -3211,7 +3219,7 @@ class AddPrposedAction extends StatelessWidget {
   ) {
     return Obx(
       () => Container(
-        margin: Dimens.edgeInsets20,
+        margin: EdgeInsets.only(top: 20),
         //  height: 300,
         height: ((controller.rowItem.value.length) * 70) + 150,
         decoration: BoxDecoration(
@@ -3329,7 +3337,7 @@ class AddPrposedAction extends StatelessWidget {
                                   (mapData['key'] == "Remark") ||
                                   (mapData['key'] == "HSE Remark")
                               ? Padding(
-                                  padding: EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top: 10, right: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -3742,7 +3750,7 @@ class WhyWhyAnalysis extends StatelessWidget {
                         return DataCell(
                           (mapData['key'] == "Why ")
                               ? Padding(
-                                  padding: EdgeInsets.only(top: 10),
+                                  padding: EdgeInsets.only(top: 10, right: 20),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -3786,7 +3794,8 @@ class WhyWhyAnalysis extends StatelessWidget {
                                 )
                               : (mapData['key'] == "Cause ")
                                   ? Padding(
-                                      padding: EdgeInsets.only(top: 10),
+                                      padding: EdgeInsets.only(
+                                          top: 10, right: 20, left: 20),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -3882,7 +3891,7 @@ class RootCauseAnalysis extends StatelessWidget {
   ) {
     return Obx(
       () => Container(
-        margin: Dimens.edgeInsets20,
+        // margin: Dimens.edgeInsets20,
         //  height: 300,
         height: ((controller.rowRootCauseItem.value.length) * 70) + 150,
         decoration: BoxDecoration(
@@ -3989,6 +3998,7 @@ class RootCauseAnalysis extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
+                                          margin: EdgeInsets.only(right: 20),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -4074,7 +4084,7 @@ class ImmediateCorrection extends StatelessWidget {
   ) {
     return Obx(
       () => Container(
-        margin: Dimens.edgeInsets20,
+        margin: EdgeInsets.only(top: 20),
         //  height: 300,
         height:
             ((controller.rowImmediateCorrectionItem.value.length) * 70) + 150,
@@ -4183,6 +4193,7 @@ class ImmediateCorrection extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
+                                          margin: EdgeInsets.only(right: 20),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
