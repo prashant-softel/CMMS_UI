@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
 import 'package:cmms/domain/models/create_audit_plan_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
@@ -146,7 +147,7 @@ class CreateAuditController extends GetxController {
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
       plan_number: _planTitle,
       Facility_id: facilityId,
-      auditee_id: 101,
+      auditee_id: varUserAccessModel.value.user_id,
       auditor_id: facilityId,
       Checklist_id: int.tryParse(selectedchecklistId.value),
       Description: _description,

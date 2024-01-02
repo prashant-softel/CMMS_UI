@@ -6,35 +6,35 @@ class ResponsibilitylistUsecase {
 
   Repository repository;
 
-  Future<List<DesignationModel?>?> getDesignationList({
+  Future<List<DesignationModel?>?> getResponsibilityList({
     int? type,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getDesignationList(
+      await repository.getResponsibilityList(
         // type,
         // facilityId,
         isLoading,
       );
 
-  Future<bool> createDesignation({
+  Future<bool> createResponsibility({
     designationJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createDesignation(
+      await repository.createResponsibility(
           isLoading: isLoading, designationJsonString: designationJsonString);
-  deleteDesignation(
+  deleteResponsibility(
           {required Object module_id, required bool isLoading}) async =>
-      await repository.deleteDesignation(
+      await repository.deleteResponsibility(
         module_id,
         isLoading,
       );
 
-  Future<bool> updateDesignation({
+  Future<bool> updateResponsibility({
     designationJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updateDesignation(
+      await repository.updateResponsibility(
         isLoading: isLoading,
         designationJsonString: designationJsonString,
       );

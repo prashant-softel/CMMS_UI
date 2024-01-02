@@ -26,7 +26,7 @@ class ResponsibilityListController extends GetxController {
   // Rx<String> selectedequipment = ''.obs;
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<DesignationModel?>? designationList = <DesignationModel?>[].obs;
+  RxList<DesignationModel?>? responsibilityList = <DesignationModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -55,26 +55,26 @@ class ResponsibilityListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getDesignationList(true);
+        getResponsibilityList(true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getDesignationList(bool isLoading) async {
-    designationList?.value = <DesignationModel>[];
-    final _moduleList =
-        await responsibilityPresenter.getDesignationList(isLoading: isLoading);
+  Future<void> getResponsibilityList(bool isLoading) async {
+    responsibilityList?.value = <DesignationModel>[];
+    final _moduleList = await responsibilityPresenter.getResponsibilityList(
+        isLoading: isLoading);
 
     if (_moduleList != null) {
-      designationList!.value = _moduleList.cast<DesignationModel?>();
+      responsibilityList!.value = _moduleList.cast<DesignationModel?>();
       paginationController = PaginationController(
-        rowCount: designationList?.length ?? 0,
+        rowCount: responsibilityList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (designationList != null && designationList!.isNotEmpty) {
-        designationModel = designationList![0];
+      if (responsibilityList != null && responsibilityList!.isNotEmpty) {
+        designationModel = responsibilityList![0];
         var preventiveCheckListJson = designationModel?.toJson();
         moduleListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
@@ -96,7 +96,7 @@ class ResponsibilityListController extends GetxController {
     }
   }
 
-  Future<bool> createDesignation() async {
+  Future<bool> createResponsibility() async {
     print("CREATE CONTROLLER");
     if (nameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
@@ -109,9 +109,7 @@ class ResponsibilityListController extends GetxController {
       isDescriptionInvalid.value = true;
     }
     checkForm();
-    print("FORMVALIDITIY : $isFormInvalid.value");
-    print("TITLE : $isTitleInvalid.value");
-    print("DES : $isDescriptionInvalid.value");
+
     if (isFormInvalid.value == true) {
       return false;
     }
@@ -129,13 +127,13 @@ class ResponsibilityListController extends GetxController {
           createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
-      await responsibilityPresenter.createDesignation(
+      await responsibilityPresenter.createResponsibility(
         designationJsonString: moduleListJsonString,
         isLoading: true,
       );
       return true;
     }
-    getDesignationList(true);
+    getResponsibilityList(true);
     return true;
   }
 
@@ -151,7 +149,7 @@ class ResponsibilityListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getDesignationList(true);
+      getResponsibilityList(true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -193,9 +191,9 @@ class ResponsibilityListController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteDesignation(module_id).then((value) {
+                  deleteResponsibility(module_id).then((value) {
                     Get.back();
-                    getDesignationList(true);
+                    getResponsibilityList(true);
                   });
                 },
                 child: Text('YES'),
@@ -207,16 +205,16 @@ class ResponsibilityListController extends GetxController {
     );
   }
 
-  Future<void> deleteDesignation(String? module_id) async {
+  Future<void> deleteResponsibility(String? module_id) async {
     {
-      await responsibilityPresenter.deleteDesignation(
+      await responsibilityPresenter.deleteResponsibility(
         module_id,
         isLoading: true,
       );
     }
   }
 
-  Future<bool> updateDesignation(moduleId) async {
+  Future<bool> updateResponsibility(moduleId) async {
     String _name = nameCtrlr.text.trim();
     String _Description = descriptionCtrlr.text.trim();
 
@@ -226,7 +224,7 @@ class ResponsibilityListController extends GetxController {
         createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"designationJsonString", designationJsonString});
-    await responsibilityPresenter.updateDesignation(
+    await responsibilityPresenter.updateResponsibility(
       designationJsonString: designationJsonString,
       isLoading: true,
     );

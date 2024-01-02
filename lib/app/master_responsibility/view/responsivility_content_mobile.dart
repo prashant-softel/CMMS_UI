@@ -24,12 +24,12 @@ class ResponsibilityListContentMobile
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: controller.designationList != null
-                        ? controller.designationList?.length
+                    itemCount: controller.responsibilityList != null
+                        ? controller.responsibilityList?.length
                         : 0,
                     itemBuilder: (context, index) {
-                      final roleModel = (controller.designationList != null)
-                          ? controller.designationList![index]
+                      final roleModel = (controller.responsibilityList != null)
+                          ? controller.responsibilityList![index]
                           : DesignationModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
