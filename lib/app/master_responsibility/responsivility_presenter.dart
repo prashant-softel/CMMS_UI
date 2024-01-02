@@ -6,35 +6,35 @@ class ResponsibilityListPresenter {
   ResponsibilityListPresenter(this.responsibilityUsecase);
   ResponsibilitylistUsecase responsibilityUsecase;
 
-  Future<List<DesignationModel?>?> getDesignationList({
+  Future<List<DesignationModel?>?> getResponsibilityList({
     bool? isLoading,
   }) async =>
-      await responsibilityUsecase.getDesignationList(
+      await responsibilityUsecase.getResponsibilityList(
         isLoading: isLoading ?? false,
       );
 
-  Future<bool> createDesignation({
+  Future<bool> createResponsibility({
     designationJsonString,
     required bool isLoading,
   }) async {
     print("presenter");
-    responsibilityUsecase.createDesignation(
+    responsibilityUsecase.createResponsibility(
       designationJsonString: designationJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  deleteDesignation(String? module_id, {required bool isLoading}) async =>
-      await responsibilityUsecase.deleteDesignation(
+  deleteResponsibility(String? module_id, {required bool isLoading}) async =>
+      await responsibilityUsecase.deleteResponsibility(
         module_id: module_id ?? 0,
         isLoading: isLoading,
       );
 
-  Future<bool> updateDesignation(
+  Future<bool> updateResponsibility(
       {designationJsonString, required bool isLoading, moduleId}) async {
     print("presenter");
-    responsibilityUsecase.updateDesignation(
+    responsibilityUsecase.updateResponsibility(
       designationJsonString: designationJsonString,
       isLoading: isLoading,
     );

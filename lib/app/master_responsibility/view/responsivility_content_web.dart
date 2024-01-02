@@ -420,7 +420,7 @@ class ResponsibilityListContentWeb
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .createDesignation()
+                                                  .createResponsibility()
                                                   .then((value) {
                                                 print("CREATE");
                                                 print("value,$value");
@@ -436,8 +436,9 @@ class ResponsibilityListContentWeb
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .updateDesignation(controller
-                                                      .selectedItem?.id)
+                                                  .updateResponsibility(
+                                                      controller
+                                                          .selectedItem?.id)
                                                   .then((value) {
                                                 print("UPDATE");
                                                 print("value,$value");
@@ -566,15 +567,15 @@ class ResponsibilityListContentWeb
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.designationList?.length ?? 0,
+                                    controller.responsibilityList?.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .designationList?[index]?.name
+                                              .responsibilityList?[index]?.name
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .designationList?[index]
+                                              .responsibilityList?[index]
                                               ?.description ??
                                           '')),
                                       DataCell(Row(
@@ -584,16 +585,15 @@ class ResponsibilityListContentWeb
                                               icon: Icons.edit,
                                               message: 'Edit',
                                               onPress: () {
-                                                controller.selectedItem =
-                                                    controller
-                                                        .designationList
-                                                        ?.firstWhere((element) =>
-                                                            "${element?.id}" ==
-                                                            controller
-                                                                .designationList?[
-                                                                    index]
-                                                                ?.id
-                                                                .toString());
+                                                controller.selectedItem = controller
+                                                    .responsibilityList
+                                                    ?.firstWhere((element) =>
+                                                        "${element?.id}" ==
+                                                        controller
+                                                            .responsibilityList?[
+                                                                index]
+                                                            ?.id
+                                                            .toString());
 
                                                 controller.nameCtrlr.text =
                                                     controller.selectedItem
@@ -607,21 +607,21 @@ class ResponsibilityListContentWeb
                                                 controller.isContainerVisible
                                                     .value = true;
                                                 // int spvId = int.tryParse(
-                                                //         designationList?.name ??
+                                                //        .responsibilityList?.name ??
                                                 //             "") ??
                                                 //     0;
                                                 // if (spvId != 0) {
                                                 //   Get.toNamed(
-                                                //       Routes.designationListScreen,
+                                                //       Routes.responsibilityListScreen,
                                                 //       arguments: {"spvId": spvId});
                                                 // }
                                                 // controller.selectedItem =
-                                                //     controller.designationList.firstWhere(
+                                                //     controller.responsibilityList.firstWhere(
                                                 //         (element) =>
                                                 //             "${element.id}" ==
                                                 //             _permitTypeList[0]);
                                                 // controller.selectedItem =
-                                                //     controller.designationList.firstWhere(
+                                                //     controller.responsibilityList.firstWhere(
                                                 //         (element) =>
                                                 //             "${element.id}" ==
                                                 //             _permitTypeList[0]);
@@ -635,11 +635,13 @@ class ResponsibilityListContentWeb
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   module_id: controller
-                                                      .designationList?[index]
+                                                      .responsibilityList?[
+                                                          index]
                                                       ?.id
                                                       .toString(),
                                                   module: controller
-                                                      .designationList?[index]
+                                                      .responsibilityList?[
+                                                          index]
                                                       ?.name);
                                             },
                                           ),
