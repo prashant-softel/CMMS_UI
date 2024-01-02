@@ -123,7 +123,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _stockManagementList(
                             tittle: "Request Orders",
@@ -160,7 +160,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _stockManagementList(
                             tittle: "MRS List",
@@ -189,7 +189,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _importPlan(
                             tittle: "Import Material",
@@ -233,7 +233,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _stockManagementList(
                             tittle: "Plant Stock Report",
@@ -295,7 +295,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _stockManagementList(
                             tittle: "List of Grievance",
@@ -357,7 +357,7 @@ class StockManagementDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _stockManagementList(
                             tittle: "Asset Master",

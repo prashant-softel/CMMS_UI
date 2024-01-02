@@ -99,7 +99,7 @@ class IncidentReportDashboardScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _incidentReportList(
                             tittle: "Incident Report List",

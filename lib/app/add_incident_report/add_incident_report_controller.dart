@@ -708,6 +708,7 @@ class AddIncidentReportController extends GetxController {
                 '${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse('${element?.target_date}'))}'
           },
           {'key': "Remark", "value": '${element?.remarks}'},
+          {'key': "HSC", "value": '${element?.remarks}'},
           {'key': "Action ", "value": ''},
         ]);
         // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =

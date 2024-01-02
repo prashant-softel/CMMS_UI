@@ -139,7 +139,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           createContentTile(
                             title: "List Of observation",
@@ -180,10 +180,10 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           createContentTile(
-                              title: "MIS Checklist",
+                              title: "MIS Checklist1",
                               onTap: () {
                                 controller.createChecklist();
                               }),
@@ -213,7 +213,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                           childAspectRatio: Responsive.isMobile(context)
                               ? (itemWidth / itemHeight)
-                              : (itemWidth / itemHeightWeb),
+                              : 5,
                           children: <Widget>[
                             createContentTile(
                                 title: "Checklist Plan",
@@ -289,7 +289,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           // createContentTile(
                           //   title: 'CheckList Inspection',
@@ -344,7 +344,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           // createContentTile(
                           //   title: 'CheckList Inspection',
@@ -399,7 +399,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           // createContentTile(
                           //   title: 'CheckList Inspection',
@@ -450,7 +450,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           OnHover(builder: (((isHovered) {
                             return createContentTile(

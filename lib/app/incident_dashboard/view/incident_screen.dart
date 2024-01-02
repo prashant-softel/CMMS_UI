@@ -52,7 +52,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child:  Row(
+                        child: Row(
                           children: [
                             Text(
                               "Incident Report ",
@@ -64,13 +64,13 @@ class IncidentScreen extends GetView<IncidentReportController> {
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -85,7 +85,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _incidentReportList(
                             tittle: "Incident Report List",
@@ -136,7 +136,7 @@ class IncidentScreen extends GetView<IncidentReportController> {
                         ),
                       ),
                     ),
-                     GridView.count(
+                    GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
@@ -145,9 +145,8 @@ class IncidentScreen extends GetView<IncidentReportController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
-
                         _incidentReportList(
                             tittle: "Incident Risk Type",
                             ontap: () {
@@ -224,14 +223,13 @@ class IncidentScreen extends GetView<IncidentReportController> {
                       color: ColorValues.whiteColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w700),
-                textAlign: TextAlign.center,
-                  ),
-
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

@@ -90,7 +90,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _inventoryList(
                             tittle: "Assets List",
@@ -146,7 +146,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         // _inventoryList(
                         //     tittle: "Warranty Certificates",
@@ -219,7 +219,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         // _inventoryList(
                         //     tittle: "Calibration Certificates",
@@ -300,7 +300,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _inventoryList(
                             tittle: "Assets Category",

@@ -100,7 +100,7 @@ class AuditScreen extends GetView<AuditController> {
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
                             ? (itemWidth / itemHeight)
-                            : (itemWidth / itemHeightWeb),
+                            : 5,
                         children: <Widget>[
                           _priventiveList(
                               tittle: " Audit Plan",
@@ -154,7 +154,7 @@ class AuditScreen extends GetView<AuditController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _priventiveList(
                             tittle: "Check List",
