@@ -128,7 +128,7 @@ class SettingDashboardScreen extends GetView<SettingDashboardController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _settingList(
                             tittle: "Change Password",

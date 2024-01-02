@@ -15,6 +15,7 @@ class CustomRichText extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       maxLines: maxline,
+      overflow: TextOverflow.ellipsis,
       text: TextSpan(text: title, style: Styles.blackBold16, children: [
         TextSpan(
           text: '*',

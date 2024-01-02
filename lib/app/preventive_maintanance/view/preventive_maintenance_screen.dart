@@ -125,7 +125,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _priventiveList(
                             tittle: "PM Plans",
@@ -148,7 +148,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _priventiveList(
                             tittle: "PM Tasks",
@@ -192,7 +192,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         _priventiveList(
                             tittle: "Check List",

@@ -299,7 +299,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return
@@ -384,7 +384,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -445,7 +445,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(
                                 builder: ((isHovered) {
@@ -489,7 +489,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -556,7 +556,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -617,7 +617,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -692,7 +692,7 @@ class MastersDashboard extends GetView<MastersController> {
                           //       Responsive.isMobile(context) ? 2 : 5,
                           //   childAspectRatio: Responsive.isMobile(context)
                           //       ? (itemWidth / itemHeight)
-                          //       : (itemWidth / itemHeightWeb),
+                          //       : 5,
                           //   children: <Widget>[
                           //     OnHover(builder: (((isHovered) {
                           //       return createContentTile(
@@ -768,7 +768,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
@@ -815,7 +815,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               _inventoryList(
                                   tittle: "Assets List",
@@ -875,7 +875,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               // _inventoryList(
                               //     tittle: "Warranty Certificates",
@@ -954,7 +954,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               // _inventoryList(
                               //     tittle: "Calibration Certificates",
@@ -1036,7 +1036,7 @@ class MastersDashboard extends GetView<MastersController> {
                                 Responsive.isMobile(context) ? 2 : 5,
                             childAspectRatio: Responsive.isMobile(context)
                                 ? (itemWidth / itemHeight)
-                                : (itemWidth / itemHeightWeb),
+                                : 5,
                             children: <Widget>[
                               _inventoryList(
                                   tittle: "Assets Category",
@@ -1095,7 +1095,7 @@ class MastersDashboard extends GetView<MastersController> {
                           //       Responsive.isMobile(context) ? 2 : 5,
                           //   childAspectRatio: Responsive.isMobile(context)
                           //       ? (itemWidth / itemHeight)
-                          //       : (itemWidth / itemHeightWeb),
+                          //       : 5,
                           //   children: <Widget>[
                           //     OnHover(builder: (((isHovered) {
                           //       return createContentTile(
