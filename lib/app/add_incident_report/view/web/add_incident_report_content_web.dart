@@ -1210,7 +1210,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           //   ],
                                                           // ),
                                                           Text(
-                                                            "RCA Upload Required",
+                                                            "RCA  Required",
                                                             style: Styles
                                                                 .blackBold14,
                                                           ),
@@ -3290,7 +3290,7 @@ class AddPrposedAction extends StatelessWidget {
               ),
               Expanded(
                 child: DataTable2(
-                  // minWidth: 2000,
+                  minWidth: 2000,
                   dataRowHeight: 70,
                   columnSpacing: 10,
                   border: TableBorder.all(
@@ -3328,6 +3328,13 @@ class AddPrposedAction extends StatelessWidget {
                         // fixedWidth: 250,
                         label: Text(
                       "HSE Remark ",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 250,
+                        label: Text(
+                      "Status ",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
@@ -3426,52 +3433,92 @@ class AddPrposedAction extends StatelessWidget {
                                         ],
                                       ),
                                     )
-                                  : (mapData['key'] == "Target Date ")
+                                  : (mapData['key'] == "Status")
                                       ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 10),
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10, top: 10),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              _buildTargetDateField_web(
-                                                context,
-                                                new TextEditingController(
-                                                    text:
-                                                        mapData["value"] ?? ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
+                                              DropdownWebStock(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                dropdownList:
+                                                    controller.statusList,
+                                                selectedValue: mapData["value"],
+                                                onValueChanged:
+                                                    (list, selectedValue) {
+                                                  print({
+                                                    selectedValue: selectedValue
+                                                  });
+                                                  mapData["value"] =
+                                                      selectedValue;
+                                                  controller.dropdownStatusMapperData[
+                                                          selectedValue] =
+                                                      list.firstWhere(
+                                                          (element) =>
+                                                              element.name ==
+                                                              selectedValue,
+                                                          orElse: null);
                                                 },
-                                              )
+                                              ),
                                             ],
                                           ),
                                         )
-                                      : (mapData['key'] == "Action ")
+                                      : (mapData['key'] == "Target Date ")
                                           ? Padding(
-                                              padding: EdgeInsets.only(top: 10),
+                                              padding: const EdgeInsets.only(
+                                                  top: 10),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.appRedColor,
-                                                    icon: Icons.delete,
-                                                    label: '',
-                                                    message: '',
-                                                    onPress: () {
-                                                      controller.rowItem
-                                                          .remove(record);
+                                                  _buildTargetDateField_web(
+                                                    context,
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                    onChanged: (txt) {
+                                                      mapData["value"] = txt;
                                                     },
                                                   )
                                                 ],
                                               ),
                                             )
-                                          : Text(mapData['key'] ?? ''),
+                                          : (mapData['key'] == "Action ")
+                                              ? Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .appRedColor,
+                                                        icon: Icons.delete,
+                                                        label: '',
+                                                        message: '',
+                                                        onPress: () {
+                                                          controller.rowItem
+                                                              .remove(record);
+                                                        },
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : Text(mapData['key'] ?? ''),
                         );
                       }).toList(),
                     );
