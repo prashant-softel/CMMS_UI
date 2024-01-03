@@ -309,11 +309,11 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                               : (mapData['key'] ==
                                                       "Available_Qty")
                                                   ? Text(
-                                                      "${controller.dropdownMapperData[record[0]['value']]?.available_qty ?? ""}")
+                                                      "${controller.dropdownMapperData.value[record[0]['value']]?.available_qty ?? ""}")
                                                   : (mapData['key'] ==
                                                           "Material_Type")
                                                       ? Text(
-                                                          "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
                                                       : Text(
                                                           mapData['key'] ?? ''),
                                     );

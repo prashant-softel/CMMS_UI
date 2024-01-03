@@ -563,42 +563,40 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
         width: 200,
         height: 60,
         padding: EdgeInsets.only(left: 10, right: 10, top: 5),
-        child: Expanded(
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  children: [
-                    Text(
-                      tittle,
-                      style: TextStyle(
-                          color: ColorValues.whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w200),
-                      textAlign: TextAlign.center,
-                    ),
-                    // Dimens.boxWidth10,
-                  ],
-                ),
-              ),
-              Row(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Row(
                 children: [
-                  Dimens.boxWidth40,
-                  Spacer(),
                   Text(
-                    percent,
+                    tittle,
                     style: TextStyle(
                         color: ColorValues.whiteColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w200),
                     textAlign: TextAlign.center,
                   ),
-                  Spacer(),
+                  // Dimens.boxWidth10,
                 ],
               ),
-            ],
-          ),
+            ),
+            Row(
+              children: [
+                Dimens.boxWidth40,
+                Spacer(),
+                Text(
+                  percent,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                ),
+                Spacer(),
+              ],
+            ),
+          ],
         ),
       ),
     );

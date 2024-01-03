@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
@@ -124,6 +125,10 @@ class AddUserController extends GetxController {
   Rx<String> selectedIBusinessList = 'Select Company'.obs;
   Rx<bool> isBusinessListSelected = true.obs;
   int selectedBusinessTypeId = 0;
+  RxList<DesignationModel?> responsList = <DesignationModel>[].obs;
+  Rx<String> selectedres = 'Select Responsbility'.obs;
+  Rx<bool> isSelectedres = true.obs;
+  int selectedresId = 0;
 
   ///
   void onInit() async {
@@ -143,6 +148,9 @@ class AddUserController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getBusinessList(0);
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getResponsibilityList(true);
       });
       if (userId.value != 0) {
         await getUserDetails();
@@ -192,6 +200,18 @@ class AddUserController extends GetxController {
 
   void togglePasswordVisibility() {
     isPasswordVisible.toggle();
+  }
+
+  Future<void> getResponsibilityList(bool isLoading) async {
+    responsList.value = <DesignationModel>[];
+    final _moduleList =
+        await addUserPresenter.getResponsibilityList(isLoading: isLoading);
+
+    if (_moduleList != null) {
+      for (var _respList in _moduleList) {
+        responsList.add(_respList);
+      }
+    }
   }
 
   // void validatePassword(String value) {
@@ -457,6 +477,12 @@ class AddUserController extends GetxController {
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
           selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
+        }
+        break;
+      case RxList<DesignationModel>:
+        {
+          int resIndex = responsList.indexWhere((x) => x?.name == value);
+          selectedresId = responsList[resIndex]?.id ?? 0;
         }
         break;
       case RxList<RoleModel>:
