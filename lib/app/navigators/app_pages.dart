@@ -15,6 +15,8 @@ import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
 import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
+import 'package:cmms/app/add_water_data_per_day/add_water_data_binding.dart';
+import 'package:cmms/app/add_water_data_per_day/view/add_water_data_screen.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
 import 'package:cmms/app/audit/view/audit_screen.dart';
@@ -1065,6 +1067,11 @@ class AppPages {
       name: _Paths.auditTask,
       page: AuditTaskScreen.new,
       binding: AuditTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addWaterData,
+      page: AddWaterDataScreen.new,
+      binding: AddWaterDataBinding(),
     ),
   ];
 }
