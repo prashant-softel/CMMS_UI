@@ -37,7 +37,7 @@ class ImportMsgDialog extends GetView {
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: 50,
+            height: double.infinity,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

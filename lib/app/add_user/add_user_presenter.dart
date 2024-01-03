@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/access_level_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
@@ -52,6 +53,12 @@ class AddUserPresenter {
       await addUserUsecase.getRoleAccessList(
         roleId: roleId,
         isLoading: isLoading,
+      );
+  Future<List<DesignationModel?>?> getResponsibilityList({
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getResponsibilityList(
+        isLoading: isLoading ?? false,
       );
   Future<GetNotificationModel?> getRoleNotificationList({
     int? roleId,

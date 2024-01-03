@@ -10,12 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
+import '../view_mis_plan/view_mis_plan_controller.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class MisExecutionProcessDialog extends GetView {
   MisExecutionProcessDialog();
 
-  // final PreventiveMaintenanceExecutionController controller = Get.find();
+  final ViewMisPlanController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -133,14 +134,14 @@ class MisExecutionProcessDialog extends GetView {
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           )),
-                                      // DataColumn2(
-                                      //     fixedWidth: 200,
-                                      //     label: Text(
-                                      //       "Upload Images",
-                                      //       style: TextStyle(
-                                      //           fontSize: 15,
-                                      //           fontWeight: FontWeight.bold),
-                                      //     )),
+                                      DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Type",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
                                           fixedWidth: 300,
                                           label: Text(
@@ -155,14 +156,14 @@ class MisExecutionProcessDialog extends GetView {
                                         "1",
                                         "checkpoint1",
                                         "requirment",
-                                        //  "Upload_image",
+                                        "Upload_image",
                                         "Observation",
                                       ],
                                       [
                                         "2",
                                         "checkpoint2",
                                         "requirment",
-                                        // "Upload_image",
+                                        "Upload_image",
                                         "Observation",
                                       ],
                                     ].map((record) {
@@ -187,16 +188,14 @@ class MisExecutionProcessDialog extends GetView {
                                                       maxLine: 5,
                                                     ),
                                                   )
-                                                // : (value == "Upload_image")
-                                                //     ? TableActionButton(
-                                                //         color: ColorValues
-                                                //             .appDarkBlueColor,
-                                                //         icon: Icons
-                                                //             .remove_red_eye_outlined,
-                                                //         // label: '1 Files',
-                                                //         onPress: () {},
-                                                //       )
-                                                : Text(value),
+                                                : (value == "Upload_image")
+                                                    ? CustomSwitchTroggle(
+                                                        value: controller
+                                                            .isToggleOn.value,
+                                                        onChanged: (value) {
+                                                          controller.toggle();
+                                                        })
+                                                    : Text(value),
                                           );
                                         }).toList(),
                                       );
@@ -292,7 +291,7 @@ class MisExecutionProcessDialog extends GetView {
                           text: "Update",
                           onPressed: () {
                             Get.back();
-                            controller.transferItem();
+                            // controller.transferItem();
                             // controller.updatePmExecution();
                           },
                         ),

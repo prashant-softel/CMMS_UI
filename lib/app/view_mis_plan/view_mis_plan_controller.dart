@@ -21,6 +21,11 @@ class ViewMisPlanController extends GetxController {
 
   Rx<AuditPlanDetailModel?> auditPlanDetailModel = AuditPlanDetailModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  var isToggleOn = false.obs;
+
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
 
   @override
   void onInit() async {

@@ -21,7 +21,7 @@ class CreateMrsController extends GetxController {
   RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
-  Map<String, GetAssetItemsModel> dropdownMapperData = {};
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
 
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
@@ -119,12 +119,13 @@ class CreateMrsController extends GetxController {
     List<Equipments> items = [];
     rowItem.forEach((element) {
       Equipments item = Equipments(
-        id: dropdownMapperData[element[0]["value"]]?.id,
+        id: dropdownMapperData.value[element[0]["value"]]?.id,
         issued_qty:
             0, // dropdownMapperData[element[0]["value"]]?.available_qty,
-        asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
-        equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
-        asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
+        asset_code: dropdownMapperData.value[element[0]["value"]]?.asset_code,
+        equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
+        asset_type_ID:
+            dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,
         requested_qty: int.tryParse(element[4]["value"] ?? '0'),
       );
       items.add(item);
