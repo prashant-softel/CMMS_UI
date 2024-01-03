@@ -75,12 +75,23 @@ class AddDialog extends GetView {
                       CustomTextFieldForStock(
                         width: MediaQuery.of(context).size.width / 5,
                         numberTextField: true,
-                        onTap: () {
-                          // controller.openPurchaseDatePicker =
-                          //     !controller.openPurchaseDatePicker;
-                          controller.update(['stock_Mangement']);
+                        onTap: () async {
+                          // Show date picker and set the selected date
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101),
+                          );
+
+                          // If a date is selected, update the selectedDate and the UI
+                          if (pickedDate != null &&
+                              pickedDate != selectedDate) {
+                            setState(() {
+                              selectedDate = pickedDate;
+                            });
+                          }
                         },
-                        // textController: controller.purchaseDateTc,
                       ),
                       Dimens.boxHeight10,
                       DropdownWebStock(

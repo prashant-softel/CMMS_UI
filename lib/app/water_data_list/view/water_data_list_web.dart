@@ -581,6 +581,10 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                               icon: Icons
                                                                   .remove_red_eye_outlined,
                                                               message: 'View',
+                                                              onPress: () {
+                                                                Get.toNamed(Routes
+                                                                    .viewWaterData);
+                                                              },
                                                             ),
                                                             TableActionButton(
                                                               color: ColorValues

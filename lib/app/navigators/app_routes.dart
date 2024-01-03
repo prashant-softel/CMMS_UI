@@ -181,6 +181,7 @@ abstract class Routes {
   static const responsibility = _Paths.responsibility;
   static const auditTask = _Paths.auditTask;
   static const addWaterData = _Paths.addWaterData;
+  static const viewWaterData = _Paths.viewWaterData;
 }
 
 abstract class _Paths {
@@ -357,4 +358,5 @@ abstract class _Paths {
   static const responsibility = '/responsibility';
   static const auditTask = '/auditTask';
   static const addWaterData = '/addWaterData';
+  static const viewWaterData = '/viewWaterData';
 }
