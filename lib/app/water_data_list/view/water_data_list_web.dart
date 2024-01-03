@@ -313,6 +313,22 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 ],
                                               ),
                                             ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  // Get.offNamed(
+                                                  //   Routes
+                                                  //     .updateGoodsOrdersDetailsScreen);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              ),
+                                            )
                                           ],
                                         ),
                                         Divider(
