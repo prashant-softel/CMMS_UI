@@ -180,6 +180,7 @@ abstract class Routes {
   static const editGrievance = _Paths.editGrievance;
   static const responsibility = _Paths.responsibility;
   static const auditTask = _Paths.auditTask;
+  static const addWaterData = _Paths.addWaterData;
 }
 
 abstract class _Paths {
@@ -355,4 +356,5 @@ abstract class _Paths {
 // static const editPermitWebScreen = '/edit-permit-web-screen';
   static const responsibility = '/responsibility';
   static const auditTask = '/auditTask';
+  static const addWaterData = '/addWaterData';
 }

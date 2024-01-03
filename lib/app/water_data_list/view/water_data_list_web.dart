@@ -322,9 +322,8 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 icon: Icons.add,
                                                 label: "Add New",
                                                 onPressed: () {
-                                                  // Get.offNamed(
-                                                  //   Routes
-                                                  //     .updateGoodsOrdersDetailsScreen);
+                                                  Get.offNamed(
+                                                      Routes.addWaterData);
                                                 },
                                                 color: ColorValues.addNewColor,
                                               ),
