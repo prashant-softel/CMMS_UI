@@ -1,6 +1,7 @@
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
-import 'package:cmms/app/water_data/water_data_controller.dart';
+import 'package:cmms/app/view_water_data/view_water_data_controller.dart';
+
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +13,19 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 
-class WaterDataWeb extends StatefulWidget {
-  WaterDataWeb({
+class ViewWaterDataWeb extends StatefulWidget {
+  ViewWaterDataWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<WaterDataWeb> createState() => _WaterDataWebState();
+  State<ViewWaterDataWeb> createState() => _WaterDataWebState();
 }
 
-class _WaterDataWebState extends State<WaterDataWeb> {
+class _WaterDataWebState extends State<ViewWaterDataWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<WaterDataController>(
+    return GetBuilder<ViewWaterDataController>(
       id: 'stock_Mangement',
       builder: (controller) {
         return Scaffold(
@@ -48,7 +49,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Water Data1",
+                                      "View Water Data",
                                       style: Styles.blackBold16,
                                     ),
                                   ],

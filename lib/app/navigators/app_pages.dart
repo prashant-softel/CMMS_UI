@@ -157,6 +157,8 @@ import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
+import 'package:cmms/app/view_water_data/view/view_water_data_screen.dart';
+import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
@@ -1072,6 +1074,11 @@ class AppPages {
       name: _Paths.addWaterData,
       page: AddWaterDataScreen.new,
       binding: AddWaterDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewWaterData,
+      page: ViewWaterDataScreen.new,
+      binding: ViewWaterDataBinding(),
     ),
   ];
 }
