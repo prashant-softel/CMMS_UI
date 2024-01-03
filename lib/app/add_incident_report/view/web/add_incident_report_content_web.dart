@@ -1090,157 +1090,168 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
 
                                                 Dimens.boxHeight20,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Why Why Analysis Required: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      child:
-                                                          // controller.id !=
-                                                          //         null
-                                                          //     ? controller
-                                                          //                 .incidentReportDetailsModel
-                                                          //                 .value
-                                                          //                 ?.legal_applicability_name ==
-                                                          //             "YES"
-                                                          //         ? Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .legalApplicabilityDetailValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .legalApplicabilityDetailValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //         : Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .whyWhyAnalysisFalseValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .whyWhyAnalysisFalseValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //     :
-                                                          Obx(
-                                                        () => Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .whyWhyAnalysisValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .whyWhyAnalysisValue
-                                                                .value = value;
-                                                            print(
-                                                                'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                controller.id != null
+                                                    ? Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Why Why Analysis Required: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    // controller.id !=
+                                                                    //         null
+                                                                    //     ? controller
+                                                                    //                 .incidentReportDetailsModel
+                                                                    //                 .value
+                                                                    //                 ?.legal_applicability_name ==
+                                                                    //             "YES"
+                                                                    //         ? Obx(
+                                                                    //             () => Switch(
+                                                                    //               activeColor:
+                                                                    //                   Colors
+                                                                    //                       .green,
+                                                                    //               value: controller
+                                                                    //                   .legalApplicabilityDetailValue
+                                                                    //                   .value,
+                                                                    //               onChanged:
+                                                                    //                   (value) {
+                                                                    //                 controller
+                                                                    //                     .legalApplicabilityDetailValue
+                                                                    //                     .value = value;
+                                                                    //                 print(
+                                                                    //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //         : Obx(
+                                                                    //             () => Switch(
+                                                                    //               activeColor:
+                                                                    //                   Colors
+                                                                    //                       .green,
+                                                                    //               value: controller
+                                                                    //                   .whyWhyAnalysisFalseValue
+                                                                    //                   .value,
+                                                                    //               onChanged:
+                                                                    //                   (value) {
+                                                                    //                 controller
+                                                                    //                     .whyWhyAnalysisFalseValue
+                                                                    //                     .value = value;
+                                                                    //                 print(
+                                                                    //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //     :
+                                                                    Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .whyWhyAnalysisValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .whyWhyAnalysisValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
 
-                                                ///Why Why Analysis Block
-                                                controller.whyWhyAnalysisValue ==
-                                                        true
-                                                    ? WhyWhyAnalysis()
-                                                    : Dimens.box0,
+                                                          ///Why Why Analysis Block
+                                                          controller.whyWhyAnalysisValue ==
+                                                                  true
+                                                              ? WhyWhyAnalysis()
+                                                              : Dimens.box0,
 
-                                                ///Root Cause
-                                                Dimens.boxHeight10,
-                                                // Row(
-                                                //   children: [
-                                                //     CustomRichText(
-                                                //         title:
-                                                //             'RCA Upload Required: '),
-                                                //     Dimens.boxWidth10,
-                                                //     // SizedBox(
-                                                //     //   width:
-                                                //     //       MediaQuery.of(context)
-                                                //     //               .size
-                                                //     //               .width /
-                                                //     //           5,
-                                                //     //   child: Obx(
-                                                //     //     () => Switch(
-                                                //     //       activeColor:
-                                                //     //           Colors.green,
-                                                //     //       value: controller
-                                                //     //           .rCAUploadRequiredValue
-                                                //     //           .value,
-                                                //     //       onChanged: (value) {
-                                                //     //         controller
-                                                //     //             .rCAUploadRequiredValue
-                                                //     //             .value = value;
-                                                //     //       },
-                                                //     //     ),
-                                                //     //   ),
-                                                //     // )
-                                                //   ],
-                                                // ),
-                                                Text(
-                                                  "RCA Upload Required",
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                Dimens.boxHeight10,
+                                                          ///Root Cause
+                                                          Dimens.boxHeight10,
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'RCA Upload Required: '),
+                                                          //     Dimens.boxWidth10,
+                                                          //     // SizedBox(
+                                                          //     //   width:
+                                                          //     //       MediaQuery.of(context)
+                                                          //     //               .size
+                                                          //     //               .width /
+                                                          //     //           5,
+                                                          //     //   child: Obx(
+                                                          //     //     () => Switch(
+                                                          //     //       activeColor:
+                                                          //     //           Colors.green,
+                                                          //     //       value: controller
+                                                          //     //           .rCAUploadRequiredValue
+                                                          //     //           .value,
+                                                          //     //       onChanged: (value) {
+                                                          //     //         controller
+                                                          //     //             .rCAUploadRequiredValue
+                                                          //     //             .value = value;
+                                                          //     //       },
+                                                          //     //     ),
+                                                          //     //   ),
+                                                          //     // )
+                                                          //   ],
+                                                          // ),
+                                                          Text(
+                                                            "RCA  Required",
+                                                            style: Styles
+                                                                .blackBold14,
+                                                          ),
+                                                          Dimens.boxHeight10,
 
-                                                // controller.rCAUploadRequiredValue ==
-                                                //         true
-                                                // ?
-                                                RootCauseAnalysis(),
-                                                // : Dimens.box0,
+                                                          // controller.rCAUploadRequiredValue ==
+                                                          //         true
+                                                          // ?
+                                                          RootCauseAnalysis(),
+                                                          // : Dimens.box0,
 
-                                                ///Immediate Correction
-                                                ImmediateCorrection(),
+                                                          ///Immediate Correction
+                                                          ImmediateCorrection(),
 
-                                                ///Proposed action plan
-                                                AddPrposedAction(),
+                                                          ///Proposed action plan
+                                                          AddPrposedAction(),
 
-                                                /// FILE UPLOAD WIDGET
-                                                Container(
-                                                  height: Get.height * 0.2,
-                                                  width: Get.width,
-                                                  child: Row(
-                                                      //
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child:
-                                                              FileUploadWidgetWithDropzone(),
-                                                        ),
-                                                        Dimens.boxWidth10,
-                                                        Expanded(
-                                                            flex: 8,
-                                                            child:
-                                                                FileUploadDetailsWidgetWeb()),
-                                                      ]),
-                                                ),
+                                                          /// FILE UPLOAD WIDGET
+                                                          Container(
+                                                            height: Get.height *
+                                                                0.2,
+                                                            width: Get.width,
+                                                            child: Row(
+                                                                //
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 2,
+                                                                    child:
+                                                                        FileUploadWidgetWithDropzone(),
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Expanded(
+                                                                      flex: 8,
+                                                                      child:
+                                                                          FileUploadDetailsWidgetWeb()),
+                                                                ]),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Dimens.box0
                                               ],
                                             ),
                                           ),
@@ -3279,7 +3290,7 @@ class AddPrposedAction extends StatelessWidget {
               ),
               Expanded(
                 child: DataTable2(
-                  // minWidth: 2000,
+                  minWidth: 2000,
                   dataRowHeight: 70,
                   columnSpacing: 10,
                   border: TableBorder.all(
@@ -3317,6 +3328,13 @@ class AddPrposedAction extends StatelessWidget {
                         // fixedWidth: 250,
                         label: Text(
                       "HSE Remark ",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 250,
+                        label: Text(
+                      "Status ",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
@@ -3415,52 +3433,92 @@ class AddPrposedAction extends StatelessWidget {
                                         ],
                                       ),
                                     )
-                                  : (mapData['key'] == "Target Date ")
+                                  : (mapData['key'] == "Status")
                                       ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 10),
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10, top: 10),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              _buildTargetDateField_web(
-                                                context,
-                                                new TextEditingController(
-                                                    text:
-                                                        mapData["value"] ?? ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
+                                              DropdownWebStock(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                dropdownList:
+                                                    controller.statusList,
+                                                selectedValue: mapData["value"],
+                                                onValueChanged:
+                                                    (list, selectedValue) {
+                                                  print({
+                                                    selectedValue: selectedValue
+                                                  });
+                                                  mapData["value"] =
+                                                      selectedValue;
+                                                  controller.dropdownStatusMapperData[
+                                                          selectedValue] =
+                                                      list.firstWhere(
+                                                          (element) =>
+                                                              element.name ==
+                                                              selectedValue,
+                                                          orElse: null);
                                                 },
-                                              )
+                                              ),
                                             ],
                                           ),
                                         )
-                                      : (mapData['key'] == "Action ")
+                                      : (mapData['key'] == "Target Date ")
                                           ? Padding(
-                                              padding: EdgeInsets.only(top: 10),
+                                              padding: const EdgeInsets.only(
+                                                  top: 10),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.appRedColor,
-                                                    icon: Icons.delete,
-                                                    label: '',
-                                                    message: '',
-                                                    onPress: () {
-                                                      controller.rowItem
-                                                          .remove(record);
+                                                  _buildTargetDateField_web(
+                                                    context,
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                    onChanged: (txt) {
+                                                      mapData["value"] = txt;
                                                     },
                                                   )
                                                 ],
                                               ),
                                             )
-                                          : Text(mapData['key'] ?? ''),
+                                          : (mapData['key'] == "Action ")
+                                              ? Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .appRedColor,
+                                                        icon: Icons.delete,
+                                                        label: '',
+                                                        message: '',
+                                                        onPress: () {
+                                                          controller.rowItem
+                                                              .remove(record);
+                                                        },
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              : Text(mapData['key'] ?? ''),
                         );
                       }).toList(),
                     );

@@ -227,11 +227,18 @@ class AddIncidentReportController extends GetxController {
   Map<String, InventoryModel> dropdownEquipmentNameMapperData = {};
 
   Map<String, GenderModel> dropdownGenderMapperData = {};
+  Map<String, GenderModel> dropdownStatusMapperData = {};
+
   RxList<GenderModel> genderList = <GenderModel>[
     GenderModel(name: "Please Select", id: 0),
     GenderModel(name: 'Male', id: 1),
     GenderModel(name: 'Female', id: 2),
     GenderModel(name: 'TransGender', id: 3),
+  ].obs;
+  RxList<StatusModel> statusList = <StatusModel>[
+    StatusModel(name: "Please Select", id: 0),
+    StatusModel(name: 'Open', id: 1),
+    StatusModel(name: 'Close', id: 2),
   ].obs;
 
   Rx<String> selectedEquipmentName = ''.obs;
@@ -709,6 +716,10 @@ class AddIncidentReportController extends GetxController {
           },
           {'key': "Remark", "value": '${element?.remarks}'},
           {'key': "HSC", "value": '${element?.remarks}'},
+          {
+            "key": "Status",
+            "value": '${element?.responsibility}',
+          },
           {'key': "Action ", "value": ''},
         ]);
         // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
