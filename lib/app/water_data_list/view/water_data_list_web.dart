@@ -725,7 +725,6 @@ DataColumn2 buildDataColumn(
 
 _showYearPicker(BuildContext context, WaterDataListController controller) {
   int selectedYear = DateTime.now().year;
-
   showDialog(
     context: context,
     builder: (BuildContext context) {
