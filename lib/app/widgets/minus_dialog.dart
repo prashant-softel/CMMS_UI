@@ -61,6 +61,8 @@ class MinusDialog extends GetView {
                       CustomRichText(title: 'Type of water :'),
                       Dimens.boxHeight20,
                       CustomRichText(title: 'Qty in KL unit:'),
+                      Dimens.boxHeight20,
+                      CustomRichText(title: 'description:'),
                     ],
                   ),
                   SizedBox(width: 20),
@@ -84,6 +86,13 @@ class MinusDialog extends GetView {
                         dropdownList: controller.month,
                         // selectedValue: ,
                         onValueChanged: (month, selectedValue) {},
+                      ),
+                      Dimens.boxHeight10,
+                      GoodsOrderTextField(
+                        keyboardType: TextInputType.number,
+
+                        // textController:
+                        //     controller.girNoCtrlr,
                       ),
                       Dimens.boxHeight10,
                       GoodsOrderTextField(

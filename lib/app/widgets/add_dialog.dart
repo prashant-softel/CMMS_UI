@@ -65,6 +65,8 @@ class AddDialog extends GetView {
                       CustomRichText(title: 'Type of water :'),
                       Dimens.boxHeight20,
                       CustomRichText(title: 'Qty in KL unit:'),
+                      Dimens.boxHeight20,
+                      CustomRichText(title: 'description:'),
                     ],
                   ),
                   SizedBox(width: 20),
@@ -107,6 +109,12 @@ class AddDialog extends GetView {
                         // textController:
                         //     controller.girNoCtrlr,
                       ),
+                      Dimens.boxHeight10,
+                      GoodsOrderTextField(
+
+                          // textController:
+                          //     controller.girNoCtrlr,
+                          ),
                     ],
                   ),
                 ],

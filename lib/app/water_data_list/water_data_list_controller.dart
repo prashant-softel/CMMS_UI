@@ -27,9 +27,9 @@ class WaterDataListController extends GetxController {
   RxString frequencyFilterText = ''.obs;
   RxString startdateFilterText = ''.obs;
   RxList<MonthModel> month = <MonthModel>[
-    MonthModel(name: "Please Select", id: "0"),
-    MonthModel(name: 'Domastic', id: "1"),
-    MonthModel(name: 'Third party', id: "2"),
+    MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
+    MonthModel(name: 'Water used for drinking', id: "2"),
+    MonthModel(name: 'Water used for Module cleaning ', id: "3"),
   ].obs;
   RxString statusFilterText = ''.obs;
 
