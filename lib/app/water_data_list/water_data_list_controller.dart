@@ -4,6 +4,7 @@ import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,7 +26,11 @@ class WaterDataListController extends GetxController {
   RxString createdByFilterText = ''.obs;
   RxString frequencyFilterText = ''.obs;
   RxString startdateFilterText = ''.obs;
-
+  RxList<MonthModel> month = <MonthModel>[
+    MonthModel(name: "Please Select", id: "0"),
+    MonthModel(name: 'Domastic', id: "1"),
+    MonthModel(name: 'Third party', id: "2"),
+  ].obs;
   RxString statusFilterText = ''.obs;
 
   //Start DateTime

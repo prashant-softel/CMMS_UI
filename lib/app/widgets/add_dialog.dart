@@ -1,7 +1,11 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +13,9 @@ import '../theme/dimens.dart';
 
 class AddDialog extends GetView {
   final WaterDataListController controller = Get.find();
+
+  DateTime selectedDate =
+      DateTime.now(); // Add this line to store the selected date
 
   @override
   Widget build(BuildContext context) {
@@ -20,56 +27,81 @@ class AddDialog extends GetView {
         insetPadding: Dimens.edgeInsets0_0_10_0,
         title: Row(
           children: [
-            Text(
-              "Water Procurements",
-              style: TextStyle(
-                fontSize: 15,
-              ),
-            ),
+            Text("Water Procurements", style: Styles.black20),
           ],
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
           return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: ColorValues.lightGreyColorWithOpacity35,
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: ColorValues.appBlueBackgroundColor,
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: ColorValues.lightGreyColorWithOpacity35,
+                width: 1,
               ),
-              // padding: EdgeInsets.only(right: 120, top: 10),
-              height: height / 1.5,
-              width: double.infinity,
-              child: SingleChildScrollView(
-                  child: Row(
+              boxShadow: [
+                BoxShadow(
+                  color: ColorValues.appBlueBackgroundColor,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            height: height / 4,
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: SingleChildScrollView(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("Date of procurement"),
+                      Dimens.boxHeight5,
+                      CustomRichText(title: 'Date of procurement :'),
+                      Dimens.boxHeight20,
+                      CustomRichText(title: 'Type of water :'),
+                      Dimens.boxHeight20,
+                      CustomRichText(title: 'Qty in KL unit:'),
                     ],
                   ),
+                  SizedBox(width: 20),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Dimens.boxHeight10,
                       CustomTextFieldForStock(
                         width: MediaQuery.of(context).size.width / 5,
                         numberTextField: true,
-                        onTap: () {},
+                        onTap: () {
+                          // controller.openPurchaseDatePicker =
+                          //     !controller.openPurchaseDatePicker;
+                          controller.update(['stock_Mangement']);
+                        },
+                        // textController: controller.purchaseDateTc,
+                      ),
+                      Dimens.boxHeight10,
+                      DropdownWebStock(
+                        width: MediaQuery.of(context).size.width / 5,
+                        dropdownList: controller.month,
+                        // selectedValue: ,
+                        onValueChanged: (month, selectedValue) {},
+                      ),
+                      Dimens.boxHeight10,
+                      GoodsOrderTextField(
+                        keyboardType: TextInputType.number,
+
+                        // textController:
+                        //     controller.girNoCtrlr,
                       ),
                     ],
-                  )
+                  ),
                 ],
-              )));
+              ),
+            ),
+          );
         }),
         actions: [
           Row(

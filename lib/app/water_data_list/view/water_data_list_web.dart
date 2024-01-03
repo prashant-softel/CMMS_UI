@@ -3,6 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
@@ -381,8 +382,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 icon: Icons.minimize_sharp,
                                                 label: "",
                                                 onPressed: () {
-                                                  // Get.offNamed(
-                                                  //     Routes.addWaterData);
+                                                  Get.dialog(MinusDialog());
                                                 },
                                                 color: ColorValues.appRedColor,
                                               ),
