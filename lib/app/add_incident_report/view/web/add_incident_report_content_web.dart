@@ -1090,157 +1090,168 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
 
                                                 Dimens.boxHeight20,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Why Why Analysis Required: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      child:
-                                                          // controller.id !=
-                                                          //         null
-                                                          //     ? controller
-                                                          //                 .incidentReportDetailsModel
-                                                          //                 .value
-                                                          //                 ?.legal_applicability_name ==
-                                                          //             "YES"
-                                                          //         ? Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .legalApplicabilityDetailValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .legalApplicabilityDetailValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //         : Obx(
-                                                          //             () => Switch(
-                                                          //               activeColor:
-                                                          //                   Colors
-                                                          //                       .green,
-                                                          //               value: controller
-                                                          //                   .whyWhyAnalysisFalseValue
-                                                          //                   .value,
-                                                          //               onChanged:
-                                                          //                   (value) {
-                                                          //                 controller
-                                                          //                     .whyWhyAnalysisFalseValue
-                                                          //                     .value = value;
-                                                          //                 print(
-                                                          //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
-                                                          //               },
-                                                          //             ),
-                                                          //           )
-                                                          //     :
-                                                          Obx(
-                                                        () => Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .whyWhyAnalysisValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .whyWhyAnalysisValue
-                                                                .value = value;
-                                                            print(
-                                                                'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                controller.id != null
+                                                    ? Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Why Why Analysis Required: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    // controller.id !=
+                                                                    //         null
+                                                                    //     ? controller
+                                                                    //                 .incidentReportDetailsModel
+                                                                    //                 .value
+                                                                    //                 ?.legal_applicability_name ==
+                                                                    //             "YES"
+                                                                    //         ? Obx(
+                                                                    //             () => Switch(
+                                                                    //               activeColor:
+                                                                    //                   Colors
+                                                                    //                       .green,
+                                                                    //               value: controller
+                                                                    //                   .legalApplicabilityDetailValue
+                                                                    //                   .value,
+                                                                    //               onChanged:
+                                                                    //                   (value) {
+                                                                    //                 controller
+                                                                    //                     .legalApplicabilityDetailValue
+                                                                    //                     .value = value;
+                                                                    //                 print(
+                                                                    //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //         : Obx(
+                                                                    //             () => Switch(
+                                                                    //               activeColor:
+                                                                    //                   Colors
+                                                                    //                       .green,
+                                                                    //               value: controller
+                                                                    //                   .whyWhyAnalysisFalseValue
+                                                                    //                   .value,
+                                                                    //               onChanged:
+                                                                    //                   (value) {
+                                                                    //                 controller
+                                                                    //                     .whyWhyAnalysisFalseValue
+                                                                    //                     .value = value;
+                                                                    //                 print(
+                                                                    //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
+                                                                    //               },
+                                                                    //             ),
+                                                                    //           )
+                                                                    //     :
+                                                                    Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .whyWhyAnalysisValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .whyWhyAnalysisValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
 
-                                                ///Why Why Analysis Block
-                                                controller.whyWhyAnalysisValue ==
-                                                        true
-                                                    ? WhyWhyAnalysis()
-                                                    : Dimens.box0,
+                                                          ///Why Why Analysis Block
+                                                          controller.whyWhyAnalysisValue ==
+                                                                  true
+                                                              ? WhyWhyAnalysis()
+                                                              : Dimens.box0,
 
-                                                ///Root Cause
-                                                Dimens.boxHeight10,
-                                                // Row(
-                                                //   children: [
-                                                //     CustomRichText(
-                                                //         title:
-                                                //             'RCA Upload Required: '),
-                                                //     Dimens.boxWidth10,
-                                                //     // SizedBox(
-                                                //     //   width:
-                                                //     //       MediaQuery.of(context)
-                                                //     //               .size
-                                                //     //               .width /
-                                                //     //           5,
-                                                //     //   child: Obx(
-                                                //     //     () => Switch(
-                                                //     //       activeColor:
-                                                //     //           Colors.green,
-                                                //     //       value: controller
-                                                //     //           .rCAUploadRequiredValue
-                                                //     //           .value,
-                                                //     //       onChanged: (value) {
-                                                //     //         controller
-                                                //     //             .rCAUploadRequiredValue
-                                                //     //             .value = value;
-                                                //     //       },
-                                                //     //     ),
-                                                //     //   ),
-                                                //     // )
-                                                //   ],
-                                                // ),
-                                                Text(
-                                                  "RCA Upload Required",
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                Dimens.boxHeight10,
+                                                          ///Root Cause
+                                                          Dimens.boxHeight10,
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'RCA Upload Required: '),
+                                                          //     Dimens.boxWidth10,
+                                                          //     // SizedBox(
+                                                          //     //   width:
+                                                          //     //       MediaQuery.of(context)
+                                                          //     //               .size
+                                                          //     //               .width /
+                                                          //     //           5,
+                                                          //     //   child: Obx(
+                                                          //     //     () => Switch(
+                                                          //     //       activeColor:
+                                                          //     //           Colors.green,
+                                                          //     //       value: controller
+                                                          //     //           .rCAUploadRequiredValue
+                                                          //     //           .value,
+                                                          //     //       onChanged: (value) {
+                                                          //     //         controller
+                                                          //     //             .rCAUploadRequiredValue
+                                                          //     //             .value = value;
+                                                          //     //       },
+                                                          //     //     ),
+                                                          //     //   ),
+                                                          //     // )
+                                                          //   ],
+                                                          // ),
+                                                          Text(
+                                                            "RCA Upload Required",
+                                                            style: Styles
+                                                                .blackBold14,
+                                                          ),
+                                                          Dimens.boxHeight10,
 
-                                                // controller.rCAUploadRequiredValue ==
-                                                //         true
-                                                // ?
-                                                RootCauseAnalysis(),
-                                                // : Dimens.box0,
+                                                          // controller.rCAUploadRequiredValue ==
+                                                          //         true
+                                                          // ?
+                                                          RootCauseAnalysis(),
+                                                          // : Dimens.box0,
 
-                                                ///Immediate Correction
-                                                ImmediateCorrection(),
+                                                          ///Immediate Correction
+                                                          ImmediateCorrection(),
 
-                                                ///Proposed action plan
-                                                AddPrposedAction(),
+                                                          ///Proposed action plan
+                                                          AddPrposedAction(),
 
-                                                /// FILE UPLOAD WIDGET
-                                                Container(
-                                                  height: Get.height * 0.2,
-                                                  width: Get.width,
-                                                  child: Row(
-                                                      //
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child:
-                                                              FileUploadWidgetWithDropzone(),
-                                                        ),
-                                                        Dimens.boxWidth10,
-                                                        Expanded(
-                                                            flex: 8,
-                                                            child:
-                                                                FileUploadDetailsWidgetWeb()),
-                                                      ]),
-                                                ),
+                                                          /// FILE UPLOAD WIDGET
+                                                          Container(
+                                                            height: Get.height *
+                                                                0.2,
+                                                            width: Get.width,
+                                                            child: Row(
+                                                                //
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 2,
+                                                                    child:
+                                                                        FileUploadWidgetWithDropzone(),
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  Expanded(
+                                                                      flex: 8,
+                                                                      child:
+                                                                          FileUploadDetailsWidgetWeb()),
+                                                                ]),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Dimens.box0
                                               ],
                                             ),
                                           ),
