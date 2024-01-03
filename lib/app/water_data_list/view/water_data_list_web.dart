@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
+import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +26,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "April",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'validity': '590',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
@@ -40,8 +46,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "May",
     'Ground Water in KL units': '300',
-    'Water Procured from Third Party for Module cleaning in KL units': '789',
-    'validity': '699',
+    'opening balance of MC water': '100',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '700',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '789',
@@ -56,8 +65,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "June",
     'Ground Water in KL units': '305',
-    'Water Procured from Third Party for Module cleaning in KL units': '66',
-    'validity': '100',
+    'opening balance of MC water': '100',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '22',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '30',
@@ -72,8 +84,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "July",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -88,8 +103,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Aug",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -104,8 +122,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Oct",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -120,8 +141,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Nov",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -136,8 +160,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Dec",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -152,8 +179,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Jan",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -168,8 +198,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Feb",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -184,8 +217,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "March",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -290,6 +326,16 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                             Padding(
                                               padding: EdgeInsets.only(
                                                 top: 20,
+                                              ),
+                                              child: Text(
+                                                "All the data in KL units",
+                                                style: Styles.blackBold16,
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
                                                 right: 20,
                                               ),
                                               child: Row(
@@ -320,12 +366,25 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                               child: ActionButton(
                                                 icon: Icons.add,
-                                                label: "Add New",
+                                                label: "",
                                                 onPressed: () {
-                                                  Get.offNamed(
-                                                      Routes.addWaterData);
+                                                  Get.dialog(AddDialog());
                                                 },
                                                 color: ColorValues.addNewColor,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 5,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.minimize_sharp,
+                                                label: "",
+                                                onPressed: () {
+                                                  Get.dialog(MinusDialog());
+                                                },
+                                                color: ColorValues.appRedColor,
                                               ),
                                             )
                                           ],
@@ -355,7 +414,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                               fixedColumnsColor:
                                                   ColorValues.appYellowColor,
-                                              minWidth: 2000,
+                                              minWidth: 2300,
                                               columns: [
                                                 DataColumn2(
                                                   fixedWidth: 70,
@@ -366,9 +425,17 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 130,
+                                                  fixedWidth: 100,
                                                   label: Text(
-                                                    'Ground Water\nin KL units',
+                                                    'Ground\nWater',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Opening\nbalance of\nModule cleaning\nwater',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -376,7 +443,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 190,
                                                   label: Text(
-                                                    'Water Procured from\nThird Party for\nModule cleaning\nin KL units',
+                                                    'Water Procured from\nThird Party for\nModule cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -384,7 +451,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 190,
                                                   label: Text(
-                                                    'Water Procured from\nThird Party for\nDrinking in KL\nunits',
+                                                    'Water Consumption\nfrom Third Party\nfor Module cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -392,7 +459,15 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes\nin KL units',
+                                                    'Closing\nbalance of\nModule cleaning\nwater',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 190,
+                                                  label: Text(
+                                                    'Water Procured from\nThird Party for\nDrinking',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -400,7 +475,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'water used for\ndrinking in KL\nunits',
+                                                    'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -408,7 +483,15 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'Water used for\nModule cleaning\nin KL units',
+                                                    'water used for\ndrinking',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Water used for\nModule cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -416,34 +499,34 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 180,
                                                   label: Text(
-                                                    'Water used for\ndomestic and other\npurpose in KL units',
+                                                    'Water used for\ndomestic and other\npurpos',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water\nWithdrawal in KL\nunits',
+                                                    'Total Water\nWithdrawal',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water\nconsumed in KL\nunits',
+                                                    'Total Water\nconsumed',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water withdrawal\nyearly limit as per\nNOC in KL units',
+                                                    'Total Water\nwithdrawal\nyearly limit as\nper NO',
                                                     style: Styles.blackBold14,
                                                   ),
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Groundwater\nWithdrawal Limit left\nin KL units',
+                                                    'Total\nGroundwater\nWithdrawal\nLimit left',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -464,7 +547,13 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                       DataCell(Text(data[
                                                           'Ground Water in KL units'])),
                                                       DataCell(Text(data[
+                                                          'opening balance of MC water'])),
+                                                      DataCell(Text(data[
                                                           'Water Procured from Third Party for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water Consumption  from Third Party for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'closing balance of MC water'])),
                                                       DataCell(Text(data[
                                                           'Water Procured from Third Party for Drinking in KL units'])),
                                                       DataCell(Text(data[
