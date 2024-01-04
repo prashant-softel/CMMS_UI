@@ -158,13 +158,48 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Dimens.boxHeight10,
-                                    Text("Drinking water Usage:",
-                                        style: Styles.blue14),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "Drinking Water Usage For April Month:",
+                                            style: Styles.blue14),
+                                        Container(
+                                          height: 30,
+                                          width: 200,
+                                          child: Center(
+                                            child: Text(
+                                                "Opening Balance : 2000",
+                                                style: Styles.blue14),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues.addNewColor,
+                                              width: 1,
+                                            ),
+                                            color: ColorValues.addNewColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        255, 236, 234, 234)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     Dimens.boxHeight5,
                                     Divider(
                                       color: ColorValues.greyLightColour,
                                     ),
-                                    Dimens.boxHeight5,
+                                    Dimens.boxHeight10,
                                     Row(
                                       children: [
                                         Column(
@@ -357,7 +392,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                     Divider(
                                       color: ColorValues.greyLightColour,
                                     ),
-                                    Dimens.boxHeight10,
+                                    Dimens.boxHeight5,
                                     Row(
                                       children: [
                                         Spacer(),
@@ -369,6 +404,40 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                         Dimens.boxWidth170,
                                         Text("1000", style: Styles.black14),
                                         Dimens.boxWidth60
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 200,
+                                          child: Center(
+                                            child: Text(
+                                                "Closing Balance : 3000",
+                                                style: Styles.black14),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues.cancelColor,
+                                              width: 1,
+                                            ),
+                                            color: ColorValues.cancelColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        255, 236, 234, 234)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
