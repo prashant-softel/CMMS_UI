@@ -362,6 +362,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                       children: [
                                         Spacer(),
                                         Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
                                         Text("500", style: Styles.black14),
                                         Dimens.boxWidth140,
                                         Text("500", style: Styles.black14),
