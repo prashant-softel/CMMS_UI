@@ -60,9 +60,9 @@ class MinusDialog extends GetView {
                       Dimens.boxHeight20,
                       CustomRichText(title: 'Type of water :'),
                       Dimens.boxHeight20,
-                      CustomRichText(title: 'Qty in KL unit:'),
+                      CustomRichText(title: 'Quantity in KL unit:'),
                       Dimens.boxHeight20,
-                      CustomRichText(title: 'description:'),
+                      CustomRichText(title: 'Description:'),
                     ],
                   ),
                   SizedBox(width: 20),
@@ -95,11 +95,13 @@ class MinusDialog extends GetView {
                         //     controller.girNoCtrlr,
                       ),
                       Dimens.boxHeight10,
-                      GoodsOrderTextField(
-                        keyboardType: TextInputType.number,
+                      SizedBox(
+                        child: GoodsOrderTextField(
+                          keyboardType: TextInputType.number,
 
-                        // textController:
-                        //     controller.girNoCtrlr,
+                          // textController:
+                          //     controller.girNoCtrlr,
+                        ),
                       ),
                     ],
                   ),

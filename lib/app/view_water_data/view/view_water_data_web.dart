@@ -158,7 +158,245 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Dimens.boxHeight10,
-                                    Text("Water Used For Drinking water:",
+                                    Text("Drinking water Usage:",
+                                        style: Styles.blue14),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description drinking water procured from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("drinking Consumption ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description drinking water procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("drinking Consumption ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description drinking water procured from vendor 3",
+                                                style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Consumption",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("procured",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Consumption",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("procured",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Consumption",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("procurment",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Consumption",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("800", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("-300", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth10,
+                                        Column(
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            // TableActionButton(
+                                            //   color: ColorValues.editColor,
+                                            //   icon: Icons.edit,
+                                            //   message: 'Edit',
+                                            //   onPress: () {},
+                                            // ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: TableActionButton(
+                                                color: ColorValues.editColor,
+                                                icon: Icons.edit,
+                                                message: 'Edit',
+                                                onPress: () {},
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: TableActionButton(
+                                                color: ColorValues.editColor,
+                                                icon: Icons.edit,
+                                                message: 'Edit',
+                                                onPress: () {},
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: TableActionButton(
+                                                color: ColorValues.editColor,
+                                                icon: Icons.edit,
+                                                message: 'Edit',
+                                                onPress: () {},
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: TableActionButton(
+                                                color: ColorValues.editColor,
+                                                icon: Icons.edit,
+                                                message: 'Edit',
+                                                onPress: () {},
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Text("Total Days: 5",
+                                            style: Styles.blue14),
+                                        Spacer(),
+                                        Text("Total Consumption : ",
+                                            style: Styles.black14),
+                                        Text("1500", style: Styles.blue14),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Text("Domestic and other purpose Usage:",
                                         style: Styles.blue14),
                                     Dimens.boxHeight5,
                                     Divider(
@@ -278,127 +516,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Dimens.boxHeight10,
-                                    Text("Domestic and other purpose:",
-                                        style: Styles.blue14),
-                                    Dimens.boxHeight5,
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight5,
-                                    Row(
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Date", style: Styles.blue17),
-                                            Dimens.boxHeight5,
-                                            Text("5 April",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("14 April",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("15 April",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("23 April",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("25 April",
-                                                style: Styles.black14)
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Opening Balance",
-                                                style: Styles.blue17),
-                                            Dimens.boxHeight5,
-                                            Text(
-                                                "description drinking water procured from vendor 1",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("drinking Consumption ",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text(
-                                                "description drinking water procured from vendor 2",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("drinking Consumption ",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text(
-                                                "description drinking water procured from vendor 3",
-                                                style: Styles.black14),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text("1000", style: Styles.blue17),
-                                            Dimens.boxHeight5,
-                                            Text("800", style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("200", style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("-300", style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Row(
-                                      children: [
-                                        Text("Total Days: 5",
-                                            style: Styles.blue14),
-                                        Spacer(),
-                                        Text("Total Consumption : ",
-                                            style: Styles.black14),
-                                        Text("1500", style: Styles.blue14),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color.fromARGB(255, 227, 224, 224),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(255, 236, 234, 234)
-                                          .withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                margin: EdgeInsets.only(
-                                    left: 20, right: 20, bottom: 10, top: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Dimens.boxHeight10,
-                                    Text("Water used for Module cleaning:",
+                                    Text("Module cleaning Usage:",
                                         style: Styles.blue14),
                                     Dimens.boxHeight5,
                                     Divider(
@@ -790,33 +908,33 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
               ],
             ),
           ),
-          floatingActionButton: Row(
-            children: [
-              Spacer(),
-              Container(
-                height: 40,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.cancelColor,
-                  text: 'Cancel',
-                  onPressed: () {
-                    Get.back();
-                  },
-                ),
-              ),
-              Dimens.boxWidth15,
-              Container(
-                height: 40,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.submitColor,
-                  text: 'Update',
-                  onPressed: () {
-                    // controller.createGoodsOrder();
-                  },
-                ),
-              ),
-              Spacer(),
-            ],
-          ),
+          // floatingActionButton: Row(
+          //   children: [
+          //     Spacer(),
+          //     Container(
+          //       height: 40,
+          //       child: CustomElevatedButton(
+          //         backgroundColor: ColorValues.cancelColor,
+          //         text: 'Cancel',
+          //         onPressed: () {
+          //           Get.back();
+          //         },
+          //       ),
+          //     ),
+          //     Dimens.boxWidth15,
+          //     Container(
+          //       height: 40,
+          //       child: CustomElevatedButton(
+          //         backgroundColor: ColorValues.submitColor,
+          //         text: 'Update',
+          //         onPressed: () {
+          //           // controller.createGoodsOrder();
+          //         },
+          //       ),
+          //     ),
+          //     Spacer(),
+          //   ],
+          // ),
         );
         // );
       },
