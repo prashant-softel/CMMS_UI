@@ -30,6 +30,18 @@ class WaterDataListController extends GetxController {
     MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
     MonthModel(name: 'Water used for drinking', id: "2"),
     MonthModel(name: 'Water used for Module cleaning ', id: "3"),
+    MonthModel(name: 'Ground Water  ', id: "4"),
+    MonthModel(name: 'Surface Water ', id: "5"),
+    MonthModel(
+        name: 'Water Procured from Third Party for Module cleaning ', id: "6"),
+    MonthModel(
+        name: 'Water Consumption  from Third Party for Module cleaning ',
+        id: "7"),
+    MonthModel(
+        name:
+            'Water Procured from Third Party for Domestic and others purposes ',
+        id: "8"),
+    MonthModel(name: 'Water Procured from Third Party for Drinking', id: "9"),
   ].obs;
   RxString statusFilterText = ''.obs;
 
