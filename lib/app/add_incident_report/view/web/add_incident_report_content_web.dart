@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -207,111 +208,105 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ),
                                                       // Dimens.boxHeight10,
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                      Row(
                                                         children: [
-                                                          SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  3,
-                                                              child:
-                                                                  CustomTextField(
+                                                          Spacer(),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Name: '),
+                                                              Dimens.boxWidth10,
+                                                              GoodsOrderTextField(
                                                                 textController:
                                                                     controller
                                                                         .investigationTeamNameTextFieldController,
-                                                                label: 'Name',
-                                                              )),
-
-                                                          //Designation
-                                                          SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  3,
-                                                              child:
-                                                                  CustomTextField(
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxWidth50,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Designation: '),
+                                                              Dimens.boxWidth10,
+                                                              GoodsOrderTextField(
                                                                 textController:
                                                                     controller
                                                                         .investigationTeamDesignationTextFieldController,
-                                                                label:
-                                                                    'Designation',
-                                                              )),
-
-                                                          ElevatedButton(
-                                                            child: Text(
-                                                              'Add',
-                                                              style: TextStyle(
-                                                                  color: ColorValues
-                                                                      .whiteColor),
-                                                            ),
-                                                            onPressed: () {
-                                                              controller
-                                                                  .updateInvestigationTeamText(
-                                                                controller
-                                                                    .investigationTeamSrNumberTextFieldController
-                                                                    .text,
-                                                                controller
-                                                                    .investigationTeamNameTextFieldController
-                                                                    .text,
-                                                                controller
-                                                                    .investigationTeamDesignationTextFieldController
-                                                                    .text,
-
-                                                                // controller.isCheckedRequire
-                                                                //     .value
-                                                              );
-                                                              controller
-                                                                  .investigationTeamSrNumberTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamNameTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamDesignationTextFieldController
-                                                                  .clear();
-                                                              // controller.isCheckedRequire
-                                                              //     .value = false;
-                                                              print(
-                                                                  'Investigation Data${controller.investigationTeam.length}');
-                                                            },
+                                                              ),
+                                                            ],
                                                           ),
-                                                          Dimens.boxHeight10
+                                                          Spacer()
                                                         ],
                                                       ),
+                                                      Dimens.boxHeight10,
+                                                      //Designation
+
+                                                      Center(
+                                                        child: ElevatedButton(
+                                                          child: Text(
+                                                            'Add',
+                                                            style: TextStyle(
+                                                                color: ColorValues
+                                                                    .whiteColor),
+                                                          ),
+                                                          onPressed: () {
+                                                            controller
+                                                                .updateInvestigationTeamText(
+                                                              controller
+                                                                  .investigationTeamSrNumberTextFieldController
+                                                                  .text,
+                                                              controller
+                                                                  .investigationTeamNameTextFieldController
+                                                                  .text,
+                                                              controller
+                                                                  .investigationTeamDesignationTextFieldController
+                                                                  .text,
+
+                                                              // controller.isCheckedRequire
+                                                              //     .value
+                                                            );
+                                                            controller
+                                                                .investigationTeamSrNumberTextFieldController
+                                                                .clear();
+                                                            controller
+                                                                .investigationTeamNameTextFieldController
+                                                                .clear();
+                                                            controller
+                                                                .investigationTeamDesignationTextFieldController
+                                                                .clear();
+                                                            // controller.isCheckedRequire
+                                                            //     .value = false;
+                                                            print(
+                                                                'Investigation Data${controller.investigationTeam.length}');
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Dimens.boxHeight20,
 
                                                       Obx(
                                                         () => Wrap(children: [
                                                           Row(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Dimens
-                                                                    .boxWidth80,
-                                                                Text('Sr.No.'),
-                                                                Dimens
-                                                                    .boxWidth180,
-                                                                Text('Name'),
-                                                                SizedBox(
-                                                                  width: 310,
-                                                                ),
-                                                                Text(
-                                                                    'Designation'),
-                                                                Dimens
-                                                                    .boxWidth200,
-                                                                Text(
-                                                                    'Signature'),
+                                                            children: [
+                                                              Dimens.boxWidth80,
+                                                              Text('Sr.No.'),
+                                                              Dimens
+                                                                  .boxWidth180,
+                                                              Text('Name'),
+                                                              SizedBox(
+                                                                width: 310,
+                                                              ),
+                                                              Text(
+                                                                  'Designation'),
+                                                              Dimens
+                                                                  .boxWidth200,
+                                                              Text('Signature'),
 
-                                                                // Text('Action'),
-                                                              ]),
+                                                              // Text('Action'),
+                                                            ],
+                                                          ),
                                                           SizedBox(
                                                             height: 20,
                                                           ),
@@ -429,44 +424,44 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 140,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Incident Investigation Team: '),
-                                                            ),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .incidentInvestigationDoneByList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isincidentInvestigationDoneByListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedIncidentInvestigationDoneByList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                        // Dimens.boxHeight5,
+                                                        // Row(
+                                                        //   children: [
+                                                        //     SizedBox(
+                                                        //       width: 140,
+                                                        //       child: CustomRichText(
+                                                        //           title:
+                                                        //               'Incident Investigation Team: '),
+                                                        //     ),
+                                                        //     Dimens.boxWidth10,
+                                                        //     SizedBox(
+                                                        //       width: MediaQuery.of(
+                                                        //                   context)
+                                                        //               .size
+                                                        //               .width /
+                                                        //           5,
+                                                        //       child: Obx(
+                                                        //         () =>
+                                                        //             DropdownWebWidget(
+                                                        //           dropdownList:
+                                                        //               controller
+                                                        //                   .incidentInvestigationDoneByList,
+                                                        //           isValueSelected:
+                                                        //               controller
+                                                        //                   .isincidentInvestigationDoneByListSelected
+                                                        //                   .value,
+                                                        //           selectedValue:
+                                                        //               controller
+                                                        //                   .selectedIncidentInvestigationDoneByList
+                                                        //                   .value,
+                                                        //           onValueChanged:
+                                                        //               controller
+                                                        //                   .onValueChanged,
+                                                        //         ),
+                                                        //       ),
+                                                        //     ),
+                                                        //   ],
+                                                        // ),
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
