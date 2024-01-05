@@ -4,7 +4,7 @@ import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

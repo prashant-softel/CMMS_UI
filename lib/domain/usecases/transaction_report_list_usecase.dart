@@ -3,11 +3,10 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
-
-import '../models/  transaction_report_list_model.dart';
 
 class TransactionReportListUsecase {
   Repository repository;

@@ -54,6 +54,8 @@ import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.d
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
 import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.dart';
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
+import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
+import 'package:cmms/app/grievance_list/views/grievance_list_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
 import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
 import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart';
@@ -1044,6 +1046,12 @@ class AppPages {
       name: _Paths.complianceHistoryScreen,
       page: ComplianceHistoryScreen.new,
       binding: ComplianceHistoryBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.grievanceList,
+      page: GrievanceListScreen.new,
+      binding: GrievanceListBinding(),
     ),
   ];
 }
