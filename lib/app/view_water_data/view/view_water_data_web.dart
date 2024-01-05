@@ -47,7 +47,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "View Water Data",
+                                      "View Water Data For April Month",
                                       style: Styles.blackBold16,
                                     ),
                                   ],
@@ -162,37 +162,8 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            "Drinking Water Usage For April Month:",
+                                        Text("Drinking Water Usage:",
                                             style: Styles.blue14),
-                                        Container(
-                                          height: 30,
-                                          width: 200,
-                                          child: Center(
-                                            child: Text(
-                                                "Opening Balance : 2000",
-                                                style: Styles.blue14),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues.addNewColor,
-                                              width: 1,
-                                            ),
-                                            color: ColorValues.addNewColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
                                       ],
                                     ),
                                     Dimens.boxHeight5,
@@ -208,6 +179,9 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                           children: [
                                             Text("Date", style: Styles.blue17),
                                             Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
                                             Text("5 April",
                                                 style: Styles.black14),
                                             Dimens.boxHeight5,
@@ -221,6 +195,9 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                 style: Styles.black14),
                                             Dimens.boxHeight5,
                                             Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
                                                 style: Styles.black14)
                                           ],
                                         ),
@@ -231,6 +208,9 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                           children: [
                                             Text("Description",
                                                 style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
                                             Dimens.boxHeight5,
                                             Text(
                                                 "description drinking water procured from vendor 1",
@@ -249,6 +229,9 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Text(
                                                 "description drinking water procured from vendor 3",
                                                 style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
                                           ],
                                         ),
                                         Spacer(),
@@ -259,11 +242,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Text("Transtion Type",
                                                 style: Styles.blue17),
                                             Dimens.boxHeight5,
-                                            Text("Consumption",
-                                                style: Styles.black14),
-                                            Dimens.boxHeight5,
-                                            Text("procured",
-                                                style: Styles.black14),
+                                            Text(""),
                                             Dimens.boxHeight5,
                                             Text("Consumption",
                                                 style: Styles.black14),
@@ -274,6 +253,13 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Text("Consumption",
                                                 style: Styles.black14),
                                             Dimens.boxHeight5,
+                                            Text("procured",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Consumption",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
                                           ],
                                         ),
                                         Spacer(),
@@ -282,18 +268,21 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text("procurment",
-                                                style: Styles.blue17),
+                                                style: Styles.green700),
                                             Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
+                                            Text(""),
                                             Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
+                                            Text("100", style: Styles.green700),
                                             Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
+                                            Text("100", style: Styles.green700),
                                             Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
+                                            Text("100", style: Styles.green700),
                                             Dimens.boxHeight5,
-                                            Text("100", style: Styles.black14),
+                                            Text("100", style: Styles.green700),
                                             Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
                                           ],
                                         ),
                                         Spacer(),
@@ -302,89 +291,81 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text("Consumption",
-                                                style: Styles.blue17),
+                                                style: Styles.Red700),
                                             Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
+                                            Text(""),
                                             Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
+                                            Text("-100", style: Styles.Red700),
                                             Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
+                                            Text("-100", style: Styles.Red700),
                                             Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
+                                            Text("-100", style: Styles.Red700),
                                             Dimens.boxHeight5,
-                                            Text("-100", style: Styles.black14),
+                                            Text("-100", style: Styles.Red700),
                                             Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
                                           ],
                                         ),
                                         Spacer(),
                                         Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text("Total", style: Styles.blue17),
                                             Dimens.boxHeight5,
-                                            Text("200", style: Styles.black14),
+                                            Text("2000", style: Styles.black14),
                                             Dimens.boxHeight5,
                                             Text("200", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Text("200", style: Styles.black14),
+                                            Text("200 ", style: Styles.black14),
                                             Dimens.boxHeight5,
                                             Text("200", style: Styles.black14),
                                             Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
                                             Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
                                           ],
                                         ),
-                                        Dimens.boxWidth10,
+                                        Spacer(),
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text("Action",
                                                 style: Styles.blue17),
-                                            // TableActionButton(
-                                            //   color: ColorValues.editColor,
-                                            //   icon: Icons.edit,
-                                            //   message: 'Edit',
-                                            //   onPress: () {},
-                                            // ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {},
-                                              ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Icon(
+                                              Icons.edit,
+                                              color: ColorValues.editColor,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {},
-                                              ),
+                                            Dimens.boxHeight5,
+                                            Icon(
+                                              Icons.edit,
+                                              color: ColorValues.editColor,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {},
-                                              ),
+                                            Dimens.boxHeight5,
+                                            Icon(
+                                              Icons.edit,
+                                              color: ColorValues.editColor,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {},
-                                              ),
+                                            Dimens.boxHeight5,
+                                            Icon(
+                                              Icons.edit,
+                                              color: ColorValues.editColor,
                                             ),
+                                            Dimens.boxHeight5,
+                                            Icon(
+                                              Icons.edit,
+                                              color: ColorValues.editColor,
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
                                           ],
                                         ),
                                       ],
@@ -399,47 +380,18 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                         Text("Total: ", style: Styles.blue14),
                                         Spacer(),
                                         Text("500", style: Styles.black14),
-                                        Dimens.boxWidth140,
+                                        SizedBox(
+                                          width: 150,
+                                        ),
                                         Text("500", style: Styles.black14),
-                                        Dimens.boxWidth170,
+                                        Dimens.boxWidth140,
                                         Text("1000", style: Styles.black14),
-                                        Dimens.boxWidth60
+                                        SizedBox(
+                                          width: 132,
+                                        )
                                       ],
                                     ),
                                     Dimens.boxHeight5,
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          height: 30,
-                                          width: 200,
-                                          child: Center(
-                                            child: Text(
-                                                "Closing Balance : 3000",
-                                                style: Styles.black14),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues.cancelColor,
-                                              width: 1,
-                                            ),
-                                            color: ColorValues.cancelColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromARGB(
-                                                        255, 236, 234, 234)
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                   ],
                                 ),
                               ),
