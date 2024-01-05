@@ -8,7 +8,6 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
-import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
@@ -75,6 +74,7 @@ import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
@@ -3006,7 +3006,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
 
-      final res = await _dataRepository.getJobList(
+      final res = await _dataRepository.getGrievanceList(
         auth: auth,
         facilityId: facilityId ?? 0,
         userId: userId,
