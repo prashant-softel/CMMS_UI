@@ -2972,12 +2972,47 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createResponsibility({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.createResponsibility(
+        auth: auth,
+        isLoading: isLoading,
+        designationJsonString: designationJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> updateResponsibility({
+    auth,
+    bool? isLoading,
+    designationJsonString,
+  }) async {
+    var response = await connectHelper.updateResponsibility(
+      auth: auth,
+      isLoading: isLoading,
+      designationJsonString: designationJsonString,
+    );
+    return response;
+  }
+
   Future<ResponseModel> deleteDesignation({
     auth,
     bool? isLoading,
     module_id,
   }) async {
     var response = await connectHelper.deleteDesignation(
+        auth: auth, isLoading: isLoading, module_id: module_id);
+    return response;
+  }
+
+  Future<ResponseModel> deleteResponsibility({
+    auth,
+    bool? isLoading,
+    module_id,
+  }) async {
+    var response = await connectHelper.deleteResponsibility(
         auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
@@ -3836,5 +3871,14 @@ class DataRepository extends DomainRepository {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getResponsibilityList({
+    required String auth,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getResponsibilityList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
 //end
 }

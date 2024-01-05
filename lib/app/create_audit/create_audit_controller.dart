@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
 import 'package:cmms/domain/models/create_audit_plan_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
@@ -144,11 +145,15 @@ class CreateAuditController extends GetxController {
     String _startDate = startDateDateTc.text.trim();
 
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
-        plan_number: _planTitle,
-        Facility_id: facilityId,
-        auditee_id: 101,
-        auditor_id: facilityId,
-        ApplyFrequency: selectedfrequencyId);
+      plan_number: _planTitle,
+      Facility_id: facilityId,
+      auditee_id: varUserAccessModel.value.user_id,
+      auditor_id: facilityId,
+      Checklist_id: int.tryParse(selectedchecklistId.value),
+      Description: _description,
+      Schedule_Date: _startDate,
+      ApplyFrequency: selectedfrequencyId,
+    );
     var checkAuditJsonString =
         createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
 

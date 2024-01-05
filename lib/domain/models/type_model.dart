@@ -48,6 +48,24 @@ class GenderModel {
   }
 }
 
+class StatusModel {
+  final String name;
+  final int? id;
+
+  StatusModel({required this.name, this.id});
+
+  StatusModel.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        id = json['id'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'id': id,
+    };
+  }
+}
+
 class MonthModel {
   final String name;
   final String? id;

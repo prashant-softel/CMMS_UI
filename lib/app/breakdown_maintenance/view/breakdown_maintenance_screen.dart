@@ -141,7 +141,7 @@ class BreakdownMaintenanceScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -197,7 +197,7 @@ class BreakdownMaintenanceScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -269,7 +269,7 @@ class BreakdownMaintenanceScreen
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
+                          : 5,
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
                                     .where((e) =>

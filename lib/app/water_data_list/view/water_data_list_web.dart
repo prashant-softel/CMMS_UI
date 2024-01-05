@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
+import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,57 +24,13 @@ class WaterDataListWeb extends StatefulWidget {
 
 final List<Map<String, dynamic>> statutoryData = [
   {
-    "Month": "Jan",
-    'Ground Water in KL units': '200',
-    'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
-    'Water Procured from Third Party for Drinking in KL units': '566',
-    'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5777',
-    'water used for drinking in KL units': '45',
-    'Water used for Module cleaning in KL units': '78',
-    'Water used for domestic and other purpose in KL units': '768',
-    'Total Water Withdrawal in KL units': '6778',
-    'Total Water consumed in KL units': '672',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
-    'Total Groundwater Withdrawal Limit left in KL units': '622',
-  },
-  {
-    "Month": "Feb",
-    'Ground Water in KL units': '300',
-    'Water Procured from Third Party for Module cleaning in KL units': '789',
-    'validity': '699',
-    'Water Procured from Third Party for Drinking in KL units': '700',
-    'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '789',
-    'water used for drinking in KL units': '100',
-    'Water used for Module cleaning in KL units': '900',
-    'Water used for domestic and other purpose in KL units': '27',
-    'Total Water Withdrawal in KL units': '262',
-    'Total Water consumed in KL units': '89',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '577',
-    'Total Groundwater Withdrawal Limit left in KL units': '49',
-  },
-  {
-    "Month": "March",
-    'Ground Water in KL units': '305',
-    'Water Procured from Third Party for Module cleaning in KL units': '66',
-    'validity': '100',
-    'Water Procured from Third Party for Drinking in KL units': '22',
-    'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '30',
-    'water used for drinking in KL units': '60',
-    'Water used for Module cleaning in KL units': '50',
-    'Water used for domestic and other purpose in KL units': '53',
-    'Total Water Withdrawal in KL units': '51',
-    'Total Water consumed in KL units': '59',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '80',
-    'Total Groundwater Withdrawal Limit left in KL units': '77',
-  },
-  {
     "Month": "April",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'validity': '590',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
@@ -87,41 +45,50 @@ final List<Map<String, dynamic>> statutoryData = [
   },
   {
     "Month": "May",
-    'Ground Water in KL units': '200',
+    'Ground Water in KL units': '300',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
-    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
+    'Water Procured from Third Party for Drinking in KL units': '700',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5777',
-    'water used for drinking in KL units': '45',
-    'Water used for Module cleaning in KL units': '78',
-    'Water used for domestic and other purpose in KL units': '768',
-    'Total Water Withdrawal in KL units': '6778',
-    'Total Water consumed in KL units': '672',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
-    'Total Groundwater Withdrawal Limit left in KL units': '622',
+        '789',
+    'water used for drinking in KL units': '100',
+    'Water used for Module cleaning in KL units': '900',
+    'Water used for domestic and other purpose in KL units': '27',
+    'Total Water Withdrawal in KL units': '262',
+    'Total Water consumed in KL units': '89',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '577',
+    'Total Groundwater Withdrawal Limit left in KL units': '49',
   },
   {
-    "Month": "Jun",
-    'Ground Water in KL units': '200',
+    "Month": "June",
+    'Ground Water in KL units': '305',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
-    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
+    'Water Procured from Third Party for Drinking in KL units': '22',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5777',
-    'water used for drinking in KL units': '45',
-    'Water used for Module cleaning in KL units': '78',
-    'Water used for domestic and other purpose in KL units': '768',
-    'Total Water Withdrawal in KL units': '6778',
-    'Total Water consumed in KL units': '672',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
-    'Total Groundwater Withdrawal Limit left in KL units': '622',
+        '30',
+    'water used for drinking in KL units': '60',
+    'Water used for Module cleaning in KL units': '50',
+    'Water used for domestic and other purpose in KL units': '53',
+    'Total Water Withdrawal in KL units': '51',
+    'Total Water consumed in KL units': '59',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '80',
+    'Total Groundwater Withdrawal Limit left in KL units': '77',
   },
   {
     "Month": "July",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -134,10 +101,13 @@ final List<Map<String, dynamic>> statutoryData = [
     'Total Groundwater Withdrawal Limit left in KL units': '622',
   },
   {
-    "Month": "Agust",
+    "Month": "Aug",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -152,8 +122,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Oct",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -168,8 +141,11 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Nov",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -184,8 +160,68 @@ final List<Map<String, dynamic>> statutoryData = [
   {
     "Month": "Dec",
     'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
     'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'validity': '590',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Jan",
+    'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "Feb",
+    'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
+    'Water Procured from Third Party for Drinking in KL units': '566',
+    'Water Procured from Third Party for Domestic and others purposes in KL units':
+        '5777',
+    'water used for drinking in KL units': '45',
+    'Water used for Module cleaning in KL units': '78',
+    'Water used for domestic and other purpose in KL units': '768',
+    'Total Water Withdrawal in KL units': '6778',
+    'Total Water consumed in KL units': '672',
+    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
+    'Total Groundwater Withdrawal Limit left in KL units': '622',
+  },
+  {
+    "Month": "March",
+    'Ground Water in KL units': '200',
+    'opening balance of MC water': '100',
+    'Water Procured from Third Party for Module cleaning in KL units': '1220',
+    'Water Consumption  from Third Party for Module cleaning in KL units':
+        '200',
+    'closing balance of MC water': '1000',
     'Water Procured from Third Party for Drinking in KL units': '566',
     'Water Procured from Third Party for Domestic and others purposes in KL units':
         '5777',
@@ -290,6 +326,16 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                             Padding(
                                               padding: EdgeInsets.only(
                                                 top: 20,
+                                              ),
+                                              child: Text(
+                                                "All the data in KL units",
+                                                style: Styles.blackBold16,
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
                                                 right: 20,
                                               ),
                                               child: Row(
@@ -301,7 +347,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
-                                                            5,
+                                                            8,
                                                     numberTextField: true,
                                                     onTap: () {
                                                       _showYearPicker(
@@ -313,6 +359,34 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 ],
                                               ),
                                             ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.add,
+                                                label: "Procurements",
+                                                onPressed: () {
+                                                  Get.dialog(AddDialog());
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 5,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.minimize_sharp,
+                                                label: "Consumption",
+                                                onPressed: () {
+                                                  Get.dialog(MinusDialog());
+                                                },
+                                                color: ColorValues.appRedColor,
+                                              ),
+                                            )
                                           ],
                                         ),
                                         Divider(
@@ -351,9 +425,17 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 130,
+                                                  fixedWidth: 100,
                                                   label: Text(
-                                                    'Ground Water\nin KL units',
+                                                    'Ground\nWater',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Opening\nbalance of\nModule cleaning\nwater',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -361,7 +443,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 190,
                                                   label: Text(
-                                                    'Water Procured from\nThird Party for\nModule cleaning\nin KL units',
+                                                    'Water Procured from\nThird Party for\nModule cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -369,7 +451,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 190,
                                                   label: Text(
-                                                    'Water Procured from\nThird Party for\nDrinking in KL\nunits',
+                                                    'Water Consumption\nfrom Third Party\nfor Module cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -377,7 +459,15 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes\nin KL units',
+                                                    'Closing\nbalance of\nModule cleaning\nwater',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 190,
+                                                  label: Text(
+                                                    'Water Procured from\nThird Party for\nDrinking',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -385,7 +475,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'water used for\ndrinking in KL\nunits',
+                                                    'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -393,7 +483,15 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 150,
                                                   label: Text(
-                                                    'Water used for\nModule cleaning\nin KL units',
+                                                    'water used for\ndrinking',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 150,
+                                                  label: Text(
+                                                    'Water used for\nModule cleaning',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -401,34 +499,34 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 180,
                                                   label: Text(
-                                                    'Water used for\ndomestic and other\npurpose in KL units',
+                                                    'Water used for\ndomestic and other\npurpos',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water\nWithdrawal in KL\nunits',
+                                                    'Total Water\nWithdrawal',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water\nconsumed in KL\nunits',
+                                                    'Total Water\nconsumed',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Water withdrawal\nyearly limit as per\nNOC in KL units',
+                                                    'Total Water\nwithdrawal\nyearly limit as\nper NO',
                                                     style: Styles.blackBold14,
                                                   ),
                                                 ),
                                                 DataColumn2(
                                                   label: Text(
-                                                    'Total Groundwater\nWithdrawal Limit left\nin KL units',
+                                                    'Total\nGroundwater\nWithdrawal\nLimit left',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -449,7 +547,13 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                       DataCell(Text(data[
                                                           'Ground Water in KL units'])),
                                                       DataCell(Text(data[
+                                                          'opening balance of MC water'])),
+                                                      DataCell(Text(data[
                                                           'Water Procured from Third Party for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'Water Consumption  from Third Party for Module cleaning in KL units'])),
+                                                      DataCell(Text(data[
+                                                          'closing balance of MC water'])),
                                                       DataCell(Text(data[
                                                           'Water Procured from Third Party for Drinking in KL units'])),
                                                       DataCell(Text(data[
@@ -477,37 +581,41 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                               icon: Icons
                                                                   .remove_red_eye_outlined,
                                                               message: 'View',
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .editColor,
-                                                              icon: Icons.edit,
-                                                              message: 'Edit',
                                                               onPress: () {
                                                                 Get.toNamed(Routes
-                                                                    .waterDataScreen);
+                                                                    .viewWaterData);
                                                               },
                                                             ),
-                                                            TableActionButton(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      156,
-                                                                      210,
-                                                                      156),
-                                                              icon:
-                                                                  Icons.replay,
-                                                              message: 'Re-New',
-                                                              onPress: () {},
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .deleteColor,
-                                                              icon:
-                                                                  Icons.delete,
-                                                              message: 'Delete',
-                                                              onPress: () {},
-                                                            ),
+                                                            // TableActionButton(
+                                                            //   color: ColorValues
+                                                            //       .editColor,
+                                                            //   icon: Icons.edit,
+                                                            //   message: 'Edit',
+                                                            //   onPress: () {
+                                                            //     Get.toNamed(Routes
+                                                            //         .waterDataScreen);
+                                                            //   },
+                                                            // ),
+                                                            // TableActionButton(
+                                                            //   color: Color
+                                                            //       .fromARGB(
+                                                            //           255,
+                                                            //           156,
+                                                            //           210,
+                                                            //           156),
+                                                            //   icon:
+                                                            //       Icons.replay,
+                                                            //   message: 'Re-New',
+                                                            //   onPress: () {},
+                                                            // ),
+                                                            // TableActionButton(
+                                                            //   color: ColorValues
+                                                            //       .deleteColor,
+                                                            //   icon:
+                                                            //       Icons.delete,
+                                                            //   message: 'Delete',
+                                                            //   onPress: () {},
+                                                            // ),
                                                           ],
                                                         ),
                                                       ),
@@ -615,196 +723,12 @@ DataColumn2 buildDataColumn(
             ),
           ),
         ]),
-    // ),
+    // ),\
   );
-}
-
-class ChecklistMisPlanListDataSource extends DataTableSource {
-  final WaterDataListController controller;
-
-  late List<AuditPlanListModel?> filteredAuditPlanList;
-
-  ChecklistMisPlanListDataSource(this.controller) {
-    filtersModuleCliningPlan();
-  }
-
-  ///
-  void filtersModuleCliningPlan() {
-    filteredAuditPlanList = <AuditPlanListModel?>[];
-    filteredAuditPlanList = controller.auditPlanList.where((auditList) {
-      return (auditList.id ?? '')
-              .toString()
-              .contains(controller.planIdFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.createdByFilterText.value.toLowerCase()) &&
-          (auditList.facility_name ?? '')
-              .toString()
-              .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-          (auditList.status ?? '')
-              .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
-
-      // Add other filter conditions as needed
-    }).toList();
-    // print({"filteredAuditPlanList": filteredAuditPlanList});
-  }
-
-  @override
-  DataRow? getRow(int index) {
-    // print({"getRow call"});
-    final AuditPlanPlanningListDetails = filteredAuditPlanList[index];
-
-    // controller.PlanId.value = AuditPlanPlanningListDetails?.planId ?? 0;
-    var cellsBuffer = [
-      "planId",
-      "S1234590", // '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
-      "CheckLIst001", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      // "", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      "22-11-2023", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      "Weekly", // '${AuditPlanPlanningListDetails?.frequency ?? ''}',
-      'Actions',
-    ];
-
-    var cells = [];
-    int i = 0;
-
-    for (var entry in controller.columnVisibility.value.entries) {
-      // print({"entry.value entry": entry});
-      if (entry.key == "search") {
-        return null;
-      }
-      if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
-      }
-      i++;
-    }
-    cells.add('Actions');
-
-    // print({"cell": cells});
-    return DataRow.byIndex(
-      index: index,
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: (value == 'planId')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${AuditPlanPlanningListDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            '${AuditPlanPlanningListDetails?.short_status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            controller.clearStoreIdData();
-                            // controller.clearValue();
-                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-                            if (auditId != 0) {
-                              Get.toNamed(
-                                Routes.viewMisPlan,
-                                //  arguments: {
-                                //   'auditId': auditId,
-                                // 'type': controller.type.value
-                                // }
-                              );
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.AuditPlanPlanning,
-                            //       arguments: {"id": id});
-                            // }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.check,
-                          message: 'Approve/Reject',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(
-                            //     Routes.viewMcPlaning,
-                            //     arguments: {'id': id, "type": 1},
-                            //   );
-                            // }
-                          },
-                        ),
-                      ])
-                    : Text(value.toString()),
-          ),
-        );
-      }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        controller.clearStoreIdData();
-        // controller.clearValue();
-        int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-        if (auditId != 0) {
-          Get.toNamed(
-            Routes.viewMisPlan,
-            // arguments: {
-            //   'auditId': auditId,
-            // }
-          );
-        }
-      },
-    );
-  }
-
-  @override
-  int get rowCount => filteredAuditPlanList.length;
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get selectedRowCount => 0;
 }
 
 _showYearPicker(BuildContext context, WaterDataListController controller) {
   int selectedYear = DateTime.now().year;
-
   showDialog(
     context: context,
     builder: (BuildContext context) {

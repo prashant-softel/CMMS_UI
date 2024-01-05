@@ -9,12 +9,18 @@ class CreateAuditPlan {
   int? auditee_id;
   int? auditor_id;
   int? ApplyFrequency;
+  int? Checklist_id;
+  String? Schedule_Date;
+  String? Description;
   CreateAuditPlan(
       {this.ApplyFrequency,
       this.Facility_id,
       this.auditee_id,
       this.auditor_id,
-      this.plan_number});
+      this.plan_number,
+      this.Checklist_id,
+      this.Description,
+      this.Schedule_Date});
 
   factory CreateAuditPlan.fromJson(Map<String, dynamic> json) =>
       CreateAuditPlan(
@@ -23,6 +29,9 @@ class CreateAuditPlan {
         auditee_id: json['auditee_id'],
         auditor_id: json['auditor_id'],
         plan_number: json['plan_number'],
+        Checklist_id: json['Checklist_id'],
+        Description: json['Description'],
+        Schedule_Date: json['Schedule_Date'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,5 +40,8 @@ class CreateAuditPlan {
         'auditee_id': auditee_id,
         'Facility_id': Facility_id,
         'ApplyFrequency': ApplyFrequency,
+        'Checklist_id': Checklist_id,
+        'Description': Description,
+        'Schedule_Date': Schedule_Date,
       };
 }

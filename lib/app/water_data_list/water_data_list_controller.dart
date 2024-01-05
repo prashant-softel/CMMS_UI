@@ -4,6 +4,7 @@ import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,21 +26,37 @@ class WaterDataListController extends GetxController {
   RxString createdByFilterText = ''.obs;
   RxString frequencyFilterText = ''.obs;
   RxString startdateFilterText = ''.obs;
-
+  RxList<MonthModel> month = <MonthModel>[
+    MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
+    MonthModel(name: 'Water used for drinking', id: "2"),
+    MonthModel(name: 'Water used for Module cleaning ', id: "3"),
+    MonthModel(name: 'Ground Water  ', id: "4"),
+    MonthModel(name: 'Surface Water ', id: "5"),
+    MonthModel(
+        name: 'Water Procured from Third Party for Module cleaning ', id: "6"),
+    MonthModel(
+        name: 'Water Consumption  from Third Party for Module cleaning ',
+        id: "7"),
+    MonthModel(
+        name:
+            'Water Procured from Third Party for Domestic and others purposes ',
+        id: "8"),
+    MonthModel(name: 'Water Procured from Third Party for Drinking', id: "9"),
+  ].obs;
   RxString statusFilterText = ''.obs;
 
   //Start DateTime
   bool openStartDatePicker = false;
   var startDateTimeCtrlr = TextEditingController();
 
-  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
-  Rx<DateTime> toDate = DateTime.now().obs;
-  String get formattedFromdate =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
-  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  String get formattedFromdate1 =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  // Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  // Rx<DateTime> toDate = DateTime.now().obs;
+  // String get formattedFromdate =>
+  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
+  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  // String get formattedFromdate1 =>
+  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan ID': true,
@@ -67,7 +84,7 @@ class WaterDataListController extends GetxController {
   }
 
   bool openFromDateToStartDatePicker = false;
-  var waterDateTc = TextEditingController();
+  var waterDateTc = TextEditingController(text: DateTime.now().year.toString());
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -93,8 +110,8 @@ class WaterDataListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getAuditPlanList(
-            facilityId, formattedTodate1, formattedFromdate1, true);
+        // getAuditPlanList(
+        //     facilityId, formattedTodate1, formattedFromdate1, true);
       });
     });
     super.onInit();
@@ -134,9 +151,9 @@ class WaterDataListController extends GetxController {
     }
   }
 
-  void getAuditListByDate() {
-    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
-  }
+  // void getAuditListByDate() {
+  //   getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  // }
 
   Future<void> clearValue() async {
     waterDataListPresenter.clearValue();

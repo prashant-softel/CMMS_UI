@@ -48,7 +48,7 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Water Data",
+                                      "Water Data1",
                                       style: Styles.blackBold16,
                                     ),
                                   ],

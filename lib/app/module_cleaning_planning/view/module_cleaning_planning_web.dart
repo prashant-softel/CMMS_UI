@@ -222,8 +222,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     child: LoginCustomTextfield(
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      inputFormatters: <
-                                                          TextInputFormatter>[
+                                                      inputFormatters: <TextInputFormatter>[
                                                         FilteringTextInputFormatter
                                                             .digitsOnly
                                                       ],

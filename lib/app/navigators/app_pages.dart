@@ -13,11 +13,17 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
+import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
+import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
+import 'package:cmms/app/add_water_data_per_day/add_water_data_binding.dart';
+import 'package:cmms/app/add_water_data_per_day/view/add_water_data_screen.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
 import 'package:cmms/app/audit/view/audit_screen.dart';
 import 'package:cmms/app/audit_list/audit_list_binding.dart';
 import 'package:cmms/app/audit_list/view/audit_list_screen.dart';
+import 'package:cmms/app/audit_task/audit_task_binding.dart';
+import 'package:cmms/app/audit_task/view/audit_task_screen.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
@@ -64,6 +70,8 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
+import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
+import 'package:cmms/app/master_responsibility/view/responsivility_screen.dart';
 import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
@@ -151,6 +159,8 @@ import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
+import 'package:cmms/app/view_water_data/view/view_water_data_screen.dart';
+import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
@@ -1046,6 +1056,31 @@ class AppPages {
       name: _Paths.complianceHistoryScreen,
       page: ComplianceHistoryScreen.new,
       binding: ComplianceHistoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addWasteDataScreen,
+      page: AddWasteDataScreen.new,
+      binding: AddWasteDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.responsibility,
+      page: ResponsibilityListScreen.new,
+      binding: ResponsibilityListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.auditTask,
+      page: AuditTaskScreen.new,
+      binding: AuditTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addWaterData,
+      page: AddWaterDataScreen.new,
+      binding: AddWaterDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewWaterData,
+      page: ViewWaterDataScreen.new,
+      binding: ViewWaterDataBinding(),
     ),
 
     GetPage<dynamic>(

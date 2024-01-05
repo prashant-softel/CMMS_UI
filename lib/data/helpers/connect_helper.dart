@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
@@ -4727,7 +4728,20 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
-
+  Future<ResponseModel> getResponsibilityList({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'MISMaster/GetResponsibilityList',
+        Request.get,
+        null,
+        true,
+        {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $auth',
+        },
+      );
   Future<ResponseModel> deleteBusinessList({
     required String auth,
     bool? isLoading,
@@ -5090,6 +5104,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createResponsibility({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    int userId = varUserAccessModel.value.user_id ?? 0;
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateResponsibility?UserID=$userId',
+      Request.post,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveRoleAccess({
     required String auth,
     bool? isLoading,
@@ -5128,6 +5162,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateResponsibility({
+    required String auth,
+    bool? isLoading,
+    required designationJsonString,
+  }) async {
+    int userId = varUserAccessModel.value.user_id ?? 0;
+
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateResponsibility?UserID=$userId',
+      Request.put,
+      designationJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteDesignation({
     required String auth,
     bool? isLoading,
@@ -5137,6 +5192,25 @@ class ConnectHelper {
       'RoleAccess/DeleteDesignation?id=$module_id',
       Request.delete,
       module_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteResponsibility({
+    required String auth,
+    bool? isLoading,
+    required module_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteResponsibility?id=$module_id',
+      Request.delete,
+      null,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

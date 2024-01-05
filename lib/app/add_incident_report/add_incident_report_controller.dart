@@ -227,11 +227,18 @@ class AddIncidentReportController extends GetxController {
   Map<String, InventoryModel> dropdownEquipmentNameMapperData = {};
 
   Map<String, GenderModel> dropdownGenderMapperData = {};
+  Map<String, GenderModel> dropdownStatusMapperData = {};
+
   RxList<GenderModel> genderList = <GenderModel>[
     GenderModel(name: "Please Select", id: 0),
     GenderModel(name: 'Male', id: 1),
     GenderModel(name: 'Female', id: 2),
     GenderModel(name: 'TransGender', id: 3),
+  ].obs;
+  RxList<StatusModel> statusList = <StatusModel>[
+    StatusModel(name: "Please Select", id: 0),
+    StatusModel(name: 'Open', id: 1),
+    StatusModel(name: 'Close', id: 2),
   ].obs;
 
   Rx<String> selectedEquipmentName = ''.obs;
@@ -481,9 +488,8 @@ class AddIncidentReportController extends GetxController {
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
-      });
+
+      getFacilityList();
     });
     Future.delayed(Duration(seconds: 1), () {
       getBlocksList(facilityId);
@@ -709,6 +715,11 @@ class AddIncidentReportController extends GetxController {
                 '${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse('${element?.target_date}'))}'
           },
           {'key': "Remark", "value": '${element?.remarks}'},
+          {'key': "HSC", "value": '${element?.remarks}'},
+          {
+            "key": "Status",
+            "value": '${element?.responsibility}',
+          },
           {'key': "Action ", "value": ''},
         ]);
         // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
@@ -954,6 +965,7 @@ class AddIncidentReportController extends GetxController {
       },
       {'key': "Target Date ", "value": ''},
       {'key': "Remark", "value": ''},
+      {'key': "HSE Remark", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -1172,7 +1184,7 @@ class AddIncidentReportController extends GetxController {
             0;
 
     if (selectedIncidentInvestigationVerificationDoneById > 0) {
-      isincidentInvestigationVerificationDoneByListSelected.value = true;
+      // isincidentInvestigationVerificationDoneByListSelected.value = true;
     }
     selectedIncidentInvestigationVerificationDoneByList.value = value;
     print(
@@ -1239,9 +1251,9 @@ class AddIncidentReportController extends GetxController {
     if (selectedAssetRestorationActionTakenByList.value == '') {
       isAssetRestorationActionTakenByListSelected.value = false;
     }
-    if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
-      isincidentInvestigationVerificationDoneByListSelected.value = false;
-    }
+    // if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
+    //   isincidentInvestigationVerificationDoneByListSelected.value = false;
+    // }
     if (damagedAssetCostTextCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Damaged cost Field cannot be empty', timeInSecForIosWeb: 5);
@@ -1278,11 +1290,12 @@ class AddIncidentReportController extends GetxController {
     //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
     // }
     if (isBlockSelected.value == false ||
-        // isEquipmentNameSelected.value == false ||
-        // isVictimNameListSelected.value == false ||
-        isAssetRestorationActionTakenByListSelected.value == false ||
-        isincidentInvestigationDoneByListSelected.value == false ||
-        isincidentInvestigationVerificationDoneByListSelected.value == false) {
+            // isEquipmentNameSelected.value == false ||
+            // isVictimNameListSelected.value == false ||
+            isAssetRestorationActionTakenByListSelected.value == false ||
+            isincidentInvestigationDoneByListSelected.value == false
+        // isincidentInvestigationVerificationDoneByListSelected.value == false
+        ) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -1435,7 +1448,7 @@ class AddIncidentReportController extends GetxController {
               action_taken_by: selectedAssetRestorationActionTakenById,
               action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
               inverstigated_by: selectedIncidentInvestigationDoneById,
-              verified_by: selectedIncidentInvestigationVerificationDoneById,
+              // verified_by: selectedIncidentInvestigationVerificationDoneById,
               risk_type: selectedRiskTypeId,
               esi_applicability: esiApplicabilityValue.value,
               legal_applicability: legalApplicabilityValue.value,
@@ -1627,7 +1640,7 @@ class AddIncidentReportController extends GetxController {
               victim_id: selectedVictimNameId,
               action_taken_by: selectedAssetRestorationActionTakenById,
               inverstigated_by: selectedIncidentInvestigationDoneById,
-              verified_by: selectedIncidentInvestigationVerificationDoneById,
+              // verified_by: selectedIncidentInvestigationVerificationDoneById,
               risk_type: selectedRiskTypeId,
               legal_applicability:
                   incidentReportDetailsModel.value?.legal_applicability_name ==

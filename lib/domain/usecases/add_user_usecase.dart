@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/country_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
@@ -58,6 +59,16 @@ class AddUserUsecase {
   }) async =>
       await repository.getRoleNotificationList(
         roleId,
+        isLoading,
+      );
+  Future<List<DesignationModel?>?> getResponsibilityList({
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getResponsibilityList(
+        // type,
+        // facilityId,
         isLoading,
       );
   Future<GetAccessLevelByIdModel?> getUserAccessListById({
