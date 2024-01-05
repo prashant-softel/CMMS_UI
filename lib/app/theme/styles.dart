@@ -768,6 +768,11 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     fontSize: Dimens.fifteen,
   );
+  static TextStyle Red700 = TextStyle(
+    color: ColorValues.cancelColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.fifteen,
+  );
 
   static ButtonStyle greenElevatedButtonStyle = ElevatedButton.styleFrom(
     textStyle: TextStyle(fontSize: Dimens.fourteen),

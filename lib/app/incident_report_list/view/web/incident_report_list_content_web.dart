@@ -498,14 +498,14 @@ class IncidentReportListDataSource extends DataTableSource {
     var cellsBuffer = [
       "id",
       // '${incidentReportListDetails?.id ?? ''}',
-      '${incidentReportListDetails?.description ?? ''}',
       '${incidentReportListDetails?.block_name ?? ''}',
-      '${incidentReportListDetails?.equipment_name ?? ''}',
-      '${incidentReportListDetails?.approved_by ?? ''}',
-      '${incidentReportListDetails?.approved_at ?? ''}',
+      '${incidentReportListDetails?.created_at ?? ''}',
+      '${incidentReportListDetails?.description ?? ''}',
+      '${incidentReportListDetails?.description ?? ''}',
       '${incidentReportListDetails?.reported_by_name ?? ''}',
       '${incidentReportListDetails?.reported_at ?? ''}',
       '${incidentReportListDetails?.status ?? ''}',
+      // '${incidentReportListDetails?.status ?? ''}',
       'Actions',
     ];
     var cells = [];
