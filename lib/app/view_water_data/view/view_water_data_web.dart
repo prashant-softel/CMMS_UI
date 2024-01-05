@@ -1,6 +1,7 @@
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/view_water_data/view_water_data_controller.dart';
+import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -340,29 +341,54 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
@@ -603,29 +629,54 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
@@ -865,29 +916,54 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
@@ -1127,29 +1203,54 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
@@ -1390,29 +1491,54 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
-                                            Icon(
-                                              Icons.edit,
-                                              color: ColorValues.editColor,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
                                             ),
                                             Dimens.boxHeight5,
                                             Text("", style: Styles.black14),
