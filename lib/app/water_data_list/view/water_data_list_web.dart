@@ -347,7 +347,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
-                                                            5,
+                                                            8,
                                                     numberTextField: true,
                                                     onTap: () {
                                                       _showYearPicker(
@@ -366,7 +366,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                               child: ActionButton(
                                                 icon: Icons.add,
-                                                label: "",
+                                                label: "Procurements",
                                                 onPressed: () {
                                                   Get.dialog(AddDialog());
                                                 },
@@ -380,7 +380,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                               child: ActionButton(
                                                 icon: Icons.minimize_sharp,
-                                                label: "",
+                                                label: "Consumption",
                                                 onPressed: () {
                                                   Get.dialog(MinusDialog());
                                                 },
@@ -586,16 +586,16 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                     .viewWaterData);
                                                               },
                                                             ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .editColor,
-                                                              icon: Icons.edit,
-                                                              message: 'Edit',
-                                                              onPress: () {
-                                                                Get.toNamed(Routes
-                                                                    .waterDataScreen);
-                                                              },
-                                                            ),
+                                                            // TableActionButton(
+                                                            //   color: ColorValues
+                                                            //       .editColor,
+                                                            //   icon: Icons.edit,
+                                                            //   message: 'Edit',
+                                                            //   onPress: () {
+                                                            //     Get.toNamed(Routes
+                                                            //         .waterDataScreen);
+                                                            //   },
+                                                            // ),
                                                             // TableActionButton(
                                                             //   color: Color
                                                             //       .fromARGB(

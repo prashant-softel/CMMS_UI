@@ -49,14 +49,14 @@ class WaterDataListController extends GetxController {
   bool openStartDatePicker = false;
   var startDateTimeCtrlr = TextEditingController();
 
-  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
-  Rx<DateTime> toDate = DateTime.now().obs;
-  String get formattedFromdate =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
-  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  String get formattedFromdate1 =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  // Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  // Rx<DateTime> toDate = DateTime.now().obs;
+  // String get formattedFromdate =>
+  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
+  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  // String get formattedFromdate1 =>
+  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan ID': true,
@@ -110,8 +110,8 @@ class WaterDataListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getAuditPlanList(
-            facilityId, formattedTodate1, formattedFromdate1, true);
+        // getAuditPlanList(
+        //     facilityId, formattedTodate1, formattedFromdate1, true);
       });
     });
     super.onInit();
@@ -151,9 +151,9 @@ class WaterDataListController extends GetxController {
     }
   }
 
-  void getAuditListByDate() {
-    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
-  }
+  // void getAuditListByDate() {
+  //   getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  // }
 
   Future<void> clearValue() async {
     waterDataListPresenter.clearValue();

@@ -498,14 +498,14 @@ class IncidentReportListDataSource extends DataTableSource {
     var cellsBuffer = [
       "id",
       // '${incidentReportListDetails?.id ?? ''}',
+      '${incidentReportListDetails?.description ?? ''}',
       '${incidentReportListDetails?.block_name ?? ''}',
-      '${incidentReportListDetails?.created_at ?? ''}',
-      '${incidentReportListDetails?.description ?? ''}',
-      '${incidentReportListDetails?.description ?? ''}',
+      '${incidentReportListDetails?.equipment_name ?? ''}',
+      '${incidentReportListDetails?.approved_by ?? ''}',
+      '${incidentReportListDetails?.approved_at ?? ''}',
       '${incidentReportListDetails?.reported_by_name ?? ''}',
       '${incidentReportListDetails?.reported_at ?? ''}',
       '${incidentReportListDetails?.status ?? ''}',
-      // '${incidentReportListDetails?.status ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -594,30 +594,15 @@ class IncidentReportListDataSource extends DataTableSource {
                                                     .kHaveViewAccess)
                                         .length >
                                     0
-                                ? Column(
-                                    children: [
-                                      TableActionButton(
-                                        color: ColorValues.appDarkBlueColor,
-                                        icon: Icons.visibility,
-                                        message: 'View',
-                                        onPress: () {
-                                          controller.viewIncidentReport(
-                                              id: incidentReportListDetails
-                                                  ?.id);
-                                          // print('record:${int.tryParse('${record[0]}')}');
-                                        },
-                                      ),
-                                      TableActionButton(
-                                        color: ColorValues.apptabColor,
-                                        icon: Icons.stairs,
-                                        message: 'Second Step',
-                                        onPress: () {
-                                          controller.editIncidentReport(
-                                              id: incidentReportListDetails
-                                                  ?.id);
-                                        },
-                                      ),
-                                    ],
+                                ? TableActionButton(
+                                    color: ColorValues.appDarkBlueColor,
+                                    icon: Icons.visibility,
+                                    message: 'View',
+                                    onPress: () {
+                                      controller.viewIncidentReport(
+                                          id: incidentReportListDetails?.id);
+                                      // print('record:${int.tryParse('${record[0]}')}');
+                                    },
                                   )
                                 : Dimens.box0,
 
@@ -632,60 +617,53 @@ class IncidentReportListDataSource extends DataTableSource {
                                                     .kHaveEditAccess)
                                         .length >
                                     0
-                                ? Column(
-                                    children: [
-                                      TableActionButton(
-                                        color: ColorValues.appYellowColor,
-                                        icon: Icons.edit,
-                                        message: 'Edit',
-                                        onPress: () {
-                                          controller.editIncidentReport(
-                                              id: incidentReportListDetails
-                                                  ?.id);
-                                        },
-                                      ),
-                                      varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kIncidentReportFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0 &&
-                                              controller.incidentReportList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            e?.id ==
-                                                            incidentReportListDetails!
-                                                                .id,
-                                                        orElse: () =>
-                                                            IncidentReportListModel(
-                                                                id: 00),
-                                                      )
-                                                      ?.status ==
-                                                  "Submitted"
-                                          ? TableActionButton(
-                                              color: ColorValues.appGreenColor,
-                                              icon: Icons.add,
-                                              message: 'Approve/Reject',
-                                              onPress: () {
-                                                // Get.dialog(PermitApprovedDialog(
-                                                //     permitId:
-                                                //         _newPermitList[0]));
-                                                // controller.incidentReportApproveButton(incidentId: record[0]);
-                                                controller.viewIncidentReport(
-                                                    id: incidentReportListDetails
-                                                        ?.id);
-                                              },
-                                            )
-                                          : Dimens.box0,
-                                    ],
+                                ? TableActionButton(
+                                    color: ColorValues.appYellowColor,
+                                    icon: Icons.edit,
+                                    message: 'Edit',
+                                    onPress: () {
+                                      controller.editIncidentReport(
+                                          id: incidentReportListDetails?.id);
+                                    },
                                   )
                                 : Dimens.box0,
 
                             // Approve/Reject
+                            varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 &&
+                                    controller.incidentReportList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  incidentReportListDetails!.id,
+                                              orElse: () =>
+                                                  IncidentReportListModel(
+                                                      id: 00),
+                                            )
+                                            ?.status ==
+                                        "Submitted"
+                                ? TableActionButton(
+                                    color: ColorValues.appGreenColor,
+                                    icon: Icons.add,
+                                    message: 'Approve/Reject',
+                                    onPress: () {
+                                      // Get.dialog(PermitApprovedDialog(
+                                      //     permitId:
+                                      //         _newPermitList[0]));
+                                      // controller.incidentReportApproveButton(incidentId: record[0]);
+                                      controller.viewIncidentReport(
+                                          id: incidentReportListDetails?.id);
+                                    },
+                                  )
+                                : Dimens.box0,
 
                             // ///Reject Button
                             // varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kIncidentReportFeatureId && e.delete == UserAccessConstants.kHaveDeleteAccess).length > 0 && record[8] == "Submitted"

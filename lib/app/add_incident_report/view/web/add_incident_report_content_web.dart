@@ -238,53 +238,50 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               ),
                                                             ],
                                                           ),
+                                                          Dimens.boxWidth20,
+                                                          ElevatedButton(
+                                                            child: Text(
+                                                              'Add',
+                                                              style: TextStyle(
+                                                                  color: ColorValues
+                                                                      .whiteColor),
+                                                            ),
+                                                            onPressed: () {
+                                                              controller
+                                                                  .updateInvestigationTeamText(
+                                                                controller
+                                                                    .investigationTeamSrNumberTextFieldController
+                                                                    .text,
+                                                                controller
+                                                                    .investigationTeamNameTextFieldController
+                                                                    .text,
+                                                                controller
+                                                                    .investigationTeamDesignationTextFieldController
+                                                                    .text,
+
+                                                                // controller.isCheckedRequire
+                                                                //     .value
+                                                              );
+                                                              controller
+                                                                  .investigationTeamSrNumberTextFieldController
+                                                                  .clear();
+                                                              controller
+                                                                  .investigationTeamNameTextFieldController
+                                                                  .clear();
+                                                              controller
+                                                                  .investigationTeamDesignationTextFieldController
+                                                                  .clear();
+                                                              // controller.isCheckedRequire
+                                                              //     .value = false;
+                                                              print(
+                                                                  'Investigation Data${controller.investigationTeam.length}');
+                                                            },
+                                                          ),
                                                           Spacer()
                                                         ],
                                                       ),
                                                       Dimens.boxHeight10,
                                                       //Designation
-
-                                                      Center(
-                                                        child: ElevatedButton(
-                                                          child: Text(
-                                                            'Add',
-                                                            style: TextStyle(
-                                                                color: ColorValues
-                                                                    .whiteColor),
-                                                          ),
-                                                          onPressed: () {
-                                                            controller
-                                                                .updateInvestigationTeamText(
-                                                              controller
-                                                                  .investigationTeamSrNumberTextFieldController
-                                                                  .text,
-                                                              controller
-                                                                  .investigationTeamNameTextFieldController
-                                                                  .text,
-                                                              controller
-                                                                  .investigationTeamDesignationTextFieldController
-                                                                  .text,
-
-                                                              // controller.isCheckedRequire
-                                                              //     .value
-                                                            );
-                                                            controller
-                                                                .investigationTeamSrNumberTextFieldController
-                                                                .clear();
-                                                            controller
-                                                                .investigationTeamNameTextFieldController
-                                                                .clear();
-                                                            controller
-                                                                .investigationTeamDesignationTextFieldController
-                                                                .clear();
-                                                            // controller.isCheckedRequire
-                                                            //     .value = false;
-                                                            print(
-                                                                'Investigation Data${controller.investigationTeam.length}');
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Dimens.boxHeight20,
 
                                                       Obx(
                                                         () => Wrap(children: [

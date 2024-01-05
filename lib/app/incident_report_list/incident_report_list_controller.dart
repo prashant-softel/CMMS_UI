@@ -95,25 +95,26 @@ class IncidentReportListController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "IR": true,
-    "Site Location": true,
-    "incident time and date": true,
-    "Type of Incident": true,
-    "nature of incident": true,
-    "Reported by": true,
-    "Reported At ": true,
-
+    "Description": true,
+    "Block Name": true,
+    "Equipment Name": true,
+    "Approved By": true,
+    "Approved At": true,
+    "Reported By": true,
+    "Reported At": true,
     "Status": true,
 
     // "search": true,
   });
   final Map<String, double> columnwidth = {
     "IR": 153,
-    "Site Location": 220,
-    "incident time and date": 250,
-    "Type of Incident": 200,
-    "nature of incident": 150,
-    "Reported by": 150,
-    "Reported At ": 150,
+    "Description": 220,
+    "Block Name": 200,
+    "Equipment Name": 200,
+    "Approved By": 150,
+    "Approved At": 150,
+    "Reported By": 150,
+    "Reported At": 150,
     "Status": 150,
   };
   Map<String, RxString> filterText = {};
@@ -153,12 +154,12 @@ class IncidentReportListController extends GetxController {
   void onInit() async {
     this.filterText = {
       "IR": incidentReportIdFilterText,
-      "Site Location": descriptionFilterText,
-      "incident time and date": block_nameFilterText,
-      "Type of Incident": equipment_nameFilterText,
-      "nature of incident": approved_byFilterText,
-      "Reported by": approved_atFilterText,
-      "Reported At ": reported_by_nameFilterText,
+      "Description": descriptionFilterText,
+      "Block Name": block_nameFilterText,
+      "Equipment Name": equipment_nameFilterText,
+      "Approved By": approved_byFilterText,
+      "Approved At": approved_atFilterText,
+      "Reported By": reported_by_nameFilterText,
       "Reported At": reported_atFilterText,
       "Status": statusFilterText
     };
