@@ -346,6 +346,2046 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
                                   ],
                                 ),
                               ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("E- waste Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("Battery Waste Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("Solar Module Waste Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "Haz waste Oil (E.g. used transformer oil) Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("Haz Waste grease Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "Haz solid waste (e.g. used oil cotton) Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromARGB(255, 227, 224, 224),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 236, 234, 234)
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 10, top: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            "Haz waste oil barrel generated in No's Usage:",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Date", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("1 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("5 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("14 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("15 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("23 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("25 April",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("29 April",
+                                                style: Styles.black14)
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Description",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("Opening Balance",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste from vendor 1",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 2",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("E- waste  ",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text(
+                                                "description Solid waste procured from vendor 3",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Closing Balance",
+                                                style: Styles.Red700),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Transtion Type",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Disposed",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("Generated",
+                                                style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Disposed",
+                                                style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("100", style: Styles.green700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Generated",
+                                                style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text(""),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("-100", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("0", style: Styles.Red700),
+                                            Dimens.boxHeight5,
+                                            Text("")
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Total", style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("2000", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200 ", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("200", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            Text("3000", style: Styles.black14),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Action",
+                                                style: Styles.blue17),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(
+                                                    WasteGeneratedAddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorValues.editColor,
+                                              ),
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Text("", style: Styles.black14),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Row(
+                                      children: [
+                                        Spacer(),
+                                        Text("Total: ", style: Styles.blue14),
+                                        Spacer(),
+                                        Text("500", style: Styles.black14),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        Text("500", style: Styles.black14),
+                                        Dimens.boxWidth140,
+                                        Text("1000", style: Styles.black14),
+                                        SizedBox(
+                                          width: 132,
+                                        )
+                                      ],
+                                    ),
+                                    Dimens.boxHeight5,
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),

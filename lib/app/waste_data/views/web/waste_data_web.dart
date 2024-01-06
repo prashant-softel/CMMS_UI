@@ -28,6 +28,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "April",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -49,6 +51,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "May",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -70,6 +74,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "June",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -91,6 +97,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "July",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -112,6 +120,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "August",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -133,6 +143,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "September",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -154,6 +166,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "October",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -175,6 +189,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "November",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -196,6 +212,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "December",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -217,6 +235,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "January",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -238,6 +258,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "February",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -259,6 +281,8 @@ final List<Map<String, dynamic>> statutoryData = [
     "Month": "March",
     "Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)":
         "Data",
+    "Opening Balance Of Waste": "Data",
+    "Closing Balance Of Waste": "Data",
     "E- waste in kgs ": "Data",
     "Battery Waste in number ": "Data",
     "Solar Module waste in number": "Data",
@@ -450,7 +474,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                               ),
                                               fixedColumnsColor:
                                                   ColorValues.appYellowColor,
-                                              minWidth: 2200,
+                                              minWidth: 2350,
                                               columns: [
                                                 DataColumn2(
                                                   fixedWidth: 70,
@@ -469,9 +493,25 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
+                                                  fixedWidth: 110,
+                                                  label: Text(
+                                                    'Opening\nBalance Of\nWaste',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
                                                   fixedWidth: 90,
                                                   label: Text(
                                                     'E- waste\nin kgs ',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 110,
+                                                  label: Text(
+                                                    'Closing\nBalance Of\nWaste',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -511,7 +551,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 120,
                                                   label: Text(
-                                                    'Haz solid waste\n(e.g. used oil\ncotton) in Kgs',
+                                                    'Haz solid\nwaste\n(e.g. used oil\ncotton)\nin Kgs',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -519,7 +559,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 120,
                                                   label: Text(
-                                                    'Haz waste oil\nbarrel generated\nin No',
+                                                    'Haz waste\noil barrel\ngenerated\nin No',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -601,6 +641,10 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                     cells: [
                                                       DataCell(
                                                           Text(data['Month'])),
+                                                      DataCell(Text(data[
+                                                          'Opening Balance Of Waste'])),
+                                                      DataCell(Text(data[
+                                                          'Closing Balance Of Waste'])),
                                                       DataCell(Text(data[
                                                           'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)'])),
                                                       DataCell(Text(data[
