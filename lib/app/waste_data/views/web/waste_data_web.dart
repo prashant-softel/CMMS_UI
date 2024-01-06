@@ -1,7 +1,11 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
+import 'package:cmms/app/widgets/add_dialog.dart';
+import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
+import 'package:cmms/app/widgets/waste_disposed_dialog%20copy.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -387,6 +391,36 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                         controller.waterDateTc,
                                                   ),
                                                 ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 5,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.minimize_sharp,
+                                                label: "Waste Generated",
+                                                onPressed: () {
+                                                  Get.dialog(
+                                                      WasteGeneratedAddDialog());
+                                                },
+                                                color: ColorValues.appRedColor,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.add,
+                                                label: "Waste  Disposed",
+                                                onPressed: () {
+                                                  Get.dialog(
+                                                      WasteDisposedAddDialog());
+                                                },
+                                                color: ColorValues.addNewColor,
                                               ),
                                             ),
                                           ],
