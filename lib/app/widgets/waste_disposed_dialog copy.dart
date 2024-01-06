@@ -59,7 +59,7 @@ class WasteDisposedAddDialog extends GetView {
                       Dimens.boxHeight5,
                       CustomRichText(title: 'Date of procurement :'),
                       Dimens.boxHeight20,
-                      CustomRichText(title: 'Type of water :'),
+                      CustomRichText(title: 'Type of Waste :'),
                       Dimens.boxHeight20,
                       CustomRichText(title: 'Quantity in KL unit:'),
                       Dimens.boxHeight20,
@@ -95,9 +95,9 @@ class WasteDisposedAddDialog extends GetView {
                       Dimens.boxHeight10,
                       DropdownWebStock(
                         width: MediaQuery.of(context).size.width / 5,
-                        dropdownList: controller.month,
+                        dropdownList: controller.wasteData,
                         // selectedValue: ,
-                        onValueChanged: (month, selectedValue) {},
+                        onValueChanged: (wasteData, selectedValue) {},
                       ),
                       Dimens.boxHeight10,
                       GoodsOrderTextField(

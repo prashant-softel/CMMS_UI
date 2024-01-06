@@ -31,22 +31,19 @@ class WasteDataController extends GetxController {
 
   bool openFromDateToStartDatePicker = false;
   var waterDateTc = TextEditingController();
-  RxList<MonthModel> month = <MonthModel>[
-    MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
-    MonthModel(name: 'Water used for drinking', id: "2"),
-    MonthModel(name: 'Water used for Module cleaning ', id: "3"),
-    MonthModel(name: 'Ground Water  ', id: "4"),
-    MonthModel(name: 'Surface Water ', id: "5"),
-    MonthModel(
-        name: 'Water Procured from Third Party for Module cleaning ', id: "6"),
-    MonthModel(
-        name: 'Water Consumption  from Third Party for Module cleaning ',
-        id: "7"),
+  RxList<MonthModel> wasteData = <MonthModel>[
     MonthModel(
         name:
-            'Water Procured from Third Party for Domestic and others purposes ',
-        id: "8"),
-    MonthModel(name: 'Water Procured from Third Party for Drinking', id: "9"),
+            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)',
+        id: "1"),
+    MonthModel(name: 'E- waste in kgs ', id: "2"),
+    MonthModel(name: 'Battery Waste in number  ', id: "3"),
+    MonthModel(name: 'Solar Module waste in number  ', id: "4"),
+    MonthModel(
+        name: 'Haz waste Oil (E.g. used transformer oil) in litres ', id: "5"),
+    MonthModel(name: 'Haz Waste grease in kgs ', id: "6"),
+    MonthModel(name: 'Haz solid waste (e.g. used oil cotton) in Kgs ', id: "7"),
+    MonthModel(name: 'Haz waste oil barrel generated in No ', id: "8"),
   ].obs;
 
   ///
