@@ -24,7 +24,7 @@ class WasteGeneratedAddDialog extends GetView {
         insetPadding: Dimens.edgeInsets0_0_10_0,
         title: Row(
           children: [
-            Text("Water Procurements", style: Styles.black20),
+            Text("Water Genrated", style: Styles.black20),
           ],
         ),
         content: Builder(builder: (context) {

@@ -163,6 +163,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     ),
                                                   ],
                                                 ),
+
                                                 Dimens.boxHeight10,
                                                 Row(
                                                   children: [
@@ -175,186 +176,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               context),
                                                     ),
                                                   ],
-                                                ),
-                                                ////Investigation team
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  margin: EdgeInsets.all(20),
-                                                  // height: Get.height,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.grey
-                                                            .withOpacity(.3)),
-                                                  ),
-                                                  // constraints: BoxConstraints(
-                                                  //   maxWidth: 1100,
-                                                  // ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                top: 10,
-                                                                left: 10),
-                                                        child: Text(
-                                                          "Investigation Team",
-                                                          style: Styles.blue700,
-                                                        ),
-                                                      ),
-                                                      // Dimens.boxHeight10,
-                                                      Row(
-                                                        children: [
-                                                          Spacer(),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Name: '),
-                                                              Dimens.boxWidth10,
-                                                              GoodsOrderTextField(
-                                                                textController:
-                                                                    controller
-                                                                        .investigationTeamNameTextFieldController,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxWidth50,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Designation: '),
-                                                              Dimens.boxWidth10,
-                                                              GoodsOrderTextField(
-                                                                textController:
-                                                                    controller
-                                                                        .investigationTeamDesignationTextFieldController,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxWidth20,
-                                                          ElevatedButton(
-                                                            child: Text(
-                                                              'Add',
-                                                              style: TextStyle(
-                                                                  color: ColorValues
-                                                                      .whiteColor),
-                                                            ),
-                                                            onPressed: () {
-                                                              controller
-                                                                  .updateInvestigationTeamText(
-                                                                controller
-                                                                    .investigationTeamSrNumberTextFieldController
-                                                                    .text,
-                                                                controller
-                                                                    .investigationTeamNameTextFieldController
-                                                                    .text,
-                                                                controller
-                                                                    .investigationTeamDesignationTextFieldController
-                                                                    .text,
-
-                                                                // controller.isCheckedRequire
-                                                                //     .value
-                                                              );
-                                                              controller
-                                                                  .investigationTeamSrNumberTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamNameTextFieldController
-                                                                  .clear();
-                                                              controller
-                                                                  .investigationTeamDesignationTextFieldController
-                                                                  .clear();
-                                                              // controller.isCheckedRequire
-                                                              //     .value = false;
-                                                              print(
-                                                                  'Investigation Data${controller.investigationTeam.length}');
-                                                            },
-                                                          ),
-                                                          Spacer()
-                                                        ],
-                                                      ),
-                                                      Dimens.boxHeight10,
-                                                      //Designation
-
-                                                      Obx(
-                                                        () => Wrap(children: [
-                                                          Row(
-                                                            children: [
-                                                              Dimens.boxWidth80,
-                                                              Text('Sr.No.'),
-                                                              Dimens
-                                                                  .boxWidth180,
-                                                              Text('Name'),
-                                                              SizedBox(
-                                                                width: 310,
-                                                              ),
-                                                              Text(
-                                                                  'Designation'),
-                                                              Dimens
-                                                                  .boxWidth200,
-                                                              Text('Signature'),
-
-                                                              // Text('Action'),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          controller.id != null
-                                                              ? Column(
-                                                                  children: []
-                                                                    ..addAll(controller
-                                                                        .investigationTeamList!
-                                                                        .map((element) =>
-                                                                            Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                              children: [
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.only(left: 150),
-                                                                                  child: Text('${element?.name}'),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: const EdgeInsets.only(right: 160),
-                                                                                  child: Text('${element?.designation}'),
-                                                                                ),
-                                                                              ],
-                                                                            ))),
-                                                                )
-                                                              : Dimens.box0,
-                                                          Column(
-                                                            children: []
-                                                              ..addAll(controller
-                                                                  .investigationTeam
-                                                                  .map(
-                                                                      (element) =>
-                                                                          Row(
-                                                                            children: [
-                                                                              // Text('${element.name}'),
-                                                                              // Text('${element.required_by_date}')
-                                                                              // Obx(
-                                                                              //   () => ListView.builder(
-                                                                              //       itemCount: controller.investigationTeam.length,
-                                                                              //       itemBuilder: (context, index) {
-                                                                              //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
-                                                                              //       }),
-                                                                              // )
-
-                                                                              investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
-                                                                            ],
-                                                                          ))),
-                                                          ),
-                                                        ]),
-                                                      ),
-                                                      Dimens.boxHeight10
-                                                    ],
-                                                  ),
                                                 ),
 
                                                 Row(
@@ -1219,6 +1040,195 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                           ///Proposed action plan
                                                           AddPrposedAction(),
+
+                                                          ////Investigation team
+                                                          Container(
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    20),
+                                                            // height: Get.height,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          .3)),
+                                                            ),
+                                                            // constraints: BoxConstraints(
+                                                            //   maxWidth: 1100,
+                                                            // ),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              10),
+                                                                  child: Text(
+                                                                    "Investigation Team",
+                                                                    style: Styles
+                                                                        .blue700,
+                                                                  ),
+                                                                ),
+                                                                // Dimens.boxHeight10,
+                                                                Row(
+                                                                  children: [
+                                                                    Spacer(),
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Name: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        GoodsOrderTextField(
+                                                                          textController:
+                                                                              controller.investigationTeamNameTextFieldController,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth50,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Designation: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        GoodsOrderTextField(
+                                                                          textController:
+                                                                              controller.investigationTeamDesignationTextFieldController,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth20,
+                                                                    ElevatedButton(
+                                                                      child:
+                                                                          Text(
+                                                                        'Add',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                ColorValues.whiteColor),
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        controller
+                                                                            .updateInvestigationTeamText(
+                                                                          controller
+                                                                              .investigationTeamSrNumberTextFieldController
+                                                                              .text,
+                                                                          controller
+                                                                              .investigationTeamNameTextFieldController
+                                                                              .text,
+                                                                          controller
+                                                                              .investigationTeamDesignationTextFieldController
+                                                                              .text,
+
+                                                                          // controller.isCheckedRequire
+                                                                          //     .value
+                                                                        );
+                                                                        controller
+                                                                            .investigationTeamSrNumberTextFieldController
+                                                                            .clear();
+                                                                        controller
+                                                                            .investigationTeamNameTextFieldController
+                                                                            .clear();
+                                                                        controller
+                                                                            .investigationTeamDesignationTextFieldController
+                                                                            .clear();
+                                                                        // controller.isCheckedRequire
+                                                                        //     .value = false;
+                                                                        print(
+                                                                            'Investigation Data${controller.investigationTeam.length}');
+                                                                      },
+                                                                    ),
+                                                                    Spacer()
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                //Designation
+
+                                                                Obx(
+                                                                  () => Wrap(
+                                                                      children: [
+                                                                        Row(
+                                                                          children: [
+                                                                            Dimens.boxWidth80,
+                                                                            Text('Sr.No.'),
+                                                                            Dimens.boxWidth180,
+                                                                            Text('Name'),
+                                                                            SizedBox(
+                                                                              width: 310,
+                                                                            ),
+                                                                            Text('Designation'),
+                                                                            Dimens.boxWidth200,
+                                                                            Text('Signature'),
+
+                                                                            // Text('Action'),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              20,
+                                                                        ),
+                                                                        controller.id !=
+                                                                                null
+                                                                            ? Column(
+                                                                                children: []..addAll(controller.investigationTeamList!.map((element) => Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: const EdgeInsets.only(left: 150),
+                                                                                          child: Text('${element?.name}'),
+                                                                                        ),
+                                                                                        Padding(
+                                                                                          padding: const EdgeInsets.only(right: 160),
+                                                                                          child: Text('${element?.designation}'),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ))),
+                                                                              )
+                                                                            : Dimens.box0,
+                                                                        Column(
+                                                                          children: []..addAll(controller.investigationTeam.map((element) =>
+                                                                              Row(
+                                                                                children: [
+                                                                                  // Text('${element.name}'),
+                                                                                  // Text('${element.required_by_date}')
+                                                                                  // Obx(
+                                                                                  //   () => ListView.builder(
+                                                                                  //       itemCount: controller.investigationTeam.length,
+                                                                                  //       itemBuilder: (context, index) {
+                                                                                  //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
+                                                                                  //       }),
+                                                                                  // )
+
+                                                                                  investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
+                                                                                ],
+                                                                              ))),
+                                                                        ),
+                                                                      ]),
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10
+                                                              ],
+                                                            ),
+                                                          ),
 
                                                           /// FILE UPLOAD WIDGET
                                                           Container(
@@ -3793,59 +3803,81 @@ class WhyWhyAnalysis extends StatelessWidget {
                               fontSize: 15, fontWeight: FontWeight.bold),
                         )),
                   ],
-                  rows: controller.rowWhyWhyAnalysisItem.value.map((record) {
+                  rows: controller.rowWhyWhyAnalysisItem.value
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    int serialNumber = entry.key + 1;
+
+                    List<dynamic> record = entry.value;
                     return DataRow(
                       // height: 130,
                       cells: record.map((mapData) {
                         return DataCell(
                           (mapData['key'] == "Why ")
                               ? Padding(
-                                  padding: EdgeInsets.only(top: 10, right: 20),
+                                  padding: EdgeInsets.only(
+                                    top: 10,
+                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                                      Row(
+                                        children: [
+                                          Text("Why $serialNumber"),
+                                          SizedBox(
+                                            width: 6,
                                           ),
-                                          child: LoginCustomTextfield(
-                                            keyboardType: TextInputType.text,
-                                            // inputFormatters: <
-                                            //     TextInputFormatter>[
-                                            //   FilteringTextInputFormatter
-                                            //       .digitsOnly
-                                            // ],
-                                            maxLine: 1,
-                                            textController:
-                                                new TextEditingController(
-                                                    text:
-                                                        mapData["value"] ?? ''),
-                                            onChanged: (txt) {
-                                              mapData["value"] = txt;
-                                            },
-                                          )),
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.28,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: LoginCustomTextfield(
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                // inputFormatters: <
+                                                //     TextInputFormatter>[
+                                                //   FilteringTextInputFormatter
+                                                //       .digitsOnly
+                                                // ],
+                                                maxLine: 1,
+                                                textController:
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              )),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 )
                               : (mapData['key'] == "Cause ")
                                   ? Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 10, right: 20, left: 20),
+                                      padding:
+                                          EdgeInsets.only(top: 10, left: 20),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -3853,6 +3885,10 @@ class WhyWhyAnalysis extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.28,
                                               decoration: BoxDecoration(
                                                 boxShadow: [
                                                   BoxShadow(
