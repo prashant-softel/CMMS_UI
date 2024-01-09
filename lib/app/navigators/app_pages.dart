@@ -258,8 +258,7 @@ import '../preventive_maintenance_execution_view/view/preventive_maintenance_exe
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../request_goods_orders_list.dart/view/request_goods_orders__list_screen.dart';
-import '../risk_type/risk_type_binding.dart';
-import '../risk_type/view/risk_type_screen.dart';
+
 import '../source_of_observation/source_of_obs_binding.dart';
 import '../source_of_observation/view/source_of_obs_screen.dart';
 import '../transaction_report/transaction_report_list_binding.dart';
@@ -972,11 +971,7 @@ class AppPages {
       page: SourceOfObsScreen.new,
       binding: SourceOfObsBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.risktypemaster,
-      page: RiskTypeScreen.new,
-      binding: RiskTypeBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.viewMcPlaning,
       page: ViewMcPlaningScreen.new,
