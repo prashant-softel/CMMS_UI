@@ -3,6 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -126,13 +127,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title:
                                                               'Type of Observation'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                      DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList: controller
+                                                            .typeOfObservation,
+                                                        // selectedValue: ,
+                                                        onValueChanged:
+                                                            (typeOfObservation,
+                                                                selectedValue) {},
                                                       ),
                                                     ],
                                                   ),
@@ -142,13 +148,17 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Risk Type'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                      DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList:
+                                                            controller.riskType,
+                                                        // selectedValue: ,
+                                                        onValueChanged: (riskType,
+                                                            selectedValue) {},
                                                       ),
                                                     ],
                                                   ),
@@ -192,13 +202,17 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Cost type'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                      DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList:
+                                                            controller.costType,
+                                                        // selectedValue: ,
+                                                        onValueChanged: (costType,
+                                                            selectedValue) {},
                                                       ),
                                                     ],
                                                   ),
@@ -253,19 +267,24 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 children: [
+                                                  Dimens.boxHeight5,
                                                   Row(
                                                     children: [
                                                       CustomRichText(
                                                           title:
                                                               'Month of Observation'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                      DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList:
+                                                            controller.month,
+                                                        // selectedValue: ,
+                                                        onValueChanged: (month,
+                                                            selectedValue) {},
                                                       ),
                                                     ],
                                                   ),
@@ -293,13 +312,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title:
                                                               'Source of Observation'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                      DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList: controller
+                                                            .sourceOfObservation,
+                                                        // selectedValue: ,
+                                                        onValueChanged:
+                                                            (sourceOfObservation,
+                                                                selectedValue) {},
                                                       ),
                                                     ],
                                                   ),
@@ -326,13 +350,23 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Target Date'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          // controller
+                                                          //         .openReceivedPicker =
+                                                          //     !controller
+                                                          //         .openReceivedPicker;
+                                                          // controller.update(
+                                                          //     ['stock_Mangement']);
+                                                        },
                                                         // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                        //     controller.receivedDateTc,
                                                       ),
                                                     ],
                                                   ),
@@ -359,13 +393,23 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Closer Date'),
                                                       Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          // controller
+                                                          //         .openReceivedPicker =
+                                                          //     !controller
+                                                          //         .openReceivedPicker;
+                                                          // controller.update(
+                                                          //     ['stock_Mangement']);
+                                                        },
                                                         // textController:
-                                                        //     controller.challanNoCtrlr,
+                                                        //     controller.receivedDateTc,
                                                       ),
                                                     ],
                                                   ),
