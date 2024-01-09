@@ -27,7 +27,6 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
-import 'package:cmms/domain/models/get_employee_stock_report_model.dart';
 import 'package:cmms/domain/models/get_faulty_material_report_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';

@@ -1,6 +1,5 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';

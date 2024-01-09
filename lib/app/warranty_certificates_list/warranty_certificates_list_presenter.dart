@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/inventory_model.dart';
-import 'package:cmms/domain/usecases/inventory_list_usecase.dart';
 import 'package:cmms/domain/usecases/warranty_certificates_list_usecase.dart';
 
 class WarrantyCertificatesListPresenter {

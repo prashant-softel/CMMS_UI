@@ -127,7 +127,7 @@ class MrsListController extends GetxController {
   Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
     mrsList?.value = <MrsListModel>[];
-    filteredData?.value = <MrsListModel>[];
+    filteredData.value = <MrsListModel>[];
 
     final _mrsList = await mrsListPresenter.getMrsList(
         facilityId: facilityId,

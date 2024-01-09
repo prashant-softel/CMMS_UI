@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/set_pm_schedule_model.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../state_list_controller.dart';
 
 class StateListContentWeb extends GetView<StateListController> {

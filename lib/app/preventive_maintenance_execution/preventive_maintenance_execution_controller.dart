@@ -106,15 +106,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               false,
             ) ??
             [];
-    if (listMrsByTaskId!.value != null) {
-      var _assetsList = listMrsByTaskId!.value[0]!.cmmrsItems;
-      for (var asset in _assetsList!) {
-        cmmrsItems!.add(asset);
-      }
-      print({"mrsit", listMrsByTaskId});
-      addRowItem();
+    var _assetsList = listMrsByTaskId!.value[0]!.cmmrsItems;
+    for (var asset in _assetsList!) {
+      cmmrsItems!.add(asset);
     }
-  }
+    print({"mrsit", listMrsByTaskId});
+    addRowItem();
+    }
 
   Future<void> setScheduleId() async {
     try {

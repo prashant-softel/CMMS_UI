@@ -5,7 +5,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -588,15 +587,15 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.SPVList?.length ?? 0,
+                                    controller.SPVList.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .SPVList?[index]?.name
+                                              .SPVList[index].name
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .SPVList?[index]?.description ??
+                                              .SPVList[index].description ??
                                           '')),
                                       DataCell(Row(
                                         children: [
@@ -610,7 +609,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                 (element) =>
                                                     "${element.id}" ==
                                                     controller
-                                                        .SPVList?[index]?.id
+                                                        .SPVList[index].id
                                                         .toString(),
                                               );
 
@@ -634,10 +633,10 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   business_id: controller
-                                                      .SPVList?[index]?.id
+                                                      .SPVList[index].id
                                                       .toString(),
                                                   business: controller
-                                                      .SPVList?[index]?.name);
+                                                      .SPVList[index].name);
                                             },
                                           ),
                                         ],

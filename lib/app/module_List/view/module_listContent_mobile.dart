@@ -25,12 +25,12 @@ class ModuleListContentMobile
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.moduleList != null
-                        ? controller.moduleList?.length
+                        ? controller.moduleList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final moduleModel =
                           (controller.moduleList != null)
-                              ? controller.moduleList![index]
+                              ? controller.moduleList[index]
                               : ModuleListModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
@@ -55,7 +55,7 @@ class ModuleListContentMobile
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        '${moduleModel?.id ?? 0}',
+                                        '${moduleModel.id ?? 0}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: ColorValues.navyBlueColor,
@@ -75,7 +75,7 @@ class ModuleListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                          '${moduleModel?.name}'
+                                          '${moduleModel.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
@@ -98,7 +98,7 @@ class ModuleListContentMobile
                                     Expanded(
                                       child: Text(
                                         moduleModel
-                                                ?.name ??
+                                                .name ??
                                             '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
@@ -119,7 +119,7 @@ class ModuleListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "${moduleModel?.featureName ?? ''}",
+                                        "${moduleModel.featureName ?? ''}",
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class ModuleListContentMobile
                                               fontWeight: FontWeight.w400),
                                         ),
                                         Text(
-                                          "${moduleModel?.menuImage ?? ''} min.",
+                                          "${moduleModel.menuImage ?? ''} min.",
                                           style: const TextStyle(
                                             color: ColorValues.navyBlueColor,
                                             fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ class ModuleListContentMobile
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
-                                            "${moduleModel?.add ?? ''}",
+                                            "${moduleModel.add ?? ''}",
                                             style: const TextStyle(
                                               color: ColorValues.navyBlueColor,
                                               fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ class ModuleListContentMobile
                                               fontWeight: FontWeight.w400),
                                         ),
                                         Text(
-                                          "${moduleModel?.edit ?? ''} min.",
+                                          "${moduleModel.edit ?? ''} min.",
                                           style: const TextStyle(
                                             color: ColorValues.navyBlueColor,
                                             fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class ModuleListContentMobile
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
-                                            "${moduleModel?.delete ?? ''}",
+                                            "${moduleModel.delete ?? ''}",
                                             style: const TextStyle(
                                               color: ColorValues.navyBlueColor,
                                               fontWeight: FontWeight.bold,
@@ -213,7 +213,7 @@ class ModuleListContentMobile
                                               fontWeight: FontWeight.w400),
                                         ),
                                         Text(
-                                          "${moduleModel?.view ?? ''} min.",
+                                          "${moduleModel.view ?? ''} min.",
                                           style: const TextStyle(
                                             color: ColorValues.navyBlueColor,
                                             fontWeight: FontWeight.bold,
@@ -231,7 +231,7 @@ class ModuleListContentMobile
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
-                                            "${moduleModel?.approve ?? ''}",
+                                            "${moduleModel.approve ?? ''}",
                                             style: const TextStyle(
                                               color: ColorValues.navyBlueColor,
                                               fontWeight: FontWeight.bold,
@@ -252,7 +252,7 @@ class ModuleListContentMobile
                                               fontWeight: FontWeight.w400),
                                         ),
                                         Text(
-                                          "${moduleModel?.issue ?? ''} min.",
+                                          "${moduleModel.issue ?? ''} min.",
                                           style: const TextStyle(
                                             color: ColorValues.navyBlueColor,
                                             fontWeight: FontWeight.bold,
@@ -270,7 +270,7 @@ class ModuleListContentMobile
                                                 fontWeight: FontWeight.w500),
                                           ),
                                           Text(
-                                            "${moduleModel?.selfView ?? ''}",
+                                            "${moduleModel.selfView ?? ''}",
                                             style: const TextStyle(
                                               color: ColorValues.navyBlueColor,
                                               fontWeight: FontWeight.bold,

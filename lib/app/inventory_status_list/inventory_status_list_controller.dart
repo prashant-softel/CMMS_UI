@@ -112,7 +112,7 @@ class InventoryStatusListController extends GetxController {
   Future<void> getInventoryStatusList(
       int facilityId, int type, bool isLoading) async {
     inventoryStatusList?.value = <InventoryStatusListModel>[];
-    filteredData?.value = <InventoryStatusListModel>[];
+    filteredData.value = <InventoryStatusListModel>[];
 
     final _inventoryStatusList =
         await inventoryStatusListPresenter.getInventoryStatusList(

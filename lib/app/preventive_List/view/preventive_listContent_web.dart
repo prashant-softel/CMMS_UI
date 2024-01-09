@@ -630,7 +630,7 @@ class CheckListDataSource extends DataTableSource {
                             controller.preventiveCheckList!.firstWhere(
                           (element) =>
                               "${element!.id}" ==
-                              controller.preventiveCheckList!?[index]?.id
+                              controller.preventiveCheckList![index]?.id
                                   .toString(),
                         );
 

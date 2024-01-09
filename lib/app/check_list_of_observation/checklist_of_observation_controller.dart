@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_presenter.dart';
-import 'package:cmms/app/create_observation/create_observation_presenter.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';

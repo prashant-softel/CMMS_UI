@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

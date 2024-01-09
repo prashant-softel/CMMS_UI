@@ -171,7 +171,7 @@ class CompetencyListController extends GetxController {
 
     competencyList?.value = filteredData
         .where((item) =>
-            (item!.name
+            (item.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

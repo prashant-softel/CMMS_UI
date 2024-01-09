@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cmms/app/audit_task_view/audit_task_view_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';

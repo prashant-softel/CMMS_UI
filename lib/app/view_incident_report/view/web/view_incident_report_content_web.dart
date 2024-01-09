@@ -2,7 +2,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewIncidentReportContentWeb
     extends GetView<ViewIncidentReportController> {

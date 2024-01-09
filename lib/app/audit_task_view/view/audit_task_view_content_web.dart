@@ -1,7 +1,6 @@
 import 'package:cmms/app/audit_task_view/audit_task_view_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';

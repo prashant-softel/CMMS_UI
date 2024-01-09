@@ -1,5 +1,4 @@
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
-import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';

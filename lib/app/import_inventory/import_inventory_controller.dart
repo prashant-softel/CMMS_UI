@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:get/get.dart';
-import '../theme/color_values.dart';
 import 'import_inventory_presenter.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -64,7 +62,7 @@ class ImportInventoryController extends GetxController {
     // Check if the file is already cached
     File file = await cacheManager.getSingleFile(assetPath);
 
-    if (file == null || !await file.exists()) {
+    if (!await file.exists()) {
       // If not cached, download the file and store it in the cache
       var fileData = await cacheManager.downloadFile(assetPath);
       file = fileData.file;

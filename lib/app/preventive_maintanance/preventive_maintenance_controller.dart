@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_presenter.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';

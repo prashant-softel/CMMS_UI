@@ -5,7 +5,6 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -1525,11 +1524,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.facilityTypeList?.length ?? 0,
+                                    controller.facilityTypeList.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]?.name
+                                              .facilityTypeList[index].name
                                               .toString() ??
                                           '')),
                                       // DataCell(Text(controller
@@ -1537,26 +1536,26 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       //         ?.address ??
                                       //     '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]?.spv ??
+                                              .facilityTypeList[index].spv ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]
-                                              ?.owner ??
+                                              .facilityTypeList[index]
+                                              .owner ??
                                           '')),
                                       // DataCell(Text(controller
                                       //         .facilityTypeList?[index]
                                       //         ?.state ??
                                       //     '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]
-                                              ?.operator ??
+                                              .facilityTypeList[index]
+                                              .operator ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]
-                                              ?.customer ??
+                                              .facilityTypeList[index]
+                                              .customer ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList?[index]?.city
+                                              .facilityTypeList[index].city
                                               .toString() ??
                                           '')),
                                       DataCell(Row(
@@ -1572,9 +1571,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                         .firstWhere((element) =>
                                                             "${element.id}" ==
                                                             controller
-                                                                .facilityTypeList?[
+                                                                .facilityTypeList[
                                                                     index]
-                                                                ?.id
+                                                                .id
                                                                 .toString());
 
                                                 controller.titleCtrlr.text =
@@ -1659,12 +1658,12 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   business_id: controller
-                                                      .facilityTypeList?[index]
-                                                      ?.id
+                                                      .facilityTypeList[index]
+                                                      .id
                                                       .toString(),
                                                   business: controller
-                                                      .facilityTypeList?[index]
-                                                      ?.name);
+                                                      .facilityTypeList[index]
+                                                      .name);
                                             },
                                           ),
                                         ],

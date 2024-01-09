@@ -1,4 +1,3 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/asset_type_list/asset_type_list_controller.dart';

@@ -99,22 +99,22 @@ class ModuleListController extends GetxController {
   }
 
   Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
-    moduleList?.value = <ModuleListModel>[];
+    moduleList.value = <ModuleListModel>[];
     BufferModuleList.value = <ModuleListModel>[];
 
     final _moduleList = await moduleListPresenter.getModuleList(
         facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<ModuleListModel>();
+      moduleList.value = _moduleList.cast<ModuleListModel>();
       BufferModuleList.value = moduleList.value;
       paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
+        rowCount: moduleList.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (moduleList != null && moduleList!.isNotEmpty) {
-        moduleListModel = moduleList![0];
+      if (moduleList.isNotEmpty) {
+        moduleListModel = moduleList[0];
 
         var preventiveCheckListJson = moduleListModel?.toJson();
         moduleListTableColumns.value = <String>[];

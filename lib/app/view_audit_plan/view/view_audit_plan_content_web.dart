@@ -5,8 +5,6 @@ import 'package:cmms/app/view_audit_plan/view_audit_plan_controller.dart';
 import 'package:cmms/app/widgets/audit_reject_plan_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
-import 'package:cmms/app/widgets/pm_plan_approve_dialog.dart';
-import 'package:cmms/app/widgets/reject_pm_plan_dialog.dart';
 
 import 'package:flutter/material.dart';
 
