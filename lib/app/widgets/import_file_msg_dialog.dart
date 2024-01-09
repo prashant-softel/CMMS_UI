@@ -39,50 +39,52 @@ class ImportMsgDialog extends GetView {
             padding: Dimens.edgeInsets05_0_5_0,
             height: double.infinity,
             width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                    thickness: 1,
-                  ),
-                  importLog == null
-                      ? Center(
-                          child: Text('${data}',
-                              style: TextStyle(color: Colors.green),
-                              textAlign: TextAlign.center),
-                        )
-                      : Center(
-                          child: Text('${importLog}',
-                              style: TextStyle(color: Colors.red),
-                              textAlign: TextAlign.center),
-                        ),
-                  // SizedBox(height: 20,),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       SizedBox(
-                  //         width: 15,
-                  //       ),
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () => Get.offAllNamed(Routes.newPermit),
-                  //         child: const Text('Permit List'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.blueElevatedButtonStyle,
-                  //         onPressed: () => Get.offAndToNamed(Routes.newPermitList),
-                  //         child: const Text('View This Permit'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
-                ]),
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                      thickness: 1,
+                    ),
+                    importLog == null
+                        ? Center(
+                            child: Text('${data}',
+                                style: TextStyle(color: Colors.green),
+                                textAlign: TextAlign.center),
+                          )
+                        : Center(
+                            child: Text('${importLog}',
+                                style: TextStyle(color: Colors.red),
+                                textAlign: TextAlign.center),
+                          ),
+                    // SizedBox(height: 20,),
+                    // Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       SizedBox(
+                    //         width: 15,
+                    //       ),
+                    //       ElevatedButton(
+                    //         style: Styles.greenElevatedButtonStyle,
+                    //         onPressed: () => Get.offAllNamed(Routes.newPermit),
+                    //         child: const Text('Permit List'),
+                    //       ),
+                    //       Dimens.boxWidth10,
+                    //       ElevatedButton(
+                    //         style: Styles.blueElevatedButtonStyle,
+                    //         onPressed: () => Get.offAndToNamed(Routes.newPermitList),
+                    //         child: const Text('View This Permit'),
+                    //       ),
+                    //       Dimens.boxWidth10,
+                    //       // ElevatedButton(
+                    //       //   style: Styles.redElevatedButtonStyle,
+                    //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                    //       //   child: const Text('Add New Job'),
+                    //       // ),
+                    //     ]),
+                  ]),
+            ),
           );
         }),
         actions: [

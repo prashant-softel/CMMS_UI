@@ -8,7 +8,6 @@ import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
 import '../user_list_controller.dart';
 
@@ -140,36 +139,34 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },

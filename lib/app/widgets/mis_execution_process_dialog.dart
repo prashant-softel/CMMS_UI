@@ -1,10 +1,6 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -104,7 +100,7 @@ class MisExecutionProcessDialog extends GetView {
                                 ),
                                 Expanded(
                                   child: DataTable2(
-                                    dataRowHeight: 100,
+                                    dataRowHeight: 150,
                                     minWidth: 2000,
                                     border: TableBorder.all(
                                         color:
@@ -119,7 +115,7 @@ class MisExecutionProcessDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 400,
+                                          fixedWidth: 300,
                                           label: Text(
                                             "Check Point",
                                             style: TextStyle(
@@ -137,7 +133,7 @@ class MisExecutionProcessDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 200,
                                           label: Text(
-                                            "Type",
+                                            "Input",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -189,12 +185,65 @@ class MisExecutionProcessDialog extends GetView {
                                                     ),
                                                   )
                                                 : (value == "Upload_image")
-                                                    ? CustomSwitchTroggle(
-                                                        value: controller
-                                                            .isToggleOn.value,
-                                                        onChanged: (value) {
-                                                          controller.toggle();
-                                                        })
+                                                    ? Column(
+                                                        children: [
+                                                          Obx(
+                                                            () => Transform.scale(
+                                                                scale: 0.8, // Adjust the scale factor as needed
+                                                                child: RadioListTile(
+                                                                  title: Text(
+                                                                      'YES'),
+                                                                  value: 1,
+                                                                  groupValue:
+                                                                      controller
+                                                                          .selectedValue
+                                                                          .value,
+                                                                  onChanged: (value) =>
+                                                                      controller
+                                                                          .onRadioValueChanged(
+                                                                              value!),
+                                                                )),
+                                                          ),
+                                                          Obx(() =>
+                                                              Transform.scale(
+                                                                scale:
+                                                                    0.8, // Adjust the scale factor as needed
+                                                                child:
+                                                                    RadioListTile(
+                                                                  title: Text(
+                                                                      'NO'),
+                                                                  value: 2,
+                                                                  groupValue:
+                                                                      controller
+                                                                          .selectedValue
+                                                                          .value,
+                                                                  onChanged: (value) =>
+                                                                      controller
+                                                                          .onRadioValueChanged(
+                                                                              value!),
+                                                                ),
+                                                              )),
+                                                          Obx(() =>
+                                                              Transform.scale(
+                                                                scale:
+                                                                    0.8, // Adjust the scale factor as needed
+                                                                child:
+                                                                    RadioListTile(
+                                                                  title: Text(
+                                                                      'NA'),
+                                                                  value: 3,
+                                                                  groupValue:
+                                                                      controller
+                                                                          .selectedValue
+                                                                          .value,
+                                                                  onChanged: (value) =>
+                                                                      controller
+                                                                          .onRadioValueChanged(
+                                                                              value!),
+                                                                ),
+                                                              )),
+                                                        ],
+                                                      )
                                                     : Text(value),
                                           );
                                         }).toList(),
