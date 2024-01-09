@@ -569,15 +569,15 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.businessTypeList?.length ?? 0,
+                                    controller.businessTypeList.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .businessTypeList?[index]?.name
+                                              .businessTypeList[index]?.name
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .businessTypeList?[index]
+                                              .businessTypeList[index]
                                               ?.description ??
                                           '')),
                                       DataCell(Row(
@@ -589,10 +589,10 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                               onPress: () {
                                                 controller.selectedItem = controller
                                                     .businessTypeList
-                                                    ?.firstWhere((element) =>
+                                                    .firstWhere((element) =>
                                                         "${element?.id}" ==
                                                         controller
-                                                            .businessTypeList?[
+                                                            .businessTypeList[
                                                                 index]
                                                             ?.id
                                                             .toString());
@@ -637,11 +637,11 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   businesstype_id: controller
-                                                      .businessTypeList?[index]
+                                                      .businessTypeList[index]
                                                       ?.id
                                                       .toString(),
                                                   businesstype: controller
-                                                      .businessTypeList?[index]
+                                                      .businessTypeList[index]
                                                       ?.name);
                                             },
                                           ),

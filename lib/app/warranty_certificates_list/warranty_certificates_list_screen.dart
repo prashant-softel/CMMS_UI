@@ -1,6 +1,5 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
-import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/warranty_certificates_list/view/web/warranty_certificates_list_content_web.dart';

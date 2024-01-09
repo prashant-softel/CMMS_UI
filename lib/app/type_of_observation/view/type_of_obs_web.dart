@@ -1,4 +1,3 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';

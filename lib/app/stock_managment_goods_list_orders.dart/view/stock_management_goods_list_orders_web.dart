@@ -468,7 +468,7 @@ class GoodsOrderListDataSource extends DataTableSource {
   void filtersGoodsOrder() {
     filteredGoodsOrderList = <GoodsOrdersListModel?>[];
     filteredGoodsOrderList = controller.goodsOrdersList.where((GoodsOrderList) {
-      return (GoodsOrderList!.id ?? '')
+      return (GoodsOrderList.id ?? '')
               .toString()
               .contains(controller.orderIdFilterText.value.toLowerCase()) &&
           (GoodsOrderList.vendor_name ?? '')
@@ -554,102 +554,102 @@ class GoodsOrderListDataSource extends DataTableSource {
                             color: controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     302
                                 ? ColorValues.yellowColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         304
                                     ? ColorValues.closeColor
                                     : controller.goodsOrdersList
                                                 .firstWhere(
                                                   (e) =>
-                                                      e?.id ==
+                                                      e.id ==
                                                       GoodsOrderListDetails!.id,
                                                   orElse: () =>
                                                       GoodsOrdersListModel(
                                                           id: 00),
                                                 )
-                                                ?.status ==
+                                                .status ==
                                             305
                                         ? ColorValues.rejectColor
                                         : controller.goodsOrdersList
                                                     .firstWhere(
                                                       (e) =>
-                                                          e?.id ==
+                                                          e.id ==
                                                           GoodsOrderListDetails!
                                                               .id,
                                                       orElse: () =>
                                                           GoodsOrdersListModel(
                                                               id: 00),
                                                     )
-                                                    ?.status ==
+                                                    .status ==
                                                 309
                                             ? ColorValues.rejectColor
                                             : controller.goodsOrdersList
                                                         .firstWhere(
                                                           (e) =>
-                                                              e?.id ==
+                                                              e.id ==
                                                               GoodsOrderListDetails!
                                                                   .id,
                                                           orElse: () =>
                                                               GoodsOrdersListModel(
                                                                   id: 00),
                                                         )
-                                                        ?.status ==
+                                                        .status ==
                                                     306
                                                 ? ColorValues.approveStatusColor
                                                 : controller.goodsOrdersList
                                                             .firstWhere(
                                                               (e) =>
-                                                                  e?.id ==
+                                                                  e.id ==
                                                                   GoodsOrderListDetails!
                                                                       .id,
                                                               orElse: () =>
                                                                   GoodsOrdersListModel(
                                                                       id: 00),
                                                             )
-                                                            ?.status ==
+                                                            .status ==
                                                         301
                                                     ? Color.fromARGB(
                                                         255, 44, 230, 230)
                                                     : controller.goodsOrdersList
                                                                 .firstWhere(
                                                                   (e) =>
-                                                                      e?.id ==
+                                                                      e.id ==
                                                                       GoodsOrderListDetails!
                                                                           .id,
                                                                   orElse: () =>
                                                                       GoodsOrdersListModel(
                                                                           id: 00),
                                                                 )
-                                                                ?.status ==
+                                                                .status ==
                                                             304
                                                         ? ColorValues.closeColor
                                                         : controller
                                                                     .goodsOrdersList
                                                                     .firstWhere(
                                                                       (e) =>
-                                                                          e?.id ==
+                                                                          e.id ==
                                                                           GoodsOrderListDetails!
                                                                               .id,
                                                                       orElse: () =>
                                                                           GoodsOrdersListModel(
                                                                               id: 00),
                                                                     )
-                                                                    ?.status ==
+                                                                    .status ==
                                                                 301
                                                             ? ColorValues
                                                                 .approveColor
@@ -754,33 +754,33 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     310 ||
                                 controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     304
                             ? Dimens.box0
                             : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         302 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -811,12 +811,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     310 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
@@ -850,12 +850,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         306 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -870,12 +870,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         307 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -890,12 +890,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         308 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -910,12 +910,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         309 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -945,12 +945,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     309 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
@@ -995,12 +995,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         302 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -1015,12 +1015,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   GoodsOrderListDetails!.id,
                                               orElse: () =>
                                                   GoodsOrdersListModel(id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         301 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -1051,12 +1051,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               GoodsOrderListDetails!.id,
                                           orElse: () =>
                                               GoodsOrdersListModel(id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     305 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>

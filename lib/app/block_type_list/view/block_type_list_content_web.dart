@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
 import 'package:cmms/app/block_type_list/block_type_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -7,7 +6,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -623,15 +621,15 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.blockTypeList?.length ?? 0,
+                                    controller.blockTypeList.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .blockTypeList?[index]?.name
+                                              .blockTypeList[index].name
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .blockTypeList?[index]?.spv ??
+                                              .blockTypeList[index].spv ??
                                           '')),
                                       DataCell(Row(
                                         children: [
@@ -646,9 +644,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                         .firstWhere((element) =>
                                                             "${element.id}" ==
                                                             controller
-                                                                .blockTypeList?[
+                                                                .blockTypeList[
                                                                     index]
-                                                                ?.id
+                                                                .id
                                                                 .toString());
 
                                                 controller.titleCtrlr.text =
@@ -691,11 +689,11 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   business_id: controller
-                                                      .blockTypeList?[index]?.id
+                                                      .blockTypeList[index].id
                                                       .toString(),
                                                   business: controller
-                                                      .blockTypeList?[index]
-                                                      ?.name);
+                                                      .blockTypeList[index]
+                                                      .name);
                                             },
                                           ),
                                         ],

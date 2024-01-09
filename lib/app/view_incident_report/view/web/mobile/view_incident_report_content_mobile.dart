@@ -1,7 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
-import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

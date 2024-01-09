@@ -615,12 +615,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       end_date: endDate,
       facility_id: facilityId,
     );
-    if (_goodsordersList != null) {
-      for (var requ in _goodsordersList) {
-        goodsOrdersList.add(requ);
-      }
-
-      update(['requ']);
+    for (var requ in _goodsordersList) {
+      goodsOrdersList.add(requ);
     }
-  }
+
+    update(['requ']);
+    }
 }

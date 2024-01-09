@@ -16,7 +16,6 @@ import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../utils/user_access_constants.dart';
 import '../../widgets/action_button.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
 import '../new_permit_list_controller.dart';
 

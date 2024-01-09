@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/setting_dashboard/setting_dashboard_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';

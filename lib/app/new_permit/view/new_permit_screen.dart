@@ -7,7 +7,6 @@ import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';

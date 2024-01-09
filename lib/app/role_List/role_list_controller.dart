@@ -67,7 +67,7 @@ class RoleListController extends GetxController {
 
   Future<void> getRoleList(bool isLoading) async {
     roleList?.value = <RoleModel>[];
-    filteredData?.value = <RoleModel>[];
+    filteredData.value = <RoleModel>[];
 
     final _moduleList =
         await roleListPresenter.getRoleList(isLoading: isLoading);

@@ -1,6 +1,4 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

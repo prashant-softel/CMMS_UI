@@ -2,7 +2,6 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/app/warranty_claim_list/mobile/warranty_claim_content_mobile.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/warranty_claim_list/web/warranty_claim_list_web.dart';
 

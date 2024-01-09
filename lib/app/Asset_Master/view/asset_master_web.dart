@@ -1,10 +1,7 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../asset_master_Controller.dart';
 // import '../mrs_Details_Controller.dart';
 // import '../preventive_list_controller.dart';

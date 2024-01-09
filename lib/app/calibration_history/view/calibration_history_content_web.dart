@@ -6,7 +6,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../calibration_history/calibration_history_controller.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/custom_elevated_button.dart';
 
 class CalibrationHistoryContentWeb
     extends GetView<CalibrationHistoryController> {

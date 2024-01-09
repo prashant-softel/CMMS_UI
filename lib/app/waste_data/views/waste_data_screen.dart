@@ -1,4 +1,3 @@
-import 'package:cmms/app/Statutory/views/mobile/statutory_mobile.dart';
 import 'package:cmms/app/waste_data/views/mobile/waste_data_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

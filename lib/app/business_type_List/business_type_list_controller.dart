@@ -56,18 +56,18 @@ class BusinessTypeListController extends GetxController {
 
   void search(String keyword) {
     if (keyword.isEmpty) {
-      businessTypeList!.value = filteredData;
+      businessTypeList.value = filteredData;
       return;
     }
 
-    businessTypeList!.value = filteredData
+    businessTypeList.value = filteredData
         .where((item) =>
                 (item!.name
                         ?.toString()
                         .toLowerCase()
                         .contains(keyword.toLowerCase()) ??
                     false) ||
-                (item!.description
+                (item.description
                         .toString()
                         .toLowerCase()
                         .contains(keyword.toLowerCase()) ??
@@ -86,7 +86,7 @@ class BusinessTypeListController extends GetxController {
       businessTypeList.value = _businessTypeList;
       filteredData.value = _businessTypeList;
       paginationController = PaginationController(
-        rowCount: businessTypeList?.length ?? 0,
+        rowCount: businessTypeList.length ?? 0,
         rowsPerPage: 10,
       );
 

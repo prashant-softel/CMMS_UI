@@ -143,14 +143,12 @@ class CreatePmPlanController extends GetxController {
 
         _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
           InventoryModel? inventoryModel = inventoryNameList.firstWhere(
-            (e) => e?.id == element.asset_id,
+            (e) => e.id == element.asset_id,
             // orElse: () => null,
           );
-          if (inventoryModel != null) {
-            print("hsdfbhjgfhsbgfhdsbshj");
-            selectedInventoryNameList.value.add(inventoryModel);
-          }
-          rowItem.value.add([
+          print("hsdfbhjgfhsbgfhdsbshj");
+          selectedInventoryNameList.value.add(inventoryModel);
+                  rowItem.value.add([
             {"key": "assetName", "value": '${element.name}'},
             {'key': "assetsId", "value": '${element.asset_id}'},
             {'key': "parentAsset", "value": '${element.parent_name}'},
@@ -228,33 +226,31 @@ class CreatePmPlanController extends GetxController {
     for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
       InventoryModel? e = inventoryNameList.firstWhere(
         (element) {
-          return element?.id == _selectedfacilityNameId;
+          return element.id == _selectedfacilityNameId;
         },
         // orElse: () => null,
       );
-      if (e != null) {
-        filteredInventoryNameList.add(e);
-      }
-    }
+      filteredInventoryNameList.add(e);
+        }
     print({"filteredInventoryNameList": filteredInventoryNameList});
     if (filteredInventoryNameList.length > 0) {
       filteredInventoryNameList.forEach((element) {
         var aa = bufferRowItem.value
-                .firstWhereOrNull((i) => i[1]["value"] == '${element?.id}') ??
+                .firstWhereOrNull((i) => i[1]["value"] == '${element.id}') ??
             [];
 
         rowItem.value.add([
           {
             "key": "assetName",
-            "value": '${element?.name}',
+            "value": '${element.name}',
           },
           {
             'key': "assetsId",
-            "value": '${element?.id}',
+            "value": '${element.id}',
           },
           {
             'key': "parentAsset",
-            "value": '${element?.parentName}',
+            "value": '${element.parentName}',
           },
           {'key': "qty", "value": ''},
           {
@@ -304,7 +300,7 @@ class CreatePmPlanController extends GetxController {
           preventiveCheckList.value = <PreventiveCheckListModel>[];
           selectedInventoryNameIdList.value = [];
 
-          if (pmPlanId == 0 || pmPlanId == null) {
+          if (pmPlanId == 0) {
             selectedInventoryNameList.value = [];
           }
           Future.delayed(Duration(seconds: 1), () {
@@ -333,10 +329,10 @@ class CreatePmPlanController extends GetxController {
           if (value != null) {
             for (var selectedItem in value) {
               int equipCatIndex =
-                  inventoryNameList.indexWhere((x) => x?.name == selectedItem);
+                  inventoryNameList.indexWhere((x) => x.name == selectedItem);
               if (equipCatIndex >= 0) {
                 selectedInventoryNameIdList
-                    .add(inventoryNameList[equipCatIndex]?.id ?? 0);
+                    .add(inventoryNameList[equipCatIndex].id ?? 0);
               }
             }
           }

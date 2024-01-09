@@ -1,6 +1,4 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';

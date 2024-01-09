@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/inventory_category_list/inventory_category_list_controller.dart';
 import 'package:cmms/app/inventory_type_list/inventory_type_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';

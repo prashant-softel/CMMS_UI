@@ -1,5 +1,4 @@
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';

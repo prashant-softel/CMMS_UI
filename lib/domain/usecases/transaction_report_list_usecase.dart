@@ -1,6 +1,5 @@
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';

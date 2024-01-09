@@ -116,7 +116,7 @@ class InventoryTypeListController extends GetxController {
   Future<void> getInventoryTypeList(
       int facilityId, int type, bool isLoading) async {
     inventoryTypeList?.value = <InventoryTypeListModel>[];
-    filteredData?.value = <InventoryTypeListModel>[];
+    filteredData.value = <InventoryTypeListModel>[];
 
     final _inventoryTypeList =
         await inventoryTypeListPresenter.getInventoryTypeList(

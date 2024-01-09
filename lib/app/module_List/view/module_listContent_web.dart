@@ -1,14 +1,11 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
 import 'package:cmms/app/module_List/module_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -824,43 +821,43 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                         )),
                                   ],
                                   rows: List<DataRow>.generate(
-                                    controller.moduleList?.length ?? 0,
+                                    controller.moduleList.length ?? 0,
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.name
+                                              .moduleList[index].name
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .moduleList?[index]
-                                              ?.featureName ??
+                                              .moduleList[index]
+                                              .featureName ??
                                           '')),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.add
+                                              .moduleList[index].add
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.edit
+                                              .moduleList[index].edit
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.delete
+                                              .moduleList[index].delete
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.view
+                                              .moduleList[index].view
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.approve
+                                              .moduleList[index].approve
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.issue
+                                              .moduleList[index].issue
                                               .toString() ??
                                           "")),
                                       DataCell(Text(controller
-                                              .moduleList?[index]?.selfView
+                                              .moduleList[index].selfView
                                               .toString() ??
                                           "")),
                                       DataCell(Row(
@@ -873,12 +870,12 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                 controller.selectedItem =
                                                     controller
                                                         .moduleList
-                                                        ?.firstWhere((element) =>
-                                                            "${element?.id}" ==
+                                                        .firstWhere((element) =>
+                                                            "${element.id}" ==
                                                             controller
-                                                                .moduleList?[
+                                                                .moduleList[
                                                                     index]
-                                                                ?.id
+                                                                .id
                                                                 .toString());
 
                                                 controller.featureCtrlr.text =
@@ -962,11 +959,11 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   module_id: controller
-                                                      .moduleList?[index]?.id
+                                                      .moduleList[index].id
                                                       .toString(),
                                                   module: controller
-                                                      .moduleList?[index]
-                                                      ?.name);
+                                                      .moduleList[index]
+                                                      .name);
                                             },
                                           ),
                                         ],

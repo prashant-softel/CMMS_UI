@@ -1,5 +1,4 @@
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
-import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class ViewHazWasteDataUsecase {

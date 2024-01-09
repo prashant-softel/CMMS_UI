@@ -24,12 +24,12 @@ class BusinessTypeListContentMobile
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.businessTypeList != null
-                        ? controller.businessTypeList?.length
+                        ? controller.businessTypeList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final preventiveCheckListModel =
                           (controller.businessTypeList != null)
-                              ? controller.businessTypeList![index]
+                              ? controller.businessTypeList[index]
                               : BusinessTypeModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),

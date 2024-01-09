@@ -100,8 +100,8 @@ class EmployeeStockReportController extends GetxController {
       for (var _userList in list) {
         userList.add(_userList!);
       }
-      selectedUser.value = userList[0]?.name ?? '';
-      selectedUserId = userList[0]?.id ?? 0;
+      selectedUser.value = userList[0].name ?? '';
+      selectedUserId = userList[0].id ?? 0;
       Future.delayed(Duration(seconds: 1), () {
         getEmployeeStockReportList(
             facilityId, 12, formattedTodate1, formattedFromdate1, false);
@@ -135,14 +135,12 @@ class EmployeeStockReportController extends GetxController {
     switch (list.runtimeType) {
       case RxList<UserListModel>:
         {
-          int userIndex = userList.indexWhere((x) => x?.name == value);
-          selectedUserId = userList[userIndex]?.id ?? 0;
-          selectedUser.value = userList[userIndex]?.name ?? '';
-          if (selectedUserId != null) {
-            getEmployeeStockReportList(facilityId, selectedUserId,
-                formattedTodate1, formattedFromdate1, false);
-          }
-        }
+          int userIndex = userList.indexWhere((x) => x.name == value);
+          selectedUserId = userList[userIndex].id ?? 0;
+          selectedUser.value = userList[userIndex].name ?? '';
+          getEmployeeStockReportList(facilityId, selectedUserId,
+              formattedTodate1, formattedFromdate1, false);
+                }
         break;
       default:
         {

@@ -2,7 +2,6 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/color_values.dart';
-import '../theme/dimens.dart';
 
 /// DO NOT CHANGE THI FILE FOR THE TOP DROPDOWN. CREATE A NEW WIDGET.
 class DropdownWebWidget extends StatelessWidget {
