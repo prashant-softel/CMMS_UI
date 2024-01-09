@@ -11,7 +11,6 @@ import '../../domain/models/asset_category_model.dart';
 import '../../domain/models/asset_type_list_sm_model.dart';
 import '../../domain/models/create_asset_sm_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';

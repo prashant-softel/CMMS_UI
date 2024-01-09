@@ -18,13 +18,11 @@ class ViewMisPlanController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditId = 0.obs;
   Rx<int> type = 0.obs;
-
+  RxInt selectedValue = 1.obs;
   Rx<AuditPlanDetailModel?> auditPlanDetailModel = AuditPlanDetailModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-  var isToggleOn = false.obs;
-
-  void toggle() {
-    isToggleOn.value = !isToggleOn.value;
+  void onRadioValueChanged(int value) {
+    selectedValue.value = value;
   }
 
   @override

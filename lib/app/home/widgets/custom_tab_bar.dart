@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({
     Key? key,
-    required this.icon,
+    this.icon,
     required this.label,
   }) : super(key: key);
 
-  final IconData icon;
+  final IconData? icon;
   final String label;
 
   @override
