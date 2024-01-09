@@ -1,10 +1,8 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
-import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/app/widgets/waste_disposed_dialog%20copy.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
@@ -461,7 +459,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                             padding: const EdgeInsets.all(16),
                                             child: DataTable2(
                                               fixedLeftColumns: 1,
-                                              headingRowHeight: 130,
+                                              headingRowHeight: 140,
                                               columnSpacing: 12,
                                               horizontalMargin: 12,
                                               headingRowColor:
@@ -485,81 +483,9 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                   // size: ColumnSize.L,
                                                 ),
                                                 DataColumn2(
-                                                  fixedWidth: 160,
-                                                  label: Text(
-                                                    'Solid waste( Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass etc)',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
                                                   fixedWidth: 110,
                                                   label: Text(
-                                                    'Opening\nBalance Of\nWaste',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 90,
-                                                  label: Text(
-                                                    'E- waste\nin kgs ',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 110,
-                                                  label: Text(
-                                                    'Closing\nBalance Of\nWaste',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Battery\nWaste in\nnumber ',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Solar Module\nwaste in\nnumber',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    'Haz waste Oil\n(E.g. used\ntransformer oil)\nin litres ',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Haz Waste\ngrease\nin kgs',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Haz solid\nwaste\n(e.g. used oil\ncotton)\nin Kgs',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Haz waste\noil barrel\ngenerated\nin No',
+                                                    'Opening\nBalance Of\nWaste\nSolid waste',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -567,7 +493,23 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 160,
                                                   label: Text(
-                                                    'Solid waste(Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass\netc)in kgs',
+                                                    'Solid waste( Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass etc)\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 160,
+                                                  label: Text(
+                                                    'Solid waste(Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass\netc) Disposed',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 110,
+                                                  label: Text(
+                                                    'Closing\nBalance Of\nWaste\nSolid waste',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -575,7 +517,23 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 90,
                                                   label: Text(
-                                                    'E- waste\nDisposed\nin kgs',
+                                                    'E- waste\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 90,
+                                                  label: Text(
+                                                    'E- waste\nDisposed',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Battery\nWaste Genrate',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -583,31 +541,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 135,
                                                   label: Text(
-                                                    'Battery Waste\ndisposed\nin number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    'Solar module\nwaste\nin number ',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 110,
-                                                  label: Text(
-                                                    'Haz waste oil\ndisposed\nin litres',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Haz waste\nGrease\nin Kgs',
+                                                    'Battery Waste\nDisposed',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
@@ -615,7 +549,71 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                 DataColumn2(
                                                   fixedWidth: 120,
                                                   label: Text(
-                                                    'Haz Solid\nwaste\ndisposed\nin Kgs ',
+                                                    'Solar Module\nwaste\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 130,
+                                                  label: Text(
+                                                    'Solar module\nwaste\nDisposed',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 130,
+                                                  label: Text(
+                                                    'Haz waste Oil\n(E.g. used\ntransformer oil)\nin litres\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 110,
+                                                  label: Text(
+                                                    'Haz waste oil\nDisposed\nin litres',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Haz Waste\ngrease\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Haz waste\nGrease\nDisposed',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 120,
+                                                  label: Text(
+                                                    'Haz solid\nwaste\n(e.g. used oil\ncotton)\nGenrate',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 120,
+                                                  label: Text(
+                                                    'Haz Solid\nwaste\nDisposed ',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 120,
+                                                  label: Text(
+                                                    'Haz waste\noil barrel\nGenerated\nin No',
                                                     style: Styles.blackBold14,
                                                   ),
                                                   // size: ColumnSize.L,
