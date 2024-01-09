@@ -686,6 +686,10 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                               icon: Icons
                                                                   .remove_red_eye_outlined,
                                                               message: 'View',
+                                                              onPress: () {
+                                                                Get.toNamed(Routes
+                                                                    .viewHazWasteData);
+                                                              },
                                                             ),
                                                             TableActionButton(
                                                               color: ColorValues

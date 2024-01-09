@@ -182,6 +182,7 @@ abstract class Routes {
   static const auditTask = _Paths.auditTask;
   static const addWaterData = _Paths.addWaterData;
   static const viewWaterData = _Paths.viewWaterData;
+  static const viewHazWasteData = _Paths.viewHazWasteData;
 }
 
 abstract class _Paths {
@@ -353,6 +354,7 @@ abstract class _Paths {
   static const grievanceDetails = '/grievance-details-screen';
   static const editGrievance = '/edit-grievance-screen';
   static const grievanceCardList = '/grievance-card-list';
+  static const viewHazWasteData = '/viewHazWasteData';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
   static const responsibility = '/responsibility';

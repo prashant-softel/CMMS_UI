@@ -100,6 +100,8 @@ import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
+import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
+import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_mis_plan/view/view_mis_plan_screen.dart';
@@ -1087,6 +1089,11 @@ class AppPages {
       name: _Paths.grievanceList,
       page: GrievanceListScreen.new,
       binding: GrievanceListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewHazWasteData,
+      page: ViewHazWasteDataScreen.new,
+      binding: ViewHazWasteDataBinding(),
     ),
   ];
 }
