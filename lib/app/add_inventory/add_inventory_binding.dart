@@ -9,14 +9,11 @@ import 'package:get/get.dart';
 class AddInventoryBinding extends Bindings {
   @override
   void dependencies() {
-    // Get.find<AddInventoryController>();
-    Get.lazyPut(
+    Get.lazyPut<AddInventoryController>(
       () => AddInventoryController(
-        Get.put(
-          AddInventoryPresenter(
-            AddInventoryUsecase(
-              Get.find(),
-            ),
+        AddInventoryPresenter(
+          AddInventoryUsecase(
+            Get.find(),
           ),
         ),
       ),
