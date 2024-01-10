@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -199,24 +200,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: 'Block'),
                                     SizedBox(
-                                      child: DropdownWebWidget(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
+                                      child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -236,24 +220,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Type"),
                                     SizedBox(
-                                      child: DropdownWebWidget(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
+                                      child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -273,24 +240,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Status"),
                                     SizedBox(
-                                      child: DropdownWebWidget(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
+                                      child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -342,24 +292,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: 'Parent Equipment'),
                                     SizedBox(
-                                      child: DropdownWebWidget(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
+                                      child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
                                             MediaQuery.of(context).size.width /
@@ -380,24 +313,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Category"),
                                     SizedBox(
-                                      child: DropdownWebWidget(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
+                                      child: DropdownWebStock(
                                         margin: Dimens.edgeInsets5,
                                         width:
                                             MediaQuery.of(context).size.width /

@@ -1,10 +1,12 @@
 import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -50,24 +52,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Type"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebWidget(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      offset: const Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 1.0,
-                                    ),
-                                    BoxShadow(
-                                      color: ColorValues.whiteColor,
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ),
-                                  ],
+                                child: DropdownWebStock(
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList: controller.warrantyNameList,
                                   isValueSelected:
@@ -86,24 +71,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   title: "Warranty Usages Term Type"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebWidget(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      offset: const Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 1.0,
-                                    ),
-                                    BoxShadow(
-                                      color: ColorValues.whiteColor,
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ),
-                                  ],
+                                child: DropdownWebStock(
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.warrantyUsageTermNameList,
@@ -121,23 +89,9 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                             children: [
                               CustomRichText(title: "Description"),
                               SizedBox(width: 10),
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                  color: Color(0xFE50000),
-                                  width: 0.5,
-                                )),
-                                height:
-                                    MediaQuery.of(context).size.height * 0.040,
-                                constraints: BoxConstraints(
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width / 5,
-                                  minWidth: 100,
-                                ),
-                                child: LoginCustomTextfield(
-                                    textController:
-                                        controller.warrentyDescriptionCtrlr),
-                              ),
+                              GoodsOrderTextField(
+                                  textController:
+                                      controller.warrentyDescriptionCtrlr),
                             ],
                           ),
                           Dimens.boxHeight10,
@@ -168,24 +122,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Provider"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebWidget(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      offset: const Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 1.0,
-                                    ),
-                                    BoxShadow(
-                                      color: ColorValues.whiteColor,
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ),
-                                  ],
+                                child: DropdownWebStock(
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.manufacturerModelNameList,
