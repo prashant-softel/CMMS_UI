@@ -68,7 +68,7 @@ class PreventiveCheckPointController extends GetxController {
     "Check Point": 250,
     "Requirement": 300,
     "Upload Image?": 200,
-    "Failure Weightage": 150,
+    "Failure Weightage": 170,
     "Type": 200,
   };
   Map<String, RxString> filterText = {};
@@ -259,7 +259,7 @@ class PreventiveCheckPointController extends GetxController {
         isLoading: true,
       );
       return true;
-        }
+    }
     return false;
   }
 

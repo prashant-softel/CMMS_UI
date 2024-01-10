@@ -171,11 +171,14 @@ class ConnectHelper {
         (categoryIds != '') ? 'categoryIds=$categoryIds&' : '';
 
     var statusParam = 'status=1';
+    var facilityParam = '&facilityId=$facilityId';
+
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Inventory/GetInventoryList?' +
           blockIdParam +
           categoryIdsParam +
-          statusParam,
+          statusParam +
+          facilityParam,
       Request.getMultiparts,
       null,
       isLoading,
