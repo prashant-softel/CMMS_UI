@@ -30,12 +30,15 @@ class PreventiveCheckPointController extends GetxController {
   var checkPointCtrlr = TextEditingController();
   var minRangeCtrlr = TextEditingController();
   var maxRangeCtrlr = TextEditingController();
+  RxBool isContainerVisible = false.obs;
 
   var requirementCtrlr = TextEditingController();
   var failurewtgCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   Rx<String> selectedchecklistId = "".obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
+  RxList<CheckPointModel?>? BufferPreventiveCheckPoint =
+      <CheckPointModel?>[].obs;
   CheckPointModel? preventiveCheckpointmodel;
   CheckPointModel? selectedItem;
 
@@ -46,12 +49,58 @@ class PreventiveCheckPointController extends GetxController {
   );
   // var preventiveCheckPointModelListDetails;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Sr No": true,
+    "Check Point Id": true,
+    "Check List No.": true,
+    "Check Point": true,
+    "Requirement": true,
+    "Upload Image?": true,
+    "Failure Weightage": true,
+    "Type": true,
 
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Sr No": 50,
+    "Check Point Id": 100,
+    "Check List No.": 250,
+    "Check Point": 250,
+    "Requirement": 300,
+    "Upload Image?": 200,
+    "Failure Weightage": 150,
+    "Type": 200,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
+
+  RxString srFilterText = ''.obs;
+  RxString idFilterText = ''.obs;
+  RxString checkListFilterText = ''.obs;
+  RxString checkpointFilterText = ''.obs;
+  RxString reqFilterText = ''.obs;
+  RxString failerFilterText = ''.obs;
+  RxString imageFilterText = ''.obs;
+  RxString typeFilterText = ''.obs;
   @override
   void onInit() async {
     try {
       await setType();
-
+      this.filterText = {
+        "Sr No": srFilterText,
+        "Check Point Id": idFilterText,
+        "Check List No.": checkListFilterText,
+        "Check Point": checkpointFilterText,
+        "Requirement": reqFilterText,
+        "Upload Image?": imageFilterText,
+        "Failure Weightage": failerFilterText,
+        "Type": typeFilterText,
+      };
       if (type.value != 0) {
         facilityIdStreamSubscription =
             homecontroller.facilityId$.listen((event) {
@@ -65,6 +114,10 @@ class PreventiveCheckPointController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   Future<void> setType() async {
@@ -96,6 +149,48 @@ class PreventiveCheckPointController extends GetxController {
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      preventiveCheckpoint!.value = BufferPreventiveCheckPoint!.value;
+      return;
+    }
+    List<CheckPointModel?> filteredList = BufferPreventiveCheckPoint!
+        .where((item) =>
+            (item!.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.checklist_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.check_point
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.requirement
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.checkpoint_type
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.failure_weightage
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    preventiveCheckpoint!.value = filteredList;
   }
 
   Future<void> getPreventiveCheckList(
@@ -172,25 +267,29 @@ class PreventiveCheckPointController extends GetxController {
 
   Future<void> getCheckPointlist({required String selectedchecklistId}) async {
     preventiveCheckpoint?.value = <CheckPointModel>[];
+    BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
+
     final _preventiveCheckpoint =
         await preventiveCheckPointPresenter.getCheckPointlist(
             selectedchecklistId: int.tryParse(selectedchecklistId));
 
     if (_preventiveCheckpoint != null) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
-      paginationController = PaginationController(
-        rowCount: preventiveCheckpoint!.length,
-        rowsPerPage: 10,
-      );
+      BufferPreventiveCheckPoint!.value = preventiveCheckpoint!.value;
 
-      if (preventiveCheckpoint != null && preventiveCheckpoint!.isNotEmpty) {
-        preventiveCheckpointmodel = preventiveCheckpoint![0];
-        var preventiveCheckListJson = preventiveCheckpointmodel?.toJson();
-        preventiveCheckPointTableColumns.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          preventiveCheckPointTableColumns.add(key);
-        }
-      }
+      // paginationController = PaginationController(
+      //   rowCount: preventiveCheckpoint!.length,
+      //   rowsPerPage: 10,
+      // );
+
+      // if (preventiveCheckpoint != null && preventiveCheckpoint!.isNotEmpty) {
+      //   preventiveCheckpointmodel = preventiveCheckpoint![0];
+      //   var preventiveCheckListJson = preventiveCheckpointmodel?.toJson();
+      //   preventiveCheckPointTableColumns.value = <String>[];
+      //   for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+      //     preventiveCheckPointTableColumns.add(key);
+      //   }
+      // }
     }
   }
 

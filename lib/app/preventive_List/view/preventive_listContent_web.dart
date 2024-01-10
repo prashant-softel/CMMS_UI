@@ -630,7 +630,7 @@ class CheckListDataSource extends DataTableSource {
                             controller.preventiveCheckList!.firstWhere(
                           (element) =>
                               "${element!.id}" ==
-                              controller.preventiveCheckList!?[index]?.id
+                              controller.preventiveCheckList![index]?.id
                                   .toString(),
                         );
 
@@ -658,7 +658,14 @@ class CheckListDataSource extends DataTableSource {
                       icon: Icons.delete,
                       message: 'Delete',
                       onPress: () {
-                        controller.isContainerVisible.value = true;
+                        controller.isDeleteDialog(
+                            checklist_id: controller
+                                .preventiveCheckList![index]?.id
+                                .toString(),
+                            checklist:
+                                controller.preventiveCheckList![index]?.name);
+
+                        // controller.isContainerVisible.value = true;
                       },
                     )
                   ])

@@ -6,7 +6,6 @@ import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -175,27 +174,27 @@ class PreventiveListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item!.name
+            (item.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item!.category_name
+            (item.category_name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item!.frequency_name
+            (item.frequency_name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item!.manPower
+            (item.manPower
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item!.duration
+            (item.duration
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
