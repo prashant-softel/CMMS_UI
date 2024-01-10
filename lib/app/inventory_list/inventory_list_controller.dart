@@ -17,7 +17,7 @@ class InventoryListController extends GetxController {
   InventoryListPresenter inventoryListPresenter;
   final HomeController homecontroller = Get.find();
   RxList<InventoryModel?> inventoryList = <InventoryModel?>[].obs;
-  RxList<InventoryModel> filteredData = <InventoryModel>[].obs;
+  RxList<InventoryModel?> filteredData = <InventoryModel?>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
@@ -98,25 +98,57 @@ class InventoryListController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      inventoryList.value = filteredData;
+      inventoryList!.value = filteredData.value;
       return;
     }
-
-    inventoryList.value = filteredData
+    List<InventoryModel?> filteredList = filteredData
         .where((item) =>
-            item.blockName!.toLowerCase().contains(keyword.toLowerCase()))
+                (item!.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.blockName
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.categoryName
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.parentName
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.id
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ||
+                (item.serialNumber
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) // Add this condition to filter by searchId
+            )
         .toList();
-    update(['stock_Mangement_Date']);
+    inventoryList!.value = filteredList;
   }
 
   Future<void> getInventoryAssetsList(int facilityId, bool isLoading) async {
     inventoryList.value = <InventoryModel>[];
+    filteredData.value = <InventoryModel>[];
     final _inventoryList = await inventoryListPresenter.getInventoryAssetsList(
       isLoading: true,
       facility_id: facilityId,
     );
     inventoryList.value = _inventoryList;
+    filteredData.value = inventoryList.value;
     paginationController = PaginationController(
       rowCount: inventoryList.length,
       rowsPerPage: 10,
@@ -133,9 +165,7 @@ class InventoryListController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   void showAddGoodsOrdersDetails({int? id}) {
