@@ -529,33 +529,35 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
             ),
           )
         ]),
-        floatingActionButton: Row(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Spacer(),
-              controller.inventoryId.value == 0
-                  ? Container(
-                      height: 40,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appGreenColor,
-                        text: 'Submit',
-                        onPressed: () {
-                          controller.AddInventory();
-                        },
+        floatingActionButton: Obx(
+          () => Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Spacer(),
+                controller.inventoryId.value == 0
+                    ? Container(
+                        height: 40,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.appGreenColor,
+                          text: 'Submit',
+                          onPressed: () {
+                            controller.AddInventory();
+                          },
+                        ),
+                      )
+                    : Container(
+                        height: 40,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.appDarkBlueColor,
+                          text: 'Update',
+                          onPressed: () {
+                            controller.updateInventory();
+                          },
+                        ),
                       ),
-                    )
-                  : Container(
-                      height: 40,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        text: 'Update',
-                        onPressed: () {
-                          controller.updateInventory();
-                        },
-                      ),
-                    ),
-              Spacer()
-            ]),
+                Spacer()
+              ]),
+        ),
       );
 }
