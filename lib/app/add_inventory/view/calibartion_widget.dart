@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -49,24 +50,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 CustomRichText(title: "Calibration Frequency"),
                                 Dimens.boxWidth5,
                                 SizedBox(
-                                  child: DropdownWebWidget(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                      BoxShadow(
-                                        color: ColorValues.whiteColor,
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
-                                      ),
-                                    ],
+                                  child: DropdownWebStock(
                                     margin: Dimens.edgeInsets5,
                                     width:
                                         MediaQuery.of(context).size.width / 5,
