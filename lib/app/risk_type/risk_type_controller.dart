@@ -127,35 +127,35 @@ class RiskTypeController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        //getRiskTypeList();
+        getRiskTypeList();
       });
     });
 
     super.onInit();
   }
 
-  // Future<void> getRiskTypeList() async {
-  //   riskTypeList.value = <RiskTypeModel>[];
-  //   BufferRiskTypeList.value = <RiskTypeModel>[];
-  //   final _risktypeList = await RiskTypeListPresenter.getRiskTypeList(
-  //     isLoading: true,
-  //     // categoryIds: categoryIds,
-  //     job_type_id: selectedJobSOPId,
-  //     // job_type_id: 36,
-  //   );
-  //   for (var facilityType_list in _risktypeList) {
-  //     riskTypeList.add(facilityType_list);
-  //     BufferRiskTypeList.add(facilityType_list);
-  //   }
+  Future<void> getRiskTypeList() async {
+    riskTypeList.value = <RiskTypeModel>[];
+    BufferRiskTypeList.value = <RiskTypeModel>[];
+    final _risktypeList = await riskTypeListPresenter.getRiskTypeList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: selectedJobSOPId,
+      // job_type_id: 36,
+    );
+    for (var facilityType_list in _risktypeList) {
+      riskTypeList.add(facilityType_list);
+      BufferRiskTypeList.add(facilityType_list);
+    }
   //   // selectedSopPermit.value = _SPVList[0].name ?? '';
 
   //   // supplierNameList = _supplierNameList;
-  //   RiskTypeListPaginationController = PaginationController(
-  //     rowCount: riskTypeList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['Risktype_list']);
-  // }
+    RiskTypeListPaginationController = PaginationController(
+      rowCount: riskTypeList.length,
+      rowsPerPage: 10,
+    );
+    update(['Risktype_list']);
+  }
 
   void toggleContainer() {
     isContainerVisible.toggle();
@@ -194,10 +194,10 @@ class RiskTypeController extends GetxController {
           .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", facilitylistJsonString});
-      // await riskTypeListPresenter.createRiskTypelist(
-      //   facilitylistJsonString: facilitylistJsonString,
-      //   isLoading: true,
-      // );
+      await riskTypeListPresenter.createRiskType(
+        riskTypeJsonString: facilitylistJsonString,
+        isLoading: true,
+      );
       return true;
     }
     return true;
@@ -221,31 +221,31 @@ class RiskTypeController extends GetxController {
     // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
-      //getRiskTypeList();
+      getRiskTypeList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
   }
 
-  // Future<bool> updateRiskType(checklistId) async {
-  //   String _name = titleCtrlr.text.trim();
-  //   String _description = descriptionCtrlr.text.trim();
+  Future<bool> updateRiskType(checklistId) async {
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
 
-  //   RiskTypeModel createChecklist = RiskTypeModel(
-  //     id: checklistId,
-  //     name: _name,
-  //     description: _description,
-  //   );
-  //   var businessTypeJsonString = createChecklist.toJson();
+    RiskTypeModel createChecklist = RiskTypeModel(
+      id: checklistId,
+      name: _name,
+      description: _description,
+    );
+    var businessTypeJsonString = createChecklist.toJson();
 
-  //   print({"businessTypeJsonString", businessTypeJsonString});
-  //   await riskTypeListPresenter.updateRiskType(
-  //     modulelistJsonString: businessTypeJsonString,
-  //     isLoading: true,
-  //   );
-  //   return true;
-  // }
+    print({"businessTypeJsonString", businessTypeJsonString});
+    await riskTypeListPresenter.updateRiskType(
+      riskTypeJsonString: businessTypeJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
 
   void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
@@ -280,15 +280,15 @@ class RiskTypeController extends GetxController {
                 },
                 child: Text('NO'),
               ),
-              // TextButton(
-              //   onPressed: () {
-              //     deleteRiskType(business_id).then((value) {
-              //       Get.back();
-              //       getRiskTypeList();
-              //     });
-              //   },
-              //   child: Text('YES'),
-              // ),
+              TextButton(
+                onPressed: () {
+                  deleteRiskType(business_id).then((value) {
+                    Get.back();
+                    getRiskTypeList();
+                  });
+                },
+                child: Text('YES'),
+              ),
             ],
           )
         ],
@@ -296,14 +296,14 @@ class RiskTypeController extends GetxController {
     );
   }
 
-  // Future<void> deleteRiskType(String? business_id) async {
-  //   {
-  //     await riskTypeListPresenter.deleteFacility(
-  //       business_id,
-  //       isLoading: true,
-  //     );
-  //   }
-  // }
+  Future<void> deleteRiskType(String? business_id) async {
+    {
+      await riskTypeListPresenter.deleteFacility(
+        business_id,
+        isLoading: true,
+      );
+    }
+  }
 
   void checkForm() {
     if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {

@@ -451,19 +451,19 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
                                           onPressed: () {
-                                            // controller
-                                            //     .updateRiskType(
-                                            //         controller.selectedItem?.id)
-                                            //     .then(
-                                            //   (value) {
-                                            //     print("UPDATE");
-                                            //     print("value,$value");
-                                            //     if (value == true)
-                                            //       controller
-                                            //           .issuccessCreatechecklist();
-                                            //     controller.toggleContainer();
-                                            //   },
-                                            // );
+                                            controller
+                                                .updateRiskType(
+                                                    controller.selectedItem?.id)
+                                                .then(
+                                              (value) {
+                                                print("UPDATE");
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                                controller.toggleContainer();
+                                              },
+                                            );
                                           },
                                           text: 'Update',
                                         ),
