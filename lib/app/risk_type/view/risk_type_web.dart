@@ -51,10 +51,10 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.offNamed(Routes.masterDashboard);
+                      Get.offNamed(Routes.misDashboard);
                     },
                     child: Text(
-                      " / MIS",
+                      " / HSE Report",
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -80,8 +80,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Create RiskType'
-                        : 'Open Create RiskType',
+                        ? 'Close Create Risk Type'
+                        : 'Open Create Risk Type',
                   );
                 }),
               ),
@@ -444,7 +444,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                 },
                                               );
                                             },
-                                            text: 'Create RiskType',
+                                            text: 'Create Risk Type',
                                           ),
                                         )
                                       : CustomElevatedButton(
