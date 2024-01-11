@@ -237,11 +237,11 @@ class RiskTypeController extends GetxController {
       name: _name,
       description: _description,
     );
-    var businessTypeJsonString = createChecklist.toJson();
+    var RiskTypeJsonString = createChecklist.toJson();
 
-    print({"businessTypeJsonString", businessTypeJsonString});
+    print({"businessTypeJsonString", RiskTypeJsonString});
     await riskTypeListPresenter.updateRiskType(
-      riskTypeJsonString: businessTypeJsonString,
+      riskTypeJsonString: RiskTypeJsonString,
       isLoading: true,
     );
     return true;
