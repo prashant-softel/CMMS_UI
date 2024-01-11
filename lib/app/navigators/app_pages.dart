@@ -42,6 +42,8 @@ import 'package:cmms/app/compliance_history/views/compliance_history_screen.dart
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
+import 'package:cmms/app/create_grievance/create_grievance_binding.dart';
+import 'package:cmms/app/create_grievance/view/create_grievance_screen.dart';
 import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
 import 'package:cmms/app/create_mis_plan/view/create_mis_plan_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
@@ -1091,6 +1093,12 @@ class AppPages {
       name: _Paths.viewHazWasteData,
       page: ViewHazWasteDataScreen.new,
       binding: ViewHazWasteDataBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: _Paths.addGrievance,
+      page: CreateGrievancesScreen.new,
+      binding: CreateGrievanceBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.risktypemaster,

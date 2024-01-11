@@ -2669,6 +2669,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> createGrievance({
+    required String auth,
+    bool? isLoading,
+    required jobTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreateGrievance',
+      Request.post,
+      jobTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> createMcPlan({
     required String auth,
     createMcPlans,
