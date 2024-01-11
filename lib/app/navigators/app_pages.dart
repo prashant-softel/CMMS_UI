@@ -98,6 +98,8 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
+import 'package:cmms/app/risk_type/risk_type_binding.dart';
+import 'package:cmms/app/risk_type/view/risk_type_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
@@ -1089,6 +1091,11 @@ class AppPages {
       name: _Paths.viewHazWasteData,
       page: ViewHazWasteDataScreen.new,
       binding: ViewHazWasteDataBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.risktypemaster,
+      page: RiskTypeListScreen.new,
+      binding: RiskTypeListBinding(),
     ),
   ];
 }
