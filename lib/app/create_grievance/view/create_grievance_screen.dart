@@ -1,4 +1,6 @@
-import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_controller.dart';
+import 'package:cmms/app/create_grievance/create_grievance_controller.dart';
+import 'package:cmms/app/create_grievance/view/create_grievance_web.dart';
+
 import 'package:cmms/app/request_order_details/view/request_order_details_web.dart';
 
 import 'package:flutter/material.dart';
@@ -8,8 +10,7 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class CreateGrievancesScreen
-    extends GetView<StockManagementGoodsOrdersController> {
+class CreateGrievancesScreen extends GetView<CreateGrievanceController> {
   CreateGrievancesScreen({super.key});
 
   ///
@@ -41,7 +42,7 @@ class CreateGrievancesScreen
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: GoodsOrdersReqDetailsWeb(),
+                        child: CreateGrievancesWeb(),
                       )
                   ],
                 ),
