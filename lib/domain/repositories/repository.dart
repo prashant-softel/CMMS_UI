@@ -6973,13 +6973,13 @@ class Repository {
       final res = await _dataRepository.updateInventory(
           auth: auth,
           isLoading: isLoading,
-          addInventoryJsonString: addInventoryJsonString);
+          addInventoryJsonString: json.encode(addInventoryJsonString));
       print({"resp", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Data update successfully...", fontSize: 16.0);
 
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.inventoryList,
         );
         return true;

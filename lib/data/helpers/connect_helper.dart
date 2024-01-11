@@ -4577,6 +4577,7 @@ class ConnectHelper {
       'Inventory/UpdateInventory',
       Request.put,
       addInventoryJsonString,
+      // json.encode(addInventoryJsonString),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
