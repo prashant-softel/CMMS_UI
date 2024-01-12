@@ -1270,11 +1270,11 @@ class AddIncidentReportController extends GetxController {
           msg: 'Incident Description Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    if (insuranceAvailableTextCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Insurance Available Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
+    // if (insuranceAvailableTextCtrlr.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: 'Insurance Available Field cannot be empty',
+    //       timeInSecForIosWeb: 5);
+    // }
     // if (insuranceRemarkTextCtrlr.text == '') {
     //   Fluttertoast.showToast(
     //       msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
@@ -1345,9 +1345,9 @@ class AddIncidentReportController extends GetxController {
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
         WhyWhyAnalysis item = WhyWhyAnalysis(
-          incidents_id: 123,
-          why: element[0]["value"] ?? '0',
-          cause: element[1]["value"] ?? '0',
+          incidents_id: 0,
+          why: "",
+          cause: "",
         );
 
         whyWhyAnalysisItems.add(item);
@@ -1357,8 +1357,8 @@ class AddIncidentReportController extends GetxController {
       List<RootCause> rootCauseItems = [];
       rowRootCauseItem.forEach((element) {
         RootCause item = RootCause(
-          incidents_id: 123,
-          cause: element[0]["value"] ?? '0',
+          incidents_id: 0,
+          cause: "",
         );
 
         rootCauseItems.add(item);
@@ -1368,8 +1368,8 @@ class AddIncidentReportController extends GetxController {
       List<ImmediateCorrection> immediateCorrectionItems = [];
       rowImmediateCorrectionItem.forEach((element) {
         ImmediateCorrection item = ImmediateCorrection(
-          incidents_id: 123,
-          details: element[0]["value"] ?? '0',
+          incidents_id: 0,
+          details: '',
         );
 
         immediateCorrectionItems.add(item);
@@ -1405,13 +1405,12 @@ class AddIncidentReportController extends GetxController {
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
         ProposedActionPlan item = ProposedActionPlan(
-          incidents_id: 123,
-          actions_as_per_plan: element[0]["value"] ?? '0',
-          responsibility:
-              dropdownEquipmentNameMapperData[element[1]["value"]]?.name,
+          incidents_id: 0,
+          actions_as_per_plan: "",
+          responsibility: "",
           // target_date: element[2]["value"] ?? '0',
           target_date: "2023-11-26T12:00:00",
-          remarks: element[3]["value"] ?? '0',
+          remarks: "",
         );
 
         proposedActionItems.add(item);
@@ -1422,11 +1421,11 @@ class AddIncidentReportController extends GetxController {
 
       investigationTeam.forEach((e) {
         investigation_team_list.add(InvestigationTeam(
-          name: e.name,
-          designation: e.designation,
+          name: "",
+          designation: "",
           person_id: "",
           person_type: 1,
-          investigation_date: "2023-07-02T08:00:00",
+          investigation_date: "",
           srNumber: "",
           // is_required: e.is_required
         ));
