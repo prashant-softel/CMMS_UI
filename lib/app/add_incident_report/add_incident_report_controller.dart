@@ -447,6 +447,7 @@ class AddIncidentReportController extends GetxController {
   ///For Why Why analysis switch
   RxBool whyWhyAnalysisRequiredValue = true.obs;
   RxBool whyWhyAnalysisValue = false.obs;
+  RxBool detailInvestigationTeamValue = false.obs;
 
   ///For Why Why analysis false switch
   RxBool whyWhyAnalysisFalseValue = false.obs;
@@ -948,11 +949,11 @@ class AddIncidentReportController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
-    id == null ? addRowItem() : Dimens.box0;
-    id == null ? addWhyWhyAnalysisRowItem() : Dimens.box0;
-    id == null ? addRootCauseRowItem() : Dimens.box0;
-    id == null ? addImmediateCorrectionRowItem() : Dimens.box0;
-    id == null ? addDetailsOfInjuredPersonRowItem() : Dimens.box0;
+    id == null ? Dimens.box0 : addRowItem();
+    id == null ? Dimens.box0 : addWhyWhyAnalysisRowItem();
+    id == null ? Dimens.box0 : addRootCauseRowItem();
+    id == null ? Dimens.box0 : addImmediateCorrectionRowItem();
+    id == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
   }
 
   void addRowItem() {
@@ -965,6 +966,10 @@ class AddIncidentReportController extends GetxController {
       {'key': "Target Date ", "value": ''},
       {'key': "Remark", "value": ''},
       {'key': "HSE Remark", "value": ''},
+      {
+        "key": "Status",
+        "value": 'Please Select',
+      },
       {'key': "Action ", "value": ''},
     ]);
   }
