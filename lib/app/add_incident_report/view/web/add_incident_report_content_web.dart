@@ -910,6 +910,205 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
+                                                                      'Detail Investigation Required: '),
+                                                              SizedBox(
+                                                                width: 13,
+                                                              ),
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .detailInvestigationTeamValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .detailInvestigationTeamValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          ////Investigation team
+                                                          controller.detailInvestigationTeamValue ==
+                                                                  true
+                                                              ? Container(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  margin:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              20),
+                                                                  // height: Get.height,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .grey
+                                                                            .withOpacity(.3)),
+                                                                  ),
+                                                                  // constraints: BoxConstraints(
+                                                                  //   maxWidth: 1100,
+                                                                  // ),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .only(
+                                                                            top:
+                                                                                10,
+                                                                            left:
+                                                                                10),
+                                                                        child:
+                                                                            Text(
+                                                                          "Investigation Team",
+                                                                          style:
+                                                                              Styles.blue700,
+                                                                        ),
+                                                                      ),
+                                                                      // Dimens.boxHeight10,
+                                                                      Row(
+                                                                        children: [
+                                                                          Spacer(),
+                                                                          Row(
+                                                                            children: [
+                                                                              CustomRichText(title: 'Name: '),
+                                                                              Dimens.boxWidth10,
+                                                                              GoodsOrderTextField(
+                                                                                textController: controller.investigationTeamNameTextFieldController,
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxWidth50,
+                                                                          Row(
+                                                                            children: [
+                                                                              CustomRichText(title: 'Designation: '),
+                                                                              Dimens.boxWidth10,
+                                                                              GoodsOrderTextField(
+                                                                                textController: controller.investigationTeamDesignationTextFieldController,
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxWidth20,
+                                                                          ElevatedButton(
+                                                                            child:
+                                                                                Text(
+                                                                              'Add',
+                                                                              style: TextStyle(color: ColorValues.whiteColor),
+                                                                            ),
+                                                                            onPressed:
+                                                                                () {
+                                                                              controller.updateInvestigationTeamText(
+                                                                                controller.investigationTeamSrNumberTextFieldController.text,
+                                                                                controller.investigationTeamNameTextFieldController.text,
+                                                                                controller.investigationTeamDesignationTextFieldController.text,
+
+                                                                                // controller.isCheckedRequire
+                                                                                //     .value
+                                                                              );
+                                                                              controller.investigationTeamSrNumberTextFieldController.clear();
+                                                                              controller.investigationTeamNameTextFieldController.clear();
+                                                                              controller.investigationTeamDesignationTextFieldController.clear();
+                                                                              // controller.isCheckedRequire
+                                                                              //     .value = false;
+                                                                              print('Investigation Data${controller.investigationTeam.length}');
+                                                                            },
+                                                                          ),
+                                                                          Spacer()
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      //Designation
+
+                                                                      Obx(
+                                                                        () => Wrap(
+                                                                            children: [
+                                                                              Row(
+                                                                                children: [
+                                                                                  Dimens.boxWidth80,
+                                                                                  Text('Sr.No.'),
+                                                                                  Dimens.boxWidth180,
+                                                                                  Text('Name'),
+                                                                                  SizedBox(
+                                                                                    width: 310,
+                                                                                  ),
+                                                                                  Text('Designation'),
+                                                                                  Dimens.boxWidth200,
+                                                                                  Text('Signature'),
+
+                                                                                  // Text('Action'),
+                                                                                ],
+                                                                              ),
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                              ),
+                                                                              controller.id != null
+                                                                                  ? Column(
+                                                                                      children: []..addAll(controller.investigationTeamList!.map((element) => Row(
+                                                                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                            children: [
+                                                                                              Padding(
+                                                                                                padding: const EdgeInsets.only(left: 150),
+                                                                                                child: Text('${element?.name}'),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: const EdgeInsets.only(right: 160),
+                                                                                                child: Text('${element?.designation}'),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ))),
+                                                                                    )
+                                                                                  : Dimens.box0,
+                                                                              Column(
+                                                                                children: []..addAll(controller.investigationTeam.map((element) => Row(
+                                                                                      children: [
+                                                                                        // Text('${element.name}'),
+                                                                                        // Text('${element.required_by_date}')
+                                                                                        // Obx(
+                                                                                        //   () => ListView.builder(
+                                                                                        //       itemCount: controller.investigationTeam.length,
+                                                                                        //       itemBuilder: (context, index) {
+                                                                                        //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
+                                                                                        //       }),
+                                                                                        // )
+
+                                                                                        investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
+                                                                                      ],
+                                                                                    ))),
+                                                                              ),
+                                                                            ]),
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              : Dimens.box0,
+
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
                                                                       'Why Why Analysis Required: '),
                                                               Dimens.boxWidth10,
                                                               SizedBox(
@@ -918,52 +1117,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                child:
-                                                                    // controller.id !=
-                                                                    //         null
-                                                                    //     ? controller
-                                                                    //                 .incidentReportDetailsModel
-                                                                    //                 .value
-                                                                    //                 ?.legal_applicability_name ==
-                                                                    //             "YES"
-                                                                    //         ? Obx(
-                                                                    //             () => Switch(
-                                                                    //               activeColor:
-                                                                    //                   Colors
-                                                                    //                       .green,
-                                                                    //               value: controller
-                                                                    //                   .legalApplicabilityDetailValue
-                                                                    //                   .value,
-                                                                    //               onChanged:
-                                                                    //                   (value) {
-                                                                    //                 controller
-                                                                    //                     .legalApplicabilityDetailValue
-                                                                    //                     .value = value;
-                                                                    //                 print(
-                                                                    //                     'why why analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //         : Obx(
-                                                                    //             () => Switch(
-                                                                    //               activeColor:
-                                                                    //                   Colors
-                                                                    //                       .green,
-                                                                    //               value: controller
-                                                                    //                   .whyWhyAnalysisFalseValue
-                                                                    //                   .value,
-                                                                    //               onChanged:
-                                                                    //                   (value) {
-                                                                    //                 controller
-                                                                    //                     .whyWhyAnalysisFalseValue
-                                                                    //                     .value = value;
-                                                                    //                 print(
-                                                                    //                     'why why analysis false: ${controller.whyWhyAnalysisValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //     :
-                                                                    Obx(
+                                                                child: Obx(
                                                                   () => Switch(
                                                                     activeColor:
                                                                         Colors
@@ -1040,195 +1194,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                           ///Proposed action plan
                                                           AddPrposedAction(),
-
-                                                          ////Investigation team
-                                                          Container(
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            margin:
-                                                                EdgeInsets.all(
-                                                                    20),
-                                                            // height: Get.height,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey
-                                                                      .withOpacity(
-                                                                          .3)),
-                                                            ),
-                                                            // constraints: BoxConstraints(
-                                                            //   maxWidth: 1100,
-                                                            // ),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          top:
-                                                                              10,
-                                                                          left:
-                                                                              10),
-                                                                  child: Text(
-                                                                    "Investigation Team",
-                                                                    style: Styles
-                                                                        .blue700,
-                                                                  ),
-                                                                ),
-                                                                // Dimens.boxHeight10,
-                                                                Row(
-                                                                  children: [
-                                                                    Spacer(),
-                                                                    Row(
-                                                                      children: [
-                                                                        CustomRichText(
-                                                                            title:
-                                                                                'Name: '),
-                                                                        Dimens
-                                                                            .boxWidth10,
-                                                                        GoodsOrderTextField(
-                                                                          textController:
-                                                                              controller.investigationTeamNameTextFieldController,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth50,
-                                                                    Row(
-                                                                      children: [
-                                                                        CustomRichText(
-                                                                            title:
-                                                                                'Designation: '),
-                                                                        Dimens
-                                                                            .boxWidth10,
-                                                                        GoodsOrderTextField(
-                                                                          textController:
-                                                                              controller.investigationTeamDesignationTextFieldController,
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    ElevatedButton(
-                                                                      child:
-                                                                          Text(
-                                                                        'Add',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                ColorValues.whiteColor),
-                                                                      ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        controller
-                                                                            .updateInvestigationTeamText(
-                                                                          controller
-                                                                              .investigationTeamSrNumberTextFieldController
-                                                                              .text,
-                                                                          controller
-                                                                              .investigationTeamNameTextFieldController
-                                                                              .text,
-                                                                          controller
-                                                                              .investigationTeamDesignationTextFieldController
-                                                                              .text,
-
-                                                                          // controller.isCheckedRequire
-                                                                          //     .value
-                                                                        );
-                                                                        controller
-                                                                            .investigationTeamSrNumberTextFieldController
-                                                                            .clear();
-                                                                        controller
-                                                                            .investigationTeamNameTextFieldController
-                                                                            .clear();
-                                                                        controller
-                                                                            .investigationTeamDesignationTextFieldController
-                                                                            .clear();
-                                                                        // controller.isCheckedRequire
-                                                                        //     .value = false;
-                                                                        print(
-                                                                            'Investigation Data${controller.investigationTeam.length}');
-                                                                      },
-                                                                    ),
-                                                                    Spacer()
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                //Designation
-
-                                                                Obx(
-                                                                  () => Wrap(
-                                                                      children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            Dimens.boxWidth80,
-                                                                            Text('Sr.No.'),
-                                                                            Dimens.boxWidth180,
-                                                                            Text('Name'),
-                                                                            SizedBox(
-                                                                              width: 310,
-                                                                            ),
-                                                                            Text('Designation'),
-                                                                            Dimens.boxWidth200,
-                                                                            Text('Signature'),
-
-                                                                            // Text('Action'),
-                                                                          ],
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              20,
-                                                                        ),
-                                                                        controller.id !=
-                                                                                null
-                                                                            ? Column(
-                                                                                children: []..addAll(controller.investigationTeamList!.map((element) => Row(
-                                                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: const EdgeInsets.only(left: 150),
-                                                                                          child: Text('${element?.name}'),
-                                                                                        ),
-                                                                                        Padding(
-                                                                                          padding: const EdgeInsets.only(right: 160),
-                                                                                          child: Text('${element?.designation}'),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ))),
-                                                                              )
-                                                                            : Dimens.box0,
-                                                                        Column(
-                                                                          children: []..addAll(controller.investigationTeam.map((element) =>
-                                                                              Row(
-                                                                                children: [
-                                                                                  // Text('${element.name}'),
-                                                                                  // Text('${element.required_by_date}')
-                                                                                  // Obx(
-                                                                                  //   () => ListView.builder(
-                                                                                  //       itemCount: controller.investigationTeam.length,
-                                                                                  //       itemBuilder: (context, index) {
-                                                                                  //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
-                                                                                  //       }),
-                                                                                  // )
-
-                                                                                  investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
-                                                                                ],
-                                                                              ))),
-                                                                        ),
-                                                                      ]),
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10
-                                                              ],
-                                                            ),
-                                                          ),
 
                                                           /// FILE UPLOAD WIDGET
                                                           Container(
