@@ -905,6 +905,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 Dimens.boxHeight20,
                                                 controller.id != null
                                                     ? Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Row(
                                                             children: [
@@ -1196,6 +1199,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           AddPrposedAction(),
 
                                                           /// FILE UPLOAD WIDGET
+                                                          Dimens.boxHeight10,
+
+                                                          Text(
+                                                            "Add Photo Of Incident Belwo ↓",
+                                                            style: Styles
+                                                                .black15W400,
+                                                          ),
                                                           Container(
                                                             height: Get.height *
                                                                 0.2,
