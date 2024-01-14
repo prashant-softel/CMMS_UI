@@ -206,7 +206,8 @@ class CreateIncidentReportModel {
 ///Details of Injured Person
 class DetailsOfInjuredPerson {
   DetailsOfInjuredPerson(
-      {this.incidents_id,
+      {this.injured_item_id,
+      this.incidents_id,
       this.person_id,
       this.person_type,
       this.other_victim,
@@ -220,7 +221,9 @@ class DetailsOfInjuredPerson {
       this.plant_equipment_involved,
       this.location_of_incident});
 
+  int? injured_item_id;
   int? incidents_id;
+
   String? person_id;
   int? person_type;
   String? other_victim;
@@ -236,6 +239,7 @@ class DetailsOfInjuredPerson {
 
   factory DetailsOfInjuredPerson.fromJson(Map<String, dynamic> json) =>
       DetailsOfInjuredPerson(
+        injured_item_id: json['injured_item_id'],
         incidents_id: json['incidents_id'],
         person_id: json['person_id'],
         person_type: json['person_type'],
@@ -252,6 +256,7 @@ class DetailsOfInjuredPerson {
       );
 
   Map<String, dynamic> toJson() => {
+        "injured_item_id": injured_item_id,
         "incidents_id": incidents_id,
         "person_id": person_id,
         "person_type": person_type,
