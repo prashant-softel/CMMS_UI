@@ -949,11 +949,12 @@ class AddIncidentReportController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
+    addDetailsOfInjuredPersonRowItem();
     id == null ? Dimens.box0 : addRowItem();
     id == null ? Dimens.box0 : addWhyWhyAnalysisRowItem();
     id == null ? Dimens.box0 : addRootCauseRowItem();
     id == null ? Dimens.box0 : addImmediateCorrectionRowItem();
-    id == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
+    // id == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
   }
 
   void addRowItem() {
@@ -1384,7 +1385,8 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          incidents_id: 123,
+          injured_item_id: 0,
+          incidents_id: 0,
           person_id: dropdownVictimNameMapperData[element[0]["value"]]?.name,
           other_victim:
               selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",

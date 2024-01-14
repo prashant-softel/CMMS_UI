@@ -137,12 +137,14 @@ class IncidentReportListController extends GetxController {
   RxString actionFilterText = ''.obs;
   Rx<int> id = 0.obs;
 
-  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
-      DateFormat('yyyy/MM/dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy/MM/dd').format(toDate.value);
-
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -237,8 +239,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading,
-        start_date: "2020-01-01", //startDate,
-        end_date: "2023-12-31", //endDate,
+        start_date: formattedFromdate1, //startDate,
+        end_date: formattedTodate1, //endDate,
         facility_id: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');

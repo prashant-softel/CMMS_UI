@@ -593,15 +593,9 @@ class ConnectHelper {
     String? start_date,
     required String end_date,
   }) async {
-    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
-//var statusParam = (status!=null status!='')?'status=1':'';
-    // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'IncidentReport/GetIncidentList?facility_id=$facility_id&' +
-          startDateParam +
-          endDateParam,
-      Request.getMultiparts,
+      'IncidentReport/GetIncidentList?facility_id=$facility_id&start_date=$start_date&end_date=$end_date',
+      Request.get,
       null,
       isLoading,
       {
@@ -2669,7 +2663,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> createGrievance({
     required String auth,
     bool? isLoading,
@@ -2688,7 +2681,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> createMcPlan({
     required String auth,
