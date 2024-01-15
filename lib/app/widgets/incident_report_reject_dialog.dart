@@ -25,7 +25,7 @@ class IncidentReportRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Goods Order Reject",
+          "Incident Report Reject",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -92,7 +92,7 @@ class IncidentReportRejectDialog extends GetView {
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
                 _controller.rejectIncidentReportButton(id: id);
-                print('Goods order id:$id');
+                print('IR id:$id');
                 Get.back();
               },
               child: Text('Reject IR'),

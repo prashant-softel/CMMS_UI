@@ -1289,7 +1289,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/RejectGO',
+      'IncidentReport/RejectIncidentReport',
       Request.post,
       incidentReportRejectJsonString,
       isLoading ?? false,

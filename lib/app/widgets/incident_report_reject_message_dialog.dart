@@ -26,7 +26,7 @@ class IncidentReportMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Goods Order Reject',
+          'Incident Report Reject',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -88,7 +88,7 @@ class IncidentReportMessageRejectDialog extends GetView {
                   onPressed: () {
                     Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
                   },
-                  child: const Text('Goods Order List'),
+                  child: const Text('IR List'),
                 ),
               ),
               Dimens.boxWidth10,
@@ -96,7 +96,7 @@ class IncidentReportMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {},
-                  child: const Text('View Goods Order'),
+                  child: const Text('View IR'),
                 ),
               ),
               Dimens.boxWidth10,

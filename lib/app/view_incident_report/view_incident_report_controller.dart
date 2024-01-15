@@ -373,16 +373,16 @@ class ViewIncidentReportController extends GetxController {
     }
   }
 
-  Future<void> incidentReportRejectButton({String? id}) async {
-    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  // Future<void> incidentReportRejectButton({String? id}) async {
+  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-    final _incidentReportRejectBtn =
-        await viewIncidentReportPresenter.incidentReportRejectButton(
-            comment: _rejectComment, id: '$id', isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Incident Report Reject Button Data:${_rejectComment}');
-    print('Incident Report Reject Button Data:${id}');
-  }
+  //   final _incidentReportRejectBtn =
+  //       await viewIncidentReportPresenter.incidentReportRejectButton(
+  //           comment: _rejectComment, id: '$id', isLoading: true);
+  //   // showAlertPermitApproveDialog();
+  //   print('Incident Report Reject Button Data:${_rejectComment}');
+  //   print('Incident Report Reject Button Data:${id}');
+  // }
 
   Future<void> getIncidentReportHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES

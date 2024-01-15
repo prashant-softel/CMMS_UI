@@ -53,17 +53,17 @@ class ViewIncidentReportUsecase {
       _repository.saveValue(LocalKeys.irId, irId);
   Future<String?> getValue() async =>
       await _repository.getStringValue(LocalKeys.irId);
-  Future<void> incidentReportRejectButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await _repository.incidentReportRejectButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  // Future<void> incidentReportRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await _repository.incidentReportRejectButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
 
   Future<void> incidentReportApproveButton({
     String? incidentId,
