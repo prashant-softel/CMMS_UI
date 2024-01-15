@@ -1,4 +1,5 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
@@ -1429,9 +1430,69 @@ class ViewIncidentReportContentWeb
                                                       ],
                                                     ),
                                                   ),
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Detail Investigation Required: '),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  child: Obx(
+                                                    () => Switch(
+                                                      activeColor: Colors.green,
+                                                      value: controller
+                                                          .detailInvestigationTeamValue
+                                                          .value,
+                                                      onChanged: (value) {
+                                                        controller
+                                                            .detailInvestigationTeamValue
+                                                            .value = value;
+                                                        print(
+                                                            'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Why Why Analysis Required: '),
+                                                Dimens.boxWidth10,
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  child: Obx(
+                                                    () => Switch(
+                                                      activeColor: Colors.green,
+                                                      value: controller
+                                                          .whyWhyAnalysisValue
+                                                          .value,
+                                                      onChanged: (value) {
+                                                        controller
+                                                            .whyWhyAnalysisValue
+                                                            .value = value;
+                                                        print(
+                                                            'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                      },
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
 
                                             ///Incident Report History
-                                            controller.id != null
+                                            controller.irId.value != null
                                                 ? Container(
                                                     margin: Dimens.edgeInsets20,
                                                     height: ((controller
@@ -1729,7 +1790,7 @@ class ViewIncidentReportContentWeb
                                           onPressed: () {
                                             Get.dialog(
                                                 ApproveIncidentReportDialog(
-                                              id: controller.id,
+                                              id: controller.irId.value,
                                             ));
                                           },
                                         ),
@@ -1739,34 +1800,48 @@ class ViewIncidentReportContentWeb
                                       ),
 
                                       ////Reject Button
-                                      varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kIncidentReportFeatureId &&
-                                                          e.delete ==
-                                                              UserAccessConstants
-                                                                  .kHaveDeleteAccess)
-                                                      .length >
-                                                  0 &&
-                                              controller
-                                                      .incidentReportDetailsModel
-                                                      .value
-                                                      ?.status ==
-                                                  181
-                                          ? CustomElevatedButton(
-                                              icon: Icons.close,
-                                              backgroundColor:
-                                                  ColorValues.appRedColor,
-                                              onPressed: () {
-                                                // controller.saveAsDraft();
-                                                Get.dialog(
-                                                    IncidentReportRejectDialog(
-                                                        id: '${controller.incidentReportDetailsModel.value?.id}'));
-                                              },
-                                              text: 'Reject',
-                                            )
-                                          : Container(),
+                                      // varUserAccessModel.value.access_list!
+                                      //                 .where((e) =>
+                                      //                     e.feature_id ==
+                                      //                         UserAccessConstants
+                                      //                             .kIncidentReportFeatureId &&
+                                      //                     e.delete ==
+                                      //                         UserAccessConstants
+                                      //                             .kHaveDeleteAccess)
+                                      //                 .length >
+                                      //             0 &&
+                                      //         controller
+                                      //                 .incidentReportDetailsModel
+                                      //                 .value
+                                      //                 ?.status ==
+                                      //             181
+                                      // ?
+                                      Container(
+                                        height: 45,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.rejectColor,
+                                          text: "Reject",
+                                          icon: Icons.close,
+                                          onPressed: () {
+                                            Get.dialog(
+                                                IncidentReportRejectDialog(
+                                                    id: controller.irId.value));
+                                          },
+                                        ),
+                                      )
+                                      // CustomElevatedButton(
+                                      //   icon: Icons.close,
+                                      //   backgroundColor:
+                                      //       ColorValues.appRedColor,
+                                      //   onPressed: () {
+                                      //     // controller.saveAsDraft();
+                                      //     Get.dialog(IncidentReportRejectDialog(
+                                      //         id: '${controller.incidentReportDetailsModel.value?.id}'));
+                                      //   },
+                                      //   text: 'Reject',
+                                      // )
+                                      // : Container(),
                                     ],
                                   ),
                                 )

@@ -172,6 +172,7 @@ class IncidentReportListUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
+  void clearValue() async => _repository.clearData(LocalKeys.irId);
   // Future<String?> getUserAccessList() async =>
   //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

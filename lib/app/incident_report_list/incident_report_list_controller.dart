@@ -296,6 +296,10 @@ class IncidentReportListController extends GetxController {
     print('Argument$id');
   }
 
+  void clearStoreData() {
+    incidentReportPresenter.clearValue();
+  }
+
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');

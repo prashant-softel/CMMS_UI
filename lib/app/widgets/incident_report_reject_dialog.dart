@@ -1,18 +1,18 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
+import '../theme/styles.dart';
 
 class IncidentReportRejectDialog extends GetView {
-  String? incidentRejectDialog;
-  String? id;
+  int? id;
 
-  IncidentReportRejectDialog({super.key, this.incidentRejectDialog, this.id});
+  IncidentReportRejectDialog({super.key, this.id});
   final ViewIncidentReportController _controller = Get.find();
 
   @override
@@ -25,7 +25,7 @@ class IncidentReportRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Reject Incident Report',
+          "Goods Order Reject",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -35,7 +35,7 @@ class IncidentReportRejectDialog extends GetView {
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: 200,
-            width: double.infinity,
+            width: 400,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -46,7 +46,7 @@ class IncidentReportRejectDialog extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment '),
+                      CustomRichText(title: 'Comment'),
                       SizedBox(
                         height: 20,
                       ),
@@ -71,29 +71,6 @@ class IncidentReportRejectDialog extends GetView {
                       ),
                     ],
                   ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () {
-                  //           _controller.permitApprovedButton(permitId:permitId);
-                  //           Get.back();
-                  //         },
-                  //         child: const Text('Permit Approve'),
-                  //       ),
-                  //       // Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
                 ]),
           );
         }),
@@ -103,21 +80,22 @@ class IncidentReportRejectDialog extends GetView {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Dimens.boxWidth10,
-            CustomElevatedButton(
-              text: 'Cancel',
-              backgroundColor: ColorValues.appRedColor,
+            ElevatedButton(
+              style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
                 Get.back();
               },
+              child: const Text('Cancel'),
             ),
             Dimens.boxWidth20,
-            CustomElevatedButton(
-              text: 'Reject Incident Report',
-              backgroundColor: ColorValues.appRedColor,
+            ElevatedButton(
+              style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
-                _controller.incidentReportRejectButton(id: id);
+                _controller.rejectIncidentReportButton(id: id);
+                print('Goods order id:$id');
                 Get.back();
               },
+              child: Text('Reject IR'),
             ),
           ]),
         ],

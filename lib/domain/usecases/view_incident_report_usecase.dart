@@ -26,6 +26,15 @@ class ViewIncidentReportUsecase {
         isLoading,
       );
 
+  Future<Map<String, dynamic>> rejectIncidentReportButton({
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectIncidentReportButton(
+        incidentReportRejectJsonString,
+        isLoading,
+      );
+
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
@@ -40,6 +49,10 @@ class ViewIncidentReportUsecase {
     );
   }
 
+  void saveValue({String? irId}) async =>
+      _repository.saveValue(LocalKeys.irId, irId);
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.irId);
   Future<void> incidentReportRejectButton({
     String? comment,
     String? id,

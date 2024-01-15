@@ -27,6 +27,7 @@ import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/import_file_msg_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
+import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
 import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
@@ -1282,6 +1283,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectIncidentReportButton({
+    required String auth,
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/RejectGO',
+      Request.post,
+      incidentReportRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('incidentReportReject: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(IncidentReportMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> goodsOrderCloseButton({
     required String auth,
     goodsOrderCloseJsonString,
@@ -1718,7 +1743,7 @@ class ConnectHelper {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'IncidentReport/RejectIncidentReport',
-      Request.put,
+      Request.post,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
