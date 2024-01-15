@@ -4609,10 +4609,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
     //     ),
     //   );
     controller.dateTimeCtrlr.text =
-        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
     controller.tbtDateTimeCtrlrBuffer =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .format(dateTime.add(Duration(hours: 8)));
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
     print('TBT DateTime:${controller.dateTimeCtrlr.text}');
   }
 

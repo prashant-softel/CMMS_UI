@@ -309,7 +309,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                 : controller.importType.value ==
                                                         AppConstants
                                                             .kImportBussiness
-                                                    ? 'checklist.xlsx'
+                                                    ? 'bussinesslist.xlsx'
                                                     : 'example.xlsx';
 
                             downloadFile(assetPath, fileName);

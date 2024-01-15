@@ -6304,7 +6304,8 @@ class Repository {
                 (m) => UserListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
-        return _UserListModelList;
+        return _UserListModelList.reversed.toList();
+        ;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getUserList');
         return [];
