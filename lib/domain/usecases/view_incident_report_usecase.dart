@@ -15,7 +15,7 @@ class ViewIncidentReportUsecase {
     return await _repository.generateToken();
   }
 
-   Future<List<HistoryModel>?> getIncidentReportHistory({
+  Future<List<HistoryModel>?> getIncidentReportHistory({
     moduleType,
     id,
     bool? isLoading,
@@ -26,7 +26,7 @@ class ViewIncidentReportUsecase {
         isLoading,
       );
 
-   Future<List<InventoryModel>> getInventoryList({
+  Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
     required int? facilityId,
     int? blockId,
@@ -40,7 +40,7 @@ class ViewIncidentReportUsecase {
     );
   }
 
-   Future<void> incidentReportRejectButton({
+  Future<void> incidentReportRejectButton({
     String? comment,
     String? id,
     bool? isLoading,
@@ -62,9 +62,8 @@ class ViewIncidentReportUsecase {
     );
   }
 
-
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
-    bool? isLoading,  
+    bool? isLoading,
     required int id,
   }) async =>
       await _repository.getIncidentReportDetail(
@@ -72,15 +71,9 @@ class ViewIncidentReportUsecase {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+  Future<List<TypePermitModel?>?> getTypePermitList(
+          bool? isLoading, int? facility_id) async =>
+      await _repository.getTypePermitList(isLoading, facility_id);
 
   // Future<Map<String, dynamic>> createWarrantyClaim({
   //   createWarrantyClaim,
@@ -92,7 +85,7 @@ class ViewIncidentReportUsecase {
   //     );
 
   //  Future<InventoryDetailsModel?> getInventoryDetail({
-  //   bool? isLoading,  
+  //   bool? isLoading,
   //   required int id,
   // }) async =>
   //     await _repository.getInventoryDetail(
@@ -221,9 +214,17 @@ class ViewIncidentReportUsecase {
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
 
-   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
+  Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
 
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
+  Future<Map<String, dynamic>> approveIncidentReportButton({
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveIncidentReportButton(
+        incidentReportApproveJsonString,
+        isLoading,
+      );
 }

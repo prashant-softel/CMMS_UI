@@ -7,6 +7,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/incident_report_approve_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 
@@ -1690,33 +1691,49 @@ class ViewIncidentReportContentWeb
                                       ),
 
                                       ////Approve Button
-                                      varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kIncidentReportFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0 &&
-                                              controller
-                                                      .incidentReportDetailsModel
-                                                      .value
-                                                      ?.status ==
-                                                  181
-                                          ? CustomElevatedButton(
-                                              icon: Icons.add,
-                                              backgroundColor:
-                                                  ColorValues.appGreenColor,
-                                              onPressed: () {
-                                                // controller.saveAsDraft();
-                                                controller
-                                                    .incidentReportApproveButton();
-                                              },
-                                              text: 'Approve',
-                                            )
-                                          : Container(),
+                                      // varUserAccessModel.value.access_list!
+                                      //                 .where((e) =>
+                                      //                     e.feature_id ==
+                                      //                         UserAccessConstants
+                                      //                             .kIncidentReportFeatureId &&
+                                      //                     e.approve ==
+                                      //                         UserAccessConstants
+                                      //                             .kHaveApproveAccess)
+                                      //                 .length >
+                                      //             0 &&
+                                      //         controller
+                                      //                 .incidentReportDetailsModel
+                                      //                 .value
+                                      //                 ?.status ==
+                                      //             181
+                                      // ? CustomElevatedButton(
+                                      //     icon: Icons.add,
+                                      //     backgroundColor:
+                                      //         ColorValues.appGreenColor,
+                                      //     onPressed: () {
+                                      //       // controller.saveAsDraft();
+                                      //       controller
+                                      //           // .incidentReportApproveButton();
+                                      //     },
+                                      //     text: 'Approve',
+                                      //   )
+                                      // :
+                                      //  Container(),
+                                      Container(
+                                        height: 45,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appGreenColor,
+                                          text: "Approve",
+                                          icon: Icons.add,
+                                          onPressed: () {
+                                            Get.dialog(
+                                                ApproveIncidentReportDialog(
+                                              id: controller.id,
+                                            ));
+                                          },
+                                        ),
+                                      ),
                                       SizedBox(
                                         width: 20,
                                       ),

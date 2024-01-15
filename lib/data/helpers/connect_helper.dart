@@ -8,6 +8,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
+import 'package:cmms/app/widgets/Incident_report_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
@@ -938,6 +939,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(GoodsOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveIncidentReportButton({
+    required String auth,
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/ApproveIncidentReport',
+      Request.post,
+      incidentReportApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(IncidentMessageApproveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;

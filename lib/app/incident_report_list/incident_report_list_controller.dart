@@ -95,7 +95,7 @@ class IncidentReportListController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "IR": true,
-    "Description": true,
+    "Title": true,
     "Block Name": true,
     "Equipment Name": true,
     "Approved By": true,
@@ -108,7 +108,7 @@ class IncidentReportListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "IR": 153,
-    "Description": 220,
+    "Title": 220,
     "Block Name": 200,
     "Equipment Name": 200,
     "Approved By": 150,
@@ -156,7 +156,7 @@ class IncidentReportListController extends GetxController {
   void onInit() async {
     this.filterText = {
       "IR": incidentReportIdFilterText,
-      "Description": descriptionFilterText,
+      "Title": descriptionFilterText,
       "Block Name": block_nameFilterText,
       "Equipment Name": equipment_nameFilterText,
       "Approved By": approved_byFilterText,

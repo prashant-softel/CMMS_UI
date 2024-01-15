@@ -461,7 +461,7 @@ class IncidentReportListDataSource extends DataTableSource {
         controller.incidentReportList.where((IncidentReportList) {
       return (IncidentReportList?.id ?? '').toString().contains(
               controller.incidentReportIdFilterText.value.toLowerCase()) &&
-          (IncidentReportList?.description ?? '')
+          (IncidentReportList?.title ?? '')
               .toString()
               .contains(controller.descriptionFilterText.value.toLowerCase()) &&
           (IncidentReportList?.block_name ?? '')
@@ -498,7 +498,7 @@ class IncidentReportListDataSource extends DataTableSource {
     var cellsBuffer = [
       "id",
       // '${incidentReportListDetails?.id ?? ''}',
-      '${incidentReportListDetails?.description ?? ''}',
+      '${incidentReportListDetails?.title ?? ''}',
       '${incidentReportListDetails?.block_name ?? ''}',
       '${incidentReportListDetails?.equipment_name ?? ''}',
       '${incidentReportListDetails?.approved_by ?? ''}',
@@ -536,7 +536,7 @@ class IncidentReportListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${incidentReportListDetails?.id}',
+                        'IR${incidentReportListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -544,33 +544,25 @@ class IncidentReportListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                              color: controller.incidentReportList
-                                          .firstWhere(
-                                            (e) =>
-                                                e?.id ==
-                                                incidentReportListDetails!.id,
-                                            orElse: () =>
-                                                IncidentReportListModel(id: 00),
-                                          )
-                                          ?.status ==
-                                      "Submitted"
-                                  ? ColorValues.appYellowColor
-                                  : controller.incidentReportList
-                                              .firstWhere(
-                                                (e) =>
-                                                    e?.id ==
-                                                    incidentReportListDetails!
-                                                        .id,
-                                                orElse: () =>
-                                                    IncidentReportListModel(
-                                                        id: 00),
-                                              )
-                                              ?.status ==
-                                          "Approved"
-                                      ? ColorValues.appGreenColor
-                                      : ColorValues.appRedColor),
+                              color: ColorValues.appYellowColor
+                              // : controller.incidentReportList
+                              //             .firstWhere(
+                              //               (e) =>
+                              //                   e?.id ==
+                              //                   incidentReportListDetails!
+                              //                       .id,
+                              //               orElse: () =>
+                              //                   IncidentReportListModel(
+                              //                       id: 00),
+                              //             )
+                              //             ?.status_short ==
+                              //         "Approved"
+                              //     ? ColorValues.appGreenColor
+                              //     : ColorValues.appRedColor
+
+                              ),
                           child: Text(
-                            '${incidentReportListDetails?.status}',
+                            '${incidentReportListDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),

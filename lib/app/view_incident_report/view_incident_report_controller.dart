@@ -6,6 +6,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_presenter.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -69,6 +70,7 @@ class ViewIncidentReportController extends GetxController {
   final TextEditingController nameTextFieldController = TextEditingController();
   final TextEditingController emailTextFieldController =
       TextEditingController();
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
   //   ///Failure Date Time For Web
   // var failureDateTimeCtrlrWeb = TextEditingController();
@@ -287,16 +289,25 @@ class ViewIncidentReportController extends GetxController {
     }
   }
 
-  Future<void> incidentReportApproveButton() async {
-    // String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  void approveIncidentReportButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _incidentReportApproveBtn =
-        await viewIncidentReportPresenter.incidentReportApproveButton(
-            // comment: _rejectComment,
-            incidentId: '$id',
-            isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Incident Report Approve Button Data:${id}');
+      CommentModel approveIncidentReportAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var incidentReportApproveJsonString =
+          approveIncidentReportAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewIncidentReportPresenter.approveIncidentReportButton(
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   Future<void> incidentReportRejectButton({String? id}) async {
