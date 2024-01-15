@@ -20,7 +20,8 @@ class AddUserModel {
       this.isEmployee,
       this.facilities,
       this.company_id,
-      this.credentials});
+      this.credentials,
+      this.user_responsibility_list});
   int? id;
   int? company_id;
   String? secondaryEmail;
@@ -41,6 +42,8 @@ class AddUserModel {
   int? isEmployee;
   Credentials? credentials;
   List<AddAccessList>? add_access_list;
+  List<UserResponbility>? user_responsibility_list;
+
   List<int>? facilities;
 
   factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
@@ -66,6 +69,9 @@ class AddUserModel {
         credentials: Credentials.fromJson(json['credentials']),
         add_access_list: List<AddAccessList>.from(
             json["access_list"].map((x) => AddAccessList.fromJson(x))),
+        user_responsibility_list: List<UserResponbility>.from(
+            json["user_responsibility_list"]
+                .map((x) => UserResponbility.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,6 +97,8 @@ class AddUserModel {
         "facilities": List<dynamic>.from(facilities!.map((x) => x)),
         "access_list":
             List<dynamic>.from(add_access_list!.map((x) => x.toJson())),
+        "user_responsibility_list": List<dynamic>.from(
+            user_responsibility_list!.map((x) => x.toJson())),
       };
 }
 
@@ -151,5 +159,26 @@ class Credentials {
   Map<String, dynamic> toJson() => {
         "password": password,
         "user_name": user_name,
+      };
+}
+
+class UserResponbility {
+  UserResponbility({
+    required this.responsibility,
+    required this.since_when,
+  });
+
+  String? responsibility;
+  String? since_when;
+
+  factory UserResponbility.fromJson(Map<String, dynamic> json) =>
+      UserResponbility(
+        since_when: json["since_when"],
+        responsibility: json["responsibility"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "since_when": since_when,
+        "responsibility": responsibility,
       };
 }

@@ -128,6 +128,8 @@ class AddUserController extends GetxController {
   Rx<String> selectedres = 'Select Responsbility'.obs;
   Rx<bool> isSelectedres = true.obs;
   int selectedresId = 0;
+  RxList<int> selectedresIdsList = <int>[].obs;
+  RxList<DesignationModel> selectedResNameList = <DesignationModel>[].obs;
 
   ///
   void onInit() async {
@@ -480,8 +482,18 @@ class AddUserController extends GetxController {
         break;
       case RxList<DesignationModel>:
         {
-          int resIndex = responsList.indexWhere((x) => x?.name == value);
-          selectedresId = responsList[resIndex]?.id ?? 0;
+          if (value != null) {
+            for (var selectedItem in value) {
+              int equipCatIndex =
+                  responsList.indexWhere((x) => x?.name == selectedItem);
+
+              if (equipCatIndex >= 0) {
+                selectedresIdsList.add(responsList[equipCatIndex]?.id ?? 0);
+              }
+            }
+          }
+          //int resIndex = responsList.indexWhere((x) => x?.name == value);
+          // selectedresId = responsList[resIndex]?.id ?? 0;
         }
         break;
       case RxList<RoleModel>:
@@ -592,6 +604,9 @@ class AddUserController extends GetxController {
 
   Future<bool> addUser() async {
     List<AddAccessList> add_accessList = <AddAccessList>[];
+    List<UserResponbility> reslist = <UserResponbility>[];
+    List<DesignationModel> newselectedResNameList = []; // Copied list
+
     accesslevel.forEach((e) {
       add_accessList.add(AddAccessList(
           feature_id: e?.feature_id.value ?? 0,
@@ -603,6 +618,18 @@ class AddUserController extends GetxController {
           issue: e?.issue.value ?? 0,
           view: e?.view.value ?? 0));
     });
+    for (int id in selectedresIdsList) {
+      DesignationModel? selectedItem =
+          responsList.firstWhere((item) => item?.id == id);
+      newselectedResNameList.add(selectedItem!);
+    }
+
+    // Display the copied list
+
+    newselectedResNameList.forEach((e) {
+      reslist.add(
+          UserResponbility(responsibility: e.name, since_when: "2023-11-27"));
+    });
     String _loginId = loginIdCtrlr.text.trim();
     String _firstname = firstNameCtrlr.text.trim();
     String _mobileno = mobileNoCtrlr.text.trim();
@@ -613,6 +640,7 @@ class AddUserController extends GetxController {
     String _zipcode = zipcodeCtrlr.text.trim();
     String _password = passwordCtrlr.text.trim();
     String _joiningdate = joingdateCtrlr.text.trim();
+
     Credentials credentials =
         Credentials(password: _password, user_name: _loginId);
 
@@ -637,6 +665,7 @@ class AddUserController extends GetxController {
         zipcode: int.parse(_zipcode),
         isEmployee: 1,
         facilities: selectedfacilityNameIdList,
+        user_responsibility_list: reslist,
         credentials: credentials);
     var adduserJsonString = [adduser.toJson()];
 

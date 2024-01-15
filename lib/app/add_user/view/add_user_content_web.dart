@@ -15,6 +15,7 @@ import '../../navigators/app_pages.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
+import '../../widgets/multipule_dropdown_web.dart';
 
 class AddUserContentWeb extends StatefulWidget {
   AddUserContentWeb({
@@ -1190,41 +1191,18 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                               CustomRichText(
                                                   title: 'Responsibility: '),
                                               Dimens.boxWidth10,
-                                              Container(
+                                              MultipDropdownWebWidget(
                                                 width: (MediaQuery.of(context)
                                                         .size
                                                         .width *
                                                     .2),
-                                                child: DropdownWebWidget(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.responsList,
-                                                  isValueSelected: controller
-                                                      .isSelectedres.value,
-                                                  selectedValue: controller
-                                                      .selectedres.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                                //  height: 35,
+                                                dropdownList:
+                                                    controller.responsList,
+                                                selectedItems: controller
+                                                    .selectedResNameList,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ],
                                           ),
