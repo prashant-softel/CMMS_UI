@@ -64,6 +64,8 @@ class ViewIncidentReportController extends GetxController {
   Rx<String> selectedStartDate = ''.obs;
   Rx<bool> isStartdate = true.obs;
   Rx<bool> isEnddate = true.obs;
+  RxBool detailInvestigationTeamValue = false.obs;
+  RxBool whyWhyAnalysisValue = false.obs;
 
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
@@ -222,39 +224,80 @@ class ViewIncidentReportController extends GetxController {
   int facilityId = 0;
 
   ///
-  int? id = 0;
+  Rx<int> irId = 0.obs;
+
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('IncidentReport_Id:$id');
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
       });
-    });
+      Future.delayed(Duration(seconds: 1), () {
+        getIncidentReportDetail(id: irId.value!);
+      });
 
-    if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportDetail(id: id!);
+        getuserAccessData();
       });
-    }
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getFacilityPlantList();
-    // });
-    Future.delayed(Duration(seconds: 1), () {
-      getuserAccessData();
-    });
-    //  Future.delayed(Duration(seconds: 1), () {
-    //   getTypePermitList();
-    // });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getInventoryList();
-    // });
-    await getIncidentReportHistory(id: id!);
+
+      await getIncidentReportHistory(id: irId.value);
+    } catch (e) {}
 
     super.onInit();
   }
+
+  Future<void> setUserId() async {
+    try {
+      final _irId = await viewIncidentReportPresenter.getValue();
+      if (_irId == null || _irId == '' || _irId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        irId.value = dataFromPreviousScreen['irId'];
+        viewIncidentReportPresenter.saveValue(irId: irId.value.toString());
+      } else {
+        irId.value = int.tryParse(_irId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+
+  // void onInit() async {
+  //   irId = Get.arguments;
+  //   print('IncidentReport_Id:$irId');
+  //   facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+  //     facilityId = event;
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getFacilityList();
+  //     });
+  //   });
+
+  //   if (irId != null) {
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getIncidentReportDetail(id: irId.value!);
+  //     });
+  //   }
+  //   // Future.delayed(Duration(seconds: 1), () {
+  //   //   getFacilityPlantList();
+  //   // });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getuserAccessData();
+  //   });
+  //   //  Future.delayed(Duration(seconds: 1), () {
+  //   //   getTypePermitList();
+  //   // });
+  //   // Future.delayed(Duration(seconds: 1), () {
+  //   //   getInventoryList();
+  //   // });
+  //   await getIncidentReportHistory(id: irId.value);
+
+  //   super.onInit();
+  // }
 
   Future<void> getIncidentReportDetail({required int id}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
@@ -302,6 +345,26 @@ class ViewIncidentReportController extends GetxController {
       Map<String, dynamic>? response =
           await viewIncidentReportPresenter.approveIncidentReportButton(
         incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void rejectIncidentReportButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentIncidentRejectModel =
+          CommentModel(id: id, comment: _comment);
+
+      var incidentReportRejectJsonString = commentIncidentRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewIncidentReportPresenter.rejectIncidentReportButton(
+        incidentReportRejectJsonString: incidentReportRejectJsonString,
         isLoading: true,
       );
       if (response == true) {

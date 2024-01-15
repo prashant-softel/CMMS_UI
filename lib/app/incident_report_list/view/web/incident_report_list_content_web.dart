@@ -590,11 +590,26 @@ class IncidentReportListDataSource extends DataTableSource {
                                     color: ColorValues.appDarkBlueColor,
                                     icon: Icons.visibility,
                                     message: 'View',
+
                                     onPress: () {
-                                      controller.viewIncidentReport(
-                                          id: incidentReportListDetails?.id);
-                                      // print('record:${int.tryParse('${record[0]}')}');
+                                      controller.clearStoreData();
+
+                                      int irId =
+                                          incidentReportListDetails?.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.viewIncidentReportScreen,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails?.id,
+                                            });
+                                      }
                                     },
+                                    // onPress: () {
+                                    //   controller.viewIncidentReport(
+                                    //       id: incidentReportListDetails?.id);
+                                    //   // print('record:${int.tryParse('${record[0]}')}');
+                                    // },
                                   )
                                 : Dimens.box0,
 

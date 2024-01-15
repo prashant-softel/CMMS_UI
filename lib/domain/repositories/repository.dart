@@ -2145,6 +2145,40 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> rejectIncidentReportButton(
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.rejectIncidentReportButton(
+        auth: auth,
+        incidentReportRejectJsonString: incidentReportRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Incident report Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'incidentReportReject');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> approveGOReceiveButton(
     goodsOrderApproveJsonString,
     bool? isLoading,

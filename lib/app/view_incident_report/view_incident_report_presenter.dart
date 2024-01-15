@@ -19,6 +19,12 @@ class ViewIncidentReportPresenter {
     );
   }
 
+  Future<String?> getValue() async =>
+      await viewIncidentReportUsecase.getValue();
+  void saveValue({String? irId}) async {
+    return viewIncidentReportUsecase.saveValue(irId: irId);
+  }
+
   Future<List<HistoryModel>?> getIncidentReportHistory(
     moduleType,
     id,
@@ -29,6 +35,16 @@ class ViewIncidentReportPresenter {
         id: id,
         isLoading: isLoading,
       );
+
+  Future<Map<String, dynamic>?> rejectIncidentReportButton({
+    incidentReportRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.rejectIncidentReportButton(
+      incidentReportRejectJsonString: incidentReportRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
 
   Future<void> incidentReportRejectButton({
     String? comment,

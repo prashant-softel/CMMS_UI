@@ -45,6 +45,7 @@ class IncidentReportListPresenter {
         isLoading: isLoading ?? false,
       );
 
+  void clearValue() async => incidentReportListUsecase.clearValue();
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await incidentReportListUsecase.getFacilityList();
   // Future<String?> getUserAccessList() async =>
