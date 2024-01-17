@@ -169,6 +169,10 @@ class AddIncidentReportPresenter {
 
   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await incidentReportUsecase.getFacilityPlantList();
+  Future<String?> getValue() async => await incidentReportUsecase.getValue();
+  void saveValue({String? irId}) async {
+    return incidentReportUsecase.saveValue(irId: irId);
+  }
 
   // Future<String?> getUserAccessList() async =>
   //     await incidentReportUsecase.getUserAccessList();

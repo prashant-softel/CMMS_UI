@@ -91,7 +91,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                               child: Text(" / Incident Report",
                                   style: Styles.greyMediumLight12),
                             ),
-                            controller.id != null
+                            controller.irId != null
                                 ? Text(" / Update Incident Report",
                                     style: Styles.greyMediumLight12)
                                 : Text(" / Add Incident Report",
@@ -115,10 +115,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                       () => Column(
                                         children: [
                                           CustomAppBar(
-                                              title: controller.id != null
+                                              title: controller.irId != null
                                                   ? 'Update Incident Report'.tr
                                                   : 'Add Incident Report'.tr,
-                                              action: controller.id != null
+                                              action: controller.irId != null
                                                   ? Row(
                                                       children: [
                                                         Text(
@@ -130,7 +130,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .bold),
                                                         ),
                                                         Text(
-                                                          '${controller.id}',
+                                                          '${controller.irId}',
                                                           style: TextStyle(
                                                               fontSize: 16,
                                                               fontWeight:
@@ -903,7 +903,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
 
                                                 Dimens.boxHeight20,
-                                                controller.id != null
+                                                controller.irId != null
                                                     ? Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -1065,7 +1065,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                               SizedBox(
                                                                                 height: 20,
                                                                               ),
-                                                                              controller.id != null
+                                                                              controller.irId != null
                                                                                   ? Column(
                                                                                       children: []..addAll(controller.investigationTeamList!.map((element) => Row(
                                                                                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1235,7 +1235,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                           ////
 
                                           ///Incident Report History
-                                          controller.id != null
+                                          controller.irId != null
                                               ? Container(
                                                   margin: Dimens.edgeInsets20,
                                                   height: ((controller
@@ -1403,7 +1403,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               SizedBox(
                                                 width: 20,
                                               ),
-                                              controller.id == null
+                                              controller.irId == null
                                                   ? CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues

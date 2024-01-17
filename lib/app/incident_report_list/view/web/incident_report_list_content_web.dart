@@ -629,9 +629,23 @@ class IncidentReportListDataSource extends DataTableSource {
                                     icon: Icons.edit,
                                     message: 'Edit',
                                     onPress: () {
-                                      controller.editIncidentReport(
-                                          id: incidentReportListDetails?.id);
+                                      controller.clearStoreData();
+
+                                      int irId =
+                                          incidentReportListDetails?.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.addIncidentReportContentWeb,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails?.id,
+                                            });
+                                      }
                                     },
+                                    // onPress: () {
+                                    //   controller.editIncidentReport(
+                                    //       id: incidentReportListDetails?.id);
+                                    // },
                                   )
                                 : Dimens.box0,
 
