@@ -29,6 +29,7 @@ import 'package:cmms/app/widgets/import_file_msg_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/ir_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
 import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_approve_dialog.dart';
@@ -969,6 +970,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveIrButton({
+    required String auth,
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/ApproveCreateIR',
+      Request.post,
+      incidentReportApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(IRMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> mcPlanApprovedButton({
     required String auth,
     mcApproveJsonString,
@@ -1289,7 +1314,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/RejectGO',
+      'IncidentReport/RejectIncidentReport',
       Request.post,
       incidentReportRejectJsonString,
       isLoading ?? false,

@@ -915,7 +915,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   title:
                                                                       'Detail Investigation Required: '),
                                                               SizedBox(
-                                                                width: 13,
+                                                                width: 3,
                                                               ),
                                                               SizedBox(
                                                                 width: MediaQuery.of(

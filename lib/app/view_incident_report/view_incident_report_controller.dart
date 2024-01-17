@@ -336,14 +336,42 @@ class ViewIncidentReportController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel approveIncidentReportAproveModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModelWithFlag approveIncidentReportAproveModel =
+          CommentModelWithFlag(
+              id: id,
+              comment: _comment,
+              is_investigation_required:
+                  detailInvestigationTeamValue.value ? 1 : 0,
+              is_why_why_required: whyWhyAnalysisValue.value ? 1 : 0);
 
       var incidentReportApproveJsonString =
           approveIncidentReportAproveModel.toJson();
 
       Map<String, dynamic>? response =
           await viewIncidentReportPresenter.approveIncidentReportButton(
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void approveIrButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel approveIncidentReportAproveModel = CommentModel(
+        id: id,
+        comment: _comment,
+      );
+
+      var incidentReportApproveJsonString =
+          approveIncidentReportAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewIncidentReportPresenter.approveIrButton(
         incidentReportApproveJsonString: incidentReportApproveJsonString,
         isLoading: true,
       );
@@ -373,16 +401,16 @@ class ViewIncidentReportController extends GetxController {
     }
   }
 
-  Future<void> incidentReportRejectButton({String? id}) async {
-    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  // Future<void> incidentReportRejectButton({String? id}) async {
+  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-    final _incidentReportRejectBtn =
-        await viewIncidentReportPresenter.incidentReportRejectButton(
-            comment: _rejectComment, id: '$id', isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Incident Report Reject Button Data:${_rejectComment}');
-    print('Incident Report Reject Button Data:${id}');
-  }
+  //   final _incidentReportRejectBtn =
+  //       await viewIncidentReportPresenter.incidentReportRejectButton(
+  //           comment: _rejectComment, id: '$id', isLoading: true);
+  //   // showAlertPermitApproveDialog();
+  //   print('Incident Report Reject Button Data:${_rejectComment}');
+  //   print('Incident Report Reject Button Data:${id}');
+  // }
 
   Future<void> getIncidentReportHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES

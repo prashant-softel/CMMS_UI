@@ -1,19 +1,17 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../navigators/app_pages.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class IncidentReportMessageRejectDialog extends GetView {
+class IRMessageApproveDialog extends GetView {
   String? data;
   List<dynamic>? id;
 
-  IncidentReportMessageRejectDialog({super.key, this.data, this.id});
+  IRMessageApproveDialog({super.key, this.data, this.id});
   final ViewIncidentReportController controller = Get.find();
 
   @override
@@ -26,7 +24,7 @@ class IncidentReportMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Incident Report Reject',
+          'IR Approval',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -86,7 +84,7 @@ class IncidentReportMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
                   },
                   child: const Text('IR List'),
                 ),
@@ -95,7 +93,9 @@ class IncidentReportMessageRejectDialog extends GetView {
               Center(
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                  },
                   child: const Text('View IR'),
                 ),
               ),

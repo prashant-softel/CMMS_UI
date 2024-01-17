@@ -9,10 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class IncidentReportRejectDialog extends GetView {
+class IRApproveDialog extends GetView {
   int? id;
 
-  IncidentReportRejectDialog({super.key, this.id});
+  IRApproveDialog({super.key, this.id});
   final ViewIncidentReportController _controller = Get.find();
 
   @override
@@ -25,7 +25,7 @@ class IncidentReportRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Incident Report Reject",
+          "Approve IR",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -55,7 +55,7 @@ class IncidentReportRejectDialog extends GetView {
                           textStyle: TextStyle(
                               fontSize: 16.0, height: 1.0, color: Colors.black),
                         ),
-                        controller: _controller.rejectCommentTextFieldCtrlr,
+                        controller: _controller.approveCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -87,15 +87,14 @@ class IncidentReportRejectDialog extends GetView {
               },
               child: const Text('Cancel'),
             ),
-            Dimens.boxWidth20,
             ElevatedButton(
-              style: Styles.darkRedElevatedButtonStyle,
+              style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.rejectIncidentReportButton(id: id);
-                print('IR id:$id');
+                _controller.approveIrButton(id: id);
+                print('Goods order id:$id');
                 Get.back();
               },
-              child: Text('Reject IR'),
+              child: Text('Approve IR'),
             ),
           ]),
         ],
