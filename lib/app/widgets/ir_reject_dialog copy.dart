@@ -9,10 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class IncidentReportRejectDialog extends GetView {
+class IRRejectDialog extends GetView {
   int? id;
 
-  IncidentReportRejectDialog({super.key, this.id});
+  IRRejectDialog({super.key, this.id});
   final ViewIncidentReportController _controller = Get.find();
 
   @override
@@ -91,7 +91,7 @@ class IncidentReportRejectDialog extends GetView {
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
-                _controller.rejectIncidentReportButton(id: id);
+                _controller.rejectIrButton(id: id);
                 print('IR id:$id');
                 Get.back();
               },

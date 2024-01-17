@@ -155,6 +155,10 @@ class AddIncidentReportUsecase {
   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
 
+  void saveValue({String? irId}) async =>
+      _repository.saveValue(LocalKeys.irId, irId);
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.irId);
   // Future<String?> getUserAccessList() async =>
   //     await _repository.getUserAccessData(LocalKeys.userAccess);
 }

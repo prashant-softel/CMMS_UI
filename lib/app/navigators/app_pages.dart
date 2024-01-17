@@ -221,8 +221,6 @@ import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
 import '../incident_dashboard/incident_report_binding.dart';
 import '../incident_dashboard/view/incident_screen.dart';
-import '../incident_risk_type/incident_listContent_binding.dart';
-import '../incident_risk_type/view/incident_listContent_screen.dart';
 import '../insurance_provider/insurance_provider_listContent_binding.dart';
 import '../insurance_provider/view/insurance_provider_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
@@ -789,11 +787,6 @@ class AppPages {
       name: _Paths.createMrs,
       page: CreateMrsScreen.new,
       binding: CreateMrsBinding(),
-    ),
-    GetPage<dynamic>(
-      name: _Paths.incidentRiskType,
-      page: IncidentRiskTypeScreen.new,
-      binding: IncidentRiskTypeBinding(),
     ),
 
     GetPage<dynamic>(

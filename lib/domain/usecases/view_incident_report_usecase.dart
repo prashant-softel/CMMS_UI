@@ -34,6 +34,14 @@ class ViewIncidentReportUsecase {
         incidentReportRejectJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> rejectIrButton({
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectIrButton(
+        incidentReportRejectJsonString,
+        isLoading,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -53,17 +61,17 @@ class ViewIncidentReportUsecase {
       _repository.saveValue(LocalKeys.irId, irId);
   Future<String?> getValue() async =>
       await _repository.getStringValue(LocalKeys.irId);
-  Future<void> incidentReportRejectButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await _repository.incidentReportRejectButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  // Future<void> incidentReportRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await _repository.incidentReportRejectButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
 
   Future<void> incidentReportApproveButton({
     String? incidentId,
@@ -237,6 +245,14 @@ class ViewIncidentReportUsecase {
     bool? isLoading,
   }) async =>
       await _repository.approveIncidentReportButton(
+        incidentReportApproveJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> approveIrButton({
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveIrButton(
         incidentReportApproveJsonString,
         isLoading,
       );

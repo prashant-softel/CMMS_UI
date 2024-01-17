@@ -46,22 +46,42 @@ class ViewIncidentReportPresenter {
     );
   }
 
-  Future<void> incidentReportRejectButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await viewIncidentReportUsecase.incidentReportRejectButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  Future<Map<String, dynamic>?> rejectIrButton({
+    incidentReportRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.rejectIrButton(
+      incidentReportRejectJsonString: incidentReportRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  // Future<void> incidentReportRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await viewIncidentReportUsecase.incidentReportRejectButton(
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<Map<String, dynamic>?> approveIncidentReportButton({
     incidentReportApproveJsonString,
     required bool isLoading,
   }) async {
     return viewIncidentReportUsecase.approveIncidentReportButton(
+      incidentReportApproveJsonString: incidentReportApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> approveIrButton({
+    incidentReportApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.approveIrButton(
       incidentReportApproveJsonString: incidentReportApproveJsonString,
       isLoading: isLoading,
     );
