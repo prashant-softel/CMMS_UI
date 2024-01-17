@@ -240,4 +240,12 @@ class ViewIncidentReportUsecase {
         incidentReportApproveJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> approveIrButton({
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveIrButton(
+        incidentReportApproveJsonString,
+        isLoading,
+      );
 }

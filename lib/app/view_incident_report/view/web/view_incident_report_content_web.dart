@@ -1795,8 +1795,20 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 20,
+                                      Container(
+                                        height: 45,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appGreenColor,
+                                          text: "Approve IR",
+                                          icon: Icons.add,
+                                          onPressed: () {
+                                            Get.dialog(
+                                                ApproveIncidentReportDialog(
+                                              id: controller.irId.value,
+                                            ));
+                                          },
+                                        ),
                                       ),
 
                                       ////Reject Button

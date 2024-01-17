@@ -67,6 +67,16 @@ class ViewIncidentReportPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> approveIrButton({
+    incidentReportApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.approveIrButton(
+      incidentReportApproveJsonString: incidentReportApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await viewIncidentReportUsecase.getFacilityList();
 
