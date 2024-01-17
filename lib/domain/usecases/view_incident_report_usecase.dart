@@ -34,6 +34,14 @@ class ViewIncidentReportUsecase {
         incidentReportRejectJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> rejectIrButton({
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectIrButton(
+        incidentReportRejectJsonString,
+        isLoading,
+      );
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,

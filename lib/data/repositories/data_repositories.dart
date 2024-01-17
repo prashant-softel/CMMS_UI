@@ -860,6 +860,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> rejectIrButton({
+    required String auth,
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectIrButton(
+        auth: auth,
+        incidentReportRejectJsonString: incidentReportRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> goodsOrderCloseButton({
     required String auth,
     goodsOrderCloseJsonString,

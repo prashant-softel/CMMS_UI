@@ -86,7 +86,7 @@ class IncidentReportMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
                   },
                   child: const Text('IR List'),
                 ),
