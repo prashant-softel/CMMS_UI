@@ -336,8 +336,13 @@ class ViewIncidentReportController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel approveIncidentReportAproveModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModelWithFlag approveIncidentReportAproveModel =
+          CommentModelWithFlag(
+              id: id,
+              comment: _comment,
+              is_investigation_required:
+                  detailInvestigationTeamValue.value ? 1 : 0,
+              is_why_why_required: whyWhyAnalysisValue.value ? 1 : 0);
 
       var incidentReportApproveJsonString =
           approveIncidentReportAproveModel.toJson();
