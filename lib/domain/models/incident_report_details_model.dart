@@ -82,6 +82,8 @@ class IncidentReportDetailsModel {
     this.unsafe_condition_contributed,
     this.unsafe_act_cause,
     this.investigation_team,
+    this.is_why_why_required,
+    this.is_investigation_required,
     this.injured_person,
 
     // this.additionalEmailEmployees,
@@ -160,6 +162,8 @@ class IncidentReportDetailsModel {
   List<ImmediateCorrectionUpdate?>? immediate_correction;
   List<ProposedActionPlanUpdate?>? proposed_action_plan;
   List<InvestigationTeamUpdate?>? investigation_team;
+  int? is_why_why_required;
+  int? is_investigation_required;
   List<DetailsOfInjuredPersonUpdate?>? injured_person;
 
   // List<ExternalsEmailsList?>? externalEmails;
@@ -239,6 +243,8 @@ class IncidentReportDetailsModel {
         safe_procedure_observed: json['safe_procedure_observed'],
         unsafe_condition_contributed: json['unsafe_condition_contributed'],
         unsafe_act_cause: json['unsafe_act_cause'],
+        is_investigation_required: json['is_investigation_required'],
+        is_why_why_required: json['is_why_why_required'],
         lstHistory: json["lstHistory"] != null
             ? List<ListHistory>.from(
                 json["lstHistory"].map((x) => ListHistory.fromJson(x)))
@@ -334,6 +340,8 @@ class IncidentReportDetailsModel {
         "safe_procedure_observed": safe_procedure_observed,
         "unsafe_condition_contributed": unsafe_condition_contributed,
         "unsafe_act_cause": unsafe_act_cause,
+        "is_why_why_required": is_why_why_required,
+        "is_investigation_required": is_investigation_required,
         "lstHistory": List<dynamic>.from(lstHistory!.map((x) => x)),
         "why_why_analysis": List<dynamic>.from(why_why_analysis!.map((x) => x)),
         "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),

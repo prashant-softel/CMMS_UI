@@ -480,69 +480,148 @@ class AddIncidentReportController extends GetxController {
   }
 
   ///
-  int? id = 0;
+  Rx<int> irId = 0.obs;
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('Edit Incident Report Id:$id');
-
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-
-      getFacilityList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBlocksList(facilityId);
-    });
-
-    if (id != null) {
-      Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportDetail(id: id!);
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
       });
-    }
-
-    if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportHistory(id: id!);
+        getBlocksList(facilityId);
       });
-    }
+      if (irId != null) {
+        Future.delayed(Duration(seconds: 1), () {
+          getIncidentReportDetail(id: irId.value!);
+        });
+      }
+      if (irId != null) {
+        Future.delayed(Duration(seconds: 1), () {
+          getIncidentReportHistory(id: irId.value!);
+        });
+      }
+      Future.delayed(Duration(seconds: 1), () {
+        getFacilityPlantList();
+      });
+      // Future.delayed(Duration(seconds: 1), () {
+      //   getuserAccessData();
+      // });
+      Future.delayed(Duration(seconds: 1), () {
+        getTypePermitList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getInventoryList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getIncidentInvestigationDoneByList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getIncidentInvestigationVerificationDoneByList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getVictimNameList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssetRestorationActionTakenByList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getRiskTypeList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getBusinessList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        addOneMoreData();
+      });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityPlantList();
-    });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getuserAccessData();
-    // });
-    Future.delayed(Duration(seconds: 1), () {
-      getTypePermitList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getIncidentInvestigationDoneByList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getIncidentInvestigationVerificationDoneByList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getVictimNameList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetRestorationActionTakenByList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getRiskTypeList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBusinessList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      addOneMoreData();
-    });
+      await getIncidentReportHistory(id: irId.value);
+    } catch (e) {}
 
     super.onInit();
   }
+
+  Future<void> setUserId() async {
+    try {
+      final _irId = await incidentReportPresenter.getValue();
+      if (_irId == null || _irId == '' || _irId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        irId.value = dataFromPreviousScreen['irId'];
+        incidentReportPresenter.saveValue(irId: irId.value.toString());
+      } else {
+        irId.value = int.tryParse(_irId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+
+  // void onInit() async {
+  //   irId = Get.arguments;
+  //   print('Edit Incident Report Id:$irId');
+
+  //   facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+  //     facilityId = event;
+
+  //     getFacilityList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getBlocksList(facilityId);
+  //   });
+
+  //   if (irId != null) {
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getIncidentReportDetail(id: irId.value!);
+  //     });
+  //   }
+
+  //   if (irId != null) {
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getIncidentReportHistory(id: irId.value!);
+  //     });
+  //   }
+
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getFacilityPlantList();
+  //   });
+  //   // Future.delayed(Duration(seconds: 1), () {
+  //   //   getuserAccessData();
+  //   // });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getTypePermitList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getInventoryList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getIncidentInvestigationDoneByList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getIncidentInvestigationVerificationDoneByList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getVictimNameList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getAssetRestorationActionTakenByList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getRiskTypeList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getBusinessList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     addOneMoreData();
+  //   });
+
+  //   super.onInit();
+  // }
 
   Future<void> getFacilityList() async {
     final _facilityList = await incidentReportPresenter.getFacilityList();
@@ -950,11 +1029,11 @@ class AddIncidentReportController extends GetxController {
     );
     update(['inventory_list']);
     addDetailsOfInjuredPersonRowItem();
-    id == null ? Dimens.box0 : addRowItem();
-    id == null ? Dimens.box0 : addWhyWhyAnalysisRowItem();
-    id == null ? Dimens.box0 : addRootCauseRowItem();
-    id == null ? Dimens.box0 : addImmediateCorrectionRowItem();
-    // id == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
+    irId == null ? Dimens.box0 : addRowItem();
+    irId == null ? Dimens.box0 : addWhyWhyAnalysisRowItem();
+    irId == null ? Dimens.box0 : addRootCauseRowItem();
+    irId == null ? Dimens.box0 : addImmediateCorrectionRowItem();
+    // irId == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
   }
 
   void addRowItem() {
@@ -1556,7 +1635,7 @@ class AddIncidentReportController extends GetxController {
       List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
       rowWhyWhyAnalysisItem.forEach((element) {
         WhyWhyAnalysis item = WhyWhyAnalysis(
-          incidents_id: id,
+          incidents_id: irId.value,
           why: element[0]["value"] ?? '0',
           cause: element[1]["value"] ?? '0',
         );
@@ -1568,7 +1647,7 @@ class AddIncidentReportController extends GetxController {
       List<RootCause> rootCauseItems = [];
       rowRootCauseItem.forEach((element) {
         RootCause item = RootCause(
-          incidents_id: id,
+          incidents_id: irId.value,
           cause: element[0]["value"] ?? '0',
         );
 
@@ -1579,7 +1658,7 @@ class AddIncidentReportController extends GetxController {
       List<ImmediateCorrection> immediateCorrectionItems = [];
       rowImmediateCorrectionItem.forEach((element) {
         ImmediateCorrection item = ImmediateCorrection(
-          incidents_id: id,
+          incidents_id: irId.value,
           details: element[0]["value"] ?? '0',
         );
 
@@ -1590,7 +1669,7 @@ class AddIncidentReportController extends GetxController {
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
         ProposedActionPlan item = ProposedActionPlan(
-          incidents_id: id,
+          incidents_id: irId.value,
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility: element[1]["value"],
           // target_date: element[2]["value"] ?? '0',
@@ -1616,7 +1695,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          incidents_id: id,
+          incidents_id: irId.value,
           person_id: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
           person_type: 1,
@@ -1637,7 +1716,7 @@ class AddIncidentReportController extends GetxController {
 
       CreateIncidentReportModel updateIncidentReportModel =
           CreateIncidentReportModel(
-              id: id,
+              id: irId.value,
               facility_id: facilityId,
               block_id: selectedBlockId,
               equipment_id: selectedEquipmentnameId,
