@@ -1695,13 +1695,10 @@ class ViewIncidentReportContentWeb
                                     }),
                                 Obx(
                                   () => Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        height: 150,
-                                      ),
+                                      Spacer(),
                                       Container(
-                                        height: 28,
+                                        height: 45,
                                         child: CustomElevatedButton(
                                           icon: Icons.print_outlined,
                                           backgroundColor:
@@ -1712,6 +1709,8 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
+
                                       // SizedBox(
                                       //   width: 15,
                                       // ),
@@ -1746,10 +1745,7 @@ class ViewIncidentReportContentWeb
                                                       .length >
                                                   0
                                           ? Dimens.box0
-                                          : Container(),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
+                                          : Dimens.box0,
 
                                       ////Approve Button
                                       // varUserAccessModel.value.access_list!
@@ -1795,6 +1791,7 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
                                       Container(
                                         height: 45,
                                         child: CustomElevatedButton(
@@ -1810,6 +1807,7 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
 
                                       ////Reject Button
                                       // varUserAccessModel.value.access_list!
@@ -1842,6 +1840,7 @@ class ViewIncidentReportContentWeb
                                           },
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
                                       Container(
                                         height: 45,
                                         child: CustomElevatedButton(
@@ -1855,7 +1854,8 @@ class ViewIncidentReportContentWeb
                                                     id: controller.irId.value));
                                           },
                                         ),
-                                      )
+                                      ),
+                                      Spacer()
                                       // CustomElevatedButton(
                                       //   icon: Icons.close,
                                       //   backgroundColor:
