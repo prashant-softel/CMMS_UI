@@ -1332,6 +1332,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> rejectIrButton({
+    required String auth,
+    incidentReportRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/RejectCreateIR',
+      Request.post,
+      incidentReportRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('incidentReportReject: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(IncidentReportMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> goodsOrderCloseButton({
     required String auth,
     goodsOrderCloseJsonString,

@@ -401,6 +401,26 @@ class ViewIncidentReportController extends GetxController {
     }
   }
 
+  void rejectIrButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentIncidentRejectModel =
+          CommentModel(id: id, comment: _comment);
+
+      var incidentReportRejectJsonString = commentIncidentRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewIncidentReportPresenter.rejectIrButton(
+        incidentReportRejectJsonString: incidentReportRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
   // Future<void> incidentReportRejectButton({String? id}) async {
   //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 

@@ -46,6 +46,16 @@ class ViewIncidentReportPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> rejectIrButton({
+    incidentReportRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewIncidentReportUsecase.rejectIrButton(
+      incidentReportRejectJsonString: incidentReportRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   // Future<void> incidentReportRejectButton({
   //   String? comment,
   //   String? id,

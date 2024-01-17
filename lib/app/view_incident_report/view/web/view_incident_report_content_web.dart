@@ -1841,6 +1841,20 @@ class ViewIncidentReportContentWeb
                                                     id: controller.irId.value));
                                           },
                                         ),
+                                      ),
+                                      Container(
+                                        height: 45,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.rejectColor,
+                                          text: "Reject IR",
+                                          icon: Icons.close,
+                                          onPressed: () {
+                                            Get.dialog(
+                                                IncidentReportRejectDialog(
+                                                    id: controller.irId.value));
+                                          },
+                                        ),
                                       )
                                       // CustomElevatedButton(
                                       //   icon: Icons.close,
