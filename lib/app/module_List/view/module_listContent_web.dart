@@ -49,7 +49,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                     "DASHBOARD",
                     style: Styles.greyLight14,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -58,14 +58,9 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / MODULE LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / MODULE LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),
@@ -829,8 +824,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               .toString() ??
                                           '')),
                                       DataCell(Text(controller
-                                              .moduleList[index]
-                                              .featureName ??
+                                              .moduleList[index].featureName ??
                                           '')),
                                       DataCell(Text(controller
                                               .moduleList[index].add
@@ -962,8 +956,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                       .moduleList[index].id
                                                       .toString(),
                                                   module: controller
-                                                      .moduleList[index]
-                                                      .name);
+                                                      .moduleList[index].name);
                                             },
                                           ),
                                         ],
