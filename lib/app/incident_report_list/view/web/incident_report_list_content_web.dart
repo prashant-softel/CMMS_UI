@@ -62,6 +62,9 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
+                            onTap: () {
+                              Get.toNamed(Routes.home);
+                            },
                             child: Text(
                               "DASHBOARD",
                               style: Styles.greyLight14,

@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -47,18 +48,25 @@ class GrievanceListContentWeb extends StatelessWidget {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
-              ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
-                  Get.back();
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.stockManagementDashboardScreen);
                 },
                 child: Text(" / BREAKDOWN MAINTANACE",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / JOB LIST", style: Styles.greyMediumLight12),
+              InkWell(
+                  onTap: () {},
+                  child: Text(" / JOB LIST", style: Styles.greyMediumLight12)),
             ],
           ),
         ),

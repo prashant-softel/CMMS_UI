@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -58,19 +59,25 @@ class _PlantStockReportContentWebState
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
+                    InkWell(
+                      onTap:(){Get.offNamed(Routes.home);},
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
-                        Get.back();
+                        Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" / PLANT STOCK REPORT",
-                        style: Styles.greyMediumLight12),
+                    InkWell(
+                      onTap:(){},
+                      child: Text(" / PLANT STOCK REPORT",
+                          style: Styles.greyMediumLight12),
+                    ),
                   ],
                 ),
               ),

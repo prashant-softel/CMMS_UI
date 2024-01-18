@@ -1,5 +1,6 @@
 import 'package:cmms/app/faulty_material_report/faulty_material_report_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -56,19 +57,27 @@ class _FaultyMaterialReportContentWebState
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
-                        Get.back();
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" /  FAULTY MATERIAL REPORT",
-                        style: Styles.greyMediumLight12),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(" /  FAULTY MATERIAL REPORT",
+                          style: Styles.greyMediumLight12),
+                    ),
                   ],
                 ),
               ),

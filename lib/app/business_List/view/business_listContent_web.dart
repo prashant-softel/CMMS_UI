@@ -46,17 +46,25 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
                     child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  Text(" / BUSINESS LIST", style: Styles.greyLight14)
+                  InkWell(
+                      onTap: () {},
+                      child:
+                          Text(" / BUSINESS LIST", style: Styles.greyLight14))
                 ],
               ),
             ),

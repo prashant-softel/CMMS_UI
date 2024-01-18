@@ -45,9 +45,14 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -58,9 +63,12 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  Text(
-                    " / MODULE LIST ",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      " / MODULE LIST ",
+                      style: Styles.greyLight14,
+                    ),
                   ),
                 ],
               ),

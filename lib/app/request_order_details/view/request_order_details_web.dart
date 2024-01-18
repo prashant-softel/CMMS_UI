@@ -40,18 +40,26 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
               Icons.home,
               color: ColorValues.greyLightColor,
             ),
-            Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
+            InkWell(
+              onTap: () {
+                Get.offNamed(Routes.home);
+              },
+              child: Text(
+                "DASHBOARD",
+                style: Styles.greyLight14,
+              ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Get.offAllNamed(Routes.purchaseGoodsorder);
               },
               child:
                   Text(" / STOCK MANAGEMENT ", style: Styles.greyMediumLight12),
             ),
-            Text(" / REQUEST GOODS  ", style: Styles.greyMediumLight12)
+            InkWell(
+                onTap: () {},
+                child:
+                    Text(" / REQUEST GOODS  ", style: Styles.greyMediumLight12))
           ],
         ),
       ),
@@ -214,10 +222,12 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         Text('Comment: '),
                         Expanded(
                           child: TextField(
-                              style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
                             controller: controller.commentCtrlr,
                             // enabled: controller.isJobCardStarted.value,
                             decoration: InputDecoration(

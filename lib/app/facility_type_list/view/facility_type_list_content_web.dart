@@ -45,17 +45,25 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
                     child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  Text(" / FACILITY LIST", style: Styles.greyLight14)
+                  InkWell(
+                      onTap: () {},
+                      child:
+                          Text(" / FACILITY LIST", style: Styles.greyLight14))
                 ],
               ),
             ),
@@ -1539,8 +1547,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               .facilityTypeList[index].spv ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList[index]
-                                              .owner ??
+                                              .facilityTypeList[index].owner ??
                                           '')),
                                       // DataCell(Text(controller
                                       //         .facilityTypeList?[index]

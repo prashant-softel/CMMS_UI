@@ -44,11 +44,16 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -57,9 +62,9 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      // Get.back();
                     },
                     child: Text(
                       " / BUSINESS TYPE ",
@@ -587,15 +592,16 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                               icon: Icons.edit,
                                               message: 'Edit',
                                               onPress: () {
-                                                controller.selectedItem = controller
-                                                    .businessTypeList
-                                                    .firstWhere((element) =>
-                                                        "${element?.id}" ==
-                                                        controller
-                                                            .businessTypeList[
-                                                                index]
-                                                            ?.id
-                                                            .toString());
+                                                controller.selectedItem =
+                                                    controller
+                                                        .businessTypeList
+                                                        .firstWhere((element) =>
+                                                            "${element?.id}" ==
+                                                            controller
+                                                                .businessTypeList[
+                                                                    index]
+                                                                ?.id
+                                                                .toString());
 
                                                 controller.nameCtrlr.text =
                                                     controller.selectedItem

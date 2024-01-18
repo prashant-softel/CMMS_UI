@@ -45,11 +45,16 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -58,9 +63,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      // Get.back();
                     },
                     child: Text(
                       " / BLOCK LIST ",
@@ -628,9 +633,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                               .blockTypeList[index].name
                                               .toString() ??
                                           '')),
-                                      DataCell(Text(controller
-                                              .blockTypeList[index].spv ??
-                                          '')),
+                                      DataCell(Text(
+                                          controller.blockTypeList[index].spv ??
+                                              '')),
                                       DataCell(Row(
                                         children: [
                                           TableActionButton(

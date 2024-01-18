@@ -58,18 +58,26 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
-                        Get.back();
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" / MRS LIST", style: Styles.greyMediumLight12),
+                    InkWell(
+                        onTap: () {},
+                        child: Text(" / MRS LIST",
+                            style: Styles.greyMediumLight12)),
                   ],
                 ),
               ),

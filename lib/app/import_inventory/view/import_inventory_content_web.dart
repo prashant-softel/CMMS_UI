@@ -68,19 +68,27 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
-                            ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
-                                Get.back();
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.masterDashboard);
                               },
                               child: Text(" / MASTER",
                                   style: Styles.greyMediumLight12),
                             ),
-                            Text(" / IMPORT USER",
-                                style: Styles.greyMediumLight12),
+                            InkWell(
+                              onTap: () {},
+                              child: Text(" / IMPORT USER",
+                                  style: Styles.greyMediumLight12),
+                            ),
                           ],
                         )
                       : controller.importType.value ==
@@ -91,19 +99,28 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                   Icons.home,
                                   color: ColorValues.greyLightColor,
                                 ),
-                                Text(
-                                  "DASHBOARD",
-                                  style: Styles.greyLight14,
-                                ),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
-                                    Get.back();
+                                    Get.offNamed(Routes.home);
+                                  },
+                                  child: Text(
+                                    "DASHBOARD",
+                                    style: Styles.greyLight14,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(
+                                        Routes.stockManagementDashboardScreen);
                                   },
                                   child: Text(" / STOCK MANAGEMENT",
                                       style: Styles.greyMediumLight12),
                                 ),
-                                Text(" / IMPORT  MATERIAL ",
-                                    style: Styles.greyMediumLight12),
+                                InkWell(
+                                  onTap: () {},
+                                  child: Text(" / IMPORT  MATERIAL ",
+                                      style: Styles.greyMediumLight12),
+                                ),
                               ],
                             )
                           : controller.importType.value ==
@@ -115,7 +132,9 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                       color: ColorValues.greyLightColor,
                                     ),
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.offNamed(Routes.home);
+                                      },
                                       child: Text(
                                         "DASHBOARD",
                                         style: Styles.greyLight14,
@@ -144,7 +163,9 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                           color: ColorValues.greyLightColor,
                                         ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Get.offNamed(Routes.home);
+                                          },
                                           child: Text(
                                             "DASHBOARD",
                                             style: Styles.greyLight14,
@@ -173,11 +194,16 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                               Icons.home,
                                               color: ColorValues.greyLightColor,
                                             ),
-                                            Text(
-                                              "DASHBOARD",
-                                              style: Styles.greyLight14,
+                                            InkWell(
+                                              onTap: () {
+                                                Get.offNamed(Routes.home);
+                                              },
+                                              child: Text(
+                                                "DASHBOARD",
+                                                style: Styles.greyLight14,
+                                              ),
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -185,9 +211,12 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                   style:
                                                       Styles.greyMediumLight12),
                                             ),
-                                            Text(" / IMPORT BUSSINESS",
-                                                style:
-                                                    Styles.greyMediumLight12),
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Text(" / IMPORT BUSSINESS",
+                                                  style:
+                                                      Styles.greyMediumLight12),
+                                            ),
                                           ],
                                         )
                                       : Dimens.box0),

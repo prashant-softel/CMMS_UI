@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -63,19 +64,28 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
-                          ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
-                              Get.back();
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(
+                                  Routes.stockManagementDashboardScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / TRANSACTION REPORT LIST ",
-                              style: Styles.greyMediumLight12)
+                          InkWell(
+                            onTap: () {},
+                            child: Text(" / TRANSACTION REPORT LIST ",
+                                style: Styles.greyMediumLight12),
+                          )
                         ],
                       ),
                     ),
