@@ -2,6 +2,7 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/approve_mc_execution_dialog.dart';
@@ -61,19 +62,25 @@ class ViewModuleCleaningExecutionContentWeb
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap:(){},
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(Routes.moduleCleaningListExecution);
                           },
                           child: Text(" / MODULE CLEANING EXECUTION LIST",
                               style: Styles.greyMediumLight12),
                         ),
-                        Text(" / VIEW MODULE CLEANING EXECUTION",
-                            style: Styles.greyMediumLight12)
+                        InkWell(
+                          onTap: () {},
+                          child: Text(" / VIEW MODULE CLEANING EXECUTION",
+                              style: Styles.greyMediumLight12),
+                        )
                       ],
                     ),
                   ),

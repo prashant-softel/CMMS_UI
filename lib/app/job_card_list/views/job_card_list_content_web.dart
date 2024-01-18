@@ -1,3 +1,4 @@
+import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/job_card_list/job_card_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
@@ -55,18 +56,24 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                         Icons.home,
                         color: ColorValues.greyLightColor,
                       ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.to(BreakdownMaintenanceScreen());
                         },
                         child: Text(" / BREAKDOWN MAINTAINANCE",
                             style: Styles.greyMediumLight12),
                       ),
-                      Text(" / JOB CARD LIST", style: Styles.greyMediumLight12),
+                      InkWell(
+                          onTap: () {},
+                          child: Text(" / JOB CARD LIST",
+                              style: Styles.greyMediumLight12)),
                     ],
                   ),
                 ),

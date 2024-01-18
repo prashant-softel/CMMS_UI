@@ -56,18 +56,24 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                         Icons.home,
                         color: ColorValues.greyLightColor,
                       ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / Preventive Maintenance".toUpperCase(),
                             style: Styles.greyMediumLight12),
                       ),
-                      Text(" / PM PLANS", style: Styles.greyMediumLight12)
+                      InkWell(
+                          onTap: () {},
+                          child: Text(" / PM PLANS",
+                              style: Styles.greyMediumLight12))
                     ],
                   ),
                 ),

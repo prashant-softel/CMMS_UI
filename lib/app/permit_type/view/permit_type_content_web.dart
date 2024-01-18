@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,17 +46,24 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS",
+                        style: Styles.greyMediumLight12),
                   ),
-                  Text(" / PERMIT TYPE", style: Styles.greyMediumLight12)
+                  InkWell(
+                      onTap: () {},
+                      child: Text(" / PERMIT TYPE",
+                          style: Styles.greyMediumLight12))
                 ],
               ),
             ),

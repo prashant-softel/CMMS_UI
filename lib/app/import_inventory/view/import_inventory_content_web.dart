@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/theme.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:file_picker/file_picker.dart';
@@ -113,19 +114,25 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                       Icons.home,
                                       color: ColorValues.greyLightColor,
                                     ),
-                                    Text(
-                                      "DASHBOARD",
-                                      style: Styles.greyLight14,
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        "DASHBOARD",
+                                        style: Styles.greyLight14,
+                                      ),
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
-                                        Get.back();
+                                        Get.offAllNamed(Routes.preventive);
                                       },
                                       child: Text(" / PREVENTIVE MAINTENANCE",
                                           style: Styles.greyMediumLight12),
                                     ),
-                                    Text(" / IMPORT PLAN",
-                                        style: Styles.greyMediumLight12),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text(" / IMPORT PLAN",
+                                          style: Styles.greyMediumLight12),
+                                    ),
                                   ],
                                 )
                               : controller.importType.value ==
@@ -136,20 +143,26 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                           Icons.home,
                                           color: ColorValues.greyLightColor,
                                         ),
-                                        Text(
-                                          "DASHBOARD",
-                                          style: Styles.greyLight14,
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Text(
+                                            "DASHBOARD",
+                                            style: Styles.greyLight14,
+                                          ),
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
-                                            Get.back();
+                                            Get.offNamed(Routes.preventive);
                                           },
                                           child: Text(
                                               " / PREVENTIVE MAINTENANCE",
                                               style: Styles.greyMediumLight12),
                                         ),
-                                        Text(" / IMPORT CHECKLIST",
-                                            style: Styles.greyMediumLight12),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Text(" / IMPORT CHECKLIST",
+                                              style: Styles.greyMediumLight12),
+                                        ),
                                       ],
                                     )
                                   : controller.importType.value ==

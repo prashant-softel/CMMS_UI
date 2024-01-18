@@ -64,11 +64,14 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               // Get.back();
                               Get.offAllNamed(Routes.breakdown);
@@ -76,8 +79,11 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / PERMIT LIST",
-                              style: Styles.greyMediumLight12),
+                          InkWell(
+                            onTap: () {},
+                            child: Text(" / PERMIT LIST",
+                                style: Styles.greyMediumLight12),
+                          ),
                         ],
                       ),
                     ),

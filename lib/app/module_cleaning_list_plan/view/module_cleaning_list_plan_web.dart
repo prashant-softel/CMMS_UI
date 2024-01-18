@@ -59,19 +59,25 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
+                          InkWell(
+                            onTap: (){},
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
-                              Get.back();
+                              Get.offNamed(Routes.moduleCleaningDashboard);
                             },
                             child: Text(" / MODULE CLEANING",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / MODULE CLEANING PLANNING",
-                              style: Styles.greyMediumLight12)
+                          InkWell(
+                            onTap: () {},
+                            child: Text(" / MODULE CLEANING PLANNING",
+                                style: Styles.greyMediumLight12),
+                          )
                         ],
                       ),
                     ),

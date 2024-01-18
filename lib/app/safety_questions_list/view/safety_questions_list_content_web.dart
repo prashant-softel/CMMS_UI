@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -44,18 +45,24 @@ class SafetyQuestionsListContentWeb
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offAllNamed(Routes.breakdown);
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Permit Type Checklist",
-                      style: Styles.greyMediumLight12)
+                  InkWell(
+                    onTap: () {},
+                    child: Text(" / Permit Type Checklist",
+                        style: Styles.greyMediumLight12),
+                  )
                 ],
               ),
             ),

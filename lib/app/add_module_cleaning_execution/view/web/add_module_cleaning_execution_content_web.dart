@@ -63,17 +63,20 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap:(){},
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(Routes.moduleCleaningListExecution);
                           },
                           child: Text(" / MODULE CLEANING EXECUTION LIST", style: Styles.greyMediumLight12),
                         ),
-                        Text(" / CREATE MODULE CLEANING EXECUTION", style: Styles.greyMediumLight12)
+                        InkWell(onTap: (){},child: Text(" / CREATE MODULE CLEANING EXECUTION", style: Styles.greyMediumLight12))
                       ],
                     ),
                   ),
