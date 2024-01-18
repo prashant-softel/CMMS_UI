@@ -58,14 +58,13 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                         "DASHBOARD",
                         style: Styles.greyLight14,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.masterDashboard);
                         },
-                        child:
-                            Text(" / MASTER", style: Styles.greyMediumLight12),
+                        child: Text(" / MASTER", style: Styles.greyLight14),
                       ),
-                      Text(" / USER LIST", style: Styles.greyMediumLight12),
+                      Text(" / USER LIST", style: Styles.greyLight14),
                     ],
                   ),
                 ),
@@ -104,7 +103,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
 
                                           Get.toNamed(Routes.addUser);
                                         },
-                                        color: ColorValues.greenlightColor,
+                                        color: ColorValues.addNewColor,
                                       ),
                                     ],
                                   ),
@@ -139,34 +138,36 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },

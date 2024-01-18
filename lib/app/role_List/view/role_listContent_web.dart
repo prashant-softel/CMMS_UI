@@ -48,7 +48,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
                     "DASHBOARD",
                     style: Styles.greyLight14,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -57,14 +57,9 @@ class RoleListContentWeb extends GetView<RoleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / ROLE LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / ROLE LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),
