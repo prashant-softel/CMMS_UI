@@ -115,8 +115,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                   children: [
                                                     ActionButton(
                                                       icon: Icons.add,
-                                                      label:
-                                                          "Add Training Course",
+                                                      label: "Add New",
                                                       onPressed: () {},
                                                       color: ColorValues
                                                           .addNewColor,
@@ -200,7 +199,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                     DataColumn2(
                                                       // fixedWidth: 90,
                                                       label: Text(
-                                                        'Duration \nin minutes',
+                                                        'Duration in minutes',
                                                         style:
                                                             Styles.blackBold14,
                                                       ),
