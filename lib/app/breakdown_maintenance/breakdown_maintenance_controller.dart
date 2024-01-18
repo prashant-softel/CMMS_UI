@@ -80,10 +80,6 @@ class BreakdownMaintenanceController extends GetxController {
     Get.toNamed(Routes.addJob);
   }
 
-  void trainingCourse() {
-    Get.toNamed(Routes.trainingCourse);
-  }
-
   Future<void> newPermitList() async {
     Get.toNamed(
       Routes.newPermitList,

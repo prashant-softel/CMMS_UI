@@ -93,6 +93,10 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.statutory);
   }
 
+  void trainingCourse() {
+    Get.toNamed(Routes.trainingCourse);
+  }
+
   void goToWasteDataScreen() {
     Get.toNamed(Routes.wasteData);
   }

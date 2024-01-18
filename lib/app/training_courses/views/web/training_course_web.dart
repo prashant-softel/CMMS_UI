@@ -59,7 +59,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                       Get.offNamed(Routes.misDashboard);
                     },
                     child: Text(
-                      " / BREAKDOWN",
+                      " / MIS",
                       style: Styles.greyLight14,
                     ),
                   ),
