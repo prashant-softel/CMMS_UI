@@ -181,21 +181,6 @@ class BreakdownMaintenanceScreen
                                     .length >
                                 0
                             ? createContentTile(
-                                title: 'Training Course',
-                                onTap: () {
-                                  controller.trainingCourse();
-                                })
-                            : Container(),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kJobCardFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
                                 title: "JobCard List",
                                 onTap: () {
                                   controller.goToJobCardList();
