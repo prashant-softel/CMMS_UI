@@ -42,16 +42,37 @@ class ManufacturarTabWidget extends StatelessWidget {
                             children: [
                               CustomRichText(title: "Manufacturer Name"),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  margin: Dimens.edgeInsets5,
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList:
-                                      controller.manufacturerModelNameList,
-                                  isValueSelected:
-                                      controller.isManufacturerSelected.value,
-                                  selectedValue:
-                                      controller.selectedmanufacturerName.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    margin: Dimens.edgeInsets5,
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList:
+                                        controller.manufacturerModelNameList,
+                                    isValueSelected:
+                                        controller.isManufacturerSelected.value,
+                                    selectedValue:
+                                        controller.selectedmanufacturerName.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],
@@ -131,16 +152,39 @@ class ManufacturarTabWidget extends StatelessWidget {
                             children: [
                               CustomRichText(title: "Supplier Name"),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  margin: Dimens.edgeInsets5,
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList:
-                                      controller.supplierNameModelNameList,
-                                  isValueSelected:
-                                      controller.isStatusNameSelected.value,
-                                  selectedValue:
-                                      controller.selectedsupplierrName.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    margin: Dimens.edgeInsets5,
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList:
+                                        controller.supplierNameModelNameList,
+                                    isValueSelected:
+                                        controller.isStatusNameSelected.value,
+                                    selectedValue:
+                                        controller.selectedsupplierrName.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],
@@ -177,15 +221,36 @@ class ManufacturarTabWidget extends StatelessWidget {
                             children: [
                               CustomRichText(title: "Currency"),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  margin: Dimens.edgeInsets5,
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList: controller.unitCurrencyList,
-                                  isValueSelected:
-                                      controller.isUnitCurrencySelected.value,
-                                  selectedValue:
-                                      controller.selectedUnitCurrency.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    margin: Dimens.edgeInsets5,
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList: controller.unitCurrencyList,
+                                    isValueSelected:
+                                        controller.isUnitCurrencySelected.value,
+                                    selectedValue:
+                                        controller.selectedUnitCurrency.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],
