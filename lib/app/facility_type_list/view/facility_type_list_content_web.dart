@@ -259,22 +259,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "Description",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                          ),
+                                              child: CustomRichText(
+                                            title: "Description",
+                                          )),
                                           Container(
                                             width: (MediaQuery.of(context)
                                                     .size
@@ -736,22 +723,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "Address",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
-                                          ),
+                                              child: CustomRichText(
+                                                  title: 'Address ')),
                                           Container(
                                             width: (MediaQuery.of(context)
                                                     .size
@@ -869,21 +842,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "Country",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
+                                            child: CustomRichText(
+                                                title: 'Country '),
                                           ),
                                           Container(
                                             height: MediaQuery.of(context)
@@ -964,21 +924,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "State",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
+                                            child:
+                                                CustomRichText(title: 'State '),
                                           ),
                                           Container(
                                             height: MediaQuery.of(context)
@@ -1059,21 +1006,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "City",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
+                                            child:
+                                                CustomRichText(title: 'City '),
                                           ),
                                           Container(
                                             height: MediaQuery.of(context)
@@ -1153,21 +1087,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                            child: RichText(
-                                              text: TextSpan(
-                                                  text: "Pin",
-                                                  style: Styles.blackBold16,
-                                                  children: [
-                                                    TextSpan(
-                                                      style: TextStyle(
-                                                        color: ColorValues
-                                                            .orangeColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                            ),
+                                            child:
+                                                CustomRichText(title: 'Pin '),
                                           ),
                                           Container(
                                             width: (MediaQuery.of(context)
@@ -1539,8 +1460,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               .facilityTypeList[index].spv ??
                                           '')),
                                       DataCell(Text(controller
-                                              .facilityTypeList[index]
-                                              .owner ??
+                                              .facilityTypeList[index].owner ??
                                           '')),
                                       // DataCell(Text(controller
                                       //         .facilityTypeList?[index]

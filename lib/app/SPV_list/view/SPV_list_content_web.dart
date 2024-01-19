@@ -608,8 +608,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                   controller.SPVList.firstWhere(
                                                 (element) =>
                                                     "${element.id}" ==
-                                                    controller
-                                                        .SPVList[index].id
+                                                    controller.SPVList[index].id
                                                         .toString(),
                                               );
 
