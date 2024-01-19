@@ -40,18 +40,26 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
               Icons.home,
               color: ColorValues.greyLightColor,
             ),
-            Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-            GestureDetector(
+            InkWell(
               onTap: () {
-                Get.offAllNamed(Routes.addGrievance);
+                Get.offNamed(Routes.home);
+              },
+              child: Text(
+                "DASHBOARD",
+                style: Styles.greyLight14,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.offAllNamed(Routes.stockManagementDashboardScreen);
               },
               child:
                   Text(" / STOCK MANAGEMENT ", style: Styles.greyMediumLight12),
             ),
-            Text(" / Create Grievance ", style: Styles.greyMediumLight12)
+            InkWell(
+                onTap: () {},
+                child: Text(" / Create Grievance ",
+                    style: Styles.greyMediumLight12))
           ],
         ),
       ),

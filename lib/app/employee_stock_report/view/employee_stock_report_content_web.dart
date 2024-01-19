@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/employee_stock_report/employee_stock_report_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
@@ -53,19 +54,27 @@ class EmployeeStockReportContentWeb
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
-                        ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.stockManagementDashboardScreen);
                           },
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),
                         ),
-                        Text(" / EMPLOYEE STOCK REPORT1 ",
-                            style: Styles.greyMediumLight12)
+                        InkWell(
+                          onTap: () {},
+                          child: Text(" / EMPLOYEE STOCK REPORT ",
+                              style: Styles.greyMediumLight12),
+                        )
                       ],
                     ),
                   ),

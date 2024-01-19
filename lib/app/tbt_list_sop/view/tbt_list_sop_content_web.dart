@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -45,17 +46,23 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offAllNamed(Routes.breakdown);
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT SOP List", style: Styles.greyMediumLight12)
+                  InkWell(
+                      onTap: () {},
+                      child: Text(" / TBT SOP List",
+                          style: Styles.greyMediumLight12))
                 ],
               ),
             ),

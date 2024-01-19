@@ -44,9 +44,14 @@ class RoleListContentWeb extends GetView<RoleListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -57,9 +62,12 @@ class RoleListContentWeb extends GetView<RoleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  Text(
-                    " / ROLE LIST ",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      " / ROLE LIST ",
+                      style: Styles.greyLight14,
+                    ),
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
@@ -66,18 +67,24 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offAllNamed(Routes.breakdown);
                           },
                           child: Text(" / BREAKDOWN MAINTENANCE",
                               style: Styles.greyMediumLight12),
                         ),
-                        Text(" / ADD NEW JOB", style: Styles.greyMediumLight12)
+                        InkWell(
+                            onTap: () {},
+                            child: Text(" / ADD NEW JOB",
+                                style: Styles.greyMediumLight12))
                       ],
                     ),
                   ),

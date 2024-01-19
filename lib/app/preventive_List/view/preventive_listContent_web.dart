@@ -48,11 +48,14 @@ class PreventiveChecklistListContentWeb
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: (){},
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.back();
                     },
@@ -63,7 +66,10 @@ class PreventiveChecklistListContentWeb
                             ? Text(" / AUDIT", style: Styles.greyMediumLight12)
                             : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / CREATE CHECKLIST NUMBER", style: Styles.greyLight14),
+                  InkWell(
+                      onTap: () {},
+                      child: Text(" / CREATE CHECKLIST NUMBER",
+                          style: Styles.greyLight14)),
                 ],
               ),
             ),

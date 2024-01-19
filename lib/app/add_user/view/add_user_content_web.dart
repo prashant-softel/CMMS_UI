@@ -62,23 +62,28 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               final _flutterSecureStorage =
                                   const FlutterSecureStorage();
 
                               _flutterSecureStorage.delete(key: "userId");
 
-                              Get.back();
+                              Get.offNamed(Routes.masterDashboard);
                             },
                             child: Text(" / MASTER",
                                 style: Styles.greyMediumLight12),
                           ),
-                          GestureDetector(
+                          InkWell(
                               onTap: () {
                                 final _flutterSecureStorage =
                                     const FlutterSecureStorage();
@@ -90,11 +95,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                               child: Text(" / USER LIST",
                                   style: Styles.greyMediumLight12)),
                           Obx(
-                            () => Text(
-                                controller.userId.value == 0
-                                    ? " / ADD USER"
-                                    : " / EDIT USER",
-                                style: Styles.greyMediumLight12),
+                            () => InkWell(
+                              onTap: () {},
+                              child: Text(
+                                  controller.userId.value == 0
+                                      ? " / ADD USER"
+                                      : " / EDIT USER",
+                                  style: Styles.greyMediumLight12),
+                            ),
                           )
                         ],
                       ),
@@ -535,8 +543,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1036,8 +1043,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1131,8 +1137,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 child: LoginCustomTextfield(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],

@@ -2,6 +2,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -79,19 +80,28 @@ class ViewEscalationMatrixContentWeb
                                   Icons.home,
                                   color: ColorValues.greyLightColor,
                                 ),
-                                Text(
-                                  "Dashboard",
-                                  style: Styles.greyLight14,
-                                ),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
-                                    Get.back();
+                                    Get.offNamed(Routes.home);
+                                  },
+                                  child: Text(
+                                    "Dashboard",
+                                    style: Styles.greyLight14,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(
+                                        Routes.escalationMatrixListWeb);
                                   },
                                   child: Text(" / Escalation Matrix List",
                                       style: Styles.greyMediumLight12),
                                 ),
-                                Text(" / View Escalation Matrix",
-                                    style: Styles.greyMediumLight12)
+                                InkWell(
+                                  onTap: () {},
+                                  child: Text(" / View Escalation Matrix",
+                                      style: Styles.greyMediumLight12),
+                                )
                               ],
                             ),
                           ),

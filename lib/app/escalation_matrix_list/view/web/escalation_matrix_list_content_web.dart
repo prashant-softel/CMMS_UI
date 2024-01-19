@@ -49,13 +49,16 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
+                            InkWell(
+                              onTap:(){},
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
-                                Get.back();
+                                Get.offNamed(Routes.masterDashboard);
                               },
                               child: Text(" / Escalation Matrix List",
                                   style: Styles.greyMediumLight12),

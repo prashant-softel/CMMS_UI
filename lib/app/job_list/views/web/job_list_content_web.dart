@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,18 +49,25 @@ class JobListContentWeb extends StatelessWidget {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
+              InkWell(
+                onTap: (){Get.offNamed(Routes.home);},
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
-                  Get.back();
+                  Get.offAllNamed(Routes.breakdown);
                 },
                 child: Text(" / BREAKDOWN MAINTANACE",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / JOB LIST", style: Styles.greyMediumLight12),
+              InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.jobList);
+                  },
+                  child: Text(" / JOB LIST", style: Styles.greyMediumLight12)),
             ],
           ),
         ),

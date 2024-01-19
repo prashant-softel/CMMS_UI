@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/role_access/rele_access_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -63,17 +64,25 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
-                  ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.masterDashboard);
                     },
                     child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / ROLE ACCESS ", style: Styles.greyMediumLight12)
+                  InkWell(
+                      onTap: () {},
+                      child: Text(" / ROLE ACCESS ",
+                          style: Styles.greyMediumLight12))
                 ],
               ),
             ),

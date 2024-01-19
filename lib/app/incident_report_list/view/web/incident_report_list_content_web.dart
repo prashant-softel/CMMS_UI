@@ -61,13 +61,18 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
-                          ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
-                              Get.back();
+                              Get.toNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.incidentReportDashboard);
                             },
                             child: Text(" / Incident Report Dashboard",
                                 style: Styles.greyMediumLight12),

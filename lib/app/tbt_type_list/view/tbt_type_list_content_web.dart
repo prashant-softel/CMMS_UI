@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -43,17 +44,23 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offAllNamed(Routes.breakdown);
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT TYPE", style: Styles.greyMediumLight12)
+                  InkWell(
+                      onTap: () {},
+                      child:
+                          Text(" / TBT TYPE", style: Styles.greyMediumLight12))
                 ],
               ),
             ),

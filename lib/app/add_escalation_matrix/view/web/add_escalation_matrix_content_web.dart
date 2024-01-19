@@ -1,9 +1,9 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
-
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -17,10 +17,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class AddEscalationMatrixContentWeb
     extends GetView<AddEscalationMatrixController> {
   AddEscalationMatrixContentWeb({super.key});
-
-
-
-
 
   // final homeController = Get.find<HomeController>();
   final AddEscalationMatrixController controller = Get.find();
@@ -77,13 +73,16 @@ class AddEscalationMatrixContentWeb
                                 Icons.home,
                                 color: ColorValues.greyLightColor,
                               ),
-                              Text(
-                                "Dashboard",
-                                style: Styles.greyLight14,
+                              InkWell(
+                                onTap: () {Get.offNamed(Routes.home);},
+                                child: Text(
+                                  "Dashboard",
+                                  style: Styles.greyLight14,
+                                ),
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
-                                  Get.back();
+                                  Get.offNamed(Routes.escalationMatrixListWeb);
                                 },
                                 child: Text(" / Escalation Matrix List",
                                     style: Styles.greyMediumLight12),
@@ -111,23 +110,20 @@ class AddEscalationMatrixContentWeb
                                           children: [
                                             CustomAppBar(
                                               title:
-                                                  'Create Escalation Matrix'
-                                                      .tr,
+                                                  'Create Escalation Matrix'.tr,
                                             ),
                                             Dimens.boxHeight20,
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                CustomRichText(
-                                                    title: 'Module'),
+                                                CustomRichText(title: 'Module'),
                                                 Dimens.boxWidth5,
                                                 SizedBox(
-                                                  width:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          5,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: DropdownWebWidget(
                                                     dropdownList:
                                                         controller.moduleList,
@@ -142,15 +138,13 @@ class AddEscalationMatrixContentWeb
                                                   ),
                                                 ),
                                                 Dimens.boxWidth30,
-                                                CustomRichText(
-                                                    title: 'Status'),
+                                                CustomRichText(title: 'Status'),
                                                 Dimens.boxWidth5,
                                                 SizedBox(
-                                                  width:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          5,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
                                                   child: DropdownWebWidget(
                                                     dropdownList: controller
                                                         .typePermitList,
@@ -191,8 +185,7 @@ class AddEscalationMatrixContentWeb
                                                               .appBlueBackgroundColor,
                                                           spreadRadius: 2,
                                                           blurRadius: 5,
-                                                          offset:
-                                                              Offset(0, 2),
+                                                          offset: Offset(0, 2),
                                                         ),
                                                       ],
                                                     ),
@@ -201,11 +194,10 @@ class AddEscalationMatrixContentWeb
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal:
                                                                       20,
-                                                                  vertical:
-                                                                      5),
+                                                                  vertical: 5),
                                                           child: Row(
                                                             children: [
                                                               Text(
@@ -215,12 +207,9 @@ class AddEscalationMatrixContentWeb
                                                                   onTap: () {
                                                                     controller
                                                                         .addRowItem();
-
-                                                                  
                                                                   },
-                                                                  child: Icon(
-                                                                      Icons
-                                                                          .exposure_plus_1)),
+                                                                  child: Icon(Icons
+                                                                      .exposure_plus_1)),
                                                             ],
                                                           ),
                                                         ),
@@ -258,8 +247,7 @@ class AddEscalationMatrixContentWeb
                                                             }).toList(),
                                                             rows: controller
                                                                 .rowItem.value
-                                                                .map(
-                                                                    (record) {
+                                                                .map((record) {
                                                               return TableViewRow(
                                                                 height: 200,
                                                                 cells: record.map(
@@ -268,8 +256,12 @@ class AddEscalationMatrixContentWeb
                                                                     child: (mapData['key'] ==
                                                                             "Duration (Days)")
                                                                         ? Padding(
-                                                                            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                                                                            child: Column(
+                                                                            padding: const EdgeInsets.only(
+                                                                                left: 20,
+                                                                                right: 20,
+                                                                                top: 10),
+                                                                            child:
+                                                                                Column(
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               crossAxisAlignment: CrossAxisAlignment.center,
                                                                               children: [
@@ -289,11 +281,11 @@ class AddEscalationMatrixContentWeb
                                                                                 SizedBox(
                                                                                   height: 5,
                                                                                 ),
-                                                                               
                                                                               ],
                                                                             ),
                                                                           )
-                                                                        : (mapData['key'] == "Escalation Roles and Levels")
+                                                                        : (mapData['key'] ==
+                                                                                "Escalation Roles and Levels")
                                                                             ? SizedBox(
                                                                                 width: MediaQuery.of(context).size.width / 5,
                                                                                 child: DropdownWebWidget(
@@ -309,7 +301,8 @@ class AddEscalationMatrixContentWeb
                                                                                   },
                                                                                 ),
                                                                               )
-                                                                            : Text(mapData['key'] ?? ''),
+                                                                            : Text(mapData['key'] ??
+                                                                                ''),
                                                                   );
                                                                 }).toList(),
                                                               );
@@ -375,9 +368,8 @@ class AddEscalationMatrixContentWeb
                                                 Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor:
-                                                        ColorValues
-                                                            .appGreenColor,
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
                                                     text: "Submit",
                                                     onPressed: () {
                                                       controller
@@ -428,6 +420,4 @@ class AddEscalationMatrixContentWeb
 
         // ),
       );
-
-  
 }

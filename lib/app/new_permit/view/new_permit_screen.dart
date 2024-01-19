@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 // import 'package:cmms/app/theme/colors_value.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -1552,15 +1553,19 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   color: ColorValues
                                                       .greyLightColor,
                                                 ),
-                                                Text(
-                                                  "DASHBOARD",
-                                                  style: Styles.greyLight14,
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: Text(
+                                                    "DASHBOARD",
+                                                    style: Styles.greyLight14,
+                                                  ),
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
-                                                    Get.back();
+                                                    Get.offAllNamed(
+                                                        Routes.breakdown);
                                                   },
-                                                  child: Text(" / BREAKDOWN",
+                                                  child: Text(" / BREAKDOWN MAINTENANCE",
                                                       style: Styles
                                                           .greyMediumLight12),
                                                 ),
