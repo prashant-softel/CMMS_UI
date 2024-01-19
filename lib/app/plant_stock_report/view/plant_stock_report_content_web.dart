@@ -73,11 +73,8 @@ class _PlantStockReportContentWebState
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    InkWell(
-                      onTap:(){},
-                      child: Text(" / PLANT STOCK REPORT",
-                          style: Styles.greyMediumLight12),
-                    ),
+                    Text(" / PLANT STOCK REPORT",
+                        style: Styles.greyMediumLight12),
                   ],
                 ),
               ),

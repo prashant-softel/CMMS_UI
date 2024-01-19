@@ -97,11 +97,8 @@ class ViewEscalationMatrixContentWeb
                                   child: Text(" / Escalation Matrix List",
                                       style: Styles.greyMediumLight12),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Text(" / View Escalation Matrix",
-                                      style: Styles.greyMediumLight12),
-                                )
+                                Text(" / View Escalation Matrix",
+                                    style: Styles.greyMediumLight12)
                               ],
                             ),
                           ),

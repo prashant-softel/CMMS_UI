@@ -81,11 +81,8 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(" / REQUEST ORDER LIST",
-                                style: Styles.greyMediumLight12),
-                          )
+                          Text(" / REQUEST ORDER LIST",
+                              style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),

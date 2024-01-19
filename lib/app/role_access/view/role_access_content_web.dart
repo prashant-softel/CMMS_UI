@@ -79,10 +79,8 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                     },
                     child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: Text(" / ROLE ACCESS ",
-                          style: Styles.greyMediumLight12))
+                  Text(" / ROLE ACCESS ",
+                      style: Styles.greyMediumLight12)
                 ],
               ),
             ),

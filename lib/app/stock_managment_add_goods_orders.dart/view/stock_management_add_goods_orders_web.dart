@@ -1224,10 +1224,8 @@ class AppBarGoodsOrder extends StatelessWidget {
             },
             child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
           ),
-          InkWell(
-              onTap: () {},
-              child: Text(" / ADD GOODS ORDER DETAILS",
-                  style: Styles.greyMediumLight12)),
+          Text(" / ADD GOODS ORDER DETAILS",
+              style: Styles.greyMediumLight12),
         ],
       ),
     );

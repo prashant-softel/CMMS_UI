@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -46,24 +47,24 @@ class CalibrationCertificateWeb
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
-                  ),
+                  InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
                   GestureDetector(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.masterDashboard);
                     },
                     child:
                         Text(" / INVENTORY", style: Styles.greyMediumLight12),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(" / CALIBRATION CERTIFICATE LIST",
-                        style: Styles.greyMediumLight12),
-                  ),
+                  Text(" / CALIBRATION CERTIFICATE LIST",
+                      style: Styles.greyMediumLight12),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

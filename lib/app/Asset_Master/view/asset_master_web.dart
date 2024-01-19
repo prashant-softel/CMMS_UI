@@ -58,13 +58,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                     child: Text(" / STOCK MANAGEMENT",
                         style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(" / ASSET MASTER LIST",
-                        style: Styles.greyMediumLight12),
-                  ),
+                  Text(" / ASSET MASTER LIST", style: Styles.greyMediumLight12),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

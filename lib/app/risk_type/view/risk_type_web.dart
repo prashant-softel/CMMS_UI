@@ -45,11 +45,16 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.misDashboard);
                     },
@@ -58,14 +63,9 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / RISK TYPE ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / RISK TYPE ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),
@@ -592,10 +592,11 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                     (index) => DataRow(cells: [
                                       DataCell(Text((index + 1).toString())),
                                       DataCell(Text(controller
-                                              .riskTypeList[index].name
-                                              .toString())),
+                                          .riskTypeList[index].name
+                                          .toString())),
                                       DataCell(Text(controller
-                                              .riskTypeList[index].description ??
+                                              .riskTypeList[index]
+                                              .description ??
                                           '')),
                                       DataCell(Row(
                                         children: [
@@ -605,7 +606,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                             message: 'Edit',
                                             onPress: () {
                                               controller.selectedItem =
-                                                  controller.riskTypeList.firstWhere(
+                                                  controller.riskTypeList
+                                                      .firstWhere(
                                                 (element) =>
                                                     "${element.id}" ==
                                                     controller
@@ -636,7 +638,8 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                       .riskTypeList?[index]?.id
                                                       .toString(),
                                                   business: controller
-                                                      .riskTypeList?[index]?.name);
+                                                      .riskTypeList?[index]
+                                                      ?.name);
                                             },
                                           ),
                                         ],

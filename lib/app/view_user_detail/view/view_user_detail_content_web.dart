@@ -42,23 +42,28 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
-                  ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.setting);
                     },
                     child: Text(" / SETTING", style: Styles.greyMediumLight12),
                   ),
-                  GestureDetector(
+                  InkWell(
                       onTap: () {
                         final _flutterSecureStorage =
                             const FlutterSecureStorage();
 
                         _flutterSecureStorage.delete(key: "userId");
-                        Get.back();
+                        Get.offNamed(Routes.userList);
                       },
                       child: Text(" / USER LIST",
                           style: Styles.greyMediumLight12)),

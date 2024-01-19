@@ -64,7 +64,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.offNamed(Routes.breakdown);
+                          Get.offNamed(Routes.home);
                         },
                         child: Text(
                           "DASHBOARD",

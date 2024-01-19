@@ -1,4 +1,5 @@
 import 'package:cmms/app/calibration_View/calibration_View_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
@@ -41,11 +42,16 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Get.back();
                   },

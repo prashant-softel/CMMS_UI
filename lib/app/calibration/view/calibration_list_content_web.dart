@@ -46,9 +46,14 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
               ),
               InkWell(
                 onTap: () {

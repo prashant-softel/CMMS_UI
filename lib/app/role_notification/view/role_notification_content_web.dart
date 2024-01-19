@@ -79,10 +79,7 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                     },
                     child: Text(" / MASTER", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: Text(" / ROLE NOTIFICATION ",
-                          style: Styles.greyMediumLight12))
+                  Text(" / ROLE NOTIFICATION ", style: Styles.greyMediumLight12)
                 ],
               ),
             ),

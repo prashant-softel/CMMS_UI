@@ -56,10 +56,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
               child:
                   Text(" / STOCK MANAGEMENT ", style: Styles.greyMediumLight12),
             ),
-            InkWell(
-                onTap: () {},
-                child: Text(" / Create Grievance ",
-                    style: Styles.greyMediumLight12))
+            Text(" / Create Grievance ", style: Styles.greyMediumLight12)
           ],
         ),
       ),

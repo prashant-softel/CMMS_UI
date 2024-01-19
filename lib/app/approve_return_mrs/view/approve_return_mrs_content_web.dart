@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -39,13 +40,18 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.stockManagementDashboardScreen);
                   },
                   child: Text(" / STOCK MANAGEMENT ",
                       style: Styles.greyMediumLight12),

@@ -62,11 +62,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Get.offNamed(
                                 Routes.stockManagementGoodsOrdersScreen);
@@ -74,12 +79,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: Text(" / RECEIVE GOODS ORDER",
-                                style: Styles.greyMediumLight12)),
+                        Text(" / RECEIVE GOODS ORDER",
+                            style: Styles.greyMediumLight12),
                       ],
                     ),
                   ),

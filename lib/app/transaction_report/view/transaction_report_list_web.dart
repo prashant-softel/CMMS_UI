@@ -81,11 +81,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(" / TRANSACTION REPORT LIST ",
-                                style: Styles.greyMediumLight12),
-                          )
+                          Text(" / TRANSACTION REPORT LIST ",
+                              style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),

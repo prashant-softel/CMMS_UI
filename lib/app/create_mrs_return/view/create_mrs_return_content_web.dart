@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_mrs_return/create_mrs_return_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -41,13 +42,18 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.stockManagementDashboardScreen);
                   },
                   child: Text(" / STOCK MANAGEMENT ",
                       style: Styles.greyMediumLight12),
@@ -273,8 +279,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                       ),
                                                       child:
                                                           LoginCustomTextfield(
-                                                        inputFormatters: <
-                                                            TextInputFormatter>[
+                                                        inputFormatters: <TextInputFormatter>[
                                                           FilteringTextInputFormatter
                                                               .digitsOnly
                                                         ],
@@ -298,7 +303,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   top: 8.0),
                                                           child:
                                                               CustomSwitchTroggle(

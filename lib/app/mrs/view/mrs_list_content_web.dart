@@ -74,10 +74,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    InkWell(
-                        onTap: () {},
-                        child: Text(" / MRS LIST",
-                            style: Styles.greyMediumLight12)),
+                    Text(" / MRS LIST",
+                        style: Styles.greyMediumLight12),
                   ],
                 ),
               ),

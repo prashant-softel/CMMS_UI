@@ -63,11 +63,16 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Get.offNamed(
                                 Routes.stockManagementGoodsOrdersScreen);
@@ -75,12 +80,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: Text(" /  VIEW GOODS ORDER DETAILS",
-                                style: Styles.greyMediumLight12)),
+                        Text(" /  VIEW GOODS ORDER DETAILS",
+                            style: Styles.greyMediumLight12),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_mis_plan/view_mis_plan_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
@@ -56,13 +57,18 @@ class _ViewMisPlanWebState extends State<ViewMisPlanWeb> {
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
                     ),
-                    GestureDetector(
+                    InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.misDashboard);
                         },
                         child: Text(" / MIS", style: Styles.greyMediumLight12)),
                     Text(" / VIEW CHECKLIST PLAN",

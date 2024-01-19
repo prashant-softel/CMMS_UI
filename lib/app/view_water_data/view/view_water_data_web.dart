@@ -1927,18 +1927,22 @@ class AppBarGoodsOrder extends StatelessWidget {
             Icons.home,
             color: ColorValues.greyLightColor,
           ),
-          Text(
-            "DASHBOARD",
-            style: Styles.greyLight14,
+          InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               Get.offNamed(Routes.misDashboard);
             },
             child: Text(" / MIS", style: Styles.greyLight14),
           ),
-          GestureDetector(
-              child: Text(" /VIEW WATER DATA", style: Styles.greyLight14)),
+          Text(" /VIEW WATER DATA", style: Styles.greyLight14),
         ],
       ),
     );

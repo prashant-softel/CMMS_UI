@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +43,18 @@ class StateListContentWeb extends GetView<StateListController> {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "Dashboard".toUpperCase(),
-                style: Styles.greyLight14,
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
               ),
               InkWell(
                 onTap: () {
-                  Get.back();
+                  Get.offNamed(Routes.preventive);
                 },
                 child: Text(" / Preventive Maintenance".toUpperCase(),
                     style: Styles.greyMediumLight12),

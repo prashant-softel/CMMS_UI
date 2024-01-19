@@ -63,14 +63,9 @@ class ResponsibilityListContentWeb
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Get.back();
-                    },
-                    child: Text(
-                      " / RESPONSIBILITY LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / RESPONSIBILITY LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

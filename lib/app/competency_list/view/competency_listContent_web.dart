@@ -62,14 +62,9 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / COMPETENCY LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / COMPETENCY LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

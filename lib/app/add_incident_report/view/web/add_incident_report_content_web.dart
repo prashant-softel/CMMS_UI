@@ -81,7 +81,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                               color: ColorValues.greyLightColor,
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
                               child: Text(
                                 "Dashboard",
                                 style: Styles.greyLight14,

@@ -107,13 +107,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             Icons.home,
                                             color: ColorValues.greyLightColor,
                                           ),
-                                          Text(
-                                            "DASHBOARD",
-                                            style: Styles.greyLight14,
-                                          ),
-                                          GestureDetector(
+                                          InkWell(
                                             onTap: () {
-                                              Get.back();
+                                              Get.offNamed(Routes.home);
+                                            },
+                                            child: Text(
+                                              "DASHBOARD",
+                                              style: Styles.greyLight14,
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              Get.offNamed(
+                                                  Routes.newPermitList);
                                             },
                                             child: Text(" / NEW PERMIT LIST",
                                                 style:
@@ -1599,11 +1605,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             Icons.home,
                                             color: ColorValues.greyLightColor,
                                           ),
-                                          Text(
-                                            "DASHBOARD",
-                                            style: Styles.greyLight14,
+                                          InkWell(
+                                            onTap: () {
+                                              Get.offNamed(Routes.home);
+                                            },
+                                            child: Text(
+                                              "DASHBOARD",
+                                              style: Styles.greyLight14,
+                                            ),
                                           ),
-                                          GestureDetector(
+                                          InkWell(
                                             onTap: () {
                                               final _flutterSecureStorage =
                                                   const FlutterSecureStorage();

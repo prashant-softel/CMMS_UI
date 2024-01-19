@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/approve_wc_dialog.dart';
@@ -72,13 +73,18 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                   Icons.home,
                                   color: ColorValues.greyLightColor,
                                 ),
-                                Text(
-                                  "Dashboard",
-                                  style: Styles.greyLight14,
-                                ),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
-                                    Get.back();
+                                    Get.offNamed(Routes.home);
+                                  },
+                                  child: Text(
+                                    "DASHBOARD",
+                                    style: Styles.greyLight14,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(Routes.warrantyClaimList);
                                   },
                                   child: Text(" / Warranty Claim",
                                       style: Styles.greyMediumLight12),
@@ -305,7 +311,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .only(
+                                                                .only(
                                                                 left: 100),
                                                         child: Row(
                                                             children: [

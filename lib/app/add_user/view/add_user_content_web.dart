@@ -90,19 +90,16 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
 
                                 _flutterSecureStorage.delete(key: "userId");
 
-                                Get.back();
+                                Get.offNamed(Routes.userList);
                               },
                               child: Text(" / USER LIST",
                                   style: Styles.greyMediumLight12)),
                           Obx(
-                            () => InkWell(
-                              onTap: () {},
-                              child: Text(
-                                  controller.userId.value == 0
-                                      ? " / ADD USER"
-                                      : " / EDIT USER",
-                                  style: Styles.greyMediumLight12),
-                            ),
+                            () => Text(
+                                controller.userId.value == 0
+                                    ? " / ADD USER"
+                                    : " / EDIT USER",
+                                style: Styles.greyMediumLight12),
                           )
                         ],
                       ),

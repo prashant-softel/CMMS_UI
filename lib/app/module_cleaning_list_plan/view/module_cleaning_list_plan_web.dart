@@ -60,7 +60,9 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-                            onTap: (){},
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
                             child: Text(
                               "DASHBOARD",
                               style: Styles.greyLight14,
@@ -73,11 +75,8 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                             child: Text(" / MODULE CLEANING",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(" / MODULE CLEANING PLANNING",
-                                style: Styles.greyMediumLight12),
-                          )
+                          Text(" / MODULE CLEANING PLANNING",
+                              style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),

@@ -63,12 +63,9 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      " / MODULE LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / MODULE LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

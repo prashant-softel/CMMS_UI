@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -41,13 +42,18 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+               InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                InkWell(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.stockManagementDashboardScreen);
                   },
                   child: Text(" / STOCK MANAGEMENT ",
                       style: Styles.greyMediumLight12),

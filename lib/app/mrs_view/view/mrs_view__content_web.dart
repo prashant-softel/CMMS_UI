@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/mrs_view/mrs_view_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +42,22 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       final _flutterSecureStorage =
                           const FlutterSecureStorage();
 
                       _flutterSecureStorage.delete(key: "mrsId");
-                      Get.back();
+                      Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),

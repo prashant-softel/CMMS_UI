@@ -62,14 +62,9 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / DESIGNATION LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / DESIGNATION LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),
