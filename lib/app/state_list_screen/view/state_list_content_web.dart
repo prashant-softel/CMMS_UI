@@ -46,7 +46,7 @@ class StateListContentWeb extends GetView<StateListController> {
                 "Dashboard".toUpperCase(),
                 style: Styles.greyLight14,
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Get.back();
                 },

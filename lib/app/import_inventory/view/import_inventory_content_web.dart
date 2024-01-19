@@ -50,9 +50,9 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                           "DASHBOARD",
                           style: Styles.greyLight14,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(Routes.masterDashboard);
                           },
                           child:
                               Text(" / ASSET", style: Styles.greyMediumLight12),
