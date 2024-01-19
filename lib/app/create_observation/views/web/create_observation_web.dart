@@ -127,18 +127,39 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title:
                                                               'Type of Observation'),
                                                       Dimens.boxWidth10,
-                                                      DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList: controller
-                                                            .typeOfObservation,
-                                                        // selectedValue: ,
-                                                        onValueChanged:
-                                                            (typeOfObservation,
-                                                                selectedValue) {},
+                                                      Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList: controller
+                                                              .typeOfObservation,
+                                                          // selectedValue: ,
+                                                          onValueChanged:
+                                                              (typeOfObservation,
+                                                                  selectedValue) {},
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -148,17 +169,38 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Risk Type'),
                                                       Dimens.boxWidth10,
-                                                      DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList:
-                                                            controller.riskType,
-                                                        // selectedValue: ,
-                                                        onValueChanged: (riskType,
-                                                            selectedValue) {},
+                                                      Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList:
+                                                              controller.riskType,
+                                                          // selectedValue: ,
+                                                          onValueChanged: (riskType,
+                                                              selectedValue) {},
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -202,17 +244,38 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       CustomRichText(
                                                           title: 'Cost type'),
                                                       Dimens.boxWidth10,
-                                                      DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList:
-                                                            controller.costType,
-                                                        // selectedValue: ,
-                                                        onValueChanged: (costType,
-                                                            selectedValue) {},
+                                                      Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList:
+                                                              controller.costType,
+                                                          // selectedValue: ,
+                                                          onValueChanged: (costType,
+                                                              selectedValue) {},
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -274,17 +337,38 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title:
                                                               'Month of Observation'),
                                                       Dimens.boxWidth10,
-                                                      DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList:
-                                                            controller.month,
-                                                        // selectedValue: ,
-                                                        onValueChanged: (month,
-                                                            selectedValue) {},
+                                                      Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList:
+                                                              controller.month,
+                                                          // selectedValue: ,
+                                                          onValueChanged: (month,
+                                                              selectedValue) {},
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -312,18 +396,39 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title:
                                                               'Source of Observation'),
                                                       Dimens.boxWidth10,
-                                                      DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList: controller
-                                                            .sourceOfObservation,
-                                                        // selectedValue: ,
-                                                        onValueChanged:
-                                                            (sourceOfObservation,
-                                                                selectedValue) {},
+                                                      Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList: controller
+                                                              .sourceOfObservation,
+                                                          // selectedValue: ,
+                                                          onValueChanged:
+                                                              (sourceOfObservation,
+                                                                  selectedValue) {},
+                                                        ),
                                                       ),
                                                     ],
                                                   ),

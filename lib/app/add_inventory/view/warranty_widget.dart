@@ -52,14 +52,35 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Type"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList: controller.warrantyNameList,
-                                  isValueSelected:
-                                      controller.isWarrentyNameSelected.value,
-                                  selectedValue:
-                                      controller.selectedWarrantyName.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList: controller.warrantyNameList,
+                                    isValueSelected:
+                                        controller.isWarrentyNameSelected.value,
+                                    selectedValue:
+                                        controller.selectedWarrantyName.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],
@@ -71,15 +92,36 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   title: "Warranty Usages Term Type"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList:
-                                      controller.warrantyUsageTermNameList,
-                                  isValueSelected: controller
-                                      .iswarrantyUsageTermNameSelected.value,
-                                  selectedValue: controller
-                                      .selectedwarrantyUsageTermListName.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList:
+                                        controller.warrantyUsageTermNameList,
+                                    isValueSelected: controller
+                                        .iswarrantyUsageTermNameSelected.value,
+                                    selectedValue: controller
+                                        .selectedwarrantyUsageTermListName.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],
@@ -122,15 +164,36 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Provider"),
                               SizedBox(width: 10),
                               SizedBox(
-                                child: DropdownWebStock(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  dropdownList:
-                                      controller.manufacturerModelNameList,
-                                  isValueSelected: controller
-                                      .iswarrantymanufacturerSelected.value,
-                                  selectedValue:
-                                      controller.selectedmanufacturerName.value,
-                                  onValueChanged: controller.onValueChanged,
+                                child: Container(
+                                decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                  child: DropdownWebStock(
+                                    width: MediaQuery.of(context).size.width / 5,
+                                    dropdownList:
+                                        controller.manufacturerModelNameList,
+                                    isValueSelected: controller
+                                        .iswarrantymanufacturerSelected.value,
+                                    selectedValue:
+                                        controller.selectedmanufacturerName.value,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
                                 ),
                               ),
                             ],

@@ -3384,28 +3384,51 @@ class AddPrposedAction extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          DropdownWebStock(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            dropdownList:
-                                                controller.eqipmentNameList,
-                                            selectedValue: mapData["value"],
-                                            onValueChanged:
-                                                (list, selectedValue) {
-                                              print({
-                                                selectedValue: selectedValue
-                                              });
-                                              mapData["value"] = selectedValue;
-                                              controller.dropdownEquipmentNameMapperData[
-                                                      selectedValue] =
-                                                  list.firstWhere(
-                                                      (element) =>
-                                                          element.name ==
-                                                          selectedValue,
-                                                      orElse: null);
-                                            },
+                                          Container(
+                                          decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                            child: DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  4,
+                                              dropdownList:
+                                                  controller.eqipmentNameList,
+                                              selectedValue: mapData["value"],
+                                              onValueChanged:
+                                                  (list, selectedValue) {
+                                                print({
+                                                  selectedValue: selectedValue
+                                                });
+                                                mapData["value"] = selectedValue;
+                                                controller.dropdownEquipmentNameMapperData[
+                                                        selectedValue] =
+                                                    list.firstWhere(
+                                                        (element) =>
+                                                            element.name ==
+                                                            selectedValue,
+                                                        orElse: null);
+                                              },
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -3420,29 +3443,52 @@ class AddPrposedAction extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              DropdownWebStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                dropdownList:
-                                                    controller.statusList,
-                                                selectedValue: mapData["value"],
-                                                onValueChanged:
-                                                    (list, selectedValue) {
-                                                  print({
-                                                    selectedValue: selectedValue
-                                                  });
-                                                  mapData["value"] =
-                                                      selectedValue;
-                                                  controller.dropdownStatusMapperData[
-                                                          selectedValue] =
-                                                      list.firstWhere(
-                                                          (element) =>
-                                                              element.name ==
-                                                              selectedValue,
-                                                          orElse: null);
-                                                },
+                                              Container(
+                                              decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                child: DropdownWebStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4,
+                                                  dropdownList:
+                                                      controller.statusList,
+                                                  selectedValue: mapData["value"],
+                                                  onValueChanged:
+                                                      (list, selectedValue) {
+                                                    print({
+                                                      selectedValue: selectedValue
+                                                    });
+                                                    mapData["value"] =
+                                                        selectedValue;
+                                                    controller.dropdownStatusMapperData[
+                                                            selectedValue] =
+                                                        list.firstWhere(
+                                                            (element) =>
+                                                                element.name ==
+                                                                selectedValue,
+                                                            orElse: null);
+                                                  },
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -4505,27 +4551,49 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      DropdownWebStock(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                4,
-                                        dropdownList: controller.victimNameList,
-                                        selectedValue: mapData["value"],
-                                        onValueChanged: (list, selectedValue) {
-                                          print({selectedValue: selectedValue});
-                                          if (selectedValue != null) {
-                                            controller.updateSelectedOption(
-                                                selectedValue);
-                                          }
-                                          mapData["value"] = selectedValue;
-                                          controller.dropdownVictimNameMapperData[
-                                                  selectedValue] =
-                                              list.firstWhere(
-                                                  (element) =>
-                                                      element.name ==
-                                                      selectedValue,
-                                                  orElse: null);
-                                        },
+                                      Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  4,
+                                          dropdownList: controller.victimNameList,
+                                          selectedValue: mapData["value"],
+                                          onValueChanged: (list, selectedValue) {
+                                            print({selectedValue: selectedValue});
+                                            if (selectedValue != null) {
+                                              controller.updateSelectedOption(
+                                                  selectedValue);
+                                            }
+                                            mapData["value"] = selectedValue;
+                                            controller.dropdownVictimNameMapperData[
+                                                    selectedValue] =
+                                                list.firstWhere(
+                                                    (element) =>
+                                                        element.name ==
+                                                        selectedValue,
+                                                    orElse: null);
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -4622,29 +4690,51 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              DropdownWebStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4,
-                                                dropdownList:
-                                                    controller.genderList,
-                                                selectedValue: mapData["value"],
-                                                onValueChanged:
-                                                    (list, selectedValue) {
-                                                  print({
-                                                    selectedValue: selectedValue
-                                                  });
-                                                  mapData["value"] =
-                                                      selectedValue;
-                                                  controller.dropdownGenderMapperData[
-                                                          selectedValue] =
-                                                      list.firstWhere(
-                                                          (element) =>
-                                                              element.name ==
-                                                              selectedValue,
-                                                          orElse: null);
-                                                },
+                                              Container(
+                                              decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                child: DropdownWebStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4,
+                                                  dropdownList:
+                                                      controller.genderList,
+                                                  selectedValue: mapData["value"],
+                                                  onValueChanged:
+                                                      (list, selectedValue) {
+                                                    print({
+                                                      selectedValue: selectedValue
+                                                    });
+                                                    mapData["value"] =
+                                                        selectedValue;
+                                                    controller.dropdownGenderMapperData[
+                                                            selectedValue] =
+                                                        list.firstWhere(
+                                                            (element) =>
+                                                                element.name ==
+                                                                selectedValue,
+                                                            orElse: null);
+                                                  },
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -4777,36 +4867,59 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          DropdownWebStock(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                4,
-                                                            dropdownList:
-                                                                controller
-                                                                    .businessList,
-                                                            selectedValue:
-                                                                mapData[
-                                                                    "value"],
-                                                            onValueChanged: (list,
-                                                                selectedValue) {
-                                                              print({
-                                                                selectedValue:
-                                                                    selectedValue
-                                                              });
-                                                              mapData["value"] =
-                                                                  selectedValue;
-                                                              controller.dropdownBusinessListMapperData[
-                                                                      selectedValue] =
-                                                                  list.firstWhere(
-                                                                      (element) =>
-                                                                          element
-                                                                              .name ==
-                                                                          selectedValue,
-                                                                      orElse:
-                                                                          null);
-                                                            },
+                                                          Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                                            child: DropdownWebStock(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  4,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .businessList,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                print({
+                                                                  selectedValue:
+                                                                      selectedValue
+                                                                });
+                                                                mapData["value"] =
+                                                                    selectedValue;
+                                                                controller.dropdownBusinessListMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
+                                                                        (element) =>
+                                                                            element
+                                                                                .name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                              },
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -4828,35 +4941,57 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              DropdownWebStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    4,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .businessList,
-                                                                selectedValue:
-                                                                    mapData[
-                                                                        "value"],
-                                                                onValueChanged:
-                                                                    (list,
-                                                                        selectedValue) {
-                                                                  print({
-                                                                    selectedValue:
-                                                                        selectedValue
-                                                                  });
-                                                                  mapData["value"] =
-                                                                      selectedValue;
-                                                                  controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
-                                                                      (element) =>
-                                                                          element
-                                                                              .name ==
-                                                                          selectedValue,
-                                                                      orElse:
-                                                                          null);
-                                                                },
+                                                              Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                                child: DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      4,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .businessList,
+                                                                  selectedValue:
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    print({
+                                                                      selectedValue:
+                                                                          selectedValue
+                                                                    });
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
+                                                                        (element) =>
+                                                                            element
+                                                                                .name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                                  },
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -4939,27 +5074,49 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      DropdownWebStock(
-                                                                        width:
-                                                                            MediaQuery.of(context).size.width /
-                                                                                4,
-                                                                        dropdownList:
-                                                                            controller.eqipmentNameList,
-                                                                        selectedValue:
-                                                                            mapData["value"],
-                                                                        onValueChanged:
-                                                                            (list,
-                                                                                selectedValue) {
-                                                                          print({
-                                                                            selectedValue:
-                                                                                selectedValue
-                                                                          });
-                                                                          mapData["value"] =
-                                                                              selectedValue;
-                                                                          controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
-                                                                              (element) => element.name == selectedValue,
-                                                                              orElse: null);
-                                                                        },
+                                                                      Container(
+                                                                        decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                                        child: DropdownWebStock(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width /
+                                                                                  4,
+                                                                          dropdownList:
+                                                                              controller.eqipmentNameList,
+                                                                          selectedValue:
+                                                                              mapData["value"],
+                                                                          onValueChanged:
+                                                                              (list,
+                                                                                  selectedValue) {
+                                                                            print({
+                                                                              selectedValue:
+                                                                                  selectedValue
+                                                                            });
+                                                                            mapData["value"] =
+                                                                                selectedValue;
+                                                                            controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
+                                                                                (element) => element.name == selectedValue,
+                                                                                orElse: null);
+                                                                          },
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),
