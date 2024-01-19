@@ -200,18 +200,38 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: 'Block'),
                                     SizedBox(
-                                      child: DropdownWebStock(
-                                        margin: Dimens.edgeInsets5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        dropdownList: controller.blocksList,
-                                        isValueSelected:
-                                            controller.isBlocksSelected.value,
-                                        selectedValue:
-                                            controller.selectedBlocks.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                      child: Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          margin: Dimens.edgeInsets5,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  5,
+                                          dropdownList: controller.blocksList,
+                                          isValueSelected:
+                                              controller.isBlocksSelected.value,
+                                          selectedValue:
+                                              controller.selectedBlocks.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -220,18 +240,38 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Type"),
                                     SizedBox(
-                                      child: DropdownWebStock(
-                                        margin: Dimens.edgeInsets5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        dropdownList: controller.typeNameList,
-                                        isValueSelected:
-                                            controller.isTypeNameSelected.value,
-                                        selectedValue:
-                                            controller.selectedTypeName.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                      child: Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          margin: Dimens.edgeInsets5,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  5,
+                                          dropdownList: controller.typeNameList,
+                                          isValueSelected:
+                                              controller.isTypeNameSelected.value,
+                                          selectedValue:
+                                              controller.selectedTypeName.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -240,18 +280,38 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Status"),
                                     SizedBox(
-                                      child: DropdownWebStock(
-                                        margin: Dimens.edgeInsets5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        dropdownList: controller.statusNameList,
-                                        isValueSelected: controller
-                                            .isStatusNameSelected.value,
-                                        selectedValue:
-                                            controller.selectedStatusName.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                      child: Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          margin: Dimens.edgeInsets5,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  5,
+                                          dropdownList: controller.statusNameList,
+                                          isValueSelected: controller
+                                              .isStatusNameSelected.value,
+                                          selectedValue:
+                                              controller.selectedStatusName.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -260,11 +320,24 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Asset Name"),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                        color: Color(0xFE50000),
-                                        width: 0.5,
-                                      )),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.040,
@@ -292,19 +365,39 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: 'Parent Equipment'),
                                     SizedBox(
-                                      child: DropdownWebStock(
-                                        margin: Dimens.edgeInsets5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        dropdownList:
-                                            controller.eqipmentNameList,
-                                        isValueSelected: controller
-                                            .isEquipmentNameSelected.value,
-                                        selectedValue: controller
-                                            .selectedEquipmentName.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                      child: Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          margin: Dimens.edgeInsets5,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  5,
+                                          dropdownList:
+                                              controller.eqipmentNameList,
+                                          isValueSelected: controller
+                                              .isEquipmentNameSelected.value,
+                                          selectedValue: controller
+                                              .selectedEquipmentName.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -313,21 +406,41 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Category"),
                                     SizedBox(
-                                      child: DropdownWebStock(
-                                        margin: Dimens.edgeInsets5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                        dropdownList:
-                                            controller.equipmentCategoryList,
-                                        isValueSelected: controller
-                                            .isEquipmentCategoryNameSelected
-                                            .value,
-                                        selectedValue: controller
-                                            .selectedEquipmentCategoryName
-                                            .value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
+                                      child: Container(
+                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                        child: DropdownWebStock(
+                                          margin: Dimens.edgeInsets5,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  5,
+                                          dropdownList:
+                                              controller.equipmentCategoryList,
+                                          isValueSelected: controller
+                                              .isEquipmentCategoryNameSelected
+                                              .value,
+                                          selectedValue: controller
+                                              .selectedEquipmentCategoryName
+                                              .value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -336,11 +449,24 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   children: [
                                     CustomRichText(title: "Serial No"),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                        color: Color(0xFE50000),
-                                        width: 0.5,
-                                      )),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.040,
@@ -368,11 +494,24 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       title: "Asset Description",
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                        color: Color(0xFE50000),
-                                        width: 0.5,
-                                      )),
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.040,

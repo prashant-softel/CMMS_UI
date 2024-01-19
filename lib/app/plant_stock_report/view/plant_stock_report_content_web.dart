@@ -107,14 +107,37 @@ class _PlantStockReportContentWebState
                                     style: Styles.blackBold16,
                                   ),
                                   Spacer(),
-                                  MultipDropdownWebWidget(
-                                    width: (MediaQuery.of(context).size.width *
-                                        .2),
-                                    //  height: 35,
-                                    dropdownList: controller.assetList,
-                                    selectedItems:
-                                        controller.selectedAssetsNameList,
-                                    onValueChanged: controller.onValueChanged,
+                                  Container(
+                                  decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                    child: MultipDropdownWebWidget(
+                                      width: (MediaQuery.of(context).size.width *
+                                          .2),
+                                      //  height: 35,
+                                      dropdownList: controller.assetList,
+                                      selectedItems:
+                                          controller.selectedAssetsNameList,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
                                   ),
                                   Spacer(),
                                   Row(

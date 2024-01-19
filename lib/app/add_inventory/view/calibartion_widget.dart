@@ -50,17 +50,38 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 CustomRichText(title: "Calibration Frequency"),
                                 Dimens.boxWidth5,
                                 SizedBox(
-                                  child: DropdownWebStock(
-                                    margin: Dimens.edgeInsets5,
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    controller: controller,
-                                    dropdownList: controller.frequencyList,
-                                    isValueSelected:
-                                        controller.isSelectedfrequency.value,
-                                    selectedValue:
-                                        controller.selectedfrequency.value,
-                                    onValueChanged: controller.onValueChanged,
+                                  child: Container(
+                                  decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+
+                                    child: DropdownWebStock(
+                                      margin: Dimens.edgeInsets5,
+                                      width:
+                                          MediaQuery.of(context).size.width / 5,
+                                      controller: controller,
+                                      dropdownList: controller.frequencyList,
+                                      isValueSelected:
+                                          controller.isSelectedfrequency.value,
+                                      selectedValue:
+                                          controller.selectedfrequency.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
                                   ),
                                 ),
                               ],
