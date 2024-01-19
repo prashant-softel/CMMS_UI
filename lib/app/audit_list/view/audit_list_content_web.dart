@@ -64,7 +64,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             "DASHBOARD",
                             style: Styles.greyLight14,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Get.back();
                             },

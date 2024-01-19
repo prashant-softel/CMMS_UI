@@ -680,7 +680,7 @@ class AppBarCreateObservation extends StatelessWidget {
             "DASHBOARD",
             style: Styles.greyLight14,
           ),
-          GestureDetector(
+          InkWell(
             onTap: () {
               Get.offNamed(Routes.misDashboard);
             },

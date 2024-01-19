@@ -67,9 +67,9 @@ class _ChecklistMisPlanContentWebState
                             "DASHBOARD",
                             style: Styles.greyLight14,
                           ),
-                          GestureDetector(
+                          InkWell(
                               onTap: () {
-                                Get.back();
+                                Get.offNamed(Routes.misDashboard);
                               },
                               child: Text(" / MIS",
                                   style: Styles.greyMediumLight12)),

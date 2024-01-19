@@ -48,7 +48,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                     "DASHBOARD",
                     style: Styles.greyLight14,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -57,14 +57,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / ASSETS TYPE LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / ASSETS TYPE LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),
