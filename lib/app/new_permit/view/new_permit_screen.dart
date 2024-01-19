@@ -1554,7 +1554,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       .greyLightColor,
                                                 ),
                                                 InkWell(
-                                                  onTap: () {},
+                                                  onTap: () {
+                                                    Get.offNamed(Routes.home);
+                                                  },
                                                   child: Text(
                                                     "DASHBOARD",
                                                     style: Styles.greyLight14,
@@ -1565,7 +1567,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     Get.offAllNamed(
                                                         Routes.breakdown);
                                                   },
-                                                  child: Text(" / BREAKDOWN MAINTENANCE",
+                                                  child: Text(
+                                                      " / BREAKDOWN MAINTENANCE",
                                                       style: Styles
                                                           .greyMediumLight12),
                                                 ),

@@ -1,4 +1,5 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -61,18 +62,33 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                         Icons.home,
                         color: ColorValues.greyLightColor,
                       ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.breakdown);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           final _flutterSecureStorage =
                               const FlutterSecureStorage();
                           _flutterSecureStorage.delete(key: "jobId");
-                          Get.back();
+                          Get.offNamed(Routes.breakdown);
                         },
                         child: Text(" / BREAKDOWN MAINTENANCE",
+                            style: Styles.greyMediumLight12),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          final _flutterSecureStorage =
+                              const FlutterSecureStorage();
+                          _flutterSecureStorage.delete(key: "jobId");
+                          Get.offNamed(Routes.jobList);
+                        },
+                        child: Text(" / JOB LIST",
                             style: Styles.greyMediumLight12),
                       ),
                       Text(" / REASSIGN JOB", style: Styles.greyMediumLight12)

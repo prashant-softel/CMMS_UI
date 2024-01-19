@@ -64,9 +64,7 @@ class GrievanceListContentWeb extends StatelessWidget {
                 child: Text(" / BREAKDOWN MAINTANACE",
                     style: Styles.greyMediumLight12),
               ),
-              InkWell(
-                  onTap: () {},
-                  child: Text(" / JOB LIST", style: Styles.greyMediumLight12)),
+              Text(" / JOB LIST", style: Styles.greyMediumLight12),
             ],
           ),
         ),

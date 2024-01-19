@@ -147,11 +147,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                       child: Text(" / PREVENTIVE MAINTENANCE",
                                           style: Styles.greyMediumLight12),
                                     ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Text(" / IMPORT PLAN",
-                                          style: Styles.greyMediumLight12),
-                                    ),
+                                    Text(" / IMPORT PLAN",
+                                        style: Styles.greyMediumLight12),
                                   ],
                                 )
                               : controller.importType.value ==

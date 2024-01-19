@@ -47,7 +47,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
                     child: Text(
                       "DASHBOARD",
                       style: Styles.greyLight14,
@@ -57,13 +59,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS",
-                        style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: Text(" / PERMIT TYPE",
-                          style: Styles.greyMediumLight12))
+                  Text(" / PERMIT TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),

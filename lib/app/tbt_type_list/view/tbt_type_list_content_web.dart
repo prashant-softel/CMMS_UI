@@ -45,7 +45,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
                     child: Text(
                       "DASHBOARD",
                       style: Styles.greyLight14,
@@ -57,10 +59,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child:
-                          Text(" / TBT TYPE", style: Styles.greyMediumLight12))
+                  Text(" / TBT TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
