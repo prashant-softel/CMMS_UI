@@ -141,6 +141,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                               icon: Icons.add,
                                               label: 'Add Incident Report',
                                               onPressed: () {
+                                                controller.clearStoreData();
                                                 Get.toNamed(Routes
                                                     .addIncidentReportContentWeb);
                                               },

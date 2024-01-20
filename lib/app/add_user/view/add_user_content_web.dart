@@ -130,7 +130,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
 
                                           Get.offNamed(Routes.userList);
                                         },
-                                        color: ColorValues.greenlightColor,
+                                        color: ColorValues.addNewColor,
                                       ),
                                     ],
                                   ),
@@ -535,8 +535,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1036,8 +1035,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1131,8 +1129,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 child: LoginCustomTextfield(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
