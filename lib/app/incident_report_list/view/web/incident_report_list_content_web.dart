@@ -154,7 +154,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                 Get.toNamed(Routes
                                                     .addIncidentReportContentWeb);
                                               },
-                                              color: ColorValues.appGreenColor,
+                                              color: ColorValues.addNewColor,
                                             )
                                           : Dimens.box0
                                     ],

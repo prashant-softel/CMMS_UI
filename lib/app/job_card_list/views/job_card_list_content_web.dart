@@ -1,4 +1,3 @@
-import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/job_card_list/job_card_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
@@ -109,7 +108,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                         onPressed: () {
                                           Get.toNamed(Routes.addUser);
                                         },
-                                        color: ColorValues.greenlightColor,
+                                        color: ColorValues.addNewColor,
                                       ),
                                     ],
                                   ),

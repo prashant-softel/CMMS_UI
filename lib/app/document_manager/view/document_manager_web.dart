@@ -91,7 +91,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                             onPressed: () {
                               Get.offNamed(Routes.addUser);
                             },
-                            color: ColorValues.greenlightColor,
+                            color: ColorValues.addNewColor,
                           ),
                         ],
                       ),

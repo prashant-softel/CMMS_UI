@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,244 +9,197 @@ class HomeDrawer extends GetView<HomeController> {
   HomeDrawer({super.key});
   final HomeController controller = Get.find<HomeController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
-    return
-        //
-        Obx(() => Drawer(
-              width: controller.isExpanded.value ? 250 : 60,
-
-              // Get.width * 0.19
-              // : 50, // Get.width * 0.35,
-              // width: (Responsive.isMobile(context) || Responsive.isTablet(context))
-              //     ? Get.width * 0.75
-              //     : Get.width * 0.19,
-              child: //
-                  ScrollConfiguration(
-                behavior:
-                    ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                child: SingleChildScrollView(
-                  child: Column(
-                      //
-                      children: [
-                        ///
-                        if (Responsive.isMobile(context))
-                          DrawerHeader(
-                            child: Center(
-                              child: Image.asset(
-                                'assets/files/logo.png',
-                              ),
+    return Obx(() {
+      return AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        width: controller.isExpanded.value ? 250 : 60,
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                if (Responsive.isMobile(context))
+                  DrawerHeader(
+                    child: Center(
+                      child: Image.asset('assets/files/logo.png'),
+                    ),
+                  ),
+                SingleChildScrollView(
+                  child: Container(
+                    height: Get.height,
+                    color: ColorValues.appDarkBlueColor,
+                    child: MouseRegion(
+                      onEnter: (_) {
+                        controller.toggleExpansion();
+                      },
+                      onExit: (_) {
+                        controller.toggleExpansion();
+                      },
+                      child: ListView(children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MenuItemLogo(
+                              isexpand: controller.isExpanded.value,
+                              icon: !controller.isExpanded.value
+                                  ? "assets/files/logodrawer.jpg"
+                                  : "assets/files/logo.png",
+                              height: !controller.isExpanded.value ? 40 : 70,
+                              width: !controller.isExpanded.value ? 40 : 100,
+                              press: () {
+                                Get.offNamed(Routes.home);
+                              },
                             ),
-                          ),
-                        // Text("${controller.isExpanded.value}"),
-                        SingleChildScrollView(
-                          child: Container(
-                              //  width: controller.isExpanded.value ? 300 : 50,
-                              height: Get.height,
-                              color: ColorValues.appDarkBlueColor,
-                              child:
-                                  // controller.isExpanded.value
-                                  // ?
-                                  MouseRegion(
-                                      onEnter: (_) {
-                                        controller.toggleExpansion();
-                                      },
-                                      onExit: (_) {
-                                        controller.toggleExpansion();
-                                      },
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // mainAxisAlignment : MainAxisAlignment.start,
-                                          //
-                                          //shrinkWrap: true,
-                                          children: [
-                                            MenuItemLogo(
-                                                isexpand:
-                                                    controller.isExpanded.value,
-                                                icon: !controller
-                                                        .isExpanded.value
-                                                    ? "assets/files/logodrawer.jpg"
-                                                    : "assets/files/logo.png",
-                                                height:
-                                                    !controller.isExpanded.value
-                                                        ? 40
-                                                        : 70,
-                                                width:
-                                                    !controller.isExpanded.value
-                                                        ? 40
-                                                        : 100,
-                                                press: () {
-                                                  Get.offNamed(Routes.home);
-                                                }),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "DashBoard",
-                                              icon: "assets/files/home.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes.home);
-                                              },
-                                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "DashBoard",
+                              icon: "assets/files/home.png",
+                              press: () {
+                                Get.offAllNamed(Routes.home);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Breakdown Maintenance",
+                              icon: "assets/files/preventive.png",
+                              press: () {
+                                Get.offAllNamed(Routes.breakdown);
+                              },
+                            ),
 
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Breakdown Maintenance",
-                                              icon:
-                                                  "assets/files/preventive.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.breakdown);
-                                              },
-                                            ),
+                            // MenuItem(
+                            ////                                              isexpand: controller.isExpanded.valu
+                            ///e,
+                            //title: "Warranty claim",
+                            //   icon: "assets/files/warranty.png",
+                            //   press: () {
+                            //     Get.offAllNamed(Routes.warrantyClaimList);
+                            //     //  Navigator.push(
+                            //     //         context,
+                            //     //         MaterialPageRoute(
+                            //     //             builder: (context) => WarrantyClaimListWeb()));
+                            //   },
+                            // ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Preventive Maintenance",
+                              icon: "assets/files/correct.png",
+                              press: () {
+                                Get.offAllNamed(Routes.preventive);
+                              },
+                            ),
 
-                                            // MenuItem(
-                                            ////                                              isexpand: controller.isExpanded.valu
-                                            ///e,
-//title: "Warranty claim",
-                                            //   icon: "assets/files/warranty.png",
-                                            //   press: () {
-                                            //     Get.offAllNamed(Routes.warrantyClaimList);
-                                            //     //  Navigator.push(
-                                            //     //         context,
-                                            //     //         MaterialPageRoute(
-                                            //     //             builder: (context) => WarrantyClaimListWeb()));
-                                            //   },
-                                            // ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Preventive Maintenance",
-                                              icon: "assets/files/correct.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.preventive);
-                                              },
-                                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Module Cleaning",
+                              icon: "assets/files/reportins.png",
+                              press: () {
+                                Get.offAllNamed(Routes.moduleCleaningDashboard);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Vegetation Control",
+                              icon: "assets/files/maint.png",
+                              press: () {
+                                Get.offAllNamed(Routes.home);
+                              },
+                            ),
+                            // MenuItem(
+                            //   isexpand:
+                            //       controller.isExpanded.value,
+                            //   title: "Assets",
+                            //   icon:
+                            //       "assets/files/maintenance.png",
+                            //   press: () {
+                            //     Get.offAllNamed(
+                            //         Routes.inventory);
+                            //   },
+                            // ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Incident Report",
+                              icon: "assets/files/misc.png",
+                              press: () {
+                                Get.offAllNamed(Routes.incidentReportDashboard);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Stock Management",
+                              icon: "assets/files/warranty.png",
+                              press: () {
+                                Get.offAllNamed(
+                                    Routes.stockManagementDashboardScreen);
+                              },
+                            ),
 
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Module Cleaning",
-                                              icon:
-                                                  "assets/files/reportins.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes
-                                                    .moduleCleaningDashboard);
-                                              },
-                                            ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Vegetation Control",
-                                              icon: "assets/files/maint.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes.home);
-                                              },
-                                            ),
-                                            // MenuItem(
-                                            //   isexpand:
-                                            //       controller.isExpanded.value,
-                                            //   title: "Assets",
-                                            //   icon:
-                                            //       "assets/files/maintenance.png",
-                                            //   press: () {
-                                            //     Get.offAllNamed(
-                                            //         Routes.inventory);
-                                            //   },
-                                            // ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Incident Report",
-                                              icon: "assets/files/misc.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes
-                                                    .incidentReportDashboard);
-                                              },
-                                            ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Stock Management",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes
-                                                    .stockManagementDashboardScreen);
-                                              },
-                                            ),
+                            // MenuItem(
+                            //   isexpand:
+                            //       controller.isExpanded.value,
+                            //   title: "Calibration",
+                            //   icon:
+                            //       "assets/files/preventive.png",
+                            //   press: () {
+                            //     Get.offAllNamed(
+                            //         Routes.calibrationList);
+                            //   },
+                            // ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Masters",
+                              icon: "assets/files/inventory.png",
+                              press: () {
+                                Get.offAllNamed(Routes.masterDashboard);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "HSE Report",
+                              icon: "assets/files/warranty.png",
+                              press: () {
+                                Get.offAllNamed(Routes.misDashboard);
+                              },
+                            ),
 
-                                            // MenuItem(
-                                            //   isexpand:
-                                            //       controller.isExpanded.value,
-                                            //   title: "Calibration",
-                                            //   icon:
-                                            //       "assets/files/preventive.png",
-                                            //   press: () {
-                                            //     Get.offAllNamed(
-                                            //         Routes.calibrationList);
-                                            //   },
-                                            // ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Masters",
-                                              icon:
-                                                  "assets/files/inventory.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.masterDashboard);
-                                              },
-                                            ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "HSE Report",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offAllNamed(
-                                                    Routes.misDashboard);
-                                              },
-                                            ),
-
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Audit",
-                                              icon: "assets/files/images.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes.audit);
-                                              },
-                                            ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Settings",
-                                              icon: "assets/files/setting.png",
-                                              press: () {
-                                                Get.offAllNamed(Routes.setting);
-                                              },
-                                            ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Log Out",
-                                              icon:
-                                                  "assets/files/dashboard.png",
-                                              press: () {
-                                                _isDeleteDialog();
-                                              },
-                                            ),
-                                          ]))),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Audit",
+                              icon: "assets/files/images.png",
+                              press: () {
+                                Get.offAllNamed(Routes.audit);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Settings",
+                              icon: "assets/files/setting.png",
+                              press: () {
+                                Get.offAllNamed(Routes.setting);
+                              },
+                            ),
+                            MenuItem(
+                              isexpand: controller.isExpanded.value,
+                              title: "Log Out",
+                              icon: "assets/files/dashboard.png",
+                              press: () {
+                                _isDeleteDialog();
+                              },
+                            ),
+                          ],
                         ),
                       ]),
+                    ),
+                  ),
                 ),
-              ),
-            ));
-
-    ///
+              ],
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   _isDeleteDialog() {
@@ -282,10 +237,9 @@ class HomeDrawer extends GetView<HomeController> {
       ),
     );
   }
-
-  ///
 }
 
+// ... (remaining classes)
 class MenuItem extends StatelessWidget {
   MenuItem({
     Key? key,
@@ -327,12 +281,14 @@ class MenuItem extends StatelessWidget {
                 ),
                 // Dimens.boxWidth15,
                 isexpand!
-                    ? Text(
-                        title ?? "",
-                        style: TextStyle(
-                          color: Color(0xffD2D0D0),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                    ? Expanded(
+                        child: Text(
+                          title ?? "",
+                          style: TextStyle(
+                            color: Color(0xffD2D0D0),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       )
                     : Dimens.box0
@@ -377,22 +333,14 @@ class MenuItemLogo extends StatelessWidget {
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  child: Image.asset(icon, height: height, fit: BoxFit.contain),
+                Expanded(
+                  child: SizedBox(
+                    child:
+                        Image.asset(icon, height: height, fit: BoxFit.contain),
+                  ),
                 ),
-                // Dimens.boxWidth15,
-                isexpand!
-                    ? Text(
-                        title ?? "",
-                        style: TextStyle(
-                          color: Color(0xffD2D0D0),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    : Dimens.box0
               ],
             ),
           ),

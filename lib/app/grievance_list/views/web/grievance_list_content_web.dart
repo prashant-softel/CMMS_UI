@@ -59,12 +59,12 @@ class GrievanceListContentWeb extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.offNamed(Routes.breakdown);
+                  Get.offNamed(Routes.stockManagementDashboardScreen);
                 },
-                child: Text(" / BREAKDOWN MAINTANACE",
+                child: Text(" / STOCK MANAGEMENT",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / JOB LIST", style: Styles.greyMediumLight12),
+              Text(" / GRIEVANCE LIST", style: Styles.greyMediumLight12),
             ],
           ),
         ),
