@@ -60,6 +60,24 @@ class HomeDrawer extends GetView<HomeController> {
                                           //
                                           //shrinkWrap: true,
                                           children: [
+                                            MenuItemLogo(
+                                                isexpand:
+                                                    controller.isExpanded.value,
+                                                icon: !controller
+                                                        .isExpanded.value
+                                                    ? "assets/files/logodrawer.jpg"
+                                                    : "assets/files/logo.png",
+                                                height:
+                                                    !controller.isExpanded.value
+                                                        ? 40
+                                                        : 70,
+                                                width:
+                                                    !controller.isExpanded.value
+                                                        ? 40
+                                                        : 100,
+                                                press: () {
+                                                  Get.offNamed(Routes.home);
+                                                }),
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -288,8 +306,8 @@ class MenuItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10),
       child: Container(
           child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Dimens.boxHeight15,
           InkWell(
@@ -306,6 +324,63 @@ class MenuItem extends StatelessWidget {
                     height: 16,
                     color: Color(0xffD2D0D0),
                   ),
+                ),
+                // Dimens.boxWidth15,
+                isexpand!
+                    ? Text(
+                        title ?? "",
+                        style: TextStyle(
+                          color: Color(0xffD2D0D0),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    : Dimens.box0
+              ],
+            ),
+          ),
+          Dimens.boxHeight10
+        ],
+      )),
+    );
+  }
+}
+
+class MenuItemLogo extends StatelessWidget {
+  MenuItemLogo({
+    Key? key,
+    required this.height,
+    this.title,
+    required this.icon,
+    required this.press,
+    this.isexpand,
+    required this.width,
+  }) : super(key: key);
+
+  String? title;
+  String icon;
+  bool? isexpand;
+  final VoidCallback press;
+  double height;
+  double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Container(
+          child: Column(
+        children: [
+          Dimens.boxHeight15,
+          InkWell(
+            mouseCursor: MaterialStateMouseCursor.clickable,
+            onTap: press,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: Image.asset(icon, height: height, fit: BoxFit.contain),
                 ),
                 // Dimens.boxWidth15,
                 isexpand!
