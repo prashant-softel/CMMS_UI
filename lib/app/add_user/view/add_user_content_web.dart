@@ -420,15 +420,6 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
                                                       color: ColorValues
                                                           .whiteColor,
                                                       offset: const Offset(
@@ -449,8 +440,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.genderList,
                                                   isValueSelected: controller
                                                       .isSelectedGender.value,
-                                                  selectedValue: controller
-                                                      .selectedGender.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedGender.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -583,8 +574,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.countryList,
                                                   isValueSelected: controller
                                                       .isSelectedCountry.value,
-                                                  selectedValue: controller
-                                                      .selectedCountry.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedCountry.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -626,8 +617,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.cityList,
                                                   isValueSelected: controller
                                                       .isSelectedCity.value,
-                                                  selectedValue: controller
-                                                      .selectedCity.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedCity.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -669,8 +660,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.roleList,
                                                   isValueSelected: controller
                                                       .isSelectedRole.value,
-                                                  selectedValue: controller
-                                                      .selectedRole.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedRole.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -714,9 +705,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   isValueSelected: controller
                                                       .isBusinessListSelected
                                                       .value,
-                                                  selectedValue: controller
-                                                      .selectedIBusinessList
-                                                      .value,
+                                                  // selectedValue: controller
+                                                  //     .selectedIBusinessList
+                                                  //     .value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -1083,8 +1074,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.stateList,
                                                   isValueSelected: controller
                                                       .isSelectedState.value,
-                                                  selectedValue: controller
-                                                      .selectedState.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedState.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),
@@ -1177,8 +1168,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       controller.bloodList,
                                                   isValueSelected: controller
                                                       .isSelectedBlood.value,
-                                                  selectedValue: controller
-                                                      .selectedBlood.value,
+                                                  // selectedValue: controller
+                                                  //     .selectedBlood.value,
                                                   onValueChanged:
                                                       controller.onValueChanged,
                                                 ),

@@ -143,34 +143,32 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                       ),
                                     ),
                                   ),
-                                  itemBuilder: (BuildContext context) =>
-                                      <PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                  itemBuilder: (BuildContext context) => <
+                                      PopupMenuEntry<String>>[]..addAll(
+                                        controller
+                                            .columnVisibility.value.entries
+                                            .map((e) {
+                                      return PopupMenuItem<String>(
+                                          child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                return Row(
+                                                  children: [
+                                                    Checkbox(
+                                                      value: value[e.key],
+                                                      onChanged: (newValue) {
+                                                        controller
+                                                            .setColumnVisibility(
+                                                                e.key,
+                                                                newValue!);
+                                                      },
+                                                    ),
+                                                    Text(e.key),
+                                                  ],
+                                                );
+                                              }));
+                                    })),
                                   onSelected: (String value) {
                                     // Handle column selection
                                   },
@@ -256,7 +254,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                             columnSpacing: 10,
                                             source:
                                                 dataSource, // Custom DataSource class
-                                            headingRowHeight: Get.height * 0.12,
+                                            // headingRowHeight: Get.height * 0.12,
                                             minWidth: 2000, //Get.width * 1.2,
                                             showCheckboxColumn: false,
                                             rowsPerPage:
@@ -314,37 +312,38 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onChanged: (value) {
-                  filterText.value = value;
-                  //   onSearchCallBack(value);
-                },
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Text(

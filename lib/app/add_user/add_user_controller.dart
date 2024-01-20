@@ -39,8 +39,8 @@ class AddUserController extends GetxController {
   );
   AddUserPresenter addUserPresenter;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
-  Rx<String> selectedCountry = 'Select Country'.obs;
-  Rx<String> selectedGender = 'Select Gender'.obs;
+  Rx<String> selectedCountry = ''.obs;
+  Rx<String> selectedGender = ''.obs;
 
   Rx<bool> isSelectedCountry = true.obs;
   Rx<bool> isSelectedGender = true.obs;
@@ -49,19 +49,19 @@ class AddUserController extends GetxController {
   int selectedGenderId = 0;
 
   RxList<StateModel?> stateList = <StateModel>[].obs;
-  Rx<String> selectedState = 'Select State'.obs;
+  Rx<String> selectedState = ''.obs;
   Rx<bool> isSelectedState = true.obs;
   int selectedStateId = 0;
   RxList<CityModel?> cityList = <CityModel>[].obs;
-  Rx<String> selectedCity = 'Select City'.obs;
+  Rx<String> selectedCity = ''.obs;
   Rx<bool> isSelectedCity = true.obs;
   int selectedCityId = 0;
   RxList<BloodModel?> bloodList = <BloodModel>[].obs;
-  Rx<String> selectedBlood = 'Select Blood'.obs;
+  Rx<String> selectedBlood = ''.obs;
   Rx<bool> isSelectedBlood = true.obs;
   int selectedBloodId = 0;
   RxList<RoleModel?> roleList = <RoleModel>[].obs;
-  Rx<String> selectedRole = 'Select Role'.obs;
+  Rx<String> selectedRole = ''.obs;
   Rx<bool> isSelectedRole = true.obs;
   int selectedRoleId = 0;
   Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;

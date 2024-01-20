@@ -1,6 +1,8 @@
+import 'package:cmms/app/theme/styles.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../theme/color_values.dart';
 
 /// DO NOT CHANGE THI FILE FOR THE TOP DROPDOWN. CREATE A NEW WIDGET.
@@ -74,6 +76,7 @@ class DropdownWebWidget extends StatelessWidget {
           },
           enabled: isEditable ?? true,
           dropdownButtonProps: DropdownButtonProps(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),
             focusNode: focusNode,
             icon: Icon(
               Icons.arrow_drop_down,
@@ -81,9 +84,14 @@ class DropdownWebWidget extends StatelessWidget {
             ),
           ),
           popupProps: PopupProps.menu(
+            fit: FlexFit.loose,
             searchFieldProps: TextFieldProps(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
               decoration: InputDecoration(
-                isDense: true,
+                // isDense: true,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorValues.blueColor),
                   borderRadius: BorderRadius.circular(5),
@@ -99,6 +107,7 @@ class DropdownWebWidget extends StatelessWidget {
           ),
           items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
+            textAlign: TextAlign.left,
             dropdownSearchDecoration: InputDecoration(
               // isDense: true,
               border: InputBorder.none,
@@ -109,7 +118,8 @@ class DropdownWebWidget extends StatelessWidget {
                 borderSide: BorderSide(color: ColorValues.redColorDark),
               ),
               contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              hintText: "Select",
+              hintText: "Please Select",
+              hintStyle: Styles.grey12,
             ),
           ),
           onChanged: (String? _selectedValue) {
