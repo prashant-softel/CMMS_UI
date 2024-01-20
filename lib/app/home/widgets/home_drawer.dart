@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,34 +13,32 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 270),
+        duration: Duration(milliseconds: 300),
         width: controller.isExpanded.value ? 250 : 60,
-        child: ClipRect(
-          clipBehavior: Clip.hardEdge,
-          child: ScrollConfiguration(
-            behavior:
-                ScrollConfiguration.of(context).copyWith(scrollbars: false),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  if (Responsive.isMobile(context))
-                    DrawerHeader(
-                      child: Center(
-                        child: Image.asset('assets/files/logo.png'),
-                      ),
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                if (Responsive.isMobile(context))
+                  DrawerHeader(
+                    child: Center(
+                      child: Image.asset('assets/files/logo.png'),
                     ),
-                  SingleChildScrollView(
-                    child: Container(
-                      height: Get.height,
-                      color: ColorValues.appDarkBlueColor,
-                      child: MouseRegion(
-                        onEnter: (_) {
-                          controller.toggleExpansion();
-                        },
-                        onExit: (_) {
-                          controller.toggleExpansion();
-                        },
-                        child: Column(
+                  ),
+                SingleChildScrollView(
+                  child: Container(
+                    height: Get.height,
+                    color: ColorValues.appDarkBlueColor,
+                    child: MouseRegion(
+                      onEnter: (_) {
+                        controller.toggleExpansion();
+                      },
+                      onExit: (_) {
+                        controller.toggleExpansion();
+                      },
+                      child: ListView(children: [
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             MenuItemLogo(
@@ -190,11 +190,11 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                           ],
                         ),
-                      ),
+                      ]),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -281,12 +281,14 @@ class MenuItem extends StatelessWidget {
                 ),
                 // Dimens.boxWidth15,
                 isexpand!
-                    ? Text(
-                        title ?? "",
-                        style: TextStyle(
-                          color: Color(0xffD2D0D0),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                    ? Expanded(
+                        child: Text(
+                          title ?? "",
+                          style: TextStyle(
+                            color: Color(0xffD2D0D0),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       )
                     : Dimens.box0
@@ -331,22 +333,14 @@ class MenuItemLogo extends StatelessWidget {
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  child: Image.asset(icon, height: height, fit: BoxFit.contain),
+                Expanded(
+                  child: SizedBox(
+                    child:
+                        Image.asset(icon, height: height, fit: BoxFit.contain),
+                  ),
                 ),
-                // Dimens.boxWidth15,
-                isexpand!
-                    ? Text(
-                        title ?? "",
-                        style: TextStyle(
-                          color: Color(0xffD2D0D0),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    : Dimens.box0
               ],
             ),
           ),
