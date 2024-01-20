@@ -126,11 +126,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                   child: TabBar(
                     tabs: [
                       CustomTabBar(
-                        label: 'Breakdown Mentainance'.tr,
+                        label: 'Breakdown Maintenance'.tr,
                         // icon: Icons.menu,
                       ),
                       CustomTabBar(
-                        label: 'Preventive Mentainance'.tr,
+                        label: 'Preventive Maintenance'.tr,
                         // icon: Icons.account_tree_sharp,
                       ),
                       CustomTabBar(
