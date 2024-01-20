@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_job/views/widgets/breakdown_time_widget.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -727,23 +728,102 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               CustomRichText(
                                                   title: 'Breakdown Time: '),
                                               Dimens.boxWidth10,
-                                              CustomTextFieldForStock(
+                                              Container(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
                                                     5,
-                                                numberTextField: true,
-                                                onTap: () {
-                                                  controller
-                                                          .openbreaketimeDatePicker =
-                                                      !controller
-                                                          .openbreaketimeDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
-                                                },
-                                                textController: controller
-                                                    .breakdownTimeCtrlr,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ), //BoxShadow
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ), //BoxShadow
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: TextField(
+                                                  style: GoogleFonts.lato(
+                                                    textStyle: TextStyle(
+                                                        fontSize: 16.0,
+                                                        height: 1.0,
+                                                        color: Colors.black),
+                                                  ),
+                                                  onTap: () {
+                                                    controller
+                                                        .pickDateTime(context);
+                                                  },
+                                                  controller: controller
+                                                      .breakdownTimeCtrlr,
+                                                  autofocus: false,
+                                                  readOnly: true,
+                                                  decoration: InputDecoration(
+                                                    fillColor:
+                                                        ColorValues.whiteColor,
+                                                    filled: true,
+                                                    contentPadding:
+                                                        EdgeInsets.fromLTRB(5.0,
+                                                            10.0, 5.0, 10.0),
+                                                    border: InputBorder.none,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent),
+                                                    ),
+                                                  ),
+                                                  onChanged: (value) {},
+                                                ),
                                               ),
+
+                                              // CustomTextFieldForStock(
+                                              //   width: MediaQuery.of(context)
+                                              //           .size
+                                              //           .width /
+                                              //       5,
+                                              //   numberTextField: true,
+                                              //   onTap: () {
+                                              //     controller
+                                              //             .openbreaketimeDatePicker =
+                                              //         !controller
+                                              //             .openbreaketimeDatePicker;
+                                              //     controller.update(
+                                              //         ['stock_Mangement']);
+                                              //   },
+                                              //   textController: controller
+                                              //       .breakdownTimeCtrlr,
+                                              // ),
                                             ],
                                           ),
 
