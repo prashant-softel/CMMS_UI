@@ -135,7 +135,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
 
                                           Get.offNamed(Routes.userList);
                                         },
-                                        color: ColorValues.greenlightColor,
+                                        color: ColorValues.addNewColor,
                                       ),
                                     ],
                                   ),
