@@ -50,7 +50,9 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                               color: ColorValues.greyLightColor,
                             ),
                             InkWell(
-                              onTap:(){Get.offNamed(Routes.home);},
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
                               child: Text(
                                 "DASHBOARD",
                                 style: Styles.greyLight14,
@@ -98,7 +100,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                   Get.toNamed(
                                       Routes.addEscalatiomMatrixContentWeb);
                                 },
-                                color: ColorValues.appGreenColor,
+                                color: ColorValues.addNewColor,
                               ),
                               Dimens.boxWidth10,
                             ],

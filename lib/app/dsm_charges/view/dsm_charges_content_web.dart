@@ -103,7 +103,7 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                                       icon: Icons.add,
                                       label: "Add New",
                                       onPressed: () {},
-                                      color: ColorValues.greenlightColor,
+                                      color: ColorValues.addNewColor,
                                     ),
                                   ],
                                 ),

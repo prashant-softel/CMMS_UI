@@ -497,7 +497,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                   icon: Icons.add,
                                   label: 'Add Material'.tr,
                                   onPressed: () {},
-                                  color: ColorValues.appGreenColor,
+                                  color: ColorValues.addNewColor,
                                 ),
                                 Dimens.boxWidth10,
                               ]),
