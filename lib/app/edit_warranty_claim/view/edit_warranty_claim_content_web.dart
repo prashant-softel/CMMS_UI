@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_warranty_claim_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -75,11 +76,16 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text(
-                              "Dashboard",
-                              style: Styles.greyLight14,
-                            ),
-                            GestureDetector(
+                            InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                            InkWell(
                               onTap: () {
                                 Get.back();
                               },

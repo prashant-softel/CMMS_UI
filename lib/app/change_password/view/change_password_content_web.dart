@@ -1,4 +1,5 @@
 import 'package:cmms/app/change_password/change_password_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,13 +42,18 @@ class ChangePasswordContentWeb extends GetView<ChangePasswordController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                InkWell(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.setting);
                   },
                   child: Text(" / SETTING", style: Styles.greyMediumLight12),
                 ),

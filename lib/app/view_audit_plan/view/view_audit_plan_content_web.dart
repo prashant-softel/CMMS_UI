@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_controller.dart';
 import 'package:cmms/app/widgets/audit_reject_plan_dialog.dart';
@@ -59,9 +60,9 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                         "DASHBOARD",
                         style: Styles.greyLight14,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.misDashboard);
                         },
                         child: controller.type.value == 3
                             ? Text(" / MIS", style: Styles.greyMediumLight12)

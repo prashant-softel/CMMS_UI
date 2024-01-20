@@ -53,17 +53,22 @@ class PreventiveMaintenanceTaskViewContentWeb
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                InkWell(
                   onTap: () {
                     final _flutterSecureStorage = const FlutterSecureStorage();
 
                     _flutterSecureStorage.delete(key: "scheduleId");
 
-                    Get.back();
+                    Get.offNamed(Routes.preventive);
                   },
                   child: Text(" / Preventive Maintenance".toUpperCase(),
                       style: Styles.greyMediumLight12),

@@ -1,5 +1,6 @@
 import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
 import 'package:cmms/app/home/home.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +43,16 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
-              ),
-              GestureDetector(
+              InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+              InkWell(
                 onTap: () {
                   Get.back();
                 },

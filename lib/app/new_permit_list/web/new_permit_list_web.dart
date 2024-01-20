@@ -65,7 +65,9 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
                             child: Text(
                               "DASHBOARD",
                               style: Styles.greyLight14,
@@ -79,11 +81,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(" / PERMIT LIST",
-                                style: Styles.greyMediumLight12),
-                          ),
+                          Text(" / PERMIT LIST",
+                              style: Styles.greyMediumLight12),
                         ],
                       ),
                     ),

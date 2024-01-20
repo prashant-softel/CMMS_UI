@@ -82,13 +82,8 @@ class _StockManagementGoodsOrdersWebState
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap:() {
-                              
-                            },
-                            child: Text(" / GOODS ORDER LIST",
-                                style: Styles.greyMediumLight12),
-                          )
+                          Text(" / GOODS ORDER LIST",
+                              style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),

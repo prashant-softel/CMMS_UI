@@ -63,7 +63,9 @@ class _ModuleCleaningListExecutionState
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
                             child: Text(
                               "DASHBOARD",
                               style: Styles.greyLight14,
@@ -76,11 +78,8 @@ class _ModuleCleaningListExecutionState
                             child: Text(" / MODULE EXECUTION",
                                 style: Styles.greyMediumLight12),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(" / MODULE CLEANING EXECUTION",
-                                style: Styles.greyMediumLight12),
-                          )
+                          Text(" / MODULE CLEANING EXECUTION",
+                              style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),

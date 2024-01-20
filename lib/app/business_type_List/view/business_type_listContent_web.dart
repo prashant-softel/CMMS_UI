@@ -62,14 +62,9 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Get.back();
-                    },
-                    child: Text(
-                      " / BUSINESS TYPE ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / BUSINESS TYPE ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

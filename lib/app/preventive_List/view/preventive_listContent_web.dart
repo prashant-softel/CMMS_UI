@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -49,7 +50,9 @@ class PreventiveChecklistListContentWeb
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
                     child: Text(
                       "DASHBOARD",
                       style: Styles.greyLight14,
@@ -57,7 +60,7 @@ class PreventiveChecklistListContentWeb
                   ),
                   InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.preventive);
                     },
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
@@ -66,10 +69,7 @@ class PreventiveChecklistListContentWeb
                             ? Text(" / AUDIT", style: Styles.greyMediumLight12)
                             : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: Text(" / CREATE CHECKLIST NUMBER",
-                          style: Styles.greyLight14)),
+                  Text(" / CREATE CHECKLIST NUMBER", style: Styles.greyLight14),
                 ],
               ),
             ),

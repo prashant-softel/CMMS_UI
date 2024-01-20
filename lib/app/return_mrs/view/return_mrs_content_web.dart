@@ -70,10 +70,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    InkWell(
-                        onTap: () {},
-                        child: Text(" / RETURN MRS LIST",
-                            style: Styles.greyMediumLight12)),
+                    Text(" / RETURN MRS LIST",
+                        style: Styles.greyMediumLight12),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/edit_mrs/edit_mrs_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -42,11 +43,16 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                InkWell(
                   onTap: () {
                     final _flutterSecureStorage = const FlutterSecureStorage();
 

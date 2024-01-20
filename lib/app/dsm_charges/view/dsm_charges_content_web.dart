@@ -1,4 +1,5 @@
 import 'package:cmms/app/dsm_charges/dsm_charges_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -51,13 +52,18 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
-                        Get.back();
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.masterDashboard);
                       },
                       child: Text(" / MASTER", style: Styles.greyMediumLight12),
                     ),

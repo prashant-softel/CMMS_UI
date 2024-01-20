@@ -57,7 +57,9 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                         color: ColorValues.greyLightColor,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
                         child: Text(
                           "DASHBOARD",
                           style: Styles.greyLight14,
@@ -70,10 +72,8 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                         child: Text(" / Preventive Maintenance".toUpperCase(),
                             style: Styles.greyMediumLight12),
                       ),
-                      InkWell(
-                          onTap: () {},
-                          child: Text(" / PM PLANS",
-                              style: Styles.greyMediumLight12))
+                      Text(" / PM PLANS",
+                          style: Styles.greyMediumLight12)
                     ],
                   ),
                 ),

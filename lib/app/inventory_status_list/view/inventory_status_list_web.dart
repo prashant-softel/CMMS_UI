@@ -45,11 +45,16 @@ class InventoryStatusListContentWeb
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -58,14 +63,9 @@ class InventoryStatusListContentWeb
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / ASSETS STATUS LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / ASSETS STATUS LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

@@ -50,7 +50,9 @@ class JobListContentWeb extends StatelessWidget {
                 color: ColorValues.greyLightColor,
               ),
               InkWell(
-                onTap: (){Get.offNamed(Routes.home);},
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
                 child: Text(
                   "DASHBOARD",
                   style: Styles.greyLight14,
@@ -63,11 +65,7 @@ class JobListContentWeb extends StatelessWidget {
                 child: Text(" / BREAKDOWN MAINTANACE",
                     style: Styles.greyMediumLight12),
               ),
-              InkWell(
-                  onTap: () {
-                    Get.offNamed(Routes.jobList);
-                  },
-                  child: Text(" / JOB LIST", style: Styles.greyMediumLight12)),
+              Text(" / JOB LIST", style: Styles.greyMediumLight12),
             ],
           ),
         ),

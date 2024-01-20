@@ -47,7 +47,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
                     child: Text(
                       "DASHBOARD",
                       style: Styles.greyLight14,
@@ -59,10 +61,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: Text(" / TBT SOP List",
-                          style: Styles.greyMediumLight12))
+                  Text(" / TBT SOP List", style: Styles.greyMediumLight12)
                 ],
               ),
             ),

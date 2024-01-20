@@ -41,11 +41,16 @@ class CountryListContentWeb extends GetView<CountryListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
@@ -54,14 +59,9 @@ class CountryListContentWeb extends GetView<CountryListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / COUNTRY LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / COUNTRY LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

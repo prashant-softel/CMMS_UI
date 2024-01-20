@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,13 +45,18 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     Icons.home,
                     color: ColorValues.greyLightColor,
                   ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
-                  ),
-                  GestureDetector(
+                  InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                  InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.masterDashboard);
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),

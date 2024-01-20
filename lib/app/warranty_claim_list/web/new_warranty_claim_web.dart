@@ -2,6 +2,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -76,13 +77,18 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text(
-                              "Dashboard",
-                              style: Styles.greyLight14,
-                            ),
-                            GestureDetector(
+                            InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                            InkWell(
                               onTap: () {
-                                Get.back();
+                                Get.offNamed(Routes.warrantyClaimList);
                               },
                               child: Text(" / Warranty Claim List",
                                   style: Styles.greyMediumLight12),
@@ -244,7 +250,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .only(
+                                                                .only(
                                                                 left: 150),
                                                         child: Row(
                                                           children: [
@@ -508,8 +514,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                         Column(
                                                                       children: [
                                                                         Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.all(1.0),
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              1.0),
                                                                           child:
                                                                               Container(
                                                                             height:

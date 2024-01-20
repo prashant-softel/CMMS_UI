@@ -61,10 +61,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child:
-                          Text(" / BUSINESS LIST", style: Styles.greyLight14))
+                  Text(" / BUSINESS LIST", style: Styles.greyLight14)
                 ],
               ),
             ),

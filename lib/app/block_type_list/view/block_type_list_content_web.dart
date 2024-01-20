@@ -63,14 +63,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Get.back();
-                    },
-                    child: Text(
-                      " / BLOCK LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / BLOCK LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

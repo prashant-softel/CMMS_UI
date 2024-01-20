@@ -74,7 +74,9 @@ class AddEscalationMatrixContentWeb
                                 color: ColorValues.greyLightColor,
                               ),
                               InkWell(
-                                onTap: () {Get.offNamed(Routes.home);},
+                                onTap: () {
+                                  Get.offNamed(Routes.home);
+                                },
                                 child: Text(
                                   "Dashboard",
                                   style: Styles.greyLight14,

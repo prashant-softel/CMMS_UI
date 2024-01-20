@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
@@ -57,13 +58,18 @@ class _WarrantyCertificatesListContentWebState
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
-                          ),
-                          GestureDetector(
+                          InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                          InkWell(
                             onTap: () {
-                              Get.back();
+                              Get.offNamed(Routes.masterDashboard);
                             },
                             child: Text(" / Inventory",
                                 style: Styles.greyMediumLight12),

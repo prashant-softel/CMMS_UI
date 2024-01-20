@@ -61,13 +61,18 @@ class _MisTaskContentWebState extends State<MisTaskContentWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
                           ),
-                          GestureDetector(
+                          InkWell(
                               onTap: () {
-                                Get.back();
+                                Get.offNamed(Routes.misDashboard);
                               },
                               child: Text(" / MIS",
                                   style: Styles.greyMediumLight12)),

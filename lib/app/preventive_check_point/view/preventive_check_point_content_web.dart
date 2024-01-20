@@ -53,7 +53,9 @@ class PreventiveCheckPointContentWeb
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
                     child: Text(
                       "DASHBOARD",
                       style: Styles.greyLight14,
@@ -61,7 +63,7 @@ class PreventiveCheckPointContentWeb
                   ),
                   InkWell(
                     onTap: () {
-                      Get.back();
+                      Get.offNamed(Routes.preventive);
                     },
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
@@ -70,11 +72,8 @@ class PreventiveCheckPointContentWeb
                             ? Text(" / AUDIT", style: Styles.greyMediumLight12)
                             : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(" / CHECK POINT CREATOR",
-                        style: Styles.greyMediumLight12),
-                  )
+                  Text(" / CHECK POINT CREATOR",
+                      style: Styles.greyMediumLight12)
                 ],
               ),
             ),

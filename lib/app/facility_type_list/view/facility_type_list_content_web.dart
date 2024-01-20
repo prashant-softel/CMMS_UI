@@ -60,10 +60,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child:
-                          Text(" / FACILITY LIST", style: Styles.greyLight14))
+                  Text(" / FACILITY LIST", style: Styles.greyLight14)
                 ],
               ),
             ),

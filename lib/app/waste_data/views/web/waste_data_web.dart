@@ -333,11 +333,16 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                       Icons.home,
                       color: ColorValues.greyLightColor,
                     ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                    GestureDetector(
+                    InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                    InkWell(
                       onTap: () {
                         Get.offNamed(Routes.misDashboard);
                       },

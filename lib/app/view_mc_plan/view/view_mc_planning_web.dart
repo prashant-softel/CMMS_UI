@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -58,13 +59,18 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                         Icons.home,
                         color: ColorValues.greyLightColor,
                       ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
-                      ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.moduleCleaningDashboard);
                         },
                         child: Text(" / MODULE CLEANING",
                             style: Styles.greyMediumLight12),

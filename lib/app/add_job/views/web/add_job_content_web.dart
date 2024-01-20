@@ -68,7 +68,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                           color: ColorValues.greyLightColor,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
                           child: Text(
                             "DASHBOARD",
                             style: Styles.greyLight14,
@@ -81,10 +83,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                           child: Text(" / BREAKDOWN MAINTENANCE",
                               style: Styles.greyMediumLight12),
                         ),
-                        InkWell(
-                            onTap: () {},
-                            child: Text(" / ADD NEW JOB",
-                                style: Styles.greyMediumLight12))
+                        Text(" / ADD NEW JOB", style: Styles.greyMediumLight12)
                       ],
                     ),
                   ),

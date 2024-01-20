@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -54,13 +55,18 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                         Icons.home,
                         color: ColorValues.greyLightColor,
                       ),
-                      Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
-                      ),
-                      GestureDetector(
+                      InkWell(
+            onTap: () {
+              Get.offNamed(Routes.home);
+            },
+            child: Text(
+              "DASHBOARD",
+              style: Styles.greyLight14,
+            ),
+          ),
+                      InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / PREVENTIVE MAINTENANCE",
                             style: Styles.greyMediumLight12),

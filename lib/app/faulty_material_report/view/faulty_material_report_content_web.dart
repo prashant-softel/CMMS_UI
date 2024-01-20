@@ -73,11 +73,8 @@ class _FaultyMaterialReportContentWebState
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(" /  FAULTY MATERIAL REPORT",
-                          style: Styles.greyMediumLight12),
-                    ),
+                    Text(" /  FAULTY MATERIAL REPORT",
+                        style: Styles.greyMediumLight12),
                   ],
                 ),
               ),

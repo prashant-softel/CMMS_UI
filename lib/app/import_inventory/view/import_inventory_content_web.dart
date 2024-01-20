@@ -50,9 +50,9 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                           "DASHBOARD",
                           style: Styles.greyLight14,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(Routes.masterDashboard);
                           },
                           child:
                               Text(" / ASSET", style: Styles.greyMediumLight12),
@@ -84,11 +84,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                               child: Text(" / MASTER",
                                   style: Styles.greyMediumLight12),
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: Text(" / IMPORT USER",
-                                  style: Styles.greyMediumLight12),
-                            ),
+                            Text(" / IMPORT USER",
+                                style: Styles.greyMediumLight12),
                           ],
                         )
                       : controller.importType.value ==
@@ -116,11 +113,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                   child: Text(" / STOCK MANAGEMENT",
                                       style: Styles.greyMediumLight12),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Text(" / IMPORT  MATERIAL ",
-                                      style: Styles.greyMediumLight12),
-                                ),
+                                Text(" / IMPORT MATERIAL ",
+                                    style: Styles.greyMediumLight12),
                               ],
                             )
                           : controller.importType.value ==
@@ -147,11 +141,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                       child: Text(" / PREVENTIVE MAINTENANCE",
                                           style: Styles.greyMediumLight12),
                                     ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Text(" / IMPORT PLAN",
-                                          style: Styles.greyMediumLight12),
-                                    ),
+                                    Text(" / IMPORT PLAN",
+                                        style: Styles.greyMediumLight12),
                                   ],
                                 )
                               : controller.importType.value ==
@@ -179,11 +170,8 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                               " / PREVENTIVE MAINTENANCE",
                                               style: Styles.greyMediumLight12),
                                         ),
-                                        InkWell(
-                                          onTap: () {},
-                                          child: Text(" / IMPORT CHECKLIST",
-                                              style: Styles.greyMediumLight12),
-                                        ),
+                                        Text(" / IMPORT CHECKLIST",
+                                            style: Styles.greyMediumLight12),
                                       ],
                                     )
                                   : controller.importType.value ==
@@ -205,18 +193,16 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                             ),
                                             InkWell(
                                               onTap: () {
-                                                Get.back();
+                                                Get.offNamed(
+                                                    Routes.masterDashboard);
                                               },
                                               child: Text(" / MASTER",
                                                   style:
                                                       Styles.greyMediumLight12),
                                             ),
-                                            InkWell(
-                                              onTap: () {},
-                                              child: Text(" / IMPORT BUSSINESS",
-                                                  style:
-                                                      Styles.greyMediumLight12),
-                                            ),
+                                            Text(" / IMPORT BUSSINESS",
+                                                style:
+                                                    Styles.greyMediumLight12),
                                           ],
                                         )
                                       : Dimens.box0),

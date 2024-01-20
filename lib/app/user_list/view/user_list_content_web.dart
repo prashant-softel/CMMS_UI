@@ -69,10 +69,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                         },
                         child: Text(" / MASTER", style: Styles.greyLight14),
                       ),
-                      InkWell(
-                          onTap: () {},
-                          child:
-                              Text(" / USER LIST", style: Styles.greyLight14)),
+                      Text(" / USER LIST", style: Styles.greyLight14),
                     ],
                   ),
                 ),

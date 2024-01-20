@@ -60,7 +60,9 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                         color: ColorValues.greyLightColor,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
                         child: Text(
                           "DASHBOARD",
                           style: Styles.greyLight14,
@@ -68,15 +70,12 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / Preventive Maintenance".toUpperCase(),
                             style: Styles.greyMediumLight12),
                       ),
-                      InkWell(
-                          onTap: () {},
-                          child: Text(" / PM TASKS",
-                              style: Styles.greyMediumLight12))
+                      Text(" ", style: Styles.greyMediumLight12)
                     ],
                   ),
                 ),

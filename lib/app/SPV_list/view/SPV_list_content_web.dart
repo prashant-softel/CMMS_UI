@@ -62,14 +62,9 @@ class SPVListContentWeb extends GetView<SPVListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      " / SPV LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / SPV LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

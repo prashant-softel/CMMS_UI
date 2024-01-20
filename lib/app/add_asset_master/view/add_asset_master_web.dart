@@ -70,10 +70,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                     },
                     child: Text(" / STOCK MANAGEMENT",
                         style: Styles.greyMediumLight12)),
-                InkWell(
-                    onTap: () {},
-                    child: Text(" / MASTER MATERIAL",
-                        style: Styles.greyMediumLight12))
+                Text(" / MASTER MATERIAL", style: Styles.greyMediumLight12)
               ],
             ),
           ),

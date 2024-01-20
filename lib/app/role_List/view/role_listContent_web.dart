@@ -62,12 +62,9 @@ class RoleListContentWeb extends GetView<RoleListController> {
                       style: Styles.greyLight14,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      " / ROLE LIST ",
-                      style: Styles.greyLight14,
-                    ),
+                  Text(
+                    " / ROLE LIST ",
+                    style: Styles.greyLight14,
                   ),
                 ],
               ),

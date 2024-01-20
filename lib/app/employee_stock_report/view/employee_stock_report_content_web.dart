@@ -70,11 +70,8 @@ class EmployeeStockReportContentWeb
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(" / EMPLOYEE STOCK REPORT ",
-                              style: Styles.greyMediumLight12),
-                        )
+                        Text(" / EMPLOYEE STOCK REPORT ",
+                            style: Styles.greyMediumLight12)
                       ],
                     ),
                   ),

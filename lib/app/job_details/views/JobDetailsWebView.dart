@@ -48,15 +48,27 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
-                    Get.back();
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.breakdown);
                   },
                   child: Text(" / BREAKDOWN MAINTAINANCE".toUpperCase(),
+                      style: Styles.greyMediumLight12),
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.jobList);
+                  },
+                  child: Text(" / JOB LIST".toUpperCase(),
                       style: Styles.greyMediumLight12),
                 ),
                 Text(" / JOB DETAILS VIEW", style: Styles.greyMediumLight12)
@@ -1141,15 +1153,15 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       //             153
                                       //   ?
                                       if (
-                                      // controller.jobDetailsModel.value
-                                      //           ?.status ==
-                                      //       103 ||
-                                      controller.jobDetailsModel.value
-                                                  ?.latestJCStatus ==
-                                              155 ||
+                                          // controller.jobDetailsModel.value
+                                          //           ?.status ==
+                                          //       103 ||
                                           controller.jobDetailsModel.value
-                                                  ?.status ==
-                                              102)
+                                                      ?.latestJCStatus ==
+                                                  155 ||
+                                              controller.jobDetailsModel.value
+                                                      ?.status ==
+                                                  102)
                                         CustomElevatedButton(
                                           text: "Create New Permit",
                                           icon: Icons.add,
