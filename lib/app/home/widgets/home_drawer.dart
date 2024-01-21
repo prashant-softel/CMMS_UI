@@ -13,7 +13,7 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 400),
         width: controller.isExpanded.value ? 250 : 60,
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
@@ -29,7 +29,7 @@ class HomeDrawer extends GetView<HomeController> {
                 SingleChildScrollView(
                   child: Container(
                     height: Get.height,
-                    color: ColorValues.appDarkBlueColor,
+                    color: Color(0xFF353F4F),
                     child: MouseRegion(
                       onEnter: (_) {
                         controller.toggleExpansion();
@@ -45,7 +45,7 @@ class HomeDrawer extends GetView<HomeController> {
                               isexpand: controller.isExpanded.value,
                               icon: !controller.isExpanded.value
                                   ? "assets/files/logodrawer.jpg"
-                                  : "assets/files/logo.png",
+                                  : "assets/files/logodrawer.png",
                               height: !controller.isExpanded.value ? 40 : 70,
                               width: !controller.isExpanded.value ? 40 : 100,
                               press: () {
@@ -289,6 +289,7 @@ class MenuItem extends StatelessWidget {
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       )
                     : Dimens.box0
