@@ -196,7 +196,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         height: 220,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.25,
+                                                0.24,
                                         child: Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
