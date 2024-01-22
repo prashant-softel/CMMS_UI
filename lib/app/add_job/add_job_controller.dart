@@ -93,6 +93,10 @@ class AddJobController extends GetxController {
   var jobDescriptionCtrlr = TextEditingController();
   var jobTitleCtrlr = TextEditingController();
   var breakdownTimeCtrlr = TextEditingController();
+  FocusNode jobNameFocus = FocusNode();
+  ScrollController jobNameScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<int> jobID = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -115,6 +119,16 @@ class AddJobController extends GetxController {
         await getWorkTypeList();
 
         // });
+      }
+    });
+    jobNameFocus.addListener(() {
+      if (!jobNameFocus.hasFocus) {
+        jobNameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
       }
     });
 

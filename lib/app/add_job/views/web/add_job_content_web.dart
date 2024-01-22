@@ -176,6 +176,10 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     controller: controller
                                                         .jobTitleCtrlr,
+                                                    focusNode:
+                                                        controller.jobNameFocus,
+                                                    scrollController: controller
+                                                        .jobNameScroll,
                                                     autofocus: false,
                                                     decoration: InputDecoration(
                                                       fillColor: ColorValues
@@ -926,6 +930,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 ),
                                                 controller: controller
                                                     .jobDescriptionCtrlr,
+                                                focusNode: controller.descFocus,
+                                                scrollController:
+                                                    controller.descScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 maxLines: 5,

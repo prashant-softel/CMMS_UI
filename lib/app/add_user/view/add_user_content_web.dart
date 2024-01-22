@@ -307,7 +307,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     ],
                                                     ishint: 'Enter Email ID',
                                                     textController:
-                                                        controller.loginIdCtrlr,
+                                                        controller.loginIdCtrlr,  
                                                   )),
                                             ],
                                           ),

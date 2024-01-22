@@ -117,6 +117,10 @@ class SPVListController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
+  FocusNode titleFocus = FocusNode();
+  ScrollController titleScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
 
   @override
   void onInit() async {
@@ -129,7 +133,16 @@ class SPVListController extends GetxController {
         getSPVList();
       });
     });
-
+    titleFocus.addListener(() {
+      if (!titleFocus.hasFocus) {
+        titleScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

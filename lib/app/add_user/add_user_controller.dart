@@ -96,15 +96,24 @@ class AddUserController extends GetxController {
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
   var loginIdCtrlr = TextEditingController();
+  FocusNode loginIdFocus = FocusNode();
+  ScrollController loginIdScrool = ScrollController();
   var firstNameCtrlr = TextEditingController();
+  FocusNode firstNameFocus = FocusNode();
+  ScrollController firstNameScrool = ScrollController();
   var mobileNoCtrlr = TextEditingController();
   var secandoryIdCtrlr = TextEditingController();
+  FocusNode secondIdFocus = FocusNode();
+  ScrollController secondIdScrool = ScrollController();
   var lastNameCtrlr = TextEditingController();
+  FocusNode lastNameFocus = FocusNode();
+  ScrollController LastNameScrool = ScrollController();
   var dobCtrlr = TextEditingController();
   var landlineCtrlr = TextEditingController();
   var zipcodeCtrlr = TextEditingController();
   var passwordCtrlr = TextEditingController();
   var joingdateCtrlr = TextEditingController();
+
   bool openDobDatePicker = false;
   bool openDoJDatePicker = false;
   Rx<int> userId = 0.obs;

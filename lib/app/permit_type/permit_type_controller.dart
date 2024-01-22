@@ -59,6 +59,10 @@ class PermitTypeController extends GetxController {
   Rx<bool> isSelectedfrequency = true.obs;
   var checklistNumberCtrlr = TextEditingController();
   var titleCtrlr = TextEditingController();
+  FocusNode titleFocusNode = FocusNode();
+  ScrollController titleScrollController = ScrollController();
+  FocusNode descFocusNode = FocusNode();
+  ScrollController descScrollController = ScrollController();
   var descriptionCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
@@ -86,6 +90,16 @@ class PermitTypeController extends GetxController {
     // });
 
       });
+      titleFocusNode.addListener(() {
+      if (!titleFocusNode.hasFocus) {
+        titleScrollController.jumpTo(0.0);
+      }
+    });
+    descFocusNode.addListener(() {
+      if (!descFocusNode.hasFocus) {
+        descScrollController.jumpTo(0.0);
+      }
+    });
       // getPreventiveCheckList(facilityId, type, true);
     //   getFacilityList();
     });

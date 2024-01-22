@@ -201,6 +201,9 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                     color: Colors.black),
                                               ),
                                               controller: controller.titleCtrlr,
+                                              focusNode: controller.titleFocus,
+                                              scrollController:
+                                                  controller.titleScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -320,6 +323,9 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                               ),
                                               controller:
                                                   controller.descriptionCtrlr,
+                                              focusNode: controller.descFocus,
+                                              scrollController:
+                                                  controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
