@@ -59,7 +59,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT TYPE", style: Styles.greyMediumLight12)
+                  Text(" / JOB TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -88,7 +88,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Add TBT Type ",
+                                    "Add JOB Type ",
                                     style: Styles.blackBold16,
                                   ),
                                   SizedBox(
@@ -101,8 +101,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         children: [
                                           Text(
                                             controller.selectedItem == null
-                                                ? "TBT added Successfully in the List."
-                                                : "TBT updated Successfully in the List.",
+                                                ? "JOB type added Successfully in the List."
+                                                : "JOB type updated Successfully in the List.",
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 color: Color.fromARGB(
@@ -496,7 +496,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                     .issuccessCreatechecklist();
                                             });
                                           },
-                                          text: 'Create TBT Type ')
+                                          text: 'Create JOB Type ')
                                       : CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appDarkBlueColor,
@@ -535,7 +535,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "List of TBT Type",
+                                "List of JOB Type",
                                 style: Styles.blackBold16,
                               ),
                             ),
@@ -658,8 +658,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             return [
                                               '${jobTypeListDetails.id}',
                                               '${jobTypeListDetails.name}',
-                                              'No Data Found',
-                                              // '${jobTypeListDetails.facilityId}',
+                                              // 'No Data Found',
+                                              '${jobTypeListDetails.description}',
                                               'Checkbox',
                                               "Action"
                                             ];

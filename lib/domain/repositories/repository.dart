@@ -6620,7 +6620,8 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
-        Get.offNamed(Routes.userList);
+        // Get.offNamed(Routes.userList);
+        Get.offAndToNamed(Routes.userList);
 
         //   print("hellooooo");
         return true;
