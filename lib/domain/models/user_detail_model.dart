@@ -33,6 +33,8 @@ class UserDetailsModel {
   String? status;
   int? photoId;
   String? photoPath;
+  String? company_name;
+  int? company_id;
   List<PlantList>? plant_list;
 
   UserDetailsModel(
@@ -63,6 +65,8 @@ class UserDetailsModel {
       this.role_id,
       this.secondaryEmail,
       this.status,
+      this.company_name,
+      this.company_id,
       this.zipcode});
 
   factory UserDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
@@ -71,6 +75,7 @@ class UserDetailsModel {
 
     return UserDetailsModel(
         city_id: parsedJson['city_id'],
+        company_name: parsedJson['company_name'],
         role_name: parsedJson['role_name'],
         city_name: parsedJson['city_name'],
         contact_no: parsedJson['contact_no'],
@@ -86,6 +91,7 @@ class UserDetailsModel {
         user_name: parsedJson['user_name'],
         gender_name: parsedJson['gender_name'],
         id: parsedJson['id'],
+        company_id: parsedJson['company_id'],
         blood_group_id: parsedJson['blood_group_id'],
         blood_group_name: parsedJson['blood_group_name'],
         isEmployee: parsedJson['isEmployee'],

@@ -318,6 +318,8 @@ class AddUserController extends GetxController {
       selectedRoleId = userDetailModel.value?.role_id ?? 0;
       photoId = userDetailModel.value?.photoId ?? 0;
       gender.value = userDetailModel.value?.gender_name ?? "";
+      selectedIBusinessList.value = userDetailModel.value?.company_name ?? "";
+      selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
 
       await getUserAccessListById(userId: userId.value, isloading: true);
@@ -678,6 +680,9 @@ class AddUserController extends GetxController {
   }
 
   Future<bool> updateUser() async {
+    List<UserResponbility> reslist = <UserResponbility>[];
+    List<DesignationModel> newselectedResNameList = []; // Copied list
+
     String _loginId = loginIdCtrlr.text.trim();
     String _firstname = firstNameCtrlr.text.trim();
     String _mobileno = mobileNoCtrlr.text.trim();
@@ -688,7 +693,18 @@ class AddUserController extends GetxController {
     String _zipcode = zipcodeCtrlr.text.trim();
     String _password = passwordCtrlr.text.trim();
     String _joiningdate = joingdateCtrlr.text.trim();
+    for (int id in selectedresIdsList) {
+      DesignationModel? selectedItem =
+          responsList.firstWhere((item) => item?.id == id);
+      newselectedResNameList.add(selectedItem!);
+    }
 
+    // Display the copied list
+
+    newselectedResNameList.forEach((e) {
+      reslist.add(
+          UserResponbility(responsibility: e.name, since_when: "2023-11-27"));
+    });
     Credentials credentials =
         Credentials(password: _password, user_name: _loginId);
 
@@ -713,6 +729,7 @@ class AddUserController extends GetxController {
         zipcode: int.parse(_zipcode),
         facilities: selectedfacilityNameIdList,
         isEmployee: 1,
+        user_responsibility_list: reslist,
         credentials: credentials);
     var adduserJsonString = adduser.toJson();
 

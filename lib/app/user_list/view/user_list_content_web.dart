@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -100,16 +101,23 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
-                                      ActionButton(
-                                        icon: Icons.add,
-                                        label: "Add New",
-                                        onPressed: () {
-                                          controller.clearStoreData();
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id == 40 &&
+                                                      e.add == 1)
+                                                  .length >
+                                              0
+                                          ? ActionButton(
+                                              icon: Icons.add,
+                                              label: "Add New",
+                                              onPressed: () {
+                                                controller.clearStoreData();
 
-                                          Get.toNamed(Routes.addUser);
-                                        },
-                                        color: ColorValues.addNewColor,
-                                      ),
+                                                Get.toNamed(Routes.addUser);
+                                              },
+                                              color: ColorValues.addNewColor,
+                                            )
+                                          : Dimens.box0
                                     ],
                                   ),
                                 ),
@@ -143,36 +151,34 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -452,48 +458,64 @@ class UserDataSource extends DataTableSource {
             padding: EdgeInsets.zero,
             child: (value == 'Actions')
                 ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
-                      onPress: () {
-                        controller.clearStoreData();
+                    varUserAccessModel.value.access_list!
+                                .where((e) => e.feature_id == 40 && e.view == 1)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.viewColor,
+                            icon: Icons.remove_red_eye_outlined,
+                            message: 'view',
+                            onPress: () {
+                              controller.clearStoreData();
 
-                        // final _flutterSecureStorage =
-                        //     const FlutterSecureStorage();
+                              // final _flutterSecureStorage =
+                              //     const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(key: "userId");
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.viewUserDetail,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        controller.clearStoreData();
+                              // _flutterSecureStorage.delete(key: "userId");
+                              int userId = UserDetails?.id ?? 0;
+                              if (userId != 0) {
+                                Get.toNamed(Routes.viewUserDetail,
+                                    arguments: {'userId': userId});
+                              }
+                            },
+                          )
+                        : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where((e) => e.feature_id == 40 && e.edit == 1)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              controller.clearStoreData();
 
-                        // final _flutterSecureStorage =
-                        //     const FlutterSecureStorage();
+                              // final _flutterSecureStorage =
+                              //     const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(key: "userId");
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.addUser,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {},
-                    )
+                              // _flutterSecureStorage.delete(key: "userId");
+                              int userId = UserDetails?.id ?? 0;
+                              if (userId != 0) {
+                                Get.toNamed(Routes.addUser,
+                                    arguments: {'userId': userId});
+                              }
+                            },
+                          )
+                        : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where(
+                                    (e) => e.feature_id == 40 && e.delete == 1)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {},
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

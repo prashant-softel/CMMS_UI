@@ -186,7 +186,6 @@ class BreakdownMaintenanceScreen
                                   controller.goToJobCardList();
                                 })
                             : Container(),
-
                       ],
                     ),
                     GridView.count(
@@ -215,8 +214,6 @@ class BreakdownMaintenanceScreen
                                   controller.newPermitList();
                                 })
                             : Container(),
-                            
-                            
 
                         //Add New Permit
                         varUserAccessModel.value.access_list!
@@ -308,7 +305,7 @@ class BreakdownMaintenanceScreen
                                     .length >
                                 0
                             ? createContentTile(
-                                title: "TBT Type",
+                                title: "JOB Type",
                                 onTap: () {
                                   controller.goToJobTypeList();
                                 })
