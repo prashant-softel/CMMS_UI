@@ -59,7 +59,8 @@ class SafetyQuestionsListContentWeb
                       Get.offAllNamed(Routes.breakdown);
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
-                  ),Text(" / Permit Type Checklist",
+                  ),
+                  Text(" / Permit Type Checklist",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -441,7 +442,7 @@ class SafetyQuestionsListContentWeb
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  width: (Get.width * .07),
+                                  width: (Get.width * .08),
                                   child: CustomElevatedButton(
                                       backgroundColor: ColorValues.appRedColor,
                                       onPressed: () {

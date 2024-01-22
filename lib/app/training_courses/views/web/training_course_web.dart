@@ -15,7 +15,7 @@ class TrainingCourseWeb extends StatefulWidget {
 
 final List<Map<dynamic, dynamic>> courseData = [
   {
-    "id": "11",
+    "id": "1",
     "topic": "test",
     "Desc": "test",
     "Category": "test",
@@ -111,7 +111,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                 top: 20,
                                               ),
                                               child: Text(
-                                                "Waste Data List",
+                                                "Training Course List",
                                                 style: Styles.blackBold16,
                                               ),
                                             ),

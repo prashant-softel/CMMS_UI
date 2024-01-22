@@ -219,6 +219,10 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                     color: Colors.black),
                                               ),
                                               controller: controller.titleCtrlr,
+                                              focusNode:
+                                                  controller.titleFocusNode,
+                                              scrollController: controller
+                                                  .titleScrollController,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
@@ -345,6 +349,10 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                 ),
                                                 controller:
                                                     controller.descriptionCtrlr,
+                                                focusNode:
+                                                    controller.descFocusNode,
+                                                scrollController: controller
+                                                    .descScrollController,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 maxLines: 1,
@@ -437,7 +445,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                             children: [
                               Container(
                                   height: 40,
-                                  width: (Get.width * .07),
+                                  width: (Get.width * .08),
                                   child: CustomElevatedButton(
                                       backgroundColor: ColorValues.appRedColor,
                                       onPressed: () {
