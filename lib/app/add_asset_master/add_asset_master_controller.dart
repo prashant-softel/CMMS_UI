@@ -125,6 +125,16 @@ class AddAssetMasterController extends GetxController {
   var zipcodeCtrlr = TextEditingController();
   var passwordCtrlr = TextEditingController();
   var joingdateCtrlr = TextEditingController();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+  FocusNode reqFocus = FocusNode();
+  ScrollController reqScroll = ScrollController();
+  FocusNode mdmFocus = FocusNode();
+  ScrollController mdmScroll = ScrollController();
+  FocusNode reorderFocus = FocusNode();
+  ScrollController reorderScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   int userId = 0;
   double thumbnailSize = Get.height * 0.20;
   RxList<String?> selectedfacilityDataList = <String>[].obs;
@@ -160,6 +170,31 @@ class AddAssetMasterController extends GetxController {
     // if (userId != null) {
     //   await getUserDetails(userId: userId, isloading: true);
     // }
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    reqFocus.addListener(() {
+      if (!reqFocus.hasFocus) {
+        reqScroll.jumpTo(0.0);
+      }
+    });
+    mdmFocus.addListener(() {
+      if (!mdmFocus.hasFocus) {
+        mdmScroll.jumpTo(0.0);
+      }
+    });
+    reorderFocus.addListener(() {
+      if (!reorderFocus.hasFocus) {
+        reorderScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

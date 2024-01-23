@@ -36,6 +36,8 @@ class BusinessTypeListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var nameCtrlr = TextEditingController();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
 
@@ -50,6 +52,12 @@ class BusinessTypeListController extends GetxController {
       Future.delayed(Duration(seconds: 2), () {
         getBusinessTypeList(facilityId, type, true);
       });
+    });
+
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
     });
     super.onInit();
   }

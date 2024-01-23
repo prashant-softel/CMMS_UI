@@ -81,7 +81,11 @@ class BlockTypeListController extends GetxController {
   Stream<int> get blockId$ => _blockId.stream;
 
   var titleCtrlr = TextEditingController();
+  FocusNode titleFocus = FocusNode();
+  ScrollController titleScroll = ScrollController();
   var descriptionCtrlr = TextEditingController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
 
   @override
   void onInit() async {
@@ -96,6 +100,16 @@ class BlockTypeListController extends GetxController {
       });
     });
 
+    titleFocus.addListener(() {
+      if (!titleFocus.hasFocus) {
+        titleScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

@@ -221,6 +221,10 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                 ),
                                                 controller:
                                                     controller.titleCtrlr,
+                                                focusNode:
+                                                    controller.titleFocus,
+                                                scrollController:
+                                                    controller.titleScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 maxLines: 1,
@@ -353,6 +357,10 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   ),
                                                   controller: controller
                                                       .descriptionCtrlr,
+                                                  focusNode:
+                                                      controller.descFocus,
+                                                  scrollController:
+                                                      controller.descScroll,
                                                   keyboardType:
                                                       TextInputType.multiline,
                                                   maxLines: 1,

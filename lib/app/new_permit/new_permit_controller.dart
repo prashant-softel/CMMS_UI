@@ -174,6 +174,11 @@ class NewPermitController extends GetxController {
   var dateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDateTime = DateTime.now().obs;
 
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
+  FocusNode commentFocus = FocusNode();
+  ScrollController commentScroll = ScrollController();
+
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
   var blockNameTextCtrlr = TextEditingController();
@@ -446,6 +451,18 @@ class NewPermitController extends GetxController {
     } catch (e) {
       print('jobModelError: $e');
     }
+
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
+
+    commentFocus.addListener(() {
+      if (!commentFocus.hasFocus) {
+        commentScroll.jumpTo(0.0);
+      }
+    });
 
     super.onInit();
   }

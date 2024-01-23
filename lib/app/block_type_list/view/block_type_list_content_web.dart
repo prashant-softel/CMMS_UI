@@ -254,6 +254,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     color: Colors.black),
                                               ),
                                               controller: controller.titleCtrlr,
+                                              focusNode: controller.titleFocus,
+                                              scrollController:
+                                                  controller.titleScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -370,6 +373,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                               ),
                                               controller:
                                                   controller.descriptionCtrlr,
+                                              focusNode: controller.descFocus,
+                                              scrollController:
+                                                  controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

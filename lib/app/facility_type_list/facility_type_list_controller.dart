@@ -112,13 +112,18 @@ class FacilityTypeListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
-
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
   //description
   var descriptionCtrlr = TextEditingController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   Rx<bool> isDescriptionInvalid = false.obs;
 
   ///address
   var addressCtrlr = TextEditingController();
+  FocusNode addFocus = FocusNode();
+  ScrollController addScroll = ScrollController();
   Rx<bool> isAddressInvalid = false.obs;
 
   ///Pin code
@@ -158,6 +163,21 @@ class FacilityTypeListController extends GetxController {
       });
     });
 
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
+    addFocus.addListener(() {
+      if (!addFocus.hasFocus) {
+        addScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

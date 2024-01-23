@@ -196,6 +196,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                     color: Colors.black),
                                               ),
                                               controller: controller.nameCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

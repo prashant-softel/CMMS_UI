@@ -181,6 +181,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             ),
                                             child: TextField(
                                               controller: controller.titleCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -299,6 +301,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
+                                              focusNode: controller.descFocus,
+                                              scrollController: controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -762,6 +766,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             child: TextField(
                                               controller:
                                                   controller.addressCtrlr,
+                                                  focusNode: controller.addFocus,
+                                                  scrollController: controller.addScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

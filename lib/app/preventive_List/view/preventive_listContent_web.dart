@@ -472,6 +472,7 @@ class PreventiveChecklistListContentWeb
                                       ),
                                       onChanged: (value) =>
                                           controller.search(value),
+                                          
                                       decoration: InputDecoration(
                                         enabledBorder: const OutlineInputBorder(
                                           borderSide: const BorderSide(

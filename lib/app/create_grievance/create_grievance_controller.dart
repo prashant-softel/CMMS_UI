@@ -35,7 +35,8 @@ class CreateGrievanceController extends GetxController {
   // int get facilityId => _facilityId.value;
   int selectedPurchaseID = 0;
   var commentCtrlr = TextEditingController();
-
+  FocusNode commentFocus = FocusNode();
+  ScrollController commentScroll = ScrollController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   final HomeController homeController = Get.find();
   int facilityId = 0;
@@ -60,6 +61,12 @@ class CreateGrievanceController extends GetxController {
         }
       });
     } catch (e) {}
+
+    commentFocus.addListener(() {
+      if (!commentFocus.hasFocus) {
+        commentScroll.jumpTo(0.0);
+      }
+    });
 
     super.onInit();
   }

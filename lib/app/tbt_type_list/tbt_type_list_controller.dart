@@ -34,6 +34,10 @@ class TBTTypeListController extends GetxController {
 
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
+  FocusNode titleFocus = FocusNode();
+  ScrollController titleScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -86,6 +90,17 @@ class TBTTypeListController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
+      });
+
+      titleFocus.addListener(() {
+        if (!titleFocus.hasFocus) {
+          titleScroll.jumpTo(0.0);
+        }
+      });
+      descFocus.addListener(() {
+        if (!descFocus.hasFocus) {
+          descScroll.jumpTo(0.0);
+        }
       });
     });
 
