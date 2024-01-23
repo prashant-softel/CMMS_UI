@@ -1708,7 +1708,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           Dimens
                                                                               .boxHeight10,
                                                                           Text(
-                                                                              '${controller.titleTextCtrlr.text}'),
+                                                                              '${controller.pmtaskViewModel?.plan_title}'),
                                                                         ],
                                                                       ),
                                                                       Spacer(),
