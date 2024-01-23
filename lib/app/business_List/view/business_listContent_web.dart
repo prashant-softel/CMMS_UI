@@ -237,6 +237,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller: controller
                                                   .businesslistNumberCtrlr,
+                                                  focusNode: controller.cnameFocus,
+                                                  scrollController: controller.cnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -354,6 +356,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                             child: TextField(
                                               controller: controller.emailCtrlr,
+                                              focusNode: controller.emailFocus,
+                                              scrollController: controller.emailScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -471,6 +475,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.contactpersonCtrlr,
+                                                  focusNode: controller.contactpFocus,
+                                                  scrollController: controller.contactpScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -590,6 +596,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.contactnumberCtrlr,
+                                                  focusNode: controller.contactnoFocus,
+                                                  scrollController: controller.contactnoScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
@@ -724,6 +732,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.websiteCtrlr,
+                                                  focusNode: controller.webFocus,
+                                                  scrollController: controller.webScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
@@ -847,6 +857,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.locationCtrlr,
+                                                  focusNode: controller.locFocus,
+                                                  scrollController: controller.locScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
@@ -969,6 +981,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.addressCtrlr,
+                                                  focusNode: controller.addFocus,
+                                                  scrollController: controller.addScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
@@ -1270,6 +1284,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                             child: TextField(
                                               controller: controller.zipCtrlr,
+                                              focusNode: controller.zipFocus,
+                                              scrollController: controller.zipScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,

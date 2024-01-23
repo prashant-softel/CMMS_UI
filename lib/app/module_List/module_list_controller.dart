@@ -19,6 +19,10 @@ class ModuleListController extends GetxController {
   );
   ModuleListPresenter moduleListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode modnameFocus = FocusNode();
+  ScrollController modnameScroll = ScrollController();
+  FocusNode feanameFocus = FocusNode();
+  ScrollController feanameScroll = ScrollController();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -95,6 +99,17 @@ class ModuleListController extends GetxController {
         getModuleList(facilityId, type, true);
       });
     });
+    modnameFocus.addListener(() {
+      if (!modnameFocus.hasFocus) {
+        modnameScroll.jumpTo(0.0);
+      }
+    });
+    feanameFocus.addListener(() {
+      if (!feanameFocus.hasFocus) {
+        feanameScroll.jumpTo(0.0);
+      }
+    });
+
     super.onInit();
   }
 

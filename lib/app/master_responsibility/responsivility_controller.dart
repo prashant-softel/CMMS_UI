@@ -19,6 +19,10 @@ class ResponsibilityListController extends GetxController {
 
   ResponsibilityListPresenter responsibilityPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
 
   // final HomeController homecontroller = Get.put( HomeController.new);
   // RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -58,6 +62,17 @@ class ResponsibilityListController extends GetxController {
         getResponsibilityList(true);
       });
     });
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
+
     super.onInit();
   }
 

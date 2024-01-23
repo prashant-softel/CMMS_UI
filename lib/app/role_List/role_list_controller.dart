@@ -45,6 +45,8 @@ class RoleListController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var rolelistNumberCtrlr = TextEditingController();
+  FocusNode rolenameFocus = FocusNode();
+  ScrollController rolenameScroll = ScrollController();
   Rx<bool> isRoleListInvalid = false.obs;
 
   Rx<bool> isFormInvalid = false.obs;
@@ -61,6 +63,11 @@ class RoleListController extends GetxController {
       Future.delayed(Duration(seconds: 2), () {
         getRoleList(true);
       });
+    });
+    rolenameFocus.addListener(() {
+      if (!rolenameFocus.hasFocus) {
+        rolenameScroll.jumpTo(0.0);
+      }
     });
     super.onInit();
   }

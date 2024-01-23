@@ -170,6 +170,8 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               ),
                                               controller: controller
                                                   .checklistNumberCtrlr,
+                                                  focusNode: controller.nameFocus,
+                                                  scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,

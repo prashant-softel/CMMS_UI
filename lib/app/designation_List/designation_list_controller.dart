@@ -20,6 +20,10 @@ class DesignationListController extends GetxController {
 
   DesignationListPresenter designationPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+    FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
 
   // final HomeController homecontroller = Get.put( HomeController.new);
   // RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -59,6 +63,17 @@ class DesignationListController extends GetxController {
         getDesignationList(true);
       });
     });
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
+
     super.onInit();
   }
 

@@ -186,6 +186,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             child: TextField(
                                               controller: controller
                                                   .modulelistNumberCtrlr,
+                                                focusNode: controller.modnameFocus,
+                                                scrollController: controller.modnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -307,6 +309,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             child: TextField(
                                               controller:
                                                   controller.featureCtrlr,
+                                                  focusNode: controller.feanameFocus,
+                                                  scrollController: controller.feanameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

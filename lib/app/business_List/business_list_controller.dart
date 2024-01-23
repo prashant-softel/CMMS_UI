@@ -75,6 +75,22 @@ class BusinessListController extends GetxController {
   var businesslistNumberCtrlr = TextEditingController();
   var emailCtrlr = TextEditingController();
   var contactpersonCtrlr = TextEditingController();
+  FocusNode cnameFocus = FocusNode();
+  ScrollController cnameScroll = ScrollController();
+  FocusNode webFocus = FocusNode();
+  ScrollController webScroll = ScrollController();
+  FocusNode locFocus = FocusNode();
+  ScrollController locScroll = ScrollController();
+  FocusNode contactnoFocus = FocusNode();
+  ScrollController contactnoScroll = ScrollController();
+  FocusNode contactpFocus = FocusNode();
+  ScrollController contactpScroll = ScrollController();
+  FocusNode emailFocus = FocusNode();
+  ScrollController emailScroll = ScrollController();
+  FocusNode addFocus = FocusNode();
+  ScrollController addScroll = ScrollController();
+  FocusNode zipFocus = FocusNode();
+  ScrollController zipScroll = ScrollController();
   var contactnumberCtrlr = TextEditingController();
   var websiteCtrlr = TextEditingController();
   var locationCtrlr = TextEditingController();
@@ -102,6 +118,50 @@ class BusinessListController extends GetxController {
       // Future.delayed(Duration(seconds: 2), () {
       // });
     });
+    cnameFocus.addListener(() {
+      if (!cnameFocus.hasFocus) {
+        cnameScroll.jumpTo(0.0);
+      }
+    });
+    zipFocus.addListener(() {
+      if (!zipFocus.hasFocus) {
+        zipScroll.jumpTo(0.0);
+      }
+    });
+    addFocus.addListener(() {
+      if (!addFocus.hasFocus) {
+        addScroll.jumpTo(0.0);
+      }
+    });
+
+    locFocus.addListener(() {
+      if (!locFocus.hasFocus) {
+        locScroll.jumpTo(0.0);
+      }
+    });
+
+    webFocus.addListener(() {
+      if (!webFocus.hasFocus) {
+        webScroll.jumpTo(0.0);
+      }
+    });
+
+    emailFocus.addListener(() {
+      if (!emailFocus.hasFocus) {
+        emailScroll.jumpTo(0.0);
+      }
+    });
+    contactpFocus.addListener(() {
+      if (!contactpFocus.hasFocus) {
+        contactpScroll.jumpTo(0.0);
+      }
+    });
+    contactnoFocus.addListener(() {
+      if (!contactnoFocus.hasFocus) {
+        contactnoScroll.jumpTo(0.0);
+      }
+    });
+
     super.onInit();
   }
 

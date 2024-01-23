@@ -54,12 +54,12 @@ class StateListContentWeb extends GetView<StateListController> {
               ),
               InkWell(
                 onTap: () {
-                  Get.offNamed(Routes.preventive);
+                  Get.offNamed(Routes.masterDashboard);
                 },
-                child: Text(" / Preventive Maintenance".toUpperCase(),
+                child: Text(" / Masters".toUpperCase(),
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / PM Schedule".toUpperCase(),
+              Text(" / State list".toUpperCase(),
                   style: Styles.greyMediumLight12)
             ],
           ),
