@@ -191,6 +191,8 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                             child: TextField(
                                               controller: controller
                                                   .rolelistNumberCtrlr,
+                                                  focusNode: controller.rolenameFocus,
+                                                  scrollController: controller.rolenameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

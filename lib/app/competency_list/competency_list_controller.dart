@@ -19,6 +19,10 @@ class CompetencyListController extends GetxController {
   );
   CompetencyListPresenter competencyListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -60,6 +64,16 @@ class CompetencyListController extends GetxController {
     getCompetencyList(true);
     //   });
     // });
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

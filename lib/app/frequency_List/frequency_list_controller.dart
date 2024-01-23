@@ -18,6 +18,8 @@ class FrequencyListController extends GetxController {
   );
   FrequencyListPresenter frequencyListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -59,6 +61,11 @@ class FrequencyListController extends GetxController {
       Future.delayed(Duration(seconds: 2), () {
         getFrequencyList(true);
       });
+    });
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
     });
     super.onInit();
   }

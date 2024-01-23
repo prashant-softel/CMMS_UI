@@ -200,6 +200,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     color: Colors.black),
                                               ),
                                               controller: controller.nameCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -313,6 +315,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
+                                                  focusNode: controller.descFocus,
+                                                  scrollController: controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

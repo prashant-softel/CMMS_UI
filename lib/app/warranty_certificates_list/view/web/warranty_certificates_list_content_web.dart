@@ -71,7 +71,7 @@ class _WarrantyCertificatesListContentWebState
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / Inventory",
+                            child: Text(" / Master",
                                 style: Styles.greyMediumLight12),
                           ),
                           Text(" / Warranty Claim Certificate List",

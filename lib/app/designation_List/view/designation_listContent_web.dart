@@ -79,8 +79,8 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Create Business'
-                        : 'Open Create Business',
+                        ? 'Close Create Designation'
+                        : 'Open Create Designation',
                   );
                 }),
               ),
@@ -188,6 +188,8 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                             ),
                                             child: TextField(
                                               controller: controller.nameCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -307,6 +309,8 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
+                                                  focusNode: controller.descFocus,
+                                                  scrollController: controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -429,7 +433,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                                 // controller.toggleContainer();
                                               });
                                             },
-                                            text: 'Create Designations ')
+                                            text: 'Create Designation ')
                                         : CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
