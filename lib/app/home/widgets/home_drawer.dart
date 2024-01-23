@@ -45,7 +45,7 @@ class HomeDrawer extends GetView<HomeController> {
                               isexpand: controller.isExpanded.value,
                               icon: !controller.isExpanded.value
                                   ? "assets/files/logodrawer.jpg"
-                                  : "assets/files/logodrawer.png",
+                                  : "assets/files/logo.png",
                               height: !controller.isExpanded.value ? 40 : 70,
                               width: !controller.isExpanded.value ? 40 : 100,
                               press: () {
