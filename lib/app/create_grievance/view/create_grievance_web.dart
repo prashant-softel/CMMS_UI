@@ -226,6 +226,8 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                   color: Colors.black),
                             ),
                             controller: controller.commentCtrlr,
+                            focusNode: controller.commentFocus,
+                            scrollController: controller.commentScroll,
                             // enabled: controller.isJobCardStarted.value,
                             decoration: InputDecoration(
                               disabledBorder: OutlineInputBorder(

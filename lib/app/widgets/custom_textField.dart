@@ -21,7 +21,6 @@ class LoginCustomTextfield extends GetView {
   TextInputType? keyboardType;
   List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
-
   double? width;
 
   LoginCustomTextfield({

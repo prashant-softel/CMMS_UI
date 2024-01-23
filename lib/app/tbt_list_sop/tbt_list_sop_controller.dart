@@ -18,7 +18,6 @@ import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/update_sop_model.dart';
 
-
 class TBTSOPListController extends GetxController {
   TBTSOPListController(
     this.tbtSOPListPresenter,
@@ -26,28 +25,25 @@ class TBTSOPListController extends GetxController {
   TBTSOPListPresenter tbtSOPListPresenter;
   final HomeController homecontroller = Get.find();
 
- RxBool isCheckedRequire = false.obs;
+  RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value =
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
   //checkbox
-   RxBool isChecked = true.obs;
+  RxBool isChecked = true.obs;
 
-
-   ////File UPload
+  ////File UPload
   RxString fileName = "".obs;
   Uint8List? fileBytes;
   RxString fileName2 = "".obs;
   Uint8List? fileBytes2;
-   
 
-
-  
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -56,16 +52,13 @@ class TBTSOPListController extends GetxController {
   );
   // PreventiveCheckListModel? preventiveCheckListModel;
 
-  
-
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
- 
+
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
-
 
   SOPListModel? selectedItem;
 
@@ -77,13 +70,13 @@ class TBTSOPListController extends GetxController {
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
   int selectedSOPId = 0;
   int selectedJobSOPId = 0;
-  
-   PaginationController jobSOPListPaginationController = PaginationController(
+
+  PaginationController jobSOPListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
 
-   PaginationController jobListPaginationController = PaginationController(
+  PaginationController jobListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -101,17 +94,20 @@ class TBTSOPListController extends GetxController {
   Rx<String> selectedJobType = ''.obs;
   RxList<String?> selectedJobTypeDataList = <String>[].obs;
   RxList<int?> selectedJobTypeIdList = <int>[].obs;
-    int selectedJobTypesId = 0;
+  int selectedJobTypesId = 0;
 
   /// TextFields Controller
   TextEditingController titleTextFieldCtrlr = TextEditingController();
   TextEditingController descriptionTextFieldCtrlr = TextEditingController();
 
-///Browse File Id's
+  FocusNode titleFocus = FocusNode();
+  ScrollController titleScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
+
+  ///Browse File Id's
   var jsaFileId;
   var sopFileId;
-  
-
 
   @override
   void onInit() async {
@@ -120,19 +116,28 @@ class TBTSOPListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-       Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () {
         getJobTypePermitList();
       });
       // Future.delayed(Duration(seconds: 1), () {
       //   getSopPermitList(selectedJobTypesId);
       // });
+
+      titleFocus.addListener(() {
+        if (!titleFocus.hasFocus) {
+          titleScroll.jumpTo(0.0);
+        }
+      });
       
-      
+      descFocus.addListener(() {
+        if (!descFocus.hasFocus) {
+          descScroll.jumpTo(0.0);
+        }
+      });
     });
-    
+
     super.onInit();
   }
-
 
   Future<void> getSopPermitList(selectedJobTypesId) async {
     sopPermitList.value = <SOPListModel>[];
@@ -141,17 +146,14 @@ class TBTSOPListController extends GetxController {
       // categoryIds: categoryIds,
       job_type_id: selectedJobTypesId,
       // job_type_id: 36,
-
     );
-    
-    
+
     for (var sopPermit_list in _sopPermitList) {
       sopPermitList.add(sopPermit_list);
     }
     // selectedSopPermit.value = _sopPermitList[0].name ?? '';
     // selectedSopPermit.value = sopPermitList[0].name!;
 
-  
     // supplierNameList = _supplierNameList;
     jobSOPListPaginationController = PaginationController(
       rowCount: sopPermitList.length,
@@ -160,7 +162,7 @@ class TBTSOPListController extends GetxController {
     update(['sop_permit_list']);
   }
 
-   Future<void> getJobTypePermitList() async {
+  Future<void> getJobTypePermitList() async {
     jobTypeList.value = <JobTypeListModel>[];
     final _jobTypeList = await tbtSOPListPresenter.getJobTypePermitList(
       isLoading: true,
@@ -170,8 +172,8 @@ class TBTSOPListController extends GetxController {
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);
     }
-      selectedJobType.value = jobTypeList[0].name ?? '';
-      selectedJobTypesId = jobTypeList[0].id ?? 0;
+    selectedJobType.value = jobTypeList[0].name ?? '';
+    selectedJobTypesId = jobTypeList[0].id ?? 0;
     getSopPermitList(selectedJobTypesId);
     // supplierNameList = _supplierNameList;
     // jobListPaginationController = PaginationController(
@@ -181,16 +183,17 @@ class TBTSOPListController extends GetxController {
     // update(['job_Type_list']);
   }
 
+  ///For View JSA File
 
-///For View JSA File
-
-   Future<bool> browseFiles({Uint8List? fileBytes, required int position}) async {
-   CreateSOPModel? createSOPModel = await tbtSOPListPresenter.browseFiles(fileBytes, fileName.value, true);
-  if(position == 0){
-    jsaFileId = createSOPModel?.jsa_fileId;
-  }else{
-    sopFileId = createSOPModel?.sop_fileId;
-  }
+  Future<bool> browseFiles(
+      {Uint8List? fileBytes, required int position}) async {
+    CreateSOPModel? createSOPModel =
+        await tbtSOPListPresenter.browseFiles(fileBytes, fileName.value, true);
+    if (position == 0) {
+      jsaFileId = createSOPModel?.jsa_fileId;
+    } else {
+      sopFileId = createSOPModel?.sop_fileId;
+    }
     return true;
   }
 
@@ -214,8 +217,7 @@ class TBTSOPListController extends GetxController {
             height: 10,
           ),
           Center(
-            child: Text(
-                "${fileName.value} \n JSA File import Successfully....",
+            child: Text("${fileName.value} \n JSA File import Successfully....",
                 style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
           )
         ]),
@@ -278,55 +280,43 @@ class TBTSOPListController extends GetxController {
     );
   }
 
+  ///Create SOP
+  Future<bool> createSOP() async {
+    if (titleTextFieldCtrlr.text.trim() == '' ||
+        descriptionTextFieldCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
+      String _description =
+          htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
 
-///Create SOP
-  Future<bool>  createSOP() async {
+      // int? sopFileId = createSOPModel2.sop_fileId;
+      // // int? jsaFileId = data.jsa_fileId;
+      // print('SOPFileId:$sopFileId');
 
-      if (titleTextFieldCtrlr.text.trim() == '' ||
-          descriptionTextFieldCtrlr.text.trim() == '') {
-        Fluttertoast.showToast(
-            msg: "Please enter required field", fontSize: 16.0);
-      } else {
-        String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
-        String _description = htmlEscape.convert(
-            descriptionTextFieldCtrlr.text.trim());
+      CreateSOPModel createSOPModel = CreateSOPModel(
+          title: _title,
+          description: _description,
+          tbt_jobType: selectedJobTypesId,
+          tbt_remarks: "PM Document",
+          sop_fileId: 225,
+          sop_file_desc: "PM Document",
+          jsa_fileId: 220);
+      var sopJsonString = createSOPModel.toJson();
+      Map<String, dynamic>? responseSopCreate =
+          await tbtSOPListPresenter.createSOP(
+        createSop: sopJsonString,
+        isLoading: true,
+      );
 
-        // int? sopFileId = createSOPModel2.sop_fileId;
-        // // int? jsaFileId = data.jsa_fileId;
-        // print('SOPFileId:$sopFileId');
-
-        CreateSOPModel createSOPModel = CreateSOPModel(
-            title: _title,
-            description: _description,
-            tbt_jobType: selectedJobTypesId,
-            tbt_remarks: "PM Document",
-            sop_fileId: 225,
-            sop_file_desc: "PM Document",
-            jsa_fileId: 220
-
-
-        );
-        var sopJsonString = createSOPModel.toJson();
-        Map<String, dynamic>? responseSopCreate =
-        await tbtSOPListPresenter.createSOP(
-          createSop: sopJsonString,
-          isLoading: true,
-        );
-
-
-        return true;
-      }
-
-      getSopPermitList(selectedJobTypesId);
       return true;
+    }
 
+    getSopPermitList(selectedJobTypesId);
+    return true;
   }
 
-
-
- 
-
-  
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<InventoryCategoryModel>:
@@ -340,22 +330,22 @@ class TBTSOPListController extends GetxController {
       case RxList<FrequencyModel>:
         {
           // int frequencyIndex =
-              // frequencyList.indexWhere((x) => x?.name == value);
+          // frequencyList.indexWhere((x) => x?.name == value);
           // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
-       case RxList<FacilityModel>:
+      case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-         case RxList<JobTypeListModel>:
+      case RxList<JobTypeListModel>:
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           int jobIds = 0;
-          if(jobTypeListIndex>=0){
+          if (jobTypeListIndex >= 0) {
             jobIds = jobTypeList[jobTypeListIndex].id ?? 0;
           }
           selectedJobTypesId = jobIds;
@@ -372,8 +362,6 @@ class TBTSOPListController extends GetxController {
     }
   }
 
- 
-
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
     await {cleardata()};
@@ -388,7 +376,6 @@ class TBTSOPListController extends GetxController {
 
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
-
       // getPreventiveCheckList(facilityId, type, true);
       getSopPermitList(selectedJobTypesId);
     });
@@ -397,15 +384,12 @@ class TBTSOPListController extends GetxController {
       isSuccess.value = false;
     });
   }
-  void isDeleteDialog({
-    String? business_id ,
-    String? business
-  }) {
+
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -437,8 +421,8 @@ class TBTSOPListController extends GetxController {
               TextButton(
                 onPressed: () {
                   deleteSopType(business_id).then((value) {
-                    Get.back();      getSopPermitList(selectedJobTypesId);
-
+                    Get.back();
+                    getSopPermitList(selectedJobTypesId);
                   });
                 },
                 child: Text('YES'),
@@ -449,6 +433,7 @@ class TBTSOPListController extends GetxController {
       ),
     );
   }
+
   Future<void> deleteSopType(String? business_id) async {
     {
       await tbtSOPListPresenter.deleteSopType(
@@ -458,11 +443,10 @@ class TBTSOPListController extends GetxController {
     }
   }
 
-
   Future<bool> updateSop(checklistId) async {
-
     String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
-    String _description = htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
+    String _description =
+        htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
     // "id": 314,
     // "title": "BM Document",
     // "description": "BM Document",
@@ -479,10 +463,8 @@ class TBTSOPListController extends GetxController {
         tbt_remarks: "PM Document",
         sop_fileId: 225,
         sop_file_desc: "PM Document",
-        jsa_fileId: 220
-    );
-    var updateSop =
-    createTbt.toJson();
+        jsa_fileId: 220);
+    var updateSop = createTbt.toJson();
 
     print({"updateTbt", updateSop});
     await tbtSOPListPresenter.updateSop(

@@ -190,6 +190,8 @@ class SafetyQuestionsListContentWeb
                                                   color: Colors.black),
                                             ),
                                             controller: controller.titleCtrlr,
+                                            focusNode: controller.titleFocus,
+                                            scrollController: controller.titleScroll,
                                             keyboardType:
                                                 TextInputType.multiline,
                                             maxLines: 1,

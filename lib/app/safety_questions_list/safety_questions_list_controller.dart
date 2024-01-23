@@ -45,7 +45,8 @@ class SafetyQuestionsListController extends GetxController {
 
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
-
+  FocusNode titleFocus = FocusNode();
+  ScrollController titleScroll = ScrollController();
   ////
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
@@ -111,6 +112,11 @@ class SafetyQuestionsListController extends GetxController {
       // getPreventiveCheckList(facilityId, type, true);
     });
 
+    titleFocus.addListener(() {
+      if (!titleFocus.hasFocus) {
+        titleScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 
