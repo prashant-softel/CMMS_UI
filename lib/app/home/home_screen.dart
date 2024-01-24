@@ -145,12 +145,14 @@ class Files extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+  CustomTextField({
     Key? key,
     this.label,
     this.maxLine = 1,
     this.width,
     this.textController,
+    this.focusnode,
+    this.scroll,
     this.readOnly = false,
     this.onTap,
     this.suffixIcon,
@@ -171,6 +173,8 @@ class CustomTextField extends StatelessWidget {
   final Alignment? alignment;
   final bool numberTextField;
   final TextEditingController? textController;
+  FocusNode? focusnode;
+  ScrollController? scroll;
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +198,8 @@ class CustomTextField extends StatelessWidget {
                 onTap: onTap,
                 readOnly: readOnly,
                 controller: textController,
+                focusNode: focusnode,
+                scrollController: scroll,
                 maxLines: maxLine,
                 decoration: InputDecoration(
                   contentPadding: Dimens.edgeInsets16_0_16_0,

@@ -351,7 +351,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       child: LoginCustomTextfield(
                                         textController:
                                             controller.assetsNameCtrlr,
-                                      ),
+                                            focusNode: controller.nameFocus,
+                                            scroll: controller.nameScroll,),
                                     ),
                                   ],
                                 ),
@@ -525,6 +526,8 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                       child: LoginCustomTextfield(
                                         textController:
                                             controller.assesDiscriptionCtrlr,
+                                            focusNode: controller.descFocus,
+                                            scroll: controller.descScroll,
                                       ),
                                     ),
                                   ],
