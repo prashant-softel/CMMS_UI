@@ -191,12 +191,10 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -314,12 +312,10 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

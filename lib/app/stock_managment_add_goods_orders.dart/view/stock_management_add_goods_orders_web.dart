@@ -192,6 +192,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .challanNoCtrlr,
+                                                        focusnode: controller.delchfocus,
+                                                        scroll: controller.delchscroll,
                                                   ),
                                                 ],
                                               ),
@@ -210,6 +212,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.pOCtrlr,
+                                                        focusnode: controller.ponofocus,
+                                                        scroll: controller.ponoscroll,
                                                   ),
                                                 ],
                                               ),
@@ -229,6 +233,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .frieghtToPayPaidCtrlr,
+                                                        focusnode: controller.freightfocus,
+                                                        scroll: controller.freightscroll,
                                                   ),
                                                 ],
                                               ),
@@ -242,6 +248,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     textController: controller
                                                         .noOfPackagesReceivedCtrlr,
+                                                        focusnode: controller.matpofocus,
+                                                        scroll: controller.matposcroll,
                                                   ),
                                                 ],
                                               ),
@@ -261,6 +269,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .conditionOfPackagesReceivedCtrlr,
+                                                        focusnode: controller.pacrfocus,
+                                                        scroll: controller.pacrscroll,
                                                   ),
                                                 ],
                                               ),
@@ -280,6 +290,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.girNoCtrlr,
+                                                        focusnode: controller.inregfocus,
+                                                        scroll: controller.inregscroll,
                                                   ),
                                                 ],
                                               ),
@@ -298,6 +310,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.amountCtrlr,
+                                                        focusnode: controller.amntfocus,
+                                                        scroll: controller.amntscroll,
                                                   ),
                                                 ],
                                               ),
@@ -436,6 +450,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.lrNoCtrlr,
+                                                        focusnode: controller.lrfocus,
+                                                        scroll: controller.lrscroll,
                                                   ),
                                                 ],
                                               ),
@@ -456,6 +472,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .vehicleNoCtrlr,
+                                                        focusnode: controller.vehfocus,
+                                                        scroll: controller.vehscroll,
                                                   ),
                                                 ],
                                               ),
@@ -476,6 +494,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.jobRefCtrlr,
+                                                        focusnode: controller.jobrfocus,
+                                                        scroll: controller.jobrscroll,
                                                   ),
                                                 ],
                                               ),

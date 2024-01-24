@@ -135,7 +135,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   textController:
                                       controller.warrentyDescriptionCtrlr,
                                       focusnode: controller.wdescFocus,
-                                      scroll: controller.wdescScroll,),
+                                      scroll: controller.wdescScroll,
+                                      ),
                             ],
                           ),
                           Dimens.boxHeight10,
