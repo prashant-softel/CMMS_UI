@@ -14,6 +14,7 @@ class CustomTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
+      width: 240,
       child: Row(
         children: [
           Icon(icon),

@@ -124,7 +124,10 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                     ActionButton(
                                                       icon: Icons.add,
                                                       label: "Add New",
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        Get.offNamed(
+                                                            Routes.addCourse);
+                                                      },
                                                       color: ColorValues
                                                           .addNewColor,
                                                     ),
@@ -180,15 +183,6 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                     DataColumn2(
                                                       // fixedWidth: 160,
                                                       label: Text(
-                                                        'Description',
-                                                        style:
-                                                            Styles.blackBold14,
-                                                      ),
-                                                      // size: ColumnSize.L,
-                                                    ),
-                                                    DataColumn2(
-                                                      // fixedWidth: 160,
-                                                      label: Text(
                                                         'Category',
                                                         style:
                                                             Styles.blackBold14,
@@ -235,8 +229,6 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                               'id'.toString()])),
                                                           DataCell(Text(
                                                               data['topic'])),
-                                                          DataCell(Text(
-                                                              data['Desc'])),
                                                           DataCell(Text(data[
                                                               'Category'])),
                                                           DataCell(Text(data[
