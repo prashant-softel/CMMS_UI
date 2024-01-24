@@ -11,6 +11,8 @@ class LoginCustomTextfield extends GetView {
   bool obscureText;
   Widget? widget;
   TextEditingController? textController;
+  FocusNode? focusNode;
+  ScrollController? scroll;
   String? errorController;
   Function(dynamic value)? onChanged;
   Function()? ontap;
@@ -28,6 +30,8 @@ class LoginCustomTextfield extends GetView {
     Key? key,
     this.ishint,
     this.numberTextField = false,
+    this.focusNode,
+    this.scroll,
     this.obscureText = false,
     this.textController,
     this.widget,
@@ -61,6 +65,8 @@ class LoginCustomTextfield extends GetView {
         maxLines: maxLine,
         onChanged: onChanged,
         controller: textController,
+        focusNode: focusNode,
+        scrollController: scroll,
         obscureText: obscureText,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,

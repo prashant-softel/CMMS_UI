@@ -27,6 +27,12 @@ class WarrantyClaimController extends GetxController {
   WarrantyClaimPresenter warrantyClaimPresenter;
 
   final HomeController homeController = Get.find();
+  FocusNode immcoracFocus = FocusNode();
+  ScrollController immcoracScroll = ScrollController();
+  FocusNode wdescFocus = FocusNode();
+  ScrollController wdescScroll = ScrollController();
+  FocusNode wtitleFocus = FocusNode();
+  ScrollController wtitleScroll = ScrollController();
   var itemCount = 0.obs;
 
   //Additional Email work
@@ -345,7 +351,21 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getEmployeesList();
     });
-
+  immcoracFocus.addListener(() {
+      if (!immcoracFocus.hasFocus) {
+        immcoracScroll.jumpTo(0.0);
+      }
+    });
+    wtitleFocus.addListener(() {
+      if (!wtitleFocus.hasFocus) {
+        wtitleScroll.jumpTo(0.0);
+      }
+    });
+    wdescFocus.addListener(() {
+      if (!wdescFocus.hasFocus) {
+        wdescScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

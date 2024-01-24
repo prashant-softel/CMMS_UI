@@ -75,7 +75,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / Inventory",
+                            child: Text(" / MASTERS",
                                 style: Styles.greyMediumLight12),
                           ),
                           Text(" / Warranty Claim List",

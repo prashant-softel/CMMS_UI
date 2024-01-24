@@ -33,6 +33,14 @@ class AddInventoryController extends GetxController {
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+  FocusNode wdescFocus = FocusNode();
+  ScrollController wdescScroll = ScrollController();
+  FocusNode calremFocus = FocusNode();
+  ScrollController calremScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
   RxString imageName = "".obs;
@@ -217,6 +225,27 @@ class AddInventoryController extends GetxController {
           getAddInventoryDetail(id: inventoryId.value);
         }
       });
+      nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+          descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
+    });
+      calremFocus.addListener(() {
+      if (!calremFocus.hasFocus) {
+        calremScroll.jumpTo(0.0);
+      }
+    });
+      wdescFocus.addListener(() {
+      if (!wdescFocus.hasFocus) {
+        wdescScroll.jumpTo(0.0);
+      }
+    });
+
     } catch (e) {}
     super.onInit();
   }

@@ -133,7 +133,9 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(width: 10),
                               GoodsOrderTextField(
                                   textController:
-                                      controller.warrentyDescriptionCtrlr),
+                                      controller.warrentyDescriptionCtrlr,
+                                      focusnode: controller.wdescFocus,
+                                      scroll: controller.wdescScroll,),
                             ],
                           ),
                           Dimens.boxHeight10,

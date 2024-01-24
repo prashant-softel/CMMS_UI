@@ -125,6 +125,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               label: 'Warranty Claim Title: ',
                                               textController: controller
                                                   .warrantyClaimTitleTextController,
+                                              focusnode: controller.wtitleFocus,
+                                              scroll: controller.wtitleScroll,
                                             ),
                                           ),
                                         ],
@@ -142,6 +144,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   'Warranty Brief Description: ',
                                               textController: controller
                                                   .warrantyClaimBriefDescTextController,
+                                                  focusnode: controller.wdescFocus,
+                                                  scroll: controller.wdescScroll,
                                             ),
                                           ),
                                         ],
@@ -855,6 +859,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       width: 550,
                                                       textController: controller
                                                           .immediateCorrectiveActionTextController,
+                                                        focusnode: controller.immcoracFocus,
+                                                        scroll: controller.immcoracScroll,
                                                       label:
                                                           'Immediate Corrective Action by Buyer: ',
                                                     ),
