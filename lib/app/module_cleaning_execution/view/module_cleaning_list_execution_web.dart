@@ -78,7 +78,7 @@ class _ModuleCleaningListExecutionState
                             child: Text(" / MODULE CLEANING",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / EXECUTION",
+                          Text(" / MODULE CLEANING EXECUTION",
                               style: Styles.greyMediumLight12)
                         ],
                       ),
