@@ -10,6 +10,8 @@ import 'package:cmms/app/add_inventory/add_inventory_binding.dart';
 import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_binding.dart';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_screen.dart';
+import 'package:cmms/app/add_training_course/add_course_binding.dart';
+import 'package:cmms/app/add_training_course/view/add_course_screen.dart';
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
@@ -995,6 +997,11 @@ class AppPages {
       name: _Paths.createObservation,
       page: CreateObservationScreen.new,
       binding: CreateObservationBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addCourse,
+      page: AddCourseScreen.new,
+      binding: AddCourseBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.checkListOfObservation,

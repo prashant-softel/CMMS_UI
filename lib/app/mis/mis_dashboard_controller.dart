@@ -57,9 +57,13 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.checklistMisPlan);
   }
 
+  void goToAddCourse() {
+    misDashboardPresenter.clearValue();
+    Get.toNamed(Routes.addCourse);
+  }
+
   void goTocreatePlanScreen() {
     misDashboardPresenter.clearValue();
-
     Get.toNamed(Routes.createAudit, arguments: {"type": 3});
   }
 
