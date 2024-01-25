@@ -188,7 +188,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             BorderRadius
                                                                 .circular(5),
                                                       ),
-
                                                         child: DropdownWebStock(
                                                           width: MediaQuery.of(
                                                                       context)
