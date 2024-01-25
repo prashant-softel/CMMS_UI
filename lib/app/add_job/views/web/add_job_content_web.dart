@@ -82,9 +82,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                             Get.offAllNamed(Routes.breakdown);
                           },
                           child: Text(" / BREAKDOWN MAINTENANCE",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
-                        Text(" / ADD NEW JOB", style: Styles.greyMediumLight12)
+                        Text(" / ADD NEW JOB", style: Styles.greyLight14)
                       ],
                     ),
                   ),

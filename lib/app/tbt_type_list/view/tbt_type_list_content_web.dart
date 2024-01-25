@@ -57,9 +57,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyMediumLight12),
+                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
                   ),
-                  Text(" / JOB TYPE", style: Styles.greyMediumLight12)
+                  Text(" / JOB TYPE", style: Styles.greyLight14)
                 ],
               ),
             ),

@@ -77,9 +77,9 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
-                    child: Text(" / MASTER", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTER", style: Styles.greyLight14),
                   ),
-                  Text(" / ROLE NOTIFICATION ", style: Styles.greyMediumLight12)
+                  Text(" / ROLE NOTIFICATION ", style: Styles.greyLight14)
                 ],
               ),
             ),

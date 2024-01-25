@@ -91,10 +91,10 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 Get.offNamed(Routes.warrantyClaimList);
                               },
                               child: Text(" / Warranty Claim List",
-                                  style: Styles.greyMediumLight12),
+                                  style: Styles.greyLight14),
                             ),
                             Text(" / Add Warranty Claim",
-                                style: Styles.greyMediumLight12)
+                                style: Styles.greyLight14)
                           ],
                         ),
                       ),

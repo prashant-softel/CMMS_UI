@@ -66,8 +66,8 @@ class PreventiveChecklistListContentWeb
                         ? Text(" / PREVENTIVE MAINTENANCE",
                             style: Styles.greyLight14)
                         : controller.type.value == 2
-                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
-                            : Text(" / MIS", style: Styles.greyMediumLight12),
+                            ? Text(" / AUDIT", style: Styles.greyLight14)
+                            : Text(" / MIS", style: Styles.greyLight14),
                   ),
                   Text(" / CREATE CHECKLIST NUMBER", style: Styles.greyLight14),
                 ],

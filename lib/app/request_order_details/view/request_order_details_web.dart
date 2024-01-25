@@ -54,9 +54,9 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                 Get.offAllNamed(Routes.purchaseGoodsorder);
               },
               child:
-                  Text(" / STOCK MANAGEMENT ", style: Styles.greyMediumLight12),
+                  Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
             ),
-            Text(" / REQUEST GOODS  ", style: Styles.greyMediumLight12)
+            Text(" / REQUEST GOODS  ", style: Styles.greyLight14)
           ],
         ),
       ),

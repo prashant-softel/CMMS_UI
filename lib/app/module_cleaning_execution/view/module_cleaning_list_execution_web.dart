@@ -76,10 +76,10 @@ class _ModuleCleaningListExecutionState
                               Get.offNamed(Routes.moduleCleaningDashboard);
                             },
                             child: Text(" / MODULE CLEANING",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / MODULE CLEANING EXECUTION",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

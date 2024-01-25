@@ -73,10 +73,10 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                               Get.offNamed(Routes.moduleCleaningDashboard);
                             },
                             child: Text(" / MODULE CLEANING",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / MODULE CLEANING PLANNING",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

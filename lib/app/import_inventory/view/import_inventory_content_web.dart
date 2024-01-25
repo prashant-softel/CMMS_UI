@@ -55,10 +55,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                             Get.offNamed(Routes.masterDashboard);
                           },
                           child:
-                              Text(" / MASTER", style: Styles.greyMediumLight12),
+                              Text(" / MASTER", style: Styles.greyLight14),
                         ),
                         Text(" / IMPORT ASSET",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ],
                     )
                   : controller.importType.value == AppConstants.kImportUser
@@ -82,10 +82,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                 Get.offNamed(Routes.masterDashboard);
                               },
                               child: Text(" / MASTER",
-                                  style: Styles.greyMediumLight12),
+                                  style: Styles.greyLight14),
                             ),
                             Text(" / IMPORT USER",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ],
                         )
                       : controller.importType.value ==
@@ -198,11 +198,11 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                               },
                                               child: Text(" / MASTER",
                                                   style:
-                                                      Styles.greyMediumLight12),
+                                                      Styles.greyLight14),
                                             ),
                                             Text(" / IMPORT BUSSINESS",
                                                 style:
-                                                    Styles.greyMediumLight12),
+                                                    Styles.greyLight14),
                                           ],
                                         )
                                       : Dimens.box0),

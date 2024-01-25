@@ -77,9 +77,9 @@ class _ChecklistMisPlanContentWebState
                                 Get.offNamed(Routes.misDashboard);
                               },
                               child: Text(" / MIS",
-                                  style: Styles.greyMediumLight12)),
+                                  style: Styles.greyLight14)),
                           Text(" / OBSERVATION PLAN",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

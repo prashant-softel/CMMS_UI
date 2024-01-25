@@ -58,9 +58,9 @@ class BloodListContentWeb extends GetView<BloodListController> {
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  Text(" / Blood List", style: Styles.greyMediumLight12),
+                  Text(" / BLOOD LIST", style: Styles.greyLight14),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

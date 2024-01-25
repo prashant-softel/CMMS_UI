@@ -67,13 +67,13 @@ class PreventiveCheckPointContentWeb
                     },
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)
                         : controller.type.value == 2
-                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
-                            : Text(" / MIS", style: Styles.greyMediumLight12),
+                            ? Text(" / AUDIT", style: Styles.greyLight14)
+                            : Text(" / MIS", style: Styles.greyLight14),
                   ),
                   Text(" / CHECK POINT CREATOR",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14)
                 ],
               ),
             ),

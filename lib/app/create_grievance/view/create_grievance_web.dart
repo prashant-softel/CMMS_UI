@@ -54,9 +54,9 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                 Get.offAllNamed(Routes.stockManagementDashboardScreen);
               },
               child:
-                  Text(" / STOCK MANAGEMENT ", style: Styles.greyMediumLight12),
+                  Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
             ),
-            Text(" / Create Grievance ", style: Styles.greyMediumLight12)
+            Text(" / Create Grievance ", style: Styles.greyLight14)
           ],
         ),
       ),

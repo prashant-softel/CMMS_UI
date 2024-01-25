@@ -56,9 +56,9 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT",
-                        style: Styles.greyMediumLight12),
+                        style: Styles.greyLight14),
                   ),
-                  Text(" / ASSET MASTER LIST", style: Styles.greyMediumLight12),
+                  Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

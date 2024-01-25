@@ -79,10 +79,10 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                   Routes.stockManagementDashboardScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / TRANSACTION REPORT LIST ",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

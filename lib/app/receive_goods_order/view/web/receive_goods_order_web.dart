@@ -77,10 +77,10 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                 Routes.stockManagementGoodsOrdersScreen);
                           },
                           child: Text(" / STOCK MANAGEMENT",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
                         Text(" / RECEIVE GOODS ORDER",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ],
                     ),
                   ),

@@ -63,9 +63,9 @@ class JobListContentWeb extends StatelessWidget {
                   Get.offAllNamed(Routes.breakdown);
                 },
                 child: Text(" / BREAKDOWN MAINTANACE",
-                    style: Styles.greyMediumLight12),
+                    style: Styles.greyLight14),
               ),
-              Text(" / JOB LIST", style: Styles.greyMediumLight12),
+              Text(" / JOB LIST", style: Styles.greyLight14),
             ],
           ),
         ),

@@ -75,15 +75,15 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             },
                             child: controller.type.value == 3
                                 ? Text(" / MIS",
-                                    style: Styles.greyMediumLight12)
+                                    style: Styles.greyLight14)
                                 : Text(" / AUDIT LIST",
-                                    style: Styles.greyMediumLight12),
+                                    style: Styles.greyLight14),
                           ),
                           controller.type.value == 3
                               ? Text(" / OBSERVATION PLAN",
-                                  style: Styles.greyMediumLight12)
+                                  style: Styles.greyLight14)
                               : Text(" / AUDIT LIST SCREEN",
-                                  style: Styles.greyMediumLight12)
+                                  style: Styles.greyLight14)
                         ],
                       ),
                     ),
