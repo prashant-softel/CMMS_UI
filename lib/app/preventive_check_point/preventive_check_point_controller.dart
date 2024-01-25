@@ -20,7 +20,10 @@ class PreventiveCheckPointController extends GetxController {
   );
   PreventiveCheckPointPresenter preventiveCheckPointPresenter;
   final HomeController homecontroller = Get.find();
-
+  FocusNode chckFocus = FocusNode();
+  ScrollController chckScroll = ScrollController();
+  FocusNode reqFocus = FocusNode();
+  ScrollController reqScroll = ScrollController();
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
@@ -110,6 +113,17 @@ class PreventiveCheckPointController extends GetxController {
           });
         });
       }
+      chckFocus.addListener(() {
+      if (!chckFocus.hasFocus) {
+        chckScroll.jumpTo(0.0);
+      }
+    });
+      reqFocus.addListener(() {
+      if (!reqFocus.hasFocus) {
+        reqScroll.jumpTo(0.0);
+      }
+    });
+
       super.onInit();
     } catch (e) {
       print(e);

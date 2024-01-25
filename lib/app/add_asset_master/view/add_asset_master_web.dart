@@ -59,18 +59,12 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Get.offNamed(Routes.stockManagementDashboardScreen);
-                  },
-                  child: Text(" / MASTER", style: Styles.greyMediumLight12),
-                ),
-                InkWell(
                     onTap: () {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT",
                         style: Styles.greyMediumLight12)),
-                Text(" / MASTER MATERIAL", style: Styles.greyMediumLight12)
+                Text(" / ASSET MATERIAL", style: Styles.greyMediumLight12)
               ],
             ),
           ),

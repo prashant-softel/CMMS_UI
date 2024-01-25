@@ -74,7 +74,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                             onTap: () {
                               Get.offNamed(Routes.incidentReportDashboard);
                             },
-                            child: Text(" / INCIDENT REPORT DASHBOARD",
+                            child: Text(" / INCIDENT REPORT",
                                 style: Styles.greyMediumLight12),
                           ),
                           Text(

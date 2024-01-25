@@ -59,7 +59,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyMediumLight12),
                   ),
                   Text(" / TBT SOP List", style: Styles.greyMediumLight12)
                 ],
