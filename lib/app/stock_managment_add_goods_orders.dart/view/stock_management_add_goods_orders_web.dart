@@ -1146,10 +1146,14 @@ class GoodsOrderTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? textController;
-  const GoodsOrderTextField({
+  FocusNode? focusnode;
+  ScrollController? scroll;
+  GoodsOrderTextField({
     this.keyboardType,
     this.inputFormatters,
     this.textController,
+    this.focusnode,
+    this.scroll
   });
 
   @override
@@ -1175,6 +1179,8 @@ class GoodsOrderTextField extends StatelessWidget {
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
         textController: textController,
+        scroll: scroll,
+        focusNode: focusnode
       ),
     );
   }

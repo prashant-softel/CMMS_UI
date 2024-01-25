@@ -108,6 +108,8 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     ],
                                     controller:
                                         controller.calibrationRemaingCtrlr,
+                                        focusNode: controller.calremFocus,
+                                        scrollController: controller.calremScroll,
                                     decoration: InputDecoration(
                                       contentPadding: Dimens.edgeInsets5,
                                       focusedBorder: OutlineInputBorder(

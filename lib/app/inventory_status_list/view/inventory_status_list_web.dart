@@ -195,6 +195,8 @@ class InventoryStatusListContentWeb
                                             ),
                                             child: TextField(
                                               controller: controller.nameCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController: controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -314,6 +316,8 @@ class InventoryStatusListContentWeb
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
+                                                  focusNode: controller.descFocus,
+                                                  scrollController: controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

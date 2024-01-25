@@ -18,6 +18,10 @@ class InventoryStatusListController extends GetxController {
   );
   InventoryStatusListPresenter inventoryStatusListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode nameFocus = FocusNode();
+  ScrollController nameScroll = ScrollController();
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -85,6 +89,16 @@ class InventoryStatusListController extends GetxController {
       Future.delayed(Duration(seconds: 2), () {
         getInventoryStatusList(facilityId, type, true);
       });
+    });
+    nameFocus.addListener(() {
+      if (!nameFocus.hasFocus) {
+        nameScroll.jumpTo(0.0);
+      }
+    });
+    descFocus.addListener(() {
+      if (!descFocus.hasFocus) {
+        descScroll.jumpTo(0.0);
+      }
     });
     super.onInit();
   }
