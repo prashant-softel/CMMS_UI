@@ -194,12 +194,10 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               controller: controller.titleCtrlr,
                                               focusNode: controller.titleFocus,
                                               scrollController:

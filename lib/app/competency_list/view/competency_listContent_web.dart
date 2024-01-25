@@ -187,12 +187,10 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               controller: controller.nameCtrlr,
                                               focusNode: controller.nameFocus,
                                               scrollController: controller.nameScroll,
@@ -314,12 +312,10 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

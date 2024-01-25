@@ -30,6 +30,26 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   StockManagementAddGoodsOrdersPresenter stockManagementAddGoodsOrdersPresenter;
 
   final HomeController homeController = Get.find();
+  FocusNode delchfocus = FocusNode();
+  ScrollController delchscroll = ScrollController();
+  FocusNode ponofocus = FocusNode();
+  ScrollController ponoscroll = ScrollController();
+  FocusNode freightfocus = FocusNode();
+  ScrollController freightscroll = ScrollController();
+  FocusNode matpofocus = FocusNode();
+  ScrollController matposcroll = ScrollController();
+  FocusNode pacrfocus = FocusNode();
+  ScrollController pacrscroll = ScrollController();
+  FocusNode inregfocus = FocusNode();
+  ScrollController inregscroll = ScrollController();
+  FocusNode amntfocus = FocusNode();
+  ScrollController amntscroll = ScrollController();
+  FocusNode lrfocus = FocusNode();
+  ScrollController lrscroll = ScrollController();
+  FocusNode vehfocus = FocusNode();
+  ScrollController vehscroll = ScrollController();
+  FocusNode jobrfocus = FocusNode();
+  ScrollController jobrscroll = ScrollController();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   RxList<GetRequestOrderListModel?> goodsOrdersList =
       <GetRequestOrderListModel>[].obs;
@@ -180,6 +200,56 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           });
         }
       });
+      delchfocus.addListener(() {
+      if (!delchfocus.hasFocus) {
+        delchscroll.jumpTo(0.0);
+      }
+    });
+      ponofocus.addListener(() {
+      if (!ponofocus.hasFocus) {
+        ponoscroll.jumpTo(0.0);
+      }
+    });
+      freightfocus.addListener(() {
+      if (!freightfocus.hasFocus) {
+        freightscroll.jumpTo(0.0);
+      }
+    });
+      matpofocus.addListener(() {
+      if (!matpofocus.hasFocus) {
+        matposcroll.jumpTo(0.0);
+      }
+    });
+      pacrfocus.addListener(() {
+      if (!pacrfocus.hasFocus) {
+        pacrscroll.jumpTo(0.0);
+      }
+    });
+    inregfocus.addListener(() {
+      if (!inregfocus.hasFocus) {
+        inregscroll.jumpTo(0.0);
+      }
+    });
+      amntfocus.addListener(() {
+      if (!amntfocus.hasFocus) {
+        amntscroll.jumpTo(0.0);
+      }
+    });
+      lrfocus.addListener(() {
+      if (!lrfocus.hasFocus) {
+        lrscroll.jumpTo(0.0);
+      }
+    });
+      vehfocus.addListener(() {
+      if (!vehfocus.hasFocus) {
+        vehscroll.jumpTo(0.0);
+      }
+    });
+      jobrfocus.addListener(() {
+      if (!jobrfocus.hasFocus) {
+        jobrscroll.jumpTo(0.0);
+      }
+    });
     } catch (e) {}
 
     super.onInit();

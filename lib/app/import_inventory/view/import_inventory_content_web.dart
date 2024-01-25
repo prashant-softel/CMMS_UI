@@ -55,7 +55,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                             Get.offNamed(Routes.masterDashboard);
                           },
                           child:
-                              Text(" / ASSET", style: Styles.greyMediumLight12),
+                              Text(" / MASTER", style: Styles.greyMediumLight12),
                         ),
                         Text(" / IMPORT ASSET",
                             style: Styles.greyMediumLight12),
