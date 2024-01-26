@@ -712,7 +712,7 @@ class IncidentReportListDataSource extends DataTableSource {
                             //       )
                             //     : Container(),
                           ],
-                        )
+                        ) 
                       ])
                     : Text(value.toString()),
           ),
@@ -720,7 +720,7 @@ class IncidentReportListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        // controller.clearStoreData();
+        controller.clearStoreData();
         controller.viewIncidentReport(id: incidentReportListDetails?.id);
       },
     );

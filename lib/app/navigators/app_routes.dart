@@ -111,7 +111,6 @@ abstract class Routes {
   static const viewEscalatiomMatrixContentWeb =
       _Paths.viewEscalatiomMatrixContentWeb;
 
-  static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
 
   static const insuranceProvider = _Paths.insuranceProvider;
@@ -288,7 +287,6 @@ abstract class _Paths {
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
   static const viewEscalatiomMatrixContentWeb = '/view-escalation-matrix';
 
-  static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
   static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';

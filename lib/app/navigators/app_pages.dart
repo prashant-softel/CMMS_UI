@@ -221,8 +221,6 @@ import '../frequency_List/frequency_list_binding.dart';
 import '../frequency_List/view/frequency_list_screen.dart';
 import '../import_inventory/import_inventory_binding.dart';
 import '../import_inventory/view/import_inventory_screen.dart';
-import '../incident_dashboard/incident_report_binding.dart';
-import '../incident_dashboard/view/incident_screen.dart';
 import '../insurance_provider/insurance_provider_listContent_binding.dart';
 import '../insurance_provider/view/insurance_provider_listContent_screen.dart';
 import '../inventory/inventory_binding.dart';
@@ -352,10 +350,9 @@ class AppPages {
       binding: AddJobBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.trainingCouse,
-      page: TrainingCourseScreen.new,
-      binding: TrainingBinding()
-    ),
+        name: _Paths.trainingCouse,
+        page: TrainingCourseScreen.new,
+        binding: TrainingBinding()),
     GetPage<dynamic>(
       name: _Paths.editJob,
       page: EditJobScreen.new,
@@ -789,12 +786,6 @@ class AppPages {
       name: _Paths.createMrs,
       page: CreateMrsScreen.new,
       binding: CreateMrsBinding(),
-    ),
-
-    GetPage<dynamic>(
-      name: _Paths.incident_risk_dashboard,
-      page: IncidentScreen.new,
-      binding: IncidentReportBinding(),
     ),
 
     GetPage<dynamic>(
