@@ -724,6 +724,19 @@ class AddIncidentReportController extends GetxController {
       selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
       selectedRiskTypeList.value =
           incidentReportDetailsModel.value?.risk_type_name ?? '';
+      detailInvestigationTeamValue.value =
+          incidentReportDetailsModel.value?.is_investigation_required == 1
+              ? true
+              : false;
+      whyWhyAnalysisValue.value =
+          incidentReportDetailsModel.value?.is_why_why_required == 1
+              ? true
+              : false;
+      if (whyWhyAnalysisValue == true) {
+        addWhyWhyAnalysisRowItem();
+        addWhyWhyAnalysisRowItem();
+        addWhyWhyAnalysisRowItem();
+      }
 
       ///new Data
 
