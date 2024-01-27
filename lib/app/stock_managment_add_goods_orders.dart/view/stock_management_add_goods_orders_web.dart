@@ -942,10 +942,31 @@ class AddRowInGoodsOrder extends StatelessWidget {
                 
                 DataColumn2(
                     fixedWidth: 250,
-                    label: Text(
-                      "Paid By",
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    label: Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Text(
+                                "Paid By",
+                                style:TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              Dimens.boxWidth10,
+                              SizedBox(
+                                child: Obx(() => DropdownWebStock(
+                                  width: MediaQuery.of(context).size.width * .10,
+                                dropdownList: controller.paid,
+                                isValueSelected:
+                                    controller.ispaidSelected.value,
+                                selectedValue: controller.selectedpaid.value,
+                                onValueChanged: controller.onValueChanged,                      
+                                  )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     )),
                 DataColumn2(
                     fixedWidth: 210,

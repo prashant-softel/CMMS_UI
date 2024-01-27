@@ -55,7 +55,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       <GetRequestOrderListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
   Rx<bool> isReqOrderSelected = true.obs;
+  Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
+  Rx<String> selectedpaid = ''.obs;
   int selectedReqOrderId = 0;
   Rx<int> roId = 0.obs;
   var commentCtrlr = TextEditingController();
