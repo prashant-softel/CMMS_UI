@@ -51,20 +51,25 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                 Icons.home,
                 color: ColorValues.greyLightColor,
               ),
-              Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
-              ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
-                  Get.offAllNamed(Routes.addGrievance);
+                  Get.offNamed(Routes.home);
                 },
                 child: Text(
-                  " / HSE Report ",
-                  style: Styles.greyMediumLight12,
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
                 ),
               ),
-              Text(" / Create Grievance ", style: Styles.greyMediumLight12),
+              InkWell(
+                onTap: () {
+                  Get.offAllNamed(Routes.misDashboard);
+                },
+                child: Text(
+                  " / MIS ",
+                  style: Styles.greyLight14,
+                ),
+              ),
+              Text(" / CREATE GRIEVANCE ", style: Styles.greyLight14),
               Spacer(),
             ],
           ),
@@ -185,9 +190,9 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                             ),
                                             controller:
                                                 controller.concernController,
-                                            focusNode: controller.descFocus,
+                                            focusNode: controller.concernFocus,
                                             scrollController:
-                                                controller.descScroll,
+                                                controller.concernScroll,
                                             keyboardType:
                                                 TextInputType.multiline,
                                             maxLines: 5,
@@ -211,8 +216,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                     color: Colors.transparent),
                                               ),
                                               focusedErrorBorder: controller
-                                                      .isJobDescriptionInvalid
-                                                      .value
+                                                      .isConcernInvalid.value
                                                   ? OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -224,8 +228,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                     )
                                                   : InputBorder.none,
                                               errorBorder: controller
-                                                      .isJobDescriptionInvalid
-                                                      .value
+                                                      .isConcernInvalid.value
                                                   ? OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -237,19 +240,16 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                                     )
                                                   : null,
                                               errorText: controller
-                                                      .isJobDescriptionInvalid
-                                                      .value
+                                                      .isConcernInvalid.value
                                                   ? "Required field"
                                                   : null,
                                             ),
                                             onChanged: (value) {
                                               if (value.trim().length > 3) {
-                                                controller
-                                                    .isJobDescriptionInvalid
+                                                controller.isConcernInvalid
                                                     .value = false;
                                               } else {
-                                                controller
-                                                    .isJobDescriptionInvalid
+                                                controller.isConcernInvalid
                                                     .value = true;
                                               }
                                             },
@@ -279,17 +279,13 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                         backgroundColor:
                                             ColorValues.appGreenColor,
                                         text: 'Create Grievance',
-                                        onPressed: () {
-                                          controller.submitPurchaseOrderData();
-                                        },
+                                        onPressed: () {},
                                       )
                                     : CustomElevatedButton(
                                         backgroundColor:
                                             ColorValues.updateColor,
                                         text: 'Update',
-                                        onPressed: () {
-                                          controller.updatePurchaseOrderData();
-                                        },
+                                        onPressed: () {},
                                       ),
                                 Spacer()
                               ],
