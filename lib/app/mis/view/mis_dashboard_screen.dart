@@ -174,8 +174,8 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                       GridView.count(
                         shrinkWrap: true,
                         primary: false,
-                        padding: const EdgeInsets.all(16),
-                        crossAxisSpacing: 40,
+                        padding: const EdgeInsets.all(15),
+                        crossAxisSpacing: 70,
                         mainAxisSpacing: 6,
                         crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                         childAspectRatio: Responsive.isMobile(context)
@@ -183,7 +183,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             : 5,
                         children: <Widget>[
                           createContentTile(
-                              title: "MIS Checklist1",
+                              title: "MIS Checklist",
                               onTap: () {
                                 controller.createChecklist();
                               }),
