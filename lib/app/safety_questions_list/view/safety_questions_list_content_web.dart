@@ -58,10 +58,10 @@ class SafetyQuestionsListContentWeb
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
                   ),
                   Text(" / Permit Type Checklist",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14)
                 ],
               ),
             ),

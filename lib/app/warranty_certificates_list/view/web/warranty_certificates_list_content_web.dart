@@ -71,11 +71,11 @@ class _WarrantyCertificatesListContentWebState
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / Master",
-                                style: Styles.greyMediumLight12),
+                            child: Text(" / MASTER",
+                                style: Styles.greyLight14),
                           ),
-                          Text(" / Warranty Claim Certificate List",
-                              style: Styles.greyMediumLight12)
+                          Text(" / WARRANTY CLAIM CERTIFICATE LIST",
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

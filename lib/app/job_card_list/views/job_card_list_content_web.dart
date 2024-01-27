@@ -69,10 +69,10 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                           Get.offNamed(Routes.breakdown);
                         },
                         child: Text(" / BREAKDOWN MAINTAINANCE",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
                       Text(" / JOB CARD LIST",
-                          style: Styles.greyMediumLight12),
+                          style: Styles.greyLight14),
                     ],
                   ),
                 ),

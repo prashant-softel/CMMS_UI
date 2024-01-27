@@ -81,7 +81,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                               Get.offNamed(Routes.masterDashboard);
                             },
                             child: Text(" / MASTER",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           InkWell(
                               onTap: () {
@@ -93,13 +93,13 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                 Get.offNamed(Routes.userList);
                               },
                               child: Text(" / USER LIST",
-                                  style: Styles.greyMediumLight12)),
+                                  style: Styles.greyLight14)),
                           Obx(
                             () => Text(
                                 controller.userId.value == 0
                                     ? " / ADD USER"
                                     : " / EDIT USER",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           )
                         ],
                       ),

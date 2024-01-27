@@ -67,13 +67,13 @@ class PreventiveCheckPointContentWeb
                     },
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)
                         : controller.type.value == 2
-                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
-                            : Text(" / MIS", style: Styles.greyMediumLight12),
+                            ? Text(" / AUDIT", style: Styles.greyLight14)
+                            : Text(" / MIS", style: Styles.greyLight14),
                   ),
                   Text(" / CHECK POINT CREATOR",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -87,8 +87,8 @@ class PreventiveCheckPointContentWeb
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Create  Create Check Point'
-                        : 'Open Create  Create Check Point',
+                        ? 'Close Create Check Point'
+                        : 'Open Create Check Point',
                   );
                 }),
               ),
@@ -245,6 +245,8 @@ class PreventiveCheckPointContentWeb
                                                   ishint: 'Enter Check Point',
                                                   textController: controller
                                                       .checkPointCtrlr,
+                                                  focusNode: controller.chckFocus,
+                                                  scroll: controller.chckScroll,
                                                 )),
                                           ),
                                         ],
@@ -290,6 +292,8 @@ class PreventiveCheckPointContentWeb
                                                   ishint: 'Enter Requirement',
                                                   textController: controller
                                                       .requirementCtrlr,
+                                                  focusNode: controller.reqFocus,
+                                                  scroll: controller.reqScroll,
                                                 )),
                                           ),
                                         ],
@@ -729,12 +733,10 @@ class PreventiveCheckPointContentWeb
                                         height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
-                                          style: GoogleFonts.lato(
-                                            textStyle: TextStyle(
+                                          style: TextStyle(
                                                 fontSize: 16.0,
                                                 height: 1.0,
                                                 color: Colors.black),
-                                          ),
                                           onChanged: (value) =>
                                               controller.search(value),
                                           decoration: InputDecoration(

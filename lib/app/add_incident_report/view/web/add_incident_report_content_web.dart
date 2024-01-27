@@ -94,15 +94,15 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                 Get.offNamed(Routes.incidentReportDashboard);
                               },
                               child: Text(" / Incident Report",
-                                  style: Styles.greyMediumLight12),
+                                  style: Styles.greyLight14),
                             ),
                             controller.irId != null ||
                                     controller.irId != 0 ||
                                     controller.irId != ''
                                 ? Text(" / Update Incident Report11",
-                                    style: Styles.greyMediumLight12)
+                                    style: Styles.greyLight14)
                                 : Text(" / Add Incident Report",
-                                    style: Styles.greyMediumLight12)
+                                    style: Styles.greyLight14)
                           ],
                         ),
                       ),

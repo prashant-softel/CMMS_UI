@@ -56,9 +56,9 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                   onTap: () {
                     Get.offNamed(Routes.masterDashboard);
                   },
-                  child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                  child: Text(" / MASTERS", style: Styles.greyLight14),
                 ),
-                Text(" / DOCUMENT MANAGER", style: Styles.greyMediumLight12),
+                Text(" / DOCUMENT MANAGER", style: Styles.greyLight14),
               ],
             ),
           ),

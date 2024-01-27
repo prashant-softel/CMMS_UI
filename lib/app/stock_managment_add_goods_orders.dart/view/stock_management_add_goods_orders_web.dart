@@ -895,6 +895,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ),
           Expanded(
             child: DataTable2(
+              
               // minWidth: 2000,
               dataRowHeight: 105,
               columnSpacing: 10,
@@ -911,31 +912,34 @@ class AddRowInGoodsOrder extends StatelessWidget {
                     //       TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     // ),
                     // Dimens.boxWidth5,
-                    Row(
-                      children: [
-                        Text(
-                          "Select Material For Req Order:",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                        // CustomRichText(title: 'Req Order: '),
-                        Dimens.boxWidth10,
-                        SizedBox(
-                          child: Obx(
-                            () => DropdownWebStock(
-                              width: MediaQuery.of(context).size.width / 5,
-                              dropdownList: controller.goodsOrdersList,
-                              isValueSelected:
-                                  controller.isReqOrderSelected.value,
-                              selectedValue: controller.selectedReqOrder.value,
-                              onValueChanged: controller.onValueChanged,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Select Material For Req Order:",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          // CustomRichText(title: 'Req Order: '),
+                          Dimens.boxWidth10,
+                          SizedBox(
+                            child: Obx(
+                              () => DropdownWebStock(
+                                width: MediaQuery.of(context).size.width * .15,
+                                dropdownList: controller.goodsOrdersList,
+                                isValueSelected:
+                                    controller.isReqOrderSelected.value,
+                                selectedValue: controller.selectedReqOrder.value,
+                                onValueChanged: controller.onValueChanged,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 )),
+                
                 DataColumn2(
                     fixedWidth: 250,
                     label: Text(

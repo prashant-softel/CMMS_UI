@@ -58,9 +58,9 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyLight14),
                   ),
-                  Text(" / FREQUENCY NUMBER", style: Styles.greyMediumLight12)
+                  Text(" / FREQUENCY NUMBER", style: Styles.greyLight14)
                 ],
               ),
             ),

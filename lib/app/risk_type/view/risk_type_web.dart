@@ -59,7 +59,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                       Get.offNamed(Routes.misDashboard);
                     },
                     child: Text(
-                      " / HSE Report",
+                      " / HSE REPORT",
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -195,13 +195,13 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               controller: controller.titleCtrlr,
+                                              focusNode: controller.rnameFocus,
+                                              scrollController: controller.rnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -313,14 +313,14 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               controller:
                                                   controller.descriptionCtrlr,
+                                                  focusNode: controller.rdescFocus,
+                                                  scrollController: controller.rdescScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

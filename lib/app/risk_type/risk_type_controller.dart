@@ -18,6 +18,10 @@ class RiskTypeController extends GetxController {
   );
   RiskTypeListPresenter riskTypeListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode rnameFocus = FocusNode();
+  ScrollController rnameScroll = ScrollController();
+  FocusNode rdescFocus = FocusNode();
+  ScrollController rdescScroll = ScrollController();
   RiskTypeModel? selectedItem;
   RiskTypeModel? selectedItemupdate;
   Rx<bool> isFormInvalid = false.obs;
@@ -130,7 +134,16 @@ class RiskTypeController extends GetxController {
         getRiskTypeList();
       });
     });
-
+  rnameFocus.addListener(() {
+      if (!rnameFocus.hasFocus) {
+        rnameScroll.jumpTo(0.0);
+      }
+    });
+  rdescFocus.addListener(() {
+      if (!rdescFocus.hasFocus) {
+        rdescScroll.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

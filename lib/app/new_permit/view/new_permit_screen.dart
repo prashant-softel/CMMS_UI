@@ -1570,18 +1570,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   child: Text(
                                                       " / BREAKDOWN MAINTENANCE",
                                                       style: Styles
-                                                          .greyMediumLight12),
+                                                          .greyLight14),
                                                 ),
                                                 controller.newPermitDetailsModel
                                                             .value?.permitNo ==
                                                         null
                                                     ? Text(" / ADD NEW PERMIT",
                                                         style: Styles
-                                                            .greyMediumLight12)
+                                                            .greyLight14)
                                                     : Text(
                                                         " / Update NEW PERMIT",
                                                         style: Styles
-                                                            .greyMediumLight12),
+                                                            .greyLight14),
                                                 Spacer(),
                                                 controller.newPermitDetailsModel
                                                             .value?.permitNo !=

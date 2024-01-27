@@ -70,10 +70,10 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                           Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / Preventive Maintenance".toUpperCase(),
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
                       Text(" / PM PLANS",
-                          style: Styles.greyMediumLight12)
+                          style: Styles.greyLight14)
                     ],
                   ),
                 ),

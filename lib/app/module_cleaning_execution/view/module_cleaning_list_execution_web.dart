@@ -75,11 +75,11 @@ class _ModuleCleaningListExecutionState
                             onTap: () {
                               Get.offNamed(Routes.moduleCleaningDashboard);
                             },
-                            child: Text(" / MODULE EXECUTION",
-                                style: Styles.greyMediumLight12),
+                            child: Text(" / MODULE CLEANING",
+                                style: Styles.greyLight14),
                           ),
                           Text(" / MODULE CLEANING EXECUTION",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),
@@ -242,12 +242,10 @@ class _ModuleCleaningListExecutionState
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
+                                        style: TextStyle(
                                               fontSize: 16.0,
                                               height: 1.0,
                                               color: Colors.black),
-                                        ),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(

@@ -57,9 +57,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
                   ),
-                  Text(" / JOB TYPE", style: Styles.greyMediumLight12)
+                  Text(" / JOB TYPE", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -213,12 +213,10 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             // width: MediaQuery.of(context).size.width / 1.5,/
                                             child: Obx(
                                               () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
+                                                style: TextStyle(
+                                                      fontSize: 14.0,
                                                       height: 1.0,
                                                       color: Colors.black),
-                                                ),
                                                 controller:
                                                     controller.titleCtrlr,
                                                 focusNode:
@@ -349,12 +347,10 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   30,
                                               child: Obx(
                                                 () => TextField(
-                                                  style: GoogleFonts.lato(
-                                                    textStyle: TextStyle(
-                                                        fontSize: 16.0,
+                                                  style: TextStyle(
+                                                        fontSize: 14.0,
                                                         height: 1.0,
                                                         color: Colors.black),
-                                                  ),
                                                   controller: controller
                                                       .descriptionCtrlr,
                                                   focusNode:

@@ -76,10 +76,10 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                               Get.offNamed(Routes.masterDashboard);
                             },
                             child: Text(" / MASTERS",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / Warranty Claim List",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

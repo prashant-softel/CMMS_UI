@@ -75,8 +75,8 @@ class _MisTaskContentWebState extends State<MisTaskContentWeb> {
                                 Get.offNamed(Routes.misDashboard);
                               },
                               child: Text(" / MIS",
-                                  style: Styles.greyMediumLight12)),
-                          Text(" / MIS TASK", style: Styles.greyMediumLight12)
+                                  style: Styles.greyLight14)),
+                          Text(" / MIS TASK", style: Styles.greyLight14)
                         ],
                       ),
                     ),

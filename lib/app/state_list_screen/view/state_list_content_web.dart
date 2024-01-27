@@ -57,10 +57,10 @@ class StateListContentWeb extends GetView<StateListController> {
                   Get.offNamed(Routes.masterDashboard);
                 },
                 child: Text(" / Masters".toUpperCase(),
-                    style: Styles.greyMediumLight12),
+                    style: Styles.greyLight14),
               ),
               Text(" / State list".toUpperCase(),
-                  style: Styles.greyMediumLight12)
+                  style: Styles.greyLight14)
             ],
           ),
         ),

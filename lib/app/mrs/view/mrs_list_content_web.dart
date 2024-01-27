@@ -72,10 +72,10 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                         Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
                       child: Text(" / STOCK MANAGEMENT",
-                          style: Styles.greyMediumLight12),
+                          style: Styles.greyLight14),
                     ),
                     Text(" / MRS LIST",
-                        style: Styles.greyMediumLight12),
+                        style: Styles.greyLight14),
                   ],
                 ),
               ),

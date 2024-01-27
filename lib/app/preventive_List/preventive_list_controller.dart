@@ -20,6 +20,8 @@ class PreventiveListController extends GetxController {
   );
   PreventiveListPresenter preventiveListPresenter;
   final HomeController homecontroller = Get.find();
+  FocusNode checklistFocus = FocusNode();
+  ScrollController checklistScroll = ScrollController();
   // final HomeController homecontroller = Get.put( HomeController.new);
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -113,6 +115,11 @@ class PreventiveListController extends GetxController {
             getPreventiveCheckList(facilityId, type.value, true);
           });
         });
+        checklistFocus.addListener(() {
+      if (!checklistFocus.hasFocus) {
+        checklistScroll.jumpTo(0.0);
+      }
+    });
       }
       super.onInit();
     } catch (e) {

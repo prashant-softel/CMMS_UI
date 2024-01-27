@@ -52,9 +52,9 @@ class ObservationListWeb extends StatelessWidget {
                   onTap: () {
                     Get.offNamed(Routes.misDashboard);
                   },
-                  child: Text(" / MIS", style: Styles.greyMediumLight12),
+                  child: Text(" / MIS", style: Styles.greyLight14),
                 ),
-                Text(" / LIST OF OBSERVATION", style: Styles.greyMediumLight12),
+                Text(" / LIST OF OBSERVATION", style: Styles.greyLight14),
               ],
             ),
           ),

@@ -66,8 +66,8 @@ class PreventiveChecklistListContentWeb
                         ? Text(" / PREVENTIVE MAINTENANCE",
                             style: Styles.greyLight14)
                         : controller.type.value == 2
-                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
-                            : Text(" / MIS", style: Styles.greyMediumLight12),
+                            ? Text(" / AUDIT", style: Styles.greyLight14)
+                            : Text(" / MIS", style: Styles.greyLight14),
                   ),
                   Text(" / CREATE CHECKLIST NUMBER", style: Styles.greyLight14),
                 ],
@@ -83,8 +83,8 @@ class PreventiveChecklistListContentWeb
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Create  Create Checklist'
-                        : 'Open Create  Create Checklist',
+                        ? 'Close Create Checklist'
+                        : 'Open Create Checklist',
                   );
                 }),
               ),
@@ -223,6 +223,8 @@ class PreventiveChecklistListContentWeb
                                                     child: LoginCustomTextfield(
                                                       textController: controller
                                                           .checklistNumberCtrlr,
+                                                        focusNode: controller.checklistFocus,
+                                                        scroll:controller.checklistScroll
                                                     )),
                                                 Dimens.boxHeight10,
                                                 DropdownWebWidget(
@@ -464,12 +466,10 @@ class PreventiveChecklistListContentWeb
                                     height: 40,
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                            fontSize: 16.0,
+                                      style: TextStyle(
+                                            fontSize: 14.0,
                                             height: 1.0,
                                             color: Colors.black),
-                                      ),
                                       onChanged: (value) =>
                                           controller.search(value),
                                           

@@ -59,9 +59,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
+                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
                   ),
-                  Text(" / PERMIT TYPE", style: Styles.greyMediumLight12)
+                  Text(" / PERMIT TYPE", style: Styles.greyLight14)
                 ],
               ),
             ),

@@ -189,12 +189,10 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                   BorderRadius.circular(5),
                                             ),
                                             child: TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
+                                              style: TextStyle(
+                                                    fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                              ),
                                               controller: controller.nameCtrlr,
                                               focusNode: controller.nameFocus,
                                               scrollController: controller.nameScroll,
