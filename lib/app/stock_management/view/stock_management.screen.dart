@@ -265,68 +265,6 @@ class StockManagementDashboardScreen
                       child: Row(
                         children: [
                           Text(
-                            "Grievance Dashboard",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        _stockManagementList(
-                            tittle: "List of Grievance",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.grievanceList,
-                              );
-                              //  controller.checkPoint();
-                            }),
-                        _stockManagementList(
-                            tittle: "Create Grievance",
-                            ontap: () {
-                              Get.toNamed(Routes.addGrievance);
-                            }),
-                        _stockManagementList(
-                            tittle: "View Grievance",
-                            ontap: () {
-                              Get.toNamed(Routes.grievanceCardList);
-                            }),
-                        _stockManagementList(
-                            tittle: "Edit Grievance",
-                            ontap: () {
-                              Get.offNamed(Routes.grievanceDetails);
-                            }),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
                             "Masters",
                             style: TextStyle(
                               color: Color.fromARGB(255, 159, 156, 156),
