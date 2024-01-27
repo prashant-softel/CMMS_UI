@@ -78,3 +78,4 @@ class AddCourseController extends GetxController {
         isSuccess.value = false;
       });
   }
+}
