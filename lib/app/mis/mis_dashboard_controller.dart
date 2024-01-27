@@ -57,9 +57,13 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.checklistMisPlan);
   }
 
+  void goToAddCourse() {
+    misDashboardPresenter.clearValue();
+    Get.toNamed(Routes.addCourse);
+  }
+
   void goTocreatePlanScreen() {
     misDashboardPresenter.clearValue();
-
     Get.toNamed(Routes.createAudit, arguments: {"type": 3});
   }
 
@@ -95,6 +99,14 @@ class MisDashboardController extends GetxController {
 
   void trainingCourse() {
     Get.toNamed(Routes.trainingCourse);
+  }
+
+  void grievanceList() {
+    Get.toNamed(Routes.grievanceList);
+  }
+
+  void addGrievance() {
+    Get.toNamed(Routes.addGrievance);
   }
 
   void goToWasteDataScreen() {

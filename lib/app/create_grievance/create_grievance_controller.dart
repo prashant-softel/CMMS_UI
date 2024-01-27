@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -20,11 +21,27 @@ class CreateGrievanceController extends GetxController {
   CreateGrievanceController(
     this.createGrievancePresenter,
   );
+
   CreateGrievancePresenter createGrievancePresenter;
   final HomeController homecontroller = Get.find();
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
   RxList<GetRODetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
+  RxList<MonthModel> createGrievance = <MonthModel>[
+    MonthModel(name: 'Type 1 ', id: "1"),
+    MonthModel(name: 'Type 2 ', id: "2"),
+    MonthModel(name: 'Type 3', id: "3"),
+  ].obs;
+  var concernController = TextEditingController();
+  var jobTitleCtrlr = TextEditingController();
+  var breakdownTimeCtrlr = TextEditingController();
+
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isJobTitleInvalid = false.obs;
+  Rx<bool> isJobDescriptionInvalid = false.obs;
+  FocusNode descFocus = FocusNode();
+  ScrollController descScroll = ScrollController();
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;

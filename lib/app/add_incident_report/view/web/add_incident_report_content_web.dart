@@ -96,8 +96,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                               child: Text(" / Incident Report",
                                   style: Styles.greyLight14),
                             ),
-                            controller.irId != null
-                                ? Text(" / Update Incident Report",
+                            controller.irId != null ||
+                                    controller.irId != 0 ||
+                                    controller.irId != ''
+                                ? Text(" / Update Incident Report11",
                                     style: Styles.greyLight14)
                                 : Text(" / Add Incident Report",
                                     style: Styles.greyLight14)
@@ -120,10 +122,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                       () => Column(
                                         children: [
                                           CustomAppBar(
-                                              title: controller.irId != null
+                                              title: controller.irId != null ||
+                                                      controller.irId != 0 ||
+                                                      controller.irId != ''
                                                   ? 'Update Incident Report'.tr
                                                   : 'Add Incident Report'.tr,
-                                              action: controller.irId != null
+                                              action: controller.irId != null ||
+                                                      controller.irId != 0 ||
+                                                      controller.irId != ''
                                                   ? Row(
                                                       children: [
                                                         Text(
@@ -908,7 +914,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                 ),
 
                                                 Dimens.boxHeight20,
-                                                controller.irId != null
+                                                controller.irId != null ||
+                                                        controller.irId != 0 ||
+                                                        controller.irId != ''
                                                     ? Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -918,7 +926,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      'Detail Investigation Required: '),
+                                                                      'Detail Investigation Required1: '),
                                                               SizedBox(
                                                                 width: 3,
                                                               ),
@@ -1070,7 +1078,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                               SizedBox(
                                                                                 height: 20,
                                                                               ),
-                                                                              controller.irId != null
+                                                                              controller.irId != null || controller.irId != 0 || controller.irId != ''
                                                                                   ? Column(
                                                                                       children: []..addAll(controller.investigationTeamList!.map((element) => Row(
                                                                                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1240,7 +1248,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                           ////
 
                                           ///Incident Report History
-                                          controller.irId != null
+                                          controller.irId != null ||
+                                                  controller.irId != 0 ||
+                                                  controller.irId != ''
                                               ? Container(
                                                   margin: Dimens.edgeInsets20,
                                                   height: ((controller
@@ -1408,7 +1418,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               SizedBox(
                                                 width: 20,
                                               ),
-                                              controller.irId == null
+                                              controller.irId == null ||
+                                                      controller.irId != 0 ||
+                                                      controller.irId != ''
                                                   ? CustomElevatedButton(
                                                       backgroundColor:
                                                           ColorValues
@@ -3390,27 +3402,22 @@ class AddPrposedAction extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                          decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
                                             child: DropdownWebStock(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -3424,7 +3431,8 @@ class AddPrposedAction extends StatelessWidget {
                                                 print({
                                                   selectedValue: selectedValue
                                                 });
-                                                mapData["value"] = selectedValue;
+                                                mapData["value"] =
+                                                    selectedValue;
                                                 controller.dropdownEquipmentNameMapperData[
                                                         selectedValue] =
                                                     list.firstWhere(
@@ -3449,27 +3457,22 @@ class AddPrposedAction extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                              decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
-
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -3477,11 +3480,13 @@ class AddPrposedAction extends StatelessWidget {
                                                       4,
                                                   dropdownList:
                                                       controller.statusList,
-                                                  selectedValue: mapData["value"],
+                                                  selectedValue:
+                                                      mapData["value"],
                                                   onValueChanged:
                                                       (list, selectedValue) {
                                                     print({
-                                                      selectedValue: selectedValue
+                                                      selectedValue:
+                                                          selectedValue
                                                     });
                                                     mapData["value"] =
                                                         selectedValue;
@@ -4557,34 +4562,34 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                          ],
+                                          color: ColorValues.whiteColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
                                         child: DropdownWebStock(
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  4,
-                                          dropdownList: controller.victimNameList,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          dropdownList:
+                                              controller.victimNameList,
                                           selectedValue: mapData["value"],
-                                          onValueChanged: (list, selectedValue) {
-                                            print({selectedValue: selectedValue});
+                                          onValueChanged:
+                                              (list, selectedValue) {
+                                            print(
+                                                {selectedValue: selectedValue});
                                             if (selectedValue != null) {
                                               controller.updateSelectedOption(
                                                   selectedValue);
@@ -4696,26 +4701,22 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                              decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
                                                 child: DropdownWebStock(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -4723,11 +4724,13 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                       4,
                                                   dropdownList:
                                                       controller.genderList,
-                                                  selectedValue: mapData["value"],
+                                                  selectedValue:
+                                                      mapData["value"],
                                                   onValueChanged:
                                                       (list, selectedValue) {
                                                     print({
-                                                      selectedValue: selectedValue
+                                                      selectedValue:
+                                                          selectedValue
                                                     });
                                                     mapData["value"] =
                                                         selectedValue;
@@ -4873,28 +4876,32 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                 .start,
                                                         children: [
                                                           Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
                                                             ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
-                                                            child: DropdownWebStock(
+                                                            child:
+                                                                DropdownWebStock(
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -4918,8 +4925,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                         selectedValue] =
                                                                     list.firstWhere(
                                                                         (element) =>
-                                                                            element
-                                                                                .name ==
+                                                                            element.name ==
                                                                             selectedValue,
                                                                         orElse:
                                                                             null);
@@ -4947,27 +4953,32 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                     .start,
                                                             children: [
                                                               Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                                child: DropdownWebStock(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black26,
+                                                                      offset:
+                                                                          const Offset(
+                                                                        5.0,
+                                                                        5.0,
+                                                                      ),
+                                                                      blurRadius:
+                                                                          5.0,
+                                                                      spreadRadius:
+                                                                          1.0,
+                                                                    ),
+                                                                  ],
+                                                                  color: ColorValues
+                                                                      .whiteColor,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    DropdownWebStock(
                                                                   width: MediaQuery.of(
                                                                               context)
                                                                           .size
@@ -4990,8 +5001,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                         selectedValue;
                                                                     controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
                                                                         (element) =>
-                                                                            element
-                                                                                .name ==
+                                                                            element.name ==
                                                                             selectedValue,
                                                                         orElse:
                                                                             null);
@@ -5080,46 +5090,41 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                             .start,
                                                                     children: [
                                                                       Container(
-                                                                        decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                                        child: DropdownWebStock(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black26,
+                                                                              offset: const Offset(
+                                                                                5.0,
+                                                                                5.0,
+                                                                              ),
+                                                                              blurRadius: 5.0,
+                                                                              spreadRadius: 1.0,
+                                                                            ),
+                                                                          ],
+                                                                          color:
+                                                                              ColorValues.whiteColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
+                                                                        ),
+                                                                        child:
+                                                                            DropdownWebStock(
                                                                           width:
-                                                                              MediaQuery.of(context).size.width /
-                                                                                  4,
+                                                                              MediaQuery.of(context).size.width / 4,
                                                                           dropdownList:
                                                                               controller.eqipmentNameList,
                                                                           selectedValue:
                                                                               mapData["value"],
                                                                           onValueChanged:
-                                                                              (list,
-                                                                                  selectedValue) {
+                                                                              (list, selectedValue) {
                                                                             print({
-                                                                              selectedValue:
-                                                                                  selectedValue
+                                                                              selectedValue: selectedValue
                                                                             });
                                                                             mapData["value"] =
                                                                                 selectedValue;
-                                                                            controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
-                                                                                (element) => element.name == selectedValue,
-                                                                                orElse: null);
+                                                                            controller.dropdownEquipmentNameMapperData[selectedValue] =
+                                                                                list.firstWhere((element) => element.name == selectedValue, orElse: null);
                                                                           },
                                                                         ),
                                                                       ),

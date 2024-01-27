@@ -44,8 +44,8 @@ class FileUploadController extends GetxController {
   Future<List<XFile>> addFiles() async {
     final ImagePicker picker = ImagePicker();
     pickedFiles.value = await picker.pickMultiImage();
-    if (pickedFiles.isNotEmpty)
-      initializeDescriptionControllers(pickedFiles.value);
+    // if (pickedFiles.isNotEmpty)
+    initializeDescriptionControllers(pickedFiles.value);
     return pickedFiles.value;
   }
 

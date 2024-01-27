@@ -316,6 +316,14 @@ class ViewIncidentReportController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.action_taken_datetime}'))}';
       reportingDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
+      detailInvestigationTeamValue.value =
+          incidentReportDetailsModel.value?.is_investigation_required == 1
+              ? true
+              : false;
+      whyWhyAnalysisValue.value =
+          incidentReportDetailsModel.value?.is_why_why_required == 1
+              ? true
+              : false;
 
       ///New Data adding
       detailsOfInjuredPersonList?.value =

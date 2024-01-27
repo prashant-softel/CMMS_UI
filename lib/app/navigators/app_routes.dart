@@ -111,7 +111,6 @@ abstract class Routes {
   static const viewEscalatiomMatrixContentWeb =
       _Paths.viewEscalatiomMatrixContentWeb;
 
-  static const incident_risk_dashboard = _Paths.incident_risk_dashboard;
   static const inventoryCategory = _Paths.inventoryCategory;
 
   static const insuranceProvider = _Paths.insuranceProvider;
@@ -159,6 +158,7 @@ abstract class Routes {
   static const createAudit = _Paths.createAudit;
   static const observationListScreen = _Paths.observationListScreen;
   static const createObservation = _Paths.createObservation;
+  static const addCourse = _Paths.addCourse;
   static const checkListOfObservation = _Paths.checkListOfObservation;
   static const viewAuditPlan = _Paths.viewAuditPlan;
   static const statutory = _Paths.statutory;
@@ -287,7 +287,6 @@ abstract class _Paths {
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
   static const viewEscalatiomMatrixContentWeb = '/view-escalation-matrix';
 
-  static const incident_risk_dashboard = '/incident-risk-dashboard';
   static const inventoryCategory = '/inventoryCategory';
   static const insuranceProvider = '/insuranceProvider';
   static const editMrs = '/editMrs';
@@ -336,6 +335,7 @@ abstract class _Paths {
   static const createAudit = '/create-audit';
   static const observationListScreen = '/observationListScreen';
   static const createObservation = '/createObservation';
+  static const addCourse = '/addCourse';
   static const checkListOfObservation = '/checkListOfObservation';
   static const viewAuditPlan = '/viewAuditPlan';
   static const statutory = '/statutory';

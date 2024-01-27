@@ -128,25 +128,25 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               'Type of Observation'),
                                                       Dimens.boxWidth10,
                                                       Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors
+                                                          //         .black26,
+                                                          //     offset:
+                                                          //         const Offset(
+                                                          //       5.0,
+                                                          //       5.0,
+                                                          //     ),
+                                                          //     blurRadius: 5.0,
+                                                          //     spreadRadius: 1.0,
+                                                          //   ),
+                                                          // ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
                                                         child: DropdownWebStock(
                                                           width: MediaQuery.of(
                                                                       context)
@@ -170,25 +170,25 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title: 'Risk Type'),
                                                       Dimens.boxWidth10,
                                                       Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors
+                                                          //         .black26,
+                                                          //     offset:
+                                                          //         const Offset(
+                                                          //       5.0,
+                                                          //       5.0,
+                                                          //     ),
+                                                          //     blurRadius: 5.0,
+                                                          //     spreadRadius: 1.0,
+                                                          //   ),
+                                                          // ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
                                                         child: DropdownWebStock(
                                                           width: MediaQuery.of(
                                                                       context)
@@ -196,7 +196,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   .width /
                                                               5,
                                                           dropdownList:
-                                                              controller.riskType,
+                                                              controller
+                                                                  .riskType,
                                                           // selectedValue: ,
                                                           onValueChanged: (riskType,
                                                               selectedValue) {},
@@ -245,25 +246,25 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           title: 'Cost type'),
                                                       Dimens.boxWidth10,
                                                       Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors
+                                                          //         .black26,
+                                                          //     offset:
+                                                          //         const Offset(
+                                                          //       5.0,
+                                                          //       5.0,
+                                                          //     ),
+                                                          //     blurRadius: 5.0,
+                                                          //     spreadRadius: 1.0,
+                                                          //   ),
+                                                          // ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
                                                         child: DropdownWebStock(
                                                           width: MediaQuery.of(
                                                                       context)
@@ -271,27 +272,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   .width /
                                                               5,
                                                           dropdownList:
-                                                              controller.costType,
+                                                              controller
+                                                                  .costType,
                                                           // selectedValue: ,
                                                           onValueChanged: (costType,
                                                               selectedValue) {},
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight5,
-                                                  Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title: 'Status'),
-                                                      Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
                                                       ),
                                                     ],
                                                   ),
@@ -335,48 +321,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                     children: [
                                                       CustomRichText(
                                                           title:
-                                                              'Month of Observation'),
-                                                      Dimens.boxWidth10,
-                                                      Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
-                                                        child: DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          dropdownList:
-                                                              controller.month,
-                                                          // selectedValue: ,
-                                                          onValueChanged: (month,
-                                                              selectedValue) {},
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight5,
-                                                  Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title:
                                                               'Location of Observation'),
                                                       Dimens.boxWidth10,
                                                       GoodsOrderTextField(
@@ -397,25 +341,25 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               'Source of Observation'),
                                                       Dimens.boxWidth10,
                                                       Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors
+                                                          //         .black26,
+                                                          //     offset:
+                                                          //         const Offset(
+                                                          //       5.0,
+                                                          //       5.0,
+                                                          //     ),
+                                                          //     blurRadius: 5.0,
+                                                          //     spreadRadius: 1.0,
+                                                          //   ),
+                                                          // ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
                                                         child: DropdownWebStock(
                                                           width: MediaQuery.of(
                                                                       context)
@@ -479,23 +423,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                   Row(
                                                     children: [
                                                       CustomRichText(
-                                                          title:
-                                                              'Contact Number'),
-                                                      Dimens.boxWidth10,
-                                                      GoodsOrderTextField(
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-
-                                                        // textController:
-                                                        //     controller.challanNoCtrlr,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight5,
-                                                  Row(
-                                                    children: [
-                                                      CustomRichText(
                                                           title: 'Closer Date'),
                                                       Dimens.boxWidth10,
                                                       CustomTextFieldForStock(
@@ -515,6 +442,23 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                         },
                                                         // textController:
                                                         //     controller.receivedDateTc,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight5,
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Contact Number'),
+                                                      Dimens.boxWidth10,
+                                                      GoodsOrderTextField(
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+
+                                                        // textController:
+                                                        //     controller.challanNoCtrlr,
                                                       ),
                                                     ],
                                                   ),
