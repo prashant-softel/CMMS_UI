@@ -69,12 +69,13 @@ class AddCourseController extends GetxController {
   }
 
   cleardata() {
-      minutes.text = '';
-      descCtrlr.text = '';
-      topic.text = '';
-      courseIdController.text = '';
-      maximumCapacity.text = '';
-      Future.delayed(Duration(seconds: 5), () {
-        isSuccess.value = false;
-      });
+    minutes.text = '';
+    descCtrlr.text = '';
+    topic.text = '';
+    courseIdController.text = '';
+    maximumCapacity.text = '';
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
   }
+}
