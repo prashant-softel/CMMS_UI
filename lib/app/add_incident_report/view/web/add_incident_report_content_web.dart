@@ -56,144 +56,332 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        height: 55,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 227, 224, 224),
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 236, 234, 234)
-                                  .withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Row(
+                      Card(
+                        // color: Colors.lightBlue.shade50,
+                        color: Color.fromARGB(255, 237, 240, 242),
+                        child: Wrap(
                           children: [
-                            Icon(
-                              Icons.home,
-                              color: ColorValues.greyLightColor,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.offNamed(Routes.home);
-                              },
-                              child: Text(
-                                "Dashboard",
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.offNamed(Routes.incidentReportDashboard);
-                              },
-                              child: Text(" / Incident Report",
-                                  style: Styles.greyLight14),
-                            ),
-                            controller.irId != null ||
-                                    controller.irId != 0 ||
-                                    controller.irId != ''
-                                ? Text(" / Update Incident Report11",
-                                    style: Styles.greyLight14)
-                                : Text(" / Add Incident Report",
-                                    style: Styles.greyLight14)
-                          ],
-                        ),
-                      ),
-                      Dimens.boxHeight10,
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 1,
-                        // height: MediaQuery.of(context).size.height / 1,
-                        child: Card(
-                          // color: Colors.lightBlue.shade50,
-                          color: Color.fromARGB(255, 237, 240, 242),
-                          child: Wrap(
-                            children: [
-                              GetBuilder<AddIncidentReportController>(
-                                  id: 'incident-report',
-                                  builder: (controller) {
-                                    return Obx(
-                                      () => Column(
-                                        children: [
-                                          CustomAppBar(
-                                              title: controller.irId != null ||
-                                                      controller.irId != 0 ||
-                                                      controller.irId != ''
-                                                  ? 'Update Incident Report'.tr
-                                                  : 'Add Incident Report'.tr,
-                                              action: controller.irId != null ||
-                                                      controller.irId != 0 ||
-                                                      controller.irId != ''
-                                                  ? Row(
-                                                      children: [
-                                                        Text(
-                                                          'Id: ',
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Text(
-                                                          '${controller.irId}',
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  : Dimens.box0),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10, top: 10, right: 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 50),
-                                                      child: CustomRichText(
-                                                          title:
-                                                              'Incident Title: '),
-                                                    ),
-                                                    Expanded(
-                                                      child:
-                                                          _buildIncidentReportTitleTextField_web(
-                                                              context),
-                                                    ),
-                                                  ],
+                            GetBuilder<AddIncidentReportController>(
+                                id: 'incident-report',
+                                builder: (controller) {
+                                  return Obx(
+                                    () => Column(
+                                      children: [
+                                        Container(
+                                          height: 55,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        255, 236, 234, 234)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.home,
+                                                color:
+                                                    ColorValues.greyLightColor,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.offNamed(Routes.home);
+                                                },
+                                                child: Text(
+                                                  "Dashboard",
+                                                  style: Styles.greyLight14,
                                                 ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.offNamed(Routes
+                                                      .incidentReportDashboard);
+                                                },
+                                                child: Text(
+                                                    " / Incident Report",
+                                                    style: Styles.greyLight14),
+                                              ),
+                                              controller.irId.value > 0
+                                                  ? Text(
+                                                      " / Update Incident Report",
+                                                      style: Styles.greyLight14)
+                                                  : Text(
+                                                      " / Add Incident Report",
+                                                      style: Styles.greyLight14)
+                                            ],
+                                          ),
+                                        ),
+                                        Dimens.boxHeight10,
 
-                                                Dimens.boxHeight10,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
+                                        CustomAppBar(
+                                            title: controller.irId.value > 0
+                                                ? 'Update Incident Report'.tr
+                                                : 'Add Incident Report'.tr,
+                                            action: controller.irId.value > 0
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        'Id: ',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Text(
+                                                        '${controller.irId.value}',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Dimens.box0),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, top: 10, right: 10),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 50),
+                                                    child: CustomRichText(
                                                         title:
-                                                            'Incident Description: '),
-                                                    Expanded(
-                                                      child:
-                                                          _buildIncidentReportDescriptionField_web(
-                                                              context),
-                                                    ),
-                                                  ],
-                                                ),
+                                                            'Incident Title: '),
+                                                  ),
+                                                  Expanded(
+                                                    child:
+                                                        _buildIncidentReportTitleTextField_web(
+                                                            context),
+                                                  ),
+                                                ],
+                                              ),
 
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
+                                              Dimens.boxHeight10,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title:
+                                                          'Incident Description: '),
+                                                  Expanded(
+                                                    child:
+                                                        _buildIncidentReportDescriptionField_web(
+                                                            context),
+                                                  ),
+                                                ],
+                                              ),
+
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        children: [
+                                                          CustomRichText(
+                                                              title:
+                                                                  'Type of Incident: '),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                            child: Obx(
+                                                              () =>
+                                                                  DropdownWebWidget(
+                                                                dropdownList:
+                                                                    controller
+                                                                        .riskTypeList,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isRiskTypeListSelected
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedRiskTypeList
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueChanged,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight5,
+                                                      Row(
+                                                        children: [
+                                                          CustomRichText(
+                                                              title:
+                                                                  'Incident date & Time: '),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                            child:
+                                                                _buildIncidentDateTimeField_web(
+                                                              context,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      // Dimens.boxHeight5,
+                                                      // Row(
+                                                      //   children: [
+                                                      //     SizedBox(
+                                                      //       width: 140,
+                                                      //       child: CustomRichText(
+                                                      //           title:
+                                                      //               'Incident Investigation Team: '),
+                                                      //     ),
+                                                      //     Dimens.boxWidth10,
+                                                      //     SizedBox(
+                                                      //       width: MediaQuery.of(
+                                                      //                   context)
+                                                      //               .size
+                                                      //               .width /
+                                                      //           5,
+                                                      //       child: Obx(
+                                                      //         () =>
+                                                      //             DropdownWebWidget(
+                                                      //           dropdownList:
+                                                      //               controller
+                                                      //                   .incidentInvestigationDoneByList,
+                                                      //           isValueSelected:
+                                                      //               controller
+                                                      //                   .isincidentInvestigationDoneByListSelected
+                                                      //                   .value,
+                                                      //           selectedValue:
+                                                      //               controller
+                                                      //                   .selectedIncidentInvestigationDoneByList
+                                                      //                   .value,
+                                                      //           onValueChanged:
+                                                      //               controller
+                                                      //                   .onValueChanged,
+                                                      //         ),
+                                                      //       ),
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
+                                                      Dimens.boxHeight5,
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 140,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Asset Restoration Action Taken By: '),
+                                                          ),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                            child: Obx(
+                                                              () =>
+                                                                  DropdownWebWidget(
+                                                                dropdownList:
+                                                                    controller
+                                                                        .assetRestorationActionTakenByList,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isAssetRestorationActionTakenByListSelected
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedAssetRestorationActionTakenByList
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueAssetRestorationActionTakenByChanged,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight5,
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 140,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Damaged Asset Cost Approx: '),
+                                                          ),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child:
+                                                                  _buildDamagedAssetsCostTextField_web(
+                                                                      context)),
+                                                        ],
+                                                      ),
+                                                      Dimens.boxHeight5,
+                                                      Row(
+                                                        children: [
+                                                          SizedBox(
+                                                              width: 150,
+                                                              child: CustomRichText(
+                                                                  title:
+                                                                      'Gen Loss Due To Asset Damage')),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child:
+                                                                  _buildGenLossAssetDamageTextField_web(
+                                                                      context)),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  ////Changes from here top for left Column
+
+                                                  ///Changes from here below for right Column
+                                                  Spacer(),
+                                                  // Dimens.boxWidth50,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 20),
+                                                    child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .end,
@@ -203,7 +391,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Type of Incident: '),
+                                                                    'Location: '),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                               width: MediaQuery.of(
@@ -214,16 +402,17 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               child: Obx(
                                                                 () =>
                                                                     DropdownWebWidget(
+                                                                  // margin: Dimens.edgeInsets5,
                                                                   dropdownList:
                                                                       controller
-                                                                          .riskTypeList,
+                                                                          .blockList,
                                                                   isValueSelected:
                                                                       controller
-                                                                          .isRiskTypeListSelected
+                                                                          .isBlockSelected
                                                                           .value,
                                                                   selectedValue:
                                                                       controller
-                                                                          .selectedRiskTypeList
+                                                                          .selectedBlock
                                                                           .value,
                                                                   onValueChanged:
                                                                       controller
@@ -233,12 +422,77 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxHeight5,
+                                                        Dimens.boxHeight10,
                                                         Row(
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Incident date & Time: '),
+                                                                    'Incident Severity: '),
+                                                            Column(
+                                                              children: [
+                                                                buildRadioButton(
+                                                                    'Critical',
+                                                                    Colors.red,
+                                                                    Colors
+                                                                        .white,
+                                                                    context),
+                                                                buildRadioButton(
+                                                                    'High',
+                                                                    Colors
+                                                                        .orange,
+                                                                    Colors
+                                                                        .white,
+                                                                    context),
+                                                              ],
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            Column(
+                                                              children: [
+                                                                buildRadioButton(
+                                                                    'Medium',
+                                                                    Colors
+                                                                        .yellow,
+                                                                    Colors
+                                                                        .white,
+                                                                    context),
+                                                                buildRadioButton(
+                                                                    'Low',
+                                                                    Colors
+                                                                        .green,
+                                                                    Colors
+                                                                        .white,
+                                                                    context),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Asset Restoration Date & Time: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildActionTakenDateTimeField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+
+                                                        Dimens.boxHeight20,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'ESI Applicability: '),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                               width: MediaQuery.of(
@@ -247,59 +501,91 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child:
-                                                                  _buildIncidentDateTimeField_web(
-                                                                context,
+                                                                  // controller
+                                                                  //             .id !=
+                                                                  //         null
+                                                                  //     ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
+                                                                  //             "YES"
+                                                                  //         ? Obx(
+                                                                  //             () =>
+                                                                  //                 Switch(
+                                                                  //               activeColor: Colors.green,
+                                                                  //               value: controller.esiApplicabilityDetailValue.value,
+                                                                  //               onChanged: (value) {
+                                                                  //                 controller.esiApplicabilityDetailValue.value = value;
+                                                                  //                 print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                  //               },
+                                                                  //             ),
+                                                                  //           )
+                                                                  //         : Obx(
+                                                                  //             () =>
+                                                                  //                 Switch(
+                                                                  //               activeColor: Colors.green,
+                                                                  //               value: controller.esiApplicabilityDetailFalseValue.value,
+                                                                  //               onChanged: (value) {
+                                                                  //                 controller.esiApplicabilityDetailFalseValue.value = value;
+                                                                  //                 print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                  //               },
+                                                                  //             ),
+                                                                  //           )
+                                                                  //     :
+                                                                  Obx(
+                                                                () => Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .esiApplicabilityValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .esiApplicabilityValue
+                                                                        .value = value;
+                                                                  },
+                                                                ),
                                                               ),
                                                             ),
                                                           ],
                                                         ),
-                                                        // Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     SizedBox(
-                                                        //       width: 140,
-                                                        //       child: CustomRichText(
-                                                        //           title:
-                                                        //               'Incident Investigation Team: '),
-                                                        //     ),
-                                                        //     Dimens.boxWidth10,
-                                                        //     SizedBox(
-                                                        //       width: MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width /
-                                                        //           5,
-                                                        //       child: Obx(
-                                                        //         () =>
-                                                        //             DropdownWebWidget(
-                                                        //           dropdownList:
-                                                        //               controller
-                                                        //                   .incidentInvestigationDoneByList,
-                                                        //           isValueSelected:
-                                                        //               controller
-                                                        //                   .isincidentInvestigationDoneByListSelected
-                                                        //                   .value,
-                                                        //           selectedValue:
-                                                        //               controller
-                                                        //                   .selectedIncidentInvestigationDoneByList
-                                                        //                   .value,
-                                                        //           onValueChanged:
-                                                        //               controller
-                                                        //                   .onValueChanged,
-                                                        //         ),
-                                                        //       ),
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
+
                                                         Dimens.boxHeight5,
+                                                        // controller
+                                                        //             .incidentReportDetailsModel
+                                                        //             .value
+                                                        //             ?.esi_applicability_name ==
+                                                        //         "YES"
+                                                        //     ? Text('Hello')
+                                                        //     : Dimens.box0,
+
                                                         Row(
                                                           children: [
-                                                            SizedBox(
-                                                              width: 140,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Asset Restoration Action Taken By: '),
-                                                            ),
+                                                            controller.esiApplicabilityValue ==
+                                                                    true
+                                                                ? CustomRichText(
+                                                                    title:
+                                                                        'ESI Applicability Remark: ')
+                                                                : Container(),
+                                                            Dimens.boxWidth10,
+                                                            controller.esiApplicabilityValue ==
+                                                                    true
+                                                                ? SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        5,
+                                                                    child: _buildESIApplicabilityRemarkTextField_web(
+                                                                        context))
+                                                                : Container(),
+                                                          ],
+                                                        ),
+
+                                                        Dimens.boxHeight15,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Legal Applicability: '),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                               width: MediaQuery.of(
@@ -308,1167 +594,866 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .width /
                                                                   5,
                                                               child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .assetRestorationActionTakenByList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isAssetRestorationActionTakenByListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedAssetRestorationActionTakenByList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueAssetRestorationActionTakenByChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 140,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Damaged Asset Cost Approx: '),
-                                                            ),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    _buildDamagedAssetsCostTextField_web(
-                                                                        context)),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                                width: 150,
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Gen Loss Due To Asset Damage')),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    _buildGenLossAssetDamageTextField_web(
-                                                                        context)),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-
-                                                    ////Changes from here top for left Column
-
-                                                    ///Changes from here below for right Column
-                                                    Spacer(),
-                                                    // Dimens.boxWidth50,
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 20),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Dimens.boxHeight10,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Location: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    // margin: Dimens.edgeInsets5,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .blockList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isBlockSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedBlock
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight10,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident Severity: '),
-                                                              Column(
-                                                                children: [
-                                                                  buildRadioButton(
-                                                                      'Critical',
-                                                                      Colors
-                                                                          .red,
-                                                                      Colors
-                                                                          .white,
-                                                                      context),
-                                                                  buildRadioButton(
-                                                                      'High',
-                                                                      Colors
-                                                                          .orange,
-                                                                      Colors
-                                                                          .white,
-                                                                      context),
-                                                                ],
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              Column(
-                                                                children: [
-                                                                  buildRadioButton(
-                                                                      'Medium',
-                                                                      Colors
-                                                                          .yellow,
-                                                                      Colors
-                                                                          .white,
-                                                                      context),
-                                                                  buildRadioButton(
-                                                                      'Low',
+                                                                () => Switch(
+                                                                  activeColor:
                                                                       Colors
                                                                           .green,
-                                                                      Colors
-                                                                          .white,
-                                                                      context),
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-
-                                                          Dimens.boxHeight10,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Asset Restoration Date & Time: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildActionTakenDateTimeField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-
-                                                          Dimens.boxHeight20,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'ESI Applicability: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    // controller
-                                                                    //             .id !=
-                                                                    //         null
-                                                                    //     ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
-                                                                    //             "YES"
-                                                                    //         ? Obx(
-                                                                    //             () =>
-                                                                    //                 Switch(
-                                                                    //               activeColor: Colors.green,
-                                                                    //               value: controller.esiApplicabilityDetailValue.value,
-                                                                    //               onChanged: (value) {
-                                                                    //                 controller.esiApplicabilityDetailValue.value = value;
-                                                                    //                 print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //         : Obx(
-                                                                    //             () =>
-                                                                    //                 Switch(
-                                                                    //               activeColor: Colors.green,
-                                                                    //               value: controller.esiApplicabilityDetailFalseValue.value,
-                                                                    //               onChanged: (value) {
-                                                                    //                 controller.esiApplicabilityDetailFalseValue.value = value;
-                                                                    //                 print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                    //               },
-                                                                    //             ),
-                                                                    //           )
-                                                                    //     :
-                                                                    Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .esiApplicabilityValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .esiApplicabilityValue
-                                                                          .value = value;
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-
-                                                          Dimens.boxHeight5,
-                                                          // controller
-                                                          //             .incidentReportDetailsModel
-                                                          //             .value
-                                                          //             ?.esi_applicability_name ==
-                                                          //         "YES"
-                                                          //     ? Text('Hello')
-                                                          //     : Dimens.box0,
-
-                                                          Row(
-                                                            children: [
-                                                              controller.esiApplicabilityValue ==
-                                                                      true
-                                                                  ? CustomRichText(
-                                                                      title:
-                                                                          'ESI Applicability Remark: ')
-                                                                  : Container(),
-                                                              Dimens.boxWidth10,
-                                                              controller.esiApplicabilityValue ==
-                                                                      true
-                                                                  ? SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child: _buildESIApplicabilityRemarkTextField_web(
-                                                                          context))
-                                                                  : Container(),
-                                                            ],
-                                                          ),
-
-                                                          Dimens.boxHeight15,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Legal Applicability: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
+                                                                  value: controller
+                                                                      .legalApplicabilityValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
                                                                         .legalApplicabilityValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .legalApplicabilityValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'Legal applicability: ${controller.legalApplicabilityValue.value}');
-                                                                    },
-                                                                  ),
+                                                                        .value = value;
+                                                                    print(
+                                                                        'Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                  },
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              controller.legalApplicabilityValue ==
-                                                                      true
-                                                                  ? CustomRichText(
-                                                                      title:
-                                                                          'Legal Applicability Remark: ')
-                                                                  : Container(),
-                                                              Dimens.boxWidth10,
-                                                              controller.legalApplicabilityValue ==
-                                                                      true
-                                                                  ? SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child: _buildLegalApplicabilityRemarkTextField_web(
-                                                                          context))
-                                                                  : Container(),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            ' Insurance Applicable: '),
-                                                    Dimens.boxWidth10,
-                                                    Obx(
-                                                      () => SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        child: Switch(
-                                                          activeColor:
-                                                              Colors.green,
-                                                          value: controller
-                                                              .insuranceApplicableValue
-                                                              .value,
-                                                          onChanged: (value) {
-                                                            controller
-                                                                .insuranceApplicableValue
-                                                                .value = value;
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    controller.insuranceApplicableValue ==
-                                                            true
-                                                        ? CustomRichText(
-                                                            title:
-                                                                '    Insurance Available: ')
-                                                        : Container(),
-                                                    Dimens.boxWidth10,
-                                                    controller.insuranceApplicableValue ==
-                                                            true
-                                                        ? SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                            child:
-                                                                _buildInsuranceAvailableTextField_web(
-                                                                    context))
-                                                        : Container(),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight20,
-
-                                                ///Personal Details
-                                                DetailsOfInjuredPerson(),
-
-                                                ///Investigation Block
-                                                Dimens.boxHeight5,
-
-                                                ///Investigation
-                                                Container(
-                                                  margin: EdgeInsets.all(20),
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.grey
-                                                            .withOpacity(.3)),
-                                                  ),
-                                                  child: Container(
-                                                    color: Color.fromARGB(
-                                                        255, 237, 240, 242),
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 20),
-                                                          child: Text(
-                                                            "Investigation",
-                                                            style:
-                                                                Styles.blue700,
-                                                          ),
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 20),
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'What task or type of job was being performed? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          1)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Was the person involved in these activities trained and if so, when? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          2)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Was the person authorized/licensed to carry out that type of work / use machinery? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          3)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'What instructions had been given? By Whom? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          4)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'What safety equipment and /protection was used/ available? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          5)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Were correct safe procedures being observed? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          6)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'What unsafe condition contributed to the incident? ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          7)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Did unsafe act/s cause the incident? If yes. Mention the same ',
-                                                                        style: Styles
-                                                                            .black15,
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight3,
-                                                                      investigationTextfields(
-                                                                          context,
-                                                                          8)
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                ],
                                                               ),
                                                             ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            controller.legalApplicabilityValue ==
+                                                                    true
+                                                                ? CustomRichText(
+                                                                    title:
+                                                                        'Legal Applicability Remark: ')
+                                                                : Container(),
+                                                            Dimens.boxWidth10,
+                                                            controller.legalApplicabilityValue ==
+                                                                    true
+                                                                ? SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        5,
+                                                                    child: _buildLegalApplicabilityRemarkTextField_web(
+                                                                        context))
+                                                                : Container(),
                                                           ],
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
+                                                ],
+                                              ),
 
-                                                Dimens.boxHeight20,
-                                                controller.irId != null ||
-                                                        controller.irId != 0 ||
-                                                        controller.irId != ''
-                                                    ? Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Detail Investigation Required1: '),
-                                                              SizedBox(
-                                                                width: 3,
-                                                              ),
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .detailInvestigationTeamValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .detailInvestigationTeamValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          ////Investigation team
-                                                          controller.detailInvestigationTeamValue ==
-                                                                  true
-                                                              ? Container(
-                                                                  width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                                  margin:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              20),
-                                                                  // height: Get.height,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .withOpacity(.3)),
-                                                                  ),
-                                                                  // constraints: BoxConstraints(
-                                                                  //   maxWidth: 1100,
-                                                                  // ),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                10,
-                                                                            left:
-                                                                                10),
-                                                                        child:
-                                                                            Text(
-                                                                          "Investigation Team",
-                                                                          style:
-                                                                              Styles.blue700,
-                                                                        ),
-                                                                      ),
-                                                                      // Dimens.boxHeight10,
-                                                                      Row(
-                                                                        children: [
-                                                                          Spacer(),
-                                                                          Row(
-                                                                            children: [
-                                                                              CustomRichText(title: 'Name: '),
-                                                                              Dimens.boxWidth10,
-                                                                              GoodsOrderTextField(
-                                                                                textController: controller.investigationTeamNameTextFieldController,
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                          Dimens
-                                                                              .boxWidth50,
-                                                                          Row(
-                                                                            children: [
-                                                                              CustomRichText(title: 'Designation: '),
-                                                                              Dimens.boxWidth10,
-                                                                              GoodsOrderTextField(
-                                                                                textController: controller.investigationTeamDesignationTextFieldController,
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                          Dimens
-                                                                              .boxWidth20,
-                                                                          ElevatedButton(
-                                                                            child:
-                                                                                Text(
-                                                                              'Add',
-                                                                              style: TextStyle(color: ColorValues.whiteColor),
-                                                                            ),
-                                                                            onPressed:
-                                                                                () {
-                                                                              controller.updateInvestigationTeamText(
-                                                                                controller.investigationTeamSrNumberTextFieldController.text,
-                                                                                controller.investigationTeamNameTextFieldController.text,
-                                                                                controller.investigationTeamDesignationTextFieldController.text,
-
-                                                                                // controller.isCheckedRequire
-                                                                                //     .value
-                                                                              );
-                                                                              controller.investigationTeamSrNumberTextFieldController.clear();
-                                                                              controller.investigationTeamNameTextFieldController.clear();
-                                                                              controller.investigationTeamDesignationTextFieldController.clear();
-                                                                              // controller.isCheckedRequire
-                                                                              //     .value = false;
-                                                                              print('Investigation Data${controller.investigationTeam.length}');
-                                                                            },
-                                                                          ),
-                                                                          Spacer()
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight10,
-                                                                      //Designation
-
-                                                                      Obx(
-                                                                        () => Wrap(
-                                                                            children: [
-                                                                              Row(
-                                                                                children: [
-                                                                                  Dimens.boxWidth80,
-                                                                                  Text('Sr.No.'),
-                                                                                  Dimens.boxWidth180,
-                                                                                  Text('Name'),
-                                                                                  SizedBox(
-                                                                                    width: 310,
-                                                                                  ),
-                                                                                  Text('Designation'),
-                                                                                  Dimens.boxWidth200,
-                                                                                  Text('Signature'),
-
-                                                                                  // Text('Action'),
-                                                                                ],
-                                                                              ),
-                                                                              SizedBox(
-                                                                                height: 20,
-                                                                              ),
-                                                                              controller.irId != null || controller.irId != 0 || controller.irId != ''
-                                                                                  ? Column(
-                                                                                      children: []..addAll(controller.investigationTeamList!.map((element) => Row(
-                                                                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                                                            children: [
-                                                                                              Padding(
-                                                                                                padding: const EdgeInsets.only(left: 150),
-                                                                                                child: Text('${element?.name}'),
-                                                                                              ),
-                                                                                              Padding(
-                                                                                                padding: const EdgeInsets.only(right: 160),
-                                                                                                child: Text('${element?.designation}'),
-                                                                                              ),
-                                                                                            ],
-                                                                                          ))),
-                                                                                    )
-                                                                                  : Dimens.box0,
-                                                                              Column(
-                                                                                children: []..addAll(controller.investigationTeam.map((element) => Row(
-                                                                                      children: [
-                                                                                        // Text('${element.name}'),
-                                                                                        // Text('${element.required_by_date}')
-                                                                                        // Obx(
-                                                                                        //   () => ListView.builder(
-                                                                                        //       itemCount: controller.investigationTeam.length,
-                                                                                        //       itemBuilder: (context, index) {
-                                                                                        //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
-                                                                                        //       }),
-                                                                                        // )
-
-                                                                                        investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
-                                                                                      ],
-                                                                                    ))),
-                                                                              ),
-                                                                            ]),
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight10
-                                                                    ],
-                                                                  ),
-                                                                )
-                                                              : Dimens.box0,
-
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Why Why Analysis Required: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .whyWhyAnalysisValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .whyWhyAnalysisValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-
-                                                          ///Why Why Analysis Block
-                                                          controller.whyWhyAnalysisValue ==
-                                                                  true
-                                                              ? WhyWhyAnalysis()
-                                                              : Dimens.box0,
-
-                                                          ///Root Cause
-                                                          Dimens.boxHeight10,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'RCA Upload Required: '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     // SizedBox(
-                                                          //     //   width:
-                                                          //     //       MediaQuery.of(context)
-                                                          //     //               .size
-                                                          //     //               .width /
-                                                          //     //           5,
-                                                          //     //   child: Obx(
-                                                          //     //     () => Switch(
-                                                          //     //       activeColor:
-                                                          //     //           Colors.green,
-                                                          //     //       value: controller
-                                                          //     //           .rCAUploadRequiredValue
-                                                          //     //           .value,
-                                                          //     //       onChanged: (value) {
-                                                          //     //         controller
-                                                          //     //             .rCAUploadRequiredValue
-                                                          //     //             .value = value;
-                                                          //     //       },
-                                                          //     //     ),
-                                                          //     //   ),
-                                                          //     // )
-                                                          //   ],
-                                                          // ),
-                                                          Text(
-                                                            "RCA  Required",
-                                                            style: Styles
-                                                                .blackBold14,
-                                                          ),
-                                                          Dimens.boxHeight10,
-
-                                                          // controller.rCAUploadRequiredValue ==
-                                                          //         true
-                                                          // ?
-                                                          RootCauseAnalysis(),
-                                                          // : Dimens.box0,
-
-                                                          ///Immediate Correction
-                                                          ImmediateCorrection(),
-
-                                                          ///Proposed action plan
-                                                          AddPrposedAction(),
-
-                                                          /// FILE UPLOAD WIDGET
-                                                          Dimens.boxHeight10,
-
-                                                          Text(
-                                                            "Add Photo Of Incident Belwo ↓",
-                                                            style: Styles
-                                                                .black15W400,
-                                                          ),
-                                                          Container(
-                                                            height: Get.height *
-                                                                0.2,
-                                                            width: Get.width,
-                                                            child: Row(
-                                                                //
-                                                                children: [
-                                                                  Expanded(
-                                                                    flex: 2,
-                                                                    child:
-                                                                        FileUploadWidgetWithDropzone(),
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Expanded(
-                                                                      flex: 8,
-                                                                      child:
-                                                                          FileUploadDetailsWidgetWeb()),
-                                                                ]),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Dimens.box0
-                                              ],
-                                            ),
-                                          ),
-                                          ////
-
-                                          ///Incident Report History
-                                          controller.irId != null ||
-                                                  controller.irId != 0 ||
-                                                  controller.irId != ''
-                                              ? Container(
-                                                  margin: Dimens.edgeInsets20,
-                                                  height: ((controller
-                                                                  .historyList
-                                                                  ?.length ??
-                                                              0) *
-                                                          50) +
-                                                      125,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: ColorValues
-                                                          .lightGreyColorWithOpacity35,
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .appBlueBackgroundColor,
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title:
+                                                          ' Insurance Applicable: '),
+                                                  Dimens.boxWidth10,
+                                                  Obx(
+                                                    () => SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      child: Switch(
+                                                        activeColor:
+                                                            Colors.green,
+                                                        value: controller
+                                                            .insuranceApplicableValue
+                                                            .value,
+                                                        onChanged: (value) {
+                                                          controller
+                                                              .insuranceApplicableValue
+                                                              .value = value;
+                                                        },
                                                       ),
-                                                    ],
+                                                    ),
                                                   ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  controller.insuranceApplicableValue ==
+                                                          true
+                                                      ? CustomRichText(
+                                                          title:
+                                                              '    Insurance Available: ')
+                                                      : Container(),
+                                                  Dimens.boxWidth10,
+                                                  controller.insuranceApplicableValue ==
+                                                          true
+                                                      ? SizedBox(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          child:
+                                                              _buildInsuranceAvailableTextField_web(
+                                                                  context))
+                                                      : Container(),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight20,
+
+                                              ///Personal Details
+                                              DetailsOfInjuredPerson(),
+
+                                              ///Investigation Block
+                                              Dimens.boxHeight5,
+
+                                              ///Investigation
+                                              Container(
+                                                margin: EdgeInsets.all(20),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.grey
+                                                          .withOpacity(.3)),
+                                                ),
+                                                child: Container(
+                                                  color: Color.fromARGB(
+                                                      255, 237, 240, 242),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
                                                   child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .all(10.0),
-                                                        child: Row(
-                                                          children: [
-                                                            Text(
-                                                              "Incident Report History ",
-                                                              style: Styles
-                                                                  .blue700,
+                                                                .only(left: 20),
+                                                        child: Text(
+                                                          "Investigation",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 20),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'What task or type of job was being performed? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        1)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Was the person involved in these activities trained and if so, when? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        2)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Was the person authorized/licensed to carry out that type of work / use machinery? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        3)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'What instructions had been given? By Whom? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        4)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'What safety equipment and /protection was used/ available? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        5)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Were correct safe procedures being observed? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        6)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'What unsafe condition contributed to the incident? ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        7)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Did unsafe act/s cause the incident? If yes. Mention the same ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight3,
+                                                                    investigationTextfields(
+                                                                        context,
+                                                                        8)
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                              ],
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Divider(
-                                                        color: ColorValues
-                                                            .greyLightColour,
-                                                      ),
-                                                      Expanded(
-                                                        child: DataTable2(
-                                                          border:
-                                                              TableBorder.all(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          206,
-                                                                          229,
-                                                                          234)),
-                                                          columns: [
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Time Stamp",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Module Ref ID",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Comment",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Module Type",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Status",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                          ],
-                                                          rows: List<
-                                                              DataRow>.generate(
-                                                            controller
-                                                                    .historyList
-                                                                    ?.length ??
-                                                                0,
-                                                            (index) =>
-                                                                DataRow(cells: [
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.createdAt
-                                                                      .toString() ??
-                                                                  '')),
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.moduleRefId
-                                                                      .toString() ??
-                                                                  '')),
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.comment
-                                                                      .toString() ??
-                                                                  '')),
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.moduleType
-                                                                      .toString() ??
-                                                                  '')),
-                                                              DataCell(Text(controller
-                                                                      .historyList?[
-                                                                          index]
-                                                                      ?.status_name
-                                                                      .toString() ??
-                                                                  '')),
-                                                            ]),
                                                           ),
-                                                        ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),
-                                                )
-                                              : Container(),
+                                                ),
+                                              ),
 
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SizedBox(
-                                                height: 150,
-                                              ),
-                                              CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appRedColor,
-                                                onPressed: () {
-                                                  Get.offAndToNamed(Routes
-                                                      .incidentReportListWeb);
-                                                },
-                                                text: 'Cancel',
-                                              ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-                                              controller.irId == null ||
-                                                      controller.irId != 0 ||
-                                                      controller.irId != ''
-                                                  ? CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appGreenColor,
-                                                      onPressed: () {
-                                                        // showAlertDialog();
-                                                        controller
-                                                            .createIncidentReport();
-                                                      },
-                                                      text: 'Submit',
+                                              Dimens.boxHeight20,
+                                              controller.irId.value > 0
+                                                  ? Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Detail Investigation Required1: '),
+                                                            SizedBox(
+                                                              width: 3,
+                                                            ),
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () => Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .detailInvestigationTeamValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .detailInvestigationTeamValue
+                                                                        .value = value;
+                                                                    print(
+                                                                        'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        ////Investigation team
+                                                        controller.detailInvestigationTeamValue ==
+                                                                true
+                                                            ? Container(
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            20),
+                                                                // height: Get.height,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              .3)),
+                                                                ),
+                                                                // constraints: BoxConstraints(
+                                                                //   maxWidth: 1100,
+                                                                // ),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .only(
+                                                                          top:
+                                                                              10,
+                                                                          left:
+                                                                              10),
+                                                                      child:
+                                                                          Text(
+                                                                        "Investigation Team",
+                                                                        style: Styles
+                                                                            .blue700,
+                                                                      ),
+                                                                    ),
+                                                                    // Dimens.boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        Spacer(),
+                                                                        Row(
+                                                                          children: [
+                                                                            CustomRichText(title: 'Name: '),
+                                                                            Dimens.boxWidth10,
+                                                                            GoodsOrderTextField(
+                                                                              textController: controller.investigationTeamNameTextFieldController,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Dimens
+                                                                            .boxWidth50,
+                                                                        Row(
+                                                                          children: [
+                                                                            CustomRichText(title: 'Designation: '),
+                                                                            Dimens.boxWidth10,
+                                                                            GoodsOrderTextField(
+                                                                              textController: controller.investigationTeamDesignationTextFieldController,
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Dimens
+                                                                            .boxWidth20,
+                                                                        ElevatedButton(
+                                                                          child:
+                                                                              Text(
+                                                                            'Add',
+                                                                            style:
+                                                                                TextStyle(color: ColorValues.whiteColor),
+                                                                          ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            controller.updateInvestigationTeamText(
+                                                                              controller.investigationTeamSrNumberTextFieldController.text,
+                                                                              controller.investigationTeamNameTextFieldController.text,
+                                                                              controller.investigationTeamDesignationTextFieldController.text,
+
+                                                                              // controller.isCheckedRequire
+                                                                              //     .value
+                                                                            );
+                                                                            controller.investigationTeamSrNumberTextFieldController.clear();
+                                                                            controller.investigationTeamNameTextFieldController.clear();
+                                                                            controller.investigationTeamDesignationTextFieldController.clear();
+                                                                            // controller.isCheckedRequire
+                                                                            //     .value = false;
+                                                                            print('Investigation Data${controller.investigationTeam.length}');
+                                                                          },
+                                                                        ),
+                                                                        Spacer()
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    //Designation
+
+                                                                    Obx(
+                                                                      () => Wrap(
+                                                                          children: [
+                                                                            Row(
+                                                                              children: [
+                                                                                Dimens.boxWidth80,
+                                                                                Text('Sr.No.'),
+                                                                                Dimens.boxWidth180,
+                                                                                Text('Name'),
+                                                                                SizedBox(
+                                                                                  width: 310,
+                                                                                ),
+                                                                                Text('Designation'),
+                                                                                Dimens.boxWidth200,
+                                                                                Text('Signature'),
+
+                                                                                // Text('Action'),
+                                                                              ],
+                                                                            ),
+                                                                            SizedBox(
+                                                                              height: 20,
+                                                                            ),
+                                                                            controller.irId.value > 0
+                                                                                ? Column(
+                                                                                    children: []..addAll(controller.investigationTeamList!.map((element) => Row(
+                                                                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                          children: [
+                                                                                            Padding(
+                                                                                              padding: const EdgeInsets.only(left: 150),
+                                                                                              child: Text('${element?.name}'),
+                                                                                            ),
+                                                                                            Padding(
+                                                                                              padding: const EdgeInsets.only(right: 160),
+                                                                                              child: Text('${element?.designation}'),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ))),
+                                                                                  )
+                                                                                : Dimens.box0,
+                                                                            Column(
+                                                                              children: []..addAll(controller.investigationTeam.map((element) => Row(
+                                                                                    children: [
+                                                                                      // Text('${element.name}'),
+                                                                                      // Text('${element.required_by_date}')
+                                                                                      // Obx(
+                                                                                      //   () => ListView.builder(
+                                                                                      //       itemCount: controller.investigationTeam.length,
+                                                                                      //       itemBuilder: (context, index) {
+                                                                                      //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
+                                                                                      //       }),
+                                                                                      // )
+
+                                                                                      investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
+                                                                                    ],
+                                                                                  ))),
+                                                                            ),
+                                                                          ]),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            : Dimens.box0,
+
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Why Why Analysis Required: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () => Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .whyWhyAnalysisValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .whyWhyAnalysisValue
+                                                                        .value = value;
+                                                                    print(
+                                                                        'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+
+                                                        ///Why Why Analysis Block
+                                                        controller.whyWhyAnalysisValue ==
+                                                                true
+                                                            ? WhyWhyAnalysis()
+                                                            : Dimens.box0,
+
+                                                        ///Root Cause
+                                                        Dimens.boxHeight10,
+                                                        // Row(
+                                                        //   children: [
+                                                        //     CustomRichText(
+                                                        //         title:
+                                                        //             'RCA Upload Required: '),
+                                                        //     Dimens.boxWidth10,
+                                                        //     // SizedBox(
+                                                        //     //   width:
+                                                        //     //       MediaQuery.of(context)
+                                                        //     //               .size
+                                                        //     //               .width /
+                                                        //     //           5,
+                                                        //     //   child: Obx(
+                                                        //     //     () => Switch(
+                                                        //     //       activeColor:
+                                                        //     //           Colors.green,
+                                                        //     //       value: controller
+                                                        //     //           .rCAUploadRequiredValue
+                                                        //     //           .value,
+                                                        //     //       onChanged: (value) {
+                                                        //     //         controller
+                                                        //     //             .rCAUploadRequiredValue
+                                                        //     //             .value = value;
+                                                        //     //       },
+                                                        //     //     ),
+                                                        //     //   ),
+                                                        //     // )
+                                                        //   ],
+                                                        // ),
+                                                        Text(
+                                                          "RCA  Required",
+                                                          style: Styles
+                                                              .blackBold14,
+                                                        ),
+                                                        Dimens.boxHeight10,
+
+                                                        // controller.rCAUploadRequiredValue ==
+                                                        //         true
+                                                        // ?
+                                                        RootCauseAnalysis(),
+                                                        // : Dimens.box0,
+
+                                                        ///Immediate Correction
+                                                        ImmediateCorrection(),
+
+                                                        ///Proposed action plan
+                                                        AddPrposedAction(),
+
+                                                        /// FILE UPLOAD WIDGET
+                                                        Dimens.boxHeight10,
+
+                                                        Text(
+                                                          "Add Photo Of Incident Belwo ↓",
+                                                          style: Styles
+                                                              .black15W400,
+                                                        ),
+                                                        Container(
+                                                          height:
+                                                              Get.height * 0.2,
+                                                          width: Get.width,
+                                                          child: Row(
+                                                              //
+                                                              children: [
+                                                                Expanded(
+                                                                  flex: 2,
+                                                                  child:
+                                                                      FileUploadWidgetWithDropzone(),
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                Expanded(
+                                                                    flex: 8,
+                                                                    child:
+                                                                        FileUploadDetailsWidgetWeb()),
+                                                              ]),
+                                                        ),
+                                                      ],
                                                     )
-                                                  : CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appDarkBlueColor,
-                                                      onPressed: () {
-                                                        // showAlertDialog();
-                                                        controller
-                                                            .updateIncidentReport();
-                                                      },
-                                                      text: 'Update',
-                                                    ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
-                                              controller.incidentReportDetailsModel
-                                                          .value?.status_short ==
-                                                      "Rejected"
-                                                  ? CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appGreenColor,
-                                                      onPressed: () {
-                                                        // showAlertDialog();
-                                                        controller
-                                                            .createIncidentReport();
-                                                      },
-                                                      text: 'Re-Submit',
-                                                    )
-                                                  : Container()
+                                                  : Dimens.box0
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    );
-                                  }),
-                            ],
-                          ),
+                                        ),
+                                        ////
+
+                                        ///Incident Report History
+                                        controller.irId.value > 0
+                                            ? Container(
+                                                margin: Dimens.edgeInsets20,
+                                                height: ((controller.historyList
+                                                                ?.length ??
+                                                            0) *
+                                                        50) +
+                                                    125,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .appBlueBackgroundColor,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Incident Report History ",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: ColorValues
+                                                          .greyLightColour,
+                                                    ),
+                                                    Expanded(
+                                                      child: DataTable2(
+                                                        border: TableBorder.all(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    206,
+                                                                    229,
+                                                                    234)),
+                                                        columns: [
+                                                          DataColumn(
+                                                              label: Text(
+                                                            "Time Stamp",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                          DataColumn(
+                                                              label: Text(
+                                                            "Module Ref ID",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                          DataColumn(
+                                                              label: Text(
+                                                            "Comment",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                          DataColumn(
+                                                              label: Text(
+                                                            "Module Type",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                          DataColumn(
+                                                              label: Text(
+                                                            "Status",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                        ],
+                                                        rows: List<
+                                                            DataRow>.generate(
+                                                          controller.historyList
+                                                                  ?.length ??
+                                                              0,
+                                                          (index) =>
+                                                              DataRow(cells: [
+                                                            DataCell(Text(controller
+                                                                    .historyList?[
+                                                                        index]
+                                                                    ?.createdAt
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .historyList?[
+                                                                        index]
+                                                                    ?.moduleRefId
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .historyList?[
+                                                                        index]
+                                                                    ?.comment
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .historyList?[
+                                                                        index]
+                                                                    ?.moduleType
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .historyList?[
+                                                                        index]
+                                                                    ?.status_name
+                                                                    .toString() ??
+                                                                '')),
+                                                          ]),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            : Container(),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 150,
+                                            ),
+                                            CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appRedColor,
+                                              onPressed: () {
+                                                Get.offAndToNamed(Routes
+                                                    .incidentReportListWeb);
+                                              },
+                                              text: 'Cancel',
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            controller.irId.value > 0
+                                                ? CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appDarkBlueColor,
+                                                    onPressed: () {
+                                                      // showAlertDialog();
+                                                      controller
+                                                          .updateIncidentReport();
+                                                    },
+                                                    text: 'Update',
+                                                  )
+                                                : CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    onPressed: () {
+                                                      // showAlertDialog();
+                                                      controller
+                                                          .createIncidentReport();
+                                                    },
+                                                    text: 'Submit',
+                                                  ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            controller.incidentReportDetailsModel
+                                                        .value?.status_short ==
+                                                    "Rejected"
+                                                ? CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    onPressed: () {
+                                                      // showAlertDialog();
+                                                      controller
+                                                          .createIncidentReport();
+                                                    },
+                                                    text: 'Re-Submit',
+                                                  )
+                                                : Container()
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ],
                         ),
                       ),
                     ],
