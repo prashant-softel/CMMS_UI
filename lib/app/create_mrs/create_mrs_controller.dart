@@ -104,6 +104,7 @@ class CreateMrsController extends GetxController {
       {'key': "Image", "value": ''},
       {'key': "Available_Qty", "value": ''},
       {'key': "Requested_Qty", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
