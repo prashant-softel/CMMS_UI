@@ -207,6 +207,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 "Image",
                                 "Available Qty",
                                 "Requested Qty",
+                                "Action"
                               ].map((column) {
                                 return TableViewColumn(
                                   label: column,
@@ -311,16 +312,44 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                         },
                                                       )),
                                                 )
-                                              : (mapData['key'] ==
-                                                      "Available_Qty")
-                                                  ? Text(
-                                                      "${controller.dropdownMapperData.value[record[0]['value']]?.available_qty ?? ""}")
+                                              : (mapData['key'] == "Action ")
+                                                  ? Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 10),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appRedColor,
+                                                            icon: Icons.delete,
+                                                            label: '',
+                                                            message: '',
+                                                            onPress: () {
+                                                              controller.rowItem
+                                                                  .remove(
+                                                                      record);
+                                                            },
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
                                                   : (mapData['key'] ==
-                                                          "Material_Type")
+                                                          "Available_Qty")
                                                       ? Text(
-                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
-                                                      : Text(
-                                                          mapData['key'] ?? ''),
+                                                          "${controller.dropdownMapperData.value[record[0]['value']]?.available_qty ?? ""}")
+                                                      : (mapData['key'] ==
+                                                              "Material_Type")
+                                                          ? Text(
+                                                              "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                          : Text(
+                                                              mapData['key'] ??
+                                                                  ''),
                                     );
                                   }).toList(),
                                 );

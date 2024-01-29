@@ -337,7 +337,7 @@ class StockManagementDashboardScreen
                   tittle,
                   style: TextStyle(
                       color: ColorValues.whiteColor,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
@@ -359,7 +359,7 @@ class StockManagementDashboardScreen
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.all(9),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -369,7 +369,7 @@ class StockManagementDashboardScreen
                   tittle,
                   style: TextStyle(
                       color: ColorValues.whiteColor,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),

@@ -1,13 +1,14 @@
 import 'package:cmms/app/add_training_course/add_course_controller.dart';
 import 'package:cmms/app/app.dart';
+// import 'package:cmms/app/grievance_list/views/widgets/dropdown.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/dropdown_web.dart';
 
 class AddCourseWeb extends GetView<AddCourseController> {
   AddCourseWeb({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class AddCourseWeb extends GetView<AddCourseController> {
   @override
   Widget build(BuildContext context) {
     ///
-
     return
         // Obx(
         //         () =>
@@ -60,15 +60,15 @@ class AddCourseWeb extends GetView<AddCourseController> {
                   onTap: () {
                     Get.offNamed(Routes.misDashboard);
                   },
-                  child: Text(" / MIS", style: Styles.greyMediumLight12),
+                  child: Text(" / MIS", style: Styles.greyLight14),
                 ),
                 InkWell(
                     onTap: () {
                       Get.offNamed(Routes.trainingCourse);
                     },
-                    child: Text(" / TRAINING COURSE",
-                        style: Styles.greyMediumLight12)),
-                Text(" / ADD TRAINING COURSE", style: Styles.greyMediumLight12)
+                    child:
+                        Text(" / TRAINING COURSE", style: Styles.greyLight14)),
+                Text(" / ADD TRAINING COURSE", style: Styles.greyLight14)
               ],
             ),
           ),
@@ -109,13 +109,13 @@ class AddCourseWeb extends GetView<AddCourseController> {
                         ),
                       ),
                     ),
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                    ),
+                    // Divider(
+                    //   color: ColorValues.greyLightColour,
+                    // ),
                     Container(
-                      margin: Dimens.edgeInsets20,
+                      margin: Dimens.edgeInsets40,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             margin: Dimens.edgeInsets30_0_0_0,
@@ -126,208 +126,10 @@ class AddCourseWeb extends GetView<AddCourseController> {
                             children: [
                               Row(
                                 children: [
-                                  CustomRichText(title: 'Course ID: '),
-                                  Dimens.boxWidth10,
-                                  Container(
-                                    // height : 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color:
-                                            Color.fromARGB(255, 227, 224, 224),
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: const Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                          blurRadius: 5.0,
-                                          spreadRadius: 1.0,
-                                        ),
-                                        BoxShadow(
-                                          color: ColorValues.whiteColor,
-                                          offset: const Offset(0.0, 0.0),
-                                          blurRadius: 0.0,
-                                          spreadRadius: 0.0,
-                                        ),
-                                      ],
-                                    ),
-                                    width: (MediaQuery.of(context).size.width *
-                                        .2),
-                                    child: Obx(
-                                      () => TextField(
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                              fontSize: 16.0,
-                                              height: 1.0,
-                                              color: Colors.black),
-                                        ),
-                                        controller:
-                                            controller.courseIdController,
-                                        focusNode: controller.idFocus,
-                                        scrollController: controller.idScroll,
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: 1,
-                                        autofocus: false,
-                                        decoration: InputDecoration(
-                                          fillColor: ColorValues.whiteColor,
-                                          filled: true,
-                                          contentPadding:
-                                              Dimens.edgeInsets05_10,
-                                          border: InputBorder.none,
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent),
-                                          ),
-                                          focusedErrorBorder: controller
-                                                  .isNameInvalid.value
-                                              ? OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: BorderSide(
-                                                    color: ColorValues
-                                                        .redColorDark,
-                                                  ),
-                                                )
-                                              : InputBorder.none,
-                                          errorBorder: controller
-                                                  .isNameInvalid.value
-                                              ? OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  borderSide: BorderSide(
-                                                    color: ColorValues
-                                                        .redColorDark,
-                                                  ),
-                                                )
-                                              : null,
-                                          errorText:
-                                              controller.isNameInvalid.value
-                                                  ? "Required field"
-                                                  : null,
-                                        ),
-                                        onChanged: (value) {
-                                          if (value.trim().length > 1) {
-                                            controller.isNameInvalid.value =
-                                                false;
-                                          } else {
-                                            controller.isNameInvalid.value =
-                                                true;
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Dimens.boxHeight8,
-                              // Row(
-                              //   children: [
-                              //     CustomRichText(title: 'Category: '),
-                              //     Dimens.boxWidth10,
-                              //     Container(
-                              //       width: (MediaQuery.of(context).size.width *
-                              //           .2),
-                              //       // height : 100,
-
-                              //       child: Obx(
-                              //         () => DropdownWebWidget(
-                              //           boxShadow: [
-                              //             BoxShadow(
-                              //               color: Colors.black26,
-                              //               offset: const Offset(
-                              //                 5.0,
-                              //                 5.0,
-                              //               ),
-                              //               blurRadius: 5.0,
-                              //               spreadRadius: 1.0,
-                              //             ),
-                              //             BoxShadow(
-                              //               color: ColorValues.whiteColor,
-                              //               offset: const Offset(0.0, 0.0),
-                              //               blurRadius: 0.0,
-                              //               spreadRadius: 0.0,
-                              //             ),
-                              //           ],
-                              //           controller: controller,
-                              //           dropdownList: controller.category,
-                              //           // isValueSelected: controller
-                              //           //     .isSelectedMaterialType.value,
-                              //           selectedValue: controller
-                              //               .selectedMaterialType.value,
-                              //           onValueChanged:
-                              //               (category, selectedValue) {},
-                              //           // controller.onValueChanged,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              Dimens.boxHeight8,
-                              // Row(
-                              //   children: [
-                              //     CustomRichText(title: 'Targetted Group: '),
-                              //     Dimens.boxWidth10,
-                              //     Container(
-                              //       width: (MediaQuery.of(context).size.width *
-                              //           .2),
-                              //       child: Obx(
-                              //         () => DropdownWebWidget(
-                              //           boxShadow: [
-                              //             BoxShadow(
-                              //               color: Colors.black26,
-                              //               offset: const Offset(
-                              //                 5.0,
-                              //                 5.0,
-                              //               ),
-                              //               blurRadius: 5.0,
-                              //               spreadRadius: 1.0,
-                              //             ),
-                              //             BoxShadow(
-                              //               color: ColorValues.whiteColor,
-                              //               offset: const Offset(0.0, 0.0),
-                              //               blurRadius: 0.0,
-                              //               spreadRadius: 0.0,
-                              //             ),
-                              //           ],
-                              //           controller: controller,
-                              //           dropdownList: controller.targetGroup,
-                              //           // isValueSelected: controller
-                              //           //     .isSelectedUnitOfMeasurement.value,
-                              //           // selectedValue: controller
-                              //           //     .selectedUnitOfMeasurement.value,
-                              //           onValueChanged:
-                              //               (targettedGroup, selctedValue) {},
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ],
-                              // ),
-                              Dimens.boxHeight8,
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
                                   CustomRichText(title: 'Topic: '),
                                   Dimens.boxWidth10,
                                   Container(
-                                    // height : 100,
-
+                                    height: 40,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
@@ -429,15 +231,97 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxHeight8,
+                              Dimens.boxHeight10,
+                              Row(
+                                children: [
+                                  CustomRichText(title: "Category: "),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                    width: (MediaQuery.of(context).size.width *
+                                        .2),
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 227, 224, 244),
+                                            width: 1),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromARGB(
+                                                    255, 236, 234, 234)
+                                                .withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          )
+                                        ]),
+                                    child: Obx(() => DropdownWebWidget(
+                                          dropdownList: controller.category,
+                                          isValueSelected: controller
+                                              .isCategorySelected.value,
+                                          selectedValue:
+                                              controller.selectedCategory.value,
+                                          onValueChanged:
+                                              (category, selectedV) {},
+                                        )),
+                                  )
+                                ],
+                              ),
+                              Dimens.boxHeight10,
+                              Row(
+                                children: [
+                                  CustomRichText(title: "Targetted Group: "),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 227, 224, 244),
+                                            width: 1),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromARGB(
+                                                    255, 236, 234, 234)
+                                                .withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          )
+                                        ]),
+                                    width: (MediaQuery.of(context).size.width *
+                                        .2),
+                                    height: 40,
+                                    child: Obx(() => DropdownWebWidget(
+                                          dropdownList: controller.targetGroup,
+                                          isValueSelected:
+                                              controller.isGroupSelected.value,
+                                          selectedValue:
+                                              controller.selectedGroup.value,
+                                          onValueChanged:
+                                              (category, selectedV) {},
+                                        )),
+                                  )
+                                ],
+                              ),
+                              Dimens.boxHeight10,
+                            ],
+                          ),
+                          // SizedBox(
+                          //   width: 250,
+                          // ),
+                          Spacer(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
                               Row(
                                 children: [
                                   CustomRichText(
-                                      title: 'Duration in \nMinutes: '),
+                                      title: 'Duration in Minutes: '),
                                   Dimens.boxWidth10,
                                   Container(
-                                    // height : 100,
-
+                                    height: 40,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
@@ -537,13 +421,13 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                   ),
                                 ],
                               ),
-                              Dimens.boxHeight8,
+                              Dimens.boxHeight10,
                               Row(
                                 children: [
                                   CustomRichText(title: 'Maximum Capacity: '),
                                   Dimens.boxWidth10,
                                   Container(
-                                    // height : 100,
+                                    height: 40,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
@@ -642,6 +526,9 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                   ),
                                 ],
                               ),
+                              Row(
+                                children: [SizedBox(height: 60)],
+                              )
                             ],
                           ),
                         ],
@@ -663,28 +550,25 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                 CustomRichText(title: 'Description: '),
                                 Dimens.boxWidth10,
                                 Container(
-                                  width: (Get.width * .7),
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: Color.fromARGB(255, 227, 224, 224),
+                                      width: 1,
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                      BoxShadow(
-                                        color: ColorValues.whiteColor,
-                                        offset: const Offset(0.0, 0.0),
-                                        blurRadius: 0.0,
-                                        spreadRadius: 0.0,
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
                                       ),
                                     ],
-                                    color: ColorValues.whiteColor,
-                                    borderRadius: BorderRadius.circular(5),
                                   ),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .5),
                                   child: Obx(
                                     () => TextField(
                                       style: GoogleFonts.lato(
@@ -696,8 +580,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                       controller: controller.descCtrlr,
                                       scrollController: controller.descScroll,
                                       focusNode: controller.descFocus,
-                                      // keyboardType: TextInputType.multiline,
-                                      // maxLines: 1,
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: 6,
                                       autofocus: false,
                                       decoration: InputDecoration(
                                         fillColor: ColorValues.whiteColor,
@@ -791,7 +675,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                           ColorValues.appDarkBlueColor,
                                       text: 'Update',
                                       onPressed: () {
-                                        // controller.updateUser().then((value) {
+                                        // controller.updateCourse().then((value) {
                                         //   if (value == true) {
                                         //     // controller.userId = 0;
                                         //     controller.saveAccessLevel();
@@ -829,3 +713,88 @@ class AddCourseWeb extends GetView<AddCourseController> {
     // );
   }
 }
+
+
+// Row(
+                              //   children: [
+                              //     CustomRichText(title: 'Category: '),
+                              //     Dimens.boxWidth10,
+                              //     Container(
+                              //       width: (MediaQuery.of(context).size.width *
+                              //           .2),
+                              //       // height : 100,
+
+                              //       child: Obx(
+                              //         () => DropdownWebWidget(
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Colors.black26,
+                              //               offset: const Offset(
+                              //                 5.0,
+                              //                 5.0,
+                              //               ),
+                              //               blurRadius: 5.0,
+                              //               spreadRadius: 1.0,
+                              //             ),
+                              //             BoxShadow(
+                              //               color: ColorValues.whiteColor,
+                              //               offset: const Offset(0.0, 0.0),
+                              //               blurRadius: 0.0,
+                              //               spreadRadius: 0.0,
+                              //             ),
+                              //           ],
+                              //           controller: controller,
+                              //           dropdownList: controller.category,
+                              //           // isValueSelected: controller
+                              //           //     .isSelectedMaterialType.value,
+                              //           selectedValue: controller
+                              //               .selectedMaterialType.value,
+                              //           onValueChanged:
+                              //               (category, selectedValue) {},
+                              //           // controller.onValueChanged,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+
+
+                              // Row(
+                              //   children: [
+                              //     CustomRichText(title: 'Targetted Group: '),
+                              //     Dimens.boxWidth10,
+                              //     Container(
+                              //       width: (MediaQuery.of(context).size.width *
+                              //           .2),
+                              //       child: Obx(
+                              //         () => DropdownWebWidget(
+                              //           boxShadow: [
+                              //             BoxShadow(
+                              //               color: Colors.black26,
+                              //               offset: const Offset(
+                              //                 5.0,
+                              //                 5.0,
+                              //               ),
+                              //               blurRadius: 5.0,
+                              //               spreadRadius: 1.0,
+                              //             ),
+                              //             BoxShadow(
+                              //               color: ColorValues.whiteColor,
+                              //               offset: const Offset(0.0, 0.0),
+                              //               blurRadius: 0.0,
+                              //               spreadRadius: 0.0,
+                              //             ),
+                              //           ],
+                              //           controller: controller,
+                              //           dropdownList: controller.targetGroup,
+                              //           // isValueSelected: controller
+                              //           //     .isSelectedUnitOfMeasurement.value,
+                              //           // selectedValue: controller
+                              //           //     .selectedUnitOfMeasurement.value,
+                              //           onValueChanged:
+                              //               (targettedGroup, selctedValue) {},
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),

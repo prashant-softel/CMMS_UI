@@ -494,14 +494,14 @@ class AddIncidentReportController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getBlocksList(facilityId);
       });
-      if (irId != null) {
+      if (irId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getIncidentReportDetail(id: irId.value!);
+          getIncidentReportDetail(id: irId.value);
         });
       }
-      if (irId != null) {
+      if (irId != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getIncidentReportHistory(id: irId.value!);
+          getIncidentReportHistory(id: irId.value);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
@@ -733,9 +733,9 @@ class AddIncidentReportController extends GetxController {
               ? true
               : false;
       if (whyWhyAnalysisValue == true) {
-        addWhyWhyAnalysisRowItem();
-        addWhyWhyAnalysisRowItem();
-        addWhyWhyAnalysisRowItem();
+        // addWhyWhyAnalysisRowItem();
+        // addWhyWhyAnalysisRowItem();
+        // addWhyWhyAnalysisRowItem();
       }
 
       ///new Data
@@ -1041,12 +1041,12 @@ class AddIncidentReportController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
-    addDetailsOfInjuredPersonRowItem();
-    irId == null ? Dimens.box0 : addRowItem();
-    irId == null ? Dimens.box0 : addWhyWhyAnalysisRowItem();
-    irId == null ? Dimens.box0 : addRootCauseRowItem();
-    irId == null ? Dimens.box0 : addImmediateCorrectionRowItem();
-    // irId == null ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
+    irId == 0 ? addDetailsOfInjuredPersonRowItem() : Dimens.box0;
+    irId == 0 ? Dimens.box0 : addRowItem();
+    irId == 0 ? Dimens.box0 : addWhyWhyAnalysisRowItem();
+    irId == 0 ? Dimens.box0 : addRootCauseRowItem();
+    irId == 0 ? Dimens.box0 : addImmediateCorrectionRowItem();
+    // irId == 0 ? Dimens.box0 : addDetailsOfInjuredPersonRowItem();
   }
 
   void addRowItem() {
@@ -1685,9 +1685,9 @@ class AddIncidentReportController extends GetxController {
           incidents_id: irId.value,
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility: element[1]["value"],
-          // target_date: element[2]["value"] ?? '0',
-          target_date:
-              '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
+          target_date: element[2]["value"] ?? '0',
+          // target_date:
+          //     '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
           remarks: element[3]["value"] ?? '0',
         );
 

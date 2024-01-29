@@ -166,8 +166,8 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                       // fixedWidth: 70,
                                                       label: Text(
                                                         'Course ID',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
@@ -175,8 +175,8 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                       // fixedWidth: 110,
                                                       label: Text(
                                                         'Topic',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
@@ -184,8 +184,8 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                       // fixedWidth: 160,
                                                       label: Text(
                                                         'Category',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
@@ -193,26 +193,26 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                       // fixedWidth: 110,
                                                       label: Text(
                                                         'Targetted Group',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
                                                     DataColumn2(
                                                       // fixedWidth: 90,
                                                       label: Text(
-                                                        'Duration in minutes',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        'Duration in\n minutes',
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
                                                     DataColumn2(
                                                       // fixedWidth: 90,
                                                       label: Text(
-                                                        'Maximum Capacity',
-                                                        style:
-                                                            Styles.blackBold14,
+                                                        'Maximum\n Capacity',
+                                                        style: Styles
+                                                            .blackBold14,
                                                       ),
                                                       // size: ColumnSize.L,
                                                     ),
