@@ -1686,6 +1686,8 @@ class AddIncidentReportController extends GetxController {
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility: element[1]["value"],
           target_date: element[2]["value"] ?? '0',
+          // target_date: "2023-11-26T12:00:00",
+
           // target_date:
           //     '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
           remarks: element[3]["value"] ?? '0',
@@ -1708,6 +1710,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
+          injured_item_id: 1,
           incidents_id: irId.value,
           person_id: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',

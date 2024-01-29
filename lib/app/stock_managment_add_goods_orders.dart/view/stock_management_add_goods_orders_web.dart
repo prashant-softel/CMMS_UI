@@ -192,8 +192,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .challanNoCtrlr,
-                                                        focusnode: controller.delchfocus,
-                                                        scroll: controller.delchscroll,
+                                                    focusnode:
+                                                        controller.delchfocus,
+                                                    scroll:
+                                                        controller.delchscroll,
                                                   ),
                                                 ],
                                               ),
@@ -212,8 +214,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.pOCtrlr,
-                                                        focusnode: controller.ponofocus,
-                                                        scroll: controller.ponoscroll,
+                                                    focusnode:
+                                                        controller.ponofocus,
+                                                    scroll:
+                                                        controller.ponoscroll,
                                                   ),
                                                 ],
                                               ),
@@ -233,8 +237,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .frieghtToPayPaidCtrlr,
-                                                        focusnode: controller.freightfocus,
-                                                        scroll: controller.freightscroll,
+                                                    focusnode:
+                                                        controller.freightfocus,
+                                                    scroll: controller
+                                                        .freightscroll,
                                                   ),
                                                 ],
                                               ),
@@ -248,8 +254,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     textController: controller
                                                         .noOfPackagesReceivedCtrlr,
-                                                        focusnode: controller.matpofocus,
-                                                        scroll: controller.matposcroll,
+                                                    focusnode:
+                                                        controller.matpofocus,
+                                                    scroll:
+                                                        controller.matposcroll,
                                                   ),
                                                 ],
                                               ),
@@ -269,8 +277,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .conditionOfPackagesReceivedCtrlr,
-                                                        focusnode: controller.pacrfocus,
-                                                        scroll: controller.pacrscroll,
+                                                    focusnode:
+                                                        controller.pacrfocus,
+                                                    scroll:
+                                                        controller.pacrscroll,
                                                   ),
                                                 ],
                                               ),
@@ -290,8 +300,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.girNoCtrlr,
-                                                        focusnode: controller.inregfocus,
-                                                        scroll: controller.inregscroll,
+                                                    focusnode:
+                                                        controller.inregfocus,
+                                                    scroll:
+                                                        controller.inregscroll,
                                                   ),
                                                 ],
                                               ),
@@ -310,8 +322,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.amountCtrlr,
-                                                        focusnode: controller.amntfocus,
-                                                        scroll: controller.amntscroll,
+                                                    focusnode:
+                                                        controller.amntfocus,
+                                                    scroll:
+                                                        controller.amntscroll,
                                                   ),
                                                 ],
                                               ),
@@ -450,8 +464,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.lrNoCtrlr,
-                                                        focusnode: controller.lrfocus,
-                                                        scroll: controller.lrscroll,
+                                                    focusnode:
+                                                        controller.lrfocus,
+                                                    scroll: controller.lrscroll,
                                                   ),
                                                 ],
                                               ),
@@ -472,8 +487,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController: controller
                                                         .vehicleNoCtrlr,
-                                                        focusnode: controller.vehfocus,
-                                                        scroll: controller.vehscroll,
+                                                    focusnode:
+                                                        controller.vehfocus,
+                                                    scroll:
+                                                        controller.vehscroll,
                                                   ),
                                                 ],
                                               ),
@@ -494,8 +511,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     ],
                                                     textController:
                                                         controller.jobRefCtrlr,
-                                                        focusnode: controller.jobrfocus,
-                                                        scroll: controller.jobrscroll,
+                                                    focusnode:
+                                                        controller.jobrfocus,
+                                                    scroll:
+                                                        controller.jobrscroll,
                                                   ),
                                                 ],
                                               ),
@@ -895,7 +914,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ),
           Expanded(
             child: DataTable2(
-              
               // minWidth: 2000,
               dataRowHeight: 105,
               columnSpacing: 10,
@@ -929,7 +947,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                 dropdownList: controller.goodsOrdersList,
                                 isValueSelected:
                                     controller.isReqOrderSelected.value,
-                                selectedValue: controller.selectedReqOrder.value,
+                                selectedValue:
+                                    controller.selectedReqOrder.value,
                                 onValueChanged: controller.onValueChanged,
                               ),
                             ),
@@ -939,7 +958,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                     ),
                   ],
                 )),
-                
                 DataColumn2(
                     fixedWidth: 250,
                     label: Text(
@@ -1172,13 +1190,12 @@ class GoodsOrderTextField extends StatelessWidget {
   final TextEditingController? textController;
   FocusNode? focusnode;
   ScrollController? scroll;
-  GoodsOrderTextField({
-    this.keyboardType,
-    this.inputFormatters,
-    this.textController,
-    this.focusnode,
-    this.scroll
-  });
+  GoodsOrderTextField(
+      {this.keyboardType,
+      this.inputFormatters,
+      this.textController,
+      this.focusnode,
+      this.scroll});
 
   @override
   Widget build(BuildContext context) {
@@ -1200,12 +1217,11 @@ class GoodsOrderTextField extends StatelessWidget {
       ),
       width: (MediaQuery.of(context).size.width * .2),
       child: LoginCustomTextfield(
-        keyboardType: keyboardType,
-        inputFormatters: inputFormatters,
-        textController: textController,
-        scroll: scroll,
-        focusNode: focusnode
-      ),
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
+          textController: textController,
+          scroll: scroll,
+          focusNode: focusnode),
     );
   }
 }
@@ -1254,8 +1270,7 @@ class AppBarGoodsOrder extends StatelessWidget {
             },
             child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
           ),
-          Text(" / ADD GOODS ORDER DETAILS",
-              style: Styles.greyMediumLight12),
+          Text(" / ADD GOODS ORDER DETAILS", style: Styles.greyMediumLight12),
         ],
       ),
     );
