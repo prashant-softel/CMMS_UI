@@ -94,12 +94,12 @@ class ViewIncidentReportContentWeb
                               ),
                               InkWell(
                                 onTap: () {
-                                  Get.offNamed(Routes.incidentReportDashboard);
+                                  Get.offNamed(Routes.incidentReportListWeb);
                                 },
-                                child: Text(" / Incident Report",
+                                child: Text(" / INCIDENT REPORT LIST",
                                     style: Styles.greyMediumLight12),
                               ),
-                              Text(" / View Incident Report",
+                              Text(" / VIEW INCIDENT REPORT",
                                   style: Styles.greyMediumLight12)
                             ],
                           ),
@@ -951,7 +951,7 @@ class ViewIncidentReportContentWeb
                                                             columns: [
                                                               DataColumn(
                                                                   label: Text(
-                                                                "WHy",
+                                                                "Why",
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         12,
@@ -1435,79 +1435,99 @@ class ViewIncidentReportContentWeb
                                                       ],
                                                     ),
                                                   ),
-                                            Container(
-                                              padding:
-                                                  EdgeInsets.only(left: 20),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Detail Investigation Required: '),
-                                                      SizedBox(
-                                                        width: 3,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        child: Obx(
-                                                          () => Switch(
-                                                            activeColor:
-                                                                Colors.green,
-                                                            value: controller
-                                                                .detailInvestigationTeamValue
-                                                                .value,
-                                                            onChanged: (value) {
-                                                              controller
-                                                                  .detailInvestigationTeamValue
-                                                                  .value = value;
-                                                              print(
-                                                                  'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title:
-                                                              'Why Why Analysis Required: '),
-                                                      Dimens.boxWidth10,
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        child: Obx(
-                                                          () => Switch(
-                                                            activeColor:
-                                                                Colors.green,
-                                                            value: controller
-                                                                .whyWhyAnalysisValue
-                                                                .value,
-                                                            onChanged: (value) {
-                                                              controller
-                                                                  .whyWhyAnalysisValue
-                                                                  .value = value;
 
-                                                              print(
-                                                                  'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                            },
-                                                          ),
+                                            controller.incidentReportDetailsModel
+                                                            .value?.id !=
+                                                        null &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kIncidentReportFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveApproveAccess)
+                                                            .length >
+                                                        0
+                                                ? Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Detail Investigation Required: '),
+                                                            SizedBox(
+                                                              width: 3,
+                                                            ),
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () => Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .detailInvestigationTeamValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .detailInvestigationTeamValue
+                                                                        .value = value;
+                                                                    print(
+                                                                        'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Why Why Analysis Required: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () => Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .whyWhyAnalysisValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .whyWhyAnalysisValue
+                                                                        .value = value;
+
+                                                                    print(
+                                                                        'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                : Dimens.box0,
 
                                             ///Incident Report History
                                             controller.irId.value != null
@@ -1700,8 +1720,8 @@ class ViewIncidentReportContentWeb
                                     }),
                                 Obx(
                                   () => Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Spacer(),
                                       Container(
                                         height: 45,
                                         child: CustomElevatedButton(
@@ -1715,26 +1735,6 @@ class ViewIncidentReportContentWeb
                                         ),
                                       ),
                                       Dimens.boxWidth10,
-
-                                      // SizedBox(
-                                      //   width: 15,
-                                      // ),
-                                      // CustomElevatedButton(
-                                      //   backgroundColor:
-                                      //       ColorValues.appRedColor,
-                                      //   onPressed: () {
-                                      //     Get.offAndToNamed(
-                                      //         Routes.incidentReportListWeb);
-                                      //   },
-                                      //   text: 'Cancel',
-                                      // ),
-                                      // SizedBox(
-                                      //   width: 20,
-                                      // ),
-                                      //           varUserAccessModel.value.access_list!
-                                      // .where((e) => e.feature_id == 3 && e.edit == 1)
-                                      // .length > 0
-                                      // &&
                                       controller.incidentReportDetailsModel
                                                       .value?.id !=
                                                   null &&
@@ -1751,128 +1751,90 @@ class ViewIncidentReportContentWeb
                                                   0
                                           ? Dimens.box0
                                           : Dimens.box0,
-
-                                      ////Approve Button
-                                      // varUserAccessModel.value.access_list!
-                                      //                 .where((e) =>
-                                      //                     e.feature_id ==
-                                      //                         UserAccessConstants
-                                      //                             .kIncidentReportFeatureId &&
-                                      //                     e.approve ==
-                                      //                         UserAccessConstants
-                                      //                             .kHaveApproveAccess)
-                                      //                 .length >
-                                      //             0 &&
-                                      //         controller
-                                      //                 .incidentReportDetailsModel
-                                      //                 .value
-                                      //                 ?.status ==
-                                      //             181
-                                      // ? CustomElevatedButton(
-                                      //     icon: Icons.add,
-                                      //     backgroundColor:
-                                      //         ColorValues.appGreenColor,
-                                      //     onPressed: () {
-                                      //       // controller.saveAsDraft();
-                                      //       controller
-                                      //           // .incidentReportApproveButton();
-                                      //     },
-                                      //     text: 'Approve',
-                                      //   )
-                                      // :
-                                      //  Container(),
-                                      Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: "Approve",
-                                          icon: Icons.add,
-                                          onPressed: () {
-                                            Get.dialog(
-                                                ApproveIncidentReportDialog(
-                                              id: controller.irId.value,
-                                            ));
-                                          },
-                                        ),
-                                      ),
-                                      Dimens.boxWidth10,
-                                      Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appGreenColor,
-                                          text: "Approve IR",
-                                          icon: Icons.add,
-                                          onPressed: () {
-                                            Get.dialog(
-                                                ApproveIncidentReportDialog(
-                                              id: controller.irId.value,
-                                            ));
-                                          },
-                                        ),
-                                      ),
-                                      Dimens.boxWidth10,
-
-                                      ////Reject Button
-                                      // varUserAccessModel.value.access_list!
-                                      //                 .where((e) =>
-                                      //                     e.feature_id ==
-                                      //                         UserAccessConstants
-                                      //                             .kIncidentReportFeatureId &&
-                                      //                     e.delete ==
-                                      //                         UserAccessConstants
-                                      //                             .kHaveDeleteAccess)
-                                      //                 .length >
-                                      //             0 &&
-                                      //         controller
-                                      //                 .incidentReportDetailsModel
-                                      //                 .value
-                                      //                 ?.status ==
-                                      //             181
-                                      // ?
-                                      Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.rejectColor,
-                                          text: "Reject",
-                                          icon: Icons.close,
-                                          onPressed: () {
-                                            Get.dialog(
-                                                IncidentReportRejectDialog(
-                                                    id: controller.irId.value));
-                                          },
-                                        ),
-                                      ),
-                                      Dimens.boxWidth10,
-                                      Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.rejectColor,
-                                          text: "Reject IR",
-                                          icon: Icons.close,
-                                          onPressed: () {
-                                            Get.dialog(
-                                                IncidentReportRejectDialog(
-                                                    id: controller.irId.value));
-                                          },
-                                        ),
-                                      ),
-                                      Spacer()
-                                      // CustomElevatedButton(
-                                      //   icon: Icons.close,
-                                      //   backgroundColor:
-                                      //       ColorValues.appRedColor,
-                                      //   onPressed: () {
-                                      //     // controller.saveAsDraft();
-                                      //     Get.dialog(IncidentReportRejectDialog(
-                                      //         id: '${controller.incidentReportDetailsModel.value?.id}'));
-                                      //   },
-                                      //   text: 'Reject',
-                                      // )
-                                      // : Container(),
+                                      controller.incidentReportDetailsModel
+                                                      .value?.id !=
+                                                  null &&
+                                              varUserAccessModel
+                                                      .value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kIncidentReportFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
+                                                      .length >
+                                                  0
+                                          ? Row(
+                                              children: [
+                                                Container(
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    text: "Approve",
+                                                    icon: Icons.add,
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          ApproveIncidentReportDialog(
+                                                        id: controller
+                                                            .irId.value,
+                                                      ));
+                                                    },
+                                                  ),
+                                                ),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    text: "Approve IR",
+                                                    icon: Icons.add,
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          ApproveIncidentReportDialog(
+                                                        id: controller
+                                                            .irId.value,
+                                                      ));
+                                                    },
+                                                  ),
+                                                ),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor:
+                                                        ColorValues.rejectColor,
+                                                    text: "Reject",
+                                                    icon: Icons.close,
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          IncidentReportRejectDialog(
+                                                              id: controller
+                                                                  .irId.value));
+                                                    },
+                                                  ),
+                                                ),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  height: 45,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor:
+                                                        ColorValues.rejectColor,
+                                                    text: "Reject IR",
+                                                    icon: Icons.close,
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          IncidentReportRejectDialog(
+                                                              id: controller
+                                                                  .irId.value));
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 )
