@@ -94,6 +94,7 @@ import '../models/asset_category_model.dart';
 import '../models/asset_master_model.dart';
 import '../models/asset_type_list_sm_model.dart';
 import '../models/blood_model.dart';
+import '../models/body_injured_model.dart';
 import '../models/business_type_model.dart';
 import '../models/calibration_certificate_model.dart';
 import '../models/city_model.dart';
@@ -9776,7 +9777,93 @@ class Repository {
       return [];
     }
   }
+  Future<bool> createBodyInjured({bool? isLoading, bodyInjuredJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createBodyInjured(
+          auth: auth,
+          isLoading: isLoading,
+          bodyInjuredJsonString: bodyInjuredJsonString);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createbodypart');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  Future<bool> updateBodyInjured({
+    bool? isLoading,
+    bodyInjuredJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateBodyInjured(
+        auth: auth,
+        isLoading: isLoading,
+        bodyInjuredJsonString: bodyInjuredJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateBodypart');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+    Future<void> deleteBodyInjured(Object bodypart_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteBodyInjured(
+        auth: auth,
+        bodypart_id: bodypart_id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deletebodypart');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+    Future<List<BodyInjuredModel>> getBodyInjuredList({
+    required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getBodyInjuredList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Risk Type List Data: ${res.data}');
+      if (!res.hasError) {
+        var bodyInjuredList = bodyInjuredModelFromJson(res.data);
+        return bodyInjuredList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
   //end
   //end
 }

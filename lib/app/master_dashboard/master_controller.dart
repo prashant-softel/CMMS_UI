@@ -115,6 +115,11 @@ class MastersController extends GetxController {
       Routes.blockTypeListScreen,
     );
   }
+  Future<void> goToBodyinjured() async {
+    Get.toNamed(
+      Routes.Bodyinjured,
+    );
+  }
 
   Future<void> goToFeatureList() async {
     Get.toNamed(
