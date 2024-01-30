@@ -63,6 +63,7 @@ abstract class Routes {
   static const facilityTypeListScreen = _Paths.facilityTypeListScreen;
   static const SPVListScreen = _Paths.SPVListScreen;
   static const blockTypeListScreen = _Paths.blockTypeListScreen;
+  static const Bodyinjured = _Paths.Bodyinjured;
   static const importInventory = _Paths.importInventory;
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
@@ -244,6 +245,7 @@ abstract class _Paths {
   static const facilityTypeListScreen = '/facility-type-list-screen';
   static const SPVListScreen = '/spv-list-screen';
   static const blockTypeListScreen = '/block-type-list-screen';
+  static const Bodyinjured = '/body-injured';
   static const importInventory = '/importInventory';
   static const userList = '/userList';
   static const addUser = '/addUser';

@@ -6806,4 +6806,70 @@ class ConnectHelper {
 
     return responseModel;
   }
+    Future<ResponseModel> createBodyInjured({
+    required String auth,
+    bool? isLoading,
+    required bodyInjuredJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/CreateBodyParts', //AddBusiness
+      Request.post,
+      bodyInjuredJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> updateBodyInjured({
+    required String auth,
+    bool? isLoading,
+    required bodyInjuredJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/UpdateBodyParts',
+      Request.patch,
+      bodyInjuredJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> deleteBodyInjured({
+    required String auth,
+    bool? isLoading,
+    required bodypart_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/DeleteBodyParts?id=$bodypart_id',
+      Request.delete,
+      bodypart_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+    Future<ResponseModel> getBodyInjuredList(
+      {required bool isLoading, required String auth, int? facility_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetBodyPartsList?facility_id=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

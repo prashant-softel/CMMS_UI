@@ -618,15 +618,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 ],
                                                 controller: controller,
                                                 dropdownList:
-                                                    controller.operatorList,
+                                                    controller.customerList,
                                                 isValueSelected: controller
-                                                    .isSelectedOperator.value,
+                                                    .isSelectedCustomer.value,
                                                 selectedValue: controller
-                                                    .selectedOperator.value,
+                                                    .selectedCustomer.value,
                                                 onValueChanged: (selectedValue,
                                                     isValueSelected) {
                                                   controller
-                                                      .onValueChangedOperator(
+                                                      .onValueChangedCustomer(
                                                           selectedValue,
                                                           isValueSelected);
                                                 },
@@ -698,17 +698,17 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 0.0,
                                                   ),
                                                 ],
-                                                controller: controller,
+                                                                                                controller: controller,
                                                 dropdownList:
-                                                    controller.customerList,
+                                                    controller.operatorList,
                                                 isValueSelected: controller
-                                                    .isSelectedCustomer.value,
+                                                    .isSelectedOperator.value,
                                                 selectedValue: controller
-                                                    .selectedCustomer.value,
+                                                    .selectedOperator.value,
                                                 onValueChanged: (selectedValue,
                                                     isValueSelected) {
                                                   controller
-                                                      .onValueChangedCustomer(
+                                                      .onValueChangedOperator(
                                                           selectedValue,
                                                           isValueSelected);
                                                 },

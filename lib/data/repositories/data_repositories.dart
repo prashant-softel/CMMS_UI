@@ -3921,5 +3921,48 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+    Future<ResponseModel> createBodyInjured({
+    auth,
+    bool? isLoading,
+    bodyInjuredJsonString,
+  }) async {
+    var response = await connectHelper.createBodyInjured(
+        auth: auth,
+        isLoading: isLoading,
+        bodyInjuredJsonString: bodyInjuredJsonString);
+    return response;
+  }
+  Future<ResponseModel> updateBodyInjured({
+    auth,
+    bool? isLoading,
+    bodyInjuredJsonString,
+  }) async {
+    var response = await connectHelper.updateBodyInjured(
+      auth: auth,
+      isLoading: isLoading,
+      bodyInjuredJsonString: bodyInjuredJsonString,
+    );
+    return response;
+  }
+    Future<ResponseModel> deleteBodyInjured({
+    auth,
+    bool? isLoading,
+    bodypart_id,
+  }) async {
+    var response = await connectHelper.deleteBodyInjured(
+        auth: auth, isLoading: isLoading, bodypart_id: bodypart_id);
+    return response;
+  }
+    Future<ResponseModel> getBodyInjuredList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBodyInjuredList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
 //end
 }

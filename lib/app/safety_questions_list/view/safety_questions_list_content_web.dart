@@ -60,7 +60,7 @@ class SafetyQuestionsListContentWeb
                     },
                     child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
                   ),
-                  Text(" / Permit Type Checklist",
+                  Text(" / PERMIT TYPE CHECKLIST",
                       style: Styles.greyLight14)
                 ],
               ),

@@ -964,7 +964,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                       "Paid By",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    )),
+                    )),                
                 DataColumn2(
                     fixedWidth: 210,
                     label: Text(
