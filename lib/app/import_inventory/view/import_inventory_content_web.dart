@@ -374,16 +374,17 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                 text: 'Import',
                                 onPressed: () {
                                   if (controller.fileName.value != "") {
-                                    controller.browseFiles(
+                                    controller
+                                        .browseFiles(
                                       fileBytes: controller.fileBytes,
-                                    );
-                                    //     .then((value) {
-                                    //   controller.isSuccessDialog();
+                                    )
+                                        .then((value) {
+                                      controller.isSuccessDialog();
 
-                                    //   // Fluttertoast.showToast(
-                                    //   //     msg: "file upload  Successfully",
-                                    //   //     fontSize: 16.0);
-                                    // });
+                                      Fluttertoast.showToast(
+                                          msg: "file upload  Successfully",
+                                          fontSize: 16.0);
+                                    });
                                   } else {
                                     Fluttertoast.showToast(
                                         msg: "Please Select file...",
