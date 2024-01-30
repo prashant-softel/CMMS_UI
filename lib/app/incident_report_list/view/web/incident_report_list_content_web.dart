@@ -624,15 +624,16 @@ class IncidentReportListDataSource extends DataTableSource {
                                 : Dimens.box0,
 
                             varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kIncidentReportFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0 &&
+                                    incidentReportListDetails!.status != 183
                                 ? TableActionButton(
                                     color: ColorValues.approveColor,
                                     icon: Icons.approval_rounded,
@@ -661,20 +662,56 @@ class IncidentReportListDataSource extends DataTableSource {
                                 : Dimens.box0,
 
                             ///Edit button
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kIncidentReportFeatureId &&
+                            //                 e.edit ==
+                            //                     UserAccessConstants
+                            //                         .kHaveEditAccess)
+                            //             .length >
+                            //         0
+                            //     ? TableActionButton(
+                            //         color: ColorValues.appYellowColor,
+                            //         icon: Icons.edit,
+                            //         message: 'Edit',
+                            //         onPress: () {
+                            //           controller.clearStoreData();
+
+                            //           int irId =
+                            //               incidentReportListDetails?.id ?? 0;
+                            //           if (irId != 0) {
+                            //             Get.toNamed(
+                            //                 Routes.addIncidentReportContentWeb,
+                            //                 arguments: {
+                            //                   'irId':
+                            //                       incidentReportListDetails?.id,
+                            //                 });
+                            //           }
+                            //         },
+                            //         // onPress: () {
+                            //         //   controller.editIncidentReport(
+                            //         //       id: incidentReportListDetails?.id);
+                            //         // },
+                            //       )
+                            //     : Dimens.box0,
+//IR 2nd step button
                             varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kIncidentReportFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    incidentReportListDetails!.status == 183
                                 ? TableActionButton(
-                                    color: ColorValues.appYellowColor,
-                                    icon: Icons.edit,
-                                    message: 'Edit',
+                                    color: Color.fromARGB(136, 107, 152, 211),
+                                    icon: Icons.start_outlined,
+                                    message: 'IR 2nd Step',
                                     onPress: () {
                                       controller.clearStoreData();
 
@@ -689,10 +726,6 @@ class IncidentReportListDataSource extends DataTableSource {
                                             });
                                       }
                                     },
-                                    // onPress: () {
-                                    //   controller.editIncidentReport(
-                                    //       id: incidentReportListDetails?.id);
-                                    // },
                                   )
                                 : Dimens.box0,
 

@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -122,27 +123,59 @@ class ViewIncidentReportContentWeb
                                           children: [
                                             CustomAppBar(
                                               title: 'View Incident Report'.tr,
-                                              action: Container(
-                                                height: 30,
-                                                width: 170,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                    color: Colors.blue,
-                                                    width: 1,
+                                              action: Row(
+                                                children: [
+                                                  Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 2,
+                                                              horizontal: 5),
+                                                      margin: EdgeInsets.only(
+                                                          top: 5),
+                                                      decoration: BoxDecoration(
+                                                        color: controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.status_short ==
+                                                                118
+                                                            ? ColorValues
+                                                                .appPurpleColor
+                                                            : ColorValues
+                                                                .lightBlueColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Obx(
+                                                        () => Text(
+                                                          "Status :${controller.incidentReportDetailsModel.value?.status ?? ""} ",
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                    height: 30,
+                                                    width: 250,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Colors.blue,
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            color:
+                                                                Colors.green),
+                                                      ],
+                                                    ),
+                                                    child: Center(
+                                                        child: Text(
+                                                      '${controller.incidentReportDetailsModel.value?.status_short}',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
                                                   ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        color: Colors.green),
-                                                  ],
-                                                ),
-                                                child: Center(
-                                                    child: Text(
-                                                  '${controller.incidentReportDetailsModel.value?.status_short}',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                )),
+                                                ],
                                               ),
                                             ),
                                             Dimens.boxHeight10,
@@ -1767,22 +1800,28 @@ class ViewIncidentReportContentWeb
                                                   0
                                           ? Row(
                                               children: [
-                                                Container(
-                                                  height: 45,
-                                                  child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .appGreenColor,
-                                                    text: "Approve",
-                                                    icon: Icons.add,
-                                                    onPressed: () {
-                                                      Get.dialog(
-                                                          ApproveIncidentReportDialog(
-                                                        id: controller
-                                                            .irId.value,
-                                                      ));
-                                                    },
-                                                  ),
-                                                ),
+                                                controller.incidentReportDetailsModel
+                                                            .value?.status ==
+                                                        181
+                                                    ? Container(
+                                                        height: 45,
+                                                        child:
+                                                            CustomElevatedButton(
+                                                          backgroundColor:
+                                                              ColorValues
+                                                                  .appGreenColor,
+                                                          text: "Approve",
+                                                          icon: Icons.add,
+                                                          onPressed: () {
+                                                            Get.dialog(
+                                                                ApproveIncidentReportDialog(
+                                                              id: controller
+                                                                  .irId.value,
+                                                            ));
+                                                          },
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   height: 45,
