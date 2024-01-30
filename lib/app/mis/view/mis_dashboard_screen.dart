@@ -401,9 +401,9 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                 controller.trainingCourse();
                               }),
                           createContentTile(
-                              title: "Add Course",
+                              title: "Schedule Course",
                               onTap: () {
-                                controller.goToAddCourse();
+                                controller.goToScheduleCourseList();
                               })
                         ],
                       ),

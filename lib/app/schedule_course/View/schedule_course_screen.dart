@@ -1,19 +1,19 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cmms/app/add_training_course/add_course_controller.dart';
-import 'package:cmms/app/add_training_course/view/add_course_mobile.dart';
-import 'package:cmms/app/add_training_course/view/add_course_web.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/schedule_course/View/schedule_course_mobile.dart';
+import 'package:cmms/app/schedule_course/View/schedule_course_web.dart';
+import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddCourseScreen extends StatelessWidget {
-  AddCourseScreen({Key? key}) : super(key: key);
+class ScheduleScreen extends StatelessWidget {
+  ScheduleScreen({Key? key}) : super(key: key);
 
-  var controller = Get.find<AddCourseController>();
+  var controller = Get.find<ScheduleController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class AddCourseScreen extends StatelessWidget {
             )
           : AppBar(
               title: Text(
-                "Add Training Course",
+                "Schedule Course",
                 style: TextStyle(
                   color: Color.fromARGB(255, 159, 156, 156),
                   fontSize: 16,
@@ -53,11 +53,11 @@ class AddCourseScreen extends StatelessWidget {
                 Expanded(
                   child: KeyedSubtree(
                     key: UniqueKey(),
-                    child: AddCourseWeb(),
+                    child: ScheduleWeb(),
                   ),
                 )
               else
-                Expanded(child: AddCourseMobile())
+                Expanded(child: ScheduleMobile())
             ]),
           ),
         ]),

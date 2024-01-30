@@ -1,19 +1,19 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:cmms/app/add_training_course/add_course_controller.dart';
-import 'package:cmms/app/add_training_course/view/add_course_mobile.dart';
-import 'package:cmms/app/add_training_course/view/add_course_web.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/schedule_course_list/schedule_course_list_controller.dart';
+import 'package:cmms/app/schedule_course_list/view/schedule_course_list_mobile.dart';
+import 'package:cmms/app/schedule_course_list/view/schedule_course_list_web.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddCourseScreen extends StatelessWidget {
-  AddCourseScreen({Key? key}) : super(key: key);
+class ScheduleCourseScreen extends StatelessWidget {
+  ScheduleCourseScreen({Key? key}) : super(key: key);
 
-  var controller = Get.find<AddCourseController>();
+  var controller = Get.find<ScheduleCourseListController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class AddCourseScreen extends StatelessWidget {
             )
           : AppBar(
               title: Text(
-                "Add Training Course",
+                "Schedule Course",
                 style: TextStyle(
                   color: Color.fromARGB(255, 159, 156, 156),
                   fontSize: 16,
@@ -53,11 +53,11 @@ class AddCourseScreen extends StatelessWidget {
                 Expanded(
                   child: KeyedSubtree(
                     key: UniqueKey(),
-                    child: AddCourseWeb(),
+                    child: ScheduleCourseWeb(),
                   ),
                 )
               else
-                Expanded(child: AddCourseMobile())
+                Expanded(child: ScheduleCourseListMobile())
             ]),
           ),
         ]),

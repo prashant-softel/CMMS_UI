@@ -83,6 +83,8 @@ abstract class Routes {
   static const warrantyType = _Paths.warrantyType;
   static const calibrationViewScreen = _Paths.calibrationViewScreen;
   static const mrsListScreen = _Paths.mrsListScreen;
+  static const scheduleCourseList = _Paths.scheduleCourseList;
+  static const scheduleCourse = _Paths.scheduleCourse;
 
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
@@ -207,6 +209,8 @@ abstract class _Paths {
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
   static const misDashboard = '/misDashboard';
+  static const scheduleCourseList = '/scheduleCourseList';
+  static const scheduleCourse = '/scheduleCourse';
 
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';

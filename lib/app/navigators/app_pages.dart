@@ -104,6 +104,10 @@ import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/risk_type/risk_type_binding.dart';
 import 'package:cmms/app/risk_type/view/risk_type_screen.dart';
+import 'package:cmms/app/schedule_course/View/schedule_course_screen.dart';
+import 'package:cmms/app/schedule_course/schedule_course_binding.dart';
+import 'package:cmms/app/schedule_course_list/schedule_course_list_binding.dart';
+import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
 import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
@@ -353,6 +357,16 @@ class AppPages {
         name: _Paths.trainingCouse,
         page: TrainingCourseScreen.new,
         binding: TrainingBinding()),
+    GetPage<dynamic>(
+      name: _Paths.scheduleCourseList,
+      page: ScheduleCourseScreen.new,
+      binding: ScheduleCourseListBinding()
+    ),
+    GetPage<dynamic>(
+      name: _Paths.scheduleCourse,
+      page: ScheduleScreen.new,
+      binding: ScheduleBinding()
+    ),
     GetPage<dynamic>(
       name: _Paths.editJob,
       page: EditJobScreen.new,
