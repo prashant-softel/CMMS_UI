@@ -623,6 +623,43 @@ class IncidentReportListDataSource extends DataTableSource {
                                   )
                                 : Dimens.box0,
 
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kIncidentReportFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
+                                ? TableActionButton(
+                                    color: ColorValues.approveColor,
+                                    icon: Icons.approval_rounded,
+                                    message: 'Approve IR',
+
+                                    onPress: () {
+                                      controller.clearStoreData();
+
+                                      int irId =
+                                          incidentReportListDetails?.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.viewIncidentReportScreen,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails?.id,
+                                            });
+                                      }
+                                    },
+                                    // onPress: () {
+                                    //   controller.viewIncidentReport(
+                                    //       id: incidentReportListDetails?.id);
+                                    //   // print('record:${int.tryParse('${record[0]}')}');
+                                    // },
+                                  )
+                                : Dimens.box0,
+
                             ///Edit button
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
@@ -712,7 +749,7 @@ class IncidentReportListDataSource extends DataTableSource {
                             //       )
                             //     : Container(),
                           ],
-                        ) 
+                        )
                       ])
                     : Text(value.toString()),
           ),
