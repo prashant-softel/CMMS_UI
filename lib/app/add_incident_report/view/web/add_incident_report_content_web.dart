@@ -920,7 +920,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Detail Investigation Required1: '),
+                                                                    'Detail Investigation Required: '),
                                                             SizedBox(
                                                               width: 3,
                                                             ),
