@@ -86,7 +86,7 @@ class IncidentMessageApproveDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    Get.offAllNamed(Routes.incidentReportListWeb);
                   },
                   child: const Text('IR List'),
                 ),
@@ -96,7 +96,7 @@ class IncidentMessageApproveDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {
-                    Get.back();
+                    Get.offAllNamed(Routes.viewIncidentReportScreen);
                   },
                   child: const Text('View IR'),
                 ),
