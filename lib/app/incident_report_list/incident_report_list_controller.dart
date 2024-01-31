@@ -225,11 +225,64 @@ class IncidentReportListController extends GetxController {
       incidentReportList.value = filteredData;
       return;
     }
-
-    incidentReportList.value = filteredData
+    List<IncidentReportListModel?> filteredList = filteredData
         .where((item) =>
-            item!.description!.toLowerCase().contains(keyword.toLowerCase()))
+            (item?.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.title
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.block_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipment_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.approved_by
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.approved_at
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.reported_by_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.reported_at
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
+    incidentReportList.value = filteredList;
+    // incidentReportList.value = filteredData
+    //     .where((item) =>
+    //         item!.description!.toLowerCase().contains(keyword.toLowerCase()))
+    //     .toList();
     update(['incident_report_list']);
   }
 

@@ -121,6 +121,40 @@ class PreventiveMaintenanceTaskController extends GetxController {
       return;
     }
 
+    List<PmTaskListModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.last_done_date
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.due_date?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.done_date?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.assigned_to_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.permit_code
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.task_code?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.frequency_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    pmTaskList.value = filteredList;
+
     // pmTaskList.value = filteredData
     //     .where((item) => item!.maintenance_order_number!
     //         .toLowerCase()

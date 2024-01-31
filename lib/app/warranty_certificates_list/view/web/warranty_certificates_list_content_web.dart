@@ -398,34 +398,34 @@ DataColumn2 buildDataColumn(
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-          SizedBox(
-            height: Get.height * 0.05,
-            child: TextField(
-              onChanged: (value) {
-                filterText.value = value;
-                //   onSearchCallBack(value);
-              },
-              textAlign: TextAlign.left,
-              style: TextStyle(height: 1.0),
-              decoration: InputDecoration(
-                hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: Get.height * 0.05,
+          //   child: TextField(
+          //     onChanged: (value) {
+          //       filterText.value = value;
+          //       //   onSearchCallBack(value);
+          //     },
+          //     textAlign: TextAlign.left,
+          //     style: TextStyle(height: 1.0),
+          //     decoration: InputDecoration(
+          //       hintText: 'Filter',
+          //       contentPadding:
+          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       enabledBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(

@@ -408,37 +408,37 @@ DataColumn2 buildDataColumn(
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-          SizedBox(
-            height: Get.height * 0.05,
-            child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-              ),
-              onChanged: (value) {
-                filterText.value = value;
-                //   onSearchCallBack(value);
-              },
-              textAlign: TextAlign.left,
-              decoration: InputDecoration(
-                hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: Get.height * 0.05,
+          //   child: TextField(
+          //     style: GoogleFonts.lato(
+          //       textStyle:
+          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+          //     ),
+          //     onChanged: (value) {
+          //       filterText.value = value;
+          //       //   onSearchCallBack(value);
+          //     },
+          //     textAlign: TextAlign.left,
+          //     decoration: InputDecoration(
+          //       hintText: 'Filter',
+          //       contentPadding:
+          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       enabledBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
