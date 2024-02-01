@@ -70,12 +70,12 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.offNamed(Routes.preventive);
+                          Get.offNamed(Routes.audit);
                         },
-                        child: Text(" / Preventive Maintenance".toUpperCase(),
+                        child: Text(" / AUDIT".toUpperCase(),
                             style: Styles.greyMediumLight12),
                       ),
-                      Text(" ", style: Styles.greyMediumLight12)
+                      Text(" /AUDIT TASK", style: Styles.greyMediumLight12)
                     ],
                   ),
                 ),
@@ -100,7 +100,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "PM Tasks ",
+                                      "Audit Tasks ",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
