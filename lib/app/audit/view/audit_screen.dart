@@ -108,15 +108,15 @@ class AuditScreen extends GetView<AuditController> {
                                 controller.auditList();
                               }),
                           _priventiveList(
-                              tittle: " Schedule Audits",
+                              tittle: "Audits Task",
                               ontap: () {
-                                // controller.pmTask();
+                                controller.auditTask();
                               }),
-                          _priventiveList(
-                              tittle: " Audits",
-                              ontap: () {
-                                controller.auditList();
-                              }),
+                          // _priventiveList(
+                          //     tittle: " Audits",
+                          //     ontap: () {
+                          //       controller.auditList();
+                          //     }),
                         ],
                       ),
                     Container(
