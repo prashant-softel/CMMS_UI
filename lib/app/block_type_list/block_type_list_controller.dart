@@ -49,9 +49,7 @@ class BlockTypeListController extends GetxController {
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
 
   int selectedEquipmentId = 0;
-  int selectedfrequencyId = 0;
   final isSuccess = false.obs;
-  StreamSubscription<int>? blockIdStreamSubscription;
 
   ///SOP Permit List
   RxList<BlockTypeListModel> blockTypeList = <BlockTypeListModel>[].obs;
@@ -86,17 +84,15 @@ class BlockTypeListController extends GetxController {
   var descriptionCtrlr = TextEditingController();
   FocusNode descFocus = FocusNode();
   ScrollController descScroll = ScrollController();
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
 
   @override
   void onInit() async {
-    // getInventoryCategoryList();
-    // getFrequencyList();
-
-    blockIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      blockId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
-        // getBlockTypeList();
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 2), () {
+        getBlockTypeList(facilityId);
       });
     });
 
@@ -142,27 +138,6 @@ class BlockTypeListController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  Future<void> getFacilityList() async {
-    facilityTypeList.value = <FacilityTypeListModel>[];
-    final _FacilityTypeList = await blockTypeListPresenter.getFacilityList(
-      isLoading: true,
-      // categoryIds: categoryIds,
-      job_type_id: selectedFacilityId,
-      // job_type_id: 36,
-    );
-    for (var facilityType_list in _FacilityTypeList) {
-      facilityTypeList.add(facilityType_list);
-    }
-    selectedfacility.value = facilityTypeList[0].name!;
-    selectedFacilityId = facilityTypeList[0].id!;
-    getBlockTypeList(selectedFacilityId);
-  }
-
-  Future<void> getBlocks(dynamic selected) async {
-    print("in getBlocks function");
-    print(selected);
-  }
-
   Future<void> getBlockTypeList(selectedFacilityId) async {
     blockTypeList.value = <BlockTypeListModel>[];
     bufferblockTypeList.value = <BlockTypeListModel>[];
@@ -177,24 +152,12 @@ class BlockTypeListController extends GetxController {
       blockTypeList.add(blockType_list);
       bufferblockTypeList.add(blockType_list);
     }
-    // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
 
-    // supplierNameList = _supplierNameList;
-    blockTypeListPaginationController = PaginationController(
-      rowCount: blockTypeList.length,
-      rowsPerPage: 10,
-    );
     update(['block_type_list']);
   }
 
   void checkForm() {
-    if (selectedfacility.value == '') {
-      isSelectedfacility.value = false;
-    }
-
-    if (isNameInvalid.value == true ||
-        isDescriptionInvalid.value == true ||
-        isSelectedfacility.value == false) {
+    if (isNameInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -218,9 +181,7 @@ class BlockTypeListController extends GetxController {
     }
     print(
         "title : ${titleCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()} ");
-    if (titleCtrlr.text.trim() == '' ||
-        descriptionCtrlr.text.trim() == '' ||
-        selectedfacility == '') {
+    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter data to create");
@@ -231,7 +192,7 @@ class BlockTypeListController extends GetxController {
         name: _title,
         description: _description,
         photoId: 0,
-        parentId: selectedFacilityId,
+        parentId: facilityId,
       );
       var blockTypeJsonString = createBlockList
           .toJson(); //createCheckPointToJson([createCheckpoint]);
@@ -261,7 +222,7 @@ class BlockTypeListController extends GetxController {
     print(selectedfacility);
     selectedFacilityId = facilityIds;
 
-    getBlockTypeList(selectedFacilityId);
+    getBlockTypeList(facilityId);
   }
 
   Future<bool> updateBlock(int? businessId) async {
@@ -280,7 +241,7 @@ class BlockTypeListController extends GetxController {
       id: businessId,
       name: _businessName,
       description: _description,
-      parentId: selectedFacilityId,
+      parentId: facilityId,
     );
     var modulelistJsonString = updateBusinessList.toJson();
 
@@ -329,7 +290,7 @@ class BlockTypeListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBlockTypeList(selectedFacilityId);
+                    getBlockTypeList(facilityId);
                     // getBusinessList(selectedBusinessTypeId, true);
                   });
                 },
@@ -370,7 +331,7 @@ class BlockTypeListController extends GetxController {
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
       // get(facilityId, type, true);
-      getBlockTypeList(selectedFacilityId);
+      getBlockTypeList(facilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;

@@ -152,68 +152,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          // Text(
-                                          //   "Title",
-                                          //   style: Styles.blackBold16,
-                                          // ),
-
-                                          Expanded(
-                                              child: CustomRichText(
-                                                  title: 'Select Facility ')),
-                                          Container(
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              color: ColorValues.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: DropdownWebWidget(
-                                              controller: controller,
-                                              // dropdownList:
-                                              // controller: controller,
-                                              dropdownList:
-                                                  controller.facilityTypeList,
-                                              isValueSelected: controller
-                                                  .isSelectedfacility.value,
-                                              selectedValue: controller
-                                                  .selectedfacility.value,
-                                              onValueChanged: (selectedValue,
-                                                  isValueSelected) {
-                                                controller.onValueChanged(
-                                                    selectedValue,
-                                                    isValueSelected);
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
                                           Expanded(
                                               child: CustomRichText(
                                                   title: 'Block Name ')),
@@ -248,9 +186,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller: controller.titleCtrlr,
                                               focusNode: controller.titleFocus,
                                               scrollController:
@@ -364,9 +302,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller:
                                                   controller.descriptionCtrlr,
                                               focusNode: controller.descFocus,
