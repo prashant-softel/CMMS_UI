@@ -54,14 +54,14 @@ class PreventiveMaintenanceTaskViewContentWeb
                   color: ColorValues.greyLightColor,
                 ),
                 InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     final _flutterSecureStorage = const FlutterSecureStorage();
@@ -440,32 +440,39 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                 style: Styles.blue700,
                                               ),
                                               Spacer(),
-                                              Container(
-                                                height: 30,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.addNewColor,
-                                                  onPressed: () async {
-                                                    Get.offAllNamed(
-                                                        Routes.createMrs,
-                                                        arguments: {
-                                                          "whereUsedId":
-                                                              controller
-                                                                  .pmtaskViewModel
-                                                                  .value
-                                                                  ?.id,
-                                                          "activity": controller
-                                                              .pmtaskViewModel
-                                                              .value
-                                                              ?.plan_title,
-                                                          "whereUsed": 27,
-                                                          "fromActorTypeId": 2,
-                                                          "to_actor_type_id": 3
-                                                        });
-                                                  },
-                                                  text: "Add New MRS",
-                                                ),
-                                              ),
+                                              controller
+                                                      .listMrsByTaskId!.isEmpty
+                                                  ? Container(
+                                                      height: 30,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .addNewColor,
+                                                        onPressed: () async {
+                                                          Get.offAllNamed(
+                                                              Routes.createMrs,
+                                                              arguments: {
+                                                                "whereUsedId":
+                                                                    controller
+                                                                        .pmtaskViewModel
+                                                                        .value
+                                                                        ?.id,
+                                                                "activity": controller
+                                                                    .pmtaskViewModel
+                                                                    .value
+                                                                    ?.plan_title,
+                                                                "whereUsed": 27,
+                                                                "fromActorTypeId":
+                                                                    2,
+                                                                "to_actor_type_id":
+                                                                    3
+                                                              });
+                                                        },
+                                                        text: "Add New MRS",
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
                                             ],
                                           ),
                                         ),
@@ -593,13 +600,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                               message:
                                                                   "Edit MRS",
                                                               onPress: () {
-                                                                final _flutterSecureStorage =
-                                                                    const FlutterSecureStorage();
-
-                                                                _flutterSecureStorage
-                                                                    .delete(
-                                                                        key:
-                                                                            "mrsId");
                                                                 String mrsId = controller
                                                                         .listMrsByTaskId?[
                                                                             index]
@@ -923,7 +923,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         UserAccessConstants.kPmTaskFeatureId &&
                                     e.add == UserAccessConstants.kHaveAddAccess)
                                 .length >
-                            0
+                            0 &&
+                        controller.listMrsByTaskId!.isNotEmpty
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
