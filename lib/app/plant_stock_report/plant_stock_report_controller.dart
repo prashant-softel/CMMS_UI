@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:async';
 
 import 'package:cmms/app/plant_stock_report/plant_stock_report_presenter.dart';
@@ -19,7 +21,8 @@ class PlantStockReportController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<PlantStockListModel?>? plantStockList = <PlantStockListModel?>[].obs;
-  RxList<StockDetails?>? StockDetailsList = <StockDetails?>[].obs;
+  RxList<StockDetails?> stockDetailsList = <StockDetails?>[].obs;
+  RxList<StockDetails?> filteredData = <StockDetails>[].obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -77,6 +80,53 @@ class PlantStockReportController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      stockDetailsList.value = filteredData;
+      return;
+    }
+    List<StockDetails?> filteredList = filteredData
+        .where((item) =>
+            (item?.asset_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.asset_code
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.asset_type
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.opening
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.inward
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.outward
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.balance
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+
+    stockDetailsList.value = filteredList;
+  }
+
   ///
   @override
   void onInit() async {
@@ -122,7 +172,7 @@ class PlantStockReportController extends GetxController {
       bool isLoading,
       List<int>? selectedAssetsNameIdList) async {
     plantStockList?.value = <PlantStockListModel>[];
-    StockDetailsList?.value = <StockDetails>[];
+    stockDetailsList.value = <StockDetails>[];
 
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
@@ -134,7 +184,7 @@ class PlantStockReportController extends GetxController {
     if (_plantStockList != null) {
       for (var facility in _plantStockList) {
         for (var stockDetail in facility!.stockDetails) {
-          StockDetailsList!.add(stockDetail);
+          stockDetailsList.add(stockDetail);
         }
       }
     }
@@ -165,7 +215,7 @@ class PlantStockReportController extends GetxController {
 
           getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
               true, selectedAssetsNameIdList.value);
-                }
+        }
         break;
     }
     // print({"selectedfrequency": selectedfrequency});

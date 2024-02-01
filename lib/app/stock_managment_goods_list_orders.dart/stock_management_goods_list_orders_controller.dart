@@ -135,7 +135,9 @@ class StockManagementGoodsOrdersController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.cost
+            (item.cost?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.currency
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

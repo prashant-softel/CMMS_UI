@@ -60,7 +60,9 @@ class _PlantStockReportContentWebState
                       color: ColorValues.greyLightColor,
                     ),
                     InkWell(
-                      onTap:(){Get.offNamed(Routes.home);},
+                      onTap: () {
+                        Get.offNamed(Routes.home);
+                      },
                       child: Text(
                         "DASHBOARD",
                         style: Styles.greyLight14,
@@ -73,8 +75,7 @@ class _PlantStockReportContentWebState
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyLight14),
                     ),
-                    Text(" / PLANT STOCK REPORT",
-                        style: Styles.greyLight14),
+                    Text(" / PLANT STOCK REPORT", style: Styles.greyLight14),
                   ],
                 ),
               ),
@@ -105,30 +106,25 @@ class _PlantStockReportContentWebState
                                   ),
                                   Spacer(),
                                   Container(
-                                  decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: const Offset(
+                                            5.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 5.0,
+                                          spreadRadius: 1.0,
+                                        ),
+                                      ],
+                                      color: ColorValues.whiteColor,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
                                     child: MultipDropdownWebWidget(
-                                      width: (MediaQuery.of(context).size.width *
-                                          .2),
+                                      width:
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
                                       //  height: 35,
                                       dropdownList: controller.assetList,
                                       selectedItems:
@@ -273,6 +269,8 @@ class _PlantStockReportContentWebState
                                           height: 1.0,
                                           color: Colors.black),
                                     ),
+                                    onChanged: (value) =>
+                                          controller.search(value),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -291,7 +289,7 @@ class _PlantStockReportContentWebState
                               ],
                             ),
                             Dimens.boxHeight5,
-                            controller.StockDetailsList?.isEmpty == true
+                            controller.StockDetailsList.isEmpty == true
                                 ? Center(child: Text('No data'))
                                 : Expanded(
                                     child: ValueListenableBuilder(
@@ -404,37 +402,37 @@ class _PlantStockReportContentWebState
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onChanged: (value) {
-                  filterText.value = value;
-                  //   onSearchCallBack(value);
-                },
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -460,7 +458,7 @@ class PlantListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredPlantList = <StockDetails?>[];
-    filteredPlantList = controller.StockDetailsList!.where((Plant) {
+    filteredPlantList = controller.StockDetailsList.where((Plant) {
       return (Plant?.asset_name ?? '')
               .toString()
               .toLowerCase()
