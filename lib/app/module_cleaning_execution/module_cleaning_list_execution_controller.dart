@@ -117,11 +117,46 @@ class ModuleCleaningListExecutionController extends GetxController {
       return;
     }
 
-    mcTaskList.value = filteredData
+    List<MCTaskListModel?> filteredList = filteredData
         .where((item) =>
-            item!.responsibility!.toLowerCase().contains(keyword.toLowerCase()))
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.planId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.responsibility
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.frequency
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.noOfDays
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.startDate
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.doneDate
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['mc_task_list']);
+    mcTaskList.value = filteredList;
+
+    // mcTaskList.value = filteredData
+    //     .where((item) =>
+    //         item!.responsibility!.toLowerCase().contains(keyword.toLowerCase()))
+    //     .toList();
+    // update(['mc_task_list']);
   }
 
   Future<void> abandonExecutionButton({int? id}) async {
@@ -169,14 +204,12 @@ class ModuleCleaningListExecutionController extends GetxController {
         mcTaskListTableColumns.add(key);
       }
     }
-  
+
     update(['mc_task_list']);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   // void getPmTaskListByDate() {

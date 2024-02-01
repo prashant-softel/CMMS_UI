@@ -105,11 +105,51 @@ class WarrantyCertificatesListController extends GetxController {
       return;
     }
 
-    inventoryList.value = filteredData
-        .where(
-            (item) => item!.name!.toLowerCase().contains(keyword.toLowerCase()))
+    List<InventoryModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.serialNumber
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.parentName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.categoryName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.operatorName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['inventory_list']);
+    inventoryList.value = filteredList;
+
+    // inventoryList.value = filteredData
+    //     .where(
+    //         (item) => item!.name!.toLowerCase().contains(keyword.toLowerCase()))
+    //     .toList();
+    // update(['inventory_list']);
   }
 
   Future<void> getInventoryList(int facilityId) async {

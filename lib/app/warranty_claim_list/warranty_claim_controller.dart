@@ -547,13 +547,46 @@ class WarrantyClaimController extends GetxController {
       warrantyClaimList.value = filteredData;
       return;
     }
-
-    warrantyClaimList.value = filteredData
-        .where((item) => item!.warranty_claim_title!
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
+    List<WarrantyClaimModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.wc_id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.date_of_claim?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.warranty_claim_title
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipment_sr_no
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipment_category
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipment_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.estimated_cost
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['warranty_claim_list']);
+    warrantyClaimList.value = filteredList;
+    // warrantyClaimList.value = filteredData
+    //     .where((item) => item!.warranty_claim_title!
+    //         .toLowerCase()
+    //         .contains(keyword.toLowerCase()))
+    //     .toList();
+    // update(['warranty_claim_list']);
   }
 
   Future<void> getWarrantyClaimList(int facilityId, dynamic startDate,

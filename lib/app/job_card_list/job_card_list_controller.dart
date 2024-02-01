@@ -45,11 +45,44 @@ class JobCardListController extends GetxController {
       return;
     }
 
-    jobList.value = filteredData
+    List<JobCardModel?> filteredList = filteredData
         .where((item) =>
-            item!.id!.toString().toLowerCase().contains(keyword.toLowerCase()))
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.jobCardId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.permit_id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.permit_no?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.start_time
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.end_time?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.job_assinged_to
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
         .toList();
-    update(['job_list']);
+
+    jobList.value = filteredList;
+    // jobList.value = filteredData
+    //     .where((item) =>
+    //         item!.id!.toString().toLowerCase().contains(keyword.toLowerCase()))
+    //     .toList();
+    // update(['job_list']);
   }
 
   @override
