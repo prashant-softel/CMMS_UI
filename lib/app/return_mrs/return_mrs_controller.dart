@@ -16,7 +16,8 @@ class ReturnMrsListController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<ReturnMrsListModel?>? mrsList = <ReturnMrsListModel?>[].obs;
+  RxList<ReturnMrsListModel?> mrsList = <ReturnMrsListModel?>[].obs;
+  RxList<ReturnMrsListModel?> filteredData = <ReturnMrsListModel?>[].obs;
   bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(
@@ -81,14 +82,15 @@ class ReturnMrsListController extends GetxController {
   }
 
   Future<void> getReturnMrsList(int facilityId, bool isLoading) async {
-    mrsList?.value = <ReturnMrsListModel>[];
+    mrsList.value = <ReturnMrsListModel>[];
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
       facilityId: facilityId,
       isLoading: isLoading,
     );
 
     if (_mrsList != null) {
-      mrsList!.value = _mrsList;
+      mrsList.value = _mrsList;
+      filteredData.value = _mrsList;
       paginationController = PaginationController(
         rowCount: mrsList?.length ?? 0,
         rowsPerPage: 10,
@@ -104,6 +106,51 @@ class ReturnMrsListController extends GetxController {
       }
     }
   }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      mrsList.value = filteredData.value;
+      return;
+    }
+    List<ReturnMrsListModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.requested_by_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.approver_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.requestd_date
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.activity
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.whereUsedType?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.whereUsedTypeId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    mrsList.value = filteredList;
+  }
+
 
   void clearStoreData() {
     returnmrsListPresenter.clearValue();

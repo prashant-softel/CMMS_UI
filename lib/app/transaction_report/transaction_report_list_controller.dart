@@ -27,8 +27,8 @@ class TransactionReportListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<TransactionReportListModel?> transactionReportList =
       <TransactionReportListModel?>[].obs;
-  RxList<TransactionReportListModel> filteredData =
-      <TransactionReportListModel>[].obs;
+  RxList<TransactionReportListModel?> filteredData =
+      <TransactionReportListModel?>[].obs;
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
@@ -164,11 +164,44 @@ class TransactionReportListController extends GetxController {
       return;
     }
 
-    transactionReportList.value = filteredData
+    List<TransactionReportListModel?> filteredList = filteredData
         .where((item) =>
-            item.assetItemName!.toLowerCase().contains(keyword.toLowerCase()))
+            (item?.fromActorID
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.fromActorType
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.fromActorName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.toActorType
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.toActorName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.assetItemName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.lastUpdated?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.qty?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
-    update(['stock_Mangement_Date']);
+    transactionReportList.value = filteredList;
+    // update(['stock_Mangement_Date']);
   }
 
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
@@ -214,6 +247,7 @@ class TransactionReportListController extends GetxController {
       actorType: actorType,
       facility_id: facilityId,
     );
+    filteredData.value = transactionReportList.toList();
     transactionReportList.value = _goodsordersList;
   }
 

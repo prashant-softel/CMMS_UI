@@ -18,8 +18,11 @@ class FaultyMaterialReportController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<FaultyMaterialReportModel?>? faultyMaterialReportList =
+  RxList<FaultyMaterialReportModel?> faultyMaterialReportList =
       <FaultyMaterialReportModel?>[].obs;
+  RxList<FaultyMaterialReportModel?> filteredData =
+      <FaultyMaterialReportModel?>[].obs;
+
   FaultyMaterialReportModel? faultyMaterialReportModel;
 
   PaginationController paginationController = PaginationController(
@@ -103,6 +106,7 @@ class FaultyMaterialReportController extends GetxController {
 
     if (_preventiveCheckList != null) {
       faultyMaterialReportList!.value = _preventiveCheckList;
+      filteredData.value = _preventiveCheckList;
       paginationController = PaginationController(
         rowCount: faultyMaterialReportList?.length ?? 0,
         rowsPerPage: 10,
@@ -118,6 +122,47 @@ class FaultyMaterialReportController extends GetxController {
         }
       }
     }
+  }
+
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      faultyMaterialReportList.value = filteredData;
+      return;
+    }
+    List<FaultyMaterialReportModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.asset_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.serial_number
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.replaceSerialNo
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.lastInsetedDateTime
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.qty
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.remarks
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    faultyMaterialReportList.value = filteredList;
   }
 
   void getPlantStockListByDate() {

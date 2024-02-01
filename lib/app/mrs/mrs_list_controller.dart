@@ -143,6 +143,7 @@ class MrsListController extends GetxController {
 
     if (_mrsList != null) {
       mrsList.value = _mrsList;
+      filteredData.value = _mrsList;
       paginationController = PaginationController(
         rowCount: mrsList.length,
         rowsPerPage: 10,

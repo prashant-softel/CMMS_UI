@@ -21,8 +21,8 @@ class PlantStockReportController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<PlantStockListModel?>? plantStockList = <PlantStockListModel?>[].obs;
-  RxList<StockDetails?> stockDetailsList = <StockDetails?>[].obs;
-  RxList<StockDetails?> filteredData = <StockDetails>[].obs;
+  RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
+  RxList<StockDetails?> filteredData = <StockDetails?>[].obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -81,8 +81,9 @@ class PlantStockReportController extends GetxController {
   }
 
   void search(String keyword) {
+    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      stockDetailsList.value = filteredData;
+      StockDetailsList.value = filteredData;
       return;
     }
     List<StockDetails?> filteredList = filteredData
@@ -124,7 +125,7 @@ class PlantStockReportController extends GetxController {
                 false))
         .toList();
 
-    stockDetailsList.value = filteredList;
+    StockDetailsList.value = filteredList;
   }
 
   ///
@@ -172,7 +173,7 @@ class PlantStockReportController extends GetxController {
       bool isLoading,
       List<int>? selectedAssetsNameIdList) async {
     plantStockList?.value = <PlantStockListModel>[];
-    stockDetailsList.value = <StockDetails>[];
+    StockDetailsList.value = <StockDetails>[];
 
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
@@ -184,9 +185,15 @@ class PlantStockReportController extends GetxController {
     if (_plantStockList != null) {
       for (var facility in _plantStockList) {
         for (var stockDetail in facility!.stockDetails) {
-          stockDetailsList.add(stockDetail);
+          StockDetailsList.add(stockDetail);
         }
       }
+      filteredData.value = StockDetailsList.toList();
+
+      paginationController = PaginationController(
+        rowCount: StockDetailsList.length,
+        rowsPerPage: 10,
+      );
     }
   }
 

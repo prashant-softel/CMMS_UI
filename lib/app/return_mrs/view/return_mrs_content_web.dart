@@ -70,8 +70,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyLight14),
                     ),
-                    Text(" / RETURN MRS LIST",
-                        style: Styles.greyLight14),
+                    Text(" / RETURN MRS LIST", style: Styles.greyLight14),
                   ],
                 ),
               ),
@@ -188,6 +187,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                           height: 1.0,
                                           color: Colors.black),
                                     ),
+                                    onChanged: (value) =>
+                                        controller.search(value),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(

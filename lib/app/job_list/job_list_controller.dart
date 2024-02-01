@@ -108,7 +108,7 @@ class JobListController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      jobList.value = filteredData.value;
+      jobList.value = filteredData;
       return;
     }
     List<JobModel?> filteredList = filteredData

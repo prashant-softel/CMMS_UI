@@ -270,7 +270,7 @@ class _PlantStockReportContentWebState
                                           color: Colors.black),
                                     ),
                                     onChanged: (value) =>
-                                          controller.search(value),
+                                        controller.search(value),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -289,7 +289,7 @@ class _PlantStockReportContentWebState
                               ],
                             ),
                             Dimens.boxHeight5,
-                            controller.stockDetailsList.isEmpty == true
+                            controller.StockDetailsList.isEmpty == true
                                 ? Center(child: Text('No data'))
                                 : Expanded(
                                     child: ValueListenableBuilder(
@@ -458,7 +458,7 @@ class PlantListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredPlantList = <StockDetails?>[];
-    filteredPlantList = controller.stockDetailsList.where((Plant) {
+    filteredPlantList = controller.StockDetailsList.where((Plant) {
       return (Plant?.asset_name ?? '')
               .toString()
               .toLowerCase()

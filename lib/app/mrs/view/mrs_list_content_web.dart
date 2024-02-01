@@ -17,16 +17,11 @@ import '../../constant/constant.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 
-class MrsListContentWeb extends StatefulWidget {
+class MrsListContentWeb extends StatelessWidget {
   MrsListContentWeb({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<MrsListContentWeb> createState() => _MrsListContentWebState();
-}
-
-class _MrsListContentWebState extends State<MrsListContentWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MrsListController>(
@@ -125,20 +120,6 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                     ),
                                   ],
                                 ),
-                                // Dimens.boxWidth15,
-                                // ActionButton(
-                                //   icon: Icons.add,
-                                //   label: "Add New",
-                                //   onPressed: () {
-                                //     final _flutterSecureStorage =
-                                //         const FlutterSecureStorage();
-
-                                //     _flutterSecureStorage.delete(
-                                //         key: "mrsId");
-                                //     Get.toNamed(Routes.createMrs);
-                                //   },
-                                //   color: ColorValues.addNewColor,
-                                // ),
                               ],
                             ),
                           ),
@@ -147,95 +128,7 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                           ),
                           Row(
                             children: [
-                              // PopupMenuButton<String>(
-                              //   tooltip: "",
-                              //   elevation: 25.0,
-                              //   child: Container(
-                              //     height: 35,
-                              //     margin: EdgeInsets.only(left: 10),
-                              //     padding: EdgeInsets.only(
-                              //         top: 4, bottom: 4, right: 8, left: 8),
-                              //     decoration: BoxDecoration(
-                              //       color: ColorValues.appLightBlueColor,
-                              //       borderRadius: BorderRadius.circular(5),
-                              //     ),
-                              //     child: Text(
-                              //       'Column Visibility',
-                              //       style: TextStyle(
-                              //         color: Colors.white,
-                              //         fontSize: 16,
-                              //         fontWeight: FontWeight.w400,
-                              //       ),
-                              //     ),
-                              //   ),
-                              //   itemBuilder: (BuildContext context) => <
-                              //       PopupMenuEntry<String>>[]..addAll(
-                              //         controller
-                              //             .columnVisibility.value.entries
-                              //             .map((e) {
-                              //       return PopupMenuItem<String>(
-                              //           child: ValueListenableBuilder(
-                              //               valueListenable:
-                              //                   controller.columnVisibility,
-                              //               builder: (context, value, child) {
-                              //                 return Row(
-                              //                   children: [
-                              //                     Checkbox(
-                              //                       value: value[e.key],
-                              //                       onChanged: (newValue) {
-                              //                         controller
-                              //                             .setColumnVisibility(
-                              //                                 e.key,
-                              //                                 newValue!);
-                              //                       },
-                              //                     ),
-                              //                     Text(e.key),
-                              //                   ],
-                              //                 );
-                              //               }));
-                              //     })),
-                              //   onSelected: (String value) {
-                              //     // Handle column selection
-                              //   },
-                              // ),
-
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //     backgroundColor:
-                              //         ColorValues.appLightBlueColor,
-                              //     onPressed: () {},
-                              //     text: 'Column Visibility',
-                              //   ),
-                              // ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'Copy'),
-                              // ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'Excel'),
-                              // ),
-                              // Container(
-                              //   height: 35,
-                              //   margin: EdgeInsets.only(left: 10),
-                              //   child: CustomElevatedButton(
-                              //       backgroundColor:
-                              //           ColorValues.appLightBlueColor,
-                              //       onPressed: () {},
-                              //       text: 'PDF'),
-                              // ),
+                             
                               Spacer(),
                               Container(
                                 width: 300,
@@ -271,7 +164,7 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                               ),
                             ],
                           ),
-                          controller.mrsList?.isEmpty == true
+                          controller.mrsList.isEmpty == true
                               ? Center(child: Text('No data'))
                               : Expanded(
                                   child: ValueListenableBuilder(
@@ -388,37 +281,7 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            // SizedBox(
-            //   height: Get.height * 0.05,
-            //   child: TextField(
-            //     style: GoogleFonts.lato(
-            //       textStyle: TextStyle(
-            //           fontSize: 16.0, height: 1.0, color: Colors.black),
-            //     ),
-            //     onChanged: (value) {
-            //       filterText.value = value;
-            //       //   onSearchCallBack(value);
-            //     },
-            //     textAlign: TextAlign.left,
-            //     decoration: InputDecoration(
-            //       hintText: 'Filter',
-            //       contentPadding: EdgeInsets.fromLTRB(
-            //           5, 0, 5, 0), // Reduced vertical padding
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //       focusedBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+           
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -444,7 +307,7 @@ class MrsListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredMrsList = <MrsListModel?>[];
-    filteredMrsList = controller.mrsList!.where((Mrs) {
+    filteredMrsList = controller.mrsList.where((Mrs) {
       return (Mrs?.id ?? '')
               .toString()
               .toLowerCase()

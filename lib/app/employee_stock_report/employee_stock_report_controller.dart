@@ -24,7 +24,8 @@ class EmployeeStockReportController extends GetxController {
   RxList<UserListModel> userList = <UserListModel>[].obs;
 
   RxList<PlantStockListModel?>? plantStockList = <PlantStockListModel?>[].obs;
-  RxList<StockDetails?>? StockDetailsList = <StockDetails?>[].obs;
+  RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
+  RxList<StockDetails?> filteredData = <StockDetails?>[].obs;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
@@ -109,10 +110,56 @@ class EmployeeStockReportController extends GetxController {
     }
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      StockDetailsList.value = filteredData;
+      return;
+    }
+    List<StockDetails?> filteredList = filteredData
+        .where((item) =>
+            (item?.asset_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.asset_code
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.asset_type
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.opening
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.inward
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.outward
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.balance
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    StockDetailsList.value = filteredList;
+  }
+
   Future<void> getEmployeeStockReportList(int facilityId, int userId,
       dynamic startDate, dynamic endDate, bool isLoading) async {
     plantStockList?.value = <PlantStockListModel>[];
-    StockDetailsList?.value = <StockDetails>[];
+    StockDetailsList.value = <StockDetails>[];
 
     final _assetList =
         await employeeStockReportPresenter.getEmployeeStockReportList(
@@ -122,11 +169,13 @@ class EmployeeStockReportController extends GetxController {
             startDate: startDate,
             endDate: endDate);
     if (_assetList != null) {
+      filteredData.value = _assetList.cast<StockDetails?>();
       for (var facility in _assetList) {
         for (var stockDetail in facility.stockDetails) {
-          StockDetailsList!.add(stockDetail);
+          StockDetailsList.add(stockDetail);
         }
       }
+      filteredData.value = StockDetailsList.toList();
     }
     print({"eeee", _assetList});
   }
@@ -140,7 +189,7 @@ class EmployeeStockReportController extends GetxController {
           selectedUser.value = userList[userIndex].name ?? '';
           getEmployeeStockReportList(facilityId, selectedUserId,
               formattedTodate1, formattedFromdate1, false);
-                }
+        }
         break;
       default:
         {
