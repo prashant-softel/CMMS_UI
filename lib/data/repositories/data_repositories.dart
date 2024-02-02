@@ -2280,6 +2280,18 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate);
+  Future<ResponseModel> getAuditTaskList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate}) async =>
+      await connectHelper.getAuditTaskList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> getPmtaskViewList({
     String? auth,
     int? scheduleId,
@@ -3921,7 +3933,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
-    Future<ResponseModel> createBodyInjured({
+
+  Future<ResponseModel> createBodyInjured({
     auth,
     bool? isLoading,
     bodyInjuredJsonString,
@@ -3932,6 +3945,7 @@ class DataRepository extends DomainRepository {
         bodyInjuredJsonString: bodyInjuredJsonString);
     return response;
   }
+
   Future<ResponseModel> updateBodyInjured({
     auth,
     bool? isLoading,
@@ -3944,7 +3958,8 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-    Future<ResponseModel> deleteBodyInjured({
+
+  Future<ResponseModel> deleteBodyInjured({
     auth,
     bool? isLoading,
     bodypart_id,
@@ -3953,7 +3968,8 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, bodypart_id: bodypart_id);
     return response;
   }
-    Future<ResponseModel> getBodyInjuredList({
+
+  Future<ResponseModel> getBodyInjuredList({
     int? facility_id,
     required bool isLoading,
     required String auth,

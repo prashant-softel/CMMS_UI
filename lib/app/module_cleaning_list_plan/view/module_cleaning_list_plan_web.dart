@@ -573,14 +573,27 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           },
                         ),
                         varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kModuleCleaningFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kModuleCleaningFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveEditAccess)
+                                        .length >
+                                    0 &&
+                                controller.moduleCleaningListPlan
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
+                                        )
+                                        .status ==
+                                    351
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -601,6 +614,18 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
+                        // controller.moduleCleaningListPlan
+                        //                 .firstWhere(
+                        //                   (e) =>
+                        //                       e.planId ==
+                        //                       ModuleCleaningPlanningListDetails!
+                        //                           .planId,
+                        //                   orElse: () =>
+                        //                       ModuleCleaningListPlanModel(
+                        //                           planId: 00),
+                        //                 )
+                        //                 .status ==
+                        //             353 ||
                         controller.moduleCleaningListPlan
                                         .firstWhere(
                                           (e) =>
@@ -612,29 +637,17 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                                   planId: 00),
                                         )
                                         .status ==
-                                    353 ||
-                                controller.moduleCleaningListPlan
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.planId ==
-                                                  ModuleCleaningPlanningListDetails!
-                                                      .planId,
-                                              orElse: () =>
-                                                  ModuleCleaningListPlanModel(
-                                                      planId: 00),
-                                            )
-                                            .status ==
-                                        351 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kModuleCleaningFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
+                                    351 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kModuleCleaningFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.appGreenColor,
                                 icon: Icons.add,

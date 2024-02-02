@@ -187,6 +187,7 @@ abstract class Routes {
   static const addWaterData = _Paths.addWaterData;
   static const viewWaterData = _Paths.viewWaterData;
   static const viewHazWasteData = _Paths.viewHazWasteData;
+  static const viewAuditTask = _Paths.viewAuditTask;
 }
 
 abstract class _Paths {
@@ -198,6 +199,8 @@ abstract class _Paths {
   static const addJob = '/add-job-screen';
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
+  static const viewAuditTask = '/viewAuditTask';
+
   static const jobCardDetails = '/job-card-details';
   static const jobCardList = '/job-card-list-screen';
   static const login = '/login-screen';
