@@ -3981,6 +3981,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAuditTaskList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getPmtaskViewList({
     required String? auth,
     int? scheduleId,
@@ -5816,7 +5835,7 @@ class ConnectHelper {
     required checklistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/UpdateBlockType',
+      'Facility/UpdateBlock',
       Request.patch,
       checklistJsonString,
       isLoading ?? false,
@@ -6806,7 +6825,8 @@ class ConnectHelper {
 
     return responseModel;
   }
-    Future<ResponseModel> createBodyInjured({
+
+  Future<ResponseModel> createBodyInjured({
     required String auth,
     bool? isLoading,
     required bodyInjuredJsonString,
@@ -6825,6 +6845,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> updateBodyInjured({
     required String auth,
     bool? isLoading,
@@ -6842,6 +6863,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteBodyInjured({
     required String auth,
     bool? isLoading,
@@ -6859,7 +6881,8 @@ class ConnectHelper {
     );
     return responseModel;
   }
-    Future<ResponseModel> getBodyInjuredList(
+
+  Future<ResponseModel> getBodyInjuredList(
       {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetBodyPartsList?facility_id=$facility_id',

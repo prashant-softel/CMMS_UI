@@ -275,6 +275,8 @@ import '../transaction_report/transaction_report_list_binding.dart';
 import '../type_of_observation/type_of_obs_binding.dart';
 import '../type_of_observation/view/type_of_obs_screen.dart';
 import '../view_audit_plan/view/view_audit_plan_screen.dart';
+import '../view_audit_task/view/view_audit_task_screen.dart';
+import '../view_audit_task/view_audit_task_binding.dart';
 import '../view_request_orders/view/request_goods_orders_view_screen.dart';
 import '../receive_goods_order/receive_goods_order_binding.dart';
 import '../receive_goods_order/receive_goods_order_screen.dart';
@@ -360,15 +362,13 @@ class AppPages {
         page: TrainingCourseScreen.new,
         binding: TrainingBinding()),
     GetPage<dynamic>(
-      name: _Paths.scheduleCourseList,
-      page: ScheduleCourseScreen.new,
-      binding: ScheduleCourseListBinding()
-    ),
+        name: _Paths.scheduleCourseList,
+        page: ScheduleCourseScreen.new,
+        binding: ScheduleCourseListBinding()),
     GetPage<dynamic>(
-      name: _Paths.scheduleCourse,
-      page: ScheduleScreen.new,
-      binding: ScheduleBinding()
-    ),
+        name: _Paths.scheduleCourse,
+        page: ScheduleScreen.new,
+        binding: ScheduleBinding()),
     GetPage<dynamic>(
       name: _Paths.editJob,
       page: EditJobScreen.new,
@@ -1123,6 +1123,11 @@ class AppPages {
       name: _Paths.Bodyinjured,
       page: BodyInjuredScreen.new,
       binding: BodyInjuredBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewAuditTask,
+      page: ViewAuditTaskScreen.new,
+      binding: ViewAuditTaskBinding(),
     ),
   ];
 }

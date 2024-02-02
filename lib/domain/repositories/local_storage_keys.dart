@@ -27,6 +27,8 @@ abstract class LocalKeys {
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';
   static const pmPlanId = 'pmPlanId';
+  static const auditTaskId = 'auditTaskId';
+
   static const activity = 'activity';
   static const fromActorTypeId = 'fromActorTypeId';
   static const toactortypeid = 'to_actor_type_id';

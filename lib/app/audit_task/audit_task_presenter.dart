@@ -5,12 +5,12 @@ import '../../domain/usecases/audit_task_usecase.dart';
 class AuditTaskPresenter {
   AuditTaskPresenter(this.auditTaskUsecase);
   AuditTaskUsecase auditTaskUsecase;
-  Future<List<PmTaskListModel?>?> getPmTaskList(
+  Future<List<PmTaskListModel?>?> getAuditTaskList(
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate}) async =>
-      await auditTaskUsecase.getPmTaskList(
+      await auditTaskUsecase.getAuditTaskList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,

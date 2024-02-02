@@ -5982,6 +5982,38 @@ class Repository {
     }
   }
 
+  Future<List<PmTaskListModel?>?> getAuditTaskList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAuditTaskList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonPmTaskListModelModels = jsonDecode(res.data);
+
+        final List<PmTaskListModel> _PmTaskListModelList =
+            jsonPmTaskListModelModels
+                .map<PmTaskListModel>((m) =>
+                    PmTaskListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        // print({"object", _PmTaskListModelList});
+        return _PmTaskListModelList.reversed.toList();
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getAuditTaskList');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
+      return [];
+    }
+  }
+
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,
     int? permitId,
@@ -9777,7 +9809,9 @@ class Repository {
       return [];
     }
   }
-  Future<bool> createBodyInjured({bool? isLoading, bodyInjuredJsonString}) async {
+
+  Future<bool> createBodyInjured(
+      {bool? isLoading, bodyInjuredJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createBodyInjured(
@@ -9796,6 +9830,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> updateBodyInjured({
     bool? isLoading,
     bodyInjuredJsonString,
@@ -9820,7 +9855,8 @@ class Repository {
       return false;
     }
   }
-    Future<void> deleteBodyInjured(Object bodypart_id, bool isLoading) async {
+
+  Future<void> deleteBodyInjured(Object bodypart_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteBodyInjured(
@@ -9838,7 +9874,8 @@ class Repository {
       print(error.toString());
     }
   }
-    Future<List<BodyInjuredModel>> getBodyInjuredList({
+
+  Future<List<BodyInjuredModel>> getBodyInjuredList({
     required int? facility_id,
     // int? blockId,
     // required String categoryIds,

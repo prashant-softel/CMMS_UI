@@ -5,11 +5,12 @@ import 'package:cmms/domain/repositories/repository.dart';
 class AuditTaskUsecase {
   AuditTaskUsecase(this.repository);
   Repository repository;
-  Future<List<PmTaskListModel?>?> getPmTaskList(
+  Future<List<PmTaskListModel?>?> getAuditTaskList(
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate}) async =>
-      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate);
-  void clearValue() async => repository.clearData(LocalKeys.pmTaskId);
+      await repository.getAuditTaskList(
+          facilityId, isLoading, startDate, endDate);
+  void clearValue() async => repository.clearData(LocalKeys.auditTaskId);
 }
