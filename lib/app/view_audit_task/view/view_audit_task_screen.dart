@@ -1,14 +1,16 @@
-import 'package:cmms/app/audit_task_view/audit_task_view_controller.dart';
-import 'package:cmms/app/audit_task_view/view/audit_task_view_content_web.dart';
+import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/view_audit_task/view/view_audit_task_content_web.dart';
+import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class AuditTaskViewScreen extends GetView<AuditTaskViewController> {
-  AuditTaskViewScreen({super.key});
+class ViewAuditTaskScreen extends GetView<ViewAuditTaskController> {
+  ViewAuditTaskScreen({super.key});
+  final ViewAuditTaskController controller = Get.find();
 
   ///
   @override
@@ -22,7 +24,7 @@ class AuditTaskViewScreen extends GetView<AuditTaskViewController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('PM Task View'),
+              title: Text('Preventive Check Point'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -37,21 +39,21 @@ class AuditTaskViewScreen extends GetView<AuditTaskViewController> {
               Expanded(
                 child: Column(
                   children: [
+                    // if (Responsive.isMobile(context) ||
+                    //     Responsive.isTablet(context))
+                    //   Expanded(
+                    //     child: ViewAuditTaskWebMobile(),
+                    //   ),
+
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: AuditTaskViewContentWeb(),
+                        child: ViewAuditTaskWeb(),
                       )
                   ],
                 ),
               ),
             ],
           )),
-    );
-  }
-
-  Widget buildDocument() {
-    return Container(
-      child: Text('This is the body of the document.'),
     );
   }
 }

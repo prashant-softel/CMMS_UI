@@ -182,34 +182,33 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                         ),
                                       ),
                                     ),
-                                    itemBuilder: (BuildContext context) =>
-                                        <PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
+                                    itemBuilder: (BuildContext context) => <
+                                        PopupMenuEntry<String>>[]..addAll(
+                                          controller
+                                              .columnVisibility.value.entries
+                                              .map((e) {
+                                        return PopupMenuItem<String>(
+                                            child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  return Row(
+                                                    children: [
+                                                      Checkbox(
+                                                        value: value[e.key],
+                                                        onChanged: (newValue) {
+                                                          controller
+                                                              .setColumnVisibility(
+                                                                  e.key,
+                                                                  newValue!);
+                                                        },
+                                                      ),
+                                                      Text(e.key),
+                                                    ],
+                                                  );
+                                                }));
+                                      })),
                                     onSelected: (String value) {
                                       // Handle column selection
                                     },
@@ -623,8 +622,8 @@ class PmTaskDataSource extends DataTableSource {
 
                                   int pmTaskId = pmTaskDetails?.id ?? 0;
                                   if (pmTaskId != 0) {
-                                    Get.toNamed(Routes.pmTaskView,
-                                        arguments: {'pmTaskId': pmTaskId});
+                                    Get.toNamed(Routes.viewAuditTask,
+                                        arguments: {'auditTaskId': pmTaskId});
                                   }
                                 },
                               )
@@ -662,8 +661,8 @@ class PmTaskDataSource extends DataTableSource {
                           e.view == UserAccessConstants.kHaveViewAccess)
                       .length >
                   0
-              ? Get.toNamed(Routes.pmTaskView,
-                  arguments: {'pmTaskId': pmTaskId})
+              ? Get.toNamed(Routes.viewAuditTask,
+                  arguments: {'auditTaskId': pmTaskId})
               : null;
         }
       },

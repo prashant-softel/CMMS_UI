@@ -60,8 +60,8 @@ class AuditTaskController extends GetxController {
   RxString ptwFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "PM Task Id": true,
-    "PM Task Title": true,
+    "Audit Task Id": true,
+    "Audit Task Title": true,
     "Last Done Date": true,
     "Due Date": true,
     "Done Date": true,
@@ -72,8 +72,8 @@ class AuditTaskController extends GetxController {
   Rx<int> pmTaskId = 0.obs;
 
   final Map<String, double> columnwidth = {
-    "PM Task Id": 150,
-    "PM Task Title": 300,
+    "Audit Task Id": 150,
+    "Audit Task Title": 300,
     "Last Done Date": 200,
     "Due Date": 200,
     "Done Date": 200,
@@ -92,8 +92,8 @@ class AuditTaskController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "PM Task Id": idFilterText,
-      "PM Task Title": titleFilterText,
+      "Audit Task Id": idFilterText,
+      "Audit Task Title": titleFilterText,
       "Last Done Date": lastDoneDateFilterText,
       "Due Date": dueDateFilterText,
       "Done Date": doneDateFilterText,
@@ -104,7 +104,8 @@ class AuditTaskController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getAuditTaskList(
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
       // isDataLoading.value = false;
 
@@ -128,11 +129,11 @@ class AuditTaskController extends GetxController {
     //     .toList();
   }
 
-  Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+  Future<void> getAuditTaskList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
-    final _pmTaskList = await auditTaskPresenter.getPmTaskList(
+    final _pmTaskList = await auditTaskPresenter.getAuditTaskList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
@@ -144,7 +145,7 @@ class AuditTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void clearStoreData() {
