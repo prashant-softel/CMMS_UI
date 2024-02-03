@@ -29,7 +29,7 @@ class HomeDrawer extends GetView<HomeController> {
                 SingleChildScrollView(
                   child: Container(
                     height: Get.height,
-                    color: Color(0xFF353F4F),
+                    color: Color(0xFF363A40),
                     child: MouseRegion(
                       onEnter: (_) {
                         controller.toggleExpansion();
