@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 
 class ModuleCleaningPlanningController extends GetxController {
@@ -24,6 +25,7 @@ class ModuleCleaningPlanningController extends GetxController {
       Rx<List<List<Map<String, String>>>>([]);
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxList<Schedules?> schedules = <Schedules>[].obs;
+  Rx<DateTime> selectedStartTime = DateTime.now().obs;
 
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
@@ -131,7 +133,7 @@ class ModuleCleaningPlanningController extends GetxController {
         isLoading: isLoading, facilityId: facilityId);
 
     equipmentList.value = list;
-  
+
     update(['equipment_list']);
   }
 
@@ -310,5 +312,70 @@ class ModuleCleaningPlanningController extends GetxController {
         {}
         break;
     }
+  }
+
+  Future pickDateTime(BuildContext context) async {
+    var dateTime = selectedStartTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedStartTime.value = dateTime;
+    startDateTc
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: startDateTc.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedStartTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime.now(),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedStartTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
   }
 }
