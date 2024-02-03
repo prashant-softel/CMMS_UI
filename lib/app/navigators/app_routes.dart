@@ -21,6 +21,10 @@ abstract class Routes {
   static const stockManagementGoodsOrdersScreen =
       _Paths.stockManagementGoodsOrdersScreen;
 
+  // Vegetation Dashboard
+  static const vegetationDashboard = _Paths.vegetationDashboard;
+  
+
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
@@ -208,6 +212,9 @@ abstract class _Paths {
   static const stockManagementDashboardScreen = '/stock-management-dashboard';
   static const stockManagementGoodsOrdersScreen =
       '/stock-management-goods-orders-dashboard';
+
+  // Vegetation Dashboard
+  static const vegetationDashboard = '/vegetation-dashboard';
 
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';

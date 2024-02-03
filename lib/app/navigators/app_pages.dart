@@ -111,6 +111,8 @@ import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.d
 import 'package:cmms/app/training_courses/training_course_binding.dart';
 import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
+import 'package:cmms/app/vegetation_controller/vegetation_binding.dart';
+import 'package:cmms/app/vegetation_controller/view/vegetation_dashboard_screen.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
@@ -542,6 +544,13 @@ class AppPages {
     //   page: EditPermitWebScreen.new,
     //   binding: EditPermitBinding()
     // ),
+
+    // Vegetation Dashboard
+    GetPage<dynamic>(
+      name: _Paths.vegetationDashboard, 
+      page: VegetationDashboardScreen.new,
+      binding: VegetationDashboardBinding()
+    ),
 
     GetPage<dynamic>(
       name: _Paths.pmTaskView,
