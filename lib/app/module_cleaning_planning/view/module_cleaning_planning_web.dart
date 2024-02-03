@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -191,26 +192,126 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       CustomRichText(
                                                           title: 'Start date:'),
                                                       Dimens.boxWidth10,
-                                                      CustomTextFieldForStock(
+
+                                                      Container(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
                                                                 .width /
                                                             5,
-                                                        numberTextField: true,
-                                                        onTap: () {
-                                                          controller
-                                                                  .openStartDatePicker =
-                                                              !controller
-                                                                  .openStartDatePicker;
-                                                          controller.update([
-                                                            'stock_Mangement'
-                                                          ]);
-                                                        },
-                                                        textController:
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ), //BoxShadow
+                                                            BoxShadow(
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0.0, 0.0),
+                                                              blurRadius: 0.0,
+                                                              spreadRadius: 0.0,
+                                                            ), //BoxShadow
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child: TextField(
+                                                          style:
+                                                              GoogleFonts.lato(
+                                                            textStyle: TextStyle(
+                                                                fontSize: 16.0,
+                                                                height: 1.0,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                          onTap: () {
                                                             controller
-                                                                .startDateTc,
+                                                                .pickDateTime(
+                                                                    context);
+                                                          },
+                                                          controller: controller
+                                                              .startDateTc,
+                                                          autofocus: false,
+                                                          readOnly: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                ColorValues
+                                                                    .whiteColor,
+                                                            filled: true,
+                                                            contentPadding:
+                                                                EdgeInsets
+                                                                    .fromLTRB(
+                                                                        5.0,
+                                                                        10.0,
+                                                                        5.0,
+                                                                        10.0),
+                                                            border: InputBorder
+                                                                .none,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                          ),
+                                                          onChanged: (value) {},
+                                                        ),
                                                       ),
+
+                                                      // CustomTextFieldForStock(
+                                                      //   width: MediaQuery.of(
+                                                      //               context)
+                                                      //           .size
+                                                      //           .width /
+                                                      //       5,
+                                                      //   numberTextField: true,
+                                                      //   onTap: () {
+                                                      //     controller
+                                                      //             .openStartDatePicker =
+                                                      //         !controller
+                                                      //             .openStartDatePicker;
+                                                      //     controller.update([
+                                                      //       'stock_Mangement'
+                                                      //     ]);
+                                                      //   },
+                                                      //   textController:
+                                                      //       controller
+                                                      //           .startDateTc,
+                                                      // ),
                                                     ],
                                                   ),
                                                   Dimens.boxHeight10
