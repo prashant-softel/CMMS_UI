@@ -1167,7 +1167,7 @@ _gridList({
     cursor: SystemMouseCursors.click,
     child: Container(
       decoration: BoxDecoration(
-        color: Color(0xFF353F4F),
+        color: Color(0xFF363A40),
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
