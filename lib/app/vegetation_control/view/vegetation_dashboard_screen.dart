@@ -1,9 +1,10 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
-import 'package:cmms/app/vegetation_controller/vegetation_controller.dart';
+import 'package:cmms/app/vegetation_control/vegetation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
     var size = Get;
 
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
-    // final double itemHeightWeb = (size.height - kToolbarHeight - 50) / 4;
+    final double itemHeightWeb = (size.height - kToolbarHeight - 50) / 4;
     final double itemWidth = size.width / 2;
 
     return Scaffold(
@@ -102,17 +103,17 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                         _vegetationList(
                             tittle: "Planning",
                             ontap: () {
-                              // Get.toNamed(
-                              //   Routes.moduleCleaningListPlan,
-                              // );
+                              Get.offNamed(
+                                Routes.vegetationPlanListScreen,
+                              );
                             }),
                         //  if (Responsive.isDesktop(context))
                         _vegetationList(
                             tittle: "Execution",
                             ontap: () {
-                              // Get.toNamed(
-                              // Routes.moduleCleaningListExecution,
-                              // );
+                              Get.offNamed(
+                                Routes.vegetationPlanListScreen,
+                              );
                             }),
                       ],
                     )
