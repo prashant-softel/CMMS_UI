@@ -1,5 +1,6 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_web.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_controller.dart';
@@ -33,7 +34,7 @@ class VegetationListPlanScreen extends GetView<VegetationPlanListController> {
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))
                   ? Dimens.box0
-                  : Dimens.box0,
+                  : HomeDrawer(),
               Expanded(
                 child: Column(
                   children: [
