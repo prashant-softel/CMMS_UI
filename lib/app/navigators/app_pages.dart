@@ -86,7 +86,7 @@ import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_binding.dart';
-import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_planning_screen.dart.dart';
+import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_planning_screen.dart';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_binding.dart';
 import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_screen.dart';
@@ -114,6 +114,7 @@ import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.
 import 'package:cmms/app/vegetation_control/vegetation_binding.dart';
 import 'package:cmms/app/vegetation_control/view/vegetation_dashboard_screen.dart';
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_binding.dart';
+import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.dart';
 import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_web.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
@@ -549,13 +550,12 @@ class AppPages {
 
     // Vegetation Dashboard
     GetPage<dynamic>(
-      name: _Paths.vegetationDashboard, 
-      page: VegetationDashboardScreen.new,
-      binding: VegetationDashboardBinding()
-    ),
+        name: _Paths.vegetationDashboard,
+        page: VegetationDashboardScreen.new,
+        binding: VegetationDashboardBinding()),
     GetPage<dynamic>(
       name: _Paths.vegetationPlanListScreen,
-      page: VegetationPlanListWeb.new,
+      page: VegetationListPlanScreen.new,
       binding: VegetationPlanListBinding(),
     ),
 
