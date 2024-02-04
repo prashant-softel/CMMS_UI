@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
 import 'package:cmms/app/utils/utility.dart';
@@ -76,6 +77,7 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -1304,6 +1306,43 @@ class Repository {
       else {
         Utility.showDialog(
             res.errorCode.toString() + 'getModuleCleaningListPlan');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+  Future<List<VegetationPlanListModel>> getVegetationPlanList({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVegetationPlanList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getVegetationPlanList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonVegetationPlanList = jsonDecode(res.data);
+        // print(res.data);
+        final List<VegetationPlanListModel> _getVegetationPlanList =
+            jsonVegetationPlanList
+                .map<VegetationPlanListModel>((m) =>
+                    VegetationPlanListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _getVegetationPlanList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getVegetationPlanList');
         return [];
       }
     } catch (error) {

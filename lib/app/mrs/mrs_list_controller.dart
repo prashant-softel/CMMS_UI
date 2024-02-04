@@ -17,8 +17,8 @@ class MrsListController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<MrsListModel?>? mrsList = <MrsListModel?>[].obs;
-  RxList<MrsListModel> filteredData = <MrsListModel>[].obs;
+  RxList<MrsListModel?> mrsList = <MrsListModel?>[].obs;
+  RxList<MrsListModel?> filteredData = <MrsListModel>[].obs;
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -90,43 +90,49 @@ class MrsListController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      mrsList?.value = filteredData.value;
+      mrsList.value = filteredData;
       return;
     }
-    List<MrsListModel> filteredList = filteredData
+
+    List<MrsListModel?> filteredList = filteredData
         .where((item) =>
-            (item.requested_by_name
+            (item?.id
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.requestd_date
+            (item?.requested_by_name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.activity
+            (item?.approver_name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.whereUsedType
+            (item?.requestd_date
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.id
+            (item?.activity
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.whereUsedTypeId
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false))
         .toList();
-    mrsList?.value = filteredList;
+    mrsList.value = filteredList;
   }
 
   Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    mrsList?.value = <MrsListModel>[];
+    mrsList.value = <MrsListModel>[];
     filteredData.value = <MrsListModel>[];
 
     final _mrsList = await mrsListPresenter.getMrsList(
@@ -136,15 +142,16 @@ class MrsListController extends GetxController {
         endDate: endDate);
 
     if (_mrsList != null) {
-      mrsList!.value = _mrsList;
+      mrsList.value = _mrsList;
+      filteredData.value = _mrsList;
       paginationController = PaginationController(
-        rowCount: mrsList?.length ?? 0,
+        rowCount: mrsList.length,
         rowsPerPage: 10,
       );
 
-      if (mrsList != null && mrsList!.isNotEmpty) {
+      if (mrsList != null && mrsList.isNotEmpty) {
         //  filteredData.value = mrsList!.value;
-        mrsListModel = mrsList![0];
+        mrsListModel = mrsList[0];
         var mrsListJson = mrsListModel?.toJson();
         mrsTableColumns.value = <String>[];
         for (var key in mrsListJson?.keys.toList() ?? []) {

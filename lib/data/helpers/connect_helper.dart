@@ -836,6 +836,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getVegetationPlanList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegetationPlanList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,

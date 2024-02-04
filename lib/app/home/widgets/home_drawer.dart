@@ -104,7 +104,7 @@ class HomeDrawer extends GetView<HomeController> {
                               title: "Vegetation Control",
                               icon: "assets/files/maint.png",
                               press: () {
-                                Get.offAllNamed(Routes.home);
+                                Get.offAllNamed(Routes.vegetationDashboard);
                               },
                             ),
                             // MenuItem(

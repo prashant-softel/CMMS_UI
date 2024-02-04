@@ -612,6 +612,17 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
     );
   }
+  Future<ResponseModel> getVegetationPlanList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getVegetationPlanList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
 
   Future<ResponseModel> getNewPermitList({
     required String auth,
