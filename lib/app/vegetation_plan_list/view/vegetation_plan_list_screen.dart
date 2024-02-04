@@ -33,7 +33,7 @@ class VegetationListPlanScreen extends GetView<VegetationPlanListController> {
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))
                   ? Dimens.box0
-                  : HomeDrawer(),
+                  : Dimens.box0,
               Expanded(
                 child: Column(
                   children: [
