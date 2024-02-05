@@ -72,8 +72,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                         child: Text(" / Preventive Maintenance".toUpperCase(),
                             style: Styles.greyLight14),
                       ),
-                      Text(" / PM PLANS",
-                          style: Styles.greyLight14)
+                      Text(" / PM PLANS", style: Styles.greyLight14)
                     ],
                   ),
                 ),
@@ -410,7 +409,7 @@ class PmPlanDataSource extends DataTableSource {
     var cellsBuffer = [
       'pmPlanId', // '${pmPlanDetails?.plan_id ?? ''}',
       '${pmPlanDetails?.plan_name ?? ''}',
-      '${pmPlanDetails?.created_at ?? ''}',
+      '${pmPlanDetails?.plan_date ?? ''}',
       '${pmPlanDetails?.updated_at ?? ''}',
       '${pmPlanDetails?.plan_freq_name ?? ''}',
       '${pmPlanDetails?.created_by_name ?? ''}',
