@@ -43,11 +43,13 @@ class HomeDrawer extends GetView<HomeController> {
                           children: [
                             MenuItemLogo(
                               isexpand: controller.isExpanded.value,
-                              icon: !controller.isExpanded.value
-                                  ? "assets/files/logodrawer.jpg"
-                                  : "assets/files/logodrawer.jpg",
-                              height: !controller.isExpanded.value ? 40 : 70,
-                              width: !controller.isExpanded.value ? 40 : 100,
+                              icon:
+                                  // controller.isExpanded.value
+                                  // ? "assets/files/logodrawer.jpg"
+                                  // :
+                                  "assets/files/logodrawer.jpg",
+                              // height: !controller.isExpanded.value ? 45 : 45,
+                              // width: !controller.isExpanded.value ? 45 : 45,
                               press: () {
                                 Get.offNamed(Routes.home);
                               },
@@ -306,20 +308,20 @@ class MenuItem extends StatelessWidget {
 class MenuItemLogo extends StatelessWidget {
   MenuItemLogo({
     Key? key,
-    required this.height,
+    this.height,
     this.title,
     required this.icon,
     required this.press,
     this.isexpand,
-    required this.width,
+    this.width,
   }) : super(key: key);
 
   String? title;
   String icon;
   bool? isexpand;
   final VoidCallback press;
-  double height;
-  double width;
+  double? height;
+  double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -340,10 +342,11 @@ class MenuItemLogo extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        child: Image.asset(icon,
-                            height: height, fit: BoxFit.contain),
+                        child: Image.asset(
+                          icon,
+                        ),
                       ),
-                      Dimens.boxWidth12,
+                      Dimens.boxWidth5,
                       isexpand == true
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,7 +355,7 @@ class MenuItemLogo extends StatelessWidget {
                                   "HERO",
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 17,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -360,7 +363,7 @@ class MenuItemLogo extends StatelessWidget {
                                   "FUTURE",
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 17,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -368,7 +371,7 @@ class MenuItemLogo extends StatelessWidget {
                                   "ENERGIES",
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 17,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
