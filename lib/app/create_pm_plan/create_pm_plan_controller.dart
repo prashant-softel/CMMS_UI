@@ -148,7 +148,7 @@ class CreatePmPlanController extends GetxController {
           );
           print("hsdfbhjgfhsbgfhdsbshj");
           selectedInventoryNameList.value.add(inventoryModel);
-                  rowItem.value.add([
+          rowItem.value.add([
             {"key": "assetName", "value": '${element.name}'},
             {'key': "assetsId", "value": '${element.asset_id}'},
             {'key': "parentAsset", "value": '${element.parent_name}'},
@@ -231,7 +231,7 @@ class CreatePmPlanController extends GetxController {
         // orElse: () => null,
       );
       filteredInventoryNameList.add(e);
-        }
+    }
     print({"filteredInventoryNameList": filteredInventoryNameList});
     if (filteredInventoryNameList.length > 0) {
       filteredInventoryNameList.forEach((element) {
@@ -445,12 +445,7 @@ class CreatePmPlanController extends GetxController {
           parent_id: 0,
           parent_name: "",
           asset_id: int.tryParse(element[1]["value"] ?? '0'),
-          checklist_id:
-              //  element[4]["id"] == ''
-              //     ? checkdropdownMapperData[element[4]["value"]]?.id
-              //     :
-              int.tryParse(
-                  '${element[4]["//////////////////***************************------------------------------------------------------------------/++*8888888"]}'));
+          checklist_id: int.tryParse('${element[4]["id"]}'));
       mapAssetChecklist.add(item);
     });
     CreatePmPlanModel createPmPlan = CreatePmPlanModel(
