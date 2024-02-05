@@ -23,14 +23,15 @@ class HeaderWidget extends GetView<HomeController> {
         Obx(
       () => //
           Container(
+        height: 60,
         decoration: BoxDecoration(
           color: ColorValues.whiteColor,
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 240, 237, 237),
-              offset: Offset(0.0, 0.0),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Color.fromARGB(255, 240, 237, 237),
+          //     offset: Offset(0.0, 0.0),
+          //   ),
+          // ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -56,23 +57,23 @@ class HeaderWidget extends GetView<HomeController> {
                   width: Get.width * .2,
                   height: 35,
                   child: DropdownWebWidget(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: const Offset(
-                          5.0,
-                          5.0,
-                        ),
-                        blurRadius: 5.0,
-                        spreadRadius: 1.0,
-                      ),
-                      BoxShadow(
-                        color: ColorValues.whiteColor,
-                        offset: const Offset(0.0, 0.0),
-                        blurRadius: 0.0,
-                        spreadRadius: 0.0,
-                      ),
-                    ],
+                    // boxShadow: [
+                    //   // BoxShadow(
+                    //   //   color: Colors.black26,
+                    //   //   offset: const Offset(
+                    //   //     5.0,
+                    //   //     5.0,
+                    //   //   ),
+                    //   //   blurRadius: 5.0,
+                    //   //   spreadRadius: 1.0,
+                    //   // ),
+                    //   BoxShadow(
+                    //     color: ColorValues.whiteColor,
+                    //     offset: const Offset(0.0, 0.0),
+                    //     blurRadius: 0.0,
+                    //     spreadRadius: 0.0,
+                    //   ),
+                    // ],
                     controller: controller,
                     dropdownList: controller.facilityList,
                     isValueSelected: controller.isFacilitySelected.value,

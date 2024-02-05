@@ -13,8 +13,8 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 400),
-        width: controller.isExpanded.value ? 250 : 60,
+        duration: Duration(milliseconds: 300),
+        width: controller.isExpanded.value ? 250 : 65,
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
@@ -45,7 +45,7 @@ class HomeDrawer extends GetView<HomeController> {
                               isexpand: controller.isExpanded.value,
                               icon: !controller.isExpanded.value
                                   ? "assets/files/logodrawer.jpg"
-                                  : "assets/files/logo.png",
+                                  : "assets/files/logodrawer.jpg",
                               height: !controller.isExpanded.value ? 40 : 70,
                               width: !controller.isExpanded.value ? 40 : 100,
                               press: () {
@@ -337,9 +337,45 @@ class MenuItemLogo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: SizedBox(
-                    child:
-                        Image.asset(icon, height: height, fit: BoxFit.contain),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        child: Image.asset(icon,
+                            height: height, fit: BoxFit.contain),
+                      ),
+                      Dimens.boxWidth12,
+                      isexpand == true
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "HERO",
+                                  style: TextStyle(
+                                    color: Color(0xffD2D0D0),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  "FUTURE",
+                                  style: TextStyle(
+                                    color: Color(0xffD2D0D0),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  "ENERGIES",
+                                  style: TextStyle(
+                                    color: Color(0xffD2D0D0),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text("")
+                    ],
                   ),
                 ),
               ],

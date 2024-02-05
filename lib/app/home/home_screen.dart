@@ -14,18 +14,13 @@ class HomeScreen extends GetView<HomeController> {
     return
         //
         Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
               title: Text('Home'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()

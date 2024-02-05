@@ -128,7 +128,6 @@ class MrsListContentWeb extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                             
                               Spacer(),
                               Container(
                                 width: 300,
@@ -164,7 +163,7 @@ class MrsListContentWeb extends StatelessWidget {
                               ),
                             ],
                           ),
-                          controller.mrsList.isEmpty == true
+                          controller.mrsList!.isEmpty
                               ? Center(child: Text('No data'))
                               : Expanded(
                                   child: ValueListenableBuilder(
@@ -281,7 +280,6 @@ class MrsListContentWeb extends StatelessWidget {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-           
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -307,7 +305,7 @@ class MrsListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredMrsList = <MrsListModel?>[];
-    filteredMrsList = controller.mrsList.where((Mrs) {
+    filteredMrsList = controller.mrsList!.where((Mrs) {
       return (Mrs?.id ?? '')
               .toString()
               .toLowerCase()
