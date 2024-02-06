@@ -6851,7 +6851,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      'CMMS/CreateBodyParts', //AddBusiness
+      'MISMaster/CreateBodyParts', //AddBusiness
       Request.post,
       bodyInjuredJsonString,
       isLoading ?? false,
@@ -6869,7 +6869,7 @@ class ConnectHelper {
     required bodyInjuredJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/UpdateBodyParts',
+      'MISMaster/UpdateBodyParts',
       Request.patch,
       bodyInjuredJsonString,
       isLoading ?? false,
@@ -6887,7 +6887,7 @@ class ConnectHelper {
     required bodypart_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/DeleteBodyParts?id=$bodypart_id',
+      'MISMaster/DeleteBodyParts?id=$bodypart_id',
       Request.delete,
       bodypart_id,
       isLoading ?? false,
@@ -6902,7 +6902,7 @@ class ConnectHelper {
   Future<ResponseModel> getBodyInjuredList(
       {required bool isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetBodyPartsList?facility_id=$facility_id',
+      'MISMaster/GetBodyPartsList?facility_id=$facility_id',
       Request.getMultiparts,
       null,
       isLoading,
