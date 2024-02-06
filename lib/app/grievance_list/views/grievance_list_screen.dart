@@ -8,57 +8,45 @@ import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../grievance_list_controller.dart';
 
-// ignore: must_be_immutable
-class GrievanceListScreen extends StatelessWidget {
-  GrievanceListScreen({Key? key});
-  var controller = Get.find<GrievanceController>();
+class GrievanceListScreen extends GetView<GrievanceController> {
+  GrievanceListScreen({super.key});
+  final controller = Get.find<GrievanceController>();
 
-  ///
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-      appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Grievances'),
               centerTitle: true,
               elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => Get.back(),
-              ),
-            ),
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Row(children: [
+            )
+          : null,
+      drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? Dimens.box0
-              : HomeDrawer(),
-          Expanded(
-            child: Column(children: [
-              if (Responsive.isDesktop(context))
-                Expanded(
-                  child: KeyedSubtree(
-                    key: UniqueKey(),
-                    child: GrievanceListContentWeb(),
-                  ),
-                )
-              else
-                Expanded(child: GrievanceListContentMobile())
-            ]),
-          ),
-        ]),
-      ),
+              ? HomeDrawer()
+              : null,
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
+                  children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(child: GrievanceListContentMobile()),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: GrievanceListContentWeb(),
+                      )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
-
-    ///
   }
 }

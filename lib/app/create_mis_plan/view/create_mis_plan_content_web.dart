@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_mis_plan/create_mis_plan_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -33,6 +34,7 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
           body: Obx(() {
             return Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

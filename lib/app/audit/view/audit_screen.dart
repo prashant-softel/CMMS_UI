@@ -19,17 +19,13 @@ class AuditScreen extends GetView<AuditController> {
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
+              // title: Text('Home'),
+              centerTitle: true,
               elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
             )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -90,35 +86,35 @@ class AuditScreen extends GetView<AuditController> {
                     //     ),
                     //   ),
 
-                    if (Responsive.isDesktop(context))
-                      GridView.count(
-                        shrinkWrap: true,
-                        primary: false,
-                        padding: const EdgeInsets.all(16),
-                        crossAxisSpacing: 40,
-                        mainAxisSpacing: 6,
-                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                        childAspectRatio: Responsive.isMobile(context)
-                            ? (itemWidth / itemHeight)
-                            : 5,
-                        children: <Widget>[
-                          _priventiveList(
-                              tittle: " Audit Plan",
-                              ontap: () {
-                                controller.auditList();
-                              }),
-                          _priventiveList(
-                              tittle: "Audits Task",
-                              ontap: () {
-                                controller.auditTask();
-                              }),
-                          // _priventiveList(
-                          //     tittle: " Audits",
-                          //     ontap: () {
-                          //       controller.auditList();
-                          //     }),
-                        ],
-                      ),
+                    if (Responsive.isDesktop(context)) HeaderWidget(),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 40,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : 5,
+                      children: <Widget>[
+                        _priventiveList(
+                            tittle: " Audit Plan",
+                            ontap: () {
+                              controller.auditList();
+                            }),
+                        _priventiveList(
+                            tittle: "Audits Task",
+                            ontap: () {
+                              controller.auditTask();
+                            }),
+                        // _priventiveList(
+                        //     tittle: " Audits",
+                        //     ontap: () {
+                        //       controller.auditList();
+                        //     }),
+                      ],
+                    ),
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       child: Row(

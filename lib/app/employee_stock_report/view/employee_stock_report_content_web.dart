@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/employee_stock_report/employee_stock_report_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -31,6 +32,7 @@ class EmployeeStockReportContentWeb
               height: Get.height,
               child: Column(
                 children: [
+                  HeaderWidget(),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
@@ -274,7 +276,8 @@ class EmployeeStockReportContentWeb
                                                 height: 1.0,
                                                 color: Colors.black),
                                           ),
-                                          onChanged: (value) => controller.search(value),
+                                          onChanged: (value) =>
+                                              controller.search(value),
                                           decoration: InputDecoration(
                                             enabledBorder:
                                                 const OutlineInputBorder(

@@ -11,23 +11,21 @@ import 'block_type_list_mobile.dart';
 
 class BlockTypeListScreen extends GetView<BlockTypeListController> {
   BlockTypeListScreen({super.key});
+  final controller = Get.find<BlockTypeListController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Block Type List'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,8 +37,7 @@ class BlockTypeListScreen extends GetView<BlockTypeListController> {
               Expanded(
                 child: Column(
                   children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
+                    if (Responsive.isMobile(context))
                       Expanded(
                         child: BlockTypeListMobile(),
                       ),

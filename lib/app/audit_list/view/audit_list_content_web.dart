@@ -1,5 +1,6 @@
 import 'package:cmms/app/audit_list/audit_list_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -37,6 +38,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -74,8 +76,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                               Get.back();
                             },
                             child: controller.type.value == 3
-                                ? Text(" / MIS",
-                                    style: Styles.greyLight14)
+                                ? Text(" / MIS", style: Styles.greyLight14)
                                 : Text(" / AUDIT LIST",
                                     style: Styles.greyLight14),
                           ),

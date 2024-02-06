@@ -17,18 +17,14 @@ class EditJobScreen extends GetView<EditJobController> {
   Widget build(BuildContext context) {
     ///
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
               elevation: 0,
               toolbarHeight: 60,
             )
-          : AppBar(
-              title: Text('Add Job'),
-              centerTitle: true,
-              elevation: 0,
-            ),
+          : null,
       body:
           //
           Row(children: [
