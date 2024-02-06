@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/competency_list/competency_list_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -188,12 +190,13 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller: controller.nameCtrlr,
                                               focusNode: controller.nameFocus,
-                                              scrollController: controller.nameScroll,
+                                              scrollController:
+                                                  controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -307,15 +310,16 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
-                                                  focusNode: controller.descFocus,
-                                                  scrollController: controller.descScroll,
+                                              focusNode: controller.descFocus,
+                                              scrollController:
+                                                  controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

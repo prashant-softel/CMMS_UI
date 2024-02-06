@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -36,6 +37,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
             backgroundColor: ColorValues.whiteColor,
             body: Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

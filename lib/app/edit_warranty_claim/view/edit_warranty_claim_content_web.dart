@@ -77,14 +77,14 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                               color: ColorValues.greyLightColor,
                             ),
                             InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 Get.back();
@@ -283,7 +283,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .only(
+                                                                .only(
                                                                 left: 150),
                                                         child: Row(
                                                           children: [
@@ -544,8 +544,9 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                         Column(
                                                                       children: [
                                                                         Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.all(1.0),
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              1.0),
                                                                           child:
                                                                               Container(
                                                                             height:

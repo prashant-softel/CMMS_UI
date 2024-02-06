@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/hoto/hoto_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -33,6 +34,7 @@ class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -57,14 +59,14 @@ class _PurchaseGoodsorderListWebState extends State<HotoListContentWeb> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
                           InkWell(
                             onTap: () {
                               Get.back();
