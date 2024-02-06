@@ -301,7 +301,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    controller.newPermitList.isEmpty == true
+                                  controller.newPermitList.value == null || controller.newPermitList.value==0 
                                         ? Center(child: Text('No data'))
                                         : Expanded(
                                             child: ValueListenableBuilder(
