@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,17 +17,13 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
 
   @override
   Widget build(BuildContext context) {
-    ///
-
-    return
-        // Obx(
-        //         () =>
-        Container(
+    return Container(
       color: Color.fromARGB(255, 234, 236, 238),
       width: Get.width,
       height: Get.height,
       child: Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
@@ -62,8 +59,8 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                     onTap: () {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
-                    child: Text(" / STOCK MANAGEMENT",
-                        style: Styles.greyLight14)),
+                    child:
+                        Text(" / STOCK MANAGEMENT", style: Styles.greyLight14)),
                 Text(" / ASSET MATERIAL", style: Styles.greyLight14)
               ],
             ),

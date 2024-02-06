@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/risk_type/risk_type_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -24,6 +25,7 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -197,12 +199,14 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller: controller.titleCtrlr,
-                                              focusNode: controller.bodypnameFocus,
-                                              scrollController: controller.bodypnameScroll,
+                                              focusNode:
+                                                  controller.bodypnameFocus,
+                                              scrollController:
+                                                  controller.bodypnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -315,13 +319,15 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller:
                                                   controller.descriptionCtrlr,
-                                                  focusNode: controller.bodypdescFocus,
-                                                  scrollController: controller.bodypdescScroll,
+                                              focusNode:
+                                                  controller.bodypdescFocus,
+                                              scrollController:
+                                                  controller.bodypdescScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -431,7 +437,9 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              controller.createBodyInjured().then(
+                                              controller
+                                                  .createBodyInjured()
+                                                  .then(
                                                 (value) {
                                                   print("CREATE");
                                                   print("value,$value");
@@ -612,7 +620,8 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                                 (element) =>
                                                     "${element.id}" ==
                                                     controller
-                                                        .bodyinjuredList?[index].id
+                                                        .bodyinjuredList?[index]
+                                                        .id
                                                         .toString(),
                                               );
 
@@ -636,7 +645,8 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   business_id: controller
-                                                      .bodyinjuredList?[index]?.id
+                                                      .bodyinjuredList?[index]
+                                                      ?.id
                                                       .toString(),
                                                   business: controller
                                                       .bodyinjuredList?[index]

@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/business_List/business_list_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -24,6 +25,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -237,15 +239,16 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller: controller
                                                   .businesslistNumberCtrlr,
-                                                  focusNode: controller.cnameFocus,
-                                                  scrollController: controller.cnameScroll,
+                                              focusNode: controller.cnameFocus,
+                                              scrollController:
+                                                  controller.cnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -355,14 +358,15 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller: controller.emailCtrlr,
                                               focusNode: controller.emailFocus,
-                                              scrollController: controller.emailScroll,
+                                              scrollController:
+                                                  controller.emailScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -471,15 +475,17 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.contactpersonCtrlr,
-                                                  focusNode: controller.contactpFocus,
-                                                  scrollController: controller.contactpScroll,
+                                              focusNode:
+                                                  controller.contactpFocus,
+                                              scrollController:
+                                                  controller.contactpScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -590,16 +596,18 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.contactnumberCtrlr,
-                                                  focusNode: controller.contactnoFocus,
-                                                  scrollController: controller.contactnoScroll,
+                                              focusNode:
+                                                  controller.contactnoFocus,
+                                              scrollController:
+                                                  controller.contactnoScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -724,16 +732,17 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.websiteCtrlr,
-                                                  focusNode: controller.webFocus,
-                                                  scrollController: controller.webScroll,
+                                              focusNode: controller.webFocus,
+                                              scrollController:
+                                                  controller.webScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -847,16 +856,17 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.locationCtrlr,
-                                                  focusNode: controller.locFocus,
-                                                  scrollController: controller.locScroll,
+                                              focusNode: controller.locFocus,
+                                              scrollController:
+                                                  controller.locScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -969,16 +979,17 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller:
                                                   controller.addressCtrlr,
-                                                  focusNode: controller.addFocus,
-                                                  scrollController: controller.addScroll,
+                                              focusNode: controller.addFocus,
+                                              scrollController:
+                                                  controller.addScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -1271,15 +1282,16 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: TextField(
                                               controller: controller.zipCtrlr,
                                               focusNode: controller.zipFocus,
-                                              scrollController: controller.zipScroll,
+                                              scrollController:
+                                                  controller.zipScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

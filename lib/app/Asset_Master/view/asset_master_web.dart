@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -55,8 +57,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                     onTap: () {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
-                    child: Text(" / STOCK MANAGEMENT",
-                        style: Styles.greyLight14),
+                    child:
+                        Text(" / STOCK MANAGEMENT", style: Styles.greyLight14),
                   ),
                   Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
                   // Text(" / CREATE CHECKLIST NUMBER",

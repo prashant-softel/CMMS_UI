@@ -1,4 +1,5 @@
 import 'package:cmms/app/change_password/change_password_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class ChangePasswordContentWeb extends GetView<ChangePasswordController> {
         SingleChildScrollView(
       child: Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
@@ -43,14 +45,14 @@ class ChangePasswordContentWeb extends GetView<ChangePasswordController> {
                   color: ColorValues.greyLightColor,
                 ),
                 InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Get.offNamed(Routes.setting);

@@ -1,4 +1,5 @@
 import 'package:cmms/app/add_water_data_per_day/add_water_data_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -33,6 +34,7 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
             height: Get.height,
             child: Column(
               children: [
+                HeaderWidget(),
                 AppBarGoodsOrder(),
                 Expanded(
                   child: SingleChildScrollView(

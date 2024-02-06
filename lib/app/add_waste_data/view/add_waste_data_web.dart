@@ -1,4 +1,5 @@
 import 'package:cmms/app/add_waste_data/add_waste_data_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
@@ -31,6 +32,7 @@ class _WaterDataWebState extends State<AddWasteDataWeb> {
             height: Get.height,
             child: Column(
               children: [
+                HeaderWidget(),
                 AppBarGoodsOrder(),
                 Expanded(
                   child: SingleChildScrollView(
