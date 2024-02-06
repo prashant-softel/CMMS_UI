@@ -1,6 +1,7 @@
 import 'package:cmms/app/audit_task/audit_task_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -36,6 +37,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
 
             return Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -182,33 +184,34 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                         ),
                                       ),
                                     ),
-                                    itemBuilder: (BuildContext context) => <
-                                        PopupMenuEntry<String>>[]..addAll(
-                                          controller
-                                              .columnVisibility.value.entries
-                                              .map((e) {
-                                        return PopupMenuItem<String>(
-                                            child: ValueListenableBuilder(
-                                                valueListenable:
-                                                    controller.columnVisibility,
-                                                builder:
-                                                    (context, value, child) {
-                                                  return Row(
-                                                    children: [
-                                                      Checkbox(
-                                                        value: value[e.key],
-                                                        onChanged: (newValue) {
-                                                          controller
-                                                              .setColumnVisibility(
-                                                                  e.key,
-                                                                  newValue!);
-                                                        },
-                                                      ),
-                                                      Text(e.key),
-                                                    ],
-                                                  );
-                                                }));
-                                      })),
+                                    itemBuilder: (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                     onSelected: (String value) {
                                       // Handle column selection
                                     },

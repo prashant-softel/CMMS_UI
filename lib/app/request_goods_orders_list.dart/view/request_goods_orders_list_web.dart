@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -41,6 +42,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(

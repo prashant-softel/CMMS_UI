@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -24,6 +25,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(

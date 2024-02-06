@@ -9,24 +9,21 @@ import 'calibration_detail_content_web.dart';
 
 class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
   CalibrationDetailScreen({super.key});
-  var homeController = Get.find<HomeController>();
+  final controller = Get.find<CalibrationDetailController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Calibration Detail'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -38,6 +35,12 @@ class CalibrationDetailScreen extends GetView<CalibrationDetailController> {
               Expanded(
                 child: Column(
                   children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: CalibrationDetailContentWeb(),

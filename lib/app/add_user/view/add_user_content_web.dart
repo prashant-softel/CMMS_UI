@@ -1,5 +1,6 @@
 import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
               child: Stack(children: [
                 Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -80,8 +82,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
 
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / MASTER",
-                                style: Styles.greyLight14),
+                            child: Text(" / MASTER", style: Styles.greyLight14),
                           ),
                           InkWell(
                               onTap: () {
@@ -307,7 +308,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     ],
                                                     ishint: 'Enter Email ID',
                                                     textController:
-                                                        controller.loginIdCtrlr,  
+                                                        controller.loginIdCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -531,8 +532,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1032,8 +1032,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   child: LoginCustomTextfield(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1127,8 +1126,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 child: LoginCustomTextfield(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],

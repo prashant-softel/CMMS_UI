@@ -3,6 +3,7 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/abandon_all_dialog.dart';
@@ -40,6 +41,7 @@ class AddModuleCleaningExecutionContentWeb
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  HeaderWidget(),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(
