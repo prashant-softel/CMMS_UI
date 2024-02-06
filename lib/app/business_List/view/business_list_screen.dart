@@ -1,36 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-// import '../module_list_controller.dart';
 import '../business_list_controller.dart';
 import 'business_listContent_mobile.dart';
 import 'business_listContent_web.dart';
-// import 'module_listContent_mobile.dart';
-// import 'module_listContent_web.dart';
 
 class BusinessListScreen extends GetView<BusinessListController> {
   BusinessListScreen({super.key});
+  final controller = Get.find<BusinessListController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Module List'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -42,8 +35,7 @@ class BusinessListScreen extends GetView<BusinessListController> {
               Expanded(
                 child: Column(
                   children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
+                    if (Responsive.isMobile(context))
                       Expanded(
                         child: BusinessListContentMobile(),
                       ),

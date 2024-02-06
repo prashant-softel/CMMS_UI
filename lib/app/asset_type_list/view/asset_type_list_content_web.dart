@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/asset_type_list/asset_type_list_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -45,14 +47,14 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
                   InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);

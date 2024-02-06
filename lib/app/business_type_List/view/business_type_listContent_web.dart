@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/business_type_List/business_type_list_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -190,12 +192,13 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller: controller.nameCtrlr,
                                               focusNode: controller.nameFocus,
-                                              scrollController: controller.nameScroll,
+                                              scrollController:
+                                                  controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -313,9 +316,9 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

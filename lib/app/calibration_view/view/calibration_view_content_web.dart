@@ -1,4 +1,5 @@
 import 'package:cmms/app/calibration_View/calibration_View_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
@@ -20,6 +21,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(

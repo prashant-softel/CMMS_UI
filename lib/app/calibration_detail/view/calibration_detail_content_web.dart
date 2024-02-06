@@ -1,5 +1,6 @@
 import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
 import 'package:cmms/app/home/home.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -21,6 +22,7 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(
@@ -44,14 +46,14 @@ class CalibrationDetailContentWeb extends GetView<CalibrationDetailController> {
                 color: ColorValues.greyLightColor,
               ),
               InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
+              ),
               InkWell(
                 onTap: () {
                   Get.back();

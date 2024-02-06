@@ -6,30 +6,25 @@ import 'package:get/get.dart';
 
 import 'view/web/add_module_cleaning_execution_content_web.dart';
 
+class AddModuleCleaningExecutionScreen
+    extends GetView<AddModuleCleaningExecutionController> {
+  AddModuleCleaningExecutionScreen({super.key});
+  final controller = Get.find<AddModuleCleaningExecutionController>();
 
-class AddModuleCleaningExecutionScreen extends GetView<AddModuleCleaningExecutionController> {
-  AddModuleCleaningExecutionScreen({Key? key});
-  // final HomeController controller = Get.find();
-  
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-           appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Module Cleaning Execution'),
               centerTitle: true,
               elevation: 0,
-            ),
-      body:      
-          Container(
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
+      body: Container(
           width: Get.width,
           height: Get.height,
           child: Row(
@@ -40,6 +35,12 @@ class AddModuleCleaningExecutionScreen extends GetView<AddModuleCleaningExecutio
               Expanded(
                 child: Column(
                   children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: AddModuleCleaningExecutionContentWeb(),
@@ -50,7 +51,5 @@ class AddModuleCleaningExecutionScreen extends GetView<AddModuleCleaningExecutio
             ],
           )),
     );
-
-    ///
   }
 }

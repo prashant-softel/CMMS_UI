@@ -1,5 +1,6 @@
 import 'package:cmms/app/add_training_course/add_course_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 // import 'package:cmms/app/grievance_list/views/widgets/dropdown.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -25,6 +26,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
       height: Get.height,
       child: Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
