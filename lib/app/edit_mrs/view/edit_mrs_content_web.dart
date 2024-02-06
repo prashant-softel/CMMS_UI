@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/edit_mrs/edit_mrs_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -21,6 +22,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
@@ -44,14 +46,14 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                   color: ColorValues.greyLightColor,
                 ),
                 InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     final _flutterSecureStorage = const FlutterSecureStorage();

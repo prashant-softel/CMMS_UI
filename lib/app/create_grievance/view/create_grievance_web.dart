@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_grievance/create_grievance_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -29,6 +30,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(

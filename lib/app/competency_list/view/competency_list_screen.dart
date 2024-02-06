@@ -11,23 +11,21 @@ import 'competency_listContent_web.dart';
 
 class CompetencyListScreen extends GetView<CompetencyListController> {
   CompetencyListScreen({super.key});
+  final controller = Get.find<CompetencyListController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Competency List'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,8 +37,7 @@ class CompetencyListScreen extends GetView<CompetencyListController> {
               Expanded(
                 child: Column(
                   children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
+                    if (Responsive.isMobile(context))
                       Expanded(
                         child: CompetencyListContentMobile(),
                       ),

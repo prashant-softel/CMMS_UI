@@ -8,64 +8,47 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-// ignore: must_be_immutable
-class ComplianceHistoryScreen extends StatelessWidget {
-  ComplianceHistoryScreen({Key? key});
-  var controller = Get.find<ComplianceHistoryController>();
+class ComplianceHistoryScreen extends GetView<ComplianceHistoryController> {
+  ComplianceHistoryScreen({super.key});
+  final controller = Get.find<ComplianceHistoryController>();
 
-  ///
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-      appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text(
-                "Compliance History",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 159, 156, 156),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
               centerTitle: true,
               elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => Get.back(),
-              ),
-            ),
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Row(children: [
+            )
+          : null,
+      drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? Dimens.box0
-              : HomeDrawer(),
-          Expanded(
-            child: Column(children: [
-              if (Responsive.isDesktop(context))
-                Expanded(
-                  child: KeyedSubtree(
-                    key: UniqueKey(),
-                    child: ComplianceHistoryWeb(),
-                  ),
-                )
-              else
-                Expanded(child: ComplianceHistoryMobile())
-            ]),
-          ),
-        ]),
-      ),
+              ? HomeDrawer()
+              : null,
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
+                  children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: ComplianceHistoryMobile(),
+                      ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: ComplianceHistoryWeb(),
+                      )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
-
-    ///
   }
 }

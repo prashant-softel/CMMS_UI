@@ -1,4 +1,5 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -39,6 +40,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
           return Obx(
             () => Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

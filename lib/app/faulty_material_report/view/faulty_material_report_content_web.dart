@@ -1,5 +1,6 @@
 import 'package:cmms/app/faulty_material_report/faulty_material_report_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -34,6 +35,7 @@ class _FaultyMaterialReportContentWebState
           return Obx(() {
             final dataSource = FaultyStockReportListDataSource(controller);
             return Column(children: [
+              HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -196,7 +198,8 @@ class _FaultyMaterialReportContentWebState
                                           height: 1.0,
                                           color: Colors.black),
                                     ),
-                                    onChanged: (value) => controller.search(value),
+                                    onChanged: (value) =>
+                                        controller.search(value),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
