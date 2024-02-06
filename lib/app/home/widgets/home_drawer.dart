@@ -13,8 +13,8 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        width: controller.isExpanded.value ? 250 : 65,
+        duration: Duration(milliseconds: 380),
+        width: controller.isExpanded.value ? 250 : 70,
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
@@ -53,6 +53,10 @@ class HomeDrawer extends GetView<HomeController> {
                               press: () {
                                 Get.offNamed(Routes.home);
                               },
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                              thickness: 0.5,
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
@@ -335,51 +339,55 @@ class MenuItemLogo extends StatelessWidget {
             mouseCursor: MaterialStateMouseCursor.clickable,
             onTap: press,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        child: Image.asset(
-                          icon,
-                        ),
+                Row(
+                  children: [
+                    SizedBox(
+                      child: Image.asset(
+                        icon,
                       ),
-                      Dimens.boxWidth5,
-                      isexpand == true
-                          ? Column(
+                    ),
+                    Dimens.boxWidth5,
+                    isexpand == true
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "HERO",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
                                 Text(
                                   "FUTURE",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 Text(
                                   "ENERGIES",
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Color(0xffD2D0D0),
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ],
-                            )
-                          : Text("")
-                    ],
-                  ),
+                            ),
+                          )
+                        : Text("")
+                  ],
                 ),
               ],
             ),
