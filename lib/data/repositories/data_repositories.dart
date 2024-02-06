@@ -624,6 +624,29 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> createVegetationPlan({
+    required String auth,
+    createVegetationPlans,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createVegetationPlan(
+        auth: auth,
+        createVegetationPlans: createVegetationPlans,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getVegEquipmentModelList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getVegEquipmentModelList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getNewPermitList({
     required String auth,
     int? facilityId,

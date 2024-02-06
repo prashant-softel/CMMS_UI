@@ -853,6 +853,56 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createVegetationPlan({
+    required String auth,
+    createVegetationPlans,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/CreateVegetationPlan',
+      Request.post,
+      createVegetationPlans,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Vegetation Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getVegEquipmentModelList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+  }) async {
+    // var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
+    // var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegEquipmentList?facilityId=$facilityId',
+      // startDateParam +
+      // endDateParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitIssueButton({
     required String auth,
     bool? isLoading,

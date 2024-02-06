@@ -77,6 +77,7 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -1343,6 +1344,75 @@ class Repository {
       else {
         Utility.showDialog(
             res.errorCode.toString() + 'getVegetationPlanList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> createVegetationPlan(
+    createVegetationPlans,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createVegetationPlan(
+        auth: auth,
+        createVegetationPlans: createVegetationPlans,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create MC  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Paln Added Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.moduleCleaningListPlan,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createVC');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVegEquipmentModelList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('EquipmentModelList:${res.data}');
+
+      if (!res.hasError) {
+        var equipmentList = getVegetationEquipmentModelFromJson(res.data);
+        return equipmentList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
         return [];
       }
     } catch (error) {

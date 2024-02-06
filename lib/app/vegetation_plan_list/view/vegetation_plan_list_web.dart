@@ -107,8 +107,8 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          // Get.offNamed(
-                                          //     Routes.moduleCleaningPlanning);
+                                          Get.offNamed(
+                                              Routes.addVegetationPlanScreen);
                                         },
                                         color: ColorValues.addNewColor,
                                       ),

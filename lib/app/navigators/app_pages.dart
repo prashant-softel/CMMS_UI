@@ -15,6 +15,8 @@ import 'package:cmms/app/add_training_course/view/add_course_screen.dart';
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
+import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_binding.dart';
+import 'package:cmms/app/add_vegetation_plan/view/add_vegetation_plan_screen.dart';
 import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
 import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
 import 'package:cmms/app/add_water_data_per_day/add_water_data_binding.dart';
@@ -115,7 +117,6 @@ import 'package:cmms/app/vegetation_control/vegetation_binding.dart';
 import 'package:cmms/app/vegetation_control/view/vegetation_dashboard_screen.dart';
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_binding.dart';
 import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.dart';
-import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_web.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
@@ -557,6 +558,11 @@ class AppPages {
       name: _Paths.vegetationPlanListScreen,
       page: VegetationListPlanScreen.new,
       binding: VegetationPlanListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addVegetationPlanScreen,
+      page: AddVegetationPlanScreen.new,
+      binding: AddVegetationPlanBinding(), 
     ),
 
     GetPage<dynamic>(
