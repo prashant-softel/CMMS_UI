@@ -40,11 +40,11 @@ class VegetationlistUsecase {
       );
 
   Future<Map<String, dynamic>> createVegetationPlan({
-    createMcPlans,
+    createVegetationPlans,
     bool? isLoading,
   }) async =>
       await repository.createVegetationPlan(
-        createMcPlans,
+        createVegetationPlans,
         isLoading,
       );
 

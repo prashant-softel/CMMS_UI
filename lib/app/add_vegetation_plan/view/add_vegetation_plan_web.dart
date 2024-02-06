@@ -1,5 +1,4 @@
 import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_controller.dart';
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -10,10 +9,10 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
+import 'package:cmms/app/widgets/veg_set_equipments.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -142,16 +141,19 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
-                                            children: 
-                                            [
+                                            children: [
                                               Row(
                                                 children: [
                                                   CustomRichText(
                                                       title: 'Title :'),
                                                   Dimens.boxWidth10,
                                                   GoodsOrderTextField(
-                                                    textController:
-                                                        controller.mcTitelCtrlr,
+                                                    textController: controller
+                                                        .vegTitleController,
+                                                    focusnode: controller
+                                                        .vegTitleFocus,
+                                                    scroll: controller
+                                                        .vegTitleScroll,
                                                   ),
                                                 ],
                                               ),
@@ -199,7 +201,6 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                       CustomRichText(
                                                           title: 'Start date:'),
                                                       Dimens.boxWidth10,
-
                                                       Container(
                                                         width: MediaQuery.of(
                                                                     context)
@@ -298,26 +299,6 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                           onChanged: (value) {},
                                                         ),
                                                       ),
-                                                      CustomTextFieldForStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        numberTextField: true,
-                                                        onTap: () {
-                                                          controller
-                                                                  .openStartDatePicker =
-                                                              !controller
-                                                                  .openStartDatePicker;
-                                                          controller.update([
-                                                            'stock_Mangement'
-                                                          ]);
-                                                        },
-                                                        textController:
-                                                            controller
-                                                                .startDateTc,
-                                                      ),
                                                     ],
                                                   ),
                                                   Dimens.boxHeight10
@@ -362,12 +343,11 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 // controller.schedules.
-                                                // controller.dayCount(
-                                                //     dayCount: int.tryParse(
-                                                //             '${controller.durationInDayCtrlr.text}') ??
-                                                //         0);
-
-                                                Get.dialog(SetEquipmentDialog(
+                                                controller.dayCount(
+                                                    dayCount: int.tryParse(
+                                                            '${controller.durationInDayCtrlr.text}') ??
+                                                        0);
+                                                Get.dialog(VegSetEquipment(
                                                   estimateDurationDays:
                                                       int.tryParse(
                                                           '${controller.durationInDayCtrlr.text}'),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-List<VegetationEquipmentModel> getVegetationEquipmentModelFromJson(String str) =>
+List<VegetationEquipmentModel> getVegetationEquipmentModelFromJson(
+        String str) =>
     List<VegetationEquipmentModel>.from(
         json.decode(str).map((x) => VegetationEquipmentModel.fromJson(x)));
 
@@ -27,11 +28,11 @@ class VegetationEquipmentModel {
       );
 
   Map<String, dynamic> toJson() => {
-    "blockId" : blockId,
-    "blockName" : blockName,
-    "area" : area,
-    "invs" : List<dynamic>.from(invs!.map((x) => x))
-  };
+        "blockId": blockId,
+        "blockName": blockName,
+        "area": area,
+        "invs": List<dynamic>.from(invs!.map((x) => x))
+      };
 }
 
 class Invs {
@@ -56,4 +57,4 @@ class Invs {
       };
 }
 
-String smbModelToJson(Invs data) => json.encode(data.toJson());
+String invsModelToJson(Invs data) => json.encode(data.toJson());

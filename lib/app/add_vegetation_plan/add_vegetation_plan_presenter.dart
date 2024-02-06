@@ -15,11 +15,11 @@ class AddVegetationPresenter {
       );
 
   Future<Map<String, dynamic>?> createVegetationPlan({
-    createMcPlans,
+    createVegetationPlans,
     required bool isLoading,
   }) async {
     return vegetationlistUsecase.createVegetationPlan(
-      createMcPlans: createMcPlans,
+      createVegetationPlans: createVegetationPlans,
       isLoading: isLoading,
     );
   }
