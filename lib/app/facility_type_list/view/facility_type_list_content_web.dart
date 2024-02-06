@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -23,6 +24,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -182,14 +184,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             child: TextField(
                                               controller: controller.titleCtrlr,
                                               focusNode: controller.nameFocus,
-                                              scrollController: controller.nameScroll,
+                                              scrollController:
+                                                  controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -300,14 +303,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               controller:
                                                   controller.descriptionCtrlr,
                                               focusNode: controller.descFocus,
-                                              scrollController: controller.descScroll,
+                                              scrollController:
+                                                  controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -698,7 +702,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 0.0,
                                                   ),
                                                 ],
-                                                                                                controller: controller,
+                                                controller: controller,
                                                 dropdownList:
                                                     controller.operatorList,
                                                 isValueSelected: controller
@@ -762,15 +766,16 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             child: TextField(
                                               controller:
                                                   controller.addressCtrlr,
-                                                  focusNode: controller.addFocus,
-                                                  scrollController: controller.addScroll,
+                                              focusNode: controller.addFocus,
+                                              scrollController:
+                                                  controller.addScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -1131,9 +1136,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

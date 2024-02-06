@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -46,14 +48,14 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
                   InkWell(
                     onTap: () {
                       Get.offNamed(Routes.masterDashboard);
@@ -170,8 +172,9 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               ),
                                               controller: controller
                                                   .checklistNumberCtrlr,
-                                                  focusNode: controller.nameFocus,
-                                                  scrollController: controller.nameScroll,
+                                              focusNode: controller.nameFocus,
+                                              scrollController:
+                                                  controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               maxLines: 1,

@@ -8,26 +8,23 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class HotoListScreen
-    extends GetView<HotoListScreenController> {
+class HotoListScreen extends GetView<HotoListScreenController> {
   HotoListScreen({super.key});
+  final controller = Get.find<HotoListScreenController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Calibration History'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,6 +36,12 @@ class HotoListScreen
               Expanded(
                 child: Column(
                   children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: HotoListContentWeb(),

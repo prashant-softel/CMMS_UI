@@ -1,5 +1,6 @@
 import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -40,6 +41,7 @@ class _ChecklistMisPlanContentWebState
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -76,10 +78,8 @@ class _ChecklistMisPlanContentWebState
                               onTap: () {
                                 Get.offNamed(Routes.misDashboard);
                               },
-                              child: Text(" / MIS",
-                                  style: Styles.greyLight14)),
-                          Text(" / OBSERVATION PLAN",
-                              style: Styles.greyLight14)
+                              child: Text(" / MIS", style: Styles.greyLight14)),
+                          Text(" / OBSERVATION PLAN", style: Styles.greyLight14)
                         ],
                       ),
                     ),

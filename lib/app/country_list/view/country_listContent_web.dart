@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class CountryListContentWeb extends GetView<CountryListController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

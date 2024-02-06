@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -20,6 +21,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
@@ -42,15 +44,15 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                   Icons.home,
                   color: ColorValues.greyLightColor,
                 ),
-               InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Get.offNamed(Routes.stockManagementDashboardScreen);
@@ -279,8 +281,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                       ),
                                                       child:
                                                           LoginCustomTextfield(
-                                                        inputFormatters: <
-                                                            TextInputFormatter>[
+                                                        inputFormatters: <TextInputFormatter>[
                                                           FilteringTextInputFormatter
                                                               .digitsOnly
                                                         ],
@@ -304,7 +305,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   top: 8.0),
                                                           child:
                                                               CustomSwitchTroggle(
