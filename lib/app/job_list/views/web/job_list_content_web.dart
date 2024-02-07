@@ -64,8 +64,8 @@ class JobListContentWeb extends StatelessWidget {
                 onTap: () {
                   Get.offAllNamed(Routes.breakdown);
                 },
-                child: Text(" / BREAKDOWN MAINTANACE",
-                    style: Styles.greyLight14),
+                child:
+                    Text(" / BREAKDOWN MAINTANACE", style: Styles.greyLight14),
               ),
               Text(" / JOB LIST", style: Styles.greyLight14),
             ],
@@ -251,7 +251,7 @@ class JobListContentWeb extends StatelessWidget {
                                 dataRowHeight: 105, // Get.height * 0.12,
                                 columnSpacing: 10,
                                 source: dataSource, // Custom DataSource class
-                                headingRowHeight: Get.height * 0.12,
+                                // headingRowHeight: Get.height * 0.12,
                                 minWidth: 20000, //Get.width * 1.2,
                                 showCheckboxColumn: false,
                                 //  rowsPerPage: 10, // Number of rows per page

@@ -304,8 +304,8 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                 dataRowHeight: 70,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: 2500,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:

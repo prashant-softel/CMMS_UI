@@ -218,11 +218,50 @@ class NewPermitListController extends GetxController {
       return;
     }
 
-    newPermitList.value = filteredData
+    List<NewPermitModel?> filteredList = filteredData
         .where((item) =>
-            item!.description!.toLowerCase().contains(keyword.toLowerCase()))
+            (item?.permitId?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.permitTypeName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.equipment_categories
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.workingAreaName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.requestByName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.approvedByName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.description
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.ptwStatus?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.requestDatetime?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
-    update(['permit_list']);
+
+    newPermitList.value = filteredData;
+
+    // newPermitList.value = filteredData
+    //     .where((item) =>
+    //         item!.description!.toLowerCase().contains(keyword.toLowerCase()))
+    //     .toList();
+    // update(['permit_list']);
   }
 
   Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,

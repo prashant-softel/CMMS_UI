@@ -293,8 +293,8 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                                 dataRowHeight: 70,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:

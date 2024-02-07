@@ -1,36 +1,32 @@
 import 'dart:async';
 
-import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
+import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/view_vegetation_plan/view_veg_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
-import 'package:cmms/domain/models/equipment_list_model.dart';
-import 'package:cmms/domain/models/history_model.dart';
-
-import 'package:cmms/domain/models/mc_details_plan_model.dart';
-
 import 'package:cmms/domain/models/type_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cmms/domain/models/veg_plan_detail_model.dart';
+import 'package:cmms/domain/models/vegetation_equipment_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../home/home_controller.dart';
 
-class ViewMcPlaningController extends GetxController {
-  ///
-  ViewMcPlaningController(
-    this.viewMcPlaningPresenter,
+class ViewVegPlanController extends GetxController {
+  ViewVegPlanController(
+    this.viewVegPlanPresenter,
   );
-  ViewMcPlaningPresenter viewMcPlaningPresenter;
+  ViewVegPlanPresenter viewVegPlanPresenter;
   final HomeController homecontroller = Get.find();
-  TextEditingController mcTitelCtrlr = TextEditingController();
+  TextEditingController vegTitleCtrlr = TextEditingController();
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, dynamic> data = {};
-  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  RxList<VegetationEquipmentModel?> vegEquipmentList =
+      <VegetationEquipmentModel?>[].obs;
 
-  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  // RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
-  RxList<McPalningDetailsModel?>? mcPlanDetailsList =
-      <McPalningDetailsModel?>[].obs;
-  Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
+  RxList<VegPlanDetailModel?>? vegPlanDetailsList = <VegPlanDetailModel?>[].obs;
+  Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   List<int?> scheduleId = [];
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
@@ -77,13 +73,13 @@ class ViewMcPlaningController extends GetxController {
       });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getMcPlanDetail(planId: id.value);
+          getVegPlanDetail(planId: id.value);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
-        getEquipmentModelList(facilityId, true);
+        getVegEquipmentModelList(facilityId, true);
       });
-      getMcPlanHistory(id: id.value);
+      // getMcPlanHistory(id: id.value);
       super.onInit();
     } catch (e) {
       print(e);
@@ -104,57 +100,52 @@ class ViewMcPlaningController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
-    equipmentList.value = <EquipmentListModel>[];
+  Future<void> getVegEquipmentModelList(int facilityId, bool isLoading) async {
+    vegEquipmentList.value = <VegetationEquipmentModel>[];
 
-    final list = await viewMcPlaningPresenter.getEquipmentModelList(
+    final list = await viewVegPlanPresenter.getVegEquipmentModelList(
         isLoading: isLoading, facilityId: facilityId);
 
-    equipmentList.value = list;
-  
-    update(['equipment_list']);
+    vegEquipmentList.value = list;
+
+    update(['veg_equipment_list']);
   }
 
-  Future<void> getMcPlanHistory({required int id}) async {
-    int moduleType = 81;
-    historyList?.value = await viewMcPlaningPresenter.getHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          id,
-          true,
-        ) ??
-        [];
-    update(["historyList"]);
-  }
+  // Future<void> getMcPlanHistory({required int id}) async {
+  //   int moduleType = 81;
+  //   historyList?.value = await viewMcPlaningPresenter.getHistory(
+  //         // tempModuleType,
+  //         // tempJobCardId,
+  //         moduleType,
+  //         id,
+  //         true,
+  //       ) ??
+  //       [];
+  //   update(["historyList"]);
+  // }
 
-  Future<void> getMcPlanDetail({required int planId}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
-    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
-
-    final _mcPlanDetails = await viewMcPlaningPresenter.getMcPlanDetail(
+  Future<void> getVegPlanDetail({required int planId}) async {
+    final _vegPlanDetail = await viewVegPlanPresenter.getVegPlanDetail(
         planId: planId, isLoading: true);
-    print('MC plan Detail:$_mcPlanDetails');
+    print('Veg plan Detail:$_vegPlanDetail');
 
-    if (_mcPlanDetails != null) {
-      mcPlanDetailsModel.value = _mcPlanDetails;
-      mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
-      selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
-      startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
+    if (_vegPlanDetail != null) {
+      vegPlanDetailsModel.value = _vegPlanDetail;
+      vegTitleCtrlr.text = vegPlanDetailsModel.value!.title ?? "";
+      selectedfrequency.value = vegPlanDetailsModel.value?.frequency ?? "";
+      startDateTc.text = vegPlanDetailsModel.value?.startDate ?? '';
       durationInDayCtrlr.text =
-          mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
-
+          vegPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
       rowItem.value = [];
-      schedules!.value = _mcPlanDetails.schedules;
-      _mcPlanDetails.schedules.forEach(
+      schedules!.value = _vegPlanDetail.schedules!;
+      _vegPlanDetail.schedules?.forEach(
         (element) {
           rowItem.value.add(
             [
               {"key": "day", "value": '${element.cleaningDay}'},
               {"key": "noOfInverters", "value": '${element.invs}'},
-              {'key': "noOfSMBs", "value": '${element.smbs}'},
-              {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "cleaningType", "value": 'Please Select'},
+              {'key': "noOfSMBs", "value": '${element.blocks}'},
+              {'key': "noOfSMBs", "value": '${element.scheduledArea}'},
             ],
           );
         },
@@ -162,18 +153,15 @@ class ViewMcPlaningController extends GetxController {
     }
   }
 
-  void mcPlanApprovedButton({int? id}) async {
+  void vegPlanApprovedButton({int? id}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
-
-      CommentModel commentGoodsOrderAproveModel =
+      CommentModel commentVegAproveModel =
           CommentModel(id: id, comment: _comment);
-
-      var mcApproveJsonString = commentGoodsOrderAproveModel.toJson();
-
+      var vegApproveJsonString = commentVegAproveModel.toJson();
       Map<String, dynamic>? response =
-          await viewMcPlaningPresenter.mcPlanApprovedButton(
-        mcApproveJsonString: mcApproveJsonString,
+          await viewVegPlanPresenter.vegPlanApprovedButton(
+        vegApproveJsonString: vegApproveJsonString,
         isLoading: true,
       );
       if (response == true) {
@@ -182,18 +170,15 @@ class ViewMcPlaningController extends GetxController {
     }
   }
 
-  void mcPlanRejectButton({int? id}) async {
+  void vegPlanRejectButton({int? id}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
-
-      CommentModel commentGoodsOrderAproveModel =
+      CommentModel commentVegAproveModel =
           CommentModel(id: id, comment: _comment);
-
-      var mcRejectJsonString = commentGoodsOrderAproveModel.toJson();
-
+      var vegRejectJsonString = commentVegAproveModel.toJson();
       Map<String, dynamic>? response =
-          await viewMcPlaningPresenter.mcPlanRejectButton(
-        mcRejectJsonString: mcRejectJsonString,
+          await viewVegPlanPresenter.vegPlanRejectButton(
+        vegRejectJsonString: vegRejectJsonString,
         isLoading: true,
       );
       if (response == true) {

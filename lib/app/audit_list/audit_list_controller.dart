@@ -48,14 +48,14 @@ class AuditListScreenController extends GetxController {
     'Start Date': true,
     'Frequency Name': true,
   });
-  final Map<String, double> columnwidth = {
-    'Plan ID': 153,
-    'Title': 320,
-    'Checklist': 220,
-    'Site Name': 200,
-    'Start Date': 250,
-    'Frequency Name': 250,
-  };
+  // final Map<String, double> columnwidth = {
+  //   'Plan ID': 153,
+  //   'Title': 320,
+  //   'Checklist': 220,
+  //   'Site Name': 200,
+  //   'Start Date': 250,
+  //   'Frequency Name': 250,
+  // };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
