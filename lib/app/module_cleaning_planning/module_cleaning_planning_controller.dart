@@ -170,8 +170,8 @@ class ModuleCleaningPlanningController extends GetxController {
         // assignedToId: 0,
 
         facilityId: facilityId,
-        // startDate: _startDateTc,
-        startDate: "2023-12-02",
+        startDate: _startDateTc,
+        // startDate: "2023-12-02",
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
