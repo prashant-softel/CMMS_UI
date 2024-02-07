@@ -75,7 +75,7 @@ class _FaultyMaterialReportContentWebState
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyLight14),
                     ),
-                    Text(" /  FAULTY MATERIAL REPORT",
+                    Text(" / FAULTY MATERIAL REPORT",
                         style: Styles.greyLight14),
                   ],
                 ),
@@ -235,7 +235,7 @@ class _FaultyMaterialReportContentWebState
                                             columnSpacing: 10,
                                             source:
                                                 dataSource, // Custom DataSource class
-                                            headingRowHeight: Get.height * 0.12,
+                                            // headingRowHeight: Get.height * 0.12,
                                             minWidth: 2000, //Get.width * 1.2,
                                             showCheckboxColumn: false,
                                             rowsPerPage:

@@ -78,14 +78,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                               color: ColorValues.greyLightColor,
                             ),
                             InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 Get.offNamed(Routes.warrantyClaimList);
@@ -144,8 +144,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   'Warranty Brief Description: ',
                                               textController: controller
                                                   .warrantyClaimBriefDescTextController,
-                                                  focusnode: controller.wdescFocus,
-                                                  scroll: controller.wdescScroll,
+                                              focusnode: controller.wdescFocus,
+                                              scroll: controller.wdescScroll,
                                             ),
                                           ),
                                         ],
@@ -859,8 +859,10 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       width: 550,
                                                       textController: controller
                                                           .immediateCorrectiveActionTextController,
-                                                        focusnode: controller.immcoracFocus,
-                                                        scroll: controller.immcoracScroll,
+                                                      focusnode: controller
+                                                          .immcoracFocus,
+                                                      scroll: controller
+                                                          .immcoracScroll,
                                                       label:
                                                           'Immediate Corrective Action by Buyer: ',
                                                     ),

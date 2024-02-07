@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
@@ -315,11 +317,10 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                   columnSpacing: 10,
                                                   dataRowHeight:
                                                       Get.height * 0.12,
-
                                                   source:
                                                       dataSource, // Custom DataSource class
-                                                  headingRowHeight:
-                                                      Get.height * 0.12,
+                                                  // headingRowHeight:
+                                                  // Get.height * 0.12,
                                                   minWidth:
                                                       3000, //Get.width * 1.2,
                                                   showCheckboxColumn: false,
@@ -506,36 +507,36 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onChanged: (value) {
-                  filterText.value = value;
-                },
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(

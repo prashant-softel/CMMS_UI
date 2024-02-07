@@ -243,9 +243,9 @@ class _ModuleCleaningListExecutionState
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
                                         style: TextStyle(
-                                              fontSize: 16.0,
-                                              height: 1.0,
-                                              color: Colors.black),
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
@@ -284,11 +284,11 @@ class _ModuleCleaningListExecutionState
 
                                               return PaginatedDataTable2(
                                                 columnSpacing: 10,
-                                                dataRowHeight: 70,
+                                                dataRowHeight: 55,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                /// headingRowHeight:
+                                                //      Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:

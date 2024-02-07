@@ -64,8 +64,12 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                               onTap: () {
                                 Get.offNamed(Routes.masterDashboard);
                               },
-                              child: Text(" / Escalation Matrix List",
-                                  style: Styles.greyLight14),
+                              child:
+                                  Text(" / MASTER", style: Styles.greyLight14),
+                            ),
+                            Text(
+                              " / ESCALATION MATRIX LIST",
+                              style: Styles.greyLight14,
                             ),
                             // Text(" / Create Checklist Number",
                             //     style: Styles.greyMediumLight12)

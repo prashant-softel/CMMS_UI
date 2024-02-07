@@ -63,20 +63,20 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
                           InkWell(
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / MASTERS",
-                                style: Styles.greyLight14),
+                            child:
+                                Text(" / MASTERS", style: Styles.greyLight14),
                           ),
                           Text(" / Warranty Claim List",
                               style: Styles.greyLight14)
@@ -302,8 +302,8 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                 dataRowHeight: 70,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: 2500,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
