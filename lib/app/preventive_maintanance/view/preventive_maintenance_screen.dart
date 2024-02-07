@@ -19,17 +19,14 @@ class PreventiveScreen extends GetView<PreventiveController> {
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
               toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -89,33 +86,33 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           ),
                         ),
                       ),
-                    if (Responsive.isDesktop(context))
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Preventive Maintenance",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 159, 156, 156),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
+                    if (Responsive.isDesktop(context)) HeaderWidget(),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Preventive Maintenance",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                             ),
-                            SizedBox(
-                                width:
-                                    10), // Add some space between the text and the line
-                            Expanded(
-                              child: Divider(
-                                color: Colors
-                                    .grey, // Customize the color of the line if needed
-                                height:
-                                    1, // Adjust the height of the line if needed
-                              ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+                    ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,

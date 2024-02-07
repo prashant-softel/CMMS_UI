@@ -27,17 +27,14 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
     return //
         Scaffold(
       appBar: //
-          Responsive.isDesktop(context)
+          Responsive.isMobile(context)
               ? AppBar(
                   title: HeaderWidget(),
                   elevation: 0,
                   toolbarHeight: 60,
                   automaticallyImplyLeading: false,
                 )
-              : AppBar(
-                  title: HeaderWidget(),
-                  elevation: 0,
-                ),
+              : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -199,34 +196,34 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         ],
                       ),
 
-                      if (Responsive.isDesktop(context))
+                      if (Responsive.isDesktop(context)) HeaderWidget(),
 
-                        /// GRID TILES
+                      /// GRID TILES
 
-                        /// GRID TILES
-                        GridView.count(
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: Dimens.edgeInsets15,
-                          crossAxisSpacing: 70,
-                          mainAxisSpacing: 6,
-                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                          childAspectRatio: Responsive.isMobile(context)
-                              ? (itemWidth / itemHeight)
-                              : 5,
-                          children: <Widget>[
-                            createContentTile(
-                                title: "Checklist Plan",
-                                onTap: () {
-                                  controller.goToPlanListScreen();
-                                }),
-                            createContentTile(
-                                title: 'MIS Task',
-                                onTap: () {
-                                  controller.goToMisTaskScreen();
-                                })
-                          ],
-                        ),
+                      /// GRID TILES
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : 5,
+                        children: <Widget>[
+                          createContentTile(
+                              title: "Checklist Plan",
+                              onTap: () {
+                                controller.goToPlanListScreen();
+                              }),
+                          createContentTile(
+                              title: 'MIS Task',
+                              onTap: () {
+                                controller.goToMisTaskScreen();
+                              })
+                        ],
+                      ),
                       // if (Responsive.isDesktop(context))
                       // Container(
                       //   margin: EdgeInsets.only(left: 20),

@@ -40,9 +40,9 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
 
             return Stack(
               children: [
-                HeaderWidget(),
                 Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -303,7 +303,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                  controller.newPermitList.value == null || controller.newPermitList.value==0 
+                                    controller.newPermitList.value == null ||
+                                            controller.newPermitList.value == 0
                                         ? Center(child: Text('No data'))
                                         : Expanded(
                                             child: ValueListenableBuilder(

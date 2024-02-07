@@ -17,12 +17,7 @@ class JobDetailsScreen extends GetView<JobDetailsController> {
     ///
     return Scaffold(
       appBar: Responsive.isDesktop(context)
-          ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
+          ? null
           : AppBar(
               title: Text('Job Details'),
               centerTitle: true,
