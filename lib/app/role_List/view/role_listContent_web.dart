@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/role_List/role_list_controller.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -22,6 +23,7 @@ class RoleListContentWeb extends GetView<RoleListController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

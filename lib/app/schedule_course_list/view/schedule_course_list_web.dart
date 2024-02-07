@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_controller.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -74,6 +75,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
       builder: (controller) {
         return SingleChildScrollView(
           child: Column(children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
