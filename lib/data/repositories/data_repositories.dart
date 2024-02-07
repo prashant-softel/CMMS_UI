@@ -1207,16 +1207,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getCheckPointlist({
-    required String auth,
-    int? selectedchecklistId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> getCheckPointlist(
+          {required String auth,
+          int? selectedchecklistId,
+          bool? isLoading,
+          int? facilityId}) async =>
       await connectHelper.getCheckPointlist(
-        auth: auth,
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          selectedchecklistId: selectedchecklistId ?? 0,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
   Future<ResponseModel> getFacilityList({
     String? auth,
@@ -4027,7 +4027,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> vegPlanApprovedButton({
+  Future<ResponseModel> vegPlanApprovedButton({
     required String auth,
     vegApproveJsonString,
     bool? isLoading,
