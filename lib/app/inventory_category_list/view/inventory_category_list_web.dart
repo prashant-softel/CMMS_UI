@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/inventory_category_list/inventory_category_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -23,6 +24,7 @@ class InventoryCategoryListContentWeb
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

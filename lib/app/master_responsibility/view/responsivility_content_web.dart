@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/master_responsibility/responsivility_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -22,6 +23,7 @@ class ResponsibilityListContentWeb
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

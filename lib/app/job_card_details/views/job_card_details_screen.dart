@@ -10,63 +10,47 @@ import '../../utils/responsive.dart';
 
 class JobCardDetailsScreen extends GetView<JobDetailsController> {
   JobCardDetailsScreen({super.key});
+  final controller = Get.find<JobDetailsController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
-    ///
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Job Card Details'),
               centerTitle: true,
               elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => Get.back(),
-              ),
-            ),
+            )
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
+              ? HomeDrawer()
               : null,
-      body:
-          //
-          Container(
-              height: Get.height,
-              width: Get.width,
-              child: Row(
-                children: [
-                  (Responsive.isMobile(context) || Responsive.isTablet(context))
-                      ? Dimens.box0
-                      : HomeDrawer(),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        if (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                          Expanded(
-                            child: JobCardDetailsContentMobile(),
-                          ),
-                        if (Responsive.isDesktop(context))
-                          Expanded(
-                            child: JobCardDetailsContentWeb(),
-                          )
-                      ],
-                    ),
-                  ),
-                ],
-              )),
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
+                  children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: JobCardDetailsContentWeb(),
+                      )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
-
-    /// build ends
   }
-
-  /// class ends
 }

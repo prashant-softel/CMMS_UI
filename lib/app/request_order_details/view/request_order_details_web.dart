@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_order_details/request_order_details_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -18,6 +19,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      HeaderWidget(),
       Container(
         height: 45,
         decoration: BoxDecoration(

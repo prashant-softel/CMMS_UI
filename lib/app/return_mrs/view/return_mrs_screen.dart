@@ -9,26 +9,20 @@ import '../../utils/responsive.dart';
 
 class ReturnMrsListScreen extends GetView<ReturnMrsListController> {
   ReturnMrsListScreen({super.key});
+  final controller = Get.find<ReturnMrsListController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Mrs'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
+              ? HomeDrawer()
               : null,
       body: Container(
           width: Get.width,
@@ -41,11 +35,12 @@ class ReturnMrsListScreen extends GetView<ReturnMrsListController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: ReturnMrsListContentWeb(),

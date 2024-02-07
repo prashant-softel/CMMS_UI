@@ -1,5 +1,6 @@
 import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mis_task/mis_task_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -38,6 +39,7 @@ class _MisTaskContentWebState extends State<MisTaskContentWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(

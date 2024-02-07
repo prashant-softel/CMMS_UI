@@ -8,57 +8,49 @@ import '../../utils/responsive.dart';
 import '../job_list_controller.dart';
 import 'web/job_list_content_web.dart';
 
-// ignore: must_be_immutable
-class JobListScreen extends StatelessWidget {
-  JobListScreen({Key? key});
-  var controller = Get.find<JobListController>();
+class JobListScreen extends GetView<JobListController> {
+  JobListScreen({super.key});
+  final controller = Get.find<JobListController>();
 
-  ///
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-      appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Jobs'),
               centerTitle: true,
               elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () => Get.back(),
-              ),
-            ),
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Row(children: [
+            )
+          : null,
+      drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? Dimens.box0
-              : HomeDrawer(),
-          Expanded(
-            child: Column(children: [
-              if (Responsive.isDesktop(context))
-                Expanded(
-                  child: KeyedSubtree(
-                    key: UniqueKey(),
-                    child: JobListContentWeb(),
-                  ),
-                )
-              else
-                Expanded(child: JobListContentMobile())
-            ]),
-          ),
-        ]),
-      ),
+              ? HomeDrawer()
+              : null,
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
+                  children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: JobListContentWeb(),
+                      )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
-
-    ///
   }
 }

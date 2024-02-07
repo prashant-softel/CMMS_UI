@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
@@ -61,6 +62,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
         //
         Column(
       children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(

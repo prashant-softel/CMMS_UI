@@ -10,24 +10,21 @@ import '../../utils/responsive.dart';
 
 class MrsViewScreen extends GetView<MrsViewController> {
   MrsViewScreen({super.key});
-  final MrsViewController controller = Get.find();
+  final controller = Get.find<MrsViewController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Preventive Check Point'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,12 +36,12 @@ class MrsViewScreen extends GetView<MrsViewController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: MrsViewContentMobile(),
-                    //   ),
-
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: MrsViewContentWeb(),

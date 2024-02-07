@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 // import '../incident_listContent_controller.dart';
+import '../../home/widgets/header_widget.dart';
 import '../insurance_provider_listContent_controller.dart';
 
 import '../../widgets/custom_elevated_button.dart';
@@ -26,6 +27,7 @@ class InsuranceProviderWeb extends GetView<InsuranceProviderController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

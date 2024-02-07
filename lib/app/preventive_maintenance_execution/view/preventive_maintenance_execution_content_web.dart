@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -41,6 +42,7 @@ class PreventiveMaintenanceExecutionContentWeb
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(

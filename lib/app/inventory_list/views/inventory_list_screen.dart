@@ -9,60 +9,48 @@ import 'mobile/inventory_list_content_mobile.dart';
 import 'web/inventory_list_content_web.dart';
 
 class InventoryListScreen extends GetView<InventoryListController> {
-  InventoryListScreen({Key? key});
+  InventoryListScreen({super.key});
+  final controller = Get.find<InventoryListController>();
 
-  ///
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-      appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
+              centerTitle: true,
               elevation: 0,
-              toolbarHeight: 100,
-              automaticallyImplyLeading: false,
             )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
+              ? HomeDrawer()
               : null,
-      body:
-          //   Obx(
-          // () => //
-          Container(
-        child: Row(
-          children: [
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                :
-                //
-                HomeDrawer(),
-            Expanded(
-              child: Column(
-                  //
+      body: Container(
+          width: Get.width,
+          height: Get.height,
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Column(
                   children: [
                     if (Responsive.isMobile(context))
                       Expanded(
-                        child: InventoryListContentMobile(),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
                       ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: //
-                            InventoryListContentWeb(),
-                      ),
-                  ]),
-            ),
-          ],
-        ),
-      ),
+                        child: InventoryListContentWeb(),
+                      )
+                  ],
+                ),
+              ),
+            ],
+          )),
     );
-
-    ///
   }
 }

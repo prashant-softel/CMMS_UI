@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -36,6 +37,7 @@ class _PlantStockReportContentWebState
             final dataSource = PlantListDataSource(controller);
 
             return Column(children: [
+              HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(

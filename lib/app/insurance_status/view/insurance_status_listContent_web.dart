@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 // import '../incident_listContent_controller.dart';
 
+import '../../home/widgets/header_widget.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
@@ -26,6 +27,7 @@ class InsuranceStatusWeb extends GetView<InsuranceStatusController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
