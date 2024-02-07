@@ -56,6 +56,8 @@ import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
+import 'package:cmms/app/widgets/veg_plan_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/veg_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
@@ -825,73 +827,6 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'MC/GetMCPlanList?facilityId=$facility_id',
-      Request.getMultiparts,
-      null,
-      isLoading,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-
-    return responseModel;
-  }
-
-  Future<ResponseModel> getVegetationPlanList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id,
-  }) async {
-    ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegetationPlanList?facilityId=$facility_id',
-      Request.getMultiparts,
-      null,
-      isLoading,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    return responseModel;
-  }
-
-  Future<ResponseModel> createVegetationPlan({
-    required String auth,
-    createVegetationPlans,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/CreateVegetationPlan',
-      Request.post,
-      createVegetationPlans,
-      isLoading ?? false,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
-
-    print('Create Vegetation Response:${responseModel.data}');
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    // if (res.e != null) {
-    //   Get.dialog<void>(WarrantyClaimErrorDialog());
-    // } else {
-
-    return responseModel;
-  }
-
-  Future<ResponseModel> getVegEquipmentModelList({
-    required bool isLoading,
-    required String auth,
-    int? facilityId,
-  }) async {
-    // var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
-    // var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
-//var statusParam = (status!=null status!='')?'status=1':'';
-    // var statusParam = 'status=1';
-    ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegEquipmentList?facilityId=$facilityId',
-      // startDateParam +
-      // endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -6960,6 +6895,136 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getVegetationPlanList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegetationPlanList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> createVegetationPlan({
+    required String auth,
+    createVegetationPlans,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/CreateVegetationPlan',
+      Request.post,
+      createVegetationPlans,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Vegetation Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getVegEquipmentModelList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+  }) async {
+    // var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
+    // var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegEquipmentList?facilityId=$facilityId',
+      // startDateParam +
+      // endDateParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getVegPlanDetail({
+    required bool isLoading,
+    required String auth,
+    int? plan_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegetationPlanDetails?planId=$plan_id',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegPlanApprovedButton({
+    required String auth,
+    vegApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/ApproveVegetationPlan',
+      Request.put,
+      vegApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('vegApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(VegPlanMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> vegPlanRejectButton({
+    required String auth,
+    vegRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/RejectVegetationPlan',
+      Request.put,
+      vegRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('vegRejectResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(VegPlanMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
     return responseModel;
   }
 }
