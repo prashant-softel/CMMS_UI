@@ -4,7 +4,6 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../domain/models/checkpoint_list_model.dart';
 import '../../constant/constant.dart';
 import '../../navigators/app_pages.dart';

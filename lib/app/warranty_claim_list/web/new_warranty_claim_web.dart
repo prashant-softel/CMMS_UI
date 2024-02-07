@@ -29,12 +29,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: HeaderWidget(),
-          elevation: 0,
-          toolbarHeight: 60,
-          automaticallyImplyLeading: false,
-        ),
         body: Row(
           children: [
             Responsive.isMobile(context) || Responsive.isTablet(context)
@@ -53,8 +47,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      HeaderWidget(),
                       Container(
-                        height: 55,
+                        height: 45,
                         decoration: BoxDecoration(
                           // borderRadius: BorderRadius.circular(0),
                           border: Border.all(
@@ -78,14 +73,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                               color: ColorValues.greyLightColor,
                             ),
                             InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 Get.offNamed(Routes.warrantyClaimList);
@@ -144,8 +139,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   'Warranty Brief Description: ',
                                               textController: controller
                                                   .warrantyClaimBriefDescTextController,
-                                                  focusnode: controller.wdescFocus,
-                                                  scroll: controller.wdescScroll,
+                                              focusnode: controller.wdescFocus,
+                                              scroll: controller.wdescScroll,
                                             ),
                                           ),
                                         ],
@@ -859,8 +854,10 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       width: 550,
                                                       textController: controller
                                                           .immediateCorrectiveActionTextController,
-                                                        focusnode: controller.immcoracFocus,
-                                                        scroll: controller.immcoracScroll,
+                                                      focusnode: controller
+                                                          .immcoracFocus,
+                                                      scroll: controller
+                                                          .immcoracScroll,
                                                       label:
                                                           'Immediate Corrective Action by Buyer: ',
                                                     ),

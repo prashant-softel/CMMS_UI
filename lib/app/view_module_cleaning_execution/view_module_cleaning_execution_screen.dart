@@ -1,37 +1,30 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'view/web/view_module_cleaning_execution_content_web.dart';
 import 'view_module_cleaning_execution_controller.dart';
 
+class ViewModuleCleaningExecutionScreen
+    extends GetView<viewModuleCleaningExecutionController> {
+  ViewModuleCleaningExecutionScreen({super.key});
+  final controller = Get.find<viewModuleCleaningExecutionController>();
 
-
-
-class ViewModuleCleaningExecutionScreen extends GetView<viewModuleCleaningExecutionController> {
-  ViewModuleCleaningExecutionScreen({Key? key});
-  // final HomeController controller = Get.find();
-  
   @override
-  Widget build(BuildContext context) //
-  {
-    return //
-        Scaffold(
-           appBar: Responsive.isDesktop(context)
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Module Cleaning Execution'),
               centerTitle: true,
               elevation: 0,
-            ),
-      body:      
-          Container(
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
+      body: Container(
           width: Get.width,
           height: Get.height,
           child: Row(
@@ -42,6 +35,12 @@ class ViewModuleCleaningExecutionScreen extends GetView<viewModuleCleaningExecut
               Expanded(
                 child: Column(
                   children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: ViewModuleCleaningExecutionContentWeb(),
@@ -52,7 +51,5 @@ class ViewModuleCleaningExecutionScreen extends GetView<viewModuleCleaningExecut
             ],
           )),
     );
-
-    ///
   }
 }

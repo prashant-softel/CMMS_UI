@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/body_injured_model.dart';

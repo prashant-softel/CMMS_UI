@@ -2,7 +2,6 @@ import 'package:cmms/app/faulty_material_report/faulty_material_report_controlle
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';

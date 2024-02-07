@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
 import 'package:file_picker/file_picker.dart';
@@ -24,6 +25,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -59,7 +61,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
+                    child: Text(" / BREAKDOWN MAINTENANCE",
+                        style: Styles.greyLight14),
                   ),
                   Text(" / TBT SOP List", style: Styles.greyLight14)
                 ],

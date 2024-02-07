@@ -1,7 +1,5 @@
-import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/models/risk_type_list_model.dart';
 import '../risk_type_controller.dart';
 
 class RiskTypeListContentMobile

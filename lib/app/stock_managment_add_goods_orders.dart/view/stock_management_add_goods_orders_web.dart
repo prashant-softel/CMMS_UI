@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -42,6 +43,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                   height: Get.height,
                   child: Column(
                     children: [
+                      HeaderWidget(),
                       AppBarGoodsOrder(),
                       Expanded(
                         child: SingleChildScrollView(
@@ -964,7 +966,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                       "Paid By",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    )),                
+                    )),
                 DataColumn2(
                     fixedWidth: 210,
                     label: Text(

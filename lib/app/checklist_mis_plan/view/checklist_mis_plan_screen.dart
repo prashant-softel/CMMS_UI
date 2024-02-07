@@ -3,7 +3,6 @@ import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_content_web.
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';

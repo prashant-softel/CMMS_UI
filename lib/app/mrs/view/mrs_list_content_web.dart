@@ -163,7 +163,7 @@ class MrsListContentWeb extends StatelessWidget {
                               ),
                             ],
                           ),
-                          controller.mrsList!.isEmpty
+                          controller.mrsList.isEmpty
                               ? Center(child: Text('No data'))
                               : Expanded(
                                   child: ValueListenableBuilder(
@@ -305,7 +305,7 @@ class MrsListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredMrsList = <MrsListModel?>[];
-    filteredMrsList = controller.mrsList!.where((Mrs) {
+    filteredMrsList = controller.mrsList.where((Mrs) {
       return (Mrs?.id ?? '')
               .toString()
               .toLowerCase()
@@ -383,16 +383,14 @@ class MrsListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color: controller.mrsList!
-                                        .firstWhere(
+                            color: controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
                                         ?.status ==
                                     322
                                 ? ColorValues.rejectedStatusColor
-                                : controller.mrsList!
-                                            .firstWhere(
+                                : controller.mrsList.firstWhere(
                                               (e) => e?.id == MrsDetails!.id,
                                               orElse: () =>
                                                   MrsListModel(id: 00),
@@ -400,8 +398,7 @@ class MrsListDataSource extends DataTableSource {
                                             ?.status ==
                                         321
                                     ? ColorValues.submitColor
-                                    : controller.mrsList!
-                                                .firstWhere(
+                                    : controller.mrsList.firstWhere(
                                                   (e) =>
                                                       e?.id == MrsDetails!.id,
                                                   orElse: () =>
@@ -410,8 +407,7 @@ class MrsListDataSource extends DataTableSource {
                                                 ?.status ==
                                             323
                                         ? ColorValues.appLightBlueColor
-                                        : controller.mrsList!
-                                                    .firstWhere(
+                                        : controller.mrsList.firstWhere(
                                                       (e) =>
                                                           e?.id ==
                                                           MrsDetails!.id,
@@ -421,8 +417,7 @@ class MrsListDataSource extends DataTableSource {
                                                     ?.status ==
                                                 324
                                             ? ColorValues.issueStatusColor
-                                            : controller.mrsList!
-                                                        .firstWhere(
+                                            : controller.mrsList.firstWhere(
                                                           (e) =>
                                                               e?.id ==
                                                               MrsDetails!.id,
@@ -433,8 +428,7 @@ class MrsListDataSource extends DataTableSource {
                                                         ?.status ==
                                                     326
                                                 ? ColorValues.appYellowColor
-                                                : controller.mrsList!
-                                                            .firstWhere(
+                                                : controller.mrsList.firstWhere(
                                                               (e) =>
                                                                   e?.id ==
                                                                   MrsDetails!
@@ -494,8 +488,7 @@ class MrsListDataSource extends DataTableSource {
                                 arguments: {'mrsId': mrsId});
                           },
                         ),
-                        controller.mrsList!
-                                        .firstWhere(
+                        controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -528,8 +521,7 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList!
-                                        .firstWhere(
+                        controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -562,8 +554,7 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList!
-                                        .firstWhere(
+                        controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -596,8 +587,7 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList!
-                                        .firstWhere(
+                        controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -630,8 +620,7 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList!
-                                        .firstWhere(
+                        controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )

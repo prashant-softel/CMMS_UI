@@ -237,7 +237,7 @@ class ViewIncidentReportController extends GetxController {
         });
       });
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportDetail(id: irId.value!);
+        getIncidentReportDetail(id: irId.value);
       });
 
       Future.delayed(Duration(seconds: 1), () {

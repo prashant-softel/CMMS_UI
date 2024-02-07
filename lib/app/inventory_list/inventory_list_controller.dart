@@ -100,7 +100,7 @@ class InventoryListController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      inventoryList!.value = filteredData.value;
+      inventoryList.value = filteredData.value;
       return;
     }
     List<InventoryModel?> filteredList = filteredData
@@ -137,7 +137,7 @@ class InventoryListController extends GetxController {
                     false) // Add this condition to filter by searchId
             )
         .toList();
-    inventoryList!.value = filteredList;
+    inventoryList.value = filteredList;
   }
 
   Future<void> getInventoryAssetsList(int facilityId, bool isLoading) async {

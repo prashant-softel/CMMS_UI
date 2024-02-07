@@ -27,7 +27,6 @@ import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/import_file_msg_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
-import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/ir_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';

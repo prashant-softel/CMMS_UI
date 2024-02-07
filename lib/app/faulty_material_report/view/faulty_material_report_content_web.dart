@@ -217,7 +217,7 @@ class _FaultyMaterialReportContentWebState
                                 ),
                               ],
                             ),
-                            controller.faultyMaterialReportList?.isEmpty == true
+                            controller.faultyMaterialReportList.isEmpty == true
                                 ? Center(child: Text('No data'))
                                 : Expanded(
                                     child: ValueListenableBuilder(
@@ -388,7 +388,7 @@ class FaultyStockReportListDataSource extends DataTableSource {
   void filterMrss() {
     filteredFaultyStockList = <FaultyMaterialReportModel?>[];
     filteredFaultyStockList =
-        controller.faultyMaterialReportList!.where((faulty) {
+        controller.faultyMaterialReportList.where((faulty) {
       return (faulty?.asset_name ?? '')
               .toString()
               .toLowerCase()

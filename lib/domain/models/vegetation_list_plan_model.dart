@@ -12,11 +12,11 @@ class VegetationPlanListModel {
   int? planId;
   int? facilityId;
   String? title;
-  dynamic? description;
+  dynamic description;
   int? frequencyId;
   String? frequency;
   int? assignedToId;
-  dynamic? assignedTo;
+  dynamic assignedTo;
   String? startDate;
   int? noOfCleaningDays;
   int? createdById;
@@ -28,8 +28,8 @@ class VegetationPlanListModel {
   String? deletedBy;
   int? status;
   String? statusShort;
-  dynamic? statusLong;
-  dynamic? schedules;
+  dynamic statusLong;
+  dynamic schedules;
 
   VegetationPlanListModel(
       {this.id,

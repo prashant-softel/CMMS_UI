@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -16,6 +17,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(
@@ -39,14 +41,14 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                   color: ColorValues.greyLightColor,
                 ),
                 InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Get.offNamed(Routes.stockManagementDashboardScreen);

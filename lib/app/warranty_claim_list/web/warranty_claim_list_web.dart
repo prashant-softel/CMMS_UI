@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -39,6 +40,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(
@@ -63,20 +65,20 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                             color: ColorValues.greyLightColor,
                           ),
                           InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
                           InkWell(
                             onTap: () {
                               Get.offNamed(Routes.masterDashboard);
                             },
-                            child: Text(" / MASTERS",
-                                style: Styles.greyLight14),
+                            child:
+                                Text(" / MASTERS", style: Styles.greyLight14),
                           ),
                           Text(" / Warranty Claim List",
                               style: Styles.greyLight14)
