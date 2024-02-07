@@ -32,17 +32,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeaderWidget(),
               automaticallyImplyLeading: false,
               elevation: 0,
               toolbarHeight: 60,
             )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+          : null,
       body: Container(
         // width: MediaQuery.of(context).size.width  ,
         // width: 1500,
@@ -1527,6 +1524,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                     } else if (Responsive.isDesktop(context)) {
                                       return Column(
                                         children: [
+                                          HeaderWidget(),
                                           Container(
                                             height: 45,
                                             decoration: BoxDecoration(
@@ -1569,19 +1567,19 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   },
                                                   child: Text(
                                                       " / BREAKDOWN MAINTENANCE",
-                                                      style: Styles
-                                                          .greyLight14),
+                                                      style:
+                                                          Styles.greyLight14),
                                                 ),
                                                 controller.newPermitDetailsModel
                                                             .value?.permitNo ==
                                                         null
                                                     ? Text(" / ADD NEW PERMIT",
-                                                        style: Styles
-                                                            .greyLight14)
+                                                        style:
+                                                            Styles.greyLight14)
                                                     : Text(
                                                         " / Update NEW PERMIT",
-                                                        style: Styles
-                                                            .greyLight14),
+                                                        style:
+                                                            Styles.greyLight14),
                                                 Spacer(),
                                                 controller.newPermitDetailsModel
                                                             .value?.permitNo !=

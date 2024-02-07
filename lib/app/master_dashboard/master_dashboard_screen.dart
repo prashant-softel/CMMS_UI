@@ -26,17 +26,14 @@ class MastersDashboard extends GetView<MastersController> {
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
               title: HeaderWidget(),
               elevation: 0,
               toolbarHeight: 60,
               automaticallyImplyLeading: false,
             )
-          : AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-            ),
+          : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
@@ -95,17 +92,17 @@ class MastersDashboard extends GetView<MastersController> {
                           ),
                         ),
                       ),
-                    if (Responsive.isDesktop(context))
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Masters",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
-                        ),
+                    if (Responsive.isDesktop(context)) HeaderWidget(),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Masters",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
                       ),
+                    ),
                     SizedBox(
                       height: 15,
                     ),
@@ -507,30 +504,30 @@ class MastersDashboard extends GetView<MastersController> {
                                 : 5,
                             children: <Widget>[
                               OnHover(builder: (((isHovered) {
-                                return 
-                                // varUserAccessModel.value.access_list!
-                                //             .where((e) =>
-                                //                 e.feature_id == 40 &&
-                                //                 e.view == 1)
-                                //             .length >
-                                //         0
-                                //     ? 
+                                return
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 40 &&
+                                    //                 e.view == 1)
+                                    //             .length >
+                                    //         0
+                                    //     ?
                                     createContentTile(
                                         title: "User List",
                                         onTap: () {
                                           controller.goToUserList();
                                         });
-                                    // : Dimens.box0;
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
-                                return 
-                                // varUserAccessModel.value.access_list!
-                                //             .where((e) =>
-                                //                 e.feature_id == 40 &&
-                                //                 e.add == 1)
-                                //             .length >
-                                //         0
-                                //     ? 
+                                return
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id == 40 &&
+                                    //                 e.add == 1)
+                                    //             .length >
+                                    //         0
+                                    //     ?
                                     createContentTile(
                                         title: "Add User",
                                         onTap: () {
@@ -538,7 +535,7 @@ class MastersDashboard extends GetView<MastersController> {
 
                                           controller.goToAddUser();
                                         });
-                                    // : Dimens.box0;
+                                // : Dimens.box0;
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
