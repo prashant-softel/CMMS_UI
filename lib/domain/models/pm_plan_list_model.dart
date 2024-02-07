@@ -30,7 +30,7 @@ class PmPlanListModel {
   int? rejected_by_id;
   String? rejected_by_name;
   String? rejected_at;
-
+  String? next_schedule_date;
   PmPlanListModel(
       {this.category_id,
       this.category_name,
@@ -56,36 +56,37 @@ class PmPlanListModel {
       this.assign_to_name,
       this.rejected_at,
       this.rejected_by_id,
-      this.rejected_by_name});
+      this.rejected_by_name,
+      this.next_schedule_date});
 
   factory PmPlanListModel.fromJson(Map<String, dynamic> parsedJson) {
     return PmPlanListModel(
-      category_id: parsedJson['category_id'],
-      category_name: parsedJson['category_name'],
-      created_at: parsedJson['created_at'],
-      created_by_id: parsedJson['created_by_id'],
-      created_by_name: parsedJson['created_by_name'],
-      facility_id: parsedJson['facility_id'],
-      facility_name: parsedJson['facility_name'],
-      plan_date: parsedJson['plan_date'],
-      plan_freq_id: parsedJson['plan_freq_id'],
-      plan_freq_name: parsedJson['plan_freq_name'],
-      plan_id: parsedJson['plan_id'],
-      plan_name: parsedJson['plan_name'],
-      status_id: parsedJson['status_id'],
-      status_name: parsedJson['status_short'],
-      updated_at: parsedJson['updated_at'],
-      updated_by_id: parsedJson['updated_by_id'],
-      updated_by_name: parsedJson['updated_by_name'],
-      approved_at: parsedJson['approved_at'],
-      approved_by_id: parsedJson['approved_by_id'],
-      approved_by_name: parsedJson['approved_by_name'],
-      assign_to_id: parsedJson['assign_to_id'],
-      assign_to_name: parsedJson['assign_to_name'],
-      rejected_at: parsedJson['rejected_at'],
-      rejected_by_id: parsedJson['rejected_by_id'],
-      rejected_by_name: parsedJson['rejected_by_name'],
-    );
+        category_id: parsedJson['category_id'],
+        category_name: parsedJson['category_name'],
+        created_at: parsedJson['created_at'],
+        created_by_id: parsedJson['created_by_id'],
+        created_by_name: parsedJson['created_by_name'],
+        facility_id: parsedJson['facility_id'],
+        facility_name: parsedJson['facility_name'],
+        plan_date: parsedJson['plan_date'],
+        plan_freq_id: parsedJson['plan_freq_id'],
+        plan_freq_name: parsedJson['plan_freq_name'],
+        plan_id: parsedJson['plan_id'],
+        plan_name: parsedJson['plan_name'],
+        status_id: parsedJson['status_id'],
+        status_name: parsedJson['status_short'],
+        updated_at: parsedJson['updated_at'],
+        updated_by_id: parsedJson['updated_by_id'],
+        updated_by_name: parsedJson['updated_by_name'],
+        approved_at: parsedJson['approved_at'],
+        approved_by_id: parsedJson['approved_by_id'],
+        approved_by_name: parsedJson['approved_by_name'],
+        assign_to_id: parsedJson['assign_to_id'],
+        assign_to_name: parsedJson['assign_to_name'],
+        rejected_at: parsedJson['rejected_at'],
+        rejected_by_id: parsedJson['rejected_by_id'],
+        rejected_by_name: parsedJson['rejected_by_name'],
+        next_schedule_date: parsedJson['next_schedule_date']);
   }
   Map<String, dynamic> toJson() => {
         "category_id": category_id,
@@ -113,5 +114,6 @@ class PmPlanListModel {
         "updated_at": updated_at,
         "updated_by_id": updated_by_id,
         "updated_by_name": updated_by_name,
+        "next_schedule_date": next_schedule_date
       };
 }

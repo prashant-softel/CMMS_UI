@@ -412,7 +412,7 @@ class PmPlanDataSource extends DataTableSource {
       'pmPlanId', // '${pmPlanDetails?.plan_id ?? ''}',
       '${pmPlanDetails?.plan_name ?? ''}',
       '${pmPlanDetails?.plan_date ?? ''}',
-      '${pmPlanDetails?.updated_at ?? ''}',
+      '${pmPlanDetails?.next_schedule_date ?? ''}',
       '${pmPlanDetails?.plan_freq_name ?? ''}',
       '${pmPlanDetails?.created_by_name ?? ''}',
       'Actions',

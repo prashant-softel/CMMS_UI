@@ -26,14 +26,12 @@ class PreventiveCheckPointPresenter {
     return true;
   }
 
-  getCheckPointlist({
-    int? selectedchecklistId,
-    bool? isLoading,
-  }) async =>
+  getCheckPointlist(
+          {int? selectedchecklistId, bool? isLoading, int? facilityId}) async =>
       await preventiveCheckPointUsecase.getCheckPointlist(
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          selectedchecklistId: selectedchecklistId ?? 0,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
   deleteCkeckpoint(String? check_point_id, {required bool isLoading}) async =>
       await preventiveCheckPointUsecase.deleteCkeckpoint(

@@ -4959,17 +4959,15 @@ class Repository {
   }
 
   Future<List<CheckPointModel?>?> getCheckPointlist(
-    int? selectedchecklistId,
-    bool? isLoading,
-  ) async {
+      int? selectedchecklistId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
       final res = await _dataRepository.getCheckPointlist(
-        auth: auth,
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          selectedchecklistId: selectedchecklistId ?? 0,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);

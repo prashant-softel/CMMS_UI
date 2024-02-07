@@ -2015,13 +2015,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getCheckPointlist({
-    required String auth,
-    bool? isLoading,
-    int? selectedchecklistId,
-  }) async {
+  Future<ResponseModel> getCheckPointlist(
+      {required String auth,
+      bool? isLoading,
+      int? selectedchecklistId,
+      int? facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId',
+      'CheckList/GetCheckPointList?checklist_id=$selectedchecklistId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,

@@ -26,7 +26,7 @@ class PreventiveCheckPointController extends GetxController {
   ScrollController reqScroll = ScrollController();
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
-  Rx<String> selectedchecklist = ''.obs;
+  Rx<String> selectedchecklist = 'Please Select'.obs;
   Rx<bool> isSelectedchecklist = true.obs;
   int facilityId = 0;
   Rx<int> type = 0.obs;
@@ -110,19 +110,21 @@ class PreventiveCheckPointController extends GetxController {
           facilityId = event;
           Future.delayed(Duration(seconds: 2), () {
             getPreventiveCheckList(facilityId, type.value);
+            getCheckPointlist(
+                selectedchecklistId: 0.toString(), facilityId: facilityId);
           });
         });
       }
       chckFocus.addListener(() {
-      if (!chckFocus.hasFocus) {
-        chckScroll.jumpTo(0.0);
-      }
-    });
+        if (!chckFocus.hasFocus) {
+          chckScroll.jumpTo(0.0);
+        }
+      });
       reqFocus.addListener(() {
-      if (!reqFocus.hasFocus) {
-        reqScroll.jumpTo(0.0);
-      }
-    });
+        if (!reqFocus.hasFocus) {
+          reqScroll.jumpTo(0.0);
+        }
+      });
 
       super.onInit();
     } catch (e) {
@@ -211,19 +213,23 @@ class PreventiveCheckPointController extends GetxController {
     facilityId,
     type,
   ) async {
+    checkList.value = <PreventiveCheckListModel>[];
+    cleardata();
+
     final list = await preventiveCheckPointPresenter.getPreventiveCheckList(
         facilityId: facilityId, type: type, isLoading: true);
 
     if (list != null) {
-      checkList.clear();
+      // checkList.clear();
 
       for (var _checkList in list) {
         checkList.add(_checkList);
       }
     }
-    selectedchecklist.value = checkList[0]?.name.toString() ?? '';
-    selectedchecklistId.value = checkList[0]?.id.toString() ?? "";
-    getCheckPointlist(selectedchecklistId: selectedchecklistId.value);
+    // selectedchecklist.value = checkList[0]?.name.toString() ?? '';
+    // selectedchecklistId.value = checkList[0]?.id.toString() ?? "";
+    // getCheckPointlist(
+    //     selectedchecklistId: selectedchecklistId.value, facilityId: facilityId);
   }
 
   Future<bool> createCheckpoint() async {
@@ -277,13 +283,18 @@ class PreventiveCheckPointController extends GetxController {
     return false;
   }
 
-  Future<void> getCheckPointlist({required String selectedchecklistId}) async {
+  Future<void> getCheckPointlist(
+      {required String selectedchecklistId, required int facilityId}) async {
     preventiveCheckpoint?.value = <CheckPointModel>[];
     BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
 
     final _preventiveCheckpoint =
         await preventiveCheckPointPresenter.getCheckPointlist(
-            selectedchecklistId: int.tryParse(selectedchecklistId));
+            selectedchecklistId: int.tryParse(
+              selectedchecklistId,
+            ),
+            isLoading: true,
+            facilityId: facilityId);
 
     if (_preventiveCheckpoint != null) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
@@ -314,6 +325,8 @@ class PreventiveCheckPointController extends GetxController {
     maxRangeCtrlr.text = '';
     minRangeCtrlr.text = '';
     checkpointType.value = '';
+    selectedchecklist.value = 'Please Select';
+    isSelectedchecklist.value = true;
   }
 
   void issuccessCreatecheckpont() {
@@ -327,7 +340,8 @@ class PreventiveCheckPointController extends GetxController {
     minRangeCtrlr.text = '';
     checkpointType.value = '';
     Future.delayed(Duration(seconds: 1), () {
-      getCheckPointlist(selectedchecklistId: selectedchecklistId.value);
+      getCheckPointlist(
+          selectedchecklistId: 0.toString(), facilityId: facilityId);
     });
     Future.delayed(Duration(seconds: 4), () {
       isSuccess.value = false;
@@ -377,7 +391,8 @@ class PreventiveCheckPointController extends GetxController {
                     deleteCkeckpoint(check_point_id).then((value) {
                       Get.back();
                       getCheckPointlist(
-                          selectedchecklistId: selectedchecklistId.value);
+                          selectedchecklistId: 0.toString(),
+                          facilityId: facilityId);
                     });
                   },
                   text: 'Yes'),
@@ -396,7 +411,9 @@ class PreventiveCheckPointController extends GetxController {
           selectedchecklistId.value =
               checkList[checklistIndex]?.id.toString() ?? "";
           cleardata();
-          getCheckPointlist(selectedchecklistId: selectedchecklistId.value);
+          getCheckPointlist(
+              selectedchecklistId: selectedchecklistId.value,
+              facilityId: facilityId);
         }
 
         break;
