@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -31,6 +32,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
       height: Get.height,
       child: Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(

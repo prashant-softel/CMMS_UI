@@ -22,12 +22,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
 
     return Scaffold(
       appBar: Responsive.isDesktop(context)
-          ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
+          ? null
           : AppBar(
               title: HeaderWidget(),
               elevation: 0,
@@ -62,7 +57,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                           ),
                         ),
                       ),
-                    if (Responsive.isDesktop(context))
+                    if (Responsive.isDesktop(context))   HeaderWidget(),
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Row(
