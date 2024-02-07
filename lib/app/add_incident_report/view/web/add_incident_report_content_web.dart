@@ -32,12 +32,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: HeaderWidget(),
-          elevation: 0,
-          toolbarHeight: 60,
-          automaticallyImplyLeading: false,
-        ),
+        // appBar: AppBar(
+        //   title: HeaderWidget(),
+        //   elevation: 0,
+        //   toolbarHeight: 60,
+        //   automaticallyImplyLeading: false,
+        // ),
         body: Row(
           children: [
             Responsive.isMobile(context) || Responsive.isTablet(context)
@@ -67,6 +67,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                   return Obx(
                                     () => Column(
                                       children: [
+                                        HeaderWidget(),
                                         Container(
                                           height: 55,
                                           decoration: BoxDecoration(
