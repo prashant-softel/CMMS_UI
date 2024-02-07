@@ -1,7 +1,5 @@
 import 'package:cmms/app/add_training_course/add_course_controller.dart';
-import 'package:cmms/app/add_training_course/view/add_course_mobile.dart';
 import 'package:cmms/app/add_training_course/view/add_course_web.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';

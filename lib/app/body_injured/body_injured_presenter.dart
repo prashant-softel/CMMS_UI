@@ -1,5 +1,3 @@
-import 'package:cmms/domain/usecases/risk_type_usecases.dart';
-import 'package:cmms/domain/models/risk_type_list_model.dart';
 
 import '../../domain/models/body_injured_model.dart';
 import '../../domain/usecases/body_injured_usecase.dart';

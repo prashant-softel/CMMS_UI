@@ -3,15 +3,11 @@ import 'package:cmms/app/create_grievance/create_grievance_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/add_job/add_job_controller.dart';
 
 class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
   CreateGrievancesWeb({Key? key}) : super(key: key);

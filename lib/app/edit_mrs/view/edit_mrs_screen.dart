@@ -4,7 +4,6 @@ import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../utils/responsive.dart';
 
 class EditMrsScreen extends GetView<EditMrsController> {

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../domain/models/file_upload_model.dart';
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
-import '../theme/dimens.dart';
 
 class FileUploadDetailsWidgetWeb extends StatelessWidget {
   FileUploadDetailsWidgetWeb({super.key});

@@ -1,12 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/risk_type/risk_type_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../body_injured_controller.dart';
@@ -620,7 +618,7 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                                 (element) =>
                                                     "${element.id}" ==
                                                     controller
-                                                        .bodyinjuredList?[index]
+                                                        .bodyinjuredList[index]
                                                         .id
                                                         .toString(),
                                               );
@@ -645,12 +643,12 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             onPress: () {
                                               controller.isDeleteDialog(
                                                   business_id: controller
-                                                      .bodyinjuredList?[index]
-                                                      ?.id
+                                                      .bodyinjuredList[index]
+                                                      .id
                                                       .toString(),
                                                   business: controller
-                                                      .bodyinjuredList?[index]
-                                                      ?.name);
+                                                      .bodyinjuredList[index]
+                                                      .name);
                                             },
                                           ),
                                         ],

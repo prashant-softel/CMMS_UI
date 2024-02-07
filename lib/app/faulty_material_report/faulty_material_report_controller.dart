@@ -96,7 +96,7 @@ class FaultyMaterialReportController extends GetxController {
 
   Future<void> getFaultyMaterialReportList(int facilityId, dynamic startDate,
       dynamic endDate, bool isLoading) async {
-    faultyMaterialReportList?.value = <FaultyMaterialReportModel>[];
+    faultyMaterialReportList.value = <FaultyMaterialReportModel>[];
     final _preventiveCheckList =
         await faultyMaterialReportPresenter.getFaultyMaterialReportList(
             facilityId: facilityId,
@@ -105,16 +105,15 @@ class FaultyMaterialReportController extends GetxController {
             endDate: endDate);
 
     if (_preventiveCheckList != null) {
-      faultyMaterialReportList!.value = _preventiveCheckList;
+      faultyMaterialReportList.value = _preventiveCheckList;
       filteredData.value = _preventiveCheckList;
       paginationController = PaginationController(
-        rowCount: faultyMaterialReportList?.length ?? 0,
+        rowCount: faultyMaterialReportList.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (faultyMaterialReportList != null &&
-          faultyMaterialReportList!.isNotEmpty) {
-        faultyMaterialReportModel = faultyMaterialReportList![0];
+      if (faultyMaterialReportList.isNotEmpty) {
+        faultyMaterialReportModel = faultyMaterialReportList[0];
         var preventiveCheckListJson = faultyMaterialReportModel?.toJson();
         faultyMaterialReportTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {

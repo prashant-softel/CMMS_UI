@@ -301,7 +301,7 @@ class EmployeeStockReportContentWeb
                                     ],
                                   ),
                                   Dimens.boxHeight5,
-                                  controller.StockDetailsList?.isEmpty == true
+                                  controller.StockDetailsList.isEmpty == true
                                       ? Center(child: Text('No data'))
                                       : Expanded(
                                           child: ValueListenableBuilder(
@@ -480,7 +480,7 @@ class PlantListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredPlantList = <StockDetails?>[];
-    filteredPlantList = controller.StockDetailsList!.where((Plant) {
+    filteredPlantList = controller.StockDetailsList.where((Plant) {
       return (Plant?.asset_name ?? '')
               .toString()
               .toLowerCase()

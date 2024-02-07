@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
@@ -32,6 +33,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
           body: Obx(
             () => Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -56,14 +58,14 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                         color: ColorValues.greyLightColor,
                       ),
                       InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
                           Get.offNamed(Routes.preventive);

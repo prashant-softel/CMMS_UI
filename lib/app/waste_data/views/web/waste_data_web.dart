@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
 import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
@@ -310,6 +311,7 @@ class _WasteDataWebState extends State<WasteDataWeb> {
         return SingleChildScrollView(
           child: Column(
             children: [
+              HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -334,14 +336,14 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                       color: ColorValues.greyLightColor,
                     ),
                     InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                      onTap: () {
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
                     InkWell(
                       onTap: () {
                         Get.offNamed(Routes.misDashboard);

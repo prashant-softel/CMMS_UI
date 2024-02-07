@@ -1,10 +1,10 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -22,6 +22,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
@@ -57,7 +58,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
+                    child: Text(" / BREAKDOWN MAINTENANCE",
+                        style: Styles.greyLight14),
                   ),
                   Text(" / JOB TYPE", style: Styles.greyLight14)
                 ],
@@ -214,9 +216,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             child: Obx(
                                               () => TextField(
                                                 style: TextStyle(
-                                                      fontSize: 14.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
+                                                    fontSize: 14.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                                 controller:
                                                     controller.titleCtrlr,
                                                 focusNode:
@@ -348,9 +350,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                               child: Obx(
                                                 () => TextField(
                                                   style: TextStyle(
-                                                        fontSize: 14.0,
-                                                        height: 1.0,
-                                                        color: Colors.black),
+                                                      fontSize: 14.0,
+                                                      height: 1.0,
+                                                      color: Colors.black),
                                                   controller: controller
                                                       .descriptionCtrlr,
                                                   focusNode:

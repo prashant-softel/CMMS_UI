@@ -1,5 +1,3 @@
-import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
-import 'package:cmms/app/SPV_list/view/SPV_list_content_web.dart';
 import 'package:cmms/app/risk_type/risk_type_controller.dart';
 import 'package:cmms/app/risk_type/view/risk_type_web.dart';
 import 'package:flutter/material.dart';

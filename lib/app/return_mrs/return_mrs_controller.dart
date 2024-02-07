@@ -92,12 +92,12 @@ class ReturnMrsListController extends GetxController {
       mrsList.value = _mrsList;
       filteredData.value = _mrsList;
       paginationController = PaginationController(
-        rowCount: mrsList?.length ?? 0,
+        rowCount: mrsList.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (mrsList != null && mrsList!.isNotEmpty) {
-        returnMrsListModel = mrsList![0];
+      if (mrsList.isNotEmpty) {
+        returnMrsListModel = mrsList[0];
         var mrsListJson = returnMrsListModel?.toJson();
         mrsTableColumns.value = <String>[];
         for (var key in mrsListJson?.keys.toList() ?? []) {

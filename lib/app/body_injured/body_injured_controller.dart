@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/risk_type/risk_type_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

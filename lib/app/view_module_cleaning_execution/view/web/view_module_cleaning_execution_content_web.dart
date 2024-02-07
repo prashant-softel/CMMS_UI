@@ -2,6 +2,7 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
@@ -38,8 +39,9 @@ class ViewModuleCleaningExecutionContentWeb
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  HeaderWidget(),
                   Container(
-                    height: 55,
+                    height: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(0),
                       border: Border.all(

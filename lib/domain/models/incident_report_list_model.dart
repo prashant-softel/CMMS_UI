@@ -40,8 +40,8 @@ class IncidentReportListModel {
   String? description;
   String? equipment_name;
   String? facility_name;
-  dynamic? type_of_job;
-  dynamic? location_of_incident;
+  dynamic type_of_job;
+  dynamic location_of_incident;
   String? incident_datetime;
   String? block_name;
   String? severity;

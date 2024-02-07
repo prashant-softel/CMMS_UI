@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
@@ -246,6 +247,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         return SingleChildScrollView(
           child: Column(
             children: [
+              HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(

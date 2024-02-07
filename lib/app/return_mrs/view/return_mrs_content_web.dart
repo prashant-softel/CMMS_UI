@@ -206,7 +206,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                 ),
                               ],
                             ),
-                            controller.mrsList?.isEmpty == true
+                            controller.mrsList.isEmpty == true
                                 ? Center(child: Text('No data'))
                                 : Expanded(
                                     child: ValueListenableBuilder(
@@ -814,7 +814,7 @@ class ReturnMrsListDataSource extends DataTableSource {
   ///
   void filterMrss() {
     filteredMrsList = <ReturnMrsListModel?>[];
-    filteredMrsList = controller.mrsList!.where((Mrs) {
+    filteredMrsList = controller.mrsList.where((Mrs) {
       return (Mrs?.id ?? '')
               .toString()
               .toLowerCase()
@@ -892,8 +892,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color: controller.mrsList!
-                                        .firstWhere(
+                            color: controller.mrsList.firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>
                                               ReturnMrsListModel(id: 00),
@@ -901,8 +900,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                         ?.status ==
                                     322
                                 ? ColorValues.rejectedStatusColor
-                                : controller.mrsList!
-                                            .firstWhere(
+                                : controller.mrsList.firstWhere(
                                               (e) => e?.id == MrsDetails!.id,
                                               orElse: () =>
                                                   ReturnMrsListModel(id: 00),
@@ -910,8 +908,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                             ?.status ==
                                         321
                                     ? ColorValues.submitColor
-                                    : controller.mrsList!
-                                                .firstWhere(
+                                    : controller.mrsList.firstWhere(
                                                   (e) =>
                                                       e?.id == MrsDetails!.id,
                                                   orElse: () =>
@@ -921,8 +918,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                 ?.status ==
                                             323
                                         ? ColorValues.appLightBlueColor
-                                        : controller.mrsList!
-                                                    .firstWhere(
+                                        : controller.mrsList.firstWhere(
                                                       (e) =>
                                                           e?.id ==
                                                           MrsDetails!.id,
@@ -933,8 +929,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                     ?.status ==
                                                 324
                                             ? ColorValues.issueStatusColor
-                                            : controller.mrsList!
-                                                        .firstWhere(
+                                            : controller.mrsList.firstWhere(
                                                           (e) =>
                                                               e?.id ==
                                                               MrsDetails!.id,
@@ -945,8 +940,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                         ?.status ==
                                                     326
                                                 ? ColorValues.appYellowColor
-                                                : controller.mrsList!
-                                                            .firstWhere(
+                                                : controller.mrsList.firstWhere(
                                                               (e) =>
                                                                   e?.id ==
                                                                   MrsDetails!

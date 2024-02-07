@@ -5,29 +5,25 @@ import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/widgets/header_widget.dart';
 import '../../utils/responsive.dart';
 
 class ViewPmPlanScreen extends GetView<ViewPmPlanController> {
   ViewPmPlanScreen({super.key});
-  final ViewPmPlanController controller = Get.find();
+  final controller = Get.find<ViewPmPlanController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Preventive Check Point'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,12 +35,12 @@ class ViewPmPlanScreen extends GetView<ViewPmPlanController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: ViewPmPlanWebMobile(),
-                    //   ),
-
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: ViewPmPlanWeb(),

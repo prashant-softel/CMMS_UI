@@ -52,7 +52,6 @@ import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
-import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';

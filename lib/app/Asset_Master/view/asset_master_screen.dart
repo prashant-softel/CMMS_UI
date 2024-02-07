@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../asset_master_Controller.dart';
-import 'asset_master_mobile.dart';
 import 'asset_master_web.dart';
 
 class AssetMasterScreen extends GetView<AssetMasterController> {

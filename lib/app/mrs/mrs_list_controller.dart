@@ -149,7 +149,7 @@ class MrsListController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (mrsList != null && mrsList.isNotEmpty) {
+      if (mrsList.isNotEmpty) {
         //  filteredData.value = mrsList!.value;
         mrsListModel = mrsList[0];
         var mrsListJson = mrsListModel?.toJson();

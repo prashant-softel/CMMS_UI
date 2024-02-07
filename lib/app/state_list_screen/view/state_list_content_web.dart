@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -20,6 +21,7 @@ class StateListContentWeb extends GetView<StateListController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(
@@ -56,11 +58,10 @@ class StateListContentWeb extends GetView<StateListController> {
                 onTap: () {
                   Get.offNamed(Routes.masterDashboard);
                 },
-                child: Text(" / Masters".toUpperCase(),
-                    style: Styles.greyLight14),
+                child:
+                    Text(" / Masters".toUpperCase(), style: Styles.greyLight14),
               ),
-              Text(" / State list".toUpperCase(),
-                  style: Styles.greyLight14)
+              Text(" / State list".toUpperCase(), style: Styles.greyLight14)
             ],
           ),
         ),
