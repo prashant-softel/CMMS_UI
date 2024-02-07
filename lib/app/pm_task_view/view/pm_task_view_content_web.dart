@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -31,6 +32,7 @@ class PreventiveMaintenanceTaskViewContentWeb
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(

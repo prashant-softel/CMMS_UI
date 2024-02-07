@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mrs/Mrs_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -30,6 +31,7 @@ class MrsListContentWeb extends StatelessWidget {
           return Obx(() {
             final dataSource = MrsListDataSource(controller);
             return Column(children: [
+              HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(

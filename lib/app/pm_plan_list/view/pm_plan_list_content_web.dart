@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -33,6 +34,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
 
             return Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

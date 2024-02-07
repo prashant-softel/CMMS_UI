@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -27,6 +28,7 @@ class PreventiveChecklistListContentWeb
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(

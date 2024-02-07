@@ -4,6 +4,7 @@ import 'package:cmms/app/utils/app_constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../home/widgets/header_widget.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../import_inventory_controller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,6 +24,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
               height: 45,
               decoration: BoxDecoration(

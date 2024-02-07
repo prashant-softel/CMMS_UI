@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -39,6 +40,7 @@ class _ModuleCleaningListExecutionState
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(

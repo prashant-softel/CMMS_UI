@@ -17,6 +17,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../../../home/widgets/header_widget.dart';
+
 class IncidentReportListWeb extends StatefulWidget {
   IncidentReportListWeb({
     Key? key,
@@ -38,6 +40,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    HeaderWidget(),
                     Container(
                       height: 45,
                       decoration: BoxDecoration(

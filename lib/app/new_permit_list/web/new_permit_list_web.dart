@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -39,6 +40,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
 
             return Stack(
               children: [
+                HeaderWidget(),
                 Column(
                   children: [
                     Container(

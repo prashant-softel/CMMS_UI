@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/job_card_list/job_card_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
@@ -32,6 +33,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
 
             return Column(
               children: [
+                HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(

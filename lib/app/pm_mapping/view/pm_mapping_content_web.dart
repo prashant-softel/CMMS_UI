@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_mapping/pm_mapping_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -16,6 +17,7 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
     return Container(
       color: Color.fromARGB(255, 234, 236, 238),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        HeaderWidget(),
         Container(
           height: 45,
           decoration: BoxDecoration(

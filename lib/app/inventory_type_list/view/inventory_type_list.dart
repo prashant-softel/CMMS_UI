@@ -11,23 +11,21 @@ import '../inventory_type_list_controller.dart';
 
 class InventoryTypeListScreen extends GetView<InventoryTypeListController> {
   InventoryTypeListScreen({super.key});
+  final controller = Get.find<InventoryTypeListController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('Inventory Type List'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -39,10 +37,11 @@ class InventoryTypeListScreen extends GetView<InventoryTypeListController> {
               Expanded(
                 child: Column(
                   children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
+                    if (Responsive.isMobile(context))
                       Expanded(
-                        child: InventoryTypeListContentMobile(),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
                       ),
                     if (Responsive.isDesktop(context))
                       Expanded(

@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -20,6 +21,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
     return Obx(
       () => Column(
         children: [
+          HeaderWidget(),
           Container(
             height: 45,
             decoration: BoxDecoration(

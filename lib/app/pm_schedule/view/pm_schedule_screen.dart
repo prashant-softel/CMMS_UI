@@ -9,26 +9,24 @@ import '../pm_schedule_controller.dart';
 
 class PmScheduleScreen extends GetView<PmScheduleController> {
   PmScheduleScreen({super.key});
+  final controller = Get.find<PmScheduleController>();
 
-  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Responsive.isDesktop(context)
+      appBar: Responsive.isMobile(context)
           ? AppBar(
-              title: HeaderWidget(),
-              elevation: 0,
-              toolbarHeight: 60,
-              automaticallyImplyLeading: false,
-            )
-          : AppBar(
-              title: Text('PM Schedule'),
               centerTitle: true,
               elevation: 0,
-            ),
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer()
+              : null,
       body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: Get.width,
+          height: Get.height,
           child: Row(
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))
@@ -37,6 +35,12 @@ class PmScheduleScreen extends GetView<PmScheduleController> {
               Expanded(
                 child: Column(
                   children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Text("Data Coming Soon......")),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: PmScheduleContentWeb(),

@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -75,6 +76,7 @@ class ObservationListWeb extends StatelessWidget {
         height: Get.height,
         child: Column(
           children: [
+            HeaderWidget(),
             Container(
               height: 45,
               decoration: BoxDecoration(
