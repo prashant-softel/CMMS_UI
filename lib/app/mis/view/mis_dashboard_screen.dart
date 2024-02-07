@@ -54,9 +54,6 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 40,
-                      ),
                       if (Responsive.isMobile(context) ||
                           Responsive.isTablet(context))
                         Obx(
@@ -100,6 +97,9 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             ),
                           ),
                         ),
+                      Responsive.isDesktop(context)
+                          ? HeaderWidget()
+                          : Dimens.box0,
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Row(
@@ -195,8 +195,6 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               }),
                         ],
                       ),
-
-                      if (Responsive.isDesktop(context)) HeaderWidget(),
 
                       /// GRID TILES
 
