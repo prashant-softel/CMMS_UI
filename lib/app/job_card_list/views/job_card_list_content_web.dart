@@ -73,8 +73,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                         child: Text(" / BREAKDOWN MAINTAINANCE",
                             style: Styles.greyLight14),
                       ),
-                      Text(" / JOB CARD LIST",
-                          style: Styles.greyLight14),
+                      Text(" / JOB CARD LIST", style: Styles.greyLight14),
                     ],
                   ),
                 ),
@@ -207,7 +206,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
 
                                           source:
                                               dataSource, // Custom DataSource class
-                                          headingRowHeight: Get.height * 0.12,
+                                          // headingRowHeight: Get.height * 0.12,
                                           minWidth: Get.width * 1.2,
                                           showCheckboxColumn: false,
                                           rowsPerPage:

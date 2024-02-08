@@ -266,12 +266,12 @@ class _PreventiveMaintenanceTaskContentWebState
 
                                             return PaginatedDataTable2(
                                               // fixedLeftColumns: 1,
-                                              dataRowHeight: Get.height * 0.10,
+                                              // dataRowHeight: Get.height * 0.10,
                                               columnSpacing: 10,
                                               source:
                                                   dataSource, // Custom DataSource class
-                                              headingRowHeight:
-                                                  Get.height * 0.12,
+                                              // headingRowHeight:
+                                              //     Get.height * 0.12,
                                               minWidth: 2000, //Get.width * 1.2,
                                               showCheckboxColumn: false,
                                               rowsPerPage:

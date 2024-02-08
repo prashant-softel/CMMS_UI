@@ -15,6 +15,8 @@ import 'package:cmms/app/add_training_course/view/add_course_screen.dart';
 
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
+import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_binding.dart';
+import 'package:cmms/app/add_vegetation_plan/view/add_vegetation_plan_screen.dart';
 import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
 import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
 import 'package:cmms/app/add_water_data_per_day/add_water_data_binding.dart';
@@ -556,6 +558,11 @@ class AppPages {
       name: _Paths.vegetationPlanListScreen,
       page: VegetationListPlanScreen.new,
       binding: VegetationPlanListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.addVegetationPlanScreen,
+      page: AddVegetationPlanScreen.new,
+      binding: AddVegetationPlanBinding(), 
     ),
 
     GetPage<dynamic>(

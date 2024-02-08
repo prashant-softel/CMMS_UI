@@ -76,6 +76,8 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/veg_plan_detail_model.dart';
+import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
@@ -1305,43 +1307,6 @@ class Repository {
       else {
         Utility.showDialog(
             res.errorCode.toString() + 'getModuleCleaningListPlan');
-        return [];
-      }
-    } catch (error) {
-      print(error.toString());
-      return [];
-    }
-  }
-  Future<List<VegetationPlanListModel>> getVegetationPlanList({
-    required int? facility_id,
-    required bool isLoading,
-  }) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-
-      log(auth);
-      final res = await _dataRepository.getVegetationPlanList(
-        facility_id: facility_id,
-        isLoading: isLoading,
-        auth: auth,
-      );
-      print('getVegetationPlanList: ${res.data}');
-
-      if (!res.hasError) {
-        final jsonVegetationPlanList = jsonDecode(res.data);
-        // print(res.data);
-        final List<VegetationPlanListModel> _getVegetationPlanList =
-            jsonVegetationPlanList
-                .map<VegetationPlanListModel>((m) =>
-                    VegetationPlanListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
-                .toList();
-
-        return _getVegetationPlanList.reversed.toList();
-      } //
-      else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'getVegetationPlanList');
         return [];
       }
     } catch (error) {
@@ -4994,17 +4959,15 @@ class Repository {
   }
 
   Future<List<CheckPointModel?>?> getCheckPointlist(
-    int? selectedchecklistId,
-    bool? isLoading,
-  ) async {
+      int? selectedchecklistId, bool? isLoading, int? facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       //print({"checkid", selectedchecklistId});
       final res = await _dataRepository.getCheckPointlist(
-        auth: auth,
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          selectedchecklistId: selectedchecklistId ?? 0,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
       //print({"checkpoint list", res.data});
       if (!res.hasError) {
         final jsonPreventiveCheckPointModels = jsonDecode(res.data);
@@ -6553,7 +6516,6 @@ class Repository {
             .toList();
 
         return _UserListModelList.reversed.toList();
-        ;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getUserList');
         return [];
@@ -9939,6 +9901,213 @@ class Repository {
       return [];
     }
   }
-  //end
+
+  Future<List<VegetationPlanListModel>> getVegetationPlanList({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVegetationPlanList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getVegetationPlanList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonVegetationPlanList = jsonDecode(res.data);
+        // print(res.data);
+        final List<VegetationPlanListModel> _getVegetationPlanList =
+            jsonVegetationPlanList
+                .map<VegetationPlanListModel>((m) =>
+                    VegetationPlanListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _getVegetationPlanList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getVegetationPlanList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> createVegetationPlan(
+    createVegetationPlans,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createVegetationPlan(
+        auth: auth,
+        createVegetationPlans: createVegetationPlans,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create MC  : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Paln Added Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.moduleCleaningListPlan,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createVC');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVegEquipmentModelList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('EquipmentModelList:${res.data}');
+
+      if (!res.hasError) {
+        var equipmentList = getVegetationEquipmentModelFromJson(res.data);
+        return equipmentList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<VegPlanDetailModel?> getVegPlanDetail({
+    bool? isLoading,
+    int? planId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getVegPlanDetail(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading ?? false,
+      );
+
+      // print({"MCPlandetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final VegPlanDetailModel _vegPlanDetailModel =
+              vegPlanDetailModelFromJson(res.data);
+
+          var responseMap = _vegPlanDetailModel;
+          print({"MCPlandetail", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'MCPlanDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> vegPlanApprovedButton(
+    vegApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.vegPlanApprovedButton(
+        auth: auth,
+        vegApproveJsonString: json.encode(vegApproveJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response vegetation Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'vegApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> vegPlanRejectButton(
+    vegRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.vegPlanRejectButton(
+        auth: auth,
+        vegRejectJsonString: json.encode(vegRejectJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response veg Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'vegRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
   //end
 }

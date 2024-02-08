@@ -41,13 +41,13 @@ class VegetationPlanListController extends GetxController {
     // "search": true,
   });
 
-  final Map<String, double> columnwidth = {
-    'Plan Id': 153,
-    'Plan Title': 320,
-    'No of Days': 220,
-    'Created By': 200,
-    'frequency': 250,
-  };
+  // final Map<String, double> columnwidth = {
+  //   'Plan Id': 153,
+  //   'Plan Title': 320,
+  //   'No of Days': 220,
+  //   'Created By': 200,
+  //   'frequency': 250,
+  // };
 
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {

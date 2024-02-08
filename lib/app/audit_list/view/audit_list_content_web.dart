@@ -302,9 +302,9 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                 dataRowHeight: 70,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
-                                                minWidth: Get.width * 1.2,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
+                                                minWidth: Get.width * 0.7,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
                                                     10, // Number of rows per page
@@ -322,13 +322,13 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                         entry.key,
                                                         controller.filterText[
                                                             entry.key]!,
-                                                        controller.columnwidth[
-                                                            entry.key],
+                                                        // controller.columnwidth[
+                                                        //     entry.key],
                                                       ),
                                                   buildDataColumn(
                                                     'Actions',
                                                     controller.planIdFilterText,
-                                                    150,
+                                                    // 150,
                                                   ),
                                                 ],
                                               );
@@ -397,13 +397,13 @@ DataColumn2 buildDataColumn(
 
   /// ColumnSize columnSize,
   RxString filterText,
-  double? fixedWidth,
+  // double? fixedWidth,
   //  {required Function(String) onSearchCallBack}
 ) {
   return //
       DataColumn2(
     // size: columnSize,
-    fixedWidth: fixedWidth,
+    // fixedWidth: fixedWidth,
 
     label: //
         Column(

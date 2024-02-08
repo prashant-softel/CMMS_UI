@@ -22,14 +22,10 @@ class PreventiveCheckPointUsecase {
   }) async =>
       await repository.createCheckpoint(
           isLoading: isLoading, checkpointJsonString: checkpointJsonString);
-  getCheckPointlist({
-    int? selectedchecklistId,
-    bool? isLoading,
-  }) async =>
+  getCheckPointlist(
+          {int? selectedchecklistId, bool? isLoading, int? facilityId}) async =>
       await repository.getCheckPointlist(
-        selectedchecklistId,
-        isLoading,
-      );
+          selectedchecklistId, isLoading, facilityId);
 
   deleteCkeckpoint(
           {required Object check_point_id, required bool isLoading}) async =>

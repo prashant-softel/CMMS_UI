@@ -612,17 +612,6 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
     );
   }
-  Future<ResponseModel> getVegetationPlanList({
-    int? facility_id,
-    required bool isLoading,
-    required String auth,
-  }) async {
-    return await connectHelper.getVegetationPlanList(
-      isLoading: isLoading,
-      auth: auth,
-      facility_id: facility_id,
-    );
-  }
 
   Future<ResponseModel> getNewPermitList({
     required String auth,
@@ -1218,16 +1207,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getCheckPointlist({
-    required String auth,
-    int? selectedchecklistId,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> getCheckPointlist(
+          {required String auth,
+          int? selectedchecklistId,
+          bool? isLoading,
+          int? facilityId}) async =>
       await connectHelper.getCheckPointlist(
-        auth: auth,
-        selectedchecklistId: selectedchecklistId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          selectedchecklistId: selectedchecklistId ?? 0,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId);
 
   Future<ResponseModel> getFacilityList({
     String? auth,
@@ -3991,5 +3980,73 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
     );
   }
+
+  Future<ResponseModel> getVegetationPlanList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getVegetationPlanList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  Future<ResponseModel> createVegetationPlan({
+    required String auth,
+    createVegetationPlans,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createVegetationPlan(
+        auth: auth,
+        createVegetationPlans: createVegetationPlans,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> getVegEquipmentModelList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getVegEquipmentModelList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<ResponseModel> getVegPlanDetail({
+    required String auth,
+    bool? isLoading,
+    int? planId,
+  }) async =>
+      await connectHelper.getVegPlanDetail(
+        auth: auth,
+        plan_id: planId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegPlanApprovedButton({
+    required String auth,
+    vegApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegPlanApprovedButton(
+        auth: auth,
+        vegApproveJsonString: vegApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> vegPlanRejectButton({
+    required String auth,
+    vegRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.vegPlanRejectButton(
+        auth: auth,
+        vegRejectJsonString: vegRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

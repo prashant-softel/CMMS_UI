@@ -309,11 +309,11 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
 
                                               return PaginatedDataTable2(
                                                 columnSpacing: 10,
-                                                dataRowHeight: 70,
+                                                dataRowHeight: 60,
                                                 source:
                                                     dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                // headingRowHeight:
+                                                //     Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
