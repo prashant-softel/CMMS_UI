@@ -177,6 +177,8 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.d
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
+import 'package:cmms/app/view_vegetation_plan/view/view_veg_plan_screen.dart';
+import 'package:cmms/app/view_vegetation_plan/view_veg_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
 import 'package:cmms/app/view_water_data/view/view_water_data_screen.dart';
@@ -563,6 +565,11 @@ class AppPages {
       name: _Paths.addVegetationPlanScreen,
       page: AddVegetationPlanScreen.new,
       binding: AddVegetationPlanBinding(), 
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewVegetationPlanScreen,
+      page: ViewVegPlanScreen.new,
+      binding: ViewVegPlanBinding(), 
     ),
 
     GetPage<dynamic>(
