@@ -82,10 +82,10 @@ class _StockManagementGoodsOrdersWebState
                                   Routes.stockManagementDashboardScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / GOODS ORDER LIST",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

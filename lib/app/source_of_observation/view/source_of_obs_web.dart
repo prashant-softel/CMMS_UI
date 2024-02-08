@@ -61,10 +61,10 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                     onTap: () {
                       Get.offNamed(Routes.misDashboard);
                     },
-                    child: Text(" / MIS", style: Styles.greyMediumLight12),
+                    child: Text(" / MIS", style: Styles.greyLight14),
                   ),
                   Text(" / SOURCE OBSERVATION LIST",
-                      style: Styles.greyMediumLight12),
+                      style: Styles.greyLight14),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

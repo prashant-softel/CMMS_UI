@@ -113,10 +113,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                         Routes.stockManagementDashboardScreen);
                                   },
                                   child: Text(" / STOCK MANAGEMENT",
-                                      style: Styles.greyMediumLight12),
+                                      style: Styles.greyLight14),
                                 ),
                                 Text(" / IMPORT MATERIAL ",
-                                    style: Styles.greyMediumLight12),
+                                    style: Styles.greyLight14),
                               ],
                             )
                           : controller.importType.value ==
@@ -141,10 +141,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                         Get.offAllNamed(Routes.preventive);
                                       },
                                       child: Text(" / PREVENTIVE MAINTENANCE",
-                                          style: Styles.greyMediumLight12),
+                                          style: Styles.greyLight14),
                                     ),
                                     Text(" / IMPORT PLAN",
-                                        style: Styles.greyMediumLight12),
+                                        style: Styles.greyLight14),
                                   ],
                                 )
                               : controller.importType.value ==
@@ -170,10 +170,10 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                           },
                                           child: Text(
                                               " / PREVENTIVE MAINTENANCE",
-                                              style: Styles.greyMediumLight12),
+                                              style: Styles.greyLight14),
                                         ),
                                         Text(" / IMPORT CHECKLIST",
-                                            style: Styles.greyMediumLight12),
+                                            style: Styles.greyLight14),
                                       ],
                                     )
                                   : controller.importType.value ==
@@ -379,14 +379,14 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                     controller
                                         .browseFiles(
                                       fileBytes: controller.fileBytes,
-                                    )
-                                        .then((value) {
-                                      controller.isSuccessDialog();
+                                    );
+                                    //     .then((value) {
+                                    //   controller.isSuccessDialog();
 
-                                      Fluttertoast.showToast(
-                                          msg: "file upload  Successfully",
-                                          fontSize: 16.0);
-                                    });
+                                    //   Fluttertoast.showToast(
+                                    //       msg: "file upload  Successfully",
+                                    //       fontSize: 16.0);
+                                    // });
                                   } else {
                                     Fluttertoast.showToast(
                                         msg: "Please Select file...",

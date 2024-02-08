@@ -1270,9 +1270,9 @@ class AppBarGoodsOrder extends StatelessWidget {
             onTap: () {
               Get.offNamed(Routes.stockManagementGoodsOrdersScreen);
             },
-            child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
+            child: Text(" / STOCK MANAGEMENT", style: Styles.greyLight14),
           ),
-          Text(" / ADD GOODS ORDER DETAILS", style: Styles.greyMediumLight12),
+          Text(" / ADD GOODS ORDER DETAILS", style: Styles.greyLight14),
         ],
       ),
     );
