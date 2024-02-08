@@ -481,6 +481,7 @@ class AddIncidentReportController extends GetxController {
 
   ///
   Rx<int> irId = 0.obs;
+
   @override
   void onInit() async {
     try {
