@@ -115,6 +115,7 @@ class MastersController extends GetxController {
       Routes.blockTypeListScreen,
     );
   }
+
   Future<void> goToBodyinjured() async {
     Get.toNamed(
       Routes.Bodyinjured,
@@ -220,6 +221,12 @@ class MastersController extends GetxController {
   Future<void> goToDesignationScreen() async {
     Get.toNamed(
       Routes.designationScreen,
+    );
+  }
+
+  Future<void> goToDsmChargesScreen() async {
+    Get.toNamed(
+      Routes.dsmCharges,
     );
   }
 
