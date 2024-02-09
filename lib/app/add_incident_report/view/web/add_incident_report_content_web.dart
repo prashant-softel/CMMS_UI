@@ -912,9 +912,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                               Dimens.boxHeight20,
 
-                                              controller.incidentReportDetailsModel
-                                                              .value?.status ==
+                                              controller
+                                                              .incidentReportDetailsModel.value?.status ==
                                                           181 ||
+                                                      controller
+                                                              .incidentReportDetailsModel
+                                                              .value
+                                                              ?.status ==
+                                                          182 ||
                                                       controller.irId.value == 0
                                                   ? Dimens.box0
                                                   : Column(
