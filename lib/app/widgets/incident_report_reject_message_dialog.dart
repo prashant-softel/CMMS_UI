@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:flutter/material.dart';
@@ -79,12 +80,12 @@ class IncidentReportMessageRejectDialog extends GetView {
         actions: [
           Row(
             children: [
-              Dimens.boxWidth10,
+              Spacer(),
               Center(
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    Get.offAllNamed(Routes.incidentReportListWeb);
                   },
                   child: const Text('IR List'),
                 ),
@@ -97,7 +98,7 @@ class IncidentReportMessageRejectDialog extends GetView {
                   child: const Text('View IR'),
                 ),
               ),
-              Dimens.boxWidth10,
+              Spacer(),
             ],
           )
         ],
