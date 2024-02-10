@@ -81,7 +81,7 @@ class BodyInjuredController extends GetxController {
       return;
     }
     List<BodyInjuredModel> filteredList = BufferBodyInjuredList.where((item) =>
-            (item.name
+            (item.bodyparts
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -248,7 +248,7 @@ class BodyInjuredController extends GetxController {
 
     BodyInjuredModel createChecklist = BodyInjuredModel(
       id: checklistId,
-      name: _name,
+      bodyparts: _name,
       description: _description,
     );
     var bodyinjuredJsonString = createChecklist.toJson();
