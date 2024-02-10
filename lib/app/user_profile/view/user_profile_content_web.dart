@@ -15,7 +15,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
+     () => Scaffold(
+      body:  Container(
         color: Color.fromARGB(255, 234, 236, 238),
         width: Get.width,
         height: Get.height,
@@ -378,7 +379,11 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                 color: Color.fromARGB(
                                                     255, 245, 248, 250),
                                               ),
-                                              child: TabBarView(children: [
+                                              child: TabBarView(
+                                                 physics:
+                                                      NeverScrollableScrollPhysics(),
+
+                                                children: [
                                                 Column(
                                                   children: [
                                                     Container(
@@ -414,153 +419,202 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         .plantListModel
                                                                         .length >
                                                                     0
-                                                                ? Center(
+                                                                ? Expanded(
                                                                     child:
-                                                                        ScrollableTableView(
+                                                                        DataTable2(
+                                                                      dataRowHeight:
+                                                                          40,
+                                                                      columnSpacing:
+                                                                          50,
                                                                       columns: [
-                                                                        "Plant Name",
-                                                                        "SPV",
-                                                                        "Location",
-                                                                      ].map(
-                                                                          (column) {
-                                                                        return TableViewColumn(
-                                                                          label:
-                                                                              column,
-                                                                          minWidth:
-                                                                              Get.width * 0.20,
+                                                                        DataColumn2(
+                                                                            size:
+                                                                                ColumnSize.L,
+                                                                            // fixedWidth: 180,
+                                                                            // columnWidth: FlexColumnWidth(3),
+                                                                            label: Text(
+                                                                              "Plant Name",
+                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                            )),
+                                                                        DataColumn2(
+                                                                            size:
+                                                                                ColumnSize.M,
+                                                                            // fixedWidth: 100,
+                                                                            // columnWidth: FlexColumnWidth(3),
+                                                                            label: Text(
+                                                                              "SPV",
+                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                            )),
+                                                                        DataColumn2(
+                                                                            size:
+                                                                                ColumnSize.S,
+                                                                            // fixedWidth: 180,
+                                                                            // columnWidth: FlexColumnWidth(3),
+                                                                            label: Text(
+                                                                              "Location",
+                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                            )),
+                                                                      ].toList(),
+                                                                      rows: controller
+                                                                          .plantListModel
+                                                                          .map<DataRow>(
+                                                                              (plants) {
+                                                                        return DataRow(
+                                                                          cells: [
+                                                                            DataCell(Text("${plants?.plant_name ?? ""}")),
+                                                                            DataCell(Text("${plants?.spv_name ?? ""}")),
+                                                                            DataCell(Text("----")),
+                                                                          ],
+                                                                          // Additional properties can be set for each DataRow if needed
                                                                         );
                                                                       }).toList(),
-                                                                      rows: true
-                                                                          ? controller
-                                                                              .plantListModel
-                                                                              .map((plants) => TableViewRow(height: 90, cells: [
-                                                                                    TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
-                                                                                    TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
-                                                                                    TableViewCell(child: Text("----")),
-                                                                                  ]))
-                                                                              .toList()
-                                                                          : [],
                                                                     ),
                                                                   )
                                                                 : Container())),
                                                   ],
                                                 ),
                                                 Container(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        child: Container(
-                                                            height:
-                                                                Get.height - 30,
-                                                            margin: Dimens
-                                                                .edgeInsets15,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
-                                                                color: ColorValues
-                                                                    .lightGreyColorWithOpacity35,
-                                                                width: 1,
-                                                              ),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: ColorValues
-                                                                      .appBlueBackgroundColor,
-                                                                  spreadRadius:
-                                                                      2,
-                                                                  blurRadius: 5,
-                                                                  offset:
-                                                                      Offset(
-                                                                          0, 2),
-                                                                ),
-                                                              ],
-                                                            ),
-                                              child:
-                                                Expanded(
-                                                  child: DataTable2(
-                                                      dataRowHeight: 30,
-                                                      columnSpacing: 10,
-                                                      columns: [
-                                                        DataColumn2(
-                                                            fixedWidth: 180,
-                                                            // columnWidth: FlexColumnWidth(3),
-                                                            label: Text(
-                                                              "Module Name",
-                                                              style: TextStyle(
-                                                                fontSize: 15,
-                                                              ),
-                                                            )),
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    child: Container(
+                                                      height: Get.height - 30,
+                                                      margin:
+                                                          Dimens.edgeInsets15,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Expanded(
+                                                        child: DataTable2(
+                                                          dataRowHeight: 30,
+                                                          columnSpacing: 10,
+                                                          columns: [
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                fixedWidth: 180,
+                                                                // columnWidth: FlexColumnWidth(3),
+                                                                label: Text(
+                                                                  "Module Name",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        15,
+                                                                  ),
+                                                                )),
+                                                            DataColumn2(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "Add",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             )),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "Edit",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             )),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "Delete",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             )),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "View",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             )),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "Issue",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             )),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
-                                                              "Approve",
-                                                              style: TextStyle(
-                                                                fontSize: 15,
+                                                              // fixedWidth: 75,
+                                                              label: Text(
+                                                                "Approve",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 15,
+                                                                ),
                                                               ),
                                                             ),
-                                                            ),
                                                             DataColumn2(
-                                                            // fixedWidth: 75,
-                                                            label: Text(
+                                                                // fixedWidth: 75,
+                                                                label: Text(
                                                               "Self View",
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                               ),
                                                             ))
-                                                      ],
-                                                      rows:controller.accessList.map((getAccesslevelDetails) {
-                                                        return DataRow(cells:[
-                                                        DataCell(Text("${getAccesslevelDetails?.feature_name ?? ""}")),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.add.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.edit.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.delete.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.view.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.issue.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.approve.value)),
-                                                        DataCell(_rowItem(getAccesslevelDetails?.selfView.value))],
-                                                         );
-                                                      }).toList(),
+                                                          ],
+                                                          
+                                                          rows: controller
+                                                              .accessList
+                                                              .map(
+                                                                  (getAccesslevelDetails) {
+                                                            return DataRow(
+                                                              cells: [
+                                                                DataCell(Text(
+                                                                    "${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.add
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.edit
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.delete
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.view
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.issue
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.approve
+                                                                        .value)),
+                                                                DataCell(_rowItem(
+                                                                    getAccesslevelDetails
+                                                                        ?.selfView
+                                                                        .value))
+                                                              ],
+                                                            );
+                                                          }).toList(),
+                                                        ),
                                                       ),
-                                                ),)),
+                                                    )),
                                                 Column(
                                                   children: [
                                                     Container(
@@ -650,17 +704,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                 ),
                               ],
                             ),
-                            Container(
-                              height: 35,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appDarkBlueColor,
-                                text: 'Edit Profile',
-                                onPressed: () {
-                                  controller.editProfile();
-                                  //  controller.saveAccessLevel();
-                                },
-                              ),
-                            )
+                            
                           ],
                         ),
                       ),
@@ -673,6 +717,19 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
           ],
         ),
       ),
+      floatingActionButton: Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: 'Edit Profile',
+                                onPressed: () {
+                                  controller.editProfile();
+                                  //  controller.saveAccessLevel();
+                                },
+                              ),
+                            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+     )
     );
   }
 
