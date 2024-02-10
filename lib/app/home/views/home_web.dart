@@ -404,8 +404,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 .black15)),
                                                     Spacer(),
                                                     Container(
-                                                      height: 90,
-                                                      width: 125,
+                                                      height: Get.height * 0.11,
+                                                      width: Get.height * 0.15,
                                                       margin: EdgeInsets.only(
                                                           left: 20, right: 10),
                                                       padding: EdgeInsets.only(

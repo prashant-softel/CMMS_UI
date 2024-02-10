@@ -387,19 +387,9 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                                   255, 206, 229, 234)),
                                           columns: [
                                             DataColumn2(
-                                              fixedWidth: 100,
-                                              label: Text(
-                                                "Day",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
                                               //fixedWidth: 150,
                                               label: Text(
-                                                'No. of Inverters',
+                                                'Day',
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -407,19 +397,9 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                               ),
                                             ),
                                             DataColumn2(
-                                              fixedWidth: 150,
+                                              // fixedWidth: 150,
                                               label: Text(
-                                                'No. of SMBs',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            DataColumn2(
-                                              // fixedWidth: 300,
-                                              label: Text(
-                                                'No of modules',
+                                                'No. of Blocks',
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -429,7 +409,17 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                             DataColumn2(
                                               // fixedWidth: 300,
                                               label: Text(
-                                                'Type',
+                                                'No of Inverters',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                                'Grass Cutting Area',
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -679,11 +669,11 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                 //             ),
                                 //           ),
 
-                                          // : Dimens.box0,
-                                          // Spacer(),
-                                        // ],
-                                      // )
-                                    // : Dimens.box0,
+                                // : Dimens.box0,
+                                // Spacer(),
+                                // ],
+                                // )
+                                // : Dimens.box0,
                                 Dimens.boxHeight12,
                               ],
                             ),

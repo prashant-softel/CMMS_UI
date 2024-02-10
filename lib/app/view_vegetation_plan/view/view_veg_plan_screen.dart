@@ -1,6 +1,7 @@
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
+import 'package:cmms/app/view_vegetation_plan/view/view_veg_plan_web.dart';
 import 'package:cmms/app/view_vegetation_plan/view_veg_plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,10 +40,10 @@ class ViewVegPlanScreen extends GetView<ViewVegPlanController> {
                             alignment: Alignment.center,
                             child: Text("Data Coming Soon......")),
                       ),
-                    // if (Responsive.isDesktop(context))
-                    //   Expanded(
-                    //     child: ViewMcPlaningWeb(),
-                    //   )
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: ViewVegPlanWeb(),
+                      )
                   ],
                 ),
               ),
