@@ -1433,7 +1433,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     },
                                                     text: 'Update',
                                                   )
-                                                : CustomElevatedButton(
+                                                : Dimens.box0,
+                                            controller.irId.value == 0
+                                                ? CustomElevatedButton(
                                                     backgroundColor: ColorValues
                                                         .appGreenColor,
                                                     onPressed: () {
@@ -1442,7 +1444,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           .createIncidentReport();
                                                     },
                                                     text: 'Submit',
-                                                  ),
+                                                  )
+                                                : Dimens.box0,
                                             SizedBox(
                                               width: 20,
                                             ),
@@ -1460,15 +1463,20 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     text: 'Re-Submit',
                                                   )
                                                 : Container(),
-                                            CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              onPressed: () {
-                                                // showAlertDialog();
-                                                controller.updateIRSecondStep();
-                                              },
-                                              text: 'Update IR ',
-                                            )
+                                            controller.incidentReportDetailsModel
+                                                        .value?.status ==
+                                                    183
+                                                ? CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appDarkBlueColor,
+                                                    onPressed: () {
+                                                      // showAlertDialog();
+                                                      controller
+                                                          .updateIRSecondStep();
+                                                    },
+                                                    text: 'Update IR ',
+                                                  )
+                                                : Dimens.box0,
                                           ],
                                         ),
                                       ],
