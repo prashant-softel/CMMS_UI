@@ -1422,7 +1422,14 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                             SizedBox(
                                               width: 20,
                                             ),
-                                            controller.irId.value > 0
+                                            controller.incidentReportDetailsModel
+                                                            .value?.status ==
+                                                        182 ||
+                                                    controller
+                                                            .incidentReportDetailsModel
+                                                            .value
+                                                            ?.status ==
+                                                        181
                                                 ? CustomElevatedButton(
                                                     backgroundColor: ColorValues
                                                         .appDarkBlueColor,
@@ -1447,7 +1454,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                   )
                                                 : Dimens.box0,
                                             SizedBox(
-                                              width: 20,
+                                              width: 10,
                                             ),
                                             controller.incidentReportDetailsModel
                                                         .value?.status_short ==
@@ -1474,7 +1481,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       controller
                                                           .updateIRSecondStep();
                                                     },
-                                                    text: 'Update IR ',
+                                                    text: 'Update IR',
                                                   )
                                                 : Dimens.box0,
                                           ],
