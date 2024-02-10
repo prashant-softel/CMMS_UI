@@ -80,7 +80,7 @@ class IncidentMessageApproveDialog extends GetView {
         actions: [
           Row(
             children: [
-              Dimens.boxWidth10,
+              Spacer(),
               Center(
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
@@ -100,7 +100,7 @@ class IncidentMessageApproveDialog extends GetView {
                   child: const Text('View IR'),
                 ),
               ),
-              Dimens.boxWidth10,
+              Spacer(),
             ],
           )
         ],

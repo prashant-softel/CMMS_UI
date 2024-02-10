@@ -61,9 +61,9 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                     onTap: () {
                       Get.offNamed(Routes.misDashboard);
                     },
-                    child: Text(" / MIS", style: Styles.greyMediumLight12),
+                    child: Text(" / MIS", style: Styles.greyLight14),
                   ),
-                  Text(" / OBSERVATION LIST", style: Styles.greyMediumLight12),
+                  Text(" / OBSERVATION LIST", style: Styles.greyLight14),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
                 ],

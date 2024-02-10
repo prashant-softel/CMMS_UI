@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -384,8 +385,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                         color: ColorValues
                                                             .whiteColor,
                                                         child: Container(
-                                                            height:
-                                                                Get.height - 30,
+                                                            height: Get.height *
+                                                                0.5,
                                                             margin: Dimens
                                                                 .edgeInsets15,
                                                             decoration:
@@ -444,9 +445,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                 : Container())),
                                                   ],
                                                 ),
-                                                Column(
-                                                  children: [
-                                                    Container(
+                                                Container(
                                                         color: ColorValues
                                                             .whiteColor,
                                                         child: Container(
@@ -475,74 +474,93 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                 ),
                                                               ],
                                                             ),
-                                                            child: controller
-                                                                        .accessList
-                                                                        .length >
-                                                                    0
-                                                                ? ScrollableTableView(
-                                                                    columns: [
-                                                                      "Module Name",
-                                                                      "Add",
-                                                                      "Edit",
-                                                                      "Delete",
-                                                                      "View",
-                                                                      "Issue",
-                                                                      "Approve",
-                                                                      "Self View"
-                                                                    ].map(
-                                                                        (column) {
-                                                                      return TableViewColumn(
-                                                                        label:
-                                                                            column,
-                                                                        // width:
-                                                                        //     115, // Set the width of the column to 100
-
-                                                                        minWidth:
-                                                                            Get.width *
-                                                                                0.08,
-                                                                      );
-                                                                    }).toList(),
-                                                                    rows: true
-                                                                        ? controller
-                                                                            .accessList
-                                                                            .map((getAccesslevelDetails) =>
-                                                                                TableViewRow(height: 90, cells: [
-                                                                                  TableViewCell(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.add.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.edit.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.delete.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.view.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.issue.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.approve.value,
-                                                                                  )),
-                                                                                  TableViewCell(
-                                                                                      child: _rowItem(
-                                                                                    getAccesslevelDetails?.selfView.value,
-                                                                                  )),
-                                                                                ]))
-                                                                            .toList()
-                                                                        : [],
-                                                                  )
-                                                                : Container())),
-                                                  ],
-                                                ),
+                                              child:
+                                                Expanded(
+                                                  child: DataTable2(
+                                                      dataRowHeight: 30,
+                                                      columnSpacing: 10,
+                                                      columns: [
+                                                        DataColumn2(
+                                                            fixedWidth: 180,
+                                                            // columnWidth: FlexColumnWidth(3),
+                                                            label: Text(
+                                                              "Module Name",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Add",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Edit",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Delete",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "View",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Issue",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            )),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Approve",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            ),
+                                                            ),
+                                                            DataColumn2(
+                                                            // fixedWidth: 75,
+                                                            label: Text(
+                                                              "Self View",
+                                                              style: TextStyle(
+                                                                fontSize: 15,
+                                                              ),
+                                                            ))
+                                                      ],
+                                                      rows:controller.accessList.map((getAccesslevelDetails) {
+                                                        return DataRow(cells:[
+                                                        DataCell(Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.add.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.edit.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.delete.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.view.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.issue.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.approve.value)),
+                                                        DataCell(_rowItem(getAccesslevelDetails?.selfView.value))],
+                                                         );
+                                                      }).toList(),
+                                                      ),
+                                                ),)),
                                                 Column(
                                                   children: [
                                                     Container(

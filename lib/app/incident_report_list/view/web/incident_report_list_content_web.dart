@@ -665,40 +665,68 @@ class IncidentReportListDataSource extends DataTableSource {
                                 : Dimens.box0,
 
                             ///Edit button
-                            // varUserAccessModel.value.access_list!
-                            //             .where((e) =>
-                            //                 e.feature_id ==
-                            //                     UserAccessConstants
-                            //                         .kIncidentReportFeatureId &&
-                            //                 e.edit ==
-                            //                     UserAccessConstants
-                            //                         .kHaveEditAccess)
-                            //             .length >
-                            //         0
-                            //     ? TableActionButton(
-                            //         color: ColorValues.appYellowColor,
-                            //         icon: Icons.edit,
-                            //         message: 'Edit',
-                            //         onPress: () {
-                            //           controller.clearStoreData();
+                            varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    incidentReportListDetails!.status == 181
+                                ? TableActionButton(
+                                    color: ColorValues.appYellowColor,
+                                    icon: Icons.edit,
+                                    message: 'Edit',
+                                    onPress: () {
+                                      controller.clearStoreData();
 
-                            //           int irId =
-                            //               incidentReportListDetails?.id ?? 0;
-                            //           if (irId != 0) {
-                            //             Get.toNamed(
-                            //                 Routes.addIncidentReportContentWeb,
-                            //                 arguments: {
-                            //                   'irId':
-                            //                       incidentReportListDetails?.id,
-                            //                 });
-                            //           }
-                            //         },
-                            //         // onPress: () {
-                            //         //   controller.editIncidentReport(
-                            //         //       id: incidentReportListDetails?.id);
-                            //         // },
-                            //       )
-                            //     : Dimens.box0,
+                                      int irId =
+                                          incidentReportListDetails?.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.addIncidentReportContentWeb,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails?.id,
+                                            });
+                                      }
+                                    },
+                                  )
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    incidentReportListDetails!.status == 182
+                                ? TableActionButton(
+                                    color: Color.fromARGB(255, 116, 78, 130),
+                                    icon: Icons.ads_click,
+                                    message: 'Re - Submit',
+                                    onPress: () {
+                                      controller.clearStoreData();
+
+                                      int irId =
+                                          incidentReportListDetails?.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.addIncidentReportContentWeb,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails?.id,
+                                            });
+                                      }
+                                    },
+                                  )
+                                : Dimens.box0,
 //IR 2nd step button
                             varUserAccessModel.value.access_list!
                                             .where((e) =>

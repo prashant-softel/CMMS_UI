@@ -597,6 +597,13 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
+                                    title: "DSM Charges",
+                                    onTap: () {
+                                      controller.goToDsmChargesScreen();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
                                     title: "Competencies",
                                     onTap: () {
                                       controller.goToCompetencyScreen();

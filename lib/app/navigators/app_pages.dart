@@ -56,6 +56,8 @@ import 'package:cmms/app/create_observation/views/create_observation_screen.dart
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/dsm_charges/dsm_charges_binding.dart';
+import 'package:cmms/app/dsm_charges/view/dsm_charges_screen.dart';
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_binding.dart';
 import 'package:cmms/app/edit_return_mrs/view/edit_return_mrs_screen.dart';
@@ -564,7 +566,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.addVegetationPlanScreen,
       page: AddVegetationPlanScreen.new,
-      binding: AddVegetationPlanBinding(), 
+      binding: AddVegetationPlanBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.viewVegetationPlanScreen,
@@ -1157,6 +1159,11 @@ class AppPages {
       name: _Paths.viewAuditTask,
       page: ViewAuditTaskScreen.new,
       binding: ViewAuditTaskBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.dsmCharges,
+      page: DsmChargesListScreen.new,
+      binding: DsmChargesListBinding(),
     ),
   ];
 }

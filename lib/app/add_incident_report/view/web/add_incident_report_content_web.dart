@@ -108,7 +108,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               InkWell(
                                                 onTap: () {
                                                   Get.offNamed(Routes
-                                                      .incidentReportDashboard);
+                                                      .incidentReportListWeb);
                                                 },
                                                 child: Text(
                                                     " / Incident Report",
@@ -911,8 +911,18 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               ),
 
                                               Dimens.boxHeight20,
-                                              controller.irId.value > 0
-                                                  ? Column(
+
+                                              controller
+                                                              .incidentReportDetailsModel.value?.status ==
+                                                          181 ||
+                                                      controller
+                                                              .incidentReportDetailsModel
+                                                              .value
+                                                              ?.status ==
+                                                          182 ||
+                                                      controller.irId.value == 0
+                                                  ? Dimens.box0
+                                                  : Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
@@ -1238,15 +1248,18 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                       ],
                                                     )
-                                                  : Dimens.box0
                                             ],
                                           ),
                                         ),
                                         ////
 
                                         ///Incident Report History
-                                        controller.irId.value > 0
-                                            ? Container(
+                                        controller.incidentReportDetailsModel
+                                                        .value?.status ==
+                                                    181 ||
+                                                controller.irId.value == 0
+                                            ? Dimens.box0
+                                            : Container(
                                                 margin: Dimens.edgeInsets20,
                                                 height: ((controller.historyList
                                                                 ?.length ??
@@ -1388,8 +1401,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     ),
                                                   ],
                                                 ),
-                                              )
-                                            : Container(),
+                                              ),
 
                                         Row(
                                           mainAxisAlignment:
