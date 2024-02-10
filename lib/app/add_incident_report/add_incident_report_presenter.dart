@@ -121,6 +121,16 @@ class AddIncidentReportPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updateIRSecondStep({
+    updateIncidentReport,
+    required bool isLoading,
+  }) async {
+    return incidentReportUsecase.updateIRSecondStep(
+      updateIncidentReport: updateIncidentReport,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<TypePermitModel?>?> getTypePermitList(
           {required int facility_id}) async =>
       await incidentReportUsecase.getTypePermitList(true, facility_id);

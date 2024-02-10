@@ -26,6 +26,14 @@ class AddIncidentReportUsecase {
         updateIncidentReport,
         isLoading,
       );
+  Future<Map<String, dynamic>> updateIRSecondStep({
+    updateIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateIRSecondStep(
+        updateIncidentReport,
+        isLoading,
+      );
 
   Future<List<HistoryModel>?> getIncidentReportHistory({
     moduleType,

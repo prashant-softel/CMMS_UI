@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_report_2nd_step_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
@@ -1401,6 +1402,7 @@ class AddIncidentReportController extends GetxController {
   }
 
   ///Create Incident Report
+
   void createIncidentReport() async {
     {
       checkForm();
@@ -1793,6 +1795,213 @@ class AddIncidentReportController extends GetxController {
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
       Map<String, dynamic>? responseUpdateIncidentReport =
           await incidentReportPresenter.updateIncidentReport(
+        updateIncidentReport: updateIncidentReportJsonString,
+        isLoading: true,
+      );
+
+      if (responseUpdateIncidentReport == null) {
+        // showAlertDialog();
+      }
+      print('Update Incident Report data: $updateIncidentReportJsonString');
+    }
+  }
+
+  void updateIRSecondStep() async {
+    {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
+      String _incidentDescription =
+          htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());
+      String _insuranceRemark =
+          htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
+      String _insuranceAvailable =
+          htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
+      String _esiApplicabilityRemark =
+          htmlEscape.convert(ESIApplicabilityRemarkTextCtrlr.text.trim());
+      String _legalApplicabilityRemark =
+          htmlEscape.convert(legalApplicabilityRemarkTextCtrlr.text.trim());
+      String _typeOfJob = htmlEscape.convert(typeOfJbTextCtrlr.text.trim());
+      String _personAuthorized =
+          htmlEscape.convert(personAuthorizedInvolvedTextCtrlr.text.trim());
+      String _instructionGiven =
+          htmlEscape.convert(instructionsTextCtrlr.text.trim());
+      String _safetyEquipments =
+          htmlEscape.convert(SafetyEquipmetsTextCtrlr.text.trim());
+      String _correctSafety =
+          htmlEscape.convert(correctSafeTextCtrlr.text.trim());
+      String _unsafeConditions =
+          htmlEscape.convert(unsafeConditionsTextCtrlr.text.trim());
+      String _unsafeActCause =
+          htmlEscape.convert(unsafeActCauseTextCtrlr.text.trim());
+      String? _otherVictimName =
+          htmlEscape.convert(otherVictimNameTextCtrlr.text.trim());
+
+      // int costOfReplacement =
+      //     int.parse(costOfReplacementTextController.text.trim());
+
+      // int? sopFileId = createSOPModel2.sop_fileId;
+      // // int? jsaFileId = data.jsa_fileId;
+      // print('SOPFileId:$sopFileId');
+
+      // late List<WhyWhyAnalysisUpdate> supplier_action_list = [];
+
+      // rowWhyWhyAnalysisItem.forEach((e) {
+      //   supplier_action_list.add(WhyWhyAnalysisUpdate(
+      //    cause:
+      //   ));
+      // });
+
+      //Why why analysis for update
+      List<WhyWhyAnalysis> whyWhyAnalysisItems = [];
+      rowWhyWhyAnalysisItem.forEach((element) {
+        WhyWhyAnalysis item = WhyWhyAnalysis(
+          incidents_id: irId.value,
+          why: element[0]["value"] ?? '0',
+          cause: element[1]["value"] ?? '0',
+        );
+
+        whyWhyAnalysisItems.add(item);
+      });
+
+      ///Root Cause for update
+      List<RootCause> rootCauseItems = [];
+      rowRootCauseItem.forEach((element) {
+        RootCause item = RootCause(
+          incidents_id: irId.value,
+          cause: element[0]["value"] ?? '0',
+        );
+
+        rootCauseItems.add(item);
+      });
+
+      ///Immediate correction for update
+      List<ImmediateCorrection> immediateCorrectionItems = [];
+      rowImmediateCorrectionItem.forEach((element) {
+        ImmediateCorrection item = ImmediateCorrection(
+          incidents_id: irId.value,
+          details: element[0]["value"] ?? '0',
+        );
+
+        immediateCorrectionItems.add(item);
+      });
+
+      ///Proposed Action Plan for update
+      List<ProposedActionPlan> proposedActionItems = [];
+      rowItem.forEach((element) {
+        ProposedActionPlan item = ProposedActionPlan(
+          incidents_id: irId.value,
+          actions_as_per_plan: element[0]["value"] ?? '0',
+          responsibility: element[1]["value"],
+          // target_date: element[2]["value"] ?? '0',
+          target_date: "2023-11-26T12:00:00",
+
+          // target_date:
+          //     '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
+          remarks: element[3]["value"] ?? '0',
+        );
+
+        proposedActionItems.add(item);
+      });
+
+      ///Investigation Team for update
+      late List<InvestigationTeam> investigation_team_list = [];
+      investigationTeamList!.forEach((e) {
+        investigation_team_list.add(InvestigationTeam(
+            designation: e!.designation,
+            person_type: e.person_type,
+            investigation_date:
+                '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${actionTakenDateTimeCtrlr.text}'))}'));
+      });
+
+      ///Details of Injured Person for update
+      List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
+      rowInjuredPersonItem.forEach((element) {
+        DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
+          injured_item_id: 1,
+          incidents_id: irId.value,
+          person_id: element[0]["value"],
+          other_victim: element[1]["value"] ?? '0',
+          person_type: 1,
+          age: 30,
+          sex: int.tryParse(
+              '${element[2]["value"] == "Male" ? 1 : element[2]["value"] == "Female" ? 2 : element[2]["value"] == "TransGender" ? 3 : 0}'),
+          designation: element[3]["value"] ?? '0',
+          address: element[4]["value"] ?? '0',
+          name_contractor: element[5]["value"],
+          body_part_and_nature_of_injury: element[6]["value"],
+          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
+          plant_equipment_involved: element[8]["value"],
+          location_of_incident: element[9]["value"] ?? '0',
+        );
+
+        detailsOfInjuredPersonItems.add(item);
+      });
+
+      CreateIncidentReportModel updateIncidentReportModel =
+          CreateIncidentReportModel(
+              id: irId.value,
+              facility_id: facilityId,
+              block_id: selectedBlockId,
+              equipment_id: selectedEquipmentnameId,
+              risk_level: 2,
+              victim_id: selectedVictimNameId,
+              action_taken_by: selectedAssetRestorationActionTakenById,
+              inverstigated_by: selectedIncidentInvestigationDoneById,
+              // verified_by: selectedIncidentInvestigationVerificationDoneById,
+              risk_type: selectedRiskTypeId,
+              legal_applicability:
+                  incidentReportDetailsModel.value?.legal_applicability_name ==
+                          "YES"
+                      ? legalApplicabilityDetailValue.value
+                      : legalApplicabilityDetailFalseValue.value,
+              esi_applicability:
+                  incidentReportDetailsModel.value?.esi_applicability_name ==
+                          "YES"
+                      ? esiApplicabilityDetailValue.value
+                      : esiApplicabilityDetailFalseValue.value,
+              incident_datetime: startDateTimeCtrlrBuffer,
+              action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
+              reporting_datetime: reportingDateTimeCtrlrBuffer,
+              insurance: _insuranceAvailable,
+              title: _title,
+              rca_required:
+                  incidentReportDetailsModel.value?.rca_required_name == "YES"
+                      ? rCAUploadRequiredDetailValue.value
+                      : rCAUploadRequiredDetailFalseValue.value,
+              damaged_cost:
+                  int.tryParse('${damagedAssetCostTextCtrlr.text}') ?? 0,
+              generation_loss:
+                  int.tryParse('${genLossAssetDamageTextCtrlr.text}') ?? 0,
+              job_id: 2061,
+              description: _incidentDescription,
+              is_insurance_applicable: true,
+              insurance_status: 2,
+              insurance_remark: _insuranceRemark,
+              severity: selectedSeverity.value,
+
+              ///new data adding
+              type_of_job: _typeOfJob,
+              is_person_authorized: _personAuthorized,
+              instructions_given: _instructionGiven,
+              safety_equipments: _safetyEquipments,
+              safe_procedure_observed: _correctSafety,
+              unsafe_condition_contributed: _unsafeConditions,
+              legal_applicability_remark: _legalApplicabilityRemark,
+              esi_applicability_remark: _esiApplicabilityRemark,
+              unsafe_act_cause: _unsafeActCause,
+              why_why_analysis: whyWhyAnalysisItems,
+              root_cause: rootCauseItems,
+              immediate_correction: immediateCorrectionItems,
+              proposed_action_plan: proposedActionItems,
+              injured_person: detailsOfInjuredPersonItems,
+              investigation_team: investigation_team_list);
+
+      var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
+      Map<String, dynamic>? responseUpdateIncidentReport =
+          await incidentReportPresenter.updateIRSecondStep(
         updateIncidentReport: updateIncidentReportJsonString,
         isLoading: true,
       );

@@ -1459,7 +1459,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                     },
                                                     text: 'Re-Submit',
                                                   )
-                                                : Container()
+                                                : Container(),
+                                            CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                // showAlertDialog();
+                                                controller.updateIRSecondStep();
+                                              },
+                                              text: 'Update IR ',
+                                            )
                                           ],
                                         ),
                                       ],
