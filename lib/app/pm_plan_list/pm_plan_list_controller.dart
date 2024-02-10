@@ -64,7 +64,7 @@ class PmPlanListController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "PM PlanID": true,
     "PM Plan Title": true,
-    "Last Done Date": true,
+    "Start Date": true,
     "Next Schedule Date": true,
     "Frequency ": true,
     "Created By": true,
@@ -73,7 +73,7 @@ class PmPlanListController extends GetxController {
   final Map<String, double> columnwidth = {
     "PM PlanID": 200,
     "PM Plan Title": 350,
-    "Last Done Date": 200,
+    "Start Date": 200,
     "Next Schedule Date": 200,
     "Frequency ": 150,
     "Created By": 150,
@@ -91,7 +91,7 @@ class PmPlanListController extends GetxController {
     this.filterText = {
       "PM PlanID": idFilterText,
       "PM Plan Title": tittleFilterText,
-      "Last Done Date": lastDoneDateFilterText,
+      "Start Date": lastDoneDateFilterText,
       "Next Schedule Date": nextScheduleDateFilterText,
       "Frequency ": frequencyFilterText,
       "Created By": createdByFilterText,

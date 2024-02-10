@@ -418,9 +418,9 @@ class FacilityTypeListController extends GetxController {
     print(" Selected Facility : ");
 
     int indexId = ownerList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      ownerId = ownerList[indexId]?.id ?? 0;
-    }
+    //  if (indexId > 0) {
+    ownerId = ownerList[indexId]?.id ?? 0;
+    //  }
     selectedOwner.value = list;
     isSelectedOwner.value = true;
     print("index received is : $indexId & owner id  : $ownerId");

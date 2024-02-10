@@ -43,8 +43,8 @@ class CreateCheckpoint {
 
 class CheckpointType {
   int? id;
-  int? min;
-  int? max;
+  dynamic min;
+  dynamic max;
 
   CheckpointType({this.id, this.max, this.min});
 
