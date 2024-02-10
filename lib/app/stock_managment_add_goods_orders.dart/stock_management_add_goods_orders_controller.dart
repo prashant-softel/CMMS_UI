@@ -203,55 +203,55 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         }
       });
       delchfocus.addListener(() {
-      if (!delchfocus.hasFocus) {
-        delchscroll.jumpTo(0.0);
-      }
-    });
+        if (!delchfocus.hasFocus) {
+          delchscroll.jumpTo(0.0);
+        }
+      });
       ponofocus.addListener(() {
-      if (!ponofocus.hasFocus) {
-        ponoscroll.jumpTo(0.0);
-      }
-    });
+        if (!ponofocus.hasFocus) {
+          ponoscroll.jumpTo(0.0);
+        }
+      });
       freightfocus.addListener(() {
-      if (!freightfocus.hasFocus) {
-        freightscroll.jumpTo(0.0);
-      }
-    });
+        if (!freightfocus.hasFocus) {
+          freightscroll.jumpTo(0.0);
+        }
+      });
       matpofocus.addListener(() {
-      if (!matpofocus.hasFocus) {
-        matposcroll.jumpTo(0.0);
-      }
-    });
+        if (!matpofocus.hasFocus) {
+          matposcroll.jumpTo(0.0);
+        }
+      });
       pacrfocus.addListener(() {
-      if (!pacrfocus.hasFocus) {
-        pacrscroll.jumpTo(0.0);
-      }
-    });
-    inregfocus.addListener(() {
-      if (!inregfocus.hasFocus) {
-        inregscroll.jumpTo(0.0);
-      }
-    });
+        if (!pacrfocus.hasFocus) {
+          pacrscroll.jumpTo(0.0);
+        }
+      });
+      inregfocus.addListener(() {
+        if (!inregfocus.hasFocus) {
+          inregscroll.jumpTo(0.0);
+        }
+      });
       amntfocus.addListener(() {
-      if (!amntfocus.hasFocus) {
-        amntscroll.jumpTo(0.0);
-      }
-    });
+        if (!amntfocus.hasFocus) {
+          amntscroll.jumpTo(0.0);
+        }
+      });
       lrfocus.addListener(() {
-      if (!lrfocus.hasFocus) {
-        lrscroll.jumpTo(0.0);
-      }
-    });
+        if (!lrfocus.hasFocus) {
+          lrscroll.jumpTo(0.0);
+        }
+      });
       vehfocus.addListener(() {
-      if (!vehfocus.hasFocus) {
-        vehscroll.jumpTo(0.0);
-      }
-    });
+        if (!vehfocus.hasFocus) {
+          vehscroll.jumpTo(0.0);
+        }
+      });
       jobrfocus.addListener(() {
-      if (!jobrfocus.hasFocus) {
-        jobrscroll.jumpTo(0.0);
-      }
-    });
+        if (!jobrfocus.hasFocus) {
+          jobrscroll.jumpTo(0.0);
+        }
+      });
     } catch (e) {}
 
     super.onInit();
@@ -692,5 +692,5 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
 
     update(['requ']);
-    }
+  }
 }

@@ -3026,6 +3026,38 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateIRSecondStep({
+    required String auth,
+    updateIncidentReport,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/UpdateIncidentInvestigationReport',
+      Request.post,
+      updateIncidentReport,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Incident Report Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(UpdateIncidentReportDialog(
+      data: parsedJson['message'],
+      incidentReportId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
   //Update MC Schedule Execution
   Future<ResponseModel> updateMCScheduleExecution({
     required String auth,

@@ -1676,6 +1676,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> updateIRSecondStep({
+    required String auth,
+    updateIncidentReport,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateIRSecondStep(
+        auth: auth,
+        updateIncidentReport: updateIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> updateMCScheduleExecution({
     required String auth,
     updateMCScheduleExecutionJsonString,
