@@ -236,8 +236,8 @@ class PreventiveCheckPointController extends GetxController {
     int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
     String _checkPoint = checkPointCtrlr.text.trim();
     String _requirement = requirementCtrlr.text.trim();
-    int _max = int.tryParse(maxRangeCtrlr.text.trim()) ?? 0;
-    int _min = int.tryParse(minRangeCtrlr.text.trim()) ?? 0;
+    dynamic _max = double.tryParse(maxRangeCtrlr.text.trim());
+    dynamic _min = double.tryParse(minRangeCtrlr.text.trim());
 
     int _checklistId = int.tryParse(selectedchecklistId.value) ?? 0;
     if (checkPointCtrlr.text.trim() == '' ||

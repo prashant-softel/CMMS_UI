@@ -22,8 +22,8 @@ class CheckPointModel {
   String? action_to_be_done;
   int? failure_weightage;
   String? checkpoint_type;
-  int? min;
-  int? max;
+  dynamic min;
+  dynamic max;
 
   String? created_at;
 

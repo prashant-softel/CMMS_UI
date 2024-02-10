@@ -28,8 +28,6 @@ class BusinessListModel {
     this.type,
     this.status,
     this.addedAt,
-
-
   });
 
   int? id;
@@ -48,40 +46,39 @@ class BusinessListModel {
   int? status;
   String? addedAt;
 
-
-  factory BusinessListModel.fromJson(Map<String, dynamic> json) => BusinessListModel(
-      id: json["id"],
-      name: json["name"],
-      email: json["email"],
-      contactPerson: json["contactPerson"],
-      contactnumber: json["contactnumber"],
-      website: json["website"],
-      location: json["location"],
-      address: json["address"],
-      country: json["country"],
-      state: json["state"],
-      city: json["city"],
-      zip: json["zip"],
-      type: json["type"],
-      status: json["status"],
-      addedAt: json["addedAt"]
-  );
+  factory BusinessListModel.fromJson(Map<String, dynamic> json) =>
+      BusinessListModel(
+          id: json["id"],
+          name: json["name"],
+          email: json["email"],
+          contactPerson: json["contactPerson"],
+          contactnumber: json["contactNumber"],
+          website: json["website"],
+          location: json["location"],
+          address: json["address"],
+          country: json["country"],
+          state: json["state"],
+          city: json["city"],
+          zip: json["zip"],
+          type: json["type"],
+          status: json["status"],
+          addedAt: json["addedAt"]);
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "email": email,
-    "contactPerson": contactPerson,
-    "contactnumber": contactnumber,
-    "website": website,
-    "location": location,
-    "address": address,
-    "country": country,
-    "state": state,
-    "city": city,
-    "zip": zip,
-    "type": type,
-    "status": status,
-    "addedAt": addedAt
-  };
+        "id": id,
+        "name": name,
+        "email": email,
+        "contactPerson": contactPerson,
+        "contactNumber": contactnumber,
+        "website": website,
+        "location": location,
+        "address": address,
+        "country": country,
+        "state": state,
+        "city": city,
+        "zip": zip,
+        "type": type,
+        "status": status,
+        "addedAt": addedAt
+      };
 }

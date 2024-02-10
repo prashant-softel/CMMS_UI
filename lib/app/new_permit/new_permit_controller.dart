@@ -433,7 +433,7 @@ class NewPermitController extends GetxController {
         getInventoryIsolationList();
         getAssignedToList();
         getFacilityLists();
-        getInventoryDetailList();
+        // getInventoryDetailList();
         getEmployeePermitList();
         getJobTypePermitList();
         if (jobModel != null) {
