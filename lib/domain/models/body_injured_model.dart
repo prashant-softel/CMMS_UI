@@ -13,23 +13,23 @@ String BodyInjuredModelToJson(List<BodyInjuredModel> data) =>
 class BodyInjuredModel {
   BodyInjuredModel({
     this.id,
-    this.name,
+    this.bodyparts,
     this.description,
   });
 
   int? id;
-  String? name;
+  String? bodyparts;
   String? description;
 
   factory BodyInjuredModel.fromJson(Map<String, dynamic> json) => BodyInjuredModel(
         id: json["id"],
-        name: json["name"],
+        bodyparts: json["bodyparts"],
     description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-    "name": name,
+    "bodyparts": bodyparts,
     "description": description,
       };
 }

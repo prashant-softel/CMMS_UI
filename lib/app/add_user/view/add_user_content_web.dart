@@ -3,6 +3,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -1359,6 +1361,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                               250),
                                                         ),
                                                         child: TabBarView(
+                                                            physics:
+                                                                NeverScrollableScrollPhysics(),
                                                             children: [
                                                               Column(
                                                                 children: [
@@ -1384,27 +1388,46 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                             ],
                                                                           ),
                                                                           child: controller.plantListModel.length > 0
-                                                                              ? Center(
-                                                                                  child: ScrollableTableView(
+                                                                              ? Expanded(
+                                                                                  child: DataTable2(
+                                                                                    dataRowHeight: 40,
+                                                                                    columnSpacing: 50,
                                                                                     columns: [
-                                                                                      "Plant Name",
-                                                                                      "SPV",
-                                                                                      "Location",
-                                                                                    ].map((column) {
-                                                                                      return TableViewColumn(
-                                                                                        label: column,
-                                                                                        minWidth: Get.width * 0.20,
+                                                                                      DataColumn2(
+                                                                                          size: ColumnSize.L,
+                                                                                          // fixedWidth: 180,
+                                                                                          // columnWidth: FlexColumnWidth(3),
+                                                                                          label: Text(
+                                                                                            "Plant Name",
+                                                                                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                                          )),
+                                                                                      DataColumn2(
+                                                                                          size: ColumnSize.M,
+                                                                                          // fixedWidth: 100,
+                                                                                          // columnWidth: FlexColumnWidth(3),
+                                                                                          label: Text(
+                                                                                            "SPV",
+                                                                                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                                          )),
+                                                                                      DataColumn2(
+                                                                                          size: ColumnSize.S,
+                                                                                          // fixedWidth: 180,
+                                                                                          // columnWidth: FlexColumnWidth(3),
+                                                                                          label: Text(
+                                                                                            "Location",
+                                                                                            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                                          )),
+                                                                                    ].toList(),
+                                                                                    rows: controller.plantListModel.map<DataRow>((plants) {
+                                                                                      return DataRow(
+                                                                                        cells: [
+                                                                                          DataCell(Text("${plants?.plant_name ?? ""}")),
+                                                                                          DataCell(Text("${plants?.spv_name ?? ""}")),
+                                                                                          DataCell(Text("----")),
+                                                                                        ],
+                                                                                        // Additional properties can be set for each DataRow if needed
                                                                                       );
                                                                                     }).toList(),
-                                                                                    rows: true
-                                                                                        ? controller.plantListModel
-                                                                                            .map((plants) => TableViewRow(height: 60, cells: [
-                                                                                                  TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
-                                                                                                  TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
-                                                                                                  TableViewCell(child: Text("----")),
-                                                                                                ]))
-                                                                                            .toList()
-                                                                                        : [],
                                                                                   ),
                                                                                 )
                                                                               : Container(
@@ -1503,100 +1526,177 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                 ],
                                                                               ),
                                                                               child: controller.accesslevel.length > 0
-                                                                                  ? ScrollableTableView(
-                                                                                      columns: [
-                                                                                        "Module Name",
-                                                                                        "Add",
-                                                                                        "Edit",
-                                                                                        "Delete",
-                                                                                        "View",
-                                                                                        "Issue",
-                                                                                        "Approve",
-                                                                                        "Self View"
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          label: column,
-                                                                                          // width:
-                                                                                          //     115, // Set the width of the column to 100
-
-                                                                                          minWidth: Get.width * 0.085,
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: true
-                                                                                          ? controller.accesslevel
-                                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return Row(
-                                                                                                          children: [
-                                                                                                            Checkbox(
-                                                                                                                value: controller.isCheckedmodule.value,
-                                                                                                                checkColor: Colors.white,
-                                                                                                                activeColor: ColorValues.blackColor,
-                                                                                                                shape: RoundedRectangleBorder(
-                                                                                                                  borderRadius: BorderRadius.circular(2.0),
-                                                                                                                ),
-                                                                                                                side: MaterialStateBorderSide.resolveWith(
-                                                                                                                  (states) => BorderSide(
-                                                                                                                    width: 1.0,
-                                                                                                                    color: ColorValues.blackColor,
-                                                                                                                  ),
-                                                                                                                ),
-                                                                                                                onChanged: (val) {
-                                                                                                                  controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
-                                                                                                                  controller.isCheckedmodule.value = val!;
-
-                                                                                                                  controller.update();
-                                                                                                                }),
-                                                                                                            Dimens.boxWidth5,
-                                                                                                            Text("${getAccesslevelDetails?.feature_name}")
-                                                                                                          ],
-                                                                                                        );
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
+                                                                                    ? Expanded(
+                                                                                      child: DataTable2(
+                                                                                        dataRowHeight: 30,
+                                                                                        columnSpacing: 10,
+                                                                                        columns: [
+                                                                                          DataColumn2(
+                                                                                            fixedWidth: 180,
+                                                                                            label: Text('Module Name',
+                                                                                            style: TextStyle(
+                                                                                              fontSize: 15
+                                                                                            ),),
+                                                                                          ),
+                                                                                          DataColumn2(label: Text('Add',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('edit',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('delete',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('view',
+                                                                                          style: TextStyle(fontSize: 15),)),
+                                                                                          DataColumn2(label: Text('issue',
+                                                                                          style: TextStyle(fontSize: 15),)),
+                                                                                          DataColumn2(label: Text('approve',
+                                                                                          style: TextStyle(fontSize: 15),)),
+                                                                                          DataColumn2(label: Text('self view',
+                                                                                          style: TextStyle(fontSize: 15),))
+                                                                                        ],
+                                                                                        rows: true 
+                                                                                          ? controller.accesslevel.map((getAccesslevelDetails) {
+                                                                                          return DataRow(cells: [
+                                                                                            DataCell(Text(
+                                                                                                      "${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                                            DataCell(Obx(() {
                                                                                                         return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
                                                                                                           getAccesslevelDetails?.add.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
                                                                                                         return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
                                                                                                           getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                                        getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                                        getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                                        getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                                        getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                                        getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                  ]))
-                                                                                              .toList()
-                                                                                          : [],
-                                                                                    )
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),)
+                                                                                          ]);
+                                                                                        }
+                                                                                      ).toList()
+                                                                                      :[] )
+                                                                                                                                                                    // ? ScrollableTableView(
+                                                                                                                                                                    //     columns: [
+                                                                                                                                                                    //       "Module Name",
+                                                                                                                                                                    //       "Add",
+                                                                                                                                                                    //       "Edit",
+                                                                                                                                                                    //       "Delete",
+                                                                                                                                                                    //       "View",
+                                                                                                                                                                    //       "Issue",
+                                                                                                                                                                    //       "Approve",
+                                                                                                                                                                    //       "Self View"
+                                                                                                                                                                    //     ].map((column) {
+                                                                                                                                                                    //       return TableViewColumn(
+                                                                                                                                                                    //         label: column,
+                                                                                                                                                                    //         // width:
+                                                                                                                                                                    //         //     115, // Set the width of the column to 100
+                                                                                    
+                                                                                                                                                                    //         minWidth: Get.width * 0.085,
+                                                                                                                                                                    //       );
+                                                                                                                                                                    //     }).toList(),
+                                                                                                                                                                    //     rows: true
+                                                                                                                                                                    //         ? controller.accesslevel
+                                                                                                                                                                    //             .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return Row(
+                                                                                                                                                                    //                         children: [
+                                                                                                                                                                    //                           Checkbox(
+                                                                                                                                                                    //                               value: controller.isCheckedmodule.value,
+                                                                                                                                                                    //                               checkColor: Colors.white,
+                                                                                                                                                                    //                               activeColor: ColorValues.blackColor,
+                                                                                                                                                                    //                               shape: RoundedRectangleBorder(
+                                                                                                                                                                    //                                 borderRadius: BorderRadius.circular(2.0),
+                                                                                                                                                                    //                               ),
+                                                                                                                                                                    //                               side: MaterialStateBorderSide.resolveWith(
+                                                                                                                                                                    //                                 (states) => BorderSide(
+                                                                                                                                                                    //                                   width: 1.0,
+                                                                                                                                                                    //                                   color: ColorValues.blackColor,
+                                                                                                                                                                    //                                 ),
+                                                                                                                                                                    //                               ),
+                                                                                                                                                                    //                               onChanged: (val) {
+                                                                                                                                                                    //                                 controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                                                                                    //                                 controller.isCheckedmodule.value = val!;
+                                                                                                                                                                    //                                 controller.update();
+                                                                                                                                                                    //                               }),
+                                                                                                                                                                    //                           Dimens.boxWidth5,
+                                                                                                                                                                    //                           Text("${getAccesslevelDetails?.feature_name}")
+                                                                                                                                                                    //                         ],
+                                                                                                                                                                    //                       );
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                                                                                                    //                         getAccesslevelDetails?.add.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                       });
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                                                                                                    //                         getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                       });
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                 ]))
+                                                                                                                                                                    //             .toList()
+                                                                                                                                                                    //         : [],
+                                                                                                                                                                    //   )
+                                                                                                                                                                    )
                                                                                   : Container())
                                                                           : Container(
                                                                               height: Get.height - 30,
@@ -1616,100 +1716,181 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                 ],
                                                                               ),
                                                                               child: controller.accessList.length > 0
-                                                                                  ? ScrollableTableView(
-                                                                                      columns: [
-                                                                                        "Module Name",
-                                                                                        "Add",
-                                                                                        "Edit",
-                                                                                        "Delete",
-                                                                                        "View",
-                                                                                        "Issue",
-                                                                                        "Approve",
-                                                                                        "Self View"
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          label: column,
-                                                                                          // width:
-                                                                                          //     115, // Set the width of the column to 100
-
-                                                                                          minWidth: Get.width * 0.085,
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: true
-                                                                                          ? controller.accessList
-                                                                                              .map((getAccesslistDetails) => TableViewRow(height: 60, cells: [
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return Row(
-                                                                                                          children: [
-                                                                                                            Checkbox(
-                                                                                                                value: controller.isCheckedmodule.value,
-                                                                                                                checkColor: Colors.white,
-                                                                                                                activeColor: ColorValues.blackColor,
-                                                                                                                shape: RoundedRectangleBorder(
-                                                                                                                  borderRadius: BorderRadius.circular(2.0),
-                                                                                                                ),
-                                                                                                                side: MaterialStateBorderSide.resolveWith(
-                                                                                                                  (states) => BorderSide(
-                                                                                                                    width: 1.0,
-                                                                                                                    color: ColorValues.blackColor,
-                                                                                                                  ),
-                                                                                                                ),
-                                                                                                                onChanged: (val) {
-                                                                                                                  controller.accessList.firstWhere((e) => e?.feature_name == getAccesslistDetails?.feature_name);
-                                                                                                                  controller.isCheckedmodule.value = val!;
-
-                                                                                                                  controller.update();
-                                                                                                                }),
-                                                                                                            Dimens.boxWidth5,
-                                                                                                            Text("${getAccesslistDetails?.feature_name}")
-                                                                                                          ],
-                                                                                                        );
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return controller.rowItem(getAccesslistDetails?.add.value, onCheck: (val) {
-                                                                                                          getAccesslistDetails?.add.value = val == true ? 1 : 0;
+                                                                                  ? Expanded(
+                                                                                      child: DataTable2(
+                                                                                        dataRowHeight: 30,
+                                                                                        columnSpacing: 10,
+                                                                                        columns: [
+                                                                                          DataColumn2(
+                                                                                            fixedWidth: 180,
+                                                                                            label: Text('Module Name',
+                                                                                            style: TextStyle(
+                                                                                              fontSize: 15,
+                                                                                              fontWeight:FontWeight.bold
+                                                                                            ),),
+                                                                                          ),
+                                                                                          DataColumn2(label: Text('Add',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15,
+                                                                                            fontWeight:FontWeight.bold
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('edit',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15,
+                                                                                            fontWeight:FontWeight.bold
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('delete',
+                                                                                          style: TextStyle(
+                                                                                            fontSize: 15,
+                                                                                            fontWeight:FontWeight.bold
+                                                                                          ),)),
+                                                                                          DataColumn2(label: Text('view',
+                                                                                          style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),)),
+                                                                                          DataColumn2(label: Text('issue',
+                                                                                          style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),)),
+                                                                                          DataColumn2(label: Text('approve',
+                                                                                          style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),)),
+                                                                                          DataColumn2(label: Text('self view',
+                                                                                          style: TextStyle(fontSize: 15,fontWeight:FontWeight.bold),))
+                                                                                        ],
+                                                                                        rows: true 
+                                                                                          ? controller.accesslevel.map((getAccesslevelDetails) {
+                                                                                          return DataRow(cells: [
+                                                                                            DataCell(Text(
+                                                                                                      "${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.add.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return controller.rowItem(getAccesslistDetails?.edit.value, onCheck: (val) {
-                                                                                                          getAccesslistDetails?.edit.value = val == true ? 1 : 0;
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.delete.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.delete.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.view.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.view.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.issue.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.issue.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.approve.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.selfView.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                  ]))
-                                                                                              .toList()
-                                                                                          : [],
-                                                                                    )
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),),
+                                                                                            DataCell(Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),)
+                                                                                          ]);
+                                                                                        }
+                                                                                      ).toList()
+                                                                                      :[] )
+                                                                                                                                                                    // ? ScrollableTableView(
+                                                                                                                                                                    //     columns: [
+                                                                                                                                                                    //       "Module Name",
+                                                                                                                                                                    //       "Add",
+                                                                                                                                                                    //       "Edit",
+                                                                                                                                                                    //       "Delete",
+                                                                                                                                                                    //       "View",
+                                                                                                                                                                    //       "Issue",
+                                                                                                                                                                    //       "Approve",
+                                                                                                                                                                    //       "Self View"
+                                                                                                                                                                    //     ].map((column) {
+                                                                                                                                                                    //       return TableViewColumn(
+                                                                                                                                                                    //         label: column,
+                                                                                                                                                                    //         // width:
+                                                                                                                                                                    //         //     115, // Set the width of the column to 100
+                                                                                    
+                                                                                                                                                                    //         minWidth: Get.width * 0.085,
+                                                                                                                                                                    //       );
+                                                                                                                                                                    //     }).toList(),
+                                                                                                                                                                    //     rows: true
+                                                                                                                                                                    //         ? controller.accesslevel
+                                                                                                                                                                    //             .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return Row(
+                                                                                                                                                                    //                         children: [
+                                                                                                                                                                    //                           Checkbox(
+                                                                                                                                                                    //                               value: controller.isCheckedmodule.value,
+                                                                                                                                                                    //                               checkColor: Colors.white,
+                                                                                                                                                                    //                               activeColor: ColorValues.blackColor,
+                                                                                                                                                                    //                               shape: RoundedRectangleBorder(
+                                                                                                                                                                    //                                 borderRadius: BorderRadius.circular(2.0),
+                                                                                                                                                                    //                               ),
+                                                                                                                                                                    //                               side: MaterialStateBorderSide.resolveWith(
+                                                                                                                                                                    //                                 (states) => BorderSide(
+                                                                                                                                                                    //                                   width: 1.0,
+                                                                                                                                                                    //                                   color: ColorValues.blackColor,
+                                                                                                                                                                    //                                 ),
+                                                                                                                                                                    //                               ),
+                                                                                                                                                                    //                               onChanged: (val) {
+                                                                                                                                                                    //                                 controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                                                                                    //                                 controller.isCheckedmodule.value = val!;
+                                                                                                                                                                    //                                 controller.update();
+                                                                                                                                                                    //                               }),
+                                                                                                                                                                    //                           Dimens.boxWidth5,
+                                                                                                                                                                    //                           Text("${getAccesslevelDetails?.feature_name}")
+                                                                                                                                                                    //                         ],
+                                                                                                                                                                    //                       );
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                                                                                                    //                         getAccesslevelDetails?.add.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                       });
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(
+                                                                                                                                                                    //                     child: Obx(() {
+                                                                                                                                                                    //                       return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                                                                                                    //                         getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                       });
+                                                                                                                                                                    //                     }),
+                                                                                                                                                                    //                   ),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                   TableViewCell(child: Obx(() {
+                                                                                                                                                                    //                     return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                                                                                    //                       getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                                                                                    //                     });
+                                                                                                                                                                    //                   })),
+                                                                                                                                                                    //                 ]))
+                                                                                                                                                                    //             .toList()
+                                                                                                                                                                    //         : [],
+                                                                                                                                                                    //   )
+                                                                                                                                                                    )
                                                                                   : Container()))
                                                                 ],
                                                               ),

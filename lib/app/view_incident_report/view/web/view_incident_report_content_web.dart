@@ -3,6 +3,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
@@ -42,7 +43,7 @@ class ViewIncidentReportContentWeb
           children: [
             Responsive.isMobile(context) || Responsive.isTablet(context)
                 ? Dimens.box0
-                : HomeDrawer(),
+                : Container(),
             Expanded(
               child: RepaintBoundary(
                 key: controller.printKey,
@@ -59,6 +60,7 @@ class ViewIncidentReportContentWeb
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        HeaderWidget(),
                         Container(
                           height: 55,
                           decoration: BoxDecoration(
@@ -97,10 +99,10 @@ class ViewIncidentReportContentWeb
                                   Get.offNamed(Routes.incidentReportListWeb);
                                 },
                                 child: Text(" / INCIDENT REPORT LIST",
-                                    style: Styles.greyMediumLight12),
+                                    style: Styles.greyLight14),
                               ),
                               Text(" / VIEW INCIDENT REPORT",
-                                  style: Styles.greyMediumLight12)
+                                  style: Styles.greyLight14)
                             ],
                           ),
                         ),
