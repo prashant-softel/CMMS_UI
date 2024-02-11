@@ -29,7 +29,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = VegetationPlanListDataSource(controller);
+              // final dataSource = VegetationPlanListDataSource(controller);
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -423,7 +423,13 @@ class VegetationPlanListDataSource extends DataTableSource {
                           color: ColorValues.viewColor,
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
-                          onPress: () {},
+                          onPress: () {
+                            int id = VegetationListDetails?.planId ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewVegetationPlanScreen,
+                                  arguments: {'id': id});
+                            }
+                          },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,

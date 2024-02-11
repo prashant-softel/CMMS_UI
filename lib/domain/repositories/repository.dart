@@ -10071,11 +10071,11 @@ class Repository {
               vegPlanDetailModelFromJson(res.data);
 
           var responseMap = _vegPlanDetailModel;
-          print({"MCPlandetail", responseMap});
+          print({"VegPlandetail", responseMap});
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'MCPlanDetail');
+        Utility.showDialog(res.errorCode.toString() + 'VegPlanDetail');
         //return '';
       }
       return null;

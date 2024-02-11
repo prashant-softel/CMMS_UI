@@ -7003,7 +7003,7 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Vegetation/GetVegetationPlanDetails?planId=$plan_id',
-      Request.get,
+      Request.getMultiparts,
       null,
       isLoading,
       {
