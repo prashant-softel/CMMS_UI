@@ -297,7 +297,7 @@ class AddJobController extends GetxController {
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
 
-      String _breakdownTime = breakdownTimeCtrlr.text.trim();
+      String _breakdownTime = formatDate(breakdownTimeCtrlr.text.trim());
       print(_breakdownTime);
       selectedAssetsIdList.clear();
 
