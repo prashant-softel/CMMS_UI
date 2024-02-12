@@ -29,7 +29,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       GetRODetailsByIDModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
-  Map<String, GetAssetDataModel> dropdownMapperData = {};
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   // int get facilityId => _facilityId.value;

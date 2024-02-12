@@ -266,10 +266,18 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 ?.checklist_observation?[index]
                                                 .observation ??
                                             '')),
-                                        DataCell(Text(
-                                          "JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.toString() ?? ''}",
-                                          style: Styles.primary15Underlined,
-                                        )),
+                                        controller
+                                                    .selectedItem
+                                                    ?.checklist_observation?[
+                                                        index]
+                                                    .linked_job_id ==
+                                                0
+                                            ? DataCell(Text(''))
+                                            : DataCell(Text(
+                                                "JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.toString() ?? ''}",
+                                                style:
+                                                    Styles.primary15Underlined,
+                                              )),
                                       ]),
                                     ),
                                   ),
@@ -376,9 +384,23 @@ class ObservationPMTaskViewDialog extends GetView {
                                           0,
                                       (index) => DataRow(cells: [
                                         DataCell(Text('${index + 1}')),
-                                        DataCell(Text(
-                                          "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
-                                          style: Styles.primary15Underlined,
+                                        DataCell(InkWell(
+                                          onTap: () {
+                                            controller.clearStoreDataJobId();
+
+                                            Get.toNamed(Routes.jobDetails,
+                                                arguments: {
+                                                  'jobId': controller
+                                                      .selectedItem
+                                                      ?.schedule_link_job?[
+                                                          index]
+                                                      .job_id
+                                                });
+                                          },
+                                          child: Text(
+                                            "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
+                                            style: Styles.primary15Underlined,
+                                          ),
                                         )),
                                         DataCell(Text('--')),
                                         DataCell(Text(controller
