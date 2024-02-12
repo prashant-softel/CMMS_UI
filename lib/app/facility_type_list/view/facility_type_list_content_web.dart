@@ -1390,7 +1390,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     // DataColumn2(
                                     //     // fixedWidth: 300,
                                     //     label: Text(
-                                    //   "Address",
+                                    //   "Desc",
                                     //   style: TextStyle(
                                     //       fontSize: 15,
                                     //       fontWeight: FontWeight.bold),
@@ -1462,7 +1462,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           '')),
                                       // DataCell(Text(controller
                                       //         .facilityTypeList?[index]
-                                      //         ?.address ??
+                                      //         ?.description ??
                                       //     '')),
                                       DataCell(Text(controller
                                               .facilityTypeList[index].spv ??
@@ -1508,6 +1508,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     controller.selectedItem
                                                             ?.name ??
                                                         '';
+                                                controller.descriptionCtrlr
+                                                    .text = controller
+                                                        .selectedItem
+                                                        ?.description ??
+                                                    '';
                                                 controller.addressCtrlr.text =
                                                     controller.selectedItem
                                                             ?.address ??
