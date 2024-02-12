@@ -60,10 +60,10 @@ class SafetyQuestionsListContentWeb
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
+                    child: Text(" / BREAKDOWN MAINTENANCE",
+                        style: Styles.greyLight14),
                   ),
-                  Text(" / PERMIT TYPE CHECKLIST",
-                      style: Styles.greyLight14)
+                  Text(" / PERMIT TYPE CHECKLIST", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -149,7 +149,7 @@ class SafetyQuestionsListContentWeb
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 15),
                                     child: CustomRichText(
-                                        title: 'Safety Measure Title '),
+                                        title: 'Checklist Title '),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
@@ -193,7 +193,8 @@ class SafetyQuestionsListContentWeb
                                             ),
                                             controller: controller.titleCtrlr,
                                             focusNode: controller.titleFocus,
-                                            scrollController: controller.titleScroll,
+                                            scrollController:
+                                                controller.titleScroll,
                                             keyboardType:
                                                 TextInputType.multiline,
                                             maxLines: 1,

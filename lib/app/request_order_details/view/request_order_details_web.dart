@@ -55,8 +55,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
               onTap: () {
                 Get.offAllNamed(Routes.purchaseGoodsorder);
               },
-              child:
-                  Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
+              child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
             ),
             Text(" / REQUEST GOODS  ", style: Styles.greyLight14)
           ],
@@ -489,7 +488,8 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[
+                                            inputFormatters: <
+                                                TextInputFormatter>[
                                               FilteringTextInputFormatter
                                                   .digitsOnly
                                             ],
