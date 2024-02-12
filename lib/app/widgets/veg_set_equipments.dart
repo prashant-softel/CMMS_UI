@@ -14,7 +14,6 @@ class VegSetEquipment extends GetView {
   int? estimateDurationDays;
   VegSetEquipment({required this.estimateDurationDays});
   final AddVegetationPlanController controller = Get.find();
-  bool isExpanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +111,7 @@ class VegSetEquipment extends GetView {
                                       onTap: () {
                                         setState(
                                           () {
-                                            isExpanded = !isExpanded;
+                                            e.isExpanded = !e.isExpanded;
                                           },
                                         );
                                       },
@@ -124,7 +123,7 @@ class VegSetEquipment extends GetView {
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          Icon(!isExpanded
+                                          Icon(e!.isExpanded
                                               ? Icons.arrow_drop_down
                                               : Icons.arrow_drop_up)
                                         ],
@@ -162,10 +161,10 @@ class VegSetEquipment extends GetView {
                                   ),
                                 ],
                               ),
-                              isExpanded
+                              e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e!.invs!.map(
+                                          e.invs!.map(
                                             (invs) {
                                               return Row(
                                                 children: [
@@ -178,13 +177,13 @@ class VegSetEquipment extends GetView {
                                                   Expanded(
                                                     child:
                                                         DropdownButton<String>(
-                                                      // value:
-                                                      // invs.selectedDay,
+                                                      value:
+                                                      invs.selectedDay,
                                                       onChanged: (newValue) {
-                                                        // setState(() {
-                                                        //   invs.selectedDay =
-                                                        //       newValue!;
-                                                        // });
+                                                        setState(() {
+                                                          invs.selectedDay =
+                                                              newValue!;
+                                                        });
                                                       },
                                                       items: controller.days
                                                           .map(
@@ -224,7 +223,6 @@ class VegSetEquipment extends GetView {
                         text: 'Submit',
                         onPressed: () {
                           controller.createVegPlan();
-                          Get.offNamed(Routes.vegetationPlanListScreen);
                         },
                       ),
                     ),

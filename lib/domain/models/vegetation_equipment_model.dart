@@ -12,10 +12,17 @@ class VegetationEquipmentModel {
   int? blockId;
   String? blockName;
   int? area;
+  bool isExpanded;
   List<Invs>? invs;
+  String? selectedDay;
 
   VegetationEquipmentModel(
-      {this.blockId, this.blockName, this.area, this.invs});
+      {this.blockId,
+      this.blockName,
+      this.area,
+      this.invs,
+      this.isExpanded = false,
+      this.selectedDay});
 
   factory VegetationEquipmentModel.fromJson(Map<String, dynamic> json) =>
       VegetationEquipmentModel(
@@ -40,20 +47,23 @@ class Invs {
   int? invId;
   String? invName;
   int? area;
+  String? selectedDay;
 
-  Invs({this.blockId, this.invId, this.invName, this.area});
+  Invs({this.blockId, this.invId, this.invName, this.area, this.selectedDay});
 
   factory Invs.fromJson(Map<String, dynamic> json) => Invs(
       blockId: json['blockId'],
       invId: json['invId'],
       invName: json['invName'],
-      area: json['area']);
+      area: json['area'],
+      selectedDay: json["selectedDay"]);
 
   Map<String, dynamic> toJson() => {
         "blockId": blockId,
         "invId": invId,
         "invName": invName,
         "area": area,
+        "selectedDay": selectedDay,
       };
 }
 

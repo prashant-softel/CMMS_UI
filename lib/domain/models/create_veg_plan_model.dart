@@ -9,14 +9,14 @@ class CreateVegPlanModel {
   String? title;
   int? noOfCleaningDays;
   int? frequencyId;
-  List<Schedules>? schedules;
+  List<Schedule>? schedule;
 
   CreateVegPlanModel(
       {this.facilityId,
       this.title,
       this.noOfCleaningDays,
       this.frequencyId,
-      this.schedules});
+      this.schedule});
 
   factory CreateVegPlanModel.fromJson(Map<String, dynamic> json) =>
       CreateVegPlanModel(
@@ -24,9 +24,9 @@ class CreateVegPlanModel {
         title: json['title'],
         noOfCleaningDays: json['noOfCleaningDays'],
         frequencyId: json['frequencyId'],
-        schedules: json["schedules"] != null
-            ? List<Schedules>.from(
-                json["schedules"].map((x) => Schedules.fromJson(x)))
+        schedule: json["schedule"] != null
+            ? List<Schedule>.from(
+                json["schedule"].map((x) => Schedule.fromJson(x)))
             : [],
       );
 
@@ -35,17 +35,17 @@ class CreateVegPlanModel {
         "facilityId": facilityId,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
+        "schedule": List<dynamic>.from(schedule!.map((x) => x.toJson())),
       };
 }
 
-class Schedules {
+class Schedule {
   int? cleaningDay;
   List<Equipments>? equipments;
 
-  Schedules({this.cleaningDay, this.equipments});
+  Schedule({this.cleaningDay, this.equipments});
 
-  factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
+  factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
         cleaningDay: json['cleaningDay'],
         equipments: json['equipments'] != null
             ? List<Equipments>.from(
@@ -74,5 +74,5 @@ class Equipments {
       };
 }
 
-String cereateVegPlanModelToJson(Schedules data) => json.encode(data.toJson());
+String cereateVegPlanModelToJson(Schedule data) => json.encode(data.toJson());
 String createVegPlanModelToJson(Equipments data) => json.encode(data.toJson());

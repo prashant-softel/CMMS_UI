@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
+import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/usecases/vegetation_list_usecase.dart';
 
@@ -42,6 +43,16 @@ class AddVegetationPresenter {
     return vegetationlistUsecase.getVegEquipmentModelList(
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<VegPlanDetailModel?> getVegPlanDetail({
+    bool? isLoading,
+    required int planId,
+  }) async {
+    return vegetationlistUsecase.getVegPlanDetail(
+      planId: planId,
+      isLoading: isLoading ?? false,
     );
   }
 }
