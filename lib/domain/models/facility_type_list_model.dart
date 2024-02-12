@@ -15,6 +15,7 @@ class FacilityTypeListModel {
   FacilityTypeListModel({
     this.id,
     this.name,
+    this.description,
     this.spv,
     this.address,
     this.city,
@@ -30,6 +31,7 @@ class FacilityTypeListModel {
   String? name;
   String? address;
   String? spv;
+  String? description;
   String? city;
   String? state;
   String? country;
@@ -43,6 +45,7 @@ class FacilityTypeListModel {
       FacilityTypeListModel(
         id: json["id"],
         name: json["name"],
+        description: json["description"],
         address: json['address'],
         spv: json['spv'],
         city: json['city'],
@@ -58,6 +61,7 @@ class FacilityTypeListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "description": description,
         "address": address,
         "spv": spv,
         "city": city,

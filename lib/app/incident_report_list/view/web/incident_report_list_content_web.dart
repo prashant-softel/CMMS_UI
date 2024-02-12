@@ -639,7 +639,17 @@ class IncidentReportListDataSource extends DataTableSource {
                                         incidentReportListDetails!.status ==
                                             181 ||
                                     // incidentReportListDetails!.status == 182 ||
-                                    incidentReportListDetails!.status == 184
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kIncidentReportFeatureId &&
+                                                    e.approve ==
+                                                        UserAccessConstants
+                                                            .kHaveApproveAccess)
+                                                .length >
+                                            0 &&
+                                        incidentReportListDetails!.status == 184
                                 ? TableActionButton(
                                     color: ColorValues.approveColor,
                                     icon: Icons.approval_rounded,
