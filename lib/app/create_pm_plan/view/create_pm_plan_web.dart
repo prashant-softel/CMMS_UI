@@ -75,9 +75,9 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                           Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
-                      Text(" / CREATE PM PLAN", style: Styles.greyMediumLight12)
+                      Text(" / CREATE PM PLAN", style: Styles.greyLight14)
                     ],
                   ),
                 ),
