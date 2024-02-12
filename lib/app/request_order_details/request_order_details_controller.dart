@@ -140,6 +140,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
       {'key': "Comment", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
