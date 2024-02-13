@@ -271,7 +271,7 @@ class MenuItem extends StatelessWidget {
         children: [
           Dimens.boxHeight15,
           InkWell(
-            mouseCursor: MaterialStateMouseCursor.clickable,
+            // mouseCursor: MaterialStateMouseCursor.clickable,
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -334,7 +334,7 @@ class MenuItemLogo extends StatelessWidget {
       child: Container(
           child: Column(
         children: [
-          Dimens.boxHeight15,
+          Dimens.boxHeight20,
           InkWell(
             mouseCursor: MaterialStateMouseCursor.clickable,
             onTap: press,
@@ -342,53 +342,25 @@ class MenuItemLogo extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      child: Image.asset(
-                        icon,
-                      ),
-                    ),
-                    Dimens.boxWidth5,
-                    isexpand == true
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "HERO",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: Color(0xffD2D0D0),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                                Text(
-                                  "FUTURE",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: Color(0xffD2D0D0),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  "ENERGIES",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: Color(0xffD2D0D0),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Text("")
-                  ],
+                SizedBox(
+                  child: Image.asset(
+                    icon,
+                  ),
                 ),
+                Dimens.boxWidth5,
+                isexpand!
+                    ? Expanded(
+                        child: Text(
+                          "HERO \nFUTURE \nENERGIES",
+                          style: TextStyle(
+                            color: Color(0xffD2D0D0),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    : Text(""),
               ],
             ),
           ),

@@ -1609,6 +1609,37 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                 ?.id
                                                                 .toString());
 
+                                                controller
+                                                    .businesslistNumberCtrlr
+                                                    .text = controller
+                                                        .selectedItem?.name ??
+                                                    '';
+                                                controller.emailCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.email ??
+                                                        '';
+                                                controller.contactpersonCtrlr
+                                                    .text = controller
+                                                        .selectedItem
+                                                        ?.contactPerson ??
+                                                    '';
+                                                controller.contactnumberCtrlr
+                                                    .text = controller
+                                                        .selectedItem
+                                                        ?.contactnumber ??
+                                                    '';
+                                                controller.websiteCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.website ??
+                                                        '';
+                                                controller.locationCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.location ??
+                                                        '';
+                                                controller.addressCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.address ??
+                                                        '';
                                                 controller.selectedCity.value =
                                                     controller.selectedItem
                                                             ?.city ??
@@ -1622,6 +1653,10 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                         .selectedItem
                                                         ?.country ??
                                                     '';
+                                                controller.zipCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.zip ??
+                                                        '';
                                                 controller.isContainerVisible
                                                     .value = true;
                                               }),

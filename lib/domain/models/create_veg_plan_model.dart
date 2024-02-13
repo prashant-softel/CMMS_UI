@@ -3,20 +3,19 @@ import 'dart:convert';
 CreateVegPlanModel createMcPlaningModelFromJson(String str) =>
     CreateVegPlanModel.fromJson(json.decode(str));
 
-
 class CreateVegPlanModel {
   int? facilityId;
   String? title;
   int? noOfCleaningDays;
   int? frequencyId;
-  List<Schedule>? schedule;
+  List<Schedule>? schedules;
 
   CreateVegPlanModel(
       {this.facilityId,
       this.title,
       this.noOfCleaningDays,
       this.frequencyId,
-      this.schedule});
+      this.schedules});
 
   factory CreateVegPlanModel.fromJson(Map<String, dynamic> json) =>
       CreateVegPlanModel(
@@ -24,9 +23,9 @@ class CreateVegPlanModel {
         title: json['title'],
         noOfCleaningDays: json['noOfCleaningDays'],
         frequencyId: json['frequencyId'],
-        schedule: json["schedule"] != null
+        schedules: json["schedules"] != null
             ? List<Schedule>.from(
-                json["schedule"].map((x) => Schedule.fromJson(x)))
+                json["schedules"].map((x) => Schedule.fromJson(x)))
             : [],
       );
 
@@ -35,7 +34,7 @@ class CreateVegPlanModel {
         "facilityId": facilityId,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
-        "schedule": List<dynamic>.from(schedule!.map((x) => x.toJson())),
+        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
       };
 }
 

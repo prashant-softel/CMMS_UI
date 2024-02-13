@@ -6982,7 +6982,7 @@ class ConnectHelper {
       'Vegetation/GetVegEquipmentList?facilityId=$facilityId',
       // startDateParam +
       // endDateParam,
-      Request.getMultiparts,
+      Request.get,
       null,
       isLoading,
       {
