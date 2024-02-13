@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/incident_report_approve_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
+import 'package:cmms/app/widgets/ir_reject_part2_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
@@ -1883,7 +1884,7 @@ class ViewIncidentReportContentWeb
                                                               text: "Reject IR",
                                                               icon: Icons.close,
                                                               onPressed: () {
-                                                                Get.dialog(IncidentReportRejectDialog(
+                                                                Get.dialog(IncidentReportSecondRejectDialog(
                                                                     id: controller
                                                                         .irId
                                                                         .value));
