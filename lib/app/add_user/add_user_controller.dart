@@ -326,7 +326,7 @@ class AddUserController extends GetxController {
       selectedRole.value = userDetailModel.value?.role_name ?? "";
       selectedRoleId = userDetailModel.value?.role_id ?? 0;
       photoId = userDetailModel.value?.photoId ?? 0;
-      gender.value = userDetailModel.value?.gender_name ?? "";
+      selectedGender.value = userDetailModel.value?.gender_name ?? "";
       selectedIBusinessList.value = userDetailModel.value?.company_name ?? "";
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
