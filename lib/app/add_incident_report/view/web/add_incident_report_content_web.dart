@@ -1471,8 +1471,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                   )
                                                 : Container(),
                                             controller.incidentReportDetailsModel
-                                                        .value?.status ==
-                                                    183
+                                                            .value?.status ==
+                                                        183 ||
+                                                    controller
+                                                            .incidentReportDetailsModel
+                                                            .value
+                                                            ?.status ==
+                                                        185
                                                 ? CustomElevatedButton(
                                                     backgroundColor: ColorValues
                                                         .appDarkBlueColor,
