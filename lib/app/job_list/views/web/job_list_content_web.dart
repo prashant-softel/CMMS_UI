@@ -269,7 +269,7 @@ class JobListContentWeb extends StatelessWidget {
                                       'Job Title',
                                       // ColumnSize.M,
                                       controller.jobDetailsFilterText,
-                                      150),
+                                      250),
                                   buildDataColumn(
                                       'breakdownTime',
                                       'BreakdownTime',

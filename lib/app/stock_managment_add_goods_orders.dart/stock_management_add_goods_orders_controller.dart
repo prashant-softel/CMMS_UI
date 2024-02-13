@@ -108,12 +108,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   // Rx<bool> isAssetSelected = true.obs;
   // Rx<String> selectedAsset = ''.obs;
 
-  // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
-  final rowItem = Rx<List<List<Map<String, String>>>>([]);
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  // final rowItem = Rx<List<List<Map<String, String>>>>([]);
   // Map<String, GetAssetDataModel> dropdownMapperData = {};
-  Map<String, GoDetails> dropdownMapperData = {};
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
 
-  Map<String, PaiedModel> paiddropdownMapperData = {};
+  RxMap<dynamic, dynamic> paiddropdownMapperData = {}.obs;
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
@@ -319,11 +319,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
       print(
           'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length}');
-      rowItem.value = [];
+      rowItem = <List<Map<String, String>>>[].obs;
       goDetails?.value = _getPurchaseDetailsById.goDetails;
 
       _getPurchaseDetailsById.goDetails.forEach((element) {
-        rowItem.value.add(
+        rowItem.add(
           [
             {
               "key": "Drop_down",
@@ -495,10 +495,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
         }
         break;
+
       case RxList<GetRequestOrderListModel>:
         {
           int reqOrderIndex =
               goodsOrdersList.indexWhere((x) => x?.name == value);
+          rowItem.value = <List<Map<String, String>>>[].obs;
+          // rowItem.remove();
+          selectedReqOrder.value = goodsOrdersList[reqOrderIndex]?.name ?? "";
           selectedReqOrderId =
               int.tryParse(goodsOrdersList[reqOrderIndex]?.name ?? "") ?? 0;
           getRoDetailsByID(requestID: selectedReqOrderId);
@@ -520,7 +524,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {
         "key": "Drop_down",
         "value": 'Please Select',
@@ -531,6 +535,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -621,7 +626,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
     String _jobRefCtrlr = jobRefCtrlr.text.trim();
     List<Items> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       Items item = Items(
         received_qty: 0,
         lost_qty: 0,
@@ -690,6 +695,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     for (var requ in _goodsordersList) {
       goodsOrdersList.add(requ);
     }
+    selectedReqOrderId = int.tryParse(goodsOrdersList[0]?.name ?? "") ?? 0;
+    selectedReqOrder.value = goodsOrdersList[0]?.name ?? "";
+    getRoDetailsByID(requestID: selectedReqOrderId);
 
     update(['requ']);
   }

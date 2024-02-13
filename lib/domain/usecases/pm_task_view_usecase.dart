@@ -112,4 +112,5 @@ class PreventiveMaintenanceTaskViewUsecase {
       repository.clearData(LocalKeys.toactortypeid);
   void clearStoreTaskWhereUsedData() async =>
       repository.clearData(LocalKeys.whereUsed);
+  void clearStoreDataJobId() async => repository.clearData(LocalKeys.jobId);
 }

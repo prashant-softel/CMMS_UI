@@ -1,4 +1,4 @@
-import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_controller.dart';
+import 'package:cmms/app/request_order_details/request_order_details_controller.dart';
 import 'package:cmms/app/request_order_details/view/request_order_details_web.dart';
 
 import 'package:flutter/material.dart';
@@ -8,9 +8,10 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class StockManagementGoodsOrdersReqdetailsScreen extends GetView<StockManagementGoodsOrdersController> {
+class StockManagementGoodsOrdersReqdetailsScreen
+    extends GetView<GoodsOrdersReqDetailController> {
   StockManagementGoodsOrdersReqdetailsScreen({super.key});
-  final controller = Get.find<StockManagementGoodsOrdersController>();
+  // final controller = Get.find<GoodsOrdersReqDetailController>();
 
   @override
   Widget build(BuildContext context) {

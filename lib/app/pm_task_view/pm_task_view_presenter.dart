@@ -142,4 +142,7 @@ class PreventiveMaintenanceTaskViewPresenter {
   void clearStoreTaskWhereUsedData() {
     preventiveMaintenanceTaskViewUsecase.clearStoreTaskWhereUsedData();
   }
+
+  void clearStoreDataJobId() async =>
+      preventiveMaintenanceTaskViewUsecase.clearStoreDataJobId();
 }

@@ -55,8 +55,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
               onTap: () {
                 Get.offAllNamed(Routes.purchaseGoodsorder);
               },
-              child:
-                  Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
+              child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
             ),
             Text(" / REQUEST GOODS  ", style: Styles.greyLight14)
           ],
@@ -407,6 +406,13 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
+                DataColumn2(
+                    fixedWidth: 70,
+                    label: Text(
+                      "Action",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
               ],
               rows: controller.rowItem.value.map((record) {
                 return DataRow(
@@ -505,47 +511,71 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Comment")
+                              : (mapData['key'] == "Action ")
                                   ? Padding(
-                                      padding: const EdgeInsets.only(top: 10),
+                                      padding: EdgeInsets.only(top: 10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                maxLine: 1,
-                                                textController:
-                                                    new TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
-                                                                ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                },
-                                              )),
+                                          TableActionButton(
+                                            color: ColorValues.appRedColor,
+                                            icon: Icons.delete,
+                                            label: '',
+                                            message: '',
+                                            onPress: () {
+                                              controller.rowItem.remove(record);
+                                            },
+                                          )
                                         ],
                                       ),
                                     )
-                                  : Text(mapData['key'] ?? ''),
+                                  : (mapData['key'] == "Comment")
+                                      ? Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: LoginCustomTextfield(
+                                                    maxLine: 1,
+                                                    textController:
+                                                        new TextEditingController(
+                                                            text: mapData[
+                                                                    "value"] ??
+                                                                ''),
+                                                    onChanged: (txt) {
+                                                      mapData["value"] = txt;
+                                                    },
+                                                  )),
+                                            ],
+                                          ),
+                                        )
+                                      : Text(mapData['key'] ?? ''),
                     );
                   }).toList(),
                 );
