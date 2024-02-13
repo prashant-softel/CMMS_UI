@@ -10002,7 +10002,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: " Paln Added Successfully...", fontSize: 16.0);
         Get.offNamed(
-          Routes.moduleCleaningListPlan,
+          Routes.vegetationPlanListScreen,
         );
 
         // if (res.errorCode == 200) {

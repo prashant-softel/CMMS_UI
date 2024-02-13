@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/create_veg_plan_model.dart';
 // import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ class AddVegetationPlanController extends GetxController {
   // RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxList<Schedules?> schedules = <Schedules>[].obs;
   Rx<DateTime> selectedStartTime = DateTime.now().obs;
+  Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
 
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
@@ -65,15 +67,14 @@ class AddVegetationPlanController extends GetxController {
   //   TypeModel(name: 'Wet', id: "2"),
   // ].obs;
 
-  // void addRowItem() {
-  //   rowItem.value.add([
-  //     {"key": "day", "value": ''},
-  //     {"key": "noOfInverters", "value": ''},
-  //     {'key': "noOfSMBs", "value": ''},
-  //     {'key': "noOfModules", "value": ''},
-  //     {'key': "cleaningType", "value": 'Please Select', "id": ""},
-  //   ]);
-  // }
+ void addRowItem() {
+    rowItem.value.add([
+      {"key": "day", "value": ''},
+      {"key": "noOfBlocks", "value": ''},
+      {'key': "noOfInverters", "value": ''},
+      {'key': "area", "value": ''},
+    ]);
+  }
 
   @override
   void onInit() async {
@@ -82,11 +83,11 @@ class AddVegetationPlanController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-      //   if (id != 0) {
-      //     Future.delayed(Duration(seconds: 1), () {
-      //       getMcPlanDetail(planId: id.value);
-      //     });
-      //   }
+        if (id != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getVegPlanDetail(planId: id.value);
+          });
+        }
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
@@ -121,13 +122,23 @@ class AddVegetationPlanController extends GetxController {
 
   void createVegPlan() async {
     var mappedData = {};
-    List<Schedules> schedules = [];
+    List<Schedule> schedule = [];
+    equipmentList.forEach((element) {
+      (element!.invs ?? []).forEach((invsItem) {
+        if (invsItem.selectedDay != null) {
+          mappedData[invsItem.selectedDay] = [
+            ...(mappedData[invsItem.selectedDay] ?? []),
+            invsItem.invId
+          ];
+        }
+      });
+    });
     mappedData.forEach((key, value) {
       List<Equipments> eqp = value.map<Equipments>((e) {
         return Equipments(id: e);
       }).toList();
-      schedules
-          .add(Schedules(cleaningDay: int.tryParse('${key}'), equipments: eqp));
+      schedule
+          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
     });
 
     print({"mappedData": mappedData});
@@ -140,7 +151,7 @@ class AddVegetationPlanController extends GetxController {
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _vegTitleController,
-        schedules: schedules);
+        schedule: schedule);
 
     var createVegModelJsonString = [createVegModel.toJson()];
     Map<String, dynamic>? responseCreateVegModel =
@@ -157,7 +168,7 @@ class AddVegetationPlanController extends GetxController {
   //   int i = -1;
 
   //   List<Schedules>? sch =
-  //       mcPlanDetailsModel.value?.schedules.map<Schedule>((e) {
+  //       vegPlanDetailsModel.value?.schedules.map<Schedule>((e) {
   //     i++;
   //     var row = rowItem.value[i];
   //     return Schedule(
@@ -193,47 +204,46 @@ class AddVegetationPlanController extends GetxController {
 
   //   var updateMcModelJsonString = [createVegModel.toJson()];
   //   Map<String, dynamic>? responseCreateMcModel =
-  //       await moduleCleaningPlanningPresenter.updateMcPlan(
+  //       await addVegetationPresenter.updateMcPlan(
   //     updateMcPlans: updateMcModelJsonString,
   //     isLoading: true,
   //   );
   //   if (responseCreateMcModel == null) {}
-  //   print('update MC   data: $updateMcModelJsonString');
+  //   print('update Veg   data: $updateMcModelJsonString');
   // }
 
-//   Future<void> getMcPlanDetail({required int planId}) async {
-//     // newPermitDetails!.value = <NewPermitListModel>[];
-//     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
+  Future<void> getVegPlanDetail({required int planId}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-//     final _mcPlanDetails = await moduleCleaningPlanningPresenter
-//         .getMcPlanDetail(planId: planId, isLoading: true);
-//     print('MC plan Detail:$_mcPlanDetails');
+    final _vegPlanDetails = await addVegetationPresenter
+        .getVegPlanDetail(planId: planId, isLoading: true);
+    print('Veg plan Detail:$_vegPlanDetails');
 
-//     if (_mcPlanDetails != null) {
-//       mcPlanDetailsModel.value = _mcPlanDetails;
-//       vegTitleController.text = mcPlanDetailsModel.value?.title ?? "";
-//       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
-//       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
-//       durationInDayCtrlr.text =
-//           mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
+    if (_vegPlanDetails != null) {
+      vegPlanDetailsModel.value = _vegPlanDetails;
+      vegTitleController.text = vegPlanDetailsModel.value?.title ?? "";
+      selectedfrequency.value = vegPlanDetailsModel.value?.frequency ?? '';
+      startDateTc.text = vegPlanDetailsModel.value?.startDate ?? '';
+      durationInDayCtrlr.text =
+          vegPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
 
-//       rowItem.value = [];
-//       schedules.value = _mcPlanDetails.schedules;
-//       _mcPlanDetails.schedules.forEach(
-//         (element) {
-//           rowItem.value.add(
-//             [
-//               {"key": "day", "value": '${element.cleaningDay}'},
-//               {"key": "noOfInverters", "value": '${element.invs}'},
-//               {'key': "noOfSMBs", "value": '${element.smbs}'},
-//               {'key': "noOfModules", "value": '${element.scheduledModules}'},
-//               {'key': "cleaningType", "value": 'Please Select'},
-//             ],
-//           );
-//         },
-//       );
-//     }
-//   }
+      rowItem.value = [];
+      schedules.value = _vegPlanDetails.schedules!;
+      _vegPlanDetails.schedules?.forEach(
+        (element) {
+          rowItem.value.add(
+            [
+              {"key": "day", "value": '${element.cleaningDay}'},
+              {'key': "noOfBlocks", "value": '${element.blocks}'},
+              {"key": "noOfInverters", "value": '${element.invs}'},
+              {'key': "area", "value": '${element.scheduledArea}'},
+            ],
+          );
+        },
+      );
+    }
+  }
 
   // Future<void> getAssignedToList() async {
   //   assignedToList.clear();

@@ -57,10 +57,9 @@ class ViewVegPlanController extends GetxController {
   void addRowItem() {
     rowItem.value.add([
       {"key": "day", "value": ''},
-      {"key": "noOfInverters", "value": ''},
-      {'key': "noOfSMBs", "value": ''},
-      {'key': "noOfModules", "value": ''},
-      {'key': "cleaningType", "value": 'Please Select', "id": ""},
+      {"key": "noOfBlocks", "value": ''},
+      {'key': "noOfInverters", "value": ''},
+      {'key': "area", "value": ''},
     ]);
   }
 

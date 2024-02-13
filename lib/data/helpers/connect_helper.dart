@@ -6965,9 +6965,6 @@ class ConnectHelper {
     print('Create Vegetation Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    // if (res.e != null) {
-    //   Get.dialog<void>(WarrantyClaimErrorDialog());
-    // } else {
 
     return responseModel;
   }
