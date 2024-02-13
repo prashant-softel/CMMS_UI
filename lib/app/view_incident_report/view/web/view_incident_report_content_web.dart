@@ -1853,44 +1853,59 @@ class ViewIncidentReportContentWeb
                                                       )
                                                     : Row(
                                                         children: [
-                                                          Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .appGreenColor,
-                                                              text:
-                                                                  "Approve IR",
-                                                              icon: Icons.add,
-                                                              onPressed: () {
-                                                                Get.dialog(
-                                                                    ApproveIncidentReportDialog(
-                                                                  id: controller
-                                                                      .irId
-                                                                      .value,
-                                                                ));
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .rejectColor,
-                                                              text: "Reject IR",
-                                                              icon: Icons.close,
-                                                              onPressed: () {
-                                                                Get.dialog(IncidentReportSecondRejectDialog(
-                                                                    id: controller
-                                                                        .irId
-                                                                        .value));
-                                                              },
-                                                            ),
-                                                          ),
+                                                          controller.incidentReportDetailsModel.value
+                                                                          ?.status ==
+                                                                      185 ||
+                                                                  controller
+                                                                          .incidentReportDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      184
+                                                              ? Row(
+                                                                  children: [
+                                                                    Container(
+                                                                      height:
+                                                                          45,
+                                                                      child:
+                                                                          CustomElevatedButton(
+                                                                        backgroundColor:
+                                                                            ColorValues.appGreenColor,
+                                                                        text:
+                                                                            "Approve IR",
+                                                                        icon: Icons
+                                                                            .add,
+                                                                        onPressed:
+                                                                            () {
+                                                                          Get.dialog(
+                                                                              ApproveIncidentReportDialog(
+                                                                            id: controller.irId.value,
+                                                                          ));
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth10,
+                                                                    Container(
+                                                                      height:
+                                                                          45,
+                                                                      child:
+                                                                          CustomElevatedButton(
+                                                                        backgroundColor:
+                                                                            ColorValues.rejectColor,
+                                                                        text:
+                                                                            "Reject IR",
+                                                                        icon: Icons
+                                                                            .close,
+                                                                        onPressed:
+                                                                            () {
+                                                                          Get.dialog(
+                                                                              IncidentReportSecondRejectDialog(id: controller.irId.value));
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              : Dimens.box0
                                                         ],
                                                       ),
                                               ],
