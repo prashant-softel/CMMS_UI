@@ -49,14 +49,20 @@ class Invs {
   int? area;
   String? selectedDay;
 
-  Invs({this.blockId, this.invId, this.invName, this.area, this.selectedDay});
+  Invs({
+    this.blockId,
+    this.invId,
+    this.invName,
+    this.area,
+    this.selectedDay,
+  });
 
   factory Invs.fromJson(Map<String, dynamic> json) => Invs(
       blockId: json['blockId'],
       invId: json['invId'],
       invName: json['invName'],
       area: json['area'],
-      selectedDay: json["selectedDay"]);
+      selectedDay: json['selectedDay']);
 
   Map<String, dynamic> toJson() => {
         "blockId": blockId,

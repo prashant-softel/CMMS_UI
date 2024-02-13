@@ -9996,7 +9996,7 @@ class Repository {
 
       var resourceData = res.data;
 
-      print('Response Create MC  : ${resourceData}');
+      print('Response Create veg  : ${resourceData}');
 
       if (!res.hasError) {
         Fluttertoast.showToast(

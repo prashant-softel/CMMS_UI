@@ -123,7 +123,7 @@ class AddVegetationPlanController extends GetxController {
   void createVegPlan() async {
     var mappedData = {};
     List<Schedule> schedule = [];
-    equipmentList.forEach((element) {
+    equipmentList.value.forEach((element) {
       (element!.invs ?? []).forEach((invsItem) {
         if (invsItem.selectedDay != null) {
           mappedData[invsItem.selectedDay] = [
@@ -151,7 +151,7 @@ class AddVegetationPlanController extends GetxController {
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _vegTitleController,
-        schedule: schedule);
+        schedules: schedule);
 
     var createVegModelJsonString = [createVegModel.toJson()];
     Map<String, dynamic>? responseCreateVegModel =
@@ -216,8 +216,8 @@ class AddVegetationPlanController extends GetxController {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _vegPlanDetails = await addVegetationPresenter
-        .getVegPlanDetail(planId: planId, isLoading: true);
+    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
+        planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetails');
 
     if (_vegPlanDetails != null) {

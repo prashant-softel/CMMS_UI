@@ -1,8 +1,5 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -99,7 +96,7 @@ class VegSetEquipment extends GetView {
                       ],
                     ),
                   )
-                ]..addAll(controller.equipmentList.map((e) {
+                ]..addAll(controller.equipmentList.value.map((e) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: Column(
@@ -132,7 +129,7 @@ class VegSetEquipment extends GetView {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${e?.area}",
+                                      "${e.area}",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold),
@@ -140,13 +137,13 @@ class VegSetEquipment extends GetView {
                                   ),
                                   Expanded(
                                     child: DropdownButton<String>(
-                                      // value: e.selectedDay,
+                                      value: e.selectedDay,
                                       onChanged: (newValue) {
                                         setState(() {
-                                          // e.selectedDay = newValue!;
-                                          // e.smbs.forEach((element) {
-                                          //   element.selectedDay = newValue;
-                                          // });
+                                          e.selectedDay = newValue!;
+                                          e.invs!.forEach((element) {
+                                            // element.selectedDay = newValue;
+                                          });
                                         });
                                       },
                                       items: controller.days
@@ -177,8 +174,7 @@ class VegSetEquipment extends GetView {
                                                   Expanded(
                                                     child:
                                                         DropdownButton<String>(
-                                                      value:
-                                                      invs.selectedDay,
+                                                      value: e.selectedDay,
                                                       onChanged: (newValue) {
                                                         setState(() {
                                                           invs.selectedDay =
