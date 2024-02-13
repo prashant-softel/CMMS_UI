@@ -740,6 +740,7 @@ class IncidentReportListDataSource extends DataTableSource {
                                     },
                                   )
                                 : Dimens.box0,
+
 //IR 2nd step button
                             varUserAccessModel.value.access_list!
                                             .where((e) =>
@@ -756,6 +757,38 @@ class IncidentReportListDataSource extends DataTableSource {
                                     color: Color.fromARGB(136, 107, 152, 211),
                                     icon: Icons.start_outlined,
                                     message: 'IR 2nd Step',
+                                    onPress: () {
+                                      controller.clearStoreData();
+
+                                      int irId =
+                                          incidentReportListDetails.id ?? 0;
+                                      if (irId != 0) {
+                                        Get.toNamed(
+                                            Routes.addIncidentReportContentWeb,
+                                            arguments: {
+                                              'irId':
+                                                  incidentReportListDetails.id,
+                                            });
+                                      }
+                                    },
+                                  )
+                                : Dimens.box0,
+
+                            varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
+                                        0 &&
+                                    incidentReportListDetails!.status == 185
+                                ? TableActionButton(
+                                    color: Color.fromARGB(255, 116, 78, 130),
+                                    icon: Icons.ads_click,
+                                    message: 'Re - Submit',
                                     onPress: () {
                                       controller.clearStoreData();
 
