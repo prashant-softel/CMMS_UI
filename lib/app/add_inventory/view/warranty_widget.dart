@@ -53,19 +53,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(
                                 child: Container(
                                 decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
+                                                        
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5),
@@ -93,19 +81,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(
                                 child: Container(
                                 decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
+                                                        
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5),
@@ -168,19 +144,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(
                                 child: Container(
                                 decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
+                                                        
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5),

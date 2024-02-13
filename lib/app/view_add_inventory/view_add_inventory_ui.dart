@@ -462,6 +462,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     Container(
                                       height: 400,
                                       child: TabBarView(
+                                        physics: NeverScrollableScrollPhysics(),
                                         children: [
                                           ViewCalibrationTabWidget(),
                                           ViewWarrantyTabWidget(),

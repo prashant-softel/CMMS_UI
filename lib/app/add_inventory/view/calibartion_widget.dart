@@ -50,25 +50,10 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                 Dimens.boxWidth5,
                                 SizedBox(
                                   child: Container(
-                                  decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                    decoration: BoxDecoration(
+                                      
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
                                     child: DropdownWebStock(
                                       margin: Dimens.edgeInsets5,
                                       width:
@@ -107,8 +92,8 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     ],
                                     controller:
                                         controller.calibrationRemaingCtrlr,
-                                        focusNode: controller.calremFocus,
-                                        scrollController: controller.calremScroll,
+                                    focusNode: controller.calremFocus,
+                                    scrollController: controller.calremScroll,
                                     decoration: InputDecoration(
                                       contentPadding: Dimens.edgeInsets5,
                                       focusedBorder: OutlineInputBorder(

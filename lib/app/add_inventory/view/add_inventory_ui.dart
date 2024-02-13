@@ -203,17 +203,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                          ],
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -241,17 +230,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                          ],
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -279,17 +257,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                          ],
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -361,17 +328,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                          ],
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -400,17 +356,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     SizedBox(
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: const Offset(
-                                                5.0,
-                                                5.0,
-                                              ),
-                                              blurRadius: 5.0,
-                                              spreadRadius: 1.0,
-                                            ),
-                                          ],
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -566,6 +511,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                 Container(
                                   height: 400,
                                   child: TabBarView(
+                                    physics: NeverScrollableScrollPhysics(),
                                     children: [
                                       CalibrationTabWidget(),
                                       WarrantyTabWidget(),
