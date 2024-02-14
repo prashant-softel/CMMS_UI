@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +11,7 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 380),
+        duration: Duration(milliseconds: 340),
         width: controller.isExpanded.value ? 250 : 70,
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),

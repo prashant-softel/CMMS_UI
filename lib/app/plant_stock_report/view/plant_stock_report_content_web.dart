@@ -126,7 +126,7 @@ class _PlantStockReportContentWebState
                                     child: MultipDropdownWebWidget(
                                       width:
                                           (MediaQuery.of(context).size.width *
-                                              .2),
+                                              .21),
                                       //  height: 35,
                                       dropdownList: controller.assetList,
                                       selectedItems:

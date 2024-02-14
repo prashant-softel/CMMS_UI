@@ -132,12 +132,7 @@ final List<Map<String, dynamic>> statutoryData = [
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
   final screenWidth = Get.width;
   @override
-  @override
   Widget build(BuildContext context) {
-    double defaultTextSize = 10.0;
-    double smallerScreenTextSize = 8.0;
-    double textSize =
-        screenWidth <= 600 ? smallerScreenTextSize : defaultTextSize;
     return Container(
         color: ColorValues.appBackgroundColor,
         child: DefaultTabController(
@@ -183,6 +178,9 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                   child: TabBar(
                     isScrollable: true,
                     tabs: [
+                      CustomTabBar(
+                        label: "All Module".tr,
+                      ),
                       CustomTabBar(
                         label: 'Breakdown Maintenance'.tr,
                         // icon: Icons.menu,
