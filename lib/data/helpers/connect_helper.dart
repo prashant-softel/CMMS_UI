@@ -650,6 +650,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getMCTaskEquipmentList({
+    required bool isLoading,
+    required String auth,
+    int? taskId,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCTaskEquipmentList?taskId=$taskId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   ///Module Cleaning Task List
   Future<ResponseModel> getMCTaskList({
     required bool isLoading,

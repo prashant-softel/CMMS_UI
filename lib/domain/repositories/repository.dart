@@ -3031,6 +3031,36 @@ class Repository {
     }
   }
 
+  // get mc task eqp data
+  Future<List<EquipmentListModel>> getMCTaskEquipmentList({
+    required int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getMCTaskEquipmentList(
+        taskId: taskId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('EquipmentModelList:${res.data}');
+
+      if (!res.hasError) {
+        var equipmentList = equipmentListModelFromJson(res.data);
+        return equipmentList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   ///Module Cleaning Task List
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,

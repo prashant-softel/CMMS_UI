@@ -126,6 +126,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  int taskId = 0;
 
   List<int?> scheduleId = [];
 
@@ -159,7 +160,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       getInventoryCategoryList();
     });
     Future.delayed(Duration(seconds: 1), () {
-      getEquipmentModelList(facilityId, true);
+      getMCTaskEquipmentList(data['id'], true);
     });
 
     if (data['id'] != null) {
@@ -185,11 +186,11 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
+  Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
     final list = await addModuleCleaningExecutionPresenter
-        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+        .getMCTaskEquipmentList(isLoading: isLoading, taskId: data['id']);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
@@ -197,18 +198,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
 
     equipmentList.value = list;
-    // filteredData.value = incidentReportList.value;
-    // print('Filtered data:${filteredData.value}');
 
-    // if (filteredData != null && filteredData.isNotEmpty) {
-    //   incidentReportModelList = filteredData[0];
-    //   var incidentListJson = incidentReportModelList?.toJson();
-    //   incidentListTableColumns.value = <String>[];
-    //   for (var key in incidentListJson?.keys.toList() ?? []) {
-    //     incidentListTableColumns.add(key);
-    //   }
-    // }
-  
     update(['equipment_list']);
   }
 

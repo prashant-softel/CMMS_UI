@@ -28,10 +28,9 @@ class AddModuleCleaningExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<Map<String, dynamic>?> abandonAllExecutionButton({
-   abandoneJsonString,
-  required bool isLoading,
-    
+  Future<Map<String, dynamic>?> abandonAllExecutionButton({
+    abandoneJsonString,
+    required bool isLoading,
   }) async {
     return addModuleCleaningExecutionUsecase.abandonAllExecutionButton(
       abandoneJsonString: abandoneJsonString,
@@ -89,13 +88,13 @@ class AddModuleCleaningExecutionPresenter {
     );
   }
 
-  Future<List<EquipmentListModel>> getEquipmentModelList({
+  Future<List<EquipmentListModel>> getMCTaskEquipmentList({
     required bool isLoading,
-    required int? facilityId,
+    required int? taskId,
   }) async {
-    return addModuleCleaningExecutionUsecase.getEquipmentModelList(
+    return addModuleCleaningExecutionUsecase.getMCTaskEquipmentList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      taskId: taskId,
     );
   }
 
