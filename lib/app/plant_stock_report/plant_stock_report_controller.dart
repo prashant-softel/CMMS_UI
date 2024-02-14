@@ -64,9 +64,9 @@ class PlantStockReportController extends GetxController {
     "Balance": true,
   });
   final Map<String, double> columnwidth = {
-    "Assets Name": 300,
-    "Assets Code": 250,
-    "Assets Type": 250,
+    "Assets Name": 350,
+    "Assets Code": 300,
+    "Assets Type": 300,
     "Opening": 100,
     "Inward": 100,
     "Outward": 100,
