@@ -26,7 +26,6 @@ class AddModuleCleaningExecutionUsecase {
   }
 
   Future<void> endMcExecutionButton({
-
     int? executionId,
     bool? isLoading,
   }) async {
@@ -36,7 +35,7 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
-   Future<Map<String, dynamic>> abandonAllExecutionButton({
+  Future<Map<String, dynamic>> abandonAllExecutionButton({
     abandoneJsonString,
     bool? isLoading,
   }) async =>
@@ -74,13 +73,13 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-  Future<List<EquipmentListModel>> getEquipmentModelList({
+  Future<List<EquipmentListModel>> getMCTaskEquipmentList({
     required bool isLoading,
-    required int? facilityId,
+    required int? taskId,
   }) async {
-    return _repository.getEquipmentModelList(
+    return _repository.getMCTaskEquipmentList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      taskId: taskId,
     );
   }
 

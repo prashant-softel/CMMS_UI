@@ -588,60 +588,7 @@ class MCExcutionListDataSource extends DataTableSource {
                                     arguments: {"id": id, "planId": planId});
                               }
                             },
-                            // onPress: () {
-                            //   controller.StartEndMCExecution(
-                            //       dataList: dataList);
-                            // },
                           ),
-                          // record[8] == "Abandoned"
-                          //     ?
-                          // TableActionButton(
-                          //   color: ColorValues.appRedColor,
-                          //   icon: Icons.close,
-                          //   message: 'Abandon',
-                          //   onPress: () {
-                          //     int id = McExcutionListDetails?.id ?? 0;
-                          //     if (id != 0) {
-                          //       Get.dialog(AbandoneExecutionDialog(
-                          //         id: id,
-                          //       ));
-                          //       // Get.toNamed(
-                          //       //     Routes.addModuleCleaningExecutionContentWeb,
-                          //       //     arguments: {
-                          //       //       "id": id,
-                          //       //     });
-                          //     }
-                          //   },
-                          //   // onPress: () {
-                          //   //   Get.dialog(AbandoneExecutionDialog(
-                          //   //       id: int.tryParse('${record[0]}')));
-                          //   // },
-                          // ),
-                          //     : Dimens.box0,
-                          // record[8] == "Scheduled"
-                          //     ?
-
-                          // controller.mcTaskList
-                          //             .firstWhere(
-                          //               (e) =>
-                          //                   e!.id == McExcutionListDetails!.id,
-                          //               orElse: () => MCTaskListModel(id: 00),
-                          //             )!
-                          //             .status ==
-                          //         361
-                          //     ?
-                          //         &&
-                          //     varUserAccessModel.value.access_list!
-                          //             .where((e) =>
-                          //                 e.feature_id ==
-                          //                     UserAccessConstants
-                          //                         .kModuleCleaningFeatureId &&
-                          //                 e.approve ==
-                          //                     UserAccessConstants
-                          //                         .kHaveApproveAccess)
-                          //             .length >
-                          //         0
-                          // ?
                           TableActionButton(
                             color: ColorValues.appGreenColor,
                             icon: Icons.add,
@@ -656,25 +603,6 @@ class MCExcutionListDataSource extends DataTableSource {
                               }
                             },
                           )
-                          // : Dimens.box0
-                          // : Dimens.box0,
-                          // record[8] == "Abandoned"
-                          //     ? TableActionButton(
-                          //         color: ColorValues.appGreenColor,
-                          //         icon: Icons.add,
-                          //         message: 'End',
-                          //         onPress: () {
-                          //           controller.StartEndMCExecution(
-                          //               dataList: dataList);
-                          // controller
-                          //     .editIncidentReport(
-                          //         id: int.tryParse(
-                          //             '${record[0]}'));
-                          // print(
-                          //     'edit record:${int.tryParse('${record[0]}')}');
-                          //     },
-                          //   )
-                          // : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),

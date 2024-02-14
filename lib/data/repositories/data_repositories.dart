@@ -480,6 +480,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getMCTaskEquipmentList({
+    int? taskId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getMCTaskEquipmentList(
+      isLoading: isLoading,
+      auth: auth,
+      taskId: taskId,
+    );
+  }
+
   ///Module Cleaning Task List
   @override
   Future<ResponseModel> getMCTaskList({

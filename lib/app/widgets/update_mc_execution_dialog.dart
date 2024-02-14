@@ -36,33 +36,36 @@ class UpdateMCExecutionDialog extends GetView {
             padding: Dimens.edgeInsets05_0_5_0,
             height: 50,
             width: double.infinity,
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              Divider(
-                color: ColorValues.greyLightColour,
-                thickness: 1,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'MC Execution Updated Successfully with Id ',
-                  style: DefaultTextStyle.of(context).style,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '$mcExecutionId',
-                      style: TextStyle(
-                        color: Colors.blue, // Set the desired text color
-                        fontWeight: FontWeight.bold, // Set any additional styles as needed
-                      ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: ColorValues.greyLightColour,
+                    thickness: 1,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: 'MC Execution Updated Successfully with Id ',
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '$mcExecutionId',
+                          style: TextStyle(
+                            color: Colors.blue, // Set the desired text color
+                            fontWeight: FontWeight
+                                .bold, // Set any additional styles as needed
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ]),
+                  ),
+                ]),
           );
         }),
         actions: [
           Dimens.boxWidth10,
           Row(
-            mainAxisAlignment : MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Dimens.boxWidth10,
               Center(
@@ -72,7 +75,6 @@ class UpdateMCExecutionDialog extends GetView {
                     Get.offAllNamed(Routes.moduleCleaningListExecution);
                     // controller.getNewPermitList(_controller.facilityId, _controller.userId);
                     // controller.getWarrantyClaimList();
-                    
                   },
                   child: const Text('Execution List'),
                 ),
@@ -88,20 +90,20 @@ class UpdateMCExecutionDialog extends GetView {
                     });
 
                     Future.delayed(Duration(seconds: 1), () {
-                     controller. getInventoryCategoryList();
+                      controller.getInventoryCategoryList();
                     });
                     Future.delayed(Duration(seconds: 1), () {
-                      controller.getEquipmentModelList(controller.facilityId, true);
+                      controller.getMCTaskEquipmentList(
+                          controller.taskId, true);
                     });
 
-                    
-                     if(mcExecutionId![0] != null){
-                       Future.delayed(Duration(seconds: 1), () {
-                        controller.getMCExecutionDetail(executionId: controller.data['id']!);
+                    if (mcExecutionId![0] != null) {
+                      Future.delayed(Duration(seconds: 1), () {
+                        controller.getMCExecutionDetail(
+                            executionId: controller.data['id']!);
                       });
+                    }
 
-                     }
-                    
                     // Get.offAllNamed(Routes.addModuleCleaningExecutionContentWeb);
                   },
                   child: const Text('View MC Details'),
