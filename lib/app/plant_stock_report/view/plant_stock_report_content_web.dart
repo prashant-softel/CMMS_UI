@@ -310,7 +310,8 @@ class _PlantStockReportContentWebState
                                             source:
                                                 dataSource, // Custom DataSource class
                                             // headingRowHeight: Get.height * 0.12,
-                                            minWidth: 2000, //Get.width * 1.2,
+                                            // minWidth: Get.width * 0.7,
+                                            minWidth: 1500,
                                             showCheckboxColumn: false,
                                             rowsPerPage:
                                                 10, // Number of rows per page
