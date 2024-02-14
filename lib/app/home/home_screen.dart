@@ -24,32 +24,24 @@ class HomeScreen extends GetView<HomeController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
+      body: Stack(
+        children: [
+          Row(
             children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
+              Positioned(child: SizedBox(width: 70)),
               Expanded(
-                child: Column(
-                  children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
-                      ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: DashBoardHomeWeb(),
-                      )
-                  ],
-                ),
-              ),
+                  child: Column(
+                children: [
+                  (Responsive.isDesktop(context))
+                      ? Expanded(child: DashBoardHomeWeb())
+                      : Dimens.box0
+                ],
+              ))
             ],
-          )),
+          ),
+          Positioned(child: HomeDrawer())
+        ],
+      ),
     );
   }
 }
