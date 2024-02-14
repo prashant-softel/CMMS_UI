@@ -462,64 +462,70 @@ class UserDataSource extends DataTableSource {
             padding: EdgeInsets.zero,
             child: (value == 'Actions')
                 ? Wrap(children: [
-                    varUserAccessModel.value.access_list!
-                                .where((e) => e.feature_id == 40 && e.view == 1)
-                                .length >
-                            0
-                        ? TableActionButton(
-                            color: ColorValues.viewColor,
-                            icon: Icons.remove_red_eye_outlined,
-                            message: 'view',
-                            onPress: () {
-                              controller.clearStoreData();
+                    // varUserAccessModel.value.access_list!
+                    //             .where((e) => e.feature_id == 40 && e.view == 1)
+                    //             .length >
+                    //         0
+                    //     ?
 
-                              // final _flutterSecureStorage =
-                              //     const FlutterSecureStorage();
+                    TableActionButton(
+                      color: ColorValues.viewColor,
+                      icon: Icons.remove_red_eye_outlined,
+                      message: 'view',
+                      onPress: () {
+                        controller.clearStoreData();
 
-                              // _flutterSecureStorage.delete(key: "userId");
-                              int userId = UserDetails?.id ?? 0;
-                              if (userId != 0) {
-                                Get.toNamed(Routes.viewUserDetail,
-                                    arguments: {'userId': userId});
-                              }
-                            },
-                          )
-                        : Dimens.box0,
-                    varUserAccessModel.value.access_list!
-                                .where((e) => e.feature_id == 40 && e.edit == 1)
-                                .length >
-                            0
-                        ? TableActionButton(
-                            color: ColorValues.editColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              controller.clearStoreData();
+                        // final _flutterSecureStorage =
+                        //     const FlutterSecureStorage();
 
-                              // final _flutterSecureStorage =
-                              //     const FlutterSecureStorage();
+                        // _flutterSecureStorage.delete(key: "userId");
+                        int userId = UserDetails?.id ?? 0;
+                        if (userId != 0) {
+                          Get.toNamed(Routes.viewUserDetail,
+                              arguments: {'userId': userId});
+                        }
+                      },
+                    )
+                    //  : Dimens.box0,
+                    // varUserAccessModel.value.access_list!
+                    //             .where((e) => e.feature_id == 40 && e.edit == 1)
+                    //             .length >
+                    //         0
+                    //     ?
+                    ,
+                    TableActionButton(
+                      color: ColorValues.editColor,
+                      icon: Icons.edit,
+                      message: 'Edit',
+                      onPress: () {
+                        controller.clearStoreData();
 
-                              // _flutterSecureStorage.delete(key: "userId");
-                              int userId = UserDetails?.id ?? 0;
-                              if (userId != 0) {
-                                Get.toNamed(Routes.addUser,
-                                    arguments: {'userId': userId});
-                              }
-                            },
-                          )
-                        : Dimens.box0,
-                    varUserAccessModel.value.access_list!
-                                .where(
-                                    (e) => e.feature_id == 40 && e.delete == 1)
-                                .length >
-                            0
-                        ? TableActionButton(
-                            color: ColorValues.deleteColor,
-                            icon: Icons.delete,
-                            message: 'Delete',
-                            onPress: () {},
-                          )
-                        : Dimens.box0
+                        // final _flutterSecureStorage =
+                        //     const FlutterSecureStorage();
+
+                        // _flutterSecureStorage.delete(key: "userId");
+                        int userId = UserDetails?.id ?? 0;
+                        if (userId != 0) {
+                          Get.toNamed(Routes.addUser,
+                              arguments: {'userId': userId});
+                        }
+                      },
+                    )
+                    // : Dimens.box0,
+                    // varUserAccessModel.value.access_list!
+                    //             .where(
+                    //                 (e) => e.feature_id == 40 && e.delete == 1)
+                    //             .length >
+                    //         0
+                    //     ?
+                    ,
+                    TableActionButton(
+                      color: ColorValues.deleteColor,
+                      icon: Icons.delete,
+                      message: 'Delete',
+                      onPress: () {},
+                    )
+                    // : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),
