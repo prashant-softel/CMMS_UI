@@ -642,11 +642,10 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                             message: 'Delete',
                                             onPress: () {
                                               controller.isDeleteDialog(
-                                                  business_id: controller
-                                                      .bodyinjuredList[index]
-                                                      .id
+                                                  bodypart_id: controller
+                                                      .bodyinjuredList[index].id
                                                       .toString(),
-                                                  business: controller
+                                                  bodypart: controller
                                                       .bodyinjuredList[index]
                                                       .bodyparts);
                                             },

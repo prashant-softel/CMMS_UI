@@ -95,6 +95,7 @@ class AddUserController extends GetxController {
   AccessLevel? selectedItem;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
+  // RxList<Responsibility?> responsibilitymodel = <Responsibility>[].obs;
   var loginIdCtrlr = TextEditingController();
   FocusNode loginIdFocus = FocusNode();
   ScrollController loginIdScrool = ScrollController();
@@ -303,6 +304,8 @@ class AddUserController extends GetxController {
   Future<void> getUserDetails() async {
     final _userDetailModel = await addUserPresenter.getUserDetails(
         userId: userId.value, isLoading: true);
+    // final _responsList =
+    //     await addUserPresenter.getResponsibilityList(isLoading: true);
 
     if (_userDetailModel != null) {
       userDetailModel.value = _userDetailModel;
@@ -330,10 +333,23 @@ class AddUserController extends GetxController {
       selectedIBusinessList.value = userDetailModel.value?.company_name ?? "";
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
+      // responsibilitymodel.value = _userDetailModel.responsibility ?? [];
+      // responsibilitymodel.value = [];
+      // _userDetailModel.responsibility?.forEach((element) {
+      //   Responsibility? responsibilityModel =
+      //       responsibilitymodel.firstWhere((e) => e!.id == element.id);
+      //   responsibilitymodel.value.add(responsibilityModel);
+      // });
+
+      // // selectedResNameList.value = responsList.
 
       await getUserAccessListById(userId: userId.value, isloading: true);
       await getUserNotificationListById(userId: userId.value, isloading: true);
     }
+    // if (_responsList != null) {
+    //   responsList.value = _responsList;
+    //   selectedResNameList.value = responsList.value.name ?? "";
+    // }
   }
 
   Future<void> getUserNotificationListById(

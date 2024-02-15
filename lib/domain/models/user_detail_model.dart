@@ -36,6 +36,7 @@ class UserDetailsModel {
   String? company_name;
   int? company_id;
   List<PlantList>? plant_list;
+  // List<Responsibility>? responsibility;
 
   UserDetailsModel(
       {this.city_id,
@@ -57,6 +58,7 @@ class UserDetailsModel {
       this.blood_group_id,
       this.blood_group_name,
       this.isEmployee,
+      // this.responsibility,
       this.joiningDate,
       this.landline_number,
       this.photoId,
@@ -71,7 +73,10 @@ class UserDetailsModel {
 
   factory UserDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['plant_list'] as List;
+    // var list1 = parsedJson['responsibility'] as List;
     List<PlantList> plantList = list.map((i) => PlantList.fromJson(i)).toList();
+    // List<Responsibility> responsibility =
+    //     list1.map((i) => Responsibility.fromJson(i)).toList();
 
     return UserDetailsModel(
         city_id: parsedJson['city_id'],
@@ -103,7 +108,9 @@ class UserDetailsModel {
         secondaryEmail: parsedJson['secondaryEmail'],
         status: parsedJson['status'],
         zipcode: parsedJson['zipcode'],
-        plant_list: plantList);
+        plant_list: plantList,
+        // responsibility: responsibility
+        );
   }
 }
 
@@ -123,3 +130,30 @@ class PlantList {
     );
   }
 }
+
+// class Responsibility {
+//   int? id;
+//   int? userId;
+//   String? responsibility;
+//   String? sinceWhen;
+
+//   Responsibility({this.id, this.userId, this.responsibility, this.sinceWhen});
+
+//   factory Responsibility.fromJson(Map<String, dynamic> json) {
+//     return Responsibility(
+//       id: json['id'],
+//       userId: json['user_id'],
+//       responsibility: json['responsibility'],
+//       sinceWhen: Utility.getFormatedyearMonthDay(json['since_when']),
+//     );
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['user_id'] = this.userId;
+//     data['responsibility'] = this.responsibility;
+//     data['since_when'] = this.sinceWhen;
+//     return data;
+//   }
+// }

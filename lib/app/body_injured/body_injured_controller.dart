@@ -12,7 +12,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'body_injured_presenter.dart';
 
-
 class BodyInjuredController extends GetxController {
   BodyInjuredController(
     this.bodyinjuredpresenter,
@@ -261,7 +260,7 @@ class BodyInjuredController extends GetxController {
     return true;
   }
 
-  void isDeleteDialog({String? business_id, String? business}) {
+  void isDeleteDialog({String? bodypart_id, String? bodypart}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -275,7 +274,7 @@ class BodyInjuredController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: "[$business]",
+                    text: "[$bodypart]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
@@ -296,7 +295,7 @@ class BodyInjuredController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteBodyInjured(business_id).then((value) {
+                  deleteBodyInjured(bodypart_id).then((value) {
                     Get.back();
                     getBodyInjuredList();
                   });
@@ -310,10 +309,10 @@ class BodyInjuredController extends GetxController {
     );
   }
 
-  Future<void> deleteBodyInjured(String? business_id) async {
+  Future<void> deleteBodyInjured(String? bodypart_id) async {
     {
       await bodyinjuredpresenter.deleteBodyInjured(
-        business_id,
+        bodypart_id,
         isLoading: true,
       );
     }

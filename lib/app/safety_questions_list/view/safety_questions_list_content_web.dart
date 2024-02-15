@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -255,6 +256,11 @@ class SafetyQuestionsListContentWeb
                                                     .value = true;
                                               }
                                             },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.deny(
+                                                RegExp('[\'^]'),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
