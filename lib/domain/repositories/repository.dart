@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 
+import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
@@ -3032,7 +3033,7 @@ class Repository {
   }
 
   // get mc task eqp data
-  Future<List<EquipmentListModel>> getMCTaskEquipmentList({
+  Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required int? taskId,
     required bool isLoading,
   }) async {
@@ -3048,7 +3049,7 @@ class Repository {
       print('EquipmentModelList:${res.data}');
 
       if (!res.hasError) {
-        var equipmentList = equipmentListModelFromJson(res.data);
+        var equipmentList = equipmentTaskListModelFromJson(res.data);
         return equipmentList;
       } //
       else {
