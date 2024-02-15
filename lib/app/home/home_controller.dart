@@ -84,6 +84,8 @@ class HomeController extends GetxController {
   String get facilityName1 => _facilityName.value;
   Rx<int> selectedIndex = 0.obs;
   var isExpanded = false.obs;
+  RxBool menuButton = false.obs;
+  
   Map<String, double> getDataMap() {
     return {
       "BM": 5,
