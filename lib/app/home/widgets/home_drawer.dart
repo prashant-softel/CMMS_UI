@@ -11,7 +11,7 @@ class HomeDrawer extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AnimatedContainer(
-        duration: Duration(milliseconds: 340),
+        duration: Duration(milliseconds: 450),
         width: controller.menuButton == true
             ? 250
             : (controller.isExpanded.value ? 250 : 70),
@@ -331,7 +331,7 @@ class MenuItemLogo extends StatelessWidget {
     required this.icon,
     required this.press,
     this.isexpand,
-    this.width, 
+    this.width,
     this.menuButton,
   }) : super(key: key);
 
@@ -370,7 +370,7 @@ class MenuItemLogo extends StatelessWidget {
                           "HERO \nFUTURE \nENERGIES",
                           style: TextStyle(
                             color: Color(0xffD2D0D0),
-                            fontSize: 13,
+                            fontSize: 12,
                             fontWeight: FontWeight.w800,
                           ),
                           overflow: TextOverflow.ellipsis,
