@@ -1,16 +1,13 @@
-
-
-
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/usecases/view_module_cleaning_execution_usecase.dart';
 
+import '../../domain/models/get_mc_task_equipment_model.dart';
+
 class ViewModuleCleaningExecutionPresenter {
   ViewModuleCleaningExecutionPresenter(this.viewModuleCleaningExecutionUsecase);
   ViewModuleCleaningExecutionUsecase viewModuleCleaningExecutionUsecase;
-
- 
 
   Future<List<HistoryModel>?> getMCExecutionHistory(
     moduleType,
@@ -23,7 +20,7 @@ class ViewModuleCleaningExecutionPresenter {
         isLoading: isLoading,
       );
 
-   Future<Map<String, dynamic>?> mcExecutionApprovedButton({
+  Future<Map<String, dynamic>?> mcExecutionApprovedButton({
     mcExecutionApproveJsonString,
     required bool isLoading,
   }) async {
@@ -33,17 +30,17 @@ class ViewModuleCleaningExecutionPresenter {
     );
   }
 
-   Future<List<EquipmentListModel>> getEquipmentModelList({
+  Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required bool isLoading,
-    required int? facilityId,
+    required int? taskId,
   }) async {
-    return viewModuleCleaningExecutionUsecase.getEquipmentModelList(
+    return viewModuleCleaningExecutionUsecase.getMCTaskEquipmentList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      taskId: taskId,
     );
   }
 
-   Future<Map<String, dynamic>?> rejectMcExecutionApprovedButton({
+  Future<Map<String, dynamic>?> rejectMcExecutionApprovedButton({
     rejectMcExecutionApproveJsonString,
     required bool isLoading,
   }) async {
@@ -53,17 +50,16 @@ class ViewModuleCleaningExecutionPresenter {
     );
   }
 
-   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
-    bool? isLoading,  
+  Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,
     required int executionId,
   }) async {
-      return viewModuleCleaningExecutionUsecase.getMCExecutionDetail(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+    return viewModuleCleaningExecutionUsecase.getMCExecutionDetail(
+      executionId: executionId,
+      isLoading: isLoading ?? false,
+    );
   }
 
- 
   // Future<List<FacilityModel?>?> getFacilityList() async =>
   //     await addModuleCleaningExecutionUsecase.getFacilityList();
 

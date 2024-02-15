@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/facility_model.dart';
+import '../models/get_mc_task_equipment_model.dart';
 
 class ViewModuleCleaningExecutionUsecase {
   final Repository _repository;
@@ -14,7 +15,6 @@ class ViewModuleCleaningExecutionUsecase {
     return await _repository.generateToken();
   }
 
-   
   Future<List<HistoryModel>?> getMCExecutionHistory({
     moduleType,
     id,
@@ -26,7 +26,7 @@ class ViewModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-   Future<Map<String, dynamic>> mcExecutionApprovedButton({
+  Future<Map<String, dynamic>> mcExecutionApprovedButton({
     mcExecutionApproveJsonString,
     bool? isLoading,
   }) async =>
@@ -35,16 +35,15 @@ class ViewModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-   Future<List<EquipmentListModel>> getEquipmentModelList({
+  Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required bool isLoading,
-    required int? facilityId,
+    required int? taskId,
   }) async {
-    return _repository.getEquipmentModelList(
+    return _repository.getMCTaskEquipmentList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      taskId: taskId,
     );
   }
-
 
   Future<Map<String, dynamic>> rejectMcExecutionApprovedButton({
     rejectMcExecutionApproveJsonString,
@@ -55,9 +54,8 @@ class ViewModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
-    bool? isLoading,  
+    bool? isLoading,
     required int executionId,
   }) async =>
       await _repository.getMCExecutionDetail(
@@ -68,7 +66,7 @@ class ViewModuleCleaningExecutionUsecase {
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
 
-   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
+  Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
 
   Future<String?> getUserAccessList() async =>
