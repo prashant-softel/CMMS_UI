@@ -11,14 +11,14 @@ import '../theme/dimens.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
   int? scheduleId;
-  int? cleaningDay;
+  // int? cleaningDay;
   int? waterUsed;
   // int? executedDay;
   // int? day;
 
   AddModuleCleaningExecutionDialog({
     required this.scheduleId,
-    required this.cleaningDay,
+    // required this.cleaningDay,
     required this.waterUsed,
   });
 
@@ -40,7 +40,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Text("Update For Day", style: Styles.blue20),
                 Dimens.boxWidth10,
                 Text(
-                  "${cleaningDay}",
+                  "abc",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -285,9 +285,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                     child: Text(
                                                         "${smbItems.moduleQuantity}")),
                                                 Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                        Text("${cleaningDay}")),
+                                                  flex: 1,
+                                                  child: Text(
+                                                      "${smbItems.scheduledDay}"),
+                                                ),
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(
@@ -420,7 +421,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     // controller.createMcPlan();
                     controller.updateMCScheduleExecution(
                         scheduleId: scheduleId,
-                        cleaningDay: cleaningDay,
+                        // cleaningDay: cleaningDay,
                         waterUsed: int.tryParse(
                             '${controller.waterUsedCtrlrWeb.text}'),
                         remark: '${controller.remarkCtrlrWeb.text}');
