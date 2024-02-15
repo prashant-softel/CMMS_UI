@@ -12,7 +12,9 @@ class HomeDrawer extends GetView<HomeController> {
     return Obx(() {
       return AnimatedContainer(
         duration: Duration(milliseconds: 340),
-        width: controller.isExpanded.value ? 250 : 70,
+        width: controller.menuButton == true
+            ? 250
+            : (controller.isExpanded.value ? 250 : 70),
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
@@ -41,6 +43,7 @@ class HomeDrawer extends GetView<HomeController> {
                           children: [
                             MenuItemLogo(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               icon:
                                   // controller.isExpanded.value
                                   // ? "assets/files/logodrawer.jpg"
@@ -58,6 +61,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "DashBoard",
                               icon: "assets/files/home.png",
                               press: () {
@@ -66,6 +70,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Breakdown Maintenance",
                               icon: "assets/files/preventive.png",
                               press: () {
@@ -88,6 +93,7 @@ class HomeDrawer extends GetView<HomeController> {
                             // ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Preventive Maintenance",
                               icon: "assets/files/correct.png",
                               press: () {
@@ -97,6 +103,7 @@ class HomeDrawer extends GetView<HomeController> {
 
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Module Cleaning",
                               icon: "assets/files/reportins.png",
                               press: () {
@@ -105,6 +112,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Vegetation Control",
                               icon: "assets/files/maint.png",
                               press: () {
@@ -124,6 +132,7 @@ class HomeDrawer extends GetView<HomeController> {
                             // ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Incident Report",
                               icon: "assets/files/misc.png",
                               press: () {
@@ -132,6 +141,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Stock Management",
                               icon: "assets/files/warranty.png",
                               press: () {
@@ -153,6 +163,7 @@ class HomeDrawer extends GetView<HomeController> {
                             // ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Masters",
                               icon: "assets/files/inventory.png",
                               press: () {
@@ -161,6 +172,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "HSE Report",
                               icon: "assets/files/warranty.png",
                               press: () {
@@ -170,6 +182,7 @@ class HomeDrawer extends GetView<HomeController> {
 
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Audit",
                               icon: "assets/files/images.png",
                               press: () {
@@ -178,6 +191,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Settings",
                               icon: "assets/files/setting.png",
                               press: () {
@@ -186,6 +200,7 @@ class HomeDrawer extends GetView<HomeController> {
                             ),
                             MenuItem(
                               isexpand: controller.isExpanded.value,
+                              menuButton: controller.menuButton.value,
                               title: "Log Out",
                               icon: "assets/files/dashboard.png",
                               press: () {
@@ -243,7 +258,6 @@ class HomeDrawer extends GetView<HomeController> {
   }
 }
 
-// ... (remaining classes)
 class MenuItem extends StatelessWidget {
   MenuItem({
     Key? key,
@@ -251,11 +265,13 @@ class MenuItem extends StatelessWidget {
     required this.icon,
     required this.press,
     this.isexpand,
+    this.menuButton,
   }) : super(key: key);
 
   String? title;
   String icon;
   bool? isexpand;
+  bool? menuButton;
   final VoidCallback press;
 
   @override
@@ -284,7 +300,7 @@ class MenuItem extends StatelessWidget {
                   ),
                 ),
                 // Dimens.boxWidth15,
-                isexpand!
+                isexpand! || menuButton!
                     ? Expanded(
                         child: Text(
                           title ?? "",
@@ -315,7 +331,8 @@ class MenuItemLogo extends StatelessWidget {
     required this.icon,
     required this.press,
     this.isexpand,
-    this.width,
+    this.width, 
+    this.menuButton,
   }) : super(key: key);
 
   String? title;
@@ -324,6 +341,7 @@ class MenuItemLogo extends StatelessWidget {
   final VoidCallback press;
   double? height;
   double? width;
+  bool? menuButton;
 
   @override
   Widget build(BuildContext context) {
@@ -346,7 +364,7 @@ class MenuItemLogo extends StatelessWidget {
                   ),
                 ),
                 Dimens.boxWidth5,
-                isexpand!
+                isexpand! || menuButton!
                     ? Expanded(
                         child: Text(
                           "HERO \nFUTURE \nENERGIES",

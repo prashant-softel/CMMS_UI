@@ -37,15 +37,16 @@ class HeaderWidget extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (Responsive.isDesktop(context))
-              // Padding(
-              //   padding: const EdgeInsets.all(0.0),
-              //   child: Image.asset(
-              //     'assets/files/logo.png',
-              //     height: 150,
-              //     width: 150,
-              //   ),
-              // ),
-              Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  child: Icon(Icons.menu),
+                  onTap: () {
+                    controller.menuButton.toggle();
+                  },
+                ),
+              ),
+            Spacer(),
             if (Responsive.isDesktop(context)) Text("Select Plant:"),
             if (Responsive.isDesktop(context))
               SizedBox(
