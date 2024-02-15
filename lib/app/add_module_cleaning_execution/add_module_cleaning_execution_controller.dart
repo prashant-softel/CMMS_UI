@@ -246,7 +246,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       // });
       List<int> cleanedEquipmentIds = [];
       List<int> abandonedEquipmentIds = [];
-      equipmentList.forEach((e) {
+      equipmenTasktList.forEach((e) {
         e?.smbs.forEach((element) {
           if (element.isAbandonSmbCheck!) {
             abandonedEquipmentIds.add(element.smbId ?? 0);
@@ -256,7 +256,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           }
         });
       });
-      print('cleaned:$equipments');
+      print('cleaned:$cleanedEquipmentIds');
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(

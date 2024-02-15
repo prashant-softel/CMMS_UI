@@ -44,7 +44,6 @@ class viewModuleCleaningExecutionDialog extends GetView {
             Dimens.boxHeight20,
             Row(
               children: [
-                
                 // Dimens.boxWidth10,
                 // Text(
                 //   "",
@@ -68,7 +67,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                     // ),
                   ],
                 ),
-              
+
                 Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -156,7 +155,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                       ],
                     ),
                   )
-                ]..addAll(controller.equipmentList.value.map((e) {
+                ]..addAll(controller.equipmenTasktList.value.map((e) {
                         return Column(
                           children: [
                             Row(
@@ -267,7 +266,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                       value: mappedData[smbItems
                                                                   .smbId]?[
                                                               "isCleanedSmbCheck"] ??
-                                                          false,
+                                                          true,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
 
@@ -286,7 +285,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                       value: mappedData[smbItems
                                                                   .smbId]?[
                                                               "isAbandonSmbCheck"] ??
-                                                          false,
+                                                          true,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
 
@@ -297,8 +296,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                    flex: 1,
-                                                    child: Text(''))
+                                                    flex: 1, child: Text(''))
                                               ],
                                             );
                                           },

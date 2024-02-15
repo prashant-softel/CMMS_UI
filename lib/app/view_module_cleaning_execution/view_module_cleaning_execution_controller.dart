@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
+import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -26,7 +27,8 @@ class viewModuleCleaningExecutionController extends GetxController {
 
   Rx<String> selectedFacility = ''.obs;
 
-  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  RxList<GetMCTaskEquipmentList?> equipmenTasktList =
+      <GetMCTaskEquipmentList?>[].obs;
 
   Schedules? selectedSchedule;
 
@@ -109,7 +111,7 @@ class viewModuleCleaningExecutionController extends GetxController {
     });
     await getMCExecutionHistory(id: id!);
     Future.delayed(Duration(seconds: 1), () {
-      getEquipmentModelList(facilityId, true);
+      getMCTaskEquipmentList(facilityId, true);
     });
 
     if (id != null) {
@@ -140,30 +142,19 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
-    equipmentList.value = <EquipmentListModel>[];
+  Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {
+    equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
     final list = await viewModuleCleaningExecutionPresenter
-        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+        .getMCTaskEquipmentList(isLoading: isLoading, taskId: id);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
-      equipmentList.add(equipment_list);
+      equipmenTasktList.add(equipment_list);
     }
 
-    // equipmentList.value = list;
-    // filteredData.value = incidentReportList.value;
-    // print('Filtered data:${filteredData.value}');
+    equipmenTasktList.value = list;
 
-    // if (filteredData != null && filteredData.isNotEmpty) {
-    //   incidentReportModelList = filteredData[0];
-    //   var incidentListJson = incidentReportModelList?.toJson();
-    //   incidentListTableColumns.value = <String>[];
-    //   for (var key in incidentListJson?.keys.toList() ?? []) {
-    //     incidentListTableColumns.add(key);
-    //   }
-    // }
-  
     update(['equipment_list']);
   }
 
