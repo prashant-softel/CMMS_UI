@@ -13,13 +13,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
   int? scheduleId;
   int? cleaningDay;
   int? waterUsed;
+  // int? executedDay;
   // int? day;
 
   AddModuleCleaningExecutionDialog({
     required this.scheduleId,
     required this.cleaningDay,
     required this.waterUsed,
-    // required this.day
   });
 
   final AddModuleCleaningExecutionController controller = Get.find();
@@ -55,7 +55,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     SizedBox(
                       width: 50,
                     ),
-                    Text('Remark: ',style: TextStyle(fontSize: 17 )),
+                    Text('Remark: ', style: TextStyle(fontSize: 17)),
                     SizedBox(
                       width: 5,
                     ),
@@ -64,43 +64,21 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       textController: controller.remarkCtrlrWeb,
                     ),
-                    // SizedBox(
-                    //   width: MediaQuery.of(context).size.width / 5,
-                    //   child: MultiSelectDialogField(
-                    //     dialogWidth: 300,
-                    //     dialogHeight: 400,
-                    //     // title: 'Select Equipments',
-                    //     // buttonText: 'Equipment Category',
-                    //     initialValue:
-                    //         (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                    //             ? controller.selectedEquipmentCategoryIdList
-                    //             : [],
-                    //     items: controller.equipmentCategoryList
-                    //         .map(
-                    //           (equipmentCategory) => MultiSelectItem(
-                    //             equipmentCategory?.id,
-                    //             equipmentCategory?.name ?? '',
-                    //           ),
-                    //         )
-                    //         .toList(),
-                    //     onConfirm: (selectedOptionsList) => {
-                    //       controller
-                    //           .equipmentCategoriesSelected(selectedOptionsList),
-                    //       print(
-                    //           'Equipment list ids ${controller.selectedEquipmentCategoryIdList}')
-                    //     },
-                    //   ),
-                    // )
                   ],
                 ),
                 Dimens.boxWidth200,
                 Row(
                   children: [
-                    Text('Water Used: ',style: TextStyle(fontSize: 17),),
+                    Text(
+                      'Water Used: ',
+                      style: TextStyle(fontSize: 17),
+                    ),
                     Dimens.boxWidth20,
                     GoodsOrderTextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       textController: controller.waterUsedCtrlrWeb,
                     ),
                   ],
@@ -147,18 +125,27 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Modules", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Scheduled Day", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Scheduled Day",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Cleaned", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Cleaned",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
-                        Expanded(flex: 1, child: Text("Abandoned", style: TextStyle(color: Color(0xff31576D)))),
-                        Expanded(flex: 1, child: Text("Executed Day", style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Abandoned",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Executed Day",
+                                style: TextStyle(color: Color(0xff31576D)))),
 
                         // Expanded(
                         //     child: Text("Day",
@@ -166,7 +153,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       ],
                     ),
                   )
-                ]..addAll(controller.equipmentList.value.map((e) {
+                ]..addAll(controller.equipmenTasktList.value.map((e) {
                         return Column(
                           children: [
                             Row(
@@ -186,9 +173,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                       children: [
                                         Text(
                                           "${e?.invName}",
-                                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(e!.isExpanded ? Icons.arrow_drop_down : Icons.arrow_drop_up)
+                                        Icon(e!.isExpanded
+                                            ? Icons.arrow_drop_down
+                                            : Icons.arrow_drop_up)
                                       ],
                                     ),
                                   ),
@@ -197,14 +188,18 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   flex: 1,
                                   child: Text(
                                     "${e.moduleQuantity}",
-                                    style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 1,
                                   child: Text(
                                     "",
-                                    style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Expanded(
@@ -217,19 +212,23 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                         // controller.toggleItemSelection(index);
                                         setState(
                                           () {
-                                            e.isCleanedChecked = !e.isCleanedChecked!;
+                                            e.isCleanedChecked =
+                                                !e.isCleanedChecked!;
                                             if (e.isCleanedChecked!) {
                                               e.isAbandonedChecked = false;
                                             }
                                             e.smbs.forEach((smbItem) {
-                                              smbItem.isCleanedSmbCheck = e.isCleanedChecked;
+                                              smbItem.isCleanedSmbCheck =
+                                                  e.isCleanedChecked;
                                               if (e.isCleanedChecked!) {
-                                                smbItem.isAbandonSmbCheck = false;
+                                                smbItem.isAbandonSmbCheck =
+                                                    false;
                                               }
                                             });
                                           },
                                         );
-                                        print('Element Cancel:${e.isCleanedChecked}');
+                                        print(
+                                            'Element Cancel:${e.isCleanedChecked}');
                                       },
                                     ),
                                   ),
@@ -244,19 +243,23 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                         // controller.toggleItemSelection(index);
                                         setState(
                                           () {
-                                            e.isAbandonedChecked = !e.isAbandonedChecked!;
+                                            e.isAbandonedChecked =
+                                                !e.isAbandonedChecked!;
                                             if (e.isAbandonedChecked!) {
                                               e.isCleanedChecked = false;
                                             }
                                             e.smbs.forEach((smbItem) {
-                                              smbItem.isAbandonSmbCheck = e.isAbandonedChecked;
+                                              smbItem.isAbandonSmbCheck =
+                                                  e.isAbandonedChecked;
                                               if (e.isAbandonedChecked!) {
-                                                smbItem.isCleanedSmbCheck = false;
+                                                smbItem.isCleanedSmbCheck =
+                                                    false;
                                               }
                                             });
                                           },
                                         );
-                                        print('Element Cancel:${e.isAbandonedChecked}');
+                                        print(
+                                            'Element Cancel:${e.isAbandonedChecked}');
                                       },
                                     ),
                                   ),
@@ -272,27 +275,44 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                             return Row(
                                               // mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                Expanded(flex: 2, child: Text(smbItems.smbName ?? "")),
-                                                Expanded(flex: 1, child: Text("${smbItems.moduleQuantity}")),
-                                                Expanded(flex: 1, child: Text("${cleaningDay}")),
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                        smbItems.smbName ??
+                                                            "")),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        "${smbItems.moduleQuantity}")),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                        Text("${cleaningDay}")),
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(
-                                                    alignment: Alignment.centerLeft,
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
-                                                      value: smbItems.isCleanedSmbCheck,
+                                                      value: smbItems
+                                                          .isCleanedSmbCheck,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            smbItems.isCleanedSmbCheck = !smbItems.isCleanedSmbCheck!;
-                                                            if (smbItems.isCleanedSmbCheck!) {
-                                                              smbItems.isAbandonSmbCheck = false;
+                                                            smbItems.isCleanedSmbCheck =
+                                                                !smbItems
+                                                                    .isCleanedSmbCheck!;
+                                                            if (smbItems
+                                                                .isCleanedSmbCheck!) {
+                                                              smbItems.isAbandonSmbCheck =
+                                                                  false;
                                                             }
                                                           },
                                                         );
 
-                                                        print('Element Cancel:${e.isCleanedChecked}');
+                                                        print(
+                                                            'Element Cancel:${e.isCleanedChecked}');
                                                       },
                                                     ),
                                                   ),
@@ -300,26 +320,36 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(
-                                                    alignment: Alignment.centerLeft,
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
-                                                      value: smbItems.isAbandonSmbCheck,
+                                                      value: smbItems
+                                                          .isAbandonSmbCheck,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            smbItems.isAbandonSmbCheck = !smbItems.isAbandonSmbCheck!;
-                                                            if (smbItems.isAbandonSmbCheck!) {
-                                                              smbItems.isCleanedSmbCheck = false;
+                                                            smbItems.isAbandonSmbCheck =
+                                                                !smbItems
+                                                                    .isAbandonSmbCheck!;
+                                                            if (smbItems
+                                                                .isAbandonSmbCheck!) {
+                                                              smbItems.isCleanedSmbCheck =
+                                                                  false;
                                                             }
                                                           },
                                                         );
 
-                                                        print('Element Cancel:${smbItems.isAbandonSmbCheck}');
+                                                        print(
+                                                            'Element Cancel:${smbItems.isAbandonSmbCheck}');
                                                       },
                                                     ),
                                                   ),
                                                 ),
-                                                Expanded(flex: 1, child: Text(''))
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        "${smbItems.executedDay}")),
                                               ],
                                             );
                                           },
@@ -391,7 +421,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     controller.updateMCScheduleExecution(
                         scheduleId: scheduleId,
                         cleaningDay: cleaningDay,
-                        waterUsed: int.tryParse('${controller.waterUsedCtrlrWeb.text}'),
+                        waterUsed: int.tryParse(
+                            '${controller.waterUsedCtrlrWeb.text}'),
                         remark: '${controller.remarkCtrlrWeb.text}');
                     Get.back();
                   },

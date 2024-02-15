@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
+import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -112,6 +113,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   TextEditingController commentTextFieldCtrlr = TextEditingController();
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  RxList<GetMCTaskEquipmentList?> equipmenTasktList =
+      <GetMCTaskEquipmentList?>[].obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -187,17 +190,17 @@ class AddModuleCleaningExecutionController extends GetxController {
   }
 
   Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {
-    equipmentList.value = <EquipmentListModel>[];
+    equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
     final list = await addModuleCleaningExecutionPresenter
         .getMCTaskEquipmentList(isLoading: isLoading, taskId: data['id']);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
-      equipmentList.add(equipment_list);
+      equipmenTasktList.add(equipment_list);
     }
 
-    equipmentList.value = list;
+    equipmenTasktList.value = list;
 
     update(['equipment_list']);
   }
