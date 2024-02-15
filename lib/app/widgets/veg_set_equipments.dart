@@ -142,7 +142,7 @@ class VegSetEquipment extends GetView {
                                         setState(() {
                                           e.selectedDay = newValue!;
                                           e.invs!.forEach((element) {
-                                            // element.selectedDay = newValue;
+                                            element.selectedDay = newValue;
                                           });
                                         });
                                       },
@@ -161,7 +161,7 @@ class VegSetEquipment extends GetView {
                               e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e.invs!.map(
+                                          e.invs.map(
                                             (invs) {
                                               return Row(
                                                 children: [
@@ -174,7 +174,7 @@ class VegSetEquipment extends GetView {
                                                   Expanded(
                                                     child:
                                                         DropdownButton<String>(
-                                                      value: e.selectedDay,
+                                                      value: invs.selectedDay,
                                                       onChanged: (newValue) {
                                                         setState(() {
                                                           invs.selectedDay =

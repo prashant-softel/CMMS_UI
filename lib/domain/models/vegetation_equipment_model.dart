@@ -13,14 +13,14 @@ class VegetationEquipmentModel {
   String? blockName;
   int? area;
   bool isExpanded;
-  List<Invs>? invs;
+  List<Invs> invs;
   String? selectedDay;
 
   VegetationEquipmentModel(
       {this.blockId,
       this.blockName,
       this.area,
-      this.invs,
+      this.invs = const [],
       this.isExpanded = false,
       this.selectedDay});
 
