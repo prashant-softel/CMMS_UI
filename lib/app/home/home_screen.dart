@@ -28,7 +28,12 @@ class HomeScreen extends GetView<HomeController> {
         children: [
           Row(
             children: [
-              Positioned(child: SizedBox(width: 70)),
+              Positioned(
+                  child: controller.menuButton.value
+                      ? SizedBox(
+                          width: 250,
+                        )
+                      : SizedBox(width: 70)),
               Expanded(
                   child: Column(
                 children: [

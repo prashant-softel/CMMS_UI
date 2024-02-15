@@ -363,14 +363,14 @@ class MenuItemLogo extends StatelessWidget {
                     icon,
                   ),
                 ),
-                Dimens.boxWidth5,
+                Dimens.boxWidth7,
                 isexpand! || menuButton!
                     ? Expanded(
                         child: Text(
                           "HERO \nFUTURE \nENERGIES",
                           style: TextStyle(
                             color: Color(0xffD2D0D0),
-                            fontSize: 12,
+                            fontSize: 11,
                             fontWeight: FontWeight.w800,
                           ),
                           overflow: TextOverflow.ellipsis,
