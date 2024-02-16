@@ -136,7 +136,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
     return Container(
         color: ColorValues.appBackgroundColor,
         child: DefaultTabController(
-          length: 5,
+          length: 6,
           child: Column(
             children: [
               HeaderWidget(),
