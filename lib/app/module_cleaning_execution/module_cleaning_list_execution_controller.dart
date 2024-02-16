@@ -67,8 +67,8 @@ class ModuleCleaningListExecutionController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "ID": 100,
-    "Title": 150,
+    "ID": 150,
+    "Title": 200,
     "Plan ID": 100,
     // "Responsibility": 200,
     "Frequency": 163,
