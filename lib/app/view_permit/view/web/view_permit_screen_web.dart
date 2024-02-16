@@ -575,7 +575,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 // / PAGINATION
                                                                 Padding(
                                                                   padding: const EdgeInsets
-                                                                      .symmetric(
+                                                                          .symmetric(
                                                                       horizontal:
                                                                           25),
                                                                   child:
@@ -801,7 +801,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   /// PAGINATION
                                                                   Padding(
                                                                     padding: const EdgeInsets
-                                                                        .symmetric(
+                                                                            .symmetric(
                                                                         horizontal:
                                                                             25),
                                                                     child: ValueListenableBuilder(
@@ -1077,7 +1077,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                  .only(
+                                                                      .only(
                                                                   right: 250),
                                                           child: CustomRichText(
                                                               title: 'JSA: '),
@@ -2144,6 +2144,212 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ),
                                           ),
 
+                                    controller.listAssociatedPm!.isEmpty
+                                        ? Dimens.box0
+                                        : Container(
+                                            margin: Dimens.edgeInsets20,
+                                            height: ((controller
+                                                            .listAssociatedPm
+                                                            ?.length ??
+                                                        0) *
+                                                    50) +
+                                                125,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: ColorValues
+                                                    .lightGreyColorWithOpacity35,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorValues
+                                                      .appBlueBackgroundColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "PM Task Linked To This Permit",
+                                                        style: Styles.blue700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // Divider(
+                                                //   color: ColorValues.greyLightColour,
+                                                // ),
+                                                Expanded(
+                                                  child: DataTable2(
+                                                    border: TableBorder.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            206,
+                                                            229,
+                                                            234)),
+                                                    columns: [
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "PM Task Id",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "PM Task Title",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "Equipment\nCategory",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "Equipment",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "Start Date",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "Assigned To",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn(
+                                                          label: Text(
+                                                        "Status",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                    ],
+                                                    rows:
+                                                        List<DataRow>.generate(
+                                                      controller
+                                                              .listAssociatedPm
+                                                              ?.length ??
+                                                          0,
+                                                      (index) => DataRow(
+                                                          cells: [
+                                                            DataCell(
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      // controller.viewJobDetails(controller
+                                                                      //     .listAssociatedPm?[
+                                                                      //         index]
+                                                                      //     ?.pmId);
+                                                                    },
+                                                                    child: Text(
+                                                                      controller
+                                                                              .listAssociatedPm?[index]
+                                                                              ?.pmId
+                                                                              .toString() ??
+                                                                          '',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        decoration:
+                                                                            TextDecoration.underline,
+                                                                        decorationStyle:
+                                                                            TextDecorationStyle.solid,
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            5,
+                                                                            92,
+                                                                            163),
+                                                                      ),
+                                                                    ))),
+                                                            DataCell(Text(controller
+                                                                    .listAssociatedPm?[
+                                                                        index]
+                                                                    ?.title
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .listAssociatedPm?[
+                                                                        index]
+                                                                    ?.equipmentCat
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(
+                                                              Text(
+                                                                controller
+                                                                        .listAssociatedPm?[
+                                                                            index]
+                                                                        ?.equipment
+                                                                        .toString() ??
+                                                                    '',
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                              ),
+                                                            ),
+                                                            DataCell(Text(controller
+                                                                    .listAssociatedPm?[
+                                                                        index]
+                                                                    ?.startDate
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .listAssociatedPm?[
+                                                                        index]
+                                                                    ?.assignedTo
+                                                                    .toString() ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .listAssociatedPm?[
+                                                                        index]
+                                                                    ?.status_short
+                                                                    .toString() ??
+                                                                '')),
+                                                          ]),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
                                     ///Loto Applied List
                                     Container(
                                       margin: EdgeInsets.all(20),
@@ -2688,7 +2894,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     right: 450),
                                                             child: Column(
                                                               crossAxisAlignment:
@@ -2896,7 +3102,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3068,7 +3274,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3235,7 +3441,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(

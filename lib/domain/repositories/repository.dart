@@ -3052,7 +3052,7 @@ class Repository {
         return equipmentList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentModelList');
         return [];
       }
     } catch (error) {

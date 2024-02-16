@@ -271,6 +271,7 @@ class ViewPermitController extends GetxController {
       <NewPermitDetailModel?>[].obs;
 
   RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
+  RxList<ListAssociatedPm?>? listAssociatedPm = <ListAssociatedPm?>[].obs;
 
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
@@ -467,7 +468,7 @@ class ViewPermitController extends GetxController {
         });
       });
       await getViewPermitDetail(permitId: permitId.value);
-    
+
       await getSafetyMeasureList();
       await getPermitHistory(permitId: permitId.value);
       await getPermitConditionList(isCancle: isCancle!);
@@ -817,6 +818,8 @@ class ViewPermitController extends GetxController {
 
       listAssociatedJobs?.value =
           viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
+      listAssociatedPm?.value =
+          viewPermitDetailsModel.value?.lstAssociatedPM ?? [];
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
