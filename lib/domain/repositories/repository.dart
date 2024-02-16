@@ -3052,7 +3052,7 @@ class Repository {
         return equipmentList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentModelList');
         return [];
       }
     } catch (error) {
@@ -10187,7 +10187,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
