@@ -52,7 +52,7 @@ class ViewUserDetailController extends GetxController {
         userId.value = int.tryParse(_userId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'userId');
+      Utility.showDialog(e.toString(), 'userId');
     }
   }
 

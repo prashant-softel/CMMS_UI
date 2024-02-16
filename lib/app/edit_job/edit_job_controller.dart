@@ -161,7 +161,7 @@ class EditJobController extends GetxController {
         jobID.value = int.tryParse(_jobId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'jobId');
+      Utility.showDialog(e.toString(), 'jobId');
     }
   }
 
@@ -416,7 +416,7 @@ class EditJobController extends GetxController {
       }
     } //
     catch (e) {
-      Utility.showDialog(e.toString() + ' assignReAssignJob');
+      Utility.showDialog(e.toString(), ' assignReAssignJob');
     }
   }
 
@@ -473,7 +473,7 @@ class EditJobController extends GetxController {
       }
     } //
     catch (e) {
-      Utility.showDialog(e.toString() + ' updateJob');
+      Utility.showDialog(e.toString(), ' updateJob');
     }
   }
 

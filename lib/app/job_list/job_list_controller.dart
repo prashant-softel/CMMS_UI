@@ -340,7 +340,7 @@ class JobListController extends GetxController {
         text: 'Please Check exported data.',
       );
     } catch (e) {
-      Utility.showDialog(e.toString());
+      // Utility.showDialog(e.toString());
     }
   }
 

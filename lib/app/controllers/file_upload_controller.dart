@@ -218,7 +218,7 @@ class FileUploadController extends GetxController {
         bytesDataList = null;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + ' selectFiles');
+      Utility.showDialog(e.toString(), ' selectFiles');
     }
   }
 

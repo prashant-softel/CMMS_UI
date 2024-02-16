@@ -385,7 +385,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                       ],
                                                     ),
                                                   ))
-                                                : DataCell(Text("")),
+                                                : DataCell(Text("Text")),
                                         DataCell(Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: LoginCustomTextfield(
@@ -596,7 +596,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                       "Consumed_Qty")
                                                                   ? Padding(
                                                                       padding: const EdgeInsets
-                                                                          .only(
+                                                                              .only(
                                                                           top:
                                                                               10),
                                                                       child: Container(

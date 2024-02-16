@@ -256,16 +256,16 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                               orElse: null);
                                                     },
                                                   ),
-                                                  Dimens.boxHeight5,
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                          "Approval required:"),
-                                                      Dimens.boxWidth10,
-                                                      Text(
-                                                          "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")
-                                                    ],
-                                                  )
+                                                  // Dimens.boxHeight5,
+                                                  // Row(
+                                                  //   children: [
+                                                  //     Text(
+                                                  //         "Approval required:"),
+                                                  //     Dimens.boxWidth10,
+                                                  //     Text(
+                                                  //         "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")
+                                                  //   ],
+                                                  // )
                                                 ],
                                               ),
                                             )
@@ -298,7 +298,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                       ),
                                                       child:
                                                           LoginCustomTextfield(
-                                                        inputFormatters: <TextInputFormatter>[
+                                                        inputFormatters: <
+                                                            TextInputFormatter>[
                                                           FilteringTextInputFormatter
                                                               .digitsOnly
                                                         ],

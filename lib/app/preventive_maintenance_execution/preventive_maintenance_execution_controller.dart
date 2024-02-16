@@ -112,7 +112,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     }
     print({"mrsit", listMrsByTaskId});
     addRowItem();
-    }
+  }
 
   Future<void> setScheduleId() async {
     try {
@@ -135,7 +135,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         scheduleId.value = int.tryParse(_scheduleId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'pmTaskId');
+      Utility.showDialog(e.toString(), 'pmTaskId');
     }
   }
 
@@ -442,7 +442,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         bytesDataList = null;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + ' selectFiles');
+      Utility.showDialog(e.toString(), ' selectFiles');
     }
   }
 
