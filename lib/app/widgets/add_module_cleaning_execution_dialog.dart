@@ -40,7 +40,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Text("Update For Day", style: Styles.blue20),
                 Dimens.boxWidth10,
                 Text(
-                  "abc",
+                  "${cleaningDay}",
                   style: TextStyle(
                     fontSize: 20,
                   ),
