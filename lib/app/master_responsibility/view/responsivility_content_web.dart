@@ -4,6 +4,7 @@ import 'package:cmms/app/master_responsibility/responsivility_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -191,14 +192,15 @@ class ResponsibilityListContentWeb
                                             child: TextField(
                                               controller: controller.nameCtrlr,
                                               focusNode: controller.nameFocus,
-                                              scrollController: controller.nameScroll,
+                                              scrollController:
+                                                  controller.nameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,
@@ -265,6 +267,12 @@ class ResponsibilityListContentWeb
                                                       .value = true;
                                                 }
                                               },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -309,15 +317,16 @@ class ResponsibilityListContentWeb
                                             child: TextField(
                                               controller:
                                                   controller.descriptionCtrlr,
-                                                  focusNode: controller.descFocus,
-                                                  scrollController: controller.descScroll,
+                                              focusNode: controller.descFocus,
+                                              scrollController:
+                                                  controller.descScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               decoration: InputDecoration(
                                                 fillColor:
                                                     ColorValues.whiteColor,

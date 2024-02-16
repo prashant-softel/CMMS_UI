@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -198,6 +199,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             child: LoginCustomTextfield(
                                               textController: controller
                                                   .titleTextFieldCtrlr,
+                                                  inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             )),
                                       ),
                                     ],

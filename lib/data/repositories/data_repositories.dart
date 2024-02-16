@@ -4071,5 +4071,15 @@ class DataRepository extends DomainRepository {
         vegRejectJsonString: vegRejectJsonString,
         isLoading: isLoading ?? false,
       );
+
+    Future<ResponseModel> deleteUser({
+    auth,
+    bool? isLoading,
+    user_id,
+  }) async {
+    var response = await connectHelper.deleteUser(
+        auth: auth, isLoading: isLoading, user_id: user_id);
+    return response;
+  }
 //end
 }

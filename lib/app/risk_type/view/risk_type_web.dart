@@ -4,6 +4,7 @@ import 'package:cmms/app/risk_type/risk_type_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -123,7 +124,7 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Create RiskType",
+                                        "Create Risk Type",
                                         style: Styles.blackBold16,
                                       ),
                                       SizedBox(
@@ -197,12 +198,13 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller: controller.titleCtrlr,
                                               focusNode: controller.rnameFocus,
-                                              scrollController: controller.rnameScroll,
+                                              scrollController:
+                                                  controller.rnameScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,
@@ -272,6 +274,12 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                                       .value = true;
                                                 }
                                               },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -315,13 +323,14 @@ class RiskTypeContentWeb extends GetView<RiskTypeController> {
                                             ),
                                             child: TextField(
                                               style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
                                               controller:
                                                   controller.descriptionCtrlr,
-                                                  focusNode: controller.rdescFocus,
-                                                  scrollController: controller.rdescScroll,
+                                              focusNode: controller.rdescFocus,
+                                              scrollController:
+                                                  controller.rdescScroll,
                                               keyboardType:
                                                   TextInputType.multiline,
                                               autofocus: false,

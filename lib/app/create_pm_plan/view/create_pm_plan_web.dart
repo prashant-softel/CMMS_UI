@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -156,6 +157,12 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                 child: LoginCustomTextfield(
                                                   textController: controller
                                                       .planTittleCtrlr,
+                                                      inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .deny(
+                                                      RegExp('[\'^]'),
+                                                    )
+                                                  ],
                                                 )),
                                           ]),
                                           Dimens.boxHeight10,

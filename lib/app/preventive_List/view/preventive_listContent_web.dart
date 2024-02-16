@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
@@ -224,8 +225,16 @@ class PreventiveChecklistListContentWeb
                                                     child: LoginCustomTextfield(
                                                       textController: controller
                                                           .checklistNumberCtrlr,
-                                                        focusNode: controller.checklistFocus,
-                                                        scroll:controller.checklistScroll
+                                                      focusNode: controller
+                                                          .checklistFocus,
+                                                      scroll: controller
+                                                          .checklistScroll,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .deny(
+                                                          RegExp('[\'^]'),
+                                                        )
+                                                      ],
                                                     )),
                                                 Dimens.boxHeight10,
                                                 DropdownWebWidget(
@@ -468,12 +477,11 @@ class PreventiveChecklistListContentWeb
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: TextStyle(
-                                            fontSize: 14.0,
-                                            height: 1.0,
-                                            color: Colors.black),
+                                          fontSize: 14.0,
+                                          height: 1.0,
+                                          color: Colors.black),
                                       onChanged: (value) =>
                                           controller.search(value),
-                                          
                                       decoration: InputDecoration(
                                         enabledBorder: const OutlineInputBorder(
                                           borderSide: const BorderSide(

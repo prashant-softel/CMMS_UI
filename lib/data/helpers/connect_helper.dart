@@ -7073,4 +7073,23 @@ class ConnectHelper {
         data: parsedJson['message'], id: parsedJson['id']));
     return responseModel;
   }
+
+  Future<ResponseModel> deleteUser({
+    required String auth,
+    bool? isLoading,
+    required user_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/DeleteUser?id=$user_id',
+      Request.delete,
+      user_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

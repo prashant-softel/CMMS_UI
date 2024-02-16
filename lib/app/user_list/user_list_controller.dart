@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/user_list/user_list_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -126,5 +128,63 @@ class UserListController extends GetxController {
 
   void clearStoreData() {
     userListPresenter.clearValue();
+  }
+
+  void isDeleteDialog({String? user_id, String? user}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the user?',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: "[$user]",
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteUser(user_id).then((value) {
+                    Get.back();
+                    getUserList(facilityId, true);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteUser(String? user_id) async {
+    {
+      await userListPresenter.deleteUser(
+        user_id,
+        isLoading: true,
+      );
+    }
   }
 }

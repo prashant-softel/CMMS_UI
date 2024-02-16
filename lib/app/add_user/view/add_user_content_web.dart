@@ -366,6 +366,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter First Name',
                                                       textController: controller
                                                           .firstNameCtrlr,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .deny(
+                                                          RegExp('[\'^]'),
+                                                        )
+                                                      ],
                                                     )),
                                               ],
                                             ),
@@ -876,6 +882,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       ishint: 'Enter Last Name',
                                                       textController: controller
                                                           .lastNameCtrlr,
+                                                      inputFormatters: [
+                                                        FilteringTextInputFormatter
+                                                            .deny(
+                                                          RegExp('[\'^]'),
+                                                        )
+                                                      ],
                                                     )),
                                               ],
                                             ),

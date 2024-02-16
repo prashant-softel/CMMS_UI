@@ -10174,5 +10174,24 @@ class Repository {
       return Map();
     }
   }
+
+  Future<void> deleteUser(Object user_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteUser(
+        auth: auth,
+        user_id: user_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   //end
 }

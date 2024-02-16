@@ -85,7 +85,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                   onTap: () {
                                     Get.offNamed(Routes.home);
                                   },
-                                  child: Text(" /DASHBOARD ",
+                                  child: Text("DASHBOARD ",
                                       style: Styles.greyLight14)),
                               InkWell(
                                 onTap: () {
@@ -312,6 +312,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             controller.assetsNameCtrlr,
                                         focusNode: controller.nameFocus,
                                         scroll: controller.nameScroll,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.deny(
+                                            RegExp('[\'^]'),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ],

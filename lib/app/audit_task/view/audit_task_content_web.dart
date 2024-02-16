@@ -75,9 +75,9 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                           Get.offNamed(Routes.audit);
                         },
                         child: Text(" / AUDIT".toUpperCase(),
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
-                      Text(" /AUDIT TASK", style: Styles.greyMediumLight12)
+                      Text(" /AUDIT TASK", style: Styles.greyLight14)
                     ],
                   ),
                 ),

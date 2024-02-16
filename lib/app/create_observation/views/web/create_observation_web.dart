@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cmms/app/app.dart';
@@ -89,7 +90,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                         keyboardType:
                                                             TextInputType
                                                                 .number,
-
+                                                                inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .deny(
+                                                            RegExp('[\'^]'),
+                                                          )
+                                                        ],
                                                         // textController:
                                                         //     controller.challanNoCtrlr,
                                                       ),
