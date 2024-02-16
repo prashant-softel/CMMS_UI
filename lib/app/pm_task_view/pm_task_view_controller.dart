@@ -124,7 +124,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       }
       //  await _flutterSecureStorage.delete(key: "scheduleId");
     } catch (e) {
-      Utility.showDialog(e.toString() + 'scheduleId');
+      Utility.showDialog(e.toString(), 'scheduleId');
     }
   }
 
@@ -517,5 +517,18 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   void clearStoreDataJobId() {
     preventiveMaintenanceTaskViewPresenter.clearStoreDataJobId();
+  }
+
+  void clearPermitStoreData() {
+    preventiveMaintenanceTaskViewPresenter.clearPermitStoreData();
+  }
+
+  Future<void> viewNewPermitList({
+    int? permitId,
+    int? jobId,
+  }) async {
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "jobId": jobId});
+    print({"Permit", permitId, jobId});
   }
 }

@@ -137,28 +137,6 @@ class StockManagementDashboardScreen
                               );
                               //controller.checkPoint();
                             }),
-                        // _stockManagementList(
-                        //     tittle: "Receive Goods Order ",
-                        //     ontap: () {
-                        //       Get.toNamed(
-                        //         Routes.receiveGoodsOrders,
-                        //       );
-
-                        //       // controller.receiveGoodsOrders();
-                        //     }),
-                      ],
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
                         _stockManagementList(
                             tittle: "MRS List",
                             ontap: () {
@@ -170,29 +148,14 @@ class StockManagementDashboardScreen
                               Get.offNamed(Routes.returnMrsList);
                             }),
                         // _stockManagementList(
-                        //   tittle: "S2S Material Transfer",
-                        //   // ontap: () {
-                        //   //   controller.pmTask();
-                        //   // }
-                        // ),
-                      ],
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        _importPlan(
-                            tittle: "Import Material",
-                            ontap: () {
-                              controller.importMaterial();
-                            }),
+                        //     tittle: "Receive Goods Order ",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.receiveGoodsOrders,
+                        //       );
+
+                        //       // controller.receiveGoodsOrders();
+                        //     }),
                       ],
                     ),
                     Container(
@@ -303,6 +266,11 @@ class StockManagementDashboardScreen
                             tittle: "Add Asset Master",
                             ontap: () {
                               Get.offNamed(Routes.addassetMaster);
+                            }),
+                        _importPlan(
+                            tittle: "Import Material",
+                            ontap: () {
+                              controller.importMaterial();
                             }),
                       ],
                     ),

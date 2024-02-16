@@ -55,7 +55,7 @@ class ViewAuditPlanController extends GetxController {
         type.value = int.tryParse(_type ?? "") ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'auditId');
+      Utility.showDialog(e.toString(), 'auditId');
     }
   }
 

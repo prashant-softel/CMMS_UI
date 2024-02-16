@@ -69,7 +69,7 @@ class EditMrsController extends GetxController {
       }
       //  await _flutterSecureStorage.delete(key: "mrsId");
     } catch (e) {
-      Utility.showDialog(e.toString() + 'mrsId');
+      Utility.showDialog(e.toString(), 'mrsId');
     }
   }
 

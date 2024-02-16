@@ -113,4 +113,5 @@ class PreventiveMaintenanceTaskViewUsecase {
   void clearStoreTaskWhereUsedData() async =>
       repository.clearData(LocalKeys.whereUsed);
   void clearStoreDataJobId() async => repository.clearData(LocalKeys.jobId);
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
 }

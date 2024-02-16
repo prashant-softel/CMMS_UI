@@ -1153,15 +1153,15 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       //             153
                                       //   ?
                                       if (
-                                          // controller.jobDetailsModel.value
-                                          //           ?.status ==
-                                          //       103 ||
+                                      // controller.jobDetailsModel.value
+                                      //           ?.status ==
+                                      //       103 ||
+                                      controller.jobDetailsModel.value
+                                                  ?.latestJCStatus ==
+                                              155 ||
                                           controller.jobDetailsModel.value
-                                                      ?.latestJCStatus ==
-                                                  155 ||
-                                              controller.jobDetailsModel.value
-                                                      ?.status ==
-                                                  102)
+                                                  ?.status ==
+                                              102)
                                         CustomElevatedButton(
                                           text: "Create New Permit",
                                           icon: Icons.add,

@@ -201,20 +201,33 @@ abstract class Utility {
   static void launchURL(String _url) async =>
       await canLaunchUrl(Uri.parse(_url))
           ? await canLaunchUrl(Uri.parse(_url))
-          : showDialog('Could not open $_url');
+          : showDialog('Could not open $_url', "");
 
   /// Show info dialog
   static void showDialog(
-    String message, {
+    String message,
+    String method, {
     Function()? onPress,
     bool barrierDismissible = true,
   }) async {
     await Get.dialog<void>(
       CupertinoAlertDialog(
         title: const Text('Info'),
-        content: Text(
-          message,
-        ),
+        content: message == "401"
+            ? Text(
+                "LogOut",
+              )
+            : Row(
+                children: [
+                  Text(
+                    message,
+                  ),
+                  Dimens.boxWidth10,
+                  Text(
+                    method,
+                  ),
+                ],
+              ),
         actions: [
           CupertinoButton(
             onPressed: onPress ?? Get.back,
