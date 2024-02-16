@@ -16,6 +16,7 @@ class BreakdownMaintenanceScreen
   BreakdownMaintenanceScreen({super.key});
 
   final BreakdownMaintenanceController controller = Get.find();
+  final HomeController homeController = Get.find();
 
   ///
   @override
@@ -27,297 +28,323 @@ class BreakdownMaintenanceScreen
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      appBar: Responsive.isMobile(context)
-          ? AppBar(
-              centerTitle: true,
-              elevation: 0,
-            )
-          : null,
-      drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? HomeDrawer()
-          : null,
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Row(
-          children: [
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (Responsive.isMobile(context) ||
-                        Responsive.isTablet(context))
-                      Obx(
-                        () => //
-                            Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Card(
-                              shadowColor: ColorValues.greyColor,
-                              elevation: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    value: controller.selectedFacility.value,
-                                    icon: const Icon(
-                                        Icons.keyboard_arrow_down_outlined),
-                                    elevation: 7,
-                                    style: const TextStyle(color: Colors.black),
-                                    onChanged: (String? selectedValue) {
-                                      controller.isFacilitySelected.value =
-                                          true;
-                                      controller.selectedFacility.value =
-                                          selectedValue ?? '';
-                                    },
-                                    items: controller.facilityList
-                                        .map<DropdownMenuItem<String>>(
-                                            (facility) {
-                                      return DropdownMenuItem<String>(
-                                        value: facility?.name ?? '',
-                                        child: Text(facility?.name ?? ''),
-                                      );
-                                    }).toList(),
+        appBar: Responsive.isMobile(context)
+            ? AppBar(
+                centerTitle: true,
+                elevation: 0,
+              )
+            : null,
+        drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+            ? HomeDrawer()
+            : null,
+        body: Obx(() => Stack(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 450),
+                  margin: EdgeInsets.only(
+                      left: homeController.menuButton.value ? 250.0 : 70.0),
+                  width: Get.width,
+                  height: Get.height,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (Responsive.isMobile(context) ||
+                                  Responsive.isTablet(context))
+                                Obx(
+                                  () => //
+                                      Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Card(
+                                        shadowColor: ColorValues.greyColor,
+                                        elevation: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(3.0),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                              isExpanded: true,
+                                              value: controller
+                                                  .selectedFacility.value,
+                                              icon: const Icon(Icons
+                                                  .keyboard_arrow_down_outlined),
+                                              elevation: 7,
+                                              style: const TextStyle(
+                                                  color: Colors.black),
+                                              onChanged:
+                                                  (String? selectedValue) {
+                                                controller.isFacilitySelected
+                                                    .value = true;
+                                                controller.selectedFacility
+                                                        .value =
+                                                    selectedValue ?? '';
+                                              },
+                                              items: controller.facilityList
+                                                  .map<
+                                                      DropdownMenuItem<
+                                                          String>>((facility) {
+                                                return DropdownMenuItem<String>(
+                                                  value: facility?.name ?? '',
+                                                  child: Text(
+                                                      facility?.name ?? ''),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
+                              if (Responsive.isDesktop(context)) HeaderWidget(),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "BreakDown Maintenance",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                            1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (Responsive.isDesktop(context)) HeaderWidget(),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "BreakDown Maintenance",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
 
-                    /// GRID TILES
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants.kJobFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Job List",
-                                onTap: () {
-                                  controller.goToJobListScreen();
-                                })
-                            : Container(),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants.kJobFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: 'Add New Job',
-                                onTap: () {
-                                  controller.addNewJob();
-                                })
-                            : Container(),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kJobCardFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "JobCard List",
-                                onTap: () {
-                                  controller.goToJobCardList();
-                                })
-                            : Container(),
-                      ],
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Permit List",
-                                onTap: () {
-                                  controller.newPermitList();
-                                })
-                            : Container(),
+                              /// GRID TILES
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 70,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                    Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : 5,
+                                children: <Widget>[
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kJobFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "Job List",
+                                          onTap: () {
+                                            controller.goToJobListScreen();
+                                          })
+                                      : Container(),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kJobFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: 'Add New Job',
+                                          onTap: () {
+                                            controller.addNewJob();
+                                          })
+                                      : Container(),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kJobCardFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "JobCard List",
+                                          onTap: () {
+                                            controller.goToJobCardList();
+                                          })
+                                      : Container(),
+                                ],
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 70,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                    Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : 5,
+                                children: <Widget>[
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "Permit List",
+                                          onTap: () {
+                                            controller.newPermitList();
+                                          })
+                                      : Container(),
 
-                        //Add New Permit
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Add New Permit",
-                                onTap: () {
-                                  controller.createNewPermit();
-                                })
-                            : Container(),
-                      ],
-                    ),
+                                  //Add New Permit
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "Add New Permit",
+                                          onTap: () {
+                                            controller.createNewPermit();
+                                          })
+                                      : Container(),
+                                ],
+                              ),
 
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Masters",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Masters",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                            1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: Dimens.edgeInsets15,
+                                crossAxisSpacing: 70,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                    Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : 5,
+                                children: <Widget>[
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id == 5 &&
+                                                  e.view == 1 &&
+                                                  e.add == 1)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "Permit Type",
+                                          onTap: () {
+                                            controller.goToPermitTypeScreen();
+                                          })
+                                      : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id == 5 &&
+                                                  e.view == 1 &&
+                                                  e.add == 1)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "Permit Type Checklist",
+                                          onTap: () {
+                                            controller
+                                                .gotToSafetyQuestionsList();
+                                          })
+                                      : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id == 5 &&
+                                                  e.view == 1 &&
+                                                  e.add == 1)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "JOB Type",
+                                          onTap: () {
+                                            controller.goToJobTypeList();
+                                          })
+                                      : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id == 5 &&
+                                                  e.view == 1 &&
+                                                  e.add == 1)
+                                              .length >
+                                          0
+                                      ? createContentTile(
+                                          title: "TBT SOP List",
+                                          onTap: () {
+                                            controller.goToJobSOPList();
+                                          })
+                                      : Dimens.box0
+                                ],
+                              ),
+                            ]),
                       ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 5 &&
-                                        e.view == 1 &&
-                                        e.add == 1)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Permit Type",
-                                onTap: () {
-                                  controller.goToPermitTypeScreen();
-                                })
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 5 &&
-                                        e.view == 1 &&
-                                        e.add == 1)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Permit Type Checklist",
-                                onTap: () {
-                                  controller.gotToSafetyQuestionsList();
-                                })
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 5 &&
-                                        e.view == 1 &&
-                                        e.add == 1)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "JOB Type",
-                                onTap: () {
-                                  controller.goToJobTypeList();
-                                })
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == 5 &&
-                                        e.view == 1 &&
-                                        e.add == 1)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "TBT SOP List",
-                                onTap: () {
-                                  controller.goToJobSOPList();
-                                })
-                            : Dimens.box0
-                      ],
-                    ),
-                  ]),
-            ),
-          ],
-        ),
-      ),
-    );
+                    ],
+                  ),
+                ),
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 450),
+                  child: HomeDrawer(),
+                ),
+              ],
+            )));
   }
 
   Widget createContentTile({required String title, Function()? onTap}) {

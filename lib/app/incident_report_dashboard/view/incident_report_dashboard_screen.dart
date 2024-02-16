@@ -11,6 +11,7 @@ class IncidentReportDashboardScreen
     extends GetView<IncidentReportDashboardController> {
   IncidentReportDashboardScreen({super.key});
   final IncidentReportDashboardController controller = Get.find();
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,88 +33,102 @@ class IncidentReportDashboardScreen
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer() //ResponsiveSideMenu()
               : null,
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        child: Row(
+      body: Obx(
+        () => Stack(
           children: [
-            SizedBox(
-              height: 40,
-            ),
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? Dimens.box0
-                :
-                //
-                HomeDrawer(),
-            Expanded(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (Responsive.isMobile(context))
-                      Obx(
-                        () => Container(
-                          width: Get.width,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                          ),
-                        ),
-                      ),
-                    if (Responsive.isDesktop(context)) HeaderWidget(),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                  left: homeController.menuButton.value ? 250.0 : 70.0),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: 40,
+                  ),
+                  // (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  //     ? Dimens.box0
+                  //     :
+                  //     //
+                  //     HomeDrawer(),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Incident Report",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                          if (Responsive.isMobile(context))
+                            Obx(
+                              () => Container(
+                                width: Get.width,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                ),
+                              ),
+                            ),
+                          if (Responsive.isDesktop(context)) HeaderWidget(),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Incident Report",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 159, 156, 156),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(
+                                    width:
+                                        10), // Add some space between the text and the line
+                                Expanded(
+                                  child: Divider(
+                                    color: Colors
+                                        .grey, // Customize the color of the line if needed
+                                    height:
+                                        1, // Adjust the height of the line if needed
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : 5,
-                      children: <Widget>[
-                        _incidentReportList(
-                            tittle: "Incident Report List",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.incidentReportListWeb,
-                              );
-                            }),
-                        //  if (Responsive.isDesktop(context))
-                        // _incidentReportList(
-                        //     tittle: "Add Incident Report",
-                        //     ontap: () {
-                        //       Get.toNamed(
-                        //         Routes.addIncidentReportContentWeb,
-                        //       );
-                        //     }),
-                      ],
-                    )
-                  ]),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: const EdgeInsets.all(16),
+                            crossAxisSpacing: 70,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                                Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : 5,
+                            children: <Widget>[
+                              _incidentReportList(
+                                  tittle: "Incident Report List",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.incidentReportListWeb,
+                                    );
+                                  }),
+                              //  if (Responsive.isDesktop(context))
+                              // _incidentReportList(
+                              //     tittle: "Add Incident Report",
+                              //     ontap: () {
+                              //       Get.toNamed(
+                              //         Routes.addIncidentReportContentWeb,
+                              //       );
+                              //     }),
+                            ],
+                          )
+                        ]),
+                  ),
+                ],
+              ),
+            ),
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 450),
+              child: HomeDrawer(),
             ),
           ],
         ),
