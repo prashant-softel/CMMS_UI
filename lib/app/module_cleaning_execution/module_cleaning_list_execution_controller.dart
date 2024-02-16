@@ -42,6 +42,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   int facilityId = 0;
   Rx<int> Id = 0.obs;
   RxString IDFilterText = ''.obs;
+  RxString titleFilterText = ''.obs;
 
   RxString planIDFilterText = ''.obs;
   RxString responsibilityFilterText = ''.obs;
@@ -53,8 +54,10 @@ class ModuleCleaningListExecutionController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "ID": true,
+    "Title": true,
     "Plan ID": true,
-    "Responsibility": true,
+
+    // "Responsibility": true,
     "Frequency": true,
     "No Of Days": true,
     "Start Date": true,
@@ -64,9 +67,10 @@ class ModuleCleaningListExecutionController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "ID": 153,
-    "Plan ID": 150,
-    "Responsibility": 200,
+    "ID": 100,
+    "Title": 150,
+    "Plan ID": 100,
+    // "Responsibility": 200,
     "Frequency": 163,
     "No Of Days": 153,
     "Start Date": 130,
@@ -89,8 +93,9 @@ class ModuleCleaningListExecutionController extends GetxController {
   void onInit() async {
     this.filterText = {
       "ID": IDFilterText,
+      "Title": titleFilterText,
       "Plan ID": planIDFilterText,
-      "Responsibility": responsibilityFilterText,
+      // "Responsibility": responsibilityFilterText,
       "Frequency": frequencyFilterText,
       "No Of Days": noOfDaysFilterText,
       "Start Date": startDateFilterText,
@@ -122,6 +127,8 @@ class ModuleCleaningListExecutionController extends GetxController {
             (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
             (item?.planId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
+            (item?.title?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
             (item?.responsibility
                     ?.toString()
                     .toLowerCase()
@@ -132,10 +139,7 @@ class ModuleCleaningListExecutionController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.noOfDays
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.noOfDays?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.startDate
                     ?.toString()
