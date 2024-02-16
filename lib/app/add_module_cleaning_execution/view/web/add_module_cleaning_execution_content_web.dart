@@ -732,7 +732,7 @@ class AddModuleCleaningExecutionContentWeb
 
                                                                                                             Get.dialog(AddModuleCleaningExecutionDialog(
                                                                                                               scheduleId: filterdData!.scheduleId,
-                                                                                                              // cleaningDay: filterdData.cleaningDay,
+                                                                                                              cleaningDay: filterdData.cleaningDay,
                                                                                                               waterUsed: filterdData.waterUsed,
                                                                                                             ));
                                                                                                           },
