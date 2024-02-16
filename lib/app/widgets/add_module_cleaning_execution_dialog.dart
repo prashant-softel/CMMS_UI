@@ -11,14 +11,14 @@ import '../theme/dimens.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
   int? scheduleId;
-  // int? cleaningDay;
+  int? cleaningDay;
   int? waterUsed;
   // int? executedDay;
   // int? day;
 
   AddModuleCleaningExecutionDialog({
     required this.scheduleId,
-    // required this.cleaningDay,
+    required this.cleaningDay,
     required this.waterUsed,
   });
 
@@ -421,7 +421,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     // controller.createMcPlan();
                     controller.updateMCScheduleExecution(
                         scheduleId: scheduleId,
-                        // cleaningDay: cleaningDay,
+                        cleaningDay: cleaningDay,
                         waterUsed: int.tryParse(
                             '${controller.waterUsedCtrlrWeb.text}'),
                         remark: '${controller.remarkCtrlrWeb.text}');
