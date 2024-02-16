@@ -13,36 +13,42 @@ class HomeScreen extends GetView<HomeController> {
     return
         //
         Scaffold(
-      appBar: Responsive.isMobile(context)
-          ? AppBar(
-              title: Text('Home'),
-              centerTitle: true,
-              elevation: 0,
-            )
-          : null,
-      drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
-              : null,
-      body: Stack(
-        children: [
-          Row(
-            children: [
-              Positioned(child: SizedBox(width: 70)),
-              Expanded(
-                  child: Column(
+            appBar: Responsive.isMobile(context)
+                ? AppBar(
+                    title: Text('Home'),
+                    centerTitle: true,
+                    elevation: 0,
+                  )
+                : null,
+            drawer: //
+                (Responsive.isMobile(context) || Responsive.isTablet(context))
+                    ? HomeDrawer() //ResponsiveSideMenu()
+                    : null,
+            body: Obx(
+              () => Stack(
                 children: [
-                  (Responsive.isDesktop(context))
-                      ? Expanded(child: DashBoardHomeWeb())
-                      : Dimens.box0
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: controller.menuButton.value ? 250.0 : 70.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Column(
+                          children: [
+                            (Responsive.isDesktop(context))
+                                ? Expanded(child: DashBoardHomeWeb())
+                                : Dimens.box0
+                          ],
+                        ))
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    child: HomeDrawer(),
+                  ),
                 ],
-              ))
-            ],
-          ),
-          Positioned(child: HomeDrawer())
-        ],
-      ),
-    );
+              ),
+            ));
   }
 }
 
