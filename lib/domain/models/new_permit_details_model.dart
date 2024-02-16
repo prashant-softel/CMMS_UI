@@ -52,6 +52,8 @@ class NewPermitDetailModel {
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
   List<ListAssociatedJob?>? lstAssociatedJobs;
+  List<ListAssociatedPm?>? lstAssociatedPM;
+
   ExtendDetails? extendDetails;
   CancelDetails? cancelDetails;
   CloseDetails? closeDetails;
@@ -112,6 +114,7 @@ class NewPermitDetailModel {
     this.loto_list,
     this.lstCategory,
     this.lstAssociatedJobs,
+    this.lstAssociatedPM,
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
@@ -195,7 +198,10 @@ class NewPermitDetailModel {
             ? List<ListAssociatedJob>.from(json["lstAssociatedJobs"]
                 .map((x) => ListAssociatedJob.fromJson(x)))
             : [],
-
+        lstAssociatedPM: json["lstAssociatedPM"] != null
+            ? List<ListAssociatedPm>.from(json["lstAssociatedPM"]
+                .map((x) => ListAssociatedPm.fromJson(x)))
+            : [],
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
@@ -262,6 +268,8 @@ class NewPermitDetailModel {
 
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
+        "lstAssociatedPM": List<dynamic>.from(lstAssociatedPM!.map((x) => x)),
+
         "extendDetails": extendDetails,
         "cancelDetails": cancelDetails,
         "closeDetails": closeDetails,
@@ -457,6 +465,54 @@ class ListAssociatedJob {
         "equipmentCat": equipmentCat,
         "equipment": equipment,
         "breakdownTime": breakdownTime,
+        "assignedTo": assignedTo,
+        "status": status,
+        "status_short": status_short,
+      };
+}
+
+class ListAssociatedPm {
+  ListAssociatedPm(
+      {this.permitId,
+      this.title,
+      this.equipmentCat,
+      this.equipment,
+      this.assignedTo,
+      this.status,
+      this.status_short,
+      this.pmId,
+      this.startDate});
+
+  int? pmId;
+  int? permitId;
+  String? title;
+  String? equipmentCat;
+  String? equipment;
+  String? startDate;
+  String? assignedTo;
+  int? status;
+  String? status_short;
+
+  factory ListAssociatedPm.fromJson(Map<String, dynamic> json) =>
+      ListAssociatedPm(
+        pmId: json['pmId'],
+        permitId: json['permitId'],
+        title: json["title"] ?? '',
+        equipmentCat: json['equipmentCat'],
+        equipment: json['equipment'],
+        startDate: json['startDate'] == null ? "" : json['startDate'],
+        assignedTo: json['assignedTo'] ?? '',
+        status: json['status'],
+        status_short: json['status_short'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "pmId": pmId,
+        "permitId": permitId,
+        "title": title,
+        "equipmentCat": equipmentCat,
+        "equipment": equipment,
+        "startDate": startDate,
         "assignedTo": assignedTo,
         "status": status,
         "status_short": status_short,
