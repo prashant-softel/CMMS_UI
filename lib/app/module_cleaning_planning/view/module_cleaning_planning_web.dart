@@ -145,7 +145,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                   GoodsOrderTextField(
                                                     textController:
                                                         controller.mcTitelCtrlr,
-                                                        inputFormatters: [
+                                                    inputFormatters: [
                                                       FilteringTextInputFormatter
                                                           .deny(
                                                         RegExp('[\'^]'),
