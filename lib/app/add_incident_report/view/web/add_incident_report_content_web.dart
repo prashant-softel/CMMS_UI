@@ -111,15 +111,18 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       .incidentReportListWeb);
                                                 },
                                                 child: Text(
-                                                    " / Incident Report",
+                                                    " / Incident Report"
+                                                        .toUpperCase(),
                                                     style: Styles.greyLight14),
                                               ),
                                               controller.irId.value > 0
                                                   ? Text(
-                                                      " / Update Incident Report",
+                                                      " / Update Incident Report"
+                                                          .toUpperCase(),
                                                       style: Styles.greyLight14)
                                                   : Text(
-                                                      " / Add Incident Report",
+                                                      " / Add Incident Report"
+                                                          .toUpperCase(),
                                                       style: Styles.greyLight14)
                                             ],
                                           ),
@@ -2417,6 +2420,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 controller.isTitleTextInvalid.value = true;
               }
             },
+            inputFormatters: [
+              FilteringTextInputFormatter.deny(
+                RegExp('[\'^]'),
+              )
+            ],
           ),
         ),
       ),

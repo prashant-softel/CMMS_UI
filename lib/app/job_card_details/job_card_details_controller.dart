@@ -141,7 +141,7 @@ class JobCardDetailsController extends GetxController {
         jobCardId.value = int.tryParse(_jobCardId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'JcId');
+      Utility.showDialog(e.toString(), 'JcId');
     }
     // return jobId.value;
   }

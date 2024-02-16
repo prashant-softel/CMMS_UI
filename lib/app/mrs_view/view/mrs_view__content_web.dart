@@ -55,11 +55,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                   ),
                   InkWell(
                     onTap: () {
-                      final _flutterSecureStorage =
-                          const FlutterSecureStorage();
-
-                      _flutterSecureStorage.delete(key: "mrsId");
-                      Get.offNamed(Routes.stockManagementDashboardScreen);
+                      Get.offNamed(Routes.mrsListScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),

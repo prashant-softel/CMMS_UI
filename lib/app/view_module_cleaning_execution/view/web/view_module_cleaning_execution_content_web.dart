@@ -78,12 +78,12 @@ class ViewModuleCleaningExecutionContentWeb
                             Get.offNamed(Routes.moduleCleaningListExecution);
                           },
                           child: Text(" / MODULE CLEANING EXECUTION LIST",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
                         InkWell(
                           onTap: () {},
                           child: Text(" / VIEW MODULE CLEANING EXECUTION",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         )
                       ],
                     ),

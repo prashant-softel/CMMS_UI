@@ -72,9 +72,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                         onTap: () {
                           Get.offNamed(Routes.misDashboard);
                         },
-                        child: Text(" / AUDIT TASK",
-                            style: Styles.greyMediumLight12)),
-                    Text(" / VIEW AUDIT TASK", style: Styles.greyMediumLight12)
+                        child:
+                            Text(" / AUDIT TASK", style: Styles.greyLight14)),
+                    Text(" / VIEW AUDIT TASK", style: Styles.greyLight14)
                   ],
                 ),
               ),

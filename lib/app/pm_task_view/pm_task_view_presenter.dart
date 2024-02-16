@@ -145,4 +145,6 @@ class PreventiveMaintenanceTaskViewPresenter {
 
   void clearStoreDataJobId() async =>
       preventiveMaintenanceTaskViewUsecase.clearStoreDataJobId();
+  void clearPermitStoreData() async =>
+      preventiveMaintenanceTaskViewUsecase.clearPermitStoreData();
 }

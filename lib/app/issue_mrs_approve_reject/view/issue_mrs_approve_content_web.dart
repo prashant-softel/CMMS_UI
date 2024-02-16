@@ -178,7 +178,7 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(
-                                      "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
+                                      '${controller.mrsDetailsModel.value?.whereUsedTypeName.toString().toUpperCase() ?? ''}${controller.mrsDetailsModel.value?.whereUsedRefID ?? ''}',
                                       style: Styles.blue17),
                                 ],
                               )

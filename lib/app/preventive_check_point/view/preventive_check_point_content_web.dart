@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/checkpoint_list_model.dart';
 import '../../constant/constant.dart';
@@ -248,6 +249,12 @@ class PreventiveCheckPointContentWeb
                                                       .checkPointCtrlr,
                                                   focusNode: controller.chckFocus,
                                                   scroll: controller.chckScroll,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .deny(
+                                                      RegExp('[\'^]'),
+                                                    )
+                                                  ],
                                                 )),
                                           ),
                                         ],
@@ -295,6 +302,12 @@ class PreventiveCheckPointContentWeb
                                                       .requirementCtrlr,
                                                   focusNode: controller.reqFocus,
                                                   scroll: controller.reqScroll,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .deny(
+                                                      RegExp('[\'^]'),
+                                                    )
+                                                  ],
                                                 )),
                                           ),
                                         ],

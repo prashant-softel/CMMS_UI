@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -258,6 +259,12 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             .value = true;
                                                       }
                                                     },
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(
+                                                        RegExp('[\'^]'),
+                                                      )
+                                                    ],
                                                   ),
                                                 ),
                                               ),

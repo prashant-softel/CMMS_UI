@@ -9,6 +9,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -72,14 +73,14 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                           Get.back();
                         },
                         child: controller.type.value == 3
-                            ? Text(" / MIS", style: Styles.greyMediumLight12)
-                            : Text(" / AUDIT", style: Styles.greyMediumLight12),
+                            ? Text(" / MIS", style: Styles.greyLight14)
+                            : Text(" / AUDIT", style: Styles.greyLight14),
                       ),
                       controller.type.value == 3
                           ? Text(" / CREATE OBSERVATION PLAN",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                           : Text(" / CREATE AUDIT",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                     ],
                   ),
                 ),
@@ -161,6 +162,11 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                               .3),
                                       child: LoginCustomTextfield(
                                         textController: controller.planTitleTc,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.deny(
+                                            RegExp('[\'^]'),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     Spacer(),

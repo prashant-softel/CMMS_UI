@@ -43,7 +43,7 @@ class BreakdownMaintenanceController extends GetxController {
         selectedFacility.value = facilityList[0]?.name ?? '';
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + ' BMController - getFacilityList');
+      Utility.showDialog(e.toString(), ' BMController - getFacilityList');
     }
   }
 

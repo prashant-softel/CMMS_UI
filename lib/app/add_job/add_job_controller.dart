@@ -337,7 +337,7 @@ class AddJobController extends GetxController {
         showAlertDialog(jobId: _jobId, message: _message);
       }
     } catch (e) {
-      Utility.showDialog(e.toString());
+      // Utility.showDialog(e.toString());
     }
   }
 

@@ -43,7 +43,7 @@ class MisDashboardController extends GetxController {
         selectedFacility.value = facilityList[0]?.name ?? '';
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + ' MisController - getFacilityList');
+      Utility.showDialog(e.toString(), ' MisController - getFacilityList');
     }
   }
 

@@ -46,7 +46,7 @@ class IssueMrsApproveController extends GetxController {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'mrsId');
+      Utility.showDialog(e.toString(), 'mrsId');
     }
   }
 

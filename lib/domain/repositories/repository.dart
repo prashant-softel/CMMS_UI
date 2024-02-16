@@ -343,7 +343,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermit');
         //return '';
       }
       return Map();
@@ -392,7 +392,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createNewPermitForJOb');
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermitForJOb');
         //return '';
       }
       return Map();
@@ -441,7 +441,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createNewPermitForJOb');
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermitForJOb');
         //return '';
       }
       return Map();
@@ -482,7 +482,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateNewPermit');
+        Utility.showDialog(res.errorCode.toString(), 'updateNewPermit');
         //return '';
       }
       return Map();
@@ -523,7 +523,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'resubmitPermit');
+        Utility.showDialog(res.errorCode.toString(), 'resubmitPermit');
         //return '';
       }
       return Map();
@@ -566,7 +566,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createSOP');
+        Utility.showDialog(res.errorCode.toString(), 'createSOP');
         //return '';
       }
       return Map();
@@ -610,7 +610,7 @@ class Repository {
           Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createWarrantyClaim');
+        Utility.showDialog(res.errorCode.toString(), 'createWarrantyClaim');
         //return '';
       }
       return Map();
@@ -652,7 +652,7 @@ class Repository {
           return responseMap;
         } else {}
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createIncidentReport');
+        Utility.showDialog(res.errorCode.toString(), 'createIncidentReport');
         //return '';
       }
       return Map();
@@ -694,7 +694,7 @@ class Repository {
           return responseMap;
         } else {}
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createEscalationMatrix');
+        Utility.showDialog(res.errorCode.toString(), 'createEscalationMatrix');
         //return '';
       }
       return Map();
@@ -735,7 +735,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'createGoodsOrder');
         //return '';
       }
       return Map();
@@ -775,7 +775,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'createGoodsOrder');
         //return '';
       }
       return Map();
@@ -812,7 +812,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'createGoodsOrder');
         //return '';
       }
       return Map();
@@ -847,7 +847,7 @@ class Repository {
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'updateGoodsOrder');
         //return '';
       }
       return Map();
@@ -883,7 +883,7 @@ class Repository {
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'reciveUpdateGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'reciveUpdateGoodsOrder');
         //return '';
       }
       return Map();
@@ -918,7 +918,7 @@ class Repository {
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'reciveUpdateGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'reciveUpdateGoodsOrder');
         //return '';
       }
       return Map();
@@ -962,7 +962,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateWarrantyClaim');
+        Utility.showDialog(res.errorCode.toString(), 'updateWarrantyClaim');
         //return '';
       }
       return Map();
@@ -1006,7 +1006,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateIncidentReport');
+        Utility.showDialog(res.errorCode.toString(), 'updateIncidentReport');
         //return '';
       }
       return Map();
@@ -1049,7 +1049,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateIncidentReport');
+        Utility.showDialog(res.errorCode.toString(), 'updateIncidentReport');
         //return '';
       }
       return Map();
@@ -1094,7 +1094,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateMCExecution');
+        Utility.showDialog(res.errorCode.toString(), 'updateMCExecution');
         //return '';
       }
       return Map();
@@ -1123,7 +1123,7 @@ class Repository {
         return countrystateFromJson(res.data);
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getStateList');
+        Utility.showDialog(res.errorCode.toString(), 'getStateList');
         return null;
       }
     } catch (error) {
@@ -1186,7 +1186,7 @@ class Repository {
         return _inventoryModelList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        Utility.showDialog(res.errorCode.toString(), 'getInventoryList');
         return [];
       }
     } catch (error) {
@@ -1226,7 +1226,7 @@ class Repository {
         return _goodOrderModelList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
         return [];
       }
     } catch (error) {
@@ -1271,7 +1271,7 @@ class Repository {
         return _transactionReportList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
         return [];
       }
     } catch (error) {
@@ -1312,7 +1312,7 @@ class Repository {
         return _goodOrderModelList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
         return [];
       }
     } catch (error) {
@@ -1350,7 +1350,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getModuleCleaningListPlan');
+            res.errorCode.toString(), 'getModuleCleaningListPlan');
         return [];
       }
     } catch (error) {
@@ -1382,7 +1382,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        Utility.showDialog(res.errorCode.toString(), 'getInventoryList');
         return [];
       }
     } catch (error) {
@@ -1447,7 +1447,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        Utility.showDialog(res.errorCode.toString(), 'getBusinessList');
         return [];
       }
     } catch (error) {
@@ -1473,7 +1473,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
+        Utility.showDialog(res.errorCode.toString(), 'manufacturerList');
         return [];
       }
     } catch (error) {
@@ -1499,7 +1499,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'manufacturerList');
+        Utility.showDialog(res.errorCode.toString(), 'manufacturerList');
         return [];
       }
     } catch (error) {
@@ -1532,7 +1532,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermit');
         //return '';
       }
       return null;
@@ -1566,7 +1566,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'WarrantyClaimDetail');
+        Utility.showDialog(res.errorCode.toString(), 'WarrantyClaimDetail');
         //return '';
       }
       return null;
@@ -1601,7 +1601,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'MCExecutionDetail');
+        Utility.showDialog(res.errorCode.toString(), 'MCExecutionDetail');
         //return '';
       }
       return null;
@@ -1635,7 +1635,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'MCPlanDetail');
+        Utility.showDialog(res.errorCode.toString(), 'MCPlanDetail');
         //return '';
       }
       return null;
@@ -1669,7 +1669,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'IncidentReportDetail');
+        Utility.showDialog(res.errorCode.toString(), 'IncidentReportDetail');
         //return '';
       }
       return null;
@@ -1704,7 +1704,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
+        Utility.showDialog(res.errorCode.toString(), 'GetPurchaseDetailsByID');
         //return '';
       }
       return null;
@@ -1738,7 +1738,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
+        Utility.showDialog(res.errorCode.toString(), 'GetPurchaseDetailsByID');
         //return '';
       }
       return null;
@@ -1773,7 +1773,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'InventoryDetail');
+        Utility.showDialog(res.errorCode.toString(), 'InventoryDetail');
         //return '';
       }
       return null;
@@ -1807,7 +1807,7 @@ class Repository {
         print({"ViewWarrantyResponseData", _addInventoryDetailModel});
         return _addInventoryDetailModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'AddInventoryDetail');
+        Utility.showDialog(res.errorCode.toString(), 'AddInventoryDetail');
         //return '';
       }
       return null;
@@ -1870,7 +1870,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+            res.errorCode.toString(), 'goodsOrderApprovedButton');
         //return '';
       }
       return Map();
@@ -1905,7 +1905,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'approveIncidentReportButton');
+            res.errorCode.toString(), 'approveIncidentReportButton');
         //return '';
       }
       return Map();
@@ -1939,7 +1939,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'approveIrButton');
+        Utility.showDialog(res.errorCode.toString(), 'approveIrButton');
         //return '';
       }
       return Map();
@@ -1973,7 +1973,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'mcRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'mcRejectButton');
         //return '';
       }
       return Map();
@@ -2007,7 +2007,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'mcApprovedButton');
+        Utility.showDialog(res.errorCode.toString(), 'mcApprovedButton');
         //return '';
       }
       return Map();
@@ -2042,7 +2042,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'mcExecutionApprovedButton');
+            res.errorCode.toString(), 'mcExecutionApprovedButton');
         //return '';
       }
       return Map();
@@ -2077,7 +2077,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'WcApprovedButton');
+        Utility.showDialog(res.errorCode.toString(), 'WcApprovedButton');
         //return '';
       }
       return Map();
@@ -2112,7 +2112,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'WcRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'WcRejectButton');
         //return '';
       }
       return Map();
@@ -2147,8 +2147,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'mcExecutionRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'mcExecutionRejectButton');
         //return '';
       }
       return Map();
@@ -2182,7 +2181,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'pmPlanApprovedButton');
+        Utility.showDialog(res.errorCode.toString(), 'pmPlanApprovedButton');
         //return '';
       }
       return Map();
@@ -2217,7 +2216,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+            res.errorCode.toString(), 'goodsOrderApprovedButton');
         //return '';
       }
       return Map();
@@ -2251,7 +2250,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'incidentReportReject');
+        Utility.showDialog(res.errorCode.toString(), 'incidentReportReject');
         //return '';
       }
       return Map();
@@ -2285,7 +2284,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'incidentReportReject');
+        Utility.showDialog(res.errorCode.toString(), 'incidentReportReject');
         //return '';
       }
       return Map();
@@ -2319,7 +2318,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'approveGOReceiveButton');
+        Utility.showDialog(res.errorCode.toString(), 'approveGOReceiveButton');
         //return '';
       }
       return Map();
@@ -2353,7 +2352,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'rejectGOReceiveButton');
+        Utility.showDialog(res.errorCode.toString(), 'rejectGOReceiveButton');
         //return '';
       }
       return Map();
@@ -2387,7 +2386,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'pmPlanRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'pmPlanRejectButton');
         //return '';
       }
       return Map();
@@ -2422,7 +2421,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+            res.errorCode.toString(), 'goodsOrderApprovedButton');
         //return '';
       }
       return Map();
@@ -2956,7 +2955,7 @@ class Repository {
         return warrantyClaimList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getWarrantyClaimList');
+        Utility.showDialog(res.errorCode.toString(), 'getWarrantyClaimList');
         return [];
       }
     } catch (error) {
@@ -2993,7 +2992,7 @@ class Repository {
         return incidentReportList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
         return [];
       }
     } catch (error) {
@@ -3023,7 +3022,7 @@ class Repository {
         return equipmentList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentModelList');
         return [];
       }
     } catch (error) {
@@ -3053,7 +3052,7 @@ class Repository {
         return equipmentList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentModelList');
         return [];
       }
     } catch (error) {
@@ -3087,7 +3086,7 @@ class Repository {
         return mcTaskList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getMCTaskList');
+        Utility.showDialog(res.errorCode.toString(), 'getMCTaskList');
         return [];
       }
     } catch (error) {
@@ -3114,7 +3113,7 @@ class Repository {
         return workTypeList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getWorkTypeList');
+        Utility.showDialog(res.errorCode.toString(), 'getWorkTypeList');
         return [];
       }
     } catch (error) {
@@ -3140,7 +3139,7 @@ class Repository {
         var _lstBlocks = blockModelFromJson(res.data);
         return _lstBlocks;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getBlockList');
+        Utility.showDialog(res.errorCode.toString(), 'getBlockList');
         return [];
       }
     } catch (error) {
@@ -3165,7 +3164,7 @@ class Repository {
       if (!res.hasError) {
         return equipmentFromJson(res.data);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentList');
         return [];
       }
     } catch (error) {
@@ -3201,7 +3200,7 @@ class Repository {
 
         return _jobModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getJobList');
+        Utility.showDialog(res.errorCode.toString(), 'getJobList');
         return [];
       }
     } catch (error) {
@@ -3237,7 +3236,7 @@ class Repository {
 
         return _grievanceModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getGrievanceList');
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceList');
         return [];
       }
     } catch (error) {
@@ -3276,7 +3275,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createGrievance');
+        Utility.showDialog(res.errorCode.toString(), 'createGrievance');
         //return '';
       }
       return Map();
@@ -3352,7 +3351,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog('Something Went Wrong!!');
+        Utility.showDialog(res.errorCode.toString(), 'permitIssueButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3387,7 +3386,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'ApproveExtenedResponse');
+        Utility.showDialog(res.errorCode.toString(), 'ApproveExtenedResponse');
         //return '';
       }
       return Map();
@@ -3446,7 +3445,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'permitCancelByIssuerButton');
+            res.errorCode.toString(), 'permitCancelByIssuerButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3474,7 +3473,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'permitCancelRequestButton');
+            res.errorCode.toString(), 'permitCancelRequestButton');
       }
       return Map();
     } catch (error) {
@@ -3510,7 +3509,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'PermitCancelByApproverResponse');
+            res.errorCode.toString(), 'PermitCancelByApproverResponse');
         //return '';
       }
       return Map();
@@ -3545,7 +3544,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'PermitCancelRejectResponse');
+            res.errorCode.toString(), 'PermitCancelRejectResponse');
         //return '';
       }
       return Map();
@@ -3602,7 +3601,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitExtendtButton');
+        Utility.showDialog(res.errorCode.toString(), 'permitExtendtButton');
       }
       return Map();
     } catch (error) {
@@ -3633,7 +3632,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCloseButton');
+        Utility.showDialog(res.errorCode.toString(), 'permitCloseButton');
       }
       return Map();
     } catch (error) {
@@ -3676,7 +3675,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'abandonExecutionButton');
+        Utility.showDialog(res.errorCode.toString(), 'abandonExecutionButton');
         //return '';
       }
       return Map();
@@ -3721,7 +3720,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'abandonScheduleExecutionButton');
+            res.errorCode.toString(), 'abandonScheduleExecutionButton');
         //return '';
       }
       return Map();
@@ -3765,7 +3764,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'endExecutionButton');
+        Utility.showDialog(res.errorCode.toString(), 'endExecutionButton');
         //return '';
       }
       return Map();
@@ -3792,7 +3791,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'startMCExecutionButton');
+        Utility.showDialog(res.errorCode.toString(), 'startMCExecutionButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3816,7 +3815,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'endMCExecutionButton');
+        Utility.showDialog(res.errorCode.toString(), 'endMCExecutionButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3841,7 +3840,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'startMCScheduleExecutionButton');
+            res.errorCode.toString(), 'startMCScheduleExecutionButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3866,7 +3865,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'endMCScheduleExecutionButton');
+            res.errorCode.toString(), 'endMCScheduleExecutionButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3934,7 +3933,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'PermitExtendRejectResponse');
+            res.errorCode.toString(), 'PermitExtendRejectResponse');
         //return '';
       }
       return Map();
@@ -3965,7 +3964,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'incidentReportRejectButton');
+            res.errorCode.toString(), 'incidentReportRejectButton');
       }
     } catch (error) {
       log(error.toString());
@@ -3991,7 +3990,7 @@ class Repository {
         //  return _permitIssueModel;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'incidentReportApproveButton');
+            res.errorCode.toString(), 'incidentReportApproveButton');
       }
     } catch (error) {
       log(error.toString());
@@ -4048,7 +4047,7 @@ class Repository {
         return _facilityModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getFacilityList');
+        Utility.showDialog(res.errorCode.toString(), 'getFacilityList');
         return null;
       }
     } catch (error) {
@@ -4074,7 +4073,7 @@ class Repository {
         return _typePermitModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getTypePermitList');
+        Utility.showDialog(res.errorCode.toString(), 'getTypePermitList');
         return null;
       }
     } catch (error) {
@@ -4100,7 +4099,7 @@ class Repository {
         return _typePermitModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getModulesList');
+        Utility.showDialog(res.errorCode.toString(), 'getModulesList');
         return null;
       }
     } catch (error) {
@@ -4133,7 +4132,7 @@ class Repository {
         return _blockModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getBlocksList');
+        Utility.showDialog(res.errorCode.toString(), 'getBlocksList');
         return null;
       }
     } catch (error) {
@@ -4170,7 +4169,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getInventoryCategoryList');
+            res.errorCode.toString(), 'getInventoryCategoryList');
         return null;
       }
     } catch (error) {
@@ -4208,7 +4207,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getInventoryCategoryList');
+            res.errorCode.toString(), 'getInventoryCategoryList');
         return null;
       }
     } catch (error) {
@@ -4246,7 +4245,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getInventoryCategoryList');
+            res.errorCode.toString(), 'getInventoryCategoryList');
         return null;
       }
     } catch (error) {
@@ -4283,7 +4282,7 @@ class Repository {
         return _inventoryIsolationModelList;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getInventoryIsolationList');
+            res.errorCode.toString(), 'getInventoryIsolationList');
         return null;
       }
     } catch (error) {
@@ -4321,7 +4320,7 @@ class Repository {
         return _inventoryNameModelList;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getInventoryEquipmentNameList');
+            res.errorCode.toString(), 'getInventoryEquipmentNameList');
         return null;
       }
     } catch (error) {
@@ -4353,7 +4352,7 @@ class Repository {
         return _frequencyModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getFrequencyList');
+        Utility.showDialog(res.errorCode.toString(), 'getFrequencyList');
         return null;
       }
     } catch (error) {
@@ -4392,7 +4391,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createMC');
+        Utility.showDialog(res.errorCode.toString(), 'createMC');
         //return '';
       }
       return Map();
@@ -4432,7 +4431,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'updateMC');
+        Utility.showDialog(res.errorCode.toString(), 'updateMC');
         //return '';
       }
       return Map();
@@ -4466,7 +4465,7 @@ class Repository {
         return _jobDetailsModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getJobDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getJobDetails');
         return [];
       }
     } catch (error) {
@@ -4508,7 +4507,7 @@ class Repository {
         // return _jobAssociatedModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getJobDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getJobDetails');
         return [];
       }
     } catch (error) {
@@ -4543,7 +4542,7 @@ class Repository {
         return _newPermitList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getJobDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getJobDetails');
         return [];
       }
     } catch (error) {
@@ -4574,7 +4573,7 @@ class Repository {
             .toList();
         return _employeeModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getAssignedToList');
+        Utility.showDialog(res.errorCode.toString(), 'getAssignedToList');
         return null;
       }
     } catch (error) {
@@ -4608,7 +4607,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getToolsRequiredToWorkTypeList');
+            res.errorCode.toString(), 'getToolsRequiredToWorkTypeList');
         return null;
       }
     } //
@@ -4640,13 +4639,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'linkToPermit');
+        Utility.showDialog(res.errorCode.toString(), 'linkToPermit');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + 'linkToPermit');
+      Utility.showDialog(error.toString(), 'linkToPermit');
       return Map();
     }
   }
@@ -4670,13 +4669,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' saveJob');
+        Utility.showDialog(res.errorCode.toString(), ' saveJob');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + ' saveJob');
+      Utility.showDialog(error.toString(), ' saveJob');
       return Map();
     }
   }
@@ -4700,13 +4699,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' updateJob');
+        Utility.showDialog(res.errorCode.toString(), ' updateJob');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + ' updateJob');
+      Utility.showDialog(error.toString(), ' updateJob');
       return Map();
     }
   }
@@ -4733,13 +4732,13 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + ' repo - assignReAssignJob');
+            res.errorCode.toString(), ' repo - assignReAssignJob');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + ' repo - assignReAssignJob');
+      Utility.showDialog(error.toString(), ' repo - assignReAssignJob');
       return Map();
     }
   }
@@ -4762,11 +4761,11 @@ class Repository {
         return null;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' getUserAccessList');
+        Utility.showDialog(res.errorCode.toString(), ' getUserAccessList');
         return null;
       }
     } catch (error) {
-      Utility.showDialog(error.toString() + ' getUserAccessList');
+      Utility.showDialog(error.toString(), ' getUserAccessList');
       return null;
     }
   }
@@ -4784,7 +4783,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -4806,7 +4805,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -4844,7 +4843,7 @@ class Repository {
         return _PreventiveCheckListModelList;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckListForPm');
+            res.errorCode.toString(), ' getPreventiveCheckListForPm');
         return [];
       }
     } catch (error) {
@@ -4882,7 +4881,7 @@ class Repository {
         return _PreventiveCheckListModelList;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckListForPm');
+            res.errorCode.toString(), ' getPreventiveCheckListForPm');
         return [];
       }
     } catch (error) {
@@ -4919,8 +4918,7 @@ class Repository {
 
         return _PreventiveCheckListModelList;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -4954,8 +4952,7 @@ class Repository {
 
         return _ModuleListModelList;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -4990,7 +4987,7 @@ class Repository {
 
         return _InventoryTypeListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
+        Utility.showDialog(res.errorCode.toString(), "getInventoryTypeList");
         return [];
       }
     } catch (error) {
@@ -5023,7 +5020,7 @@ class Repository {
 
         return _InventoryStatusListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getinventoryTypeList');
+        Utility.showDialog(res.errorCode.toString(), ' getinventoryTypeList');
         return [];
       }
     } catch (error) {
@@ -5054,7 +5051,7 @@ class Repository {
 
         return _PreventiveCheckPointList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return [];
       }
     } catch (error) {
@@ -5075,7 +5072,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return true;
       }
     } catch (error) {
@@ -5096,7 +5093,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'saveRoleAccess');
+        Utility.showDialog(res.errorCode.toString(), 'saveRoleAccess');
         return true;
       }
     } catch (error) {
@@ -5123,7 +5120,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'uploadFiles');
+        Utility.showDialog(res.errorCode.toString(), 'uploadFiles');
       }
       return Map();
     } //
@@ -5159,7 +5156,7 @@ class Repository {
 
         return _jobCardDetailsList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getJobCardDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getJobCardDetails');
         return null;
       }
     } catch (error) {
@@ -5197,7 +5194,7 @@ class Repository {
         //   return responseMap;
         // }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createJobCard');
+        Utility.showDialog(res.errorCode.toString(), 'createJobCard');
       }
       return Map();
     } catch (error) {
@@ -5225,7 +5222,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'startJobCard');
+        Utility.showDialog(res.errorCode.toString(), 'startJobCard');
       }
       return Map();
     } catch (error) {
@@ -5252,7 +5249,7 @@ class Repository {
         return _permitDetailsModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getPermitDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getPermitDetails');
         return null;
       }
     } //
@@ -5288,7 +5285,7 @@ class Repository {
 
         return _jobCardDetailsList;
       } else {
-        Utility.showDialog(res.errorCode.toString());
+        Utility.showDialog(res.errorCode.toString(), "getJobCardHistory");
         return null;
       }
     } catch (error) {
@@ -5325,7 +5322,7 @@ class Repository {
 
         return _permitDetailsList;
       } else {
-        Utility.showDialog(res.errorCode.toString());
+        Utility.showDialog(res.errorCode.toString(), "getPermitHistory");
         return null;
       }
     } catch (error) {
@@ -5355,13 +5352,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' repo- updateJobCard');
+        Utility.showDialog(res.errorCode.toString(), ' repo- updateJobCard');
       }
       return Map();
     } //
     catch (error) {
       print(error.toString());
-      Utility.showDialog(error.toString() + ' repo - updateJobCard');
+      Utility.showDialog(error.toString(), ' repo - updateJobCard');
       return Map();
     }
   }
@@ -5387,13 +5384,13 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + ' repo- carryForwardJobCard');
+            res.errorCode.toString(), ' repo- carryForwardJobCard');
       }
       return Map();
     } //
     catch (error) {
       print(error.toString());
-      Utility.showDialog(error.toString() + ' repo - carryForwardJobCard');
+      Utility.showDialog(error.toString(), ' repo - carryForwardJobCard');
       return Map();
     }
   }
@@ -5418,13 +5415,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' repo- closeJobCard');
+        Utility.showDialog(res.errorCode.toString(), ' repo- closeJobCard');
       }
       return Map();
     } //
     catch (error) {
       print(error.toString());
-      Utility.showDialog(error.toString() + ' repo - closeJobCard');
+      Utility.showDialog(error.toString(), ' repo - closeJobCard');
       return Map();
     }
   }
@@ -5482,7 +5479,7 @@ class Repository {
         print({"_historyModelList", _historyModelList});
         return _historyModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getHistory');
+        Utility.showDialog(res.errorCode.toString(), 'getHistory');
         return null;
       }
     } catch (error) {
@@ -5516,7 +5513,7 @@ class Repository {
         print({"_linkedJobsToPermit", _linkedJobsToPermit});
         return _linkedJobsToPermit;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getLinkedJobsToPermit');
+        Utility.showDialog(res.errorCode.toString(), 'getLinkedJobsToPermit');
         return null;
       }
     } catch (error) {
@@ -5550,7 +5547,7 @@ class Repository {
         print({"_mrsListByModule", _mrsListByModule});
         return _mrsListByModule;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getMrsListByModule');
+        Utility.showDialog(res.errorCode.toString(), 'getMrsListByModule');
         return null;
       }
     } catch (error) {
@@ -5583,7 +5580,7 @@ class Repository {
         print({"_mrsListByModule", _mrsListByModule});
         return _mrsListByModule;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getMrsListByModuleTask');
+        Utility.showDialog(res.errorCode.toString(), 'getMrsListByModuleTask');
         return null;
       }
     } catch (error) {
@@ -5604,7 +5601,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -5623,7 +5620,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deletePmPlan');
+        Utility.showDialog(res.errorCode.toString(), 'deletePmPlan');
       }
     } catch (error) {
       print(error.toString());
@@ -5650,7 +5647,7 @@ class Repository {
                 .toList();
         return _pmMappingListModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmMappingList');
+        Utility.showDialog(res.errorCode.toString(), 'getPmMappingList');
         return [];
       }
     } catch (error) {
@@ -5677,7 +5674,7 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'savePmMapping');
+        Utility.showDialog(res.errorCode.toString(), 'savePmMapping');
       }
       return Map();
     } catch (error) {
@@ -5709,7 +5706,7 @@ class Repository {
 
         return _CalibrationListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCalibrationList');
+        Utility.showDialog(res.errorCode.toString(), 'getCalibrationList');
         return [];
       }
     } catch (error) {
@@ -5988,7 +5985,7 @@ class Repository {
 
         return _setPmSchedultModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getPMScheduleData');
+        Utility.showDialog(res.errorCode.toString(), 'getPMScheduleData');
         return [];
       }
     } catch (error) {
@@ -6016,7 +6013,7 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'savePmSchedule');
+        Utility.showDialog(res.errorCode.toString(), 'savePmSchedule');
       }
       return [];
     } catch (error) {
@@ -6047,7 +6044,7 @@ class Repository {
         // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmTaskList');
+        Utility.showDialog(res.errorCode.toString(), 'getPmTaskList');
         return [];
       }
     } catch (error) {
@@ -6079,7 +6076,7 @@ class Repository {
         // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getAuditTaskList');
+        Utility.showDialog(res.errorCode.toString(), 'getAuditTaskList');
         return [];
       }
     } catch (error) {
@@ -6113,7 +6110,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createNewPermit');
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermit');
         //return '';
       }
       return null;
@@ -6143,7 +6140,7 @@ class Repository {
         return _permitDetailsModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        Utility.showDialog(res.errorCode.toString(), 'getPmtaskViewList');
         return null;
       }
     } //
@@ -6191,7 +6188,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -6210,7 +6207,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -6233,7 +6230,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -6258,7 +6255,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -6279,7 +6276,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return true;
       }
     } catch (error) {
@@ -6302,7 +6299,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getSafetyMeasureList');
+        Utility.showDialog(res.errorCode.toString(), 'getSafetyMeasureList');
         return true;
       }
     } catch (error) {
@@ -6332,7 +6329,7 @@ class Repository {
         return _countryModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getCountryList');
+        Utility.showDialog(res.errorCode.toString(), 'getCountryList');
         return null;
       }
     } catch (error) {
@@ -6362,7 +6359,7 @@ class Repository {
         return _bloodModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getBloodList');
+        Utility.showDialog(res.errorCode.toString(), 'getBloodList');
         return null;
       }
     } catch (error) {
@@ -6391,7 +6388,7 @@ class Repository {
         return _stateModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getStateListnew');
+        Utility.showDialog(res.errorCode.toString(), 'getStateListnew');
         return null;
       }
     } catch (error) {
@@ -6420,7 +6417,7 @@ class Repository {
         return _cityModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getCityList');
+        Utility.showDialog(res.errorCode.toString(), 'getCityList');
         return null;
       }
     } catch (error) {
@@ -6446,7 +6443,7 @@ class Repository {
         return _accessLevelModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getRoleAccessList');
+        Utility.showDialog(res.errorCode.toString(), 'getRoleAccessList');
         return null;
       }
     } //
@@ -6473,8 +6470,7 @@ class Repository {
         return _getNotificationModel;
       } //
       else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'getRoleNotificationList');
+        Utility.showDialog(res.errorCode.toString(), 'getRoleNotificationList');
         return null;
       }
     } //
@@ -6501,7 +6497,7 @@ class Repository {
         return _accessLevelModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getUserAccessListById');
+        Utility.showDialog(res.errorCode.toString(), 'getUserAccessListById');
         return null;
       }
     } //
@@ -6529,7 +6525,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getUserNotificationListById');
+            res.errorCode.toString(), 'getUserNotificationListById');
         return null;
       }
     } //
@@ -6560,7 +6556,7 @@ class Repository {
         return _roleModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        Utility.showDialog(res.errorCode.toString(), 'getRoleList');
         return null;
       }
     } catch (error) {
@@ -6591,7 +6587,7 @@ class Repository {
 
         return _UserListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        Utility.showDialog(res.errorCode.toString(), ' getUserList');
         return [];
       }
     } catch (error) {
@@ -6623,7 +6619,7 @@ class Repository {
 
         return _JobCardListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getjobcardList');
+        Utility.showDialog(res.errorCode.toString(), ' getjobcardList');
         return [];
       }
     } catch (error) {
@@ -6655,7 +6651,7 @@ class Repository {
 
         return _UserListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        Utility.showDialog(res.errorCode.toString(), ' getUserList');
         return [];
       }
     } catch (error) {
@@ -6681,7 +6677,7 @@ class Repository {
         return _userDetailModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getUserDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getUserDetails');
         return null;
       }
     } //
@@ -6709,7 +6705,7 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'saveAccessLevel');
+        Utility.showDialog(res.errorCode.toString(), 'saveAccessLevel');
       }
       return Map();
     } catch (error) {
@@ -6734,7 +6730,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' addUser');
+        Utility.showDialog(res.errorCode.toString(), ' addUser');
         return false;
       }
     } catch (error) {
@@ -6755,7 +6751,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' updateUser');
+        Utility.showDialog(res.errorCode.toString(), ' updateUser');
         return false;
       }
     } catch (error) {
@@ -6788,7 +6784,7 @@ class Repository {
         return _warrantyTypeListModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        Utility.showDialog(res.errorCode.toString(), 'getWarrantyTypeList');
         return null;
       }
     } catch (error) {
@@ -6816,7 +6812,7 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updatePmExecution');
+        Utility.showDialog(res.errorCode.toString(), 'updatePmExecution');
       }
       return [];
     } catch (error) {
@@ -6900,7 +6896,7 @@ class Repository {
         return _warrantyUsageTermListModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getWarrantyTypeList');
+        Utility.showDialog(res.errorCode.toString(), 'getWarrantyTypeList');
         return null;
       }
     } catch (error) {
@@ -6935,8 +6931,7 @@ class Repository {
 
         return _ModuleListModelList;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -6966,7 +6961,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        Utility.showDialog(res.errorCode.toString(), 'getBusinessList');
         return [];
       }
     } catch (error) {
@@ -6998,7 +6993,7 @@ class Repository {
         return _getAssetList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getAssetList');
+        Utility.showDialog(res.errorCode.toString(), 'getAssetList');
         return null;
       }
     } catch (error) {
@@ -7032,7 +7027,7 @@ class Repository {
         }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+            res.errorCode.toString(), 'goodsOrderApprovedButton');
         //return '';
       }
       return Map();
@@ -7088,7 +7083,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'reqOrderRejectedButton');
+        Utility.showDialog(res.errorCode.toString(), 'reqOrderRejectedButton');
         //return '';
       }
       return Map();
@@ -7125,7 +7120,7 @@ class Repository {
 
         return _goDetailsList;
       } else {
-        Utility.showDialog(res.errorCode.toString());
+        Utility.showDialog(res.errorCode.toString(), "getRoHistory");
         return null;
       }
     } catch (error) {
@@ -7170,7 +7165,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7191,7 +7186,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7218,7 +7213,7 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'saveNotification');
+        Utility.showDialog(res.errorCode.toString(), 'saveNotification');
       }
       return Map();
     } catch (error) {
@@ -7243,7 +7238,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        Utility.showDialog(res.errorCode.toString(), ' AddInventory');
         return false;
       }
     } catch (error) {
@@ -7271,7 +7266,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' AddInventory');
+        Utility.showDialog(res.errorCode.toString(), ' AddInventory');
         return false;
       }
     } catch (error) {
@@ -7299,7 +7294,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        Utility.showDialog(res.errorCode.toString(), 'inventoryList');
         return [];
       }
     } catch (error) {
@@ -7327,7 +7322,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'inventoryList');
+        Utility.showDialog(res.errorCode.toString(), 'inventoryList');
         return [];
       }
     } catch (error) {
@@ -7349,7 +7344,7 @@ class Repository {
         return true;
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
         return false;
       }
     } catch (error) {
@@ -7371,7 +7366,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7400,7 +7395,7 @@ class Repository {
         return _calibrationDetailsModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'calibrationDetail');
+        Utility.showDialog(res.errorCode.toString(), 'calibrationDetail');
         return null;
       }
     } //
@@ -7424,7 +7419,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7458,8 +7453,7 @@ class Repository {
 
         return _ModuleListModelList;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -7489,7 +7483,7 @@ class Repository {
         return _roleModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getRoleList');
+        Utility.showDialog(res.errorCode.toString(), 'getRoleList');
         return null;
       }
     } catch (error) {
@@ -7510,7 +7504,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -7529,7 +7523,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -7548,7 +7542,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -7567,7 +7561,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -7590,7 +7584,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -7615,7 +7609,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -7640,7 +7634,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -7670,8 +7664,7 @@ class Repository {
 
         return _PreventiveCheckListModelList;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];
       }
     } catch (error) {
@@ -7692,7 +7685,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7717,7 +7710,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -7738,7 +7731,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -7757,7 +7750,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7778,7 +7771,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -7797,7 +7790,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteSafetyMeasure');
+        Utility.showDialog(res.errorCode.toString(), 'deleteSafetyMeasure');
       }
     } catch (error) {
       print(error.toString());
@@ -7820,7 +7813,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -7841,7 +7834,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7866,7 +7859,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -7887,7 +7880,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -7907,7 +7900,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7929,7 +7922,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -7954,7 +7947,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -7979,7 +7972,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -8000,7 +7993,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -8019,7 +8012,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -8039,7 +8032,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -8061,7 +8054,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -8084,7 +8077,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -8116,7 +8109,7 @@ class Repository {
 
         return _MrsListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getMrsList');
+        Utility.showDialog(res.errorCode.toString(), ' getMrsList');
         return [];
       }
     } catch (error) {
@@ -8154,7 +8147,7 @@ class Repository {
 
         return _plantStockListModels;
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getPlantStockList');
+        Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
         return [];
       }
     } catch (error) {
@@ -8185,7 +8178,7 @@ class Repository {
         return _getAssetList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getAssetList');
+        Utility.showDialog(res.errorCode.toString(), 'getAssetList');
         return null;
       }
     } catch (error) {
@@ -8206,7 +8199,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -8239,7 +8232,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createMrs');
+        Utility.showDialog(res.errorCode.toString(), 'createMrs');
         //return '';
       }
       return Map();
@@ -8313,7 +8306,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -8334,7 +8327,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteModuleList');
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
       }
     } catch (error) {
       print(error.toString());
@@ -8357,7 +8350,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -8383,7 +8376,7 @@ class Repository {
         return _mrsDetailModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getMrsDetails');
         return null;
       }
     } //
@@ -8409,7 +8402,7 @@ class Repository {
         return _pmPlanDetailModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmPlanDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getPmPlanDetails');
         return null;
       }
     } //
@@ -8435,7 +8428,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -8457,7 +8450,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -8477,7 +8470,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return true;
       }
     } catch (error) {
@@ -8502,7 +8495,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -8524,7 +8517,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -8544,7 +8537,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return true;
       }
     } catch (error) {
@@ -8569,7 +8562,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateChecklistNumber');
+        Utility.showDialog(res.errorCode.toString(), 'updateChecklistNumber');
         return false;
       }
     } catch (error) {
@@ -8591,7 +8584,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteCkeckpoint');
+        Utility.showDialog(res.errorCode.toString(), 'deleteCkeckpoint');
       }
     } catch (error) {
       print(error.toString());
@@ -8611,7 +8604,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getCheckPointlist');
+        Utility.showDialog(res.errorCode.toString(), 'getCheckPointlist');
         return true;
       }
     } catch (error) {
@@ -8659,7 +8652,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
         return false;
       }
     } catch (error) {
@@ -8707,7 +8700,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: " Mrs edit Successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'editMrs');
+        Utility.showDialog(res.errorCode.toString(), 'editMrs');
         //return '';
       }
       return Map();
@@ -8769,7 +8762,7 @@ class Repository {
         return _CalibrationListModelList;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + ' getCalibrationCertificate');
+            res.errorCode.toString(), ' getCalibrationCertificate');
         return [];
       }
     } catch (error) {
@@ -8802,8 +8795,7 @@ class Repository {
 
         return _warrantyModel;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + ' getWarrantyCertificate');
+        Utility.showDialog(res.errorCode.toString(), ' getWarrantyCertificate');
         return [];
       }
     } catch (error) {
@@ -8825,7 +8817,7 @@ class Repository {
       if (!res.hasError) {
         return true;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'saveRoleNotification');
+        Utility.showDialog(res.errorCode.toString(), 'saveRoleNotification');
         return true;
       }
     } catch (error) {
@@ -8929,7 +8921,7 @@ class Repository {
 
         return _ReturnMrsListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + ' getMrsList');
+        Utility.showDialog(res.errorCode.toString(), ' getMrsList');
         return [];
       }
     } catch (error) {
@@ -8961,13 +8953,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'scheduleLinkToPermit');
+        Utility.showDialog(res.errorCode.toString(), 'scheduleLinkToPermit');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + 'scheduleLinkToPermit');
+      Utility.showDialog(error.toString(), 'scheduleLinkToPermit');
       return Map();
     }
   }
@@ -8991,13 +8983,13 @@ class Repository {
         }
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'setPmTask');
+        Utility.showDialog(res.errorCode.toString(), 'setPmTask');
         return Map();
       }
       return Map();
     } //
     catch (error) {
-      Utility.showDialog(error.toString() + 'setPmTask');
+      Utility.showDialog(error.toString(), 'setPmTask');
       return Map();
     }
   }
@@ -9065,7 +9057,7 @@ class Repository {
         return _returnMrsDetailModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getMrsDetails');
         return null;
       }
     } //
@@ -9088,7 +9080,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' jobTypeJsonString');
+        Utility.showDialog(res.errorCode.toString(), ' jobTypeJsonString');
         return false;
       }
     } catch (error) {
@@ -9112,7 +9104,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' SafetyMeasureString');
+        Utility.showDialog(res.errorCode.toString(), ' SafetyMeasureString');
         return false;
       }
     } catch (error) {
@@ -9133,7 +9125,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteJobType');
+        Utility.showDialog(res.errorCode.toString(), 'deleteJobType');
       }
     } catch (error) {
       print(error.toString());
@@ -9156,7 +9148,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'tbtJsonString');
+        Utility.showDialog(res.errorCode.toString(), 'tbtJsonString');
         return false;
       }
     } catch (error) {
@@ -9177,7 +9169,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deleteSopType');
+        Utility.showDialog(res.errorCode.toString(), 'deleteSopType');
       }
     } catch (error) {
       print(error.toString());
@@ -9200,7 +9192,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateSop');
+        Utility.showDialog(res.errorCode.toString(), 'updateSop');
         return false;
       }
     } catch (error) {
@@ -9229,7 +9221,7 @@ class Repository {
         return _employeeStockListModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getCmmsItemList');
+        Utility.showDialog(res.errorCode.toString(), 'getCmmsItemList');
         return null;
       }
     } catch (error) {
@@ -9263,7 +9255,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createReturnMrs');
+        Utility.showDialog(res.errorCode.toString(), 'createReturnMrs');
         //return '';
       }
       return Map();
@@ -9301,7 +9293,7 @@ class Repository {
         return _FaultyMaterialReportModels;
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + ' getFaultyMaterialReportList');
+            res.errorCode.toString(), ' getFaultyMaterialReportList');
         return [];
       }
     } catch (error) {
@@ -9336,7 +9328,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + 'getEmployeeStockReportList');
+            res.errorCode.toString(), 'getEmployeeStockReportList');
         return null;
       }
     } catch (error) {
@@ -9367,7 +9359,7 @@ class Repository {
         // print({"object", _PmPlanListModelList});
         return _PmPlanListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmPlanList');
+        Utility.showDialog(res.errorCode.toString(), 'getPmPlanList');
         return [];
       }
     } catch (error) {
@@ -9403,7 +9395,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createMrs');
+        Utility.showDialog(res.errorCode.toString(), 'createMrs');
         //return '';
       }
       return Map();
@@ -9439,7 +9431,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createMrs');
+        Utility.showDialog(res.errorCode.toString(), 'createMrs');
         //return '';
       }
       return Map();
@@ -9648,7 +9640,7 @@ class Repository {
       }
 //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        Utility.showDialog(res.errorCode.toString(), 'getBusinessList');
         return [];
       }
     } catch (error) {
@@ -9672,7 +9664,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createAuditNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createAuditNumber');
         return false;
       }
     } catch (error) {
@@ -9703,7 +9695,7 @@ class Repository {
         print({"object", _AuditPlanListModelList});
         return _AuditPlanListModelList.reversed.toList();
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'getAuditPlanList');
+        Utility.showDialog(res.errorCode.toString(), 'getAuditPlanList');
         return [];
       }
     } catch (error) {
@@ -9725,7 +9717,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
         return false;
       }
     } catch (error) {
@@ -9747,7 +9739,7 @@ class Repository {
       } //
       else {
         Utility.showDialog(
-            res.errorCode.toString() + ' createtransferItemNumber');
+            res.errorCode.toString(), ' createtransferItemNumber');
         return false;
       }
     } catch (error) {
@@ -9773,7 +9765,7 @@ class Repository {
         return _auditPlanDetailModel;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getPmPlanDetails');
+        Utility.showDialog(res.errorCode.toString(), 'getPmPlanDetails');
         return null;
       }
     } //
@@ -9807,8 +9799,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'auditPlanApprovedButton');
+        Utility.showDialog(res.errorCode.toString(), 'auditPlanApprovedButton');
         //return '';
       }
       return Map();
@@ -9842,7 +9833,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'auditPlanRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'auditPlanRejectButton');
         //return '';
       }
       return Map();
@@ -9875,7 +9866,7 @@ class Repository {
         return _ResponsibiltyModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getResponsibiltyList');
+        Utility.showDialog(res.errorCode.toString(), 'getResponsibiltyList');
         return null;
       }
     } catch (error) {
@@ -9896,7 +9887,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + ' createbodypart');
+        Utility.showDialog(res.errorCode.toString(), ' createbodypart');
         return false;
       }
     } catch (error) {
@@ -9921,7 +9912,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'updateBodypart');
+        Utility.showDialog(res.errorCode.toString(), 'updateBodypart');
         return false;
       }
     } catch (error) {
@@ -9942,7 +9933,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'deletebodypart');
+        Utility.showDialog(res.errorCode.toString(), 'deletebodypart');
       }
     } catch (error) {
       print(error.toString());
@@ -10004,7 +9995,7 @@ class Repository {
         return _getVegetationPlanList.reversed.toList();
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getVegetationPlanList');
+        Utility.showDialog(res.errorCode.toString(), 'getVegetationPlanList');
         return [];
       }
     } catch (error) {
@@ -10043,7 +10034,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'createVC');
+        Utility.showDialog(res.errorCode.toString(), 'createVC');
         //return '';
       }
       return Map();
@@ -10073,7 +10064,7 @@ class Repository {
         return equipmentList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getEquipmentModelList');
+        Utility.showDialog(res.errorCode.toString(), 'getEquipmentModelList');
         return [];
       }
     } catch (error) {
@@ -10106,7 +10097,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'VegPlanDetail');
+        Utility.showDialog(res.errorCode.toString(), 'VegPlanDetail');
         //return '';
       }
       return null;
@@ -10140,7 +10131,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'vegApprovedButton');
+        Utility.showDialog(res.errorCode.toString(), 'vegApprovedButton');
         //return '';
       }
       return Map();
@@ -10174,13 +10165,32 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'vegRejectButton');
+        Utility.showDialog(res.errorCode.toString(), 'vegRejectButton');
         //return '';
       }
       return Map();
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<void> deleteUser(Object user_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteUser(
+        auth: auth,
+        user_id: user_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
   //end

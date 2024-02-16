@@ -103,7 +103,7 @@ class JobDetailsController extends GetxController {
       permitValues = RxList<String>.filled(permitValuesCount, '');
     } //
     catch (e) {
-      Utility.showDialog(e.toString() + 'onReady');
+      Utility.showDialog(e.toString(), 'onReady');
       print(e);
     }
     super.onReady();
@@ -122,7 +122,7 @@ class JobDetailsController extends GetxController {
         jobId.value = int.tryParse(_jobId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'jobId');
+      Utility.showDialog(e.toString(), 'jobId');
     }
   }
   // startStopJobCard() {
@@ -167,7 +167,7 @@ class JobDetailsController extends GetxController {
         update(["jobDetailsModel"]);
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'getJobDetails');
+      Utility.showDialog(e.toString(), 'getJobDetails');
     }
   }
 
@@ -185,7 +185,7 @@ class JobDetailsController extends GetxController {
         update(["getjobDetailsModel"]);
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'getjobDetailsModel');
+      Utility.showDialog(e.toString(), 'getjobDetailsModel');
     }
   }
 

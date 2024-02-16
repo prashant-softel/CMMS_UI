@@ -4145,7 +4145,7 @@ class ConnectHelper {
       'Inventory/ImportInventories?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -4169,7 +4169,7 @@ class ConnectHelper {
       'User/ImportUsers?file_id=$fileId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -6469,7 +6469,7 @@ class ConnectHelper {
       'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -6494,7 +6494,7 @@ class ConnectHelper {
       'SMMaster/ImportMaterialFile?file_id=$fileId&facilityID=$facilityId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -6503,9 +6503,9 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     var import = parsedJson['import_log'];
-    String logString = import.join('\n');
+    // String logString = import.join('\n');
     Get.dialog<void>(
-        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
+        ImportMsgDialog(data: parsedJson['message'], importLog: import));
     return responseModel;
   }
 
@@ -6518,7 +6518,7 @@ class ConnectHelper {
       'PM/ImportPMPlanFile?file_id=$fileId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -6542,7 +6542,7 @@ class ConnectHelper {
       'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
       Request.post,
       null,
-      false,
+      true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
@@ -7071,6 +7071,25 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(VegPlanMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteUser({
+    required String auth,
+    bool? isLoading,
+    required user_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/DeleteUser?id=$user_id',
+      Request.delete,
+      user_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 }

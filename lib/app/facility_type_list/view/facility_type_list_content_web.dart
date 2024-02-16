@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -256,6 +257,12 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       .value = true;
                                                 }
                                               },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ],

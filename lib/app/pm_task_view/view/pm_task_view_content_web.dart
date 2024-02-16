@@ -404,7 +404,186 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       ],
                                     ),
                                   ),
+                                  controller.pmtaskViewModel.value?.permit_id ==
+                                          0
+                                      ? Dimens.box0
+                                      : Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Permit Details ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                    border: TableBorder.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            206,
+                                                            229,
+                                                            234)),
+                                                    columns: [
+                                                      DataColumn2(
+                                                          fixedWidth: 150,
+                                                          label: Text(
+                                                            "Permit ID",
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                      DataColumn2(
+                                                          // fixedWidth: 300,
+                                                          label: Text(
+                                                        "Permit Code",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn2(
+                                                          // fixedWidth: 300,
+                                                          label: Text(
+                                                        "Status",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                      DataColumn2(
+                                                          fixedWidth: 300,
+                                                          label: Text(
+                                                            'Action',
+                                                            style: TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )),
+                                                    ],
+                                                    rows: [
+                                                      DataRow(cells: [
+                                                        DataCell(Text(
+                                                          "${controller.pmtaskViewModel.value?.permit_id ?? ""}",
+                                                        )),
+                                                        DataCell(Text(
+                                                          "${controller.pmtaskViewModel.value?.permit_code ?? ""}",
+                                                        )),
+                                                        DataCell(Text(
+                                                          "${controller.pmtaskViewModel.value?.status_short_ptw ?? ""}",
+                                                        )),
+                                                        DataCell(Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          children: [
+                                                            // TableActionButton(
+                                                            //     color: ColorValues
+                                                            //         .viewColor,
+                                                            //     icon: Icons
+                                                            //         .remove_red_eye,
+                                                            //     message:
+                                                            //         "View Job Card",
+                                                            //     onPress: () {
+                                                            //       controller
+                                                            //           .clearStoreData();
 
+                                                            //       String jobCardId = controller
+                                                            //               .jobAssociatedModelsList?[
+                                                            //                   index]
+                                                            //               ?.jobCardId
+                                                            //               .toString() ??
+                                                            //           "";
+                                                            //       print({
+                                                            //         "JcId": jobCardId
+                                                            //       });
+
+                                                            //       Get.toNamed(
+                                                            //           Routes.jobCard,
+                                                            //           arguments: {
+                                                            //             'JcId': int
+                                                            //                 .tryParse(
+                                                            //                     "$jobCardId")
+                                                            //           });
+                                                            //     }),
+
+                                                            varUserAccessModel
+                                                                        .value
+                                                                        .access_list!
+                                                                        .where((e) =>
+                                                                            e.feature_id == UserAccessConstants.kJobFeatureId &&
+                                                                            e.view ==
+                                                                                UserAccessConstants
+                                                                                    .kHaveViewAccess)
+                                                                        .length >
+                                                                    0
+                                                                ? TableActionButton(
+                                                                    color: ColorValues
+                                                                        .appLightBlueColor,
+                                                                    icon: Icons
+                                                                        .remove_red_eye,
+                                                                    message:
+                                                                        "View Permit",
+                                                                    onPress:
+                                                                        () {
+                                                                      controller
+                                                                          .clearPermitStoreData();
+                                                                      controller.viewNewPermitList(
+                                                                          permitId: controller
+                                                                              .pmtaskViewModel
+                                                                              .value
+                                                                              ?.permit_id,
+                                                                          jobId:
+                                                                              controller.jobDetailsModel.value!.id ?? 0);
+                                                                    })
+                                                                : Container(),
+                                                            // TableActionButton(
+                                                            //     color: ColorValues
+                                                            //         .appYellowColor,
+                                                            //     icon: Icons.copy,
+                                                            //     message:
+                                                            //         "Clone Permit"
+                                                            //     // onPress:
+                                                            //     //     () =>
+                                                            //     //         controller.goToJobCardScreen(),
+                                                            //     ),
+                                                          ],
+                                                        )),
+                                                      ]),
+                                                    ]),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                   Container(
                                     margin: Dimens.edgeInsets20,
                                     height:

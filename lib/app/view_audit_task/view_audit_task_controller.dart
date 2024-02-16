@@ -54,7 +54,7 @@ class ViewAuditTaskController extends GetxController {
         auditTaskId.value = int.tryParse(_auditId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'auditTaskId');
+      Utility.showDialog(e.toString(), 'auditTaskId');
     }
   }
 
