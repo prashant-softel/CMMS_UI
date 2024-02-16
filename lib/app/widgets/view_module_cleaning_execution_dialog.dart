@@ -266,7 +266,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                       value: mappedData[smbItems
                                                                   .smbId]?[
                                                               "isCleanedSmbCheck"] ??
-                                                          true,
+                                                          false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
 
@@ -285,7 +285,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                       value: mappedData[smbItems
                                                                   .smbId]?[
                                                               "isAbandonSmbCheck"] ??
-                                                          true,
+                                                          false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
 
