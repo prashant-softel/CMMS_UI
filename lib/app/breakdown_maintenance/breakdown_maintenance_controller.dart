@@ -11,8 +11,7 @@ class BreakdownMaintenanceController extends GetxController {
     this.breakdownMaintenancePresenter,
   );
 
-  // final HomeController controller = Get.find();
-
+  final HomeController controller = Get.find();
   BreakdownMaintenancePresenter breakdownMaintenancePresenter;
   late JobListController jobListController;
 
@@ -24,7 +23,7 @@ class BreakdownMaintenanceController extends GetxController {
   @override
   void onInit() async {
     getFacilityList();
-
+    addListener(() {controller.menuButton.value;});
     super.onInit();
   }
 

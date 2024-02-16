@@ -7,53 +7,50 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
   final controller = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     return
         //
         Scaffold(
-      appBar: Responsive.isMobile(context)
-          ? AppBar(
-              title: Text('Home'),
-              centerTitle: true,
-              elevation: 0,
-            )
-          : null,
-      drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
-              : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 450),
-              margin: EdgeInsets.only(
-                  left: controller.menuButton.value ? 250.0 : 70.0),
-              child: Row(
+            appBar: Responsive.isMobile(context)
+                ? AppBar(
+                    title: Text('Home'),
+                    centerTitle: true,
+                    elevation: 0,
+                  )
+                : null,
+            drawer: //
+                (Responsive.isMobile(context) || Responsive.isTablet(context))
+                    ? HomeDrawer() //ResponsiveSideMenu()
+                    : null,
+            body: Obx(
+              () => Stack(
                 children: [
-                  Expanded(
-                    child: Column(
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 450),
+                    margin: EdgeInsets.only(
+                        left: controller.menuButton.value ? 250.0 : 70.0),
+                    child: Row(
                       children: [
-                        (Responsive.isDesktop(context))
-                            ? Expanded(child: DashBoardHomeWeb())
-                            : Dimens.box0
+                        Expanded(
+                            child: Column(
+                          children: [
+                            (Responsive.isDesktop(context))
+                                ? Expanded(child: DashBoardHomeWeb())
+                                : Dimens.box0
+                          ],
+                        ))
                       ],
                     ),
-                  )
+                  ),
+                  AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  ),
                 ],
               ),
-            ),
-            AnimatedPositioned(
-              duration:
-                  Duration(milliseconds: 450), // Adjust duration as needed
-              // left: controller.menuButton.value ? 0 : -250.0,
-              child: HomeDrawer(),
-            ),
-          ],
-        ),
-      ),
-    );
+            ));
   }
 }
 
@@ -61,6 +58,7 @@ class Files extends StatelessWidget {
   const Files({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -157,6 +155,7 @@ class CustomTextField extends StatelessWidget {
     this.alignment,
     this.numberTextField = false,
   }) : super(key: key);
+
   final String? label;
   final int? maxLine;
   final double? width;
@@ -170,6 +169,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? textController;
   FocusNode? focusnode;
   ScrollController? scroll;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -243,6 +243,7 @@ class CustomTextFieldForStock extends StatelessWidget {
     this.alignment,
     this.numberTextField = false,
   }) : super(key: key);
+
   final String? label;
   final int? maxLine;
   final double? width;
@@ -254,6 +255,7 @@ class CustomTextFieldForStock extends StatelessWidget {
   final Alignment? alignment;
   final bool numberTextField;
   final TextEditingController? textController;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -321,6 +323,7 @@ class CustomTextFieldForPermit extends StatelessWidget {
     this.alignment,
     this.numberTextField = false,
   }) : super(key: key);
+
   final String? label;
   final int? maxLine;
   final double? width;
@@ -332,6 +335,7 @@ class CustomTextFieldForPermit extends StatelessWidget {
   final Alignment? alignment;
   final bool numberTextField;
   final TextEditingController? textController;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -387,6 +391,7 @@ class AddPhoto extends StatelessWidget {
   const AddPhoto({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -450,7 +455,9 @@ class Inventory {
     required this.parentAsset,
     required this.category,
   });
+
   final String name;
+
   final String serialNo;
   final String parentAsset;
   final String category;
@@ -460,5 +467,6 @@ class Inventory {
 class AssetName {
   final String name;
   final int requirementStatus;
+
   AssetName(this.name, this.requirementStatus);
 }
