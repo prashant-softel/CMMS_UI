@@ -77,9 +77,9 @@ class _PreventiveMaintenanceTaskContentWebState
                           Get.offNamed(Routes.preventive);
                         },
                         child: Text(" / Preventive Maintenance".toUpperCase(),
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
-                      Text(" / PM TASKS", style: Styles.greyMediumLight12)
+                      Text(" / PM TASKS", style: Styles.greyLight14)
                     ],
                   ),
                 ),

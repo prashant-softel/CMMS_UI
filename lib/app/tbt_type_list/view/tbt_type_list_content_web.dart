@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -294,6 +295,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                         .value = true;
                                                   }
                                                 },
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .deny(
+                                                    RegExp('[\'^]'),
+                                                  )
+                                                ],
                                               ),
                                             ),
                                           ),

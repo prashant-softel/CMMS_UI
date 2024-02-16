@@ -180,10 +180,9 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                       onTap: () {
                         Get.offNamed(Routes.masterDashboard);
                       },
-                      child: Text(" / MASTER", style: Styles.greyMediumLight12),
+                      child: Text(" / MASTER", style: Styles.greyLight14),
                     ),
-                    Text(" / DSM CHARAGES LIST",
-                        style: Styles.greyMediumLight12),
+                    Text(" / DSM CHARGES LIST", style: Styles.greyLight14),
                   ],
                 ),
               ),

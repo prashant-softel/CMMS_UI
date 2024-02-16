@@ -78,10 +78,10 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                           Get.offNamed(Routes.moduleCleaningDashboard);
                         },
                         child: Text(" / MODULE CLEANING",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
                       ),
                       Text(" / ADD MODULE CLEANING PLAN",
-                          style: Styles.greyMediumLight12)
+                          style: Styles.greyLight14)
                     ],
                   ),
                 ),
@@ -145,6 +145,12 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                   GoodsOrderTextField(
                                                     textController:
                                                         controller.mcTitelCtrlr,
+                                                        inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(
+                                                        RegExp('[\'^]'),
+                                                      )
+                                                    ],
                                                   ),
                                                 ],
                                               ),

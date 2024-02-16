@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -292,6 +293,12 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                       .value = true;
                                                 }
                                               },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),

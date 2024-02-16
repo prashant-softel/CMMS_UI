@@ -14,5 +14,12 @@ class UserListUsecase {
         facilityId,
         isLoading,
       );
+
+      deleteUser(
+      {required Object user_id, required bool isLoading}) async =>
+      await repository.deleteUser(
+        user_id,
+        isLoading,
+      );
   void clearValue() async => repository.clearData(LocalKeys.userDetailId);
 }

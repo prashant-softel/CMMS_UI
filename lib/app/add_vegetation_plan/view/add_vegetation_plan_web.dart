@@ -153,6 +153,12 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                         .vegTitleFocus,
                                                     scroll: controller
                                                         .vegTitleScroll,
+                                                        inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(
+                                                        RegExp('[\'^]'),
+                                                      )
+                                                    ],
                                                   ),
                                                 ],
                                               ),

@@ -471,7 +471,7 @@ class UserDataSource extends DataTableSource {
                     TableActionButton(
                       color: ColorValues.viewColor,
                       icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
+                      message: 'View',
                       onPress: () {
                         controller.clearStoreData();
 
@@ -523,7 +523,11 @@ class UserDataSource extends DataTableSource {
                       color: ColorValues.deleteColor,
                       icon: Icons.delete,
                       message: 'Delete',
-                      onPress: () {},
+                      onPress: () {
+                        controller.isDeleteDialog(
+                            user_id: controller.userList[index].id.toString(),
+                            user: controller.userList[index].full_name);
+                      },
                     )
                     // : Dimens.box0
                   ])

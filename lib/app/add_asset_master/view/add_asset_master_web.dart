@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -223,6 +224,11 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                   true;
                                             }
                                           },
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.deny(
+                                              RegExp('[\'^]'),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ),
