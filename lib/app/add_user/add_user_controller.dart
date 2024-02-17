@@ -333,16 +333,17 @@ class AddUserController extends GetxController {
       selectedIBusinessList.value = userDetailModel.value?.company_name ?? "";
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
-      // responsibilitymodel.value = _userDetailModel.responsibility ?? [];
-      // responsibilitymodel.value = [];
-      // _userDetailModel.responsibility?.forEach((element) {
-      //   Responsibility? responsibilityModel =
-      //       responsibilitymodel.firstWhere((e) => e!.id == element.id);
-      //   responsibilitymodel.value.add(responsibilityModel);
-      // });
+      responsList.value = _userDetailModel.responsibility ?? [];
+      responsList.value = _userDetailModel.responsibility ?? [];
+      selectedresIdsList.value = responsList.map((obj) => obj!.id).toList();
+      //selectedresIdsList.add(responsList[equipCatIndex]?.id ?? 0);
 
-      // // selectedResNameList.value = responsList.
-
+      selectedResNameList.value = responsList
+          .map((responsibility) => DesignationModel(
+                id: responsibility?.id ?? 0,
+                name: responsibility?.responsibility ?? "",
+              ))
+          .toList();
       await getUserAccessListById(userId: userId.value, isloading: true);
       await getUserNotificationListById(userId: userId.value, isloading: true);
     }

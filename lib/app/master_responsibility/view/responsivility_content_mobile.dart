@@ -28,9 +28,11 @@ class ResponsibilityListContentMobile
                         ? controller.responsibilityList?.length
                         : 0,
                     itemBuilder: (context, index) {
-                      final roleModel = (controller.responsibilityList != null)
-                          ? controller.responsibilityList![index]
-                          : DesignationModel();
+                      final roleModel =
+                          //  (controller.responsibilityList != null)
+                          //     ?
+                          controller.responsibilityList![index];
+                      // : DesignationModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
                         child: Card(
