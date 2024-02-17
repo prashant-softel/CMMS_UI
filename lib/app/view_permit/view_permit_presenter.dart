@@ -411,4 +411,6 @@ class ViewPermitPresenter {
   void clearisCheckedValue() async => viewPermitUsecase.clearisCheckedValue();
   void clearjobmodelValue() async => viewPermitUsecase.clearjobmodelValue();
   void clearpmTaskValue() async => viewPermitUsecase.clearpmTaskValue();
+  void clearStoreDataPMtaskId() async =>
+      viewPermitUsecase.clearStoreDataPMtaskId();
 }

@@ -10193,5 +10193,24 @@ class Repository {
       print(error.toString());
     }
   }
+
+  Future<void> deletePmTask(Object task_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deletePmTask(
+        auth: auth,
+        task_id: task_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deletePmTask');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   //end
 }

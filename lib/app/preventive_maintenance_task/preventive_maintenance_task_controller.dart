@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -183,5 +185,64 @@ class PreventiveMaintenanceTaskController extends GetxController {
 
   void clearStoreData() {
     preventiveMaintenanceTaskPresenter.clearValue();
+  }
+
+  void isDeleteDialog({String? task_id, String? task}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the user?',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: "[$task]",
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deletePmTask(task_id).then((value) {
+                    Get.back();
+                    getPmTaskList(facilityId, formattedTodate1,
+                        formattedFromdate1, false);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deletePmTask(String? task_id) async {
+    {
+      await preventiveMaintenanceTaskPresenter.deletePmTask(
+        task_id,
+        isLoading: true,
+      );
+    }
   }
 }

@@ -634,22 +634,16 @@ class PmTaskDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        // TableActionButton(
-                        //   color: ColorValues.appGreenColor,
-                        //   icon: Icons.remove_red_eye_outlined,
-                        //   message: 'Execute',
-                        //   onPress: () {
-                        //     final _flutterSecureStorage =
-                        //         const FlutterSecureStorage();
-
-                        //     _flutterSecureStorage.delete(key: "pmTaskId");
-                        //     int pmTaskId = pmTaskDetails?.id ?? 0;
-                        //     if (pmTaskId != 0) {
-                        //       Get.toNamed(Routes.pmExecution,
-                        //           arguments: {'pmTaskId': pmTaskId});
-                        //     }
-                        //   },
-                        // ),
+                        TableActionButton(
+                          color: ColorValues.deleteColor,
+                          icon: Icons.delete,
+                          message: 'Delete',
+                          onPress: () {
+                            controller.isDeleteDialog(
+                                task_id: pmTaskDetails?.id.toString(),
+                                task: pmTaskDetails?.name ?? "");
+                          },
+                        ),
                       ])
                     : Text(value.toString()),
           ),

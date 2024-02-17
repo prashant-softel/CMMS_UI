@@ -4072,13 +4072,23 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-    Future<ResponseModel> deleteUser({
+  Future<ResponseModel> deleteUser({
     auth,
     bool? isLoading,
     user_id,
   }) async {
     var response = await connectHelper.deleteUser(
         auth: auth, isLoading: isLoading, user_id: user_id);
+    return response;
+  }
+
+  Future<ResponseModel> deletePmTask({
+    auth,
+    bool? isLoading,
+    task_id,
+  }) async {
+    var response = await connectHelper.deletePmTask(
+        auth: auth, isLoading: isLoading, task_id: task_id);
     return response;
   }
 //end

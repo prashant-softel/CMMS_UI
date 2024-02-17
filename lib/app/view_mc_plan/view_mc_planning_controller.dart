@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
@@ -39,7 +40,7 @@ class ViewMcPlaningController extends GetxController {
   int facilityId = 0;
   var durationInDayCtrlr = TextEditingController();
 
-  Rx<int> id = 0.obs;
+  Rx<int> mcid = 0.obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
@@ -75,15 +76,15 @@ class ViewMcPlaningController extends GetxController {
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
       });
-      if (id != 0) {
+      if (mcid != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getMcPlanDetail(planId: id.value);
+          getMcPlanDetail(planId: mcid.value);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
         getEquipmentModelList(facilityId, true);
       });
-      getMcPlanHistory(id: id.value);
+      getMcPlanHistory(id: mcid.value);
       super.onInit();
     } catch (e) {
       print(e);
@@ -94,13 +95,17 @@ class ViewMcPlaningController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      var dataFromPreviousScreen = Get.arguments;
+      final _mcid = await viewMcPlaningPresenter.getValue();
+      if (_mcid == null || _mcid == '' || _mcid == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
-      // id= Get.arguments;
-      print('AddStock:$id');
+        mcid.value = dataFromPreviousScreen['mcid'];
+        viewMcPlaningPresenter.saveValue(mcid: mcid.value.toString());
+      } else {
+        mcid.value = int.tryParse(_mcid) ?? 0;
+      }
     } catch (e) {
-      print(e.toString() + 'userId');
+      Utility.showDialog(e.toString(), 'mcid');
     }
   }
 
@@ -111,7 +116,7 @@ class ViewMcPlaningController extends GetxController {
         isLoading: isLoading, facilityId: facilityId);
 
     equipmentList.value = list;
-  
+
     update(['equipment_list']);
   }
 

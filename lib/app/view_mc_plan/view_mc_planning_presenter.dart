@@ -57,4 +57,10 @@ class ViewMcPlaningPresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? mcid}) async {
+    return viewMcPlaningUsecase.saveValue(mcid: mcid);
+  }
+
+  Future<String?> getValue() async => await viewMcPlaningUsecase.getValue();
 }
