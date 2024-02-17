@@ -820,6 +820,7 @@ class ViewPermitController extends GetxController {
           viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
       listAssociatedPm?.value =
           viewPermitDetailsModel.value?.lstAssociatedPM ?? [];
+      print({"12233", listAssociatedPm});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
@@ -2693,5 +2694,9 @@ class ViewPermitController extends GetxController {
 
   void clearpmTaskValue() {
     viewPermitPresenter.clearpmTaskValue();
+  }
+
+  void clearStoreDataPMtaskId() {
+    viewPermitPresenter.clearStoreDataPMtaskId();
   }
 }

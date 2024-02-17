@@ -7092,4 +7092,23 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> deletePmTask({
+    required String auth,
+    bool? isLoading,
+    required task_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/DeletePMTask?id=$task_id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

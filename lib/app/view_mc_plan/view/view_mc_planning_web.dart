@@ -669,7 +669,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               icon: Icons.close,
                                               onPressed: () {
                                                 Get.dialog(RejectMcPlan(
-                                                  id: controller.id.value,
+                                                  id: controller.mcid.value,
                                                 ));
                                               },
                                             ),
@@ -685,7 +685,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               icon: Icons.add,
                                               onPressed: () {
                                                 Get.dialog(ApproveMcPlan(
-                                                  id: controller.id.value,
+                                                  id: controller.mcid.value,
                                                 ));
                                               },
                                             ),

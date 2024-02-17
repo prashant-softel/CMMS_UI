@@ -575,7 +575,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 // / PAGINATION
                                                                 Padding(
                                                                   padding: const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           25),
                                                                   child:
@@ -801,7 +801,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   /// PAGINATION
                                                                   Padding(
                                                                     padding: const EdgeInsets
-                                                                            .symmetric(
+                                                                        .symmetric(
                                                                         horizontal:
                                                                             25),
                                                                     child: ValueListenableBuilder(
@@ -1077,7 +1077,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   right: 250),
                                                           child: CustomRichText(
                                                               title: 'JSA: '),
@@ -2154,10 +2154,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         0) *
                                                     50) +
                                                 125,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
+                                            // width: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width /
+                                            //     1.2,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
@@ -2275,17 +2275,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             DataCell(
                                                                 GestureDetector(
                                                                     onTap: () {
-                                                                      // controller.viewJobDetails(controller
-                                                                      //     .listAssociatedPm?[
-                                                                      //         index]
-                                                                      //     ?.pmId);
+                                                                      controller
+                                                                          .clearStoreDataPMtaskId();
+
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .pmTaskView,
+                                                                          arguments: {
+                                                                            'pmTaskId':
+                                                                                controller.listAssociatedPm?[index]?.pmId
+                                                                          });
                                                                     },
                                                                     child: Text(
-                                                                      controller
-                                                                              .listAssociatedPm?[index]
-                                                                              ?.pmId
-                                                                              .toString() ??
-                                                                          '',
+                                                                      "PMT${controller.listAssociatedPm?[index]?.pmId.toString() ?? ''}",
                                                                       style:
                                                                           TextStyle(
                                                                         decoration:
@@ -2894,7 +2896,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     right: 450),
                                                             child: Column(
                                                               crossAxisAlignment:
@@ -3102,7 +3104,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3274,7 +3276,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(
@@ -3441,7 +3443,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10),
                                                             child: Row(

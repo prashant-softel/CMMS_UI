@@ -387,4 +387,6 @@ class ViewPermitUsecase {
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
   void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
+  void clearStoreDataPMtaskId() async =>
+      repository.clearData(LocalKeys.pmTaskId);
 }

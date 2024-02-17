@@ -12,4 +12,9 @@ class PreventiveMaintenanceTaskUsecase {
           dynamic startDate}) async =>
       await repository.getPmTaskList(facilityId, isLoading, startDate, endDate);
   void clearValue() async => repository.clearData(LocalKeys.pmTaskId);
+  deletePmTask({required Object task_id, required bool isLoading}) async =>
+      await repository.deletePmTask(
+        task_id,
+        isLoading,
+      );
 }

@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -51,4 +52,8 @@ class ViewMcPlaningUsecase {
         mcRejectJsonString,
         isLoading,
       );
+  void saveValue({String? mcid}) async =>
+      repository.saveValue(LocalKeys.mcid, mcid);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.mcid);
 }
