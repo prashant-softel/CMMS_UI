@@ -297,7 +297,7 @@ class AddJobController extends GetxController {
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
 
-      String _breakdownTime = formatDate(breakdownTimeCtrlr.text.trim());
+      String _breakdownTime = convertDateTimeToAPIFormat();
       print(_breakdownTime);
       selectedAssetsIdList.clear();
 
@@ -347,6 +347,16 @@ class AddJobController extends GetxController {
     var outputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     String outputDate = outputFormat.format(inputDate);
     return outputDate;
+  }
+
+  String convertDateTimeToAPIFormat() {
+    var _breakdownTime = breakdownTimeCtrlr.text;
+    // Parse the timestamp string into a DateTime object
+    DateTime parsedDateTime = DateTime.parse(_breakdownTime);
+    // Format the DateTime object with the desired format
+    DateFormat formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    String formattedDateTime = formatter.format(parsedDateTime.toUtc());
+    return formattedDateTime;
   }
 
   ///Value changed in any of the dropdowns - single select

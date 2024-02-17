@@ -13,23 +13,24 @@ class DesignationModel {
         id: json['id'],
         name: json['name'],
         description: json['description'],
-        // input: json['input'],
+        responsibility: json['responsibility'],
       );
   DesignationModel({
-    this.id,
+    required this.id,
     this.name,
     this.description,
-    // this.input,
+    this.responsibility,
   });
 
-  int? id;
+  int id;
   String? name;
   String? description;
+  String? responsibility;
   // int? input;
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'name': name,
+        'name': name, 'responsibility': responsibility,
         'description': description,
         // 'input': input,
       };
