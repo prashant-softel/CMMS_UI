@@ -3,8 +3,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/domain/models/getuser_access_byId_model.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -35,869 +33,241 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
     return GetBuilder<AddUserController>(
         id: 'stock_Mangement',
         builder: (controller) {
-          return Scaffold(
-            body: Container(
-                color: Color.fromARGB(255, 234, 236, 238),
-                width: Get.width,
-                height: Get.height,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      HeaderWidget(),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color.fromARGB(255, 227, 224, 224),
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 236, 234, 234)
-                                  .withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
+          return Container(
+              color: Color.fromARGB(255, 234, 236, 238),
+              width: Get.width,
+              height: Get.height,
+              child: Stack(children: [
+                Column(
+                  children: [
+                    HeaderWidget(),
+                    Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 227, 224, 224),
+                          width: 1,
                         ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: ColorValues.greyLightColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 236, 234, 234)
+                                .withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.home,
+                            color: ColorValues.greyLightColor,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
                             ),
-                            InkWell(
-                              onTap: () {
-                                Get.offNamed(Routes.home);
-                              },
-                              child: Text(
-                                "DASHBOARD",
-                                style: Styles.greyLight14,
-                              ),
-                            ),
-                            InkWell(
+                          ),
+                          InkWell(
+                            onTap: () {
+                              final _flutterSecureStorage =
+                                  const FlutterSecureStorage();
+
+                              _flutterSecureStorage.delete(key: "userId");
+
+                              Get.offNamed(Routes.masterDashboard);
+                            },
+                            child: Text(" / MASTER", style: Styles.greyLight14),
+                          ),
+                          InkWell(
                               onTap: () {
                                 final _flutterSecureStorage =
                                     const FlutterSecureStorage();
 
                                 _flutterSecureStorage.delete(key: "userId");
 
-                                Get.offNamed(Routes.masterDashboard);
+                                Get.offNamed(Routes.userList);
                               },
-                              child:
-                                  Text(" / MASTER", style: Styles.greyLight14),
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
-
-                                  _flutterSecureStorage.delete(key: "userId");
-
-                                  Get.offNamed(Routes.userList);
-                                },
-                                child: Text(" / USER LIST",
-                                    style: Styles.greyLight14)),
-                            Obx(
-                              () => Text(
-                                  controller.userId.value == 0
-                                      ? " / ADD USER"
-                                      : " / EDIT USER",
-                                  style: Styles.greyLight14),
-                            )
-                          ],
-                        ),
+                              child: Text(" / USER LIST",
+                                  style: Styles.greyLight14)),
+                          Obx(
+                            () => Text(
+                                controller.userId.value == 0
+                                    ? " / ADD USER"
+                                    : " / EDIT USER",
+                                style: Styles.greyLight14),
+                          )
+                        ],
                       ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Obx(
-                            () => Container(
-                              //   margin: Dimens.edgeInsets20,
-                              color: Color.fromARGB(255, 245, 248, 250),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          controller.userId.value == 0
-                                              ? "Add User "
-                                              : "Edit User",
-                                          style: Styles.blackBold16,
-                                        ),
-                                        Spacer(),
-                                        ActionButton(
-                                          icon: Icons.menu,
-                                          label: "User List",
-                                          onPressed: () {
-                                            final _flutterSecureStorage =
-                                                const FlutterSecureStorage();
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Obx(
+                          () => Container(
+                            //   margin: Dimens.edgeInsets20,
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        controller.userId.value == 0
+                                            ? "Add User "
+                                            : "Edit User",
+                                        style: Styles.blackBold16,
+                                      ),
+                                      Spacer(),
+                                      ActionButton(
+                                        icon: Icons.menu,
+                                        label: "User List",
+                                        onPressed: () {
+                                          final _flutterSecureStorage =
+                                              const FlutterSecureStorage();
 
-                                            _flutterSecureStorage.delete(
-                                                key: "userId");
+                                          _flutterSecureStorage.delete(
+                                              key: "userId");
 
-                                            Get.offNamed(Routes.userList);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        ),
-                                      ],
-                                    ),
+                                          Get.offNamed(Routes.userList);
+                                        },
+                                        color: ColorValues.addNewColor,
+                                      ),
+                                    ],
                                   ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  Container(
-                                    margin: Dimens.edgeInsets20,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 210,
-                                          child: Stack(
-                                            children: [
-                                              controller.selectedImagePath.value
-                                                      .isNotEmpty
-                                                  ? GestureDetector(
-                                                      onTap: () => controller
-                                                          .getImage(ImageSource
-                                                              .gallery),
-                                                      child: Container(
-                                                        height: controller
-                                                            .thumbnailSize,
-                                                        width: controller
-                                                            .thumbnailSize,
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100),
-                                                          child: Image.memory(
-                                                            controller
-                                                                .selectedImageBytes
-                                                                .value,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : Container(
+                                ),
+                                Divider(
+                                  color: ColorValues.greyLightColour,
+                                ),
+                                Container(
+                                  margin: Dimens.edgeInsets20,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 210,
+                                        child: Stack(
+                                          children: [
+                                            controller.selectedImagePath.value
+                                                    .isNotEmpty
+                                                ? GestureDetector(
+                                                    onTap: () => controller
+                                                        .getImage(ImageSource
+                                                            .gallery),
+                                                    child: Container(
                                                       height: controller
                                                           .thumbnailSize,
                                                       width: controller
                                                           .thumbnailSize,
-                                                      decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 195, 192, 192),
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .appLightGreyColor,
-                                                        ),
+                                                      child: ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100),
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.image,
-                                                            size: 70,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    215,
-                                                                    192,
-                                                                    141),
-                                                          ),
-                                                          Dimens.boxHeight10,
-                                                          Text("Upload Photo",
-                                                              style: Styles
-                                                                  .greyMediumLight12)
-                                                        ],
+                                                        child: Image.memory(
+                                                          controller
+                                                              .selectedImageBytes
+                                                              .value,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
-                                              Positioned(
-                                                top: 150,
-                                                left: 100,
-                                                right: 0,
-                                                child: Center(
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      controller.getImage(
-                                                          ImageSource.gallery);
-                                                    },
-                                                    child: Container(
-                                                      height: 45,
-                                                      width: 45,
-                                                      decoration: BoxDecoration(
+                                                  )
+                                                : Container(
+                                                    height: controller
+                                                        .thumbnailSize,
+                                                    width: controller
+                                                        .thumbnailSize,
+                                                    decoration: BoxDecoration(
+                                                      color: Color.fromARGB(
+                                                          255, 195, 192, 192),
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .appLightGreyColor,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.image,
+                                                          size: 70,
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              215,
+                                                              192,
+                                                              141),
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Text("Upload Photo",
+                                                            style: Styles
+                                                                .greyMediumLight12)
+                                                      ],
+                                                    ),
+                                                  ),
+                                            Positioned(
+                                              top: 150,
+                                              left: 100,
+                                              right: 0,
+                                              child: Center(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller.getImage(
+                                                        ImageSource.gallery);
+                                                  },
+                                                  child: Container(
+                                                    height: 45,
+                                                    width: 45,
+                                                    decoration: BoxDecoration(
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      border: Border.all(
                                                         color: ColorValues
                                                             .appDarkBlueColor,
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .appDarkBlueColor,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(50),
                                                       ),
-                                                      child: Center(
-                                                        child: Icon(
-                                                          Icons.add,
-                                                          size: 40,
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                        ), //Circ
-                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                    ),
+                                                    child: Center(
+                                                      child: Icon(
+                                                        Icons.add,
+                                                        size: 40,
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                      ), //Circ
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        // Container(
-                                        //     margin: Dimens.edgeInsets30_0_0_0,
-                                        //     child:
-                                        Dimens.boxWidth30,
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Login ID: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .deny(
-                                                                RegExp(r'\s')),
-                                                      ],
-                                                      ishint: 'Enter Email ID',
-                                                      textController: controller
-                                                          .loginIdCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'First Name: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      ishint:
-                                                          'Enter First Name',
-                                                      textController: controller
-                                                          .firstNameCtrlr,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .deny(
-                                                          RegExp('[\'^]'),
-                                                        )
-                                                      ],
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Secandory E-mail: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .deny(
-                                                                RegExp(r'\s')),
-                                                      ],
-                                                      ishint: 'Enter Email ID',
-                                                      textController: controller
-                                                          .secandoryIdCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Gender: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  height: 35,
-                                                  child: DropdownWebWidget(
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.genderList,
-                                                    isValueSelected: controller
-                                                        .isSelectedGender.value,
-                                                    selectedValue: controller
-                                                        .selectedGender.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                  //   DropdownButtonHideUnderline(
-                                                  //     child: DropdownButton<String>(
-                                                  //       isExpanded: true,
-                                                  //       value:
-                                                  //           controller.gender.value,
-                                                  //       onChanged: (value) =>
-                                                  //           controller.updateGender(
-                                                  //               value!),
-                                                  //       items: <String>[
-                                                  //         'Select Gender',
-                                                  //         'Male',
-                                                  //         'Female',
-                                                  //         'Other'
-                                                  //       ].map<
-                                                  //               DropdownMenuItem<
-                                                  //                   String>>(
-                                                  //           (String value) {
-                                                  //         return DropdownMenuItem<
-                                                  //             String>(
-                                                  //           value: value,
-                                                  //           child: Container(
-                                                  //             margin:
-                                                  //                 EdgeInsets.only(
-                                                  //                     left: 10),
-                                                  //             child: Text(
-                                                  //               value,
-                                                  //               style:
-                                                  //                   Styles.black12,
-                                                  //             ),
-                                                  //           ),
-                                                  //         );
-                                                  //       }).toList(),
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Mobile Number: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: <TextInputFormatter>[
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                      ishint:
-                                                          'Enter Mobile Number',
-                                                      textController: controller
-                                                          .mobileNoCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Country: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.countryList,
-                                                    isValueSelected: controller
-                                                        .isSelectedCountry
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedCountry.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(title: 'City: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.cityList,
-                                                    isValueSelected: controller
-                                                        .isSelectedCity.value,
-                                                    selectedValue: controller
-                                                        .selectedCity.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(title: 'Role: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.roleList,
-                                                    isValueSelected: controller
-                                                        .isSelectedRole.value,
-                                                    selectedValue: controller
-                                                        .selectedRole.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Company Name: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.businessList,
-                                                    isValueSelected: controller
-                                                        .isBusinessListSelected
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedIBusinessList
-                                                        .value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
-                                              ],
                                             ),
                                           ],
                                         ),
-                                        Spacer(),
-
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Password: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      widget: MouseRegion(
-                                                        onEnter: (_) {
-                                                          if (!controller
-                                                              .isPasswordVisible
-                                                              .value) {
-                                                            controller
-                                                                .togglePasswordVisibility();
-                                                          }
-                                                        },
-                                                        onExit: (_) {
-                                                          if (controller
-                                                              .isPasswordVisible
-                                                              .value) {
-                                                            controller
-                                                                .togglePasswordVisibility();
-                                                          }
-                                                        },
-                                                        child: IconButton(
-                                                          icon: Icon(
-                                                              controller
-                                                                      .isPasswordVisible
-                                                                      .value
-                                                                  ? Icons
-                                                                      .visibility
-                                                                  : Icons
-                                                                      .visibility_off,
-                                                              color:
-                                                                  Colors.grey),
-                                                          onPressed: () {
-                                                            controller
-                                                                .togglePasswordVisibility();
-                                                          },
-                                                        ),
-                                                      ),
-                                                      obscureText: !controller
-                                                          .isPasswordVisible
-                                                          .value,
-                                                      ishint: 'Enter Password',
-                                                      textController: controller
-                                                          .passwordCtrlr,
-                                                      onChanged: (value) {
-                                                        // controller.validatePassword(value);
-                                                      },
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Last Name: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      ishint: 'Enter Last Name',
-                                                      textController: controller
-                                                          .lastNameCtrlr,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .deny(
-                                                          RegExp('[\'^]'),
-                                                        )
-                                                      ],
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Date of Birth: '),
-                                                Dimens.boxWidth10,
-                                                Container(
+                                      ),
+                                      // Container(
+                                      //     margin: Dimens.edgeInsets30_0_0_0,
+                                      //     child:
+                                      Dimens.boxWidth30,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Login ID: '),
+                                              Dimens.boxWidth10,
+                                              Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -932,166 +302,32 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
-                                                    ishint: 'select DOB',
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    widget: Icon(
-                                                      Icons.calendar_month,
-                                                      color: ColorValues
-                                                          .greyLightColor,
-                                                    ),
-                                                    ontap: () {
-                                                      controller
-                                                              .openDobDatePicker =
-                                                          !controller
-                                                              .openDobDatePicker;
-                                                      controller.update(
-                                                          ['stock_Mangement']);
-                                                    },
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(RegExp(r'\s')),
+                                                    ],
+                                                    ishint: 'Enter Email ID',
                                                     textController:
-                                                        controller.dobCtrlr,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Date of Joining: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
+                                                        controller.loginIdCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'First Name: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
                                                     ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .allow(RegExp(
-                                                                r'^\d+\.?\d{0,2}'))
-                                                      ],
-                                                      ishint:
-                                                          'Enter Date of Joining',
-                                                      textController: controller
-                                                          .joingdateCtrlr,
-                                                      ontap: () {
-                                                        controller
-                                                                .openDoJDatePicker =
-                                                            !controller
-                                                                .openDoJDatePicker;
-                                                        controller.update([
-                                                          'stock_Mangement'
-                                                        ]);
-                                                      },
-                                                      widget: Icon(
-                                                        Icons.calendar_month,
-                                                        color: ColorValues
-                                                            .greyLightColor,
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Landline: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: <TextInputFormatter>[
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                      ishint:
-                                                          'Enter Landline Number',
-                                                      textController: controller
-                                                          .landlineCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'State: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black26,
@@ -1111,23 +347,153 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         spreadRadius: 0.0,
                                                       ),
                                                     ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.stateList,
-                                                    isValueSelected: controller
-                                                        .isSelectedState.value,
-                                                    selectedValue: controller
-                                                        .selectedState.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(children: [
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter First Name',
+                                                    textController: controller
+                                                        .firstNameCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
                                               CustomRichText(
-                                                  title: 'Zip Code: '),
+                                                  title: 'Secandory E-mail: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(RegExp(r'\s')),
+                                                    ],
+                                                    ishint: 'Enter Email ID',
+                                                    textController: controller
+                                                        .secandoryIdCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'Gender: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                height: 35,
+                                                child: DropdownWebWidget(
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.genderList,
+                                                  isValueSelected: controller
+                                                      .isSelectedGender.value,
+                                                  selectedValue: controller
+                                                      .selectedGender.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                                //   DropdownButtonHideUnderline(
+                                                //     child: DropdownButton<String>(
+                                                //       isExpanded: true,
+                                                //       value:
+                                                //           controller.gender.value,
+                                                //       onChanged: (value) =>
+                                                //           controller.updateGender(
+                                                //               value!),
+                                                //       items: <String>[
+                                                //         'Select Gender',
+                                                //         'Male',
+                                                //         'Female',
+                                                //         'Other'
+                                                //       ].map<
+                                                //               DropdownMenuItem<
+                                                //                   String>>(
+                                                //           (String value) {
+                                                //         return DropdownMenuItem<
+                                                //             String>(
+                                                //           value: value,
+                                                //           child: Container(
+                                                //             margin:
+                                                //                 EdgeInsets.only(
+                                                //                     left: 10),
+                                                //             child: Text(
+                                                //               value,
+                                                //               style:
+                                                //                   Styles.black12,
+                                                //             ),
+                                                //           ),
+                                                //         );
+                                                //       }).toList(),
+                                                //     ),
+                                                //   ),
+                                                // ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Mobile Number: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
@@ -1170,23 +536,212 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
-                                                    ishint: 'Enter Zip Code',
-                                                    textController:
-                                                        controller.zipcodeCtrlr,
+                                                    ishint:
+                                                        'Enter Mobile Number',
+                                                    textController: controller
+                                                        .mobileNoCtrlr,
                                                   )),
-                                            ]),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Blood Group: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Country: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.countryList,
+                                                  isValueSelected: controller
+                                                      .isSelectedCountry.value,
+                                                  selectedValue: controller
+                                                      .selectedCountry.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'City: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.cityList,
+                                                  isValueSelected: controller
+                                                      .isSelectedCity.value,
+                                                  selectedValue: controller
+                                                      .selectedCity.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'Role: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.roleList,
+                                                  isValueSelected: controller
+                                                      .isSelectedRole.value,
+                                                  selectedValue: controller
+                                                      .selectedRole.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Company Name: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.businessList,
+                                                  isValueSelected: controller
+                                                      .isBusinessListSelected
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedIBusinessList
+                                                      .value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Password: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black26,
@@ -1206,186 +761,497 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         spreadRadius: 0.0,
                                                       ),
                                                     ],
-                                                    controller: controller,
-                                                    dropdownList:
-                                                        controller.bloodList,
-                                                    isValueSelected: controller
-                                                        .isSelectedBlood.value,
-                                                    selectedValue: controller
-                                                        .selectedBlood.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight8,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Responsibility: '),
-                                                Dimens.boxWidth10,
-                                                MultipDropdownWebWidget(
                                                   width: (MediaQuery.of(context)
                                                           .size
                                                           .width *
                                                       .2),
-                                                  //  height: 35,
-                                                  dropdownList:
-                                                      controller.responsList,
-                                                  selectedItems: controller
-                                                      .selectedResNameList,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
+                                                  child: LoginCustomTextfield(
+                                                    widget: MouseRegion(
+                                                      onEnter: (_) {
+                                                        if (!controller
+                                                            .isPasswordVisible
+                                                            .value) {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        }
+                                                      },
+                                                      onExit: (_) {
+                                                        if (controller
+                                                            .isPasswordVisible
+                                                            .value) {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        }
+                                                      },
+                                                      child: IconButton(
+                                                        icon: Icon(
+                                                            controller
+                                                                    .isPasswordVisible
+                                                                    .value
+                                                                ? Icons
+                                                                    .visibility
+                                                                : Icons
+                                                                    .visibility_off,
+                                                            color: Colors.grey),
+                                                        onPressed: () {
+                                                          controller
+                                                              .togglePasswordVisibility();
+                                                        },
+                                                      ),
+                                                    ),
+                                                    obscureText: !controller
+                                                        .isPasswordVisible
+                                                        .value,
+                                                    ishint: 'Enter Password',
+                                                    textController: controller
+                                                        .passwordCtrlr,
+                                                    onChanged: (value) {
+                                                      // controller.validatePassword(value);
+                                                    },
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Last Name: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Last Name',
+                                                    textController: controller
+                                                        .lastNameCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Date of Birth: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    // width: MediaQuery.of(context).size.width / 2,
-                                    child: Column(
-                                      children: [
-                                        Wrap(
-                                          children: [
-                                            Column(
-                                              children: [
-                                                SizedBox(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: LoginCustomTextfield(
+                                                  ishint: 'select DOB',
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      1.5,
-                                                  child: DefaultTabController(
-                                                    length: 3,
-                                                    child: Column(
-                                                      children: [
-                                                        Container(
-                                                          height: 45,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius: BorderRadius.only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        40),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        40)),
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    245,
-                                                                    248,
-                                                                    250),
-                                                          ),
-                                                          child: TabBar(
-                                                            labelPadding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        10.0),
-                                                            labelColor:
-                                                                Colors.black,
-                                                            indicator:
-                                                                BoxDecoration(
-                                                              borderRadius: BorderRadius.only(
+                                                      5,
+                                                  widget: Icon(
+                                                    Icons.calendar_month,
+                                                    color: ColorValues
+                                                        .greyLightColor,
+                                                  ),
+                                                  ontap: () {
+                                                    controller
+                                                            .openDobDatePicker =
+                                                        !controller
+                                                            .openDobDatePicker;
+                                                    controller.update(
+                                                        ['stock_Mangement']);
+                                                  },
+                                                  textController:
+                                                      controller.dobCtrlr,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Date of Joining: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .allow(RegExp(
+                                                              r'^\d+\.?\d{0,2}'))
+                                                    ],
+                                                    ishint:
+                                                        'Enter Date of Joining',
+                                                    textController: controller
+                                                        .joingdateCtrlr,
+                                                    ontap: () {
+                                                      controller
+                                                              .openDoJDatePicker =
+                                                          !controller
+                                                              .openDoJDatePicker;
+                                                      controller.update(
+                                                          ['stock_Mangement']);
+                                                    },
+                                                    widget: Icon(
+                                                      Icons.calendar_month,
+                                                      color: ColorValues
+                                                          .greyLightColor,
+                                                    ),
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Landline: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    ishint:
+                                                        'Enter Landline Number',
+                                                    textController: controller
+                                                        .landlineCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'State: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.stateList,
+                                                  isValueSelected: controller
+                                                      .isSelectedState.value,
+                                                  selectedValue: controller
+                                                      .selectedState.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(children: [
+                                            CustomRichText(title: 'Zip Code: '),
+                                            Dimens.boxWidth10,
+                                            Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: <TextInputFormatter>[
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
+                                                  ishint: 'Enter Zip Code',
+                                                  textController:
+                                                      controller.zipcodeCtrlr,
+                                                )),
+                                          ]),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Blood Group: '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.bloodList,
+                                                  isValueSelected: controller
+                                                      .isSelectedBlood.value,
+                                                  selectedValue: controller
+                                                      .selectedBlood.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight8,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Responsibility: '),
+                                              Dimens.boxWidth10,
+                                              MultipDropdownWebWidget(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                //  height: 35,
+                                                dropdownList:
+                                                    controller.responsList,
+                                                selectedItems: controller
+                                                    .selectedResNameList,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  // width: MediaQuery.of(context).size.width / 2,
+                                  child: Column(
+                                    children: [
+                                      Wrap(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.5,
+                                                child: DefaultTabController(
+                                                  length: 3,
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        height: 45,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.only(
                                                                   topLeft: Radius
                                                                       .circular(
                                                                           40),
                                                                   topRight: Radius
                                                                       .circular(
                                                                           40)),
-                                                              color:
-                                                                  Colors.white,
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    1.0,
-                                                                    1.0,
-                                                                  ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                ),
-                                                                BoxShadow(
-                                                                  color: ColorValues
-                                                                      .whiteColor,
-                                                                  offset:
-                                                                      const Offset(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  blurRadius:
-                                                                      0.0,
-                                                                  spreadRadius:
-                                                                      0.0,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            unselectedLabelColor:
-                                                                Colors.black,
-                                                            tabs: [
-                                                              Tab(
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Icon(Icons
-                                                                        .analytics_outlined),
-                                                                    Dimens
-                                                                        .boxWidth5,
-                                                                    Text(
-                                                                        'Plant Access'),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Tab(
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Icon(Icons
-                                                                        .account_tree_outlined),
-                                                                    Dimens
-                                                                        .boxWidth5,
-                                                                    Text(
-                                                                      'Access Level',
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Tab(
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Icon(Icons
-                                                                        .notifications),
-                                                                    Dimens
-                                                                        .boxWidth5,
-                                                                    Text(
-                                                                      'Notification',
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              245,
+                                                              248,
+                                                              250),
                                                         ),
-                                                        Container(
-                                                          height:
-                                                              Get.height + 50,
-
-                                                          //  height: 500,
-                                                          decoration:
+                                                        child: TabBar(
+                                                          labelPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          10.0),
+                                                          labelColor:
+                                                              Colors.black,
+                                                          indicator:
                                                               BoxDecoration(
                                                             borderRadius: BorderRadius.only(
                                                                 topLeft: Radius
@@ -1394,837 +1260,703 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                 topRight: Radius
                                                                     .circular(
                                                                         40)),
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    245,
-                                                                    248,
-                                                                    250),
+                                                            color: Colors.white,
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                offset:
+                                                                    const Offset(
+                                                                  1.0,
+                                                                  1.0,
+                                                                ),
+                                                                blurRadius: 5.0,
+                                                              ),
+                                                              BoxShadow(
+                                                                color: ColorValues
+                                                                    .whiteColor,
+                                                                offset:
+                                                                    const Offset(
+                                                                        0.0,
+                                                                        0.0),
+                                                                blurRadius: 0.0,
+                                                                spreadRadius:
+                                                                    0.0,
+                                                              ),
+                                                            ],
                                                           ),
-                                                          child: TabBarView(
-                                                              physics:
-                                                                  NeverScrollableScrollPhysics(),
-                                                              children: [
-                                                                Column(
-                                                                  children: [
-                                                                    Container(
-                                                                        color: ColorValues
-                                                                            .whiteColor,
-                                                                        child: Container(
-                                                                            height: Get.height,
-                                                                            margin: Dimens.edgeInsets15,
-                                                                            decoration: BoxDecoration(
-                                                                              border: Border.all(
-                                                                                color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                width: 1,
-                                                                              ),
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: ColorValues.appBlueBackgroundColor,
-                                                                                  spreadRadius: 2,
-                                                                                  blurRadius: 5,
-                                                                                  offset: Offset(0, 2),
-                                                                                ),
-                                                                              ],
+                                                          unselectedLabelColor:
+                                                              Colors.black,
+                                                          tabs: [
+                                                            Tab(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(Icons
+                                                                      .analytics_outlined),
+                                                                  Dimens
+                                                                      .boxWidth5,
+                                                                  Text(
+                                                                      'Plant Access'),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Tab(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(Icons
+                                                                      .account_tree_outlined),
+                                                                  Dimens
+                                                                      .boxWidth5,
+                                                                  Text(
+                                                                    'Access Level',
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Tab(
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(Icons
+                                                                      .notifications),
+                                                                  Dimens
+                                                                      .boxWidth5,
+                                                                  Text(
+                                                                    'Notification',
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        height: Get.height + 50,
+
+                                                        //  height: 500,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          40),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          40)),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              245,
+                                                              248,
+                                                              250),
+                                                        ),
+                                                        child: TabBarView(
+                                                            children: [
+                                                              Column(
+                                                                children: [
+                                                                  Container(
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      child: Container(
+                                                                          height: Get.height,
+                                                                          margin: Dimens.edgeInsets15,
+                                                                          decoration: BoxDecoration(
+                                                                            border:
+                                                                                Border.all(
+                                                                              color: ColorValues.lightGreyColorWithOpacity35,
+                                                                              width: 1,
                                                                             ),
-                                                                            child: controller.plantListModel.length > 0
-                                                                                ? Expanded(
-                                                                                    child: DataTable2(
-                                                                                      dataRowHeight: 40,
-                                                                                      columnSpacing: 50,
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: ColorValues.appBlueBackgroundColor,
+                                                                                spreadRadius: 2,
+                                                                                blurRadius: 5,
+                                                                                offset: Offset(0, 2),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                          child: controller.plantListModel.length > 0
+                                                                              ? Center(
+                                                                                  child: ScrollableTableView(
+                                                                                    columns: [
+                                                                                      "Plant Name",
+                                                                                      "SPV",
+                                                                                      "Location",
+                                                                                    ].map((column) {
+                                                                                      return TableViewColumn(
+                                                                                        label: column,
+                                                                                        minWidth: Get.width * 0.20,
+                                                                                      );
+                                                                                    }).toList(),
+                                                                                    rows: true
+                                                                                        ? controller.plantListModel
+                                                                                            .map((plants) => TableViewRow(height: 60, cells: [
+                                                                                                  TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
+                                                                                                  TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
+                                                                                                  TableViewCell(child: Text("----")),
+                                                                                                ]))
+                                                                                            .toList()
+                                                                                        : [],
+                                                                                  ),
+                                                                                )
+                                                                              : Container(
+                                                                                  width: Get.width,
+                                                                                  height: Get.height,
+                                                                                  child: Column(
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      SizedBox(
+                                                                                        width: MediaQuery.of(context).size.width / 9,
+                                                                                        child: ActionButton(
+                                                                                          label: 'Add Facility',
+                                                                                          icon: Icons.add,
+                                                                                          onPressed: () {
+                                                                                            Get.dialog<void>(controller.AddfacilityListAlertBox());
+
+                                                                                            //     void>(
+                                                                                            // AddfacilityListAlertBox());
+                                                                                          },
+                                                                                          color: Colors.green,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Container(
+                                                                                        width: MediaQuery.of(context).size.height * 1.5,
+                                                                                        height: Get.height - 70,
+                                                                                        child: Column(
+                                                                                            //
+                                                                                            children: [
+                                                                                              Expanded(
+                                                                                                child: ScrollableTableView(
+                                                                                                  columns: [
+                                                                                                    "Facility Id",
+                                                                                                    'Facility name',
+                                                                                                    'Location',
+                                                                                                  ].map((column) {
+                                                                                                    return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                                                  }).toList(),
+                                                                                                  rows: //
+                                                                                                      [
+                                                                                                    ...List.generate(
+                                                                                                      controller.filteredfacilityNameList.length,
+                                                                                                      (index) {
+                                                                                                        var facilityNameDetails = controller.filteredfacilityNameList[index];
+
+                                                                                                        return [
+                                                                                                          '${facilityNameDetails?.id ?? ''}',
+                                                                                                          '${facilityNameDetails?.name ?? ''}',
+                                                                                                          '${facilityNameDetails?.address ?? ''}',
+                                                                                                        ];
+                                                                                                      },
+                                                                                                    ),
+                                                                                                  ].map((_inventoryDetailList) {
+                                                                                                    return TableViewRow(
+                                                                                                        onTap: () => {
+                                                                                                              //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                            },
+                                                                                                        height: 60,
+                                                                                                        cells: _inventoryDetailList.map((value) {
+                                                                                                          return TableViewCell(
+                                                                                                            //key: ,
+                                                                                                            child: Text(value.toString()),
+                                                                                                          );
+                                                                                                        }).toList());
+                                                                                                  }).toList(),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ]),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ))),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                children: [
+                                                                  Container(
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      child: controller.accesslevel.length >
+                                                                              0
+                                                                          ? Container(
+                                                                              height: Get.height - 30,
+                                                                              margin: Dimens.edgeInsets15,
+                                                                              decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                                                                  width: 1,
+                                                                                ),
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: ColorValues.appBlueBackgroundColor,
+                                                                                    spreadRadius: 2,
+                                                                                    blurRadius: 5,
+                                                                                    offset: Offset(0, 2),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              child: controller.accesslevel.length > 0
+                                                                                  ? ScrollableTableView(
                                                                                       columns: [
-                                                                                        DataColumn2(
-                                                                                            size: ColumnSize.L,
-                                                                                            // fixedWidth: 180,
-                                                                                            // columnWidth: FlexColumnWidth(3),
-                                                                                            label: Text(
-                                                                                              "Plant Name",
-                                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                            )),
-                                                                                        DataColumn2(
-                                                                                            size: ColumnSize.M,
-                                                                                            // fixedWidth: 100,
-                                                                                            // columnWidth: FlexColumnWidth(3),
-                                                                                            label: Text(
-                                                                                              "SPV",
-                                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                            )),
-                                                                                        DataColumn2(
-                                                                                            size: ColumnSize.S,
-                                                                                            // fixedWidth: 180,
-                                                                                            // columnWidth: FlexColumnWidth(3),
-                                                                                            label: Text(
-                                                                                              "Location",
-                                                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                            )),
-                                                                                      ].toList(),
-                                                                                      rows: controller.plantListModel.map<DataRow>((plants) {
-                                                                                        return DataRow(
-                                                                                          cells: [
-                                                                                            DataCell(Text("${plants?.plant_name ?? ""}")),
-                                                                                            DataCell(Text("${plants?.spv_name ?? ""}")),
-                                                                                            DataCell(Text("----")),
-                                                                                          ],
-                                                                                          // Additional properties can be set for each DataRow if needed
+                                                                                        "Module Name",
+                                                                                        "Add",
+                                                                                        "Edit",
+                                                                                        "Delete",
+                                                                                        "View",
+                                                                                        "Issue",
+                                                                                        "Approve",
+                                                                                        "Self View"
+                                                                                      ].map((column) {
+                                                                                        return TableViewColumn(
+                                                                                          label: column,
+                                                                                          // width:
+                                                                                          //     115, // Set the width of the column to 100
+
+                                                                                          minWidth: Get.width * 0.085,
                                                                                         );
                                                                                       }).toList(),
-                                                                                    ),
-                                                                                  )
-                                                                                : Container(
-                                                                                    width: Get.width,
-                                                                                    height: Get.height,
-                                                                                    child: Column(
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        SizedBox(
-                                                                                          width: MediaQuery.of(context).size.width / 9,
-                                                                                          child: ActionButton(
-                                                                                            label: 'Add Facility',
-                                                                                            icon: Icons.add,
-                                                                                            onPressed: () {
-                                                                                              Get.dialog<void>(controller.AddfacilityListAlertBox());
+                                                                                      rows: true
+                                                                                          ? controller.accesslevel
+                                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return Row(
+                                                                                                          children: [
+                                                                                                            Checkbox(
+                                                                                                                value: controller.isCheckedmodule.value,
+                                                                                                                checkColor: Colors.white,
+                                                                                                                activeColor: ColorValues.blackColor,
+                                                                                                                shape: RoundedRectangleBorder(
+                                                                                                                  borderRadius: BorderRadius.circular(2.0),
+                                                                                                                ),
+                                                                                                                side: MaterialStateBorderSide.resolveWith(
+                                                                                                                  (states) => BorderSide(
+                                                                                                                    width: 1.0,
+                                                                                                                    color: ColorValues.blackColor,
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                                onChanged: (val) {
+                                                                                                                  controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                                  controller.isCheckedmodule.value = val!;
 
-                                                                                              //     void>(
-                                                                                              // AddfacilityListAlertBox());
-                                                                                            },
-                                                                                            color: Colors.green,
-                                                                                          ),
-                                                                                        ),
-                                                                                        Container(
-                                                                                          width: MediaQuery.of(context).size.height * 1.5,
-                                                                                          height: Get.height - 70,
-                                                                                          child: Column(
-                                                                                              //
-                                                                                              children: [
-                                                                                                Expanded(
-                                                                                                  child: ScrollableTableView(
-                                                                                                    columns: [
-                                                                                                      "Facility Id",
-                                                                                                      'Facility name',
-                                                                                                      'Location',
-                                                                                                    ].map((column) {
-                                                                                                      return TableViewColumn(minWidth: Get.width * 0.20, label: column);
-                                                                                                    }).toList(),
-                                                                                                    rows: //
-                                                                                                        [
-                                                                                                      ...List.generate(
-                                                                                                        controller.filteredfacilityNameList.length,
-                                                                                                        (index) {
-                                                                                                          var facilityNameDetails = controller.filteredfacilityNameList[index];
-
-                                                                                                          return [
-                                                                                                            '${facilityNameDetails?.id ?? ''}',
-                                                                                                            '${facilityNameDetails?.name ?? ''}',
-                                                                                                            '${facilityNameDetails?.address ?? ''}',
-                                                                                                          ];
-                                                                                                        },
-                                                                                                      ),
-                                                                                                    ].map((_inventoryDetailList) {
-                                                                                                      return TableViewRow(
-                                                                                                          onTap: () => {
-                                                                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                              },
-                                                                                                          height: 60,
-                                                                                                          cells: _inventoryDetailList.map((value) {
-                                                                                                            return TableViewCell(
-                                                                                                              //key: ,
-                                                                                                              child: Text(value.toString()),
-                                                                                                            );
-                                                                                                          }).toList());
-                                                                                                    }).toList(),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ]),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ))),
-                                                                  ],
-                                                                ),
-                                                                Column(
-                                                                  children: [
-                                                                    Container(
-                                                                        color: ColorValues
-                                                                            .whiteColor,
-                                                                        child: controller.accesslevel.length >
-                                                                                0
-                                                                            ? Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
-                                                                                  ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
+                                                                                                                  controller.update();
+                                                                                                                }),
+                                                                                                            Dimens.boxWidth5,
+                                                                                                            Text("${getAccesslevelDetails?.feature_name}")
+                                                                                                          ],
+                                                                                                        );
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.add.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
+                                                                                                        getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
+                                                                                                        getAccesslevelDetails?.view.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
+                                                                                                        getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
+                                                                                                        getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                        getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                  ]))
+                                                                                              .toList()
+                                                                                          : [],
+                                                                                    )
+                                                                                  : Container())
+                                                                          : Container(
+                                                                              height: Get.height - 30,
+                                                                              margin: Dimens.edgeInsets15,
+                                                                              decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                                                                  width: 1,
                                                                                 ),
-                                                                                child: controller.accesslevel.length > 0
-                                                                                    ? Expanded(
-                                                                                        child: DataTable2(
-                                                                                            dataRowHeight: 30,
-                                                                                            columnSpacing: 10,
-                                                                                            columns: [
-                                                                                              DataColumn2(
-                                                                                                fixedWidth: 180,
-                                                                                                label: Text(
-                                                                                                  'Module Name',
-                                                                                                  style: TextStyle(fontSize: 15),
-                                                                                                ),
-                                                                                              ),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'Add',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'edit',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'delete',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'view',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'issue',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'approve',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'self view',
-                                                                                                style: TextStyle(fontSize: 15),
-                                                                                              ))
-                                                                                            ],
-                                                                                            rows: true
-                                                                                                ? controller.accesslevel.map((getAccesslevelDetails) {
-                                                                                                    return DataRow(cells: [
-                                                                                                      DataCell(Text("${getAccesslevelDetails?.feature_name ?? ""}")),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.add.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      )
-                                                                                                    ]);
-                                                                                                  }).toList()
-                                                                                                : [])
-                                                                                        // ? ScrollableTableView(
-                                                                                        //     columns: [
-                                                                                        //       "Module Name",
-                                                                                        //       "Add",
-                                                                                        //       "Edit",
-                                                                                        //       "Delete",
-                                                                                        //       "View",
-                                                                                        //       "Issue",
-                                                                                        //       "Approve",
-                                                                                        //       "Self View"
-                                                                                        //     ].map((column) {
-                                                                                        //       return TableViewColumn(
-                                                                                        //         label: column,
-                                                                                        //         // width:
-                                                                                        //         //     115, // Set the width of the column to 100
-
-                                                                                        //         minWidth: Get.width * 0.085,
-                                                                                        //       );
-                                                                                        //     }).toList(),
-                                                                                        //     rows: true
-                                                                                        //         ? controller.accesslevel
-                                                                                        //             .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return Row(
-                                                                                        //                         children: [
-                                                                                        //                           Checkbox(
-                                                                                        //                               value: controller.isCheckedmodule.value,
-                                                                                        //                               checkColor: Colors.white,
-                                                                                        //                               activeColor: ColorValues.blackColor,
-                                                                                        //                               shape: RoundedRectangleBorder(
-                                                                                        //                                 borderRadius: BorderRadius.circular(2.0),
-                                                                                        //                               ),
-                                                                                        //                               side: MaterialStateBorderSide.resolveWith(
-                                                                                        //                                 (states) => BorderSide(
-                                                                                        //                                   width: 1.0,
-                                                                                        //                                   color: ColorValues.blackColor,
-                                                                                        //                                 ),
-                                                                                        //                               ),
-                                                                                        //                               onChanged: (val) {
-                                                                                        //                                 controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
-                                                                                        //                                 controller.isCheckedmodule.value = val!;
-                                                                                        //                                 controller.update();
-                                                                                        //                               }),
-                                                                                        //                           Dimens.boxWidth5,
-                                                                                        //                           Text("${getAccesslevelDetails?.feature_name}")
-                                                                                        //                         ],
-                                                                                        //                       );
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
-                                                                                        //                         getAccesslevelDetails?.add.value = val == true ? 1 : 0;
-                                                                                        //                       });
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
-                                                                                        //                         getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                        //                       });
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                 ]))
-                                                                                        //             .toList()
-                                                                                        //         : [],
-                                                                                        //   )
-                                                                                        )
-                                                                                    : Container())
-                                                                            : Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: ColorValues.appBlueBackgroundColor,
+                                                                                    spreadRadius: 2,
+                                                                                    blurRadius: 5,
+                                                                                    offset: Offset(0, 2),
                                                                                   ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                child: controller.accessList.length > 0
-                                                                                    ? Expanded(
-                                                                                        child: DataTable2(
-                                                                                            dataRowHeight: 30,
-                                                                                            columnSpacing: 10,
-                                                                                            columns: [
-                                                                                              DataColumn2(
-                                                                                                fixedWidth: 180,
-                                                                                                label: Text(
-                                                                                                  'Module Name',
-                                                                                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                                ),
-                                                                                              ),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'Add',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'edit',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'delete',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'view',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'issue',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'approve',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              )),
-                                                                                              DataColumn2(
-                                                                                                  label: Text(
-                                                                                                'self view',
-                                                                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                              ))
-                                                                                            ],
-                                                                                            rows: true
-                                                                                                ? controller.accesslevel.map((getAccesslevelDetails) {
-                                                                                                    return DataRow(cells: [
-                                                                                                      DataCell(Text("${getAccesslevelDetails?.feature_name ?? ""}")),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.add.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      DataCell(
-                                                                                                        Obx(() {
-                                                                                                          return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                                            getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      )
-                                                                                                    ]);
-                                                                                                  }).toList()
-                                                                                                : [])
-                                                                                        // ? ScrollableTableView(
-                                                                                        //     columns: [
-                                                                                        //       "Module Name",
-                                                                                        //       "Add",
-                                                                                        //       "Edit",
-                                                                                        //       "Delete",
-                                                                                        //       "View",
-                                                                                        //       "Issue",
-                                                                                        //       "Approve",
-                                                                                        //       "Self View"
-                                                                                        //     ].map((column) {
-                                                                                        //       return TableViewColumn(
-                                                                                        //         label: column,
-                                                                                        //         // width:
-                                                                                        //         //     115, // Set the width of the column to 100
+                                                                                ],
+                                                                              ),
+                                                                              child: controller.accessList.length > 0
+                                                                                  ? ScrollableTableView(
+                                                                                      columns: [
+                                                                                        "Module Name",
+                                                                                        "Add",
+                                                                                        "Edit",
+                                                                                        "Delete",
+                                                                                        "View",
+                                                                                        "Issue",
+                                                                                        "Approve",
+                                                                                        "Self View"
+                                                                                      ].map((column) {
+                                                                                        return TableViewColumn(
+                                                                                          label: column,
+                                                                                          // width:
+                                                                                          //     115, // Set the width of the column to 100
 
-                                                                                        //         minWidth: Get.width * 0.085,
-                                                                                        //       );
-                                                                                        //     }).toList(),
-                                                                                        //     rows: true
-                                                                                        //         ? controller.accesslevel
-                                                                                        //             .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return Row(
-                                                                                        //                         children: [
-                                                                                        //                           Checkbox(
-                                                                                        //                               value: controller.isCheckedmodule.value,
-                                                                                        //                               checkColor: Colors.white,
-                                                                                        //                               activeColor: ColorValues.blackColor,
-                                                                                        //                               shape: RoundedRectangleBorder(
-                                                                                        //                                 borderRadius: BorderRadius.circular(2.0),
-                                                                                        //                               ),
-                                                                                        //                               side: MaterialStateBorderSide.resolveWith(
-                                                                                        //                                 (states) => BorderSide(
-                                                                                        //                                   width: 1.0,
-                                                                                        //                                   color: ColorValues.blackColor,
-                                                                                        //                                 ),
-                                                                                        //                               ),
-                                                                                        //                               onChanged: (val) {
-                                                                                        //                                 controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
-                                                                                        //                                 controller.isCheckedmodule.value = val!;
-                                                                                        //                                 controller.update();
-                                                                                        //                               }),
-                                                                                        //                           Dimens.boxWidth5,
-                                                                                        //                           Text("${getAccesslevelDetails?.feature_name}")
-                                                                                        //                         ],
-                                                                                        //                       );
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return controller.rowItem(getAccesslevelDetails?.add.value, onCheck: (val) {
-                                                                                        //                         getAccesslevelDetails?.add.value = val == true ? 1 : 0;
-                                                                                        //                       });
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(
-                                                                                        //                     child: Obx(() {
-                                                                                        //                       return controller.rowItem(getAccesslevelDetails?.edit.value, onCheck: (val) {
-                                                                                        //                         getAccesslevelDetails?.edit.value = val == true ? 1 : 0;
-                                                                                        //                       });
-                                                                                        //                     }),
-                                                                                        //                   ),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.delete.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.delete.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.view.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.view.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                   TableViewCell(child: Obx(() {
-                                                                                        //                     return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                        //                       getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                        //                     });
-                                                                                        //                   })),
-                                                                                        //                 ]))
-                                                                                        //             .toList()
-                                                                                        //         : [],
-                                                                                        //   )
-                                                                                        )
-                                                                                    : Container()))
-                                                                  ],
-                                                                ),
-                                                                Column(
-                                                                  children: [
-                                                                    Container(
-                                                                        color: ColorValues
-                                                                            .whiteColor,
-                                                                        child: controller.notificationList.length >
-                                                                                0
-                                                                            ? Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
-                                                                                  ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
+                                                                                          minWidth: Get.width * 0.085,
+                                                                                        );
+                                                                                      }).toList(),
+                                                                                      rows: true
+                                                                                          ? controller.accessList
+                                                                                              .map((getAccesslistDetails) => TableViewRow(height: 60, cells: [
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return Row(
+                                                                                                          children: [
+                                                                                                            Checkbox(
+                                                                                                                value: controller.isCheckedmodule.value,
+                                                                                                                checkColor: Colors.white,
+                                                                                                                activeColor: ColorValues.blackColor,
+                                                                                                                shape: RoundedRectangleBorder(
+                                                                                                                  borderRadius: BorderRadius.circular(2.0),
+                                                                                                                ),
+                                                                                                                side: MaterialStateBorderSide.resolveWith(
+                                                                                                                  (states) => BorderSide(
+                                                                                                                    width: 1.0,
+                                                                                                                    color: ColorValues.blackColor,
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                                onChanged: (val) {
+                                                                                                                  controller.accessList.firstWhere((e) => e?.feature_name == getAccesslistDetails?.feature_name);
+                                                                                                                  controller.isCheckedmodule.value = val!;
+
+                                                                                                                  controller.update();
+                                                                                                                }),
+                                                                                                            Dimens.boxWidth5,
+                                                                                                            Text("${getAccesslistDetails?.feature_name}")
+                                                                                                          ],
+                                                                                                        );
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getAccesslistDetails?.add.value, onCheck: (val) {
+                                                                                                          getAccesslistDetails?.add.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getAccesslistDetails?.edit.value, onCheck: (val) {
+                                                                                                          getAccesslistDetails?.edit.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslistDetails?.delete.value, onCheck: (val) {
+                                                                                                        getAccesslistDetails?.delete.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslistDetails?.view.value, onCheck: (val) {
+                                                                                                        getAccesslistDetails?.view.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslistDetails?.issue.value, onCheck: (val) {
+                                                                                                        getAccesslistDetails?.issue.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslistDetails?.approve.value, onCheck: (val) {
+                                                                                                        getAccesslistDetails?.approve.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getAccesslistDetails?.selfView.value, onCheck: (val) {
+                                                                                                        getAccesslistDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                  ]))
+                                                                                              .toList()
+                                                                                          : [],
+                                                                                    )
+                                                                                  : Container()))
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                children: [
+                                                                  Container(
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      child: controller.notificationList.length >
+                                                                              0
+                                                                          ? Container(
+                                                                              height: Get.height - 30,
+                                                                              margin: Dimens.edgeInsets15,
+                                                                              decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                                                                  width: 1,
                                                                                 ),
-                                                                                child: controller.notificationList.length > 0
-                                                                                    ? ScrollableTableView(
-                                                                                        columns: [
-                                                                                          "Notifications",
-                                                                                          "Default Value",
-                                                                                          "Can Override",
-                                                                                          "User Preference",
-                                                                                        ].map((column) {
-                                                                                          return TableViewColumn(
-                                                                                            label: column,
-                                                                                            minWidth: Get.width * 0.17,
-                                                                                          );
-                                                                                        }).toList(),
-                                                                                        rows: true
-                                                                                            ? controller.notificationList
-                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
-                                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(child: Obx(() {
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: ColorValues.appBlueBackgroundColor,
+                                                                                    spreadRadius: 2,
+                                                                                    blurRadius: 5,
+                                                                                    offset: Offset(0, 2),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              child: controller.notificationList.length > 0
+                                                                                  ? ScrollableTableView(
+                                                                                      columns: [
+                                                                                        "Notifications",
+                                                                                        "Default Value",
+                                                                                        "Can Override",
+                                                                                        "User Preference",
+                                                                                      ].map((column) {
+                                                                                        return TableViewColumn(
+                                                                                          label: column,
+                                                                                          minWidth: Get.width * 0.17,
+                                                                                        );
+                                                                                      }).toList(),
+                                                                                      rows: true
+                                                                                          ? controller.notificationList
+                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
+                                                                                                    TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
                                                                                                         return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
                                                                                                           getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      })),
-                                                                                                    ]))
-                                                                                                .toList()
-                                                                                            : [],
-                                                                                      )
-                                                                                    : Container())
-                                                                            : Container(
-                                                                                height: Get.height - 30,
-                                                                                margin: Dimens.edgeInsets15,
-                                                                                decoration: BoxDecoration(
-                                                                                  border: Border.all(
-                                                                                    color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                    width: 1,
-                                                                                  ),
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: ColorValues.appBlueBackgroundColor,
-                                                                                      spreadRadius: 2,
-                                                                                      blurRadius: 5,
-                                                                                      offset: Offset(0, 2),
-                                                                                    ),
-                                                                                  ],
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                                          getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                                        getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                  ]))
+                                                                                              .toList()
+                                                                                          : [],
+                                                                                    )
+                                                                                  : Container())
+                                                                          : Container(
+                                                                              height: Get.height - 30,
+                                                                              margin: Dimens.edgeInsets15,
+                                                                              decoration: BoxDecoration(
+                                                                                border: Border.all(
+                                                                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                                                                  width: 1,
                                                                                 ),
-                                                                                child: controller.notificationListByUserId.length > 0
-                                                                                    ? ScrollableTableView(
-                                                                                        columns: [
-                                                                                          "Notifications",
-                                                                                          "Default Value",
-                                                                                          "Can Override",
-                                                                                          "User Preference",
-                                                                                        ].map((column) {
-                                                                                          return TableViewColumn(
-                                                                                            label: column,
-                                                                                            minWidth: Get.width * 0.17,
-                                                                                          );
-                                                                                        }).toList(),
-                                                                                        rows: true
-                                                                                            ? controller.notificationListByUserId
-                                                                                                .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
-                                                                                                      TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(
-                                                                                                        child: Obx(() {
-                                                                                                          return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
-                                                                                                            getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
-                                                                                                          });
-                                                                                                        }),
-                                                                                                      ),
-                                                                                                      TableViewCell(child: Obx(() {
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: ColorValues.appBlueBackgroundColor,
+                                                                                    spreadRadius: 2,
+                                                                                    blurRadius: 5,
+                                                                                    offset: Offset(0, 2),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              child: controller.notificationListByUserId.length > 0
+                                                                                  ? ScrollableTableView(
+                                                                                      columns: [
+                                                                                        "Notifications",
+                                                                                        "Default Value",
+                                                                                        "Can Override",
+                                                                                        "User Preference",
+                                                                                      ].map((column) {
+                                                                                        return TableViewColumn(
+                                                                                          label: column,
+                                                                                          minWidth: Get.width * 0.17,
+                                                                                        );
+                                                                                      }).toList(),
+                                                                                      rows: true
+                                                                                          ? controller.notificationListByUserId
+                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
+                                                                                                    TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
                                                                                                         return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
                                                                                                           getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
                                                                                                         });
-                                                                                                      })),
-                                                                                                    ]))
-                                                                                                .toList()
-                                                                                            : [],
-                                                                                      )
-                                                                                    : Container()))
-                                                                  ],
-                                                                ),
-                                                              ]),
-                                                        )
-                                                      ],
-                                                    ),
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(
+                                                                                                      child: Obx(() {
+                                                                                                        return controller.rowItem(getnotificationListDetails?.can_change.value, onCheck: (val) {
+                                                                                                          getnotificationListDetails?.can_change.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      }),
+                                                                                                    ),
+                                                                                                    TableViewCell(child: Obx(() {
+                                                                                                      return controller.rowItem(getnotificationListDetails?.default_flag.value, onCheck: (val) {
+                                                                                                        getnotificationListDetails?.default_flag.value = val == true ? 1 : 0;
+                                                                                                      });
+                                                                                                    })),
+                                                                                                  ]))
+                                                                                              .toList()
+                                                                                          : [],
+                                                                                    )
+                                                                                  : Container()))
+                                                                ],
+                                                              ),
+                                                            ]),
+                                                      )
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 40, top: 30),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      controller.userId.value == 0
+                                          ? Container(
+                                              height: 35,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.greenColor,
+                                                text: 'Submit',
+                                                onPressed: () {
+                                                  controller.addUser();
+                                                  //  controller.saveAccessLevel();
+                                                },
+                                              ),
+                                            )
+                                          : Container(
+                                              height: 35,
+                                              child: CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                text: 'Update',
+                                                onPressed: () {
+                                                  controller
+                                                      .updateUser()
+                                                      .then((value) {
+                                                    if (value == true) {
+                                                      // controller.userId.value = 0;
+                                                      controller
+                                                          .saveAccessLevel();
+                                                      //   controller.saveNotification();
+                                                    }
+                                                  });
+                                                  //  controller.saveAccessLevel();
+                                                },
+                                              ),
+                                            ),
+                                      Dimens.boxWidth20,
+                                      Container(
+                                        height: 35,
+                                        child: CustomElevatedButton(
+                                          backgroundColor: ColorValues.redColor,
+                                          text: "Cancel",
+                                          onPressed: () {
+                                            final _flutterSecureStorage =
+                                                const FlutterSecureStorage();
+
+                                            _flutterSecureStorage.delete(
+                                                key: "userId");
+
+                                            Get.back();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  if (controller.openDobDatePicker)
-                    Positioned(
-                      right: 35,
-                      top: 260,
-                      child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
-                        controller: DateRangePickerController(),
-                        selectionChanges: (p0) {
-                          print('po valu ${p0.value.toString()}');
-                          controller.dobCtrlr.text =
-                              DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openDobDatePicker =
-                              !controller.openDobDatePicker;
-                          controller.update(['stock_Mangement']);
-                        },
-                      ),
                     ),
-                  if (controller.openDoJDatePicker)
-                    Positioned(
-                      right: 35,
-                      top: 300,
-                      child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
-                        controller: DateRangePickerController(),
-                        selectionChanges: (p0) {
-                          print('po valu ${p0.value.toString()}');
-                          controller.joingdateCtrlr.text =
-                              DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openDoJDatePicker =
-                              !controller.openDoJDatePicker;
-                          controller.update(['stock_Mangement']);
-                        },
-                      ),
-                    ),
-                ])),
-            floatingActionButton: Container(
-              margin: EdgeInsets.only(bottom: 40, top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  controller.userId.value == 0
-                      ? Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.greenColor,
-                            text: 'Submit',
-                            onPressed: () {
-                              controller.addUser();
-                              //  controller.saveAccessLevel();
-                            },
-                          ),
-                        )
-                      : Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.appDarkBlueColor,
-                            text: 'Update',
-                            onPressed: () {
-                              controller.updateUser().then((value) {
-                                if (value == true) {
-                                  // controller.userId.value = 0;
-                                  controller.saveAccessLevel();
-                                  //   controller.saveNotification();
-                                }
-                              });
-                              //  controller.saveAccessLevel();
-                            },
-                          ),
-                        ),
-                  Dimens.boxWidth20,
-                  Container(
-                    height: 35,
-                    child: CustomElevatedButton(
-                      backgroundColor: ColorValues.redColor,
-                      text: "Cancel",
-                      onPressed: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
-
-                        _flutterSecureStorage.delete(key: "userId");
-
-                        Get.back();
+                  ],
+                ),
+                if (controller.openDobDatePicker)
+                  Positioned(
+                    right: 35,
+                    top: 260,
+                    child: DatePickerWidget(
+                      minDate: DateTime(DateTime.now().year),
+                      maxDate: DateTime(
+                          DateTime.now().year, 13, 0), // last date of this year
+                      controller: DateRangePickerController(),
+                      selectionChanges: (p0) {
+                        print('po valu ${p0.value.toString()}');
+                        controller.dobCtrlr.text =
+                            DateFormat('yyyy-MM-dd').format(p0.value);
+                        controller.openDobDatePicker =
+                            !controller.openDobDatePicker;
+                        controller.update(['stock_Mangement']);
                       },
                     ),
                   ),
-                ],
-              ),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-          );
+                if (controller.openDoJDatePicker)
+                  Positioned(
+                    right: 35,
+                    top: 300,
+                    child: DatePickerWidget(
+                      minDate: DateTime(DateTime.now().year),
+                      maxDate: DateTime(
+                          DateTime.now().year, 13, 0), // last date of this year
+                      controller: DateRangePickerController(),
+                      selectionChanges: (p0) {
+                        print('po valu ${p0.value.toString()}');
+                        controller.joingdateCtrlr.text =
+                            DateFormat('yyyy-MM-dd').format(p0.value);
+                        controller.openDoJDatePicker =
+                            !controller.openDoJDatePicker;
+                        controller.update(['stock_Mangement']);
+                      },
+                    ),
+                  ),
+              ]));
         });
   }
 }
