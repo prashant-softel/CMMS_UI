@@ -47,7 +47,7 @@ class HeaderWidget extends GetView<HomeController> {
                 ),
               ),
             Spacer(),
-            if (Responsive.isDesktop(context)) Text("Select Plant:"),
+            if (Responsive.isDesktop(context)) SelectableText("Select Plant:"),
             if (Responsive.isDesktop(context))
               SizedBox(
                 width: 10,
