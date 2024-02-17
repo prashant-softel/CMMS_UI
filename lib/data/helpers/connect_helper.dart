@@ -4385,6 +4385,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getUserAccessListByUserId({
+    required String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/GetUserAccess?user_id=$userId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getUserNotificationListById({
     required String? auth,
     int? userId,
@@ -7099,9 +7117,9 @@ class ConnectHelper {
     required task_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/DeletePMTask?id=$task_id',
-      Request.delete,
-      null,
+      'PM/DeletePMTask',
+      Request.post,
+      {"id": int.tryParse(task_id)},
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

@@ -2488,6 +2488,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getUserAccessListByUserId({
+    String? auth,
+    int? userId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getUserAccessListByUserId(
+      auth: auth,
+      userId: userId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> getUserNotificationListById({
     String? auth,
     int? userId,

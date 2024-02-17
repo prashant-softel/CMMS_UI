@@ -77,8 +77,8 @@ class AddUserController extends GetxController {
     GenderModel(name: 'Other', id: 3),
   ].obs;
 
-  Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
-  RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
+  // Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
+  // RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
 
   Rx<GetNotificationModel?> notificationModel = GetNotificationModel().obs;
   RxList<NotificationList?> notificationList = <NotificationList>[].obs;
@@ -367,8 +367,8 @@ class AddUserController extends GetxController {
     final _accessListModel = await addUserPresenter.getUserAccessListById(
         userId: userId, isLoading: isloading);
     if (_accessListModel != null) {
-      accessListModel.value = _accessListModel;
-      accessList.value = accessListModel.value?.access_list ?? [];
+      accessLevelModel.value = _accessListModel;
+      accesslevel.value = accessLevelModel.value?.access_list ?? [];
     }
   }
 
@@ -547,35 +547,36 @@ class AddUserController extends GetxController {
 
   void saveAccessLevel() async {
     List<SaveAccessList> accesslist = <SaveAccessList>[];
-    userId == null
-        ? accesslevel.forEach((e) {
-            accesslist.add(SaveAccessList(
-                feature_id: e?.feature_id.value ?? 0,
-                add: e?.add.value ?? 0,
-                delete: e?.delete.value ?? 0,
-                edit: e?.edit.value ?? 0,
-                selfView: e?.selfView.value ?? 0,
-                approve: e?.approve.value ?? 0,
-                issue: e?.issue.value ?? 0,
-                view: e?.view.value ?? 0));
-          })
-        : accessList.forEach((e) {
-            accesslist.add(SaveAccessList(
-                feature_id: e?.feature_id.value ?? 0,
-                add: e?.add.value ?? 0,
-                delete: e?.delete.value ?? 0,
-                edit: e?.edit.value ?? 0,
-                selfView: e?.selfView.value ?? 0,
-                approve: e?.approve.value ?? 0,
-                issue: e?.issue.value ?? 0,
-                view: e?.view.value ?? 0));
-          });
+    // userId == null
+    //     ?
+    accesslevel.forEach((e) {
+      accesslist.add(SaveAccessList(
+          feature_id: e?.feature_id.value ?? 0,
+          add: e?.add.value ?? 0,
+          delete: e?.delete.value ?? 0,
+          edit: e?.edit.value ?? 0,
+          selfView: e?.selfView.value ?? 0,
+          approve: e?.approve.value ?? 0,
+          issue: e?.issue.value ?? 0,
+          view: e?.view.value ?? 0));
+    });
+    // : accessList.forEach((e) {
+    //     accesslist.add(SaveAccessList(
+    //         feature_id: e?.feature_id.value ?? 0,
+    //         add: e?.add.value ?? 0,
+    //         delete: e?.delete.value ?? 0,
+    //         edit: e?.edit.value ?? 0,
+    //         selfView: e?.selfView.value ?? 0,
+    //         approve: e?.approve.value ?? 0,
+    //         issue: e?.issue.value ?? 0,
+    //         view: e?.view.value ?? 0));
+    //   });
     SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
         user_id: userId.value, // varUserAccessModel.value.user_id ?? 0,
         access_list: accesslist);
     var accessLevelJsonString = saveAccessLevelModel.toJson();
     print({"accessLevelJsonString", accessLevelJsonString});
-    if (accessList.isNotEmpty) {
+    if (accesslist.isNotEmpty) {
       Map<String, dynamic>? responsePmMapCreated =
           await addUserPresenter.saveAccessLevel(
         accessLevelJsonString: accessLevelJsonString,
