@@ -68,7 +68,7 @@ class AddUserPresenter {
         roleId: roleId,
         isLoading: isLoading,
       );
-  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+  Future<AccessLevelModel?> getUserAccessListById({
     int? userId,
     bool? isLoading,
   }) async =>

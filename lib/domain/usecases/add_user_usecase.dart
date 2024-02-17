@@ -71,11 +71,11 @@ class AddUserUsecase {
         // facilityId,
         isLoading,
       );
-  Future<GetAccessLevelByIdModel?> getUserAccessListById({
+  Future<AccessLevelModel?> getUserAccessListById({
     int? userId,
     bool? isLoading,
   }) async =>
-      await repository.getUserAccessListById(
+      await repository.getUserAccessListByUserId(
         userId,
         isLoading,
       );

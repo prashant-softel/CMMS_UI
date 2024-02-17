@@ -6507,6 +6507,33 @@ class Repository {
     }
   }
 
+  Future<AccessLevelModel?> getUserAccessListByUserId(
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUserAccessListByUserId(
+        auth: auth,
+        userId: userId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final AccessLevelModel _accessLevelModel =
+            accessLevelModelFromJson(res.data);
+        return _accessLevelModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getUserAccessListById');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<GetNotificationByUserIdModel?> getUserNotificationListById(
     int? userId,
     bool? isLoading,

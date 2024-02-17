@@ -1383,99 +1383,78 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                          child: controller.plantListModel.length > 0
-                                                                              ? Center(
-                                                                                  child: ScrollableTableView(
-                                                                                    columns: [
-                                                                                      "Plant Name",
-                                                                                      "SPV",
-                                                                                      "Location",
-                                                                                    ].map((column) {
-                                                                                      return TableViewColumn(
-                                                                                        label: column,
-                                                                                        minWidth: Get.width * 0.20,
-                                                                                      );
-                                                                                    }).toList(),
-                                                                                    rows: true
-                                                                                        ? controller.plantListModel
-                                                                                            .map((plants) => TableViewRow(height: 60, cells: [
-                                                                                                  TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
-                                                                                                  TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
-                                                                                                  TableViewCell(child: Text("----")),
-                                                                                                ]))
-                                                                                            .toList()
-                                                                                        : [],
+                                                                          child: Container(
+                                                                            width:
+                                                                                Get.width,
+                                                                            height:
+                                                                                Get.height,
+                                                                            child:
+                                                                                Column(
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                SizedBox(
+                                                                                  width: MediaQuery.of(context).size.width / 9,
+                                                                                  child: ActionButton(
+                                                                                    label: 'Add Facility',
+                                                                                    icon: Icons.add,
+                                                                                    onPressed: () {
+                                                                                      Get.dialog<void>(controller.AddfacilityListAlertBox());
+
+                                                                                      //     void>(
+                                                                                      // AddfacilityListAlertBox());
+                                                                                    },
+                                                                                    color: Colors.green,
                                                                                   ),
-                                                                                )
-                                                                              : Container(
-                                                                                  width: Get.width,
-                                                                                  height: Get.height,
+                                                                                ),
+                                                                                Container(
+                                                                                  width: MediaQuery.of(context).size.height * 1.5,
+                                                                                  height: Get.height - 70,
                                                                                   child: Column(
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        width: MediaQuery.of(context).size.width / 9,
-                                                                                        child: ActionButton(
-                                                                                          label: 'Add Facility',
-                                                                                          icon: Icons.add,
-                                                                                          onPressed: () {
-                                                                                            Get.dialog<void>(controller.AddfacilityListAlertBox());
+                                                                                      //
+                                                                                      children: [
+                                                                                        Expanded(
+                                                                                          child: ScrollableTableView(
+                                                                                            columns: [
+                                                                                              "Facility Id",
+                                                                                              'Facility name',
+                                                                                              'Location',
+                                                                                            ].map((column) {
+                                                                                              return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                                            }).toList(),
+                                                                                            rows: //
+                                                                                                [
+                                                                                              ...List.generate(
+                                                                                                controller.filteredfacilityNameList.length,
+                                                                                                (index) {
+                                                                                                  var facilityNameDetails = controller.filteredfacilityNameList[index];
 
-                                                                                            //     void>(
-                                                                                            // AddfacilityListAlertBox());
-                                                                                          },
-                                                                                          color: Colors.green,
-                                                                                        ),
-                                                                                      ),
-                                                                                      Container(
-                                                                                        width: MediaQuery.of(context).size.height * 1.5,
-                                                                                        height: Get.height - 70,
-                                                                                        child: Column(
-                                                                                            //
-                                                                                            children: [
-                                                                                              Expanded(
-                                                                                                child: ScrollableTableView(
-                                                                                                  columns: [
-                                                                                                    "Facility Id",
-                                                                                                    'Facility name',
-                                                                                                    'Location',
-                                                                                                  ].map((column) {
-                                                                                                    return TableViewColumn(minWidth: Get.width * 0.20, label: column);
-                                                                                                  }).toList(),
-                                                                                                  rows: //
-                                                                                                      [
-                                                                                                    ...List.generate(
-                                                                                                      controller.filteredfacilityNameList.length,
-                                                                                                      (index) {
-                                                                                                        var facilityNameDetails = controller.filteredfacilityNameList[index];
-
-                                                                                                        return [
-                                                                                                          '${facilityNameDetails?.id ?? ''}',
-                                                                                                          '${facilityNameDetails?.name ?? ''}',
-                                                                                                          '${facilityNameDetails?.address ?? ''}',
-                                                                                                        ];
-                                                                                                      },
-                                                                                                    ),
-                                                                                                  ].map((_inventoryDetailList) {
-                                                                                                    return TableViewRow(
-                                                                                                        onTap: () => {
-                                                                                                              //  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                            },
-                                                                                                        height: 60,
-                                                                                                        cells: _inventoryDetailList.map((value) {
-                                                                                                          return TableViewCell(
-                                                                                                            //key: ,
-                                                                                                            child: Text(value.toString()),
-                                                                                                          );
-                                                                                                        }).toList());
-                                                                                                  }).toList(),
-                                                                                                ),
+                                                                                                  return [
+                                                                                                    '${facilityNameDetails?.id ?? ''}',
+                                                                                                    '${facilityNameDetails?.name ?? ''}',
+                                                                                                    '${facilityNameDetails?.address ?? ''}',
+                                                                                                  ];
+                                                                                                },
                                                                                               ),
-                                                                                            ]),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ))),
+                                                                                            ].map((_inventoryDetailList) {
+                                                                                              return TableViewRow(
+                                                                                                  onTap: () => {
+                                                                                                        //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                      },
+                                                                                                  height: 60,
+                                                                                                  cells: _inventoryDetailList.map((value) {
+                                                                                                    return TableViewCell(
+                                                                                                      //key: ,
+                                                                                                      child: Text(value.toString()),
+                                                                                                    );
+                                                                                                  }).toList());
+                                                                                            }).toList(),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ]),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ))),
                                                                 ],
                                                               ),
                                                               Column(
@@ -1529,25 +1508,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                       child: Obx(() {
                                                                                                         return Row(
                                                                                                           children: [
-                                                                                                            Checkbox(
-                                                                                                                value: controller.isCheckedmodule.value,
-                                                                                                                checkColor: Colors.white,
-                                                                                                                activeColor: ColorValues.blackColor,
-                                                                                                                shape: RoundedRectangleBorder(
-                                                                                                                  borderRadius: BorderRadius.circular(2.0),
-                                                                                                                ),
-                                                                                                                side: MaterialStateBorderSide.resolveWith(
-                                                                                                                  (states) => BorderSide(
-                                                                                                                    width: 1.0,
-                                                                                                                    color: ColorValues.blackColor,
-                                                                                                                  ),
-                                                                                                                ),
-                                                                                                                onChanged: (val) {
-                                                                                                                  controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
-                                                                                                                  controller.isCheckedmodule.value = val!;
+                                                                                                            // Checkbox(
+                                                                                                            //     value: controller.isCheckedmodule.value,
+                                                                                                            //     checkColor: Colors.white,
+                                                                                                            //     activeColor: ColorValues.blackColor,
+                                                                                                            //     shape: RoundedRectangleBorder(
+                                                                                                            //       borderRadius: BorderRadius.circular(2.0),
+                                                                                                            //     ),
+                                                                                                            //     side: MaterialStateBorderSide.resolveWith(
+                                                                                                            //       (states) => BorderSide(
+                                                                                                            //         width: 1.0,
+                                                                                                            //         color: ColorValues.blackColor,
+                                                                                                            //       ),
+                                                                                                            //     ),
+                                                                                                            //     onChanged: (val) {
+                                                                                                            //       controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
+                                                                                                            //       controller.isCheckedmodule.value = val!;
 
-                                                                                                                  controller.update();
-                                                                                                                }),
+                                                                                                            //       controller.update();
+                                                                                                            //     }),
                                                                                                             Dimens.boxWidth5,
                                                                                                             Text("${getAccesslevelDetails?.feature_name}")
                                                                                                           ],
@@ -1598,119 +1577,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                           : [],
                                                                                     )
                                                                                   : Container())
-                                                                          : Container(
-                                                                              height: Get.height - 30,
-                                                                              margin: Dimens.edgeInsets15,
-                                                                              decoration: BoxDecoration(
-                                                                                border: Border.all(
-                                                                                  color: ColorValues.lightGreyColorWithOpacity35,
-                                                                                  width: 1,
-                                                                                ),
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: ColorValues.appBlueBackgroundColor,
-                                                                                    spreadRadius: 2,
-                                                                                    blurRadius: 5,
-                                                                                    offset: Offset(0, 2),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                              child: controller.accessList.length > 0
-                                                                                  ? ScrollableTableView(
-                                                                                      columns: [
-                                                                                        "Module Name",
-                                                                                        "Add",
-                                                                                        "Edit",
-                                                                                        "Delete",
-                                                                                        "View",
-                                                                                        "Issue",
-                                                                                        "Approve",
-                                                                                        "Self View"
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          label: column,
-                                                                                          // width:
-                                                                                          //     115, // Set the width of the column to 100
-
-                                                                                          minWidth: Get.width * 0.085,
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: true
-                                                                                          ? controller.accessList
-                                                                                              .map((getAccesslistDetails) => TableViewRow(height: 60, cells: [
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return Row(
-                                                                                                          children: [
-                                                                                                            Checkbox(
-                                                                                                                value: controller.isCheckedmodule.value,
-                                                                                                                checkColor: Colors.white,
-                                                                                                                activeColor: ColorValues.blackColor,
-                                                                                                                shape: RoundedRectangleBorder(
-                                                                                                                  borderRadius: BorderRadius.circular(2.0),
-                                                                                                                ),
-                                                                                                                side: MaterialStateBorderSide.resolveWith(
-                                                                                                                  (states) => BorderSide(
-                                                                                                                    width: 1.0,
-                                                                                                                    color: ColorValues.blackColor,
-                                                                                                                  ),
-                                                                                                                ),
-                                                                                                                onChanged: (val) {
-                                                                                                                  controller.accessList.firstWhere((e) => e?.feature_name == getAccesslistDetails?.feature_name);
-                                                                                                                  controller.isCheckedmodule.value = val!;
-
-                                                                                                                  controller.update();
-                                                                                                                }),
-                                                                                                            Dimens.boxWidth5,
-                                                                                                            Text("${getAccesslistDetails?.feature_name}")
-                                                                                                          ],
-                                                                                                        );
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return controller.rowItem(getAccesslistDetails?.add.value, onCheck: (val) {
-                                                                                                          getAccesslistDetails?.add.value = val == true ? 1 : 0;
-                                                                                                        });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(
-                                                                                                      child: Obx(() {
-                                                                                                        return controller.rowItem(getAccesslistDetails?.edit.value, onCheck: (val) {
-                                                                                                          getAccesslistDetails?.edit.value = val == true ? 1 : 0;
-                                                                                                        });
-                                                                                                      }),
-                                                                                                    ),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.delete.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.delete.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.view.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.view.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.issue.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.issue.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.approve.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                    TableViewCell(child: Obx(() {
-                                                                                                      return controller.rowItem(getAccesslistDetails?.selfView.value, onCheck: (val) {
-                                                                                                        getAccesslistDetails?.selfView.value = val == true ? 1 : 0;
-                                                                                                      });
-                                                                                                    })),
-                                                                                                  ]))
-                                                                                              .toList()
-                                                                                          : [],
-                                                                                    )
-                                                                                  : Container()))
+                                                                          : Container())
                                                                 ],
                                                               ),
                                                               Column(
