@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:excel/excel.dart';
+import 'package:flutter/services.dart' show ByteData, rootBundle;
+import 'dart:html' as html;
 
 void main() {
   runApp(const MyApp());
@@ -49,8 +52,49 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Future<void> exportToExcel() async {
+    // Load the data
+    List<List<String>> data = [
+      ["One", "Two", "Three"],
+      ["1", "2", "3"],
+      ["1", "2", "3"],
+      ["1", "2", "3"],
+    ]; // Define your own function to get the data
+
+    // Create Excel file
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Sheet1'];
+
+    // Populate Excel file with data
+    for (int row = 0; row < data.length; row++) {
+      for (int col = 0; col < data[row].length; col++) {
+        sheetObject
+            .cell(CellIndex.indexByColumnRow(rowIndex: row, columnIndex: col))
+            .value = "${data[row][col]}";
+      }
+    }
+
+    // Save Excel file
+    String fileName = 'example.xlsx'; // Specify the file name
+    List<int> bytes = excel.save()!;
+
+    // Create a Blob containing the Excel data
+    final blob = html.Blob([bytes]);
+
+    // Create an object URL for the Blob
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create a link element
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute("download", fileName)
+      ..click(); // Trigger download
+
+    // Revoke the object URL to free up memory
+    html.Url.revokeObjectUrl(url);
+  }
 
   void _incrementCounter() {
+    exportToExcel();
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
