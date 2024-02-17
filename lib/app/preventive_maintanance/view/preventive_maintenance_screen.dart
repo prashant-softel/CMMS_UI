@@ -140,20 +140,6 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                     ontap: () {
                                       controller.importPlan();
                                     }),
-                              ],
-                            ),
-                            GridView.count(
-                              shrinkWrap: true,
-                              primary: false,
-                              padding: const EdgeInsets.all(16),
-                              crossAxisSpacing: 40,
-                              mainAxisSpacing: 6,
-                              crossAxisCount:
-                                  Responsive.isMobile(context) ? 2 : 5,
-                              childAspectRatio: Responsive.isMobile(context)
-                                  ? (itemWidth / itemHeight)
-                                  : 5,
-                              children: <Widget>[
                                 _priventiveList(
                                     tittle: "PM Tasks",
                                     ontap: () {
@@ -161,6 +147,25 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                     }),
                               ],
                             ),
+                            // GridView.count(
+                            //   shrinkWrap: true,
+                            //   primary: false,
+                            //   padding: const EdgeInsets.all(16),
+                            //   crossAxisSpacing: 40,
+                            //   mainAxisSpacing: 6,
+                            //   crossAxisCount:
+                            //       Responsive.isMobile(context) ? 2 : 5,
+                            //   childAspectRatio: Responsive.isMobile(context)
+                            //       ? (itemWidth / itemHeight)
+                            //       : 5,
+                            //   children: <Widget>[
+                            //     _priventiveList(
+                            //         tittle: "PM Tasks",
+                            //         ontap: () {
+                            //           controller.pmTask();
+                            //         }),
+                            //   ],
+                            // ),
                             Container(
                               margin: EdgeInsets.only(left: 20),
                               child: Row(

@@ -191,6 +191,33 @@ class BreakdownMaintenanceScreen
                                       : Container(),
                                 ],
                               ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Permit",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                            1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               GridView.count(
                                 shrinkWrap: true,
                                 primary: false,

@@ -353,21 +353,21 @@ class MastersDashboard extends GetView<MastersController> {
                                               });
                                       // : Dimens.box0;
                                     }))),
-                                    OnHover(builder: (((isHovered) {
-                                      return
-                                          // varUserAccessModel.value.access_list!
-                                          //             .where((e) =>
-                                          //                 e.feature_id == 5 && e.add == 0)
-                                          //             .length >
-                                          //         0
-                                          //     ?
-                                          createContentTile(
-                                              title: "Body Injured",
-                                              onTap: () {
-                                                controller.goToBodyinjured();
-                                              });
-                                      // : Dimens.box0;
-                                    }))),
+                                    // OnHover(builder: (((isHovered) {
+                                    //   return
+                                    //       // varUserAccessModel.value.access_list!
+                                    //       //             .where((e) =>
+                                    //       //                 e.feature_id == 5 && e.add == 0)
+                                    //       //             .length >
+                                    //       //         0
+                                    //       //     ?
+                                    //       createContentTile(
+                                    //           title: "Body Injured",
+                                    //           onTap: () {
+                                                // controller.goToBodyinjured();
+                                    //           });
+                                    //   // : Dimens.box0;
+                                    // }))),
                                   ],
                                 ),
                                 Container(
@@ -896,6 +896,11 @@ class MastersDashboard extends GetView<MastersController> {
                                                     AppConstants.kImportAsset
                                               });
                                         }),
+                                    _inventoryList(
+                                      tittle: "Warranty Claims List",
+                                      ontap: () =>
+                                          controller.breakdownMaintenance(),
+                                    )
                                     // _inventoryList(
                                     //     tittle: "Inventory Category",
                                     //     ontap: () {
@@ -950,11 +955,7 @@ class MastersDashboard extends GetView<MastersController> {
                                     //             .length >
                                     //         0
                                     //     ?
-                                    _inventoryList(
-                                      tittle: "Warranty Claims List",
-                                      ontap: () =>
-                                          controller.breakdownMaintenance(),
-                                    )
+
                                     // : Container(),
 
                                     // varUserAccessModel.value.access_list!
@@ -968,56 +969,12 @@ class MastersDashboard extends GetView<MastersController> {
                                     //             .length >
                                     //         0
                                     //     ?
-                                    ,
+
                                     _inventoryList(
                                         tittle: "New Warranty Claim",
                                         ontap: () {
                                           controller.newWarrantyClaimList();
-                                        })
-                                    // : Container(),
-
-                                    // _inventoryList(
-                                    //     tittle: "Inventory Category",
-                                    //     ontap: () {
-                                    //       Get.toNamed(
-                                    //         Routes.assetTypeListScreen,
-                                    //       );
-                                    //     }),
-                                    // _inventoryList(
-                                    //     tittle: "Inventory Type",
-                                    //     ontap: () {
-                                    //       Get.toNamed(
-                                    //       Routes.inventoryTypeListScreen,
-                                    //     );
-                                    //   }),
-                                    // _inventoryList(
-                                    //     tittle: "Inventory Status",
-                                    //     ontap: () {
-                                    //       Get.toNamed(
-                                    //         Routes.inventoryStatusListScreen,
-                                    //       );
-                                    //     }),
-                                  ],
-                                ),
-                                GridView.count(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  padding: const EdgeInsets.all(16),
-                                  crossAxisSpacing: 70,
-                                  mainAxisSpacing: 6,
-                                  crossAxisCount:
-                                      Responsive.isMobile(context) ? 2 : 5,
-                                  childAspectRatio: Responsive.isMobile(context)
-                                      ? (itemWidth / itemHeight)
-                                      : 5,
-                                  children: <Widget>[
-                                    // _inventoryList(
-                                    //     tittle: "Calibration Certificates",
-                                    //     ontap: () {
-                                    //       Get.toNamed(
-                                    //         Routes.calibrationCertificate,
-                                    //       );
-                                    //     }),
+                                        }),
                                     _inventoryList(
                                         tittle: "Calibration List",
                                         ontap: () {
@@ -1032,6 +989,8 @@ class MastersDashboard extends GetView<MastersController> {
                                             Routes.warrantyCertificatesList,
                                           );
                                         }),
+                                    // : Container(),
+
                                     // _inventoryList(
                                     //     tittle: "Inventory Category",
                                     //     ontap: () {
@@ -1055,6 +1014,49 @@ class MastersDashboard extends GetView<MastersController> {
                                     //     }),
                                   ],
                                 ),
+                                // GridView.count(
+                                //   shrinkWrap: true,
+                                //   primary: false,
+                                //   padding: const EdgeInsets.all(16),
+                                //   crossAxisSpacing: 70,
+                                //   mainAxisSpacing: 6,
+                                //   crossAxisCount:
+                                //       Responsive.isMobile(context) ? 2 : 5,
+                                //   childAspectRatio: Responsive.isMobile(context)
+                                //       ? (itemWidth / itemHeight)
+                                //       : 5,
+                                //   children: <Widget>[
+                                // _inventoryList(
+                                //     tittle: "Calibration Certificates",
+                                //     ontap: () {
+                                //       Get.toNamed(
+                                //         Routes.calibrationCertificate,
+                                //       );
+                                //     }),
+
+                                // _inventoryList(
+                                //     tittle: "Inventory Category",
+                                //     ontap: () {
+                                //       Get.toNamed(
+                                //         Routes.assetTypeListScreen,
+                                //       );
+                                //     }),
+                                // _inventoryList(
+                                //     tittle: "Inventory Type",
+                                //     ontap: () {
+                                //       Get.toNamed(
+                                //       Routes.inventoryTypeListScreen,
+                                //     );
+                                //   }),
+                                // _inventoryList(
+                                //     tittle: "Inventory Status",
+                                //     ontap: () {
+                                //       Get.toNamed(
+                                //         Routes.inventoryStatusListScreen,
+                                //       );
+                                //     }),
+                                //   ],
+                                // ),
                                 Container(
                                   margin: EdgeInsets.only(left: 20),
                                   child: Row(

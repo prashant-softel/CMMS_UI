@@ -116,11 +116,11 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> goToBodyinjured() async {
-    Get.toNamed(
-      Routes.Bodyinjured,
-    );
-  }
+  // Future<void> goToBodyinjured() async {
+  //   Get.toNamed(
+  //     Routes.Bodyinjured,
+  //   );
+  // }
 
   Future<void> goToFeatureList() async {
     Get.toNamed(

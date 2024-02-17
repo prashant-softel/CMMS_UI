@@ -58,10 +58,10 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.offNamed(Routes.masterDashboard);
+                      Get.offNamed(Routes.incidentReportDashboard);
                     },
                     child: Text(
-                      " / MASTERS",
+                      " / INCIDENT REPORT",
                       style: Styles.greyLight14,
                     ),
                   ),

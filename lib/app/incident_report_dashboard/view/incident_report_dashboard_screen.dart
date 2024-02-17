@@ -111,6 +111,14 @@ class IncidentReportDashboardScreen
                                       Routes.incidentReportListWeb,
                                     );
                                   }),
+                              _incidentReportList(
+                                  tittle: "Body Injured",
+                                  ontap: () {
+                                    Get.toNamed(
+                                      Routes.Bodyinjured,
+                                    );
+                                  }),
+
                               //  if (Responsive.isDesktop(context))
                               // _incidentReportList(
                               //     tittle: "Add Incident Report",
