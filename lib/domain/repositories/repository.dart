@@ -3362,6 +3362,7 @@ class Repository {
     rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
+    int? type,
     bool? isLoading,
   ) async {
     try {
@@ -3381,6 +3382,9 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          type == 1
+              ? Get.offAllNamed(Routes.pmTaskView)
+              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());

@@ -164,7 +164,7 @@ class ViewPermitController extends GetxController {
 
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
-  int? type = 0;
+  Rx<int> type = 0.obs;
 
   ///
   // var issuedAtTimeCtrlr = TextEditingController();
@@ -485,6 +485,8 @@ class ViewPermitController extends GetxController {
   Future<void> setPermitId() async {
     try {
       final _permitId = await viewPermitPresenter.getValue();
+      final _type = await viewPermitPresenter.getTypeValue();
+
       final _jobId = await viewPermitPresenter.getJobIdValue();
 
       if (_permitId == null || _permitId == '' || _permitId == "null") {
@@ -492,12 +494,15 @@ class ViewPermitController extends GetxController {
 
         permitId.value = dataFromPreviousScreen['permitId'];
         jobId.value = dataFromPreviousScreen['jobId'];
+        type.value = dataFromPreviousScreen['type'];
 
         viewPermitPresenter.saveValue(permitId: permitId.value.toString());
         viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
+        viewPermitPresenter.saveTypeValue(type: type.value.toString());
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
         jobId.value = int.tryParse(_jobId ?? "") ?? 0;
+        type.value = int.tryParse(_type ?? "") ?? 0;
       }
     } catch (e) {
       // Utility.showDialog(e.toString() + 'permitId');
@@ -522,7 +527,7 @@ class ViewPermitController extends GetxController {
   }
 
   void permitApprovedButton(
-      {int? permitId, String? ptwStatus, int? jobId}) async {
+      {int? permitId, String? ptwStatus, int? jobId, int? type}) async {
     {
       String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
@@ -542,6 +547,7 @@ class ViewPermitController extends GetxController {
         rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         ptwStatus: ptwStatus,
         jobId: jobId,
+        type: type,
         isLoading: true,
       );
       if (response == true) {

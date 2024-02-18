@@ -47,12 +47,14 @@ class ViewPermitUsecase {
     rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
+    int? type,
     bool? isLoading,
   }) async =>
       await repository.permitApprovedButton(
         rejectCancelPermitJsonString,
         ptwStatus,
         jobId,
+        type,
         isLoading,
       );
   // Future<void> permitApprovedButton({
@@ -381,6 +383,10 @@ class ViewPermitUsecase {
       repository.saveValue(LocalKeys.jobId, jobId);
   Future<String?> getJobIdValue() async =>
       await repository.getStringValue(LocalKeys.jobId);
+  void saveTypeValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getTypeValue() async =>
+      await repository.getStringValue(LocalKeys.type);
 
   void clearValue() async => repository.clearData(LocalKeys.permitId);
   void clearTypeValue() async => repository.clearData(LocalKeys.types);

@@ -31,7 +31,7 @@ class PmtaskViewModel {
   String? status_short;
   int? ptw_status;
   String? status_short_ptw;
-
+  String? permit_type;
   List<ScheduleCheckPoint>? schedules;
 
   PmtaskViewModel(
@@ -54,7 +54,8 @@ class PmtaskViewModel {
       this.task_code,
       this.schedules,
       this.status_short_ptw,
-      this.ptw_status});
+      this.ptw_status,
+      this.permit_type});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
@@ -77,6 +78,7 @@ class PmtaskViewModel {
         plan_title: json["plan_title"] ?? "",
         status_short: json["status_short"] ?? "",
         task_code: json["task_code"] ?? "",
+        permit_type: json["permit_type"] ?? "",
         schedules: List<ScheduleCheckPoint>.from(
             json["schedules"].map((x) => ScheduleCheckPoint.fromJson(x))),
       );
@@ -101,6 +103,7 @@ class PmtaskViewModel {
         "status_short": status_short,
         "status": status,
         "task_code": task_code,
+        "permit_type": permit_type,
         "schedules":
             List<dynamic>.from(schedules?.map((x) => x.toJson()) ?? []),
       };

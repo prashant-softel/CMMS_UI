@@ -67,10 +67,11 @@ class PreventiveMaintenanceTaskViewContentWeb
                   ),
                   InkWell(
                     onTap: () {
-                      final _flutterSecureStorage = const FlutterSecureStorage();
-        
+                      final _flutterSecureStorage =
+                          const FlutterSecureStorage();
+
                       _flutterSecureStorage.delete(key: "scheduleId");
-        
+
                       Get.offNamed(Routes.preventive);
                     },
                     child: Text(" / Preventive Maintenance".toUpperCase(),
@@ -85,7 +86,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                 key: controller.printKey,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-        
+
                   margin: EdgeInsets.all(20),
                   // height: Get.height,
                   child: Card(
@@ -124,7 +125,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               : controller.pmtaskViewModel.value
                                                           ?.status ==
                                                       167
-                                                  ? ColorValues.approveStatusColor
+                                                  ? ColorValues
+                                                      .approveStatusColor
                                                   : controller.pmtaskViewModel
                                                               .value?.status ==
                                                           165
@@ -255,9 +257,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       ),
                                     ),
                                     // Dimens.boxHeight30,
-        
+
                                     ///Assets
-        
+
                                     Container(
                                       margin: Dimens.edgeInsets20,
                                       height: ((controller.scheduleCheckPoint
@@ -350,7 +352,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         ?.length ??
                                                     0,
                                                 (index) => DataRow(cells: [
-                                                  DataCell(Text('${index + 1}')),
+                                                  DataCell(
+                                                      Text('${index + 1}')),
                                                   DataCell(Text(controller
                                                           .scheduleCheckPoint?[
                                                               index]
@@ -405,7 +408,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         ],
                                       ),
                                     ),
-                                    controller.pmtaskViewModel.value?.permit_id ==
+                                    controller.pmtaskViewModel.value
+                                                ?.permit_id ==
                                             0
                                         ? Dimens.box0
                                         : Container(
@@ -430,8 +434,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
                                                   child: Row(
                                                     children: [
                                                       Text(
@@ -473,6 +477,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         DataColumn2(
                                                             // fixedWidth: 300,
                                                             label: Text(
+                                                          "Permit Type",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                        DataColumn2(
+                                                            // fixedWidth: 300,
+                                                            label: Text(
                                                           "Status",
                                                           style: TextStyle(
                                                               fontSize: 15,
@@ -500,6 +514,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                             "${controller.pmtaskViewModel.value?.permit_code ?? ""}",
                                                           )),
                                                           DataCell(Text(
+                                                            "${controller.pmtaskViewModel.value?.permit_type ?? ""}",
+                                                          )),
+                                                          DataCell(Text(
                                                             "${controller.pmtaskViewModel.value?.status_short_ptw ?? ""}",
                                                           )),
                                                           DataCell(Row(
@@ -517,7 +534,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                               //     onPress: () {
                                                               //       controller
                                                               //           .clearStoreData();
-        
+
                                                               //       String jobCardId = controller
                                                               //               .jobAssociatedModelsList?[
                                                               //                   index]
@@ -527,7 +544,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                               //       print({
                                                               //         "JcId": jobCardId
                                                               //       });
-        
+
                                                               //       Get.toNamed(
                                                               //           Routes.jobCard,
                                                               //           arguments: {
@@ -536,12 +553,12 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                               //                     "$jobCardId")
                                                               //           });
                                                               //     }),
-        
+
                                                               varUserAccessModel
                                                                           .value
                                                                           .access_list!
                                                                           .where((e) =>
-                                                                              e.feature_id == UserAccessConstants.kJobFeatureId &&
+                                                                              e.feature_id == UserAccessConstants.kPermitFeatureId &&
                                                                               e.view ==
                                                                                   UserAccessConstants
                                                                                       .kHaveViewAccess)
@@ -559,12 +576,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                         controller
                                                                             .clearPermitStoreData();
                                                                         controller.viewNewPermitList(
-                                                                            permitId: controller
-                                                                                .pmtaskViewModel
-                                                                                .value
-                                                                                ?.permit_id,
-                                                                            jobId:
-                                                                                controller.jobDetailsModel.value!.id ?? 0);
+                                                                            permitId:
+                                                                                controller.pmtaskViewModel.value?.permit_id,
+                                                                            jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                       })
                                                                   : Container(),
                                                               // TableActionButton(
@@ -622,8 +636,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   style: Styles.blue700,
                                                 ),
                                                 Spacer(),
-                                                controller
-                                                        .listMrsByTaskId!.isEmpty
+                                                controller.listMrsByTaskId!
+                                                        .isEmpty
                                                     ? Container(
                                                         height: 30,
                                                         child:
@@ -633,7 +647,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   .addNewColor,
                                                           onPressed: () async {
                                                             Get.offAllNamed(
-                                                                Routes.createMrs,
+                                                                Routes
+                                                                    .createMrs,
                                                                 arguments: {
                                                                   "whereUsedId":
                                                                       controller
@@ -644,7 +659,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       .pmtaskViewModel
                                                                       .value
                                                                       ?.plan_title,
-                                                                  "whereUsed": 27,
+                                                                  "whereUsed":
+                                                                      27,
                                                                   "fromActorTypeId":
                                                                       2,
                                                                   "to_actor_type_id":
@@ -667,7 +683,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   child: DataTable2(
                                                     border: TableBorder.all(
                                                         color: Color.fromARGB(
-                                                            255, 206, 229, 234)),
+                                                            255,
+                                                            206,
+                                                            229,
+                                                            234)),
                                                     columns: [
                                                       DataColumn2(
                                                           fixedWidth: 100,
@@ -696,7 +715,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn2(
                                                           //  fixedWidth: 300,
@@ -705,7 +725,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn2(
                                                           fixedWidth: 300,
@@ -718,91 +739,91 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                         .bold),
                                                           )),
                                                     ],
-                                                    rows: List<DataRow>.generate(
+                                                    rows:
+                                                        List<DataRow>.generate(
                                                       controller.listMrsByTaskId
                                                               ?.length ??
                                                           0,
-                                                      (index) => DataRow(cells: [
-                                                        DataCell(
-                                                            Text('${index + 1}')),
-                                                        DataCell(Text(
-                                                            "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
-                                                        DataCell(Text(controller
-                                                                .listMrsByTaskId?[
-                                                                    index]
-                                                                ?.mrsItems ??
-                                                            '')),
-                                                        DataCell(Text(controller
-                                                                .listMrsByTaskId?[
-                                                                    index]
-                                                                ?.status_short ??
-                                                            '')),
-                                                        DataCell(Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            TableActionButton(
-                                                                color: ColorValues
-                                                                    .viewColor,
-                                                                icon: Icons
-                                                                    .remove_red_eye,
-                                                                message:
-                                                                    "View MRS",
-                                                                onPress: () {
-                                                                  final _flutterSecureStorage =
-                                                                      const FlutterSecureStorage();
-        
-                                                                  _flutterSecureStorage
-                                                                      .delete(
-                                                                          key:
-                                                                              "mrsId");
-                                                                  String mrsId = controller
-                                                                          .listMrsByTaskId?[
-                                                                              index]
-                                                                          ?.mrsId
-                                                                          .toString() ??
-                                                                      "";
-                                                                  print({
-                                                                    "mrsId": mrsId
-                                                                  });
-                                                                  Get.toNamed(
-                                                                      Routes
-                                                                          .mrsViewScreen,
-                                                                      arguments: {
-                                                                        'mrsId': int
-                                                                            .tryParse(
-                                                                                "$mrsId")
+                                                      (index) => DataRow(
+                                                          cells: [
+                                                            DataCell(Text(
+                                                                '${index + 1}')),
+                                                            DataCell(Text(
+                                                                "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
+                                                            DataCell(Text(controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.mrsItems ??
+                                                                '')),
+                                                            DataCell(Text(controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status_short ??
+                                                                '')),
+                                                            DataCell(Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceEvenly,
+                                                              children: [
+                                                                TableActionButton(
+                                                                    color: ColorValues
+                                                                        .viewColor,
+                                                                    icon: Icons
+                                                                        .remove_red_eye,
+                                                                    message:
+                                                                        "View MRS",
+                                                                    onPress:
+                                                                        () {
+                                                                      final _flutterSecureStorage =
+                                                                          const FlutterSecureStorage();
+
+                                                                      _flutterSecureStorage
+                                                                          .delete(
+                                                                              key: "mrsId");
+                                                                      String
+                                                                          mrsId =
+                                                                          controller.listMrsByTaskId?[index]?.mrsId.toString() ??
+                                                                              "";
+                                                                      print({
+                                                                        "mrsId":
+                                                                            mrsId
                                                                       });
-                                                                }),
-                                                            TableActionButton(
-                                                                color: ColorValues
-                                                                    .editColor,
-                                                                icon: Icons.edit,
-                                                                message:
-                                                                    "Edit MRS",
-                                                                onPress: () {
-                                                                  String mrsId = controller
-                                                                          .listMrsByTaskId?[
-                                                                              index]
-                                                                          ?.mrsId
-                                                                          .toString() ??
-                                                                      "";
-                                                                  print({
-                                                                    "mrsId": mrsId
-                                                                  });
-                                                                  Get.toNamed(
-                                                                      Routes
-                                                                          .editMrs,
-                                                                      arguments: {
-                                                                        'mrsId': int
-                                                                            .tryParse(
-                                                                                "$mrsId")
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .mrsViewScreen,
+                                                                          arguments: {
+                                                                            'mrsId':
+                                                                                int.tryParse("$mrsId")
+                                                                          });
+                                                                    }),
+                                                                TableActionButton(
+                                                                    color: ColorValues
+                                                                        .editColor,
+                                                                    icon: Icons
+                                                                        .edit,
+                                                                    message:
+                                                                        "Edit MRS",
+                                                                    onPress:
+                                                                        () {
+                                                                      String
+                                                                          mrsId =
+                                                                          controller.listMrsByTaskId?[index]?.mrsId.toString() ??
+                                                                              "";
+                                                                      print({
+                                                                        "mrsId":
+                                                                            mrsId
                                                                       });
-                                                                })
-                                                          ],
-                                                        )),
-                                                      ]),
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .editMrs,
+                                                                          arguments: {
+                                                                            'mrsId':
+                                                                                int.tryParse("$mrsId")
+                                                                          });
+                                                                    })
+                                                              ],
+                                                            )),
+                                                          ]),
                                                     ),
                                                   ),
                                                 )
@@ -811,7 +832,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       ),
                                     ),
                                     // : Dimens.box0,
-        
+
                                     (controller.historyList != null &&
                                             controller.historyList!.isNotEmpty)
                                         ? Container(
@@ -911,7 +932,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                   //           text: "Link to Permit",
                   //           onPressed: () {
                   //             controller.createNewPermit();
-        
+
                   //             //controller.printScreen();
                   //           },
                   //         ),
@@ -921,8 +942,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
-                                          UserAccessConstants.kPmTaskFeatureId &&
-                                      e.add == UserAccessConstants.kHaveAddAccess)
+                                          UserAccessConstants
+                                              .kPmTaskFeatureId &&
+                                      e.add ==
+                                          UserAccessConstants.kHaveAddAccess)
                                   .length >
                               0
                       ? Container(
@@ -937,7 +960,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                           ),
                         )
                       : Dimens.box0,
-        
+
                   controller.pmtaskViewModel.value?.status == 164 &&
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
@@ -945,7 +968,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               UserAccessConstants
                                                   .kPmTaskFeatureId &&
                                           e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
+                                              UserAccessConstants
+                                                  .kHaveAddAccess)
                                       .length >
                                   0 ||
                           controller.pmtaskViewModel.value?.status == 166 &&
@@ -955,7 +979,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               UserAccessConstants
                                                   .kPmTaskFeatureId &&
                                           e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
+                                              UserAccessConstants
+                                                  .kHaveAddAccess)
                                       .length >
                                   0 ||
                           controller.pmtaskViewModel.value?.status == 168 &&
@@ -965,7 +990,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               UserAccessConstants
                                                   .kPmTaskFeatureId &&
                                           e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
+                                              UserAccessConstants
+                                                  .kHaveAddAccess)
                                       .length >
                                   0
                       ? Container(
@@ -985,8 +1011,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
-                                          UserAccessConstants.kPermitFeatureId &&
-                                      e.add == UserAccessConstants.kHaveAddAccess)
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.add ==
+                                          UserAccessConstants.kHaveAddAccess)
                                   .length >
                               0
                       ? Container(
@@ -1035,14 +1063,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                   //   ),
                   // ),
                   Dimens.boxWidth10,
-        
+
                   controller.pmtaskViewModel.value?.status == 165 &&
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
-                                          UserAccessConstants.kPmTaskFeatureId &&
+                                          UserAccessConstants
+                                              .kPmTaskFeatureId &&
                                       e.approve ==
-                                          UserAccessConstants.kHaveApproveAccess)
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
                                   .length >
                               0
                       ? Container(
@@ -1071,9 +1101,11 @@ class PreventiveMaintenanceTaskViewContentWeb
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
-                                          UserAccessConstants.kPmTaskFeatureId &&
+                                          UserAccessConstants
+                                              .kPmTaskFeatureId &&
                                       e.approve ==
-                                          UserAccessConstants.kHaveApproveAccess)
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
                                   .length >
                               0
                       ? Container(
@@ -1102,8 +1134,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
-                                          UserAccessConstants.kPmTaskFeatureId &&
-                                      e.add == UserAccessConstants.kHaveAddAccess)
+                                          UserAccessConstants
+                                              .kPmTaskFeatureId &&
+                                      e.add ==
+                                          UserAccessConstants.kHaveAddAccess)
                                   .length >
                               0 &&
                           controller.listMrsByTaskId!.isNotEmpty
@@ -1119,7 +1153,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                               controller.clearStoreTasktoActorData();
                               controller.clearStoreTaskWhereUsedData();
                               controller.clearStoreTaskfromActorData();
-        
+
                               Get.toNamed(Routes.mrsReturnScreen, arguments: {
                                 "whereUsed": 27,
                                 "fromActorTypeId": 3,
