@@ -16,6 +16,9 @@ class PreventiveMaintenanceTaskPresenter {
           endDate: endDate,
           startDate: startDate);
   void clearValue() async => preventiveMaintenanceTaskUsecase.clearValue();
+  void clearValuetype() async =>
+      preventiveMaintenanceTaskUsecase.clearValuetype();
+
   deletePmTask(String? task_id, {required bool isLoading}) async =>
       await preventiveMaintenanceTaskUsecase.deletePmTask(
         task_id: task_id ?? 0,
