@@ -308,447 +308,453 @@ class _WasteDataWebState extends State<WasteDataWeb> {
       id: 'stock_Mangement_Date',
       builder: (controller) {
         // final dataSource = AuditPlanPlanListDataSource(controller);
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
+        return SelectionArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.misDashboard);
+                        },
+                        child: Text(" / MIS", style: Styles.greyLight14),
+                      ),
+                      Text(
+                        " / WASTE DATA",
                         style: Styles.greyLight14,
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.misDashboard);
-                      },
-                      child: Text(" / MIS", style: Styles.greyLight14),
-                    ),
-                    Text(
-                      " / WASTE DATA",
-                      style: Styles.greyLight14,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                    width: Get.width * 7,
-                    margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                    height: Get.height,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(left: 10, top: 10, right: 10),
-                              child: Column(
-                                children: [
-                                  Card(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 20,
-                                                top: 20,
+                Stack(
+                  children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      height: Get.height,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    left: 10, top: 10, right: 10),
+                                child: Column(
+                                  children: [
+                                    Card(
+                                      color: Color.fromARGB(255, 245, 248, 250),
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  left: 20,
+                                                  top: 20,
+                                                ),
+                                                child: Text(
+                                                  "Waste Data List",
+                                                  style: Styles.blackBold16,
+                                                ),
                                               ),
-                                              child: Text(
-                                                "Waste Data List",
-                                                style: Styles.blackBold16,
+                                              Spacer(),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 20,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text('Year :'),
+                                                    Dimens.boxWidth10,
+                                                    CustomTextFieldForStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      numberTextField: true,
+                                                      onTap: () {
+                                                        _showYearPicker(context,
+                                                            controller);
+                                                      },
+                                                      textController: controller
+                                                          .waterDateTc,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Spacer(),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 20,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 5,
+                                                ),
+                                                child: ActionButton(
+                                                  icon: Icons.minimize_sharp,
+                                                  label: "Waste Generated",
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        WasteGeneratedAddDialog());
+                                                  },
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                ),
                                               ),
-                                              child: Row(
-                                                children: [
-                                                  Text('Year :'),
-                                                  Dimens.boxWidth10,
-                                                  CustomTextFieldForStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      _showYearPicker(
-                                                          context, controller);
-                                                    },
-                                                    textController:
-                                                        controller.waterDateTc,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 20,
+                                                ),
+                                                child: ActionButton(
+                                                  icon: Icons.add,
+                                                  label: "Waste  Disposed",
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        WasteDisposedAddDialog());
+                                                  },
+                                                  color:
+                                                      ColorValues.addNewColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Divider(
+                                            color: ColorValues.greyLightColour,
+                                          ),
+                                          Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            height: Get.height,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: DataTable2(
+                                                fixedLeftColumns: 1,
+                                                headingRowHeight: 140,
+                                                columnSpacing: 12,
+                                                horizontalMargin: 12,
+                                                headingRowColor:
+                                                    MaterialStateColor
+                                                        .resolveWith(
+                                                  (states) {
+                                                    return ColorValues
+                                                        .lightGreyColor;
+                                                  },
+                                                ),
+                                                fixedColumnsColor:
+                                                    ColorValues.appYellowColor,
+                                                minWidth: 2350,
+                                                columns: [
+                                                  DataColumn2(
+                                                    fixedWidth: 70,
+                                                    label: Text(
+                                                      'Month',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Opening\nBalance Of\nWaste\nSolid waste',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 160,
+                                                    label: Text(
+                                                      'Solid waste( Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass etc)\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 160,
+                                                    label: Text(
+                                                      'Solid waste(Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass\netc) Disposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Closing\nBalance Of\nWaste\nSolid waste',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 90,
+                                                    label: Text(
+                                                      'E- waste\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 90,
+                                                    label: Text(
+                                                      'E- waste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Battery\nWaste Genrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 135,
+                                                    label: Text(
+                                                      'Battery Waste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Solar Module\nwaste\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Solar module\nwaste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Haz waste Oil\n(E.g. used\ntransformer oil)\nin litres\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Haz waste oil\nDisposed\nin litres',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Haz Waste\ngrease\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Haz waste\nGrease\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz solid\nwaste\n(e.g. used oil\ncotton)\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz Solid\nwaste\nDisposed ',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz waste\noil barrel\nGenerated\nin No',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Haz waste oil\nbarrel\nDisposed in No',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    label: Text(
+                                                      'Action',
+                                                      style: Styles.blackBold14,
+                                                    ),
                                                   ),
                                                 ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 5,
-                                              ),
-                                              child: ActionButton(
-                                                icon: Icons.minimize_sharp,
-                                                label: "Waste Generated",
-                                                onPressed: () {
-                                                  Get.dialog(
-                                                      WasteGeneratedAddDialog());
-                                                },
-                                                color: ColorValues.appRedColor,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 20,
-                                              ),
-                                              child: ActionButton(
-                                                icon: Icons.add,
-                                                label: "Waste  Disposed",
-                                                onPressed: () {
-                                                  Get.dialog(
-                                                      WasteDisposedAddDialog());
-                                                },
-                                                color: ColorValues.addNewColor,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Divider(
-                                          color: ColorValues.greyLightColour,
-                                        ),
-                                        Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: DataTable2(
-                                              fixedLeftColumns: 1,
-                                              headingRowHeight: 140,
-                                              columnSpacing: 12,
-                                              horizontalMargin: 12,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
-                                              ),
-                                              fixedColumnsColor:
-                                                  ColorValues.appYellowColor,
-                                              minWidth: 2350,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 70,
-                                                  label: Text(
-                                                    'Month',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 110,
-                                                  label: Text(
-                                                    'Opening\nBalance Of\nWaste\nSolid waste',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 160,
-                                                  label: Text(
-                                                    'Solid waste( Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass etc)\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 160,
-                                                  label: Text(
-                                                    'Solid waste(Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass\netc) Disposed',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 110,
-                                                  label: Text(
-                                                    'Closing\nBalance Of\nWaste\nSolid waste',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 90,
-                                                  label: Text(
-                                                    'E- waste\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 90,
-                                                  label: Text(
-                                                    'E- waste\nDisposed',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Battery\nWaste Genrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 135,
-                                                  label: Text(
-                                                    'Battery Waste\nDisposed',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Solar Module\nwaste\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    'Solar module\nwaste\nDisposed',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    'Haz waste Oil\n(E.g. used\ntransformer oil)\nin litres\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 110,
-                                                  label: Text(
-                                                    'Haz waste oil\nDisposed\nin litres',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Haz Waste\ngrease\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Haz waste\nGrease\nDisposed',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Haz solid\nwaste\n(e.g. used oil\ncotton)\nGenrate',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Haz Solid\nwaste\nDisposed ',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'Haz waste\noil barrel\nGenerated\nin No',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 130,
-                                                  label: Text(
-                                                    'Haz waste oil\nbarrel\nDisposed in No',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: statutoryData.map(
-                                                (data) {
-                                                  return DataRow(
-                                                    cells: [
-                                                      DataCell(
-                                                          Text(data['Month'])),
-                                                      DataCell(Text(data[
-                                                          'Opening Balance Of Waste'])),
-                                                      DataCell(Text(data[
-                                                          'Closing Balance Of Waste'])),
-                                                      DataCell(Text(data[
-                                                          'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)'])),
-                                                      DataCell(Text(data[
-                                                          'E- waste in kgs '])),
-                                                      DataCell(Text(data[
-                                                          'Battery Waste in number '])),
-                                                      DataCell(Text(data[
-                                                          'Solar Module waste in number'])),
-                                                      DataCell(Text(data[
-                                                          'Haz waste Oil (E.g. used transformer oil) in litres '])),
-                                                      DataCell(Text(data[
-                                                          'Haz Waste grease in kgs'])),
-                                                      DataCell(Text(data[
-                                                          'Haz solid waste (e.g. used oil cotton) in Kgs'])),
-                                                      DataCell(Text(data[
-                                                          'Haz waste oil barrel generated in No'])),
-                                                      DataCell(Text(data[
-                                                          'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)in kgs'])),
-                                                      DataCell(Text(data[
-                                                          'E- waste Disposed in kgs'])),
-                                                      DataCell(Text(data[
-                                                          'Battery Waste disposed in number'])),
-                                                      DataCell(Text(data[
-                                                          'Solar module waste in number '])),
-                                                      DataCell(Text(data[
-                                                          'Haz waste oil disposed in litres'])),
-                                                      DataCell(Text(data[
-                                                          'Haz waste Grease in Kgs'])),
-                                                      DataCell(Text(data[
-                                                          'Haz Solid waste disposed in Kgs '])),
-                                                      DataCell(Text(data[
-                                                          'Haz waste oil barrel Disposed in No'])),
-                                                      DataCell(
-                                                        Row(
-                                                          children: [
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .viewColor,
-                                                              icon: Icons
-                                                                  .remove_red_eye_outlined,
-                                                              message: 'View',
-                                                              onPress: () {
-                                                                Get.toNamed(Routes
-                                                                    .viewHazWasteData);
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .editColor,
-                                                              icon: Icons.edit,
-                                                              message: 'Edit',
-                                                              onPress: () {
-                                                                Get.toNamed(Routes
-                                                                    .addWasteDataScreen);
-                                                              },
-                                                            ),
-                                                          ],
+                                                rows: statutoryData.map(
+                                                  (data) {
+                                                    return DataRow(
+                                                      cells: [
+                                                        DataCell(Text(
+                                                            data['Month'])),
+                                                        DataCell(Text(data[
+                                                            'Opening Balance Of Waste'])),
+                                                        DataCell(Text(data[
+                                                            'Closing Balance Of Waste'])),
+                                                        DataCell(Text(data[
+                                                            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)'])),
+                                                        DataCell(Text(data[
+                                                            'E- waste in kgs '])),
+                                                        DataCell(Text(data[
+                                                            'Battery Waste in number '])),
+                                                        DataCell(Text(data[
+                                                            'Solar Module waste in number'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste Oil (E.g. used transformer oil) in litres '])),
+                                                        DataCell(Text(data[
+                                                            'Haz Waste grease in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz solid waste (e.g. used oil cotton) in Kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil barrel generated in No'])),
+                                                        DataCell(Text(data[
+                                                            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'E- waste Disposed in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Battery Waste disposed in number'])),
+                                                        DataCell(Text(data[
+                                                            'Solar module waste in number '])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil disposed in litres'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste Grease in Kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz Solid waste disposed in Kgs '])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil barrel Disposed in No'])),
+                                                        DataCell(
+                                                          Row(
+                                                            children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .viewColor,
+                                                                icon: Icons
+                                                                    .remove_red_eye_outlined,
+                                                                message: 'View',
+                                                                onPress: () {
+                                                                  Get.toNamed(Routes
+                                                                      .viewHazWasteData);
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                message: 'Edit',
+                                                                onPress: () {
+                                                                  Get.toNamed(Routes
+                                                                      .addWasteDataScreen);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ).toList(),
+                                                      ],
+                                                    );
+                                                  },
+                                                ).toList(),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (controller.openFromDateToStartDatePicker)
-                    Positioned(
-                      right: 120,
-                      top: 100,
-                      child: DatePickerWidget(
-                        minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(DateTime.now().year, 13,
-                            0), // last date of this year
-                        controller: DateRangePickerController(),
-                        selectionChanges: (p0) {
-                          print('po valu ${p0.value.toString()}');
-                          controller.waterDateTc.text =
-                              DateFormat('yyyy-MM-dd').format(p0.value);
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
-                          controller.update(['stock_Mangement_Date']);
-                        },
+                        ],
                       ),
                     ),
-                ],
-              ),
-            ],
+                    if (controller.openFromDateToStartDatePicker)
+                      Positioned(
+                        right: 120,
+                        top: 100,
+                        child: DatePickerWidget(
+                          minDate: DateTime(DateTime.now().year),
+                          maxDate: DateTime(DateTime.now().year, 13,
+                              0), // last date of this year
+                          controller: DateRangePickerController(),
+                          selectionChanges: (p0) {
+                            print('po valu ${p0.value.toString()}');
+                            controller.waterDateTc.text =
+                                DateFormat('yyyy-MM-dd').format(p0.value);
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['stock_Mangement_Date']);
+                          },
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
