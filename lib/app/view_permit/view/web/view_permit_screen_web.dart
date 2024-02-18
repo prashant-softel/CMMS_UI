@@ -1623,20 +1623,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 style: Styles.greyLight14,
                                               ),
                                             ),
-                                            InkWell(
-                                              onTap: () {
-                                                final _flutterSecureStorage =
-                                                    const FlutterSecureStorage();
-
-                                                _flutterSecureStorage.delete(
-                                                    key: "permitId");
-                                                Get.offAllNamed(
-                                                    Routes.newPermitList);
-                                              },
-                                              child: Text(" / NEW PERMIT LIST",
-                                                  style:
-                                                      Styles.greyMediumLight12),
-                                            ),
+                                            controller.type.value == 1
+                                                ? InkWell(
+                                                    onTap: () {
+                                                      Get.offAllNamed(
+                                                          Routes.pmTaskView);
+                                                    },
+                                                    child: Text(
+                                                        " / VIEW PM TASK",
+                                                        style: Styles
+                                                            .greyMediumLight12),
+                                                  )
+                                                : InkWell(
+                                                    onTap: () {
+                                                      Get.offAllNamed(
+                                                          Routes.newPermitList);
+                                                    },
+                                                    child: Text(
+                                                        " / NEW PERMIT LIST",
+                                                        style: Styles
+                                                            .greyMediumLight12),
+                                                  ),
                                             Text(" / VIEW PERMIT",
                                                 style: Styles.greyMediumLight12)
                                           ],
@@ -4205,12 +4212,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 // controller
                                 //     .createNewPermit();
                                 Get.dialog(PermitApprovedDialog(
-                                  permitId: controller
-                                      .viewPermitDetailsModel.value?.permitNo,
-                                  ptwStatus:
-                                      '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                                  jobId: controller.jobId.value,
-                                ));
+                                    permitId: controller
+                                        .viewPermitDetailsModel.value?.permitNo,
+                                    ptwStatus:
+                                        '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                    jobId: controller.jobId.value,
+                                    type: controller.type.value));
                               },
                             )),
                       )
@@ -5229,7 +5236,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           content: Builder(builder: (context) {
             var height = MediaQuery.of(context).size.height;
             var width = MediaQuery.of(context).size.width;
-      
+
             return Obx(
               () => Container(
                 padding: Dimens.edgeInsets05_0_5_0,
@@ -5263,7 +5270,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               )
                               .toList(),
                           onConfirm: (selectedOptionsList) => {
-                            controller.equipmentNameSelected(selectedOptionsList),
+                            controller
+                                .equipmentNameSelected(selectedOptionsList),
                             print(
                                 'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
                           },
@@ -5308,7 +5316,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           content: Builder(builder: (context) {
             var height = MediaQuery.of(context).size.height;
             var width = MediaQuery.of(context).size.width;
-      
+
             return Obx(
               () => Container(
                 padding: Dimens.edgeInsets05_0_5_0,
@@ -5342,7 +5350,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               )
                               .toList(),
                           onConfirm: (selectedOptionsList) => {
-                            controller.employeeNameSelected(selectedOptionsList),
+                            controller
+                                .employeeNameSelected(selectedOptionsList),
                             print(
                                 'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
                           },
