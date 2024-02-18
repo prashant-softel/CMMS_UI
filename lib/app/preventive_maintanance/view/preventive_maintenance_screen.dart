@@ -19,69 +19,73 @@ class PreventiveScreen extends GetView<PreventiveController> {
 
     final double itemWidth = size.width / 2;
 
-    return Scaffold(
-        appBar: Responsive.isMobile(context)
-            ? AppBar(
-                title: HeaderWidget(),
-                elevation: 0,
-                toolbarHeight: 60,
-                automaticallyImplyLeading: false,
-              )
-            : null,
-        drawer: //
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? HomeDrawer() //ResponsiveSideMenu()
-                : null,
-        body: Obx(
-          () => Stack(
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                    left: homeController.menuButton.value ? 250.0 : 70.0),
-                width: Get.width,
-                height: Get.height,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            if (Responsive.isMobile(context))
-                              Obx(
-                                () => Container(
-                                  width: Get.width,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Card(
-                                      shadowColor: ColorValues.greyColor,
-                                      elevation: 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: DropdownButtonHideUnderline(
-                                          child: DropdownButton(
-                                            // isExpanded: true,
-                                            value: controller
-                                                .selectedFacility.value,
-                                            icon: const Icon(Icons
-                                                .keyboard_arrow_down_outlined),
-                                            elevation: 9,
-                                            style: const TextStyle(
-                                                color: Colors.black),
-                                            onChanged: (String? selectedValue) {
-                                              controller.isFacilitySelected
-                                                  .value = true;
-                                              controller.selectedFacility
-                                                  .value = selectedValue ?? '';
-                                            },
-                                            items: controller.facilityList
-                                                .map<DropdownMenuItem<String>>(
-                                                    (facility) {
-                                              return DropdownMenuItem<String>(
-                                                value: facility?.name ?? '',
-                                                child:
-                                                    Text(facility?.name ?? ''),
+    return SelectionArea(
+      child: Scaffold(
+          appBar: Responsive.isMobile(context)
+              ? AppBar(
+                  title: HeaderWidget(),
+                  elevation: 0,
+                  toolbarHeight: 60,
+                  automaticallyImplyLeading: false,
+                )
+              : null,
+          drawer: //
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? HomeDrawer() //ResponsiveSideMenu()
+                  : null,
+          body: Obx(
+            () => Stack(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 450),
+                  margin: EdgeInsets.only(
+                      left: homeController.menuButton.value ? 250.0 : 70.0),
+                  width: Get.width,
+                  height: Get.height,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              if (Responsive.isMobile(context))
+                                Obx(
+                                  () => Container(
+                                    width: Get.width,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Card(
+                                        shadowColor: ColorValues.greyColor,
+                                        elevation: 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(3.0),
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                              // isExpanded: true,
+                                              value: controller
+                                                  .selectedFacility.value,
+                                              icon: const Icon(Icons
+                                                  .keyboard_arrow_down_outlined),
+                                              elevation: 9,
+                                              style: const TextStyle(
+                                                  color: Colors.black),
+                                              onChanged:
+                                                  (String? selectedValue) {
+                                                controller.isFacilitySelected
+                                                    .value = true;
+                                                controller.selectedFacility
+                                                        .value =
+                                                    selectedValue ?? '';
+                                              },
+                                              items: controller.facilityList
+                                                  .map<
+                                                      DropdownMenuItem<
+                                                          String>>((facility) {
+                                                return DropdownMenuItem<String>(
+                                                  value: facility?.name ?? '',
+                                                  child: Text(
+                                                      facility?.name ?? ''),
                                               );
                                             }).toList(),
                                           ),
@@ -232,7 +236,8 @@ class PreventiveScreen extends GetView<PreventiveController> {
               ),
             ],
           ),
-        ));
+        )),
+    );
   }
 
   _priventiveList({required String tittle, Function()? ontap}) {

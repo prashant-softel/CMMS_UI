@@ -27,312 +27,314 @@ class JobListContentWeb extends StatelessWidget {
         Obx(() {
       final dataSource = JobDataSource(controller);
 
-      return Column(children: [
-        HeaderWidget(),
-        Container(
-          height: 45,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromARGB(255, 227, 224, 224),
-              width: 1,
+      return SelectionArea(
+        child: Column(children: [
+          HeaderWidget(),
+          Container(
+            height: 45,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 227, 224, 224),
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.home,
-                color: ColorValues.greyLightColor,
-              ),
-              InkWell(
-                onTap: () {
-                  Get.offNamed(Routes.home);
-                },
-                child: Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.home,
+                  color: ColorValues.greyLightColor,
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  Get.offAllNamed(Routes.breakdown);
-                },
-                child:
-                    Text(" / BREAKDOWN MAINTANACE", style: Styles.greyLight14),
-              ),
-              Text(" / JOB LIST", style: Styles.greyLight14),
-            ],
-          ),
-        ),
-
-        // CustomAppBar(
-        //   title: 'Job List',
-        //   action: Row(children: [
-        //     // ActionButton(
-        //     //   icon: Icons.download,
-        //     //   label: 'BM Report',
-        //     //   onPressed: () {
-        //     //     if (kIsWeb) {
-        //     //       controller.exportToExcelWeb();
-        //     //     }
-        //     //   },
-        //     //   color: ColorValues.appYellowColor,
-        //     // ),
-        //     // Dimens.boxWidth10,
-        //     // ActionButton(
-        //     //   icon: Icons.upload,
-        //     //   label: 'Pending Jobs',
-        //     //   onPressed: () {},
-        //     //   color: ColorValues.appDarkBlueColor.withOpacity(0.3),
-        //     // ),
-        //     // Dimens.boxWidth10,
-        //     // ActionButton(
-        //     //   icon: Icons.add,
-        //     //   label: 'Created By Me'.tr,
-        //     //   onPressed: () {},
-        //     //   color: ColorValues.appLightBlueColor,
-        //     // ),
-        //     // Dimens.boxWidth10,
-        //     // ActionButton(
-        //     //   icon: Icons.close,
-        //     //   label: 'Assigned To Me'.tr,
-        //     //   onPressed: () async {},
-        //     //   color: ColorValues.appGreenColor,
-        //     // ),
-        //     Dimens.boxWidth10,
-        //     varUserAccessModel.value.access_list!
-        //                 .where((e) => e.feature_id == 2 && e.add == 1)
-        //                 .length >
-        //             0
-        //         ? ActionButton(
-        //             icon: Icons.upload,
-        //             label: 'Add New Job',
-        //             onPressed: () {
-        //               controller.goToAddJobScreen();
-        //             },
-        //             color: ColorValues.appDarkBlueColor,
-        //           )
-        //         : Container(),
-        //     Dimens.boxWidth10,
-        //   ]),
-        // ),
-
-        //  Obx(() {
-        Expanded(
-          child: Container(
-            // width: Get.width * 7,
-            margin: EdgeInsets.all(10),
-            height: Get.height,
-            child: Card(
-                color: Color.fromARGB(255, 245, 248, 250),
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                InkWell(
+                  onTap: () {
+                    Get.offNamed(Routes.home);
+                  },
+                  child: Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
                 ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
+                InkWell(
+                  onTap: () {
+                    Get.offAllNamed(Routes.breakdown);
+                  },
+                  child: Text(" / BREAKDOWN MAINTANACE",
+                      style: Styles.greyLight14),
+                ),
+                Text(" / JOB LIST", style: Styles.greyLight14),
+              ],
+            ),
+          ),
+
+          // CustomAppBar(
+          //   title: 'Job List',
+          //   action: Row(children: [
+          //     // ActionButton(
+          //     //   icon: Icons.download,
+          //     //   label: 'BM Report',
+          //     //   onPressed: () {
+          //     //     if (kIsWeb) {
+          //     //       controller.exportToExcelWeb();
+          //     //     }
+          //     //   },
+          //     //   color: ColorValues.appYellowColor,
+          //     // ),
+          //     // Dimens.boxWidth10,
+          //     // ActionButton(
+          //     //   icon: Icons.upload,
+          //     //   label: 'Pending Jobs',
+          //     //   onPressed: () {},
+          //     //   color: ColorValues.appDarkBlueColor.withOpacity(0.3),
+          //     // ),
+          //     // Dimens.boxWidth10,
+          //     // ActionButton(
+          //     //   icon: Icons.add,
+          //     //   label: 'Created By Me'.tr,
+          //     //   onPressed: () {},
+          //     //   color: ColorValues.appLightBlueColor,
+          //     // ),
+          //     // Dimens.boxWidth10,
+          //     // ActionButton(
+          //     //   icon: Icons.close,
+          //     //   label: 'Assigned To Me'.tr,
+          //     //   onPressed: () async {},
+          //     //   color: ColorValues.appGreenColor,
+          //     // ),
+          //     Dimens.boxWidth10,
+          //     varUserAccessModel.value.access_list!
+          //                 .where((e) => e.feature_id == 2 && e.add == 1)
+          //                 .length >
+          //             0
+          //         ? ActionButton(
+          //             icon: Icons.upload,
+          //             label: 'Add New Job',
+          //             onPressed: () {
+          //               controller.goToAddJobScreen();
+          //             },
+          //             color: ColorValues.appDarkBlueColor,
+          //           )
+          //         : Container(),
+          //     Dimens.boxWidth10,
+          //   ]),
+          // ),
+
+          //  Obx(() {
+          Expanded(
+            child: Container(
+              // width: Get.width * 7,
+              margin: EdgeInsets.all(10),
+              height: Get.height,
+              child: Card(
+                  color: Color.fromARGB(255, 245, 248, 250),
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Job List ",
+                                style: Styles.blackBold16,
+                              ),
+                              Spacer(),
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id == 2 && e.add == 1)
+                                          .length >
+                                      0
+                                  ? ActionButton(
+                                      icon: Icons.add,
+                                      label: "Add New",
+                                      onPressed: () {
+                                        controller.clearStoreData();
+
+                                        controller.goToAddJobScreen();
+                                      },
+                                      color: ColorValues.addNewColor,
+                                    )
+                                  : Dimens.box0
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          color: ColorValues.greyLightColour,
+                        ),
+                        Row(
                           children: [
-                            Text(
-                              "Job List ",
-                              style: Styles.blackBold16,
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appLightBlueColor,
+                                onPressed: () {},
+                                text: 'columnVisibility'.tr,
+                              ),
                             ),
-                            Spacer(),
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 2 && e.add == 1)
-                                        .length >
-                                    0
-                                ? ActionButton(
-                                    icon: Icons.add,
-                                    label: "Add New",
-                                    onPressed: () {
-                                      controller.clearStoreData();
+                            // Container(
+                            //   height: 35,
+                            //   margin: EdgeInsets.only(left: 10),
+                            //   child: CustomElevatedButton(
+                            //       backgroundColor: ColorValues.appLightBlueColor,
+                            //       onPressed: () {},
+                            //       text: 'Copy'),
+                            // ),
+                            // Container(
+                            //   height: 35,
+                            //   margin: EdgeInsets.only(left: 10),
+                            //   child: CustomElevatedButton(
+                            //       backgroundColor: ColorValues.appLightBlueColor,
+                            //       onPressed: () {},
+                            //       text: 'Excel'),
+                            // ),
+                            // Container(
+                            //   height: 35,
+                            //   margin: EdgeInsets.only(left: 10),
+                            //   child: CustomElevatedButton(
+                            //       backgroundColor: ColorValues.appLightBlueColor,
+                            //       onPressed: () {},
+                            //       text: 'PDF'),
+                            // ),
 
-                                      controller.goToAddJobScreen();
-                                    },
-                                    color: ColorValues.addNewColor,
-                                  )
-                                : Dimens.box0
+                            Spacer(),
+                            Container(
+                              width: 300,
+                              height: 40,
+                              margin: Dimens.edgeInsets0_0_16_0,
+                              child: TextField(
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 16.0,
+                                      height: 1.0,
+                                      color: Colors.black),
+                                ),
+                                onChanged: (value) => controller.search(value),
+                                decoration: InputDecoration(
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.0,
+                                    ),
+                                  ),
+                                  contentPadding: Dimens.edgeInsets05_10,
+                                  hintText: 'search'.tr,
+                                  hintStyle: Styles.grey16,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      Divider(
-                        color: ColorValues.greyLightColour,
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            height: 35,
-                            margin: EdgeInsets.only(left: 10),
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'columnVisibility'.tr,
-                            ),
-                          ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'Copy'),
-                          // ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'Excel'),
-                          // ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'PDF'),
-                          // ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        controller.jobList.isEmpty == true
+                            ? Center(child: Text('No data'))
+                            : Expanded(
+                                child: PaginatedDataTable2(
+                                  //fixedLeftColumns: 1,
+                                  dataRowHeight: 105, // Get.height * 0.12,
+                                  columnSpacing: 10,
+                                  source: dataSource, // Custom DataSource class
+                                  // headingRowHeight: Get.height * 0.12,
+                                  minWidth: 20000, //Get.width * 1.2,
+                                  showCheckboxColumn: false,
+                                  //  rowsPerPage: 10, // Number of rows per page
+                                  //    availableRowsPerPage: [10, 20, 30, 50],
+                                  columns: [
+                                    buildDataColumn(
+                                      'id',
+                                      'ID',
+                                      //  ColumnSize.S,
+                                      controller.idFilterText,
+                                      100,
+                                    ),
+                                    buildDataColumn(
+                                        'jobDetails',
+                                        'Job Title',
+                                        // ColumnSize.M,
+                                        controller.jobDetailsFilterText,
+                                        250),
+                                    buildDataColumn(
+                                        'breakdownTime',
+                                        'BreakdownTime',
+                                        // ColumnSize.L,
+                                        controller.breakdownTimeFilterText,
+                                        150),
+                                    buildDataColumn(
+                                        'equipmentCat',
+                                        'Equipment Category',
+                                        // ColumnSize.L,
+                                        controller.equipmentCategoryFilterText,
+                                        200),
+                                    buildDataColumn(
+                                        'workingArea',
+                                        'Equipment',
+                                        // ColumnSize.L,
+                                        controller.workAreaFilterText,
+                                        170),
+                                    buildDataColumn(
+                                        'workType',
+                                        'Work Type',
+                                        // ColumnSize.L,
+                                        controller.workTypeFilterText,
+                                        150),
+                                    buildDataColumn(
+                                        'raisedByName',
+                                        'Raised By',
+                                        // ColumnSize.S,
+                                        controller.raisedByNameFilterText,
+                                        100),
 
-                          Spacer(),
-                          Container(
-                            width: 300,
-                            height: 40,
-                            margin: Dimens.edgeInsets0_0_16_0,
-                            child: TextField(
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
-                              onChanged: (value) => controller.search(value),
-                              decoration: InputDecoration(
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 0.0,
-                                  ),
+                                    // buildDataColumn(
+                                    //   'breakdownType',
+                                    //   'Breakdown Type',
+                                    //   ColumnSize.L,
+                                    //   controller.breakdownTypeFilterText,
+                                    // ),
+                                    buildDataColumn(
+                                        'permitId',
+                                        'Permit ID',
+                                        // ColumnSize.S,
+                                        controller.permitIdFilterText,
+                                        100),
+                                    buildDataColumn(
+                                        'assignedToName',
+                                        'Assigned To',
+                                        // ColumnSize.S,
+                                        controller.assignedToNameFilterText,
+                                        150),
+                                    buildDataColumn(
+                                        'action'.tr,
+                                        'Actions',
+                                        // ColumnSize.L,
+                                        controller.jobDateFilterText,
+                                        150),
+                                  ],
                                 ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Colors.grey,
-                                    width: 0.0,
-                                  ),
-                                ),
-                                contentPadding: Dimens.edgeInsets05_10,
-                                hintText: 'search'.tr,
-                                hintStyle: Styles.grey16,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      controller.jobList.isEmpty == true
-                          ? Center(child: Text('No data'))
-                          : Expanded(
-                              child: PaginatedDataTable2(
-                                //fixedLeftColumns: 1,
-                                dataRowHeight: 105, // Get.height * 0.12,
-                                columnSpacing: 10,
-                                source: dataSource, // Custom DataSource class
-                                // headingRowHeight: Get.height * 0.12,
-                                minWidth: 20000, //Get.width * 1.2,
-                                showCheckboxColumn: false,
-                                //  rowsPerPage: 10, // Number of rows per page
-                                //    availableRowsPerPage: [10, 20, 30, 50],
-                                columns: [
-                                  buildDataColumn(
-                                    'id',
-                                    'ID',
-                                    //  ColumnSize.S,
-                                    controller.idFilterText,
-                                    100,
-                                  ),
-                                  buildDataColumn(
-                                      'jobDetails',
-                                      'Job Title',
-                                      // ColumnSize.M,
-                                      controller.jobDetailsFilterText,
-                                      250),
-                                  buildDataColumn(
-                                      'breakdownTime',
-                                      'BreakdownTime',
-                                      // ColumnSize.L,
-                                      controller.breakdownTimeFilterText,
-                                      150),
-                                  buildDataColumn(
-                                      'equipmentCat',
-                                      'Equipment Category',
-                                      // ColumnSize.L,
-                                      controller.equipmentCategoryFilterText,
-                                      200),
-                                  buildDataColumn(
-                                      'workingArea',
-                                      'Equipment',
-                                      // ColumnSize.L,
-                                      controller.workAreaFilterText,
-                                      170),
-                                  buildDataColumn(
-                                      'workType',
-                                      'Work Type',
-                                      // ColumnSize.L,
-                                      controller.workTypeFilterText,
-                                      150),
-                                  buildDataColumn(
-                                      'raisedByName',
-                                      'Raised By',
-                                      // ColumnSize.S,
-                                      controller.raisedByNameFilterText,
-                                      100),
-
-                                  // buildDataColumn(
-                                  //   'breakdownType',
-                                  //   'Breakdown Type',
-                                  //   ColumnSize.L,
-                                  //   controller.breakdownTypeFilterText,
-                                  // ),
-                                  buildDataColumn(
-                                      'permitId',
-                                      'Permit ID',
-                                      // ColumnSize.S,
-                                      controller.permitIdFilterText,
-                                      100),
-                                  buildDataColumn(
-                                      'assignedToName',
-                                      'Assigned To',
-                                      // ColumnSize.S,
-                                      controller.assignedToNameFilterText,
-                                      150),
-                                  buildDataColumn(
-                                      'action'.tr,
-                                      'Actions',
-                                      // ColumnSize.L,
-                                      controller.jobDateFilterText,
-                                      150),
-                                ],
-                              ),
-                            )
-                      //}),
-                    ])),
+                              )
+                        //}),
+                      ])),
+            ),
           ),
-        ),
-      ]);
+        ]),
+      );
     });
   }
 

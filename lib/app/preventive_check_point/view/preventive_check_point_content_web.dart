@@ -24,480 +24,339 @@ class PreventiveCheckPointContentWeb
     return Obx(() {
       final dataSource = CheckPointDataSource(controller);
 
-      return Container(
-        color: Color.fromARGB(255, 234, 236, 238),
-        width: Get.width,
-        height: Get.height,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(),
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 227, 224, 224),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
+      return SelectionArea(
+        child: Container(
+          color: Color.fromARGB(255, 234, 236, 238),
+          width: Get.width,
+          height: Get.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderWidget(),
+              Container(
+                height: 45,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 227, 224, 224),
+                    width: 1,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: ColorValues.greyLightColor,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.home);
-                    },
-                    child: Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.preventive);
-                    },
-                    child: controller.type.value == 1
-                        ? Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyLight14)
-                        : controller.type.value == 2
-                            ? Text(" / AUDIT", style: Styles.greyLight14)
-                            : Text(" / MIS", style: Styles.greyLight14),
-                  ),
-                  Text(" / CHECK POINT CREATOR",
-                      style: Styles.greyLight14)
-                ],
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: ColorValues.greyLightColor,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.home);
+                      },
+                      child: Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.offNamed(Routes.preventive);
+                      },
+                      child: controller.type.value == 1
+                          ? Text(" / PREVENTIVE MAINTENANCE",
+                              style: Styles.greyLight14)
+                          : controller.type.value == 2
+                              ? Text(" / AUDIT", style: Styles.greyLight14)
+                              : Text(" / MIS", style: Styles.greyLight14),
+                    ),
+                    Text(" / CHECK POINT CREATOR", style: Styles.greyLight14)
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: ElevatedButton(
-                style: Styles.navyBlueElevatedButtonStyle,
-                onPressed: () {
-                  controller.toggleContainer();
-                },
-                child: Obx(() {
-                  return Text(
-                    controller.isContainerVisible.value
-                        ? 'Close Create Check Point'
-                        : 'Open Create Check Point',
-                  );
-                }),
+              Padding(
+                padding: EdgeInsets.only(left: 10, top: 10),
+                child: ElevatedButton(
+                  style: Styles.navyBlueElevatedButtonStyle,
+                  onPressed: () {
+                    controller.toggleContainer();
+                  },
+                  child: Obx(() {
+                    return Text(
+                      controller.isContainerVisible.value
+                          ? 'Close Create Check Point'
+                          : 'Open Create Check Point',
+                    );
+                  }),
+                ),
               ),
-            ),
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // varUserAccessModel.value.access_list!
-                  //             .where((e) => e.feature_id == 6 && e.add == 1)
-                  //             .length >
-                  //         0
-                  //     ?
-                  Visibility(
-                    visible: controller.isContainerVisible.value,
-                    child: Container(
-                      width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 30, top: 10),
-                      height: Get.height / 1.6,
-                      child: Card(
-                        color: Color.fromARGB(255, 251, 252, 253),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10.0, right: 10, top: 10),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Check Point Creator",
-                                        style: Styles.blackBold16,
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      Visibility(
-                                        visible: controller.isSuccess.value,
-                                        child: Center(
-                                          child: Wrap(
-                                            children: [
-                                              Text(
-                                                controller.selectedItem == null
-                                                    ? "CheckPoint added Successfully in the List."
-                                                    : "CheckPoint updated Successfully in the List.",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Color.fromARGB(
-                                                        255, 24, 243, 123)),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                            ],
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // varUserAccessModel.value.access_list!
+                    //             .where((e) => e.feature_id == 6 && e.add == 1)
+                    //             .length >
+                    //         0
+                    //     ?
+                    Visibility(
+                      visible: controller.isContainerVisible.value,
+                      child: Container(
+                        width: (Get.width * .3),
+                        margin: EdgeInsets.only(left: 30, top: 10),
+                        height: Get.height / 1.6,
+                        child: Card(
+                          color: Color.fromARGB(255, 251, 252, 253),
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10.0, right: 10, top: 10),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Check Point Creator",
+                                          style: Styles.blackBold16,
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Visibility(
+                                          visible: controller.isSuccess.value,
+                                          child: Center(
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  controller.selectedItem ==
+                                                          null
+                                                      ? "CheckPoint added Successfully in the List."
+                                                      : "CheckPoint updated Successfully in the List.",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Color.fromARGB(
+                                                          255, 24, 243, 123)),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(
-                                              title: 'Check List No. '),
-                                          SizedBox(
-                                            width: 15,
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5.0),
-                                              child: DropdownWebWidget(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                controller: controller,
-                                                dropdownList:
-                                                    controller.checkList,
-                                                isValueSelected: controller
-                                                    .isSelectedchecklist.value,
-                                                selectedValue: controller
-                                                    .selectedchecklist.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Check List No. '),
+                                            SizedBox(
+                                              width: 15,
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(title: 'Check Point'),
-                                          SizedBox(
-                                            width: 37,
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 5.0),
+                                                child: DropdownWebWidget(
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      30,
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: LoginCustomTextfield(
-                                                  ishint: 'Enter Check Point',
-                                                  textController: controller
-                                                      .checkPointCtrlr,
-                                                  focusNode: controller.chckFocus,
-                                                  scroll: controller.chckScroll,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .deny(
-                                                      RegExp('[\'^]'),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(title: 'Requirement'),
-                                          SizedBox(
-                                            width: 35,
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: LoginCustomTextfield(
-                                                  ishint: 'Enter Requirement',
-                                                  textController: controller
-                                                      .requirementCtrlr,
-                                                  focusNode: controller.reqFocus,
-                                                  scroll: controller.reqScroll,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .deny(
-                                                      RegExp('[\'^]'),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        // mainAxisAlignment:
-                                        //     MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(
-                                              title: 'Image Upload?'),
-                                          SizedBox(
-                                            width: 35,
-                                          ),
-                                          Text("No"),
-                                          CustomSwitchTroggle(
-                                              value:
-                                                  controller.isToggleOn.value,
-                                              onChanged: (value) {
-                                                controller.toggle();
-                                              }),
-                                          Text("Yes"),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        children: [
-                                          CustomRichText(
-                                              title: 'Failure Weightage'),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                  color: Color.fromARGB(
-                                                      255, 227, 224, 224),
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromARGB(
-                                                            255, 236, 234, 234)
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              width: 100,
-                                              child: LoginCustomTextfield(
-                                                // ishint: 'Enter Check Point',
-                                                textController:
-                                                    controller.failurewtgCtrlr,
-                                              )),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomRichText(title: 'Type '),
-                                          SizedBox(
-                                            width: 90,
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                border: Border.all(
-                                                  color: Color.fromARGB(
-                                                      255, 227, 224, 224),
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              height: 35,
-                                              child:
-                                                  DropdownButtonHideUnderline(
-                                                child: DropdownButton<String>(
-                                                  isExpanded: true,
-                                                  value: controller
-                                                      .checkpointType.value,
-                                                  onChanged: (value) =>
-                                                      controller
-                                                        ..updatecheCkpointType(
-                                                            value!),
-                                                  items: <String>[
-                                                    '',
-                                                    'Text',
-                                                    'Bool',
-                                                    'Range'
-                                                  ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 10),
-                                                        child: Text(
-                                                          value,
-                                                          style: Styles.black12,
-                                                        ),
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
-                                                    );
-                                                  }).toList(),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.checkList,
+                                                  isValueSelected: controller
+                                                      .isSelectedchecklist
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedchecklist.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
                                               ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Check Point'),
+                                            SizedBox(
+                                              width: 37,
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Visibility(
-                                        visible:
-                                            controller.checkpointType.value ==
-                                                "Range",
-                                        child: Row(
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      30,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Check Point',
+                                                    textController: controller
+                                                        .checkPointCtrlr,
+                                                    focusNode:
+                                                        controller.chckFocus,
+                                                    scroll:
+                                                        controller.chckScroll,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(
+                                                        RegExp('[\'^]'),
+                                                      )
+                                                    ],
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Requirement'),
+                                            SizedBox(
+                                              width: 35,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          .2) -
+                                                      30,
+                                                  child: LoginCustomTextfield(
+                                                    ishint: 'Enter Requirement',
+                                                    textController: controller
+                                                        .requirementCtrlr,
+                                                    focusNode:
+                                                        controller.reqFocus,
+                                                    scroll:
+                                                        controller.reqScroll,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .deny(
+                                                        RegExp('[\'^]'),
+                                                      )
+                                                    ],
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
                                           // mainAxisAlignment:
                                           //     MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Spacer(),
-                                            CustomRichText(title: 'Min'),
+                                            CustomRichText(
+                                                title: 'Image Upload?'),
                                             SizedBox(
-                                              width: 10,
+                                              width: 35,
                                             ),
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    ),
-                                                  ],
-                                                ),
-                                                width: 100,
-                                                child: LoginCustomTextfield(
-                                                  // ishint: 'Enter Chec',
-                                                  textController:
-                                                      controller.minRangeCtrlr,
-                                                )),
-                                            // Dimens.boxWidth20,
-                                            Spacer(),
-                                            CustomRichText(title: 'Max'),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
+                                            Text("No"),
+                                            CustomSwitchTroggle(
+                                                value:
+                                                    controller.isToggleOn.value,
+                                                onChanged: (value) {
+                                                  controller.toggle();
+                                                }),
+                                            Text("Yes"),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Failure Weightage'),
+                                            Dimens.boxWidth10,
                                             Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
@@ -521,316 +380,493 @@ class PreventiveCheckPointContentWeb
                                                 width: 100,
                                                 child: LoginCustomTextfield(
                                                   // ishint: 'Enter Check Point',
-                                                  textController:
-                                                      controller.maxRangeCtrlr,
+                                                  textController: controller
+                                                      .failurewtgCtrlr,
                                                 )),
-                                            Spacer(),
                                           ],
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ]),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 40,
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appRedColor,
-                                        onPressed: () {
-                                          controller.cleardata();
-                                        },
-                                        text: 'Cancel'),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomRichText(title: 'Type '),
+                                            SizedBox(
+                                              width: 90,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                height: 35,
+                                                child:
+                                                    DropdownButtonHideUnderline(
+                                                  child: DropdownButton<String>(
+                                                    isExpanded: true,
+                                                    value: controller
+                                                        .checkpointType.value,
+                                                    onChanged: (value) =>
+                                                        controller
+                                                          ..updatecheCkpointType(
+                                                              value!),
+                                                    items: <String>[
+                                                      '',
+                                                      'Text',
+                                                      'Bool',
+                                                      'Range'
+                                                    ].map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10),
+                                                          child: Text(
+                                                            value,
+                                                            style:
+                                                                Styles.black12,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Visibility(
+                                          visible:
+                                              controller.checkpointType.value ==
+                                                  "Range",
+                                          child: Row(
+                                            // mainAxisAlignment:
+                                            //     MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Spacer(),
+                                              CustomRichText(title: 'Min'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: 100,
+                                                  child: LoginCustomTextfield(
+                                                    // ishint: 'Enter Chec',
+                                                    textController: controller
+                                                        .minRangeCtrlr,
+                                                  )),
+                                              // Dimens.boxWidth20,
+                                              Spacer(),
+                                              CustomRichText(title: 'Max'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: 100,
+                                                  child: LoginCustomTextfield(
+                                                    // ishint: 'Enter Check Point',
+                                                    textController: controller
+                                                        .maxRangeCtrlr,
+                                                  )),
+                                              Spacer(),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                      ]),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
                                       height: 40,
-                                      child: controller.selectedItem == null
-                                          ? CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              onPressed: () {
-                                                controller
-                                                    .createCheckpoint()
-                                                    .then((value) {
-                                                  if (value)
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appRedColor,
+                                          onPressed: () {
+                                            controller.cleardata();
+                                          },
+                                          text: 'Cancel'),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                        height: 40,
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .createCheckpoint()
+                                                      .then((value) {
+                                                    if (value)
+                                                      controller
+                                                          .issuccessCreatecheckpont();
                                                     controller
-                                                        .issuccessCreatecheckpont();
-                                                  controller.toggleContainer();
-                                                });
-                                              },
-                                              text: 'Create Check Point')
-                                          : CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              onPressed: () {
-                                                controller
-                                                    .updateCheckPoint(controller
-                                                        .selectedItem?.id)
-                                                    .then((value) {
-                                                  print("value,$value");
-                                                  if (value == true)
+                                                        .toggleContainer();
+                                                  });
+                                                },
+                                                text: 'Create Check Point')
+                                            : CustomElevatedButton(
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .updateCheckPoint(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatecheckpont();
                                                     controller
-                                                        .issuccessCreatecheckpont();
-                                                  controller.toggleContainer();
-                                                });
-                                              },
-                                              text: 'Update')),
-                                ],
-                              ),
-                              Dimens.boxHeight10
-                            ],
+                                                        .toggleContainer();
+                                                  });
+                                                },
+                                                text: 'Update')),
+                                  ],
+                                ),
+                                Dimens.boxHeight10
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                  //  : Container(),
-                  ,
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 6 && e.add == 1)
-                              .length >
-                          0
-                      ? Expanded(
-                          child: Container(
-                            width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 10),
-                            height: Get.height,
-                            child: Card(
-                              color: Color.fromARGB(255, 251, 252, 253),
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Check Point List",
-                                          style: Styles.blackBold16,
-                                        ),
-                                        ActionButton(
-                                          icon: Icons.upload,
-                                          label: 'Import Check Point',
-                                          onPressed: () {
-                                            Get.toNamed(Routes.importInventory,
-                                                arguments: {
-                                                  'importType': AppConstants
-                                                      .kImportChecklist
-                                                });
-                                          },
-                                          color: ColorValues.appDarkBlueColor,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    children: [
-                                      PopupMenuButton<String>(
-                                        tooltip: "",
-                                        elevation: 25.0,
-                                        child: Container(
-                                          height: 35,
-                                          margin: EdgeInsets.only(left: 10),
-                                          padding: EdgeInsets.only(
-                                              top: 4,
-                                              bottom: 4,
-                                              right: 8,
-                                              left: 8),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                ColorValues.appLightBlueColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                    )
+                    //  : Container(),
+                    ,
+                    varUserAccessModel.value.access_list!
+                                .where((e) => e.feature_id == 6 && e.add == 1)
+                                .length >
+                            0
+                        ? Expanded(
+                            child: Container(
+                              width: Get.width * 7,
+                              margin: EdgeInsets.only(left: 10, top: 10),
+                              height: Get.height,
+                              child: Card(
+                                color: Color.fromARGB(255, 251, 252, 253),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Check Point List",
+                                            style: Styles.blackBold16,
                                           ),
-                                          child: Text(
-                                            'Column Visibility',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
+                                          ActionButton(
+                                            icon: Icons.upload,
+                                            label: 'Import Check Point',
+                                            onPressed: () {
+                                              Get.toNamed(
+                                                  Routes.importInventory,
+                                                  arguments: {
+                                                    'importType': AppConstants
+                                                        .kImportChecklist
+                                                  });
+                                            },
+                                            color: ColorValues.appDarkBlueColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      children: [
+                                        PopupMenuButton<String>(
+                                          tooltip: "",
+                                          elevation: 25.0,
+                                          child: Container(
+                                            height: 35,
+                                            margin: EdgeInsets.only(left: 10),
+                                            padding: EdgeInsets.only(
+                                                top: 4,
+                                                bottom: 4,
+                                                right: 8,
+                                                left: 8),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  ColorValues.appLightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: Text(
+                                              'Column Visibility',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
+                                          itemBuilder: (BuildContext context) =>
+                                              <PopupMenuEntry<String>>[]
+                                                ..addAll(controller
+                                                    .columnVisibility
+                                                    .value
+                                                    .entries
+                                                    .map((e) {
+                                                  return PopupMenuItem<String>(
+                                                      child:
+                                                          ValueListenableBuilder(
+                                                              valueListenable:
+                                                                  controller
+                                                                      .columnVisibility,
+                                                              builder: (context,
+                                                                  value,
+                                                                  child) {
+                                                                return Row(
+                                                                  children: [
+                                                                    Checkbox(
+                                                                      value: value[
+                                                                          e.key],
+                                                                      onChanged:
+                                                                          (newValue) {
+                                                                        controller.setColumnVisibility(
+                                                                            e.key,
+                                                                            newValue!);
+                                                                      },
+                                                                    ),
+                                                                    Text(e.key),
+                                                                  ],
+                                                                );
+                                                              }));
+                                                })),
+                                          onSelected: (String value) {
+                                            // Handle column selection
+                                          },
                                         ),
-                                        itemBuilder: (BuildContext context) =>
-                                            <PopupMenuEntry<String>>[]..addAll(
-                                                  controller.columnVisibility
-                                                      .value.entries
-                                                      .map((e) {
-                                                return PopupMenuItem<String>(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                            valueListenable:
-                                                                controller
-                                                                    .columnVisibility,
-                                                            builder: (context,
-                                                                value, child) {
-                                                              return Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                    value: value[
-                                                                        e.key],
-                                                                    onChanged:
-                                                                        (newValue) {
-                                                                      controller.setColumnVisibility(
-                                                                          e.key,
-                                                                          newValue!);
-                                                                    },
-                                                                  ),
-                                                                  Text(e.key),
-                                                                ],
-                                                              );
-                                                            }));
-                                              })),
-                                        onSelected: (String value) {
-                                          // Handle column selection
-                                        },
-                                      ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //         ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'Column Visibility',
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
-                                      Spacer(),
-                                      Container(
-                                        width: 300,
-                                        height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
-                                        child: TextField(
-                                          style: TextStyle(
+                                        // Container(
+                                        //   height: 35,
+                                        //   margin: EdgeInsets.only(left: 10),
+                                        //   child: CustomElevatedButton(
+                                        //     backgroundColor:
+                                        //         ColorValues.appLightBlueColor,
+                                        //     onPressed: () {},
+                                        //     text: 'Column Visibility',
+                                        //   ),
+                                        // ),
+                                        // Container(
+                                        //   height: 35,
+                                        //   margin: EdgeInsets.only(left: 10),
+                                        //   child: CustomElevatedButton(
+                                        //       backgroundColor:
+                                        //           ColorValues.appLightBlueColor,
+                                        //       onPressed: () {},
+                                        //       text: 'Copy'),
+                                        // ),
+                                        // Container(
+                                        //   height: 35,
+                                        //   margin: EdgeInsets.only(left: 10),
+                                        //   child: CustomElevatedButton(
+                                        //       backgroundColor:
+                                        //           ColorValues.appLightBlueColor,
+                                        //       onPressed: () {},
+                                        //       text: 'Excel'),
+                                        // ),
+                                        // Container(
+                                        //   height: 35,
+                                        //   margin: EdgeInsets.only(left: 10),
+                                        //   child: CustomElevatedButton(
+                                        //       backgroundColor:
+                                        //           ColorValues.appLightBlueColor,
+                                        //       onPressed: () {},
+                                        //       text: 'PDF'),
+                                        // ),
+                                        Spacer(),
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          margin: Dimens.edgeInsets0_0_16_0,
+                                          child: TextField(
+                                            style: TextStyle(
                                                 fontSize: 16.0,
                                                 height: 1.0,
                                                 color: Colors.black),
-                                          onChanged: (value) =>
-                                              controller.search(value),
-                                          decoration: InputDecoration(
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
+                                            onChanged: (value) =>
+                                                controller.search(value),
+                                            decoration: InputDecoration(
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0,
+                                                ),
                                               ),
-                                            ),
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                color: Colors.grey,
-                                                width: 0.0,
+                                              focusedBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0,
+                                                ),
                                               ),
+                                              contentPadding:
+                                                  Dimens.edgeInsets05_10,
+                                              hintText: 'search'.tr,
+                                              hintStyle: Styles.grey16,
                                             ),
-                                            contentPadding:
-                                                Dimens.edgeInsets05_10,
-                                            hintText: 'search'.tr,
-                                            hintStyle: Styles.grey16,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Expanded(
-                                      child: ValueListenableBuilder(
-                                          valueListenable:
-                                              controller.columnVisibility,
-                                          builder: (context, value, child) {
-                                            final dataSource =
-                                                CheckPointDataSource(
-                                                    controller);
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Expanded(
+                                        child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  CheckPointDataSource(
+                                                      controller);
 
-                                            return PaginatedDataTable2(
-                                              columnSpacing: 10,
-                                              source: dataSource,
+                                              return PaginatedDataTable2(
+                                                columnSpacing: 10,
+                                                source: dataSource,
 
-                                              minWidth: 2000,
-                                              showCheckboxColumn: false,
-                                              rowsPerPage:
-                                                  10, // Number of rows per page
-                                              availableRowsPerPage: [
-                                                10,
-                                                20,
-                                                30,
-                                                50
-                                              ],
-                                              border: TableBorder.all(
-                                                  color: Color.fromARGB(
-                                                      255, 206, 229, 234)),
-                                              columns: [
-                                                for (var entry in value.entries)
-                                                  if (entry.value)
-                                                    buildDataColumn(
-                                                      entry.key,
-                                                      controller.columnwidth[
-                                                          entry.key],
-                                                    ),
-                                                buildDataColumn(
-                                                  'Actions',
-                                                  150,
-                                                ),
-                                              ],
-                                            );
-                                          })),
-                                ],
+                                                minWidth: 2000,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
+                                                columns: [
+                                                  for (var entry
+                                                      in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                        entry.key,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                      ),
+                                                  buildDataColumn(
+                                                    'Actions',
+                                                    150,
+                                                  ),
+                                                ],
+                                              );
+                                            })),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        )
-                      : Container(),
-                ],
+                          )
+                        : Container(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     });

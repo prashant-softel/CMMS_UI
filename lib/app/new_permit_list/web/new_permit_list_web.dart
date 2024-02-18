@@ -40,454 +40,465 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
           return Obx(() {
             final dataSource = PermitListDataSource(controller);
 
-            return Stack(
-              children: [
-                Column(
-                  children: [
-                    HeaderWidget(),
-                    Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color.fromARGB(255, 227, 224, 224),
-                          width: 1,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 236, 234, 234)
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
+            return SelectionArea(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
                           ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.home,
-                            color: ColorValues.greyLightColor,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.home);
-                            },
-                            child: Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              // Get.back();
-                              Get.offAllNamed(Routes.breakdown);
-                            },
-                            child: Text(" / BREAKDOWN MAINTAINANCE",
-                                style: Styles.greyMediumLight12),
-                          ),
-                          Text(" / PERMIT LIST",
-                              style: Styles.greyMediumLight12),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context)
-                            .copyWith(scrollbars: false),
-                        child: SingleChildScrollView(
-                          child: Container(
-                            width: Get.width * 7,
-                            height: Get.height,
-                            child: Card(
-                              color: Color.fromARGB(255, 245, 248, 250),
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
                               ),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Permit List ",
-                                            style: Styles.blackBold16,
-                                          ),
-                                          Spacer(),
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: 'Date Range'),
-                                              Dimens.boxWidth10,
-                                              CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                numberTextField: true,
-                                                onTap: () {
-                                                  controller
-                                                          .openFromDateToStartDatePicker =
-                                                      !controller
-                                                          .openFromDateToStartDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement_Date']);
-                                                },
-                                                hintText:
-                                                    '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxWidth10,
-                                          varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.add ==
-                                                              UserAccessConstants
-                                                                  .kHaveAddAccess)
-                                                      .length >
-                                                  0
-                                              ? ActionButton(
-                                                  icon: Icons.add,
-                                                  label: "Add New",
-                                                  onPressed: () {
-                                                    controller.clearStoreData();
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // Get.back();
+                                Get.offAllNamed(Routes.breakdown);
+                              },
+                              child: Text(" / BREAKDOWN MAINTAINANCE",
+                                  style: Styles.greyMediumLight12),
+                            ),
+                            Text(" / PERMIT LIST",
+                                style: Styles.greyMediumLight12),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: ScrollConfiguration(
+                          behavior: ScrollConfiguration.of(context)
+                              .copyWith(scrollbars: false),
+                          child: SingleChildScrollView(
+                            child: Container(
+                              width: Get.width * 7,
+                              height: Get.height,
+                              child: Card(
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Permit List ",
+                                              style: Styles.blackBold16,
+                                            ),
+                                            Spacer(),
+                                            Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title: 'Date Range'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  numberTextField: true,
+                                                  onTap: () {
                                                     controller
-                                                        .clearTypeStoreData();
-                                                    controller
-                                                        .clearisCheckedtoreData();
-                                                    Get.toNamed(
-                                                        Routes.newPermit);
+                                                            .openFromDateToStartDatePicker =
+                                                        !controller
+                                                            .openFromDateToStartDatePicker;
+                                                    controller.update([
+                                                      'stock_Mangement_Date'
+                                                    ]);
                                                   },
-                                                  color:
-                                                      ColorValues.addNewColor,
-                                                )
-                                              : Dimens.box0
+                                                  hintText:
+                                                      '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxWidth10,
+                                            varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kPermitFeatureId &&
+                                                            e.add ==
+                                                                UserAccessConstants
+                                                                    .kHaveAddAccess)
+                                                        .length >
+                                                    0
+                                                ? ActionButton(
+                                                    icon: Icons.add,
+                                                    label: "Add New",
+                                                    onPressed: () {
+                                                      controller
+                                                          .clearStoreData();
+                                                      controller
+                                                          .clearTypeStoreData();
+                                                      controller
+                                                          .clearisCheckedtoreData();
+                                                      Get.toNamed(
+                                                          Routes.newPermit);
+                                                    },
+                                                    color:
+                                                        ColorValues.addNewColor,
+                                                  )
+                                                : Dimens.box0
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Row(
+                                        children: [
+                                          PopupMenuButton<String>(
+                                            tooltip: "",
+                                            elevation: 25.0,
+                                            child: Container(
+                                              height: 35,
+                                              margin: EdgeInsets.only(left: 10),
+                                              padding: EdgeInsets.only(
+                                                  top: 4,
+                                                  bottom: 4,
+                                                  right: 8,
+                                                  left: 8),
+                                              decoration: BoxDecoration(
+                                                color: ColorValues
+                                                    .appLightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Text(
+                                                'Column Visibility',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            itemBuilder:
+                                                (BuildContext context) =>
+                                                    <PopupMenuEntry<String>>[]
+                                                      ..addAll(controller
+                                                          .columnVisibility
+                                                          .value
+                                                          .entries
+                                                          .map((e) {
+                                                        return PopupMenuItem<
+                                                                String>(
+                                                            child:
+                                                                ValueListenableBuilder(
+                                                                    valueListenable:
+                                                                        controller
+                                                                            .columnVisibility,
+                                                                    builder: (context,
+                                                                        value,
+                                                                        child) {
+                                                                      return Row(
+                                                                        children: [
+                                                                          Checkbox(
+                                                                            value:
+                                                                                value[e.key],
+                                                                            onChanged:
+                                                                                (newValue) {
+                                                                              controller.setColumnVisibility(e.key, newValue!);
+                                                                            },
+                                                                          ),
+                                                                          Text(e
+                                                                              .key),
+                                                                        ],
+                                                                      );
+                                                                    }));
+                                                      })),
+                                            onSelected: (String value) {
+                                              // Handle column selection
+                                            },
+                                          ),
+
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'Copy'),
+                                          // ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'Excel'),
+                                          // ),
+                                          // Container(
+                                          //   height: 35,
+                                          //   margin: EdgeInsets.only(left: 10),
+                                          //   child: CustomElevatedButton(
+                                          //       backgroundColor:
+                                          //           ColorValues.appLightBlueColor,
+                                          //       onPressed: () {},
+                                          //       text: 'PDF'),
+                                          // ),
+                                          Spacer(),
+                                          Container(
+                                            width: 200,
+                                            height: 35,
+                                            margin: Dimens.edgeInsets0_0_16_0,
+                                            child: TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
+                                              ),
+                                              onChanged: (value) =>
+                                                  controller.search(value),
+                                              decoration: InputDecoration(
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.grey,
+                                                      width: 0.0),
+                                                ),
+                                                focusedBorder:
+                                                    const OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.grey,
+                                                      width: 0.0),
+                                                ),
+                                                contentPadding:
+                                                    Dimens.edgeInsets10_0_0_0,
+                                                hintText: 'search'.tr,
+                                                hintStyle: Styles.grey12,
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Row(
-                                      children: [
-                                        PopupMenuButton<String>(
-                                          tooltip: "",
-                                          elevation: 25.0,
-                                          child: Container(
-                                            height: 35,
-                                            margin: EdgeInsets.only(left: 10),
-                                            padding: EdgeInsets.only(
-                                                top: 4,
-                                                bottom: 4,
-                                                right: 8,
-                                                left: 8),
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  ColorValues.appLightBlueColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: Text(
-                                              'Column Visibility',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                          itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<String>>[]
-                                                ..addAll(controller
-                                                    .columnVisibility
-                                                    .value
-                                                    .entries
-                                                    .map((e) {
-                                                  return PopupMenuItem<String>(
-                                                      child:
-                                                          ValueListenableBuilder(
-                                                              valueListenable:
-                                                                  controller
-                                                                      .columnVisibility,
-                                                              builder: (context,
-                                                                  value,
-                                                                  child) {
-                                                                return Row(
-                                                                  children: [
-                                                                    Checkbox(
-                                                                      value: value[
-                                                                          e.key],
-                                                                      onChanged:
-                                                                          (newValue) {
-                                                                        controller.setColumnVisibility(
-                                                                            e.key,
-                                                                            newValue!);
-                                                                      },
-                                                                    ),
-                                                                    Text(e.key),
-                                                                  ],
-                                                                );
-                                                              }));
-                                                })),
-                                          onSelected: (String value) {
-                                            // Handle column selection
-                                          },
-                                        ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      controller.newPermitList.value == null ||
+                                              controller.newPermitList.value ==
+                                                  0
+                                          ? Center(child: Text('No data'))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  final dataSource =
+                                                      PermitListDataSource(
+                                                          controller);
+                                                  return PaginatedDataTable2(
+                                                    columnSpacing: 10,
+                                                    dataRowHeight:
+                                                        Get.height * 0.12,
+                                                    source:
+                                                        dataSource, // Custom DataSource class
+                                                    // headingRowHeight:
+                                                    // Get.height * 0.12,
+                                                    minWidth:
+                                                        3000, //Get.width * 1.2,
+                                                    showCheckboxColumn: false,
+                                                    rowsPerPage:
+                                                        10, // Number of rows per page
+                                                    availableRowsPerPage: [
+                                                      10,
+                                                      20,
+                                                      30,
+                                                      50
+                                                    ],
+                                                    columns: [
+                                                      for (var entry
+                                                          in value.entries)
+                                                        if (entry.value)
+                                                          buildDataColumn(
+                                                            entry.key,
+                                                            controller
+                                                                    .filterText[
+                                                                entry.key]!,
+                                                            controller
+                                                                    .columnwidth[
+                                                                entry.key],
+                                                          ),
+                                                      buildDataColumn(
+                                                        'Actions',
+                                                        controller
+                                                            .ActionFilterText,
+                                                        150,
+                                                      ),
+                                                      // buildDataColumn(
+                                                      //   'PermitId',
+                                                      //   'Permit Id',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller
+                                                      //       .PermitIdFilterText,
+                                                      //   130,
+                                                      // ),
 
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //       backgroundColor:
-                                        //           ColorValues.appLightBlueColor,
-                                        //       onPressed: () {},
-                                        //       text: 'Copy'),
-                                        // ),
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //       backgroundColor:
-                                        //           ColorValues.appLightBlueColor,
-                                        //       onPressed: () {},
-                                        //       text: 'Excel'),
-                                        // ),
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //       backgroundColor:
-                                        //           ColorValues.appLightBlueColor,
-                                        //       onPressed: () {},
-                                        //       text: 'PDF'),
-                                        // ),
-                                        Spacer(),
-                                        Container(
-                                          width: 200,
-                                          height: 35,
-                                          margin: Dimens.edgeInsets0_0_16_0,
-                                          child: TextField(
-                                            style: GoogleFonts.lato(
-                                              textStyle: TextStyle(
-                                                  fontSize: 16.0,
-                                                  height: 1.0,
-                                                  color: Colors.black),
-                                            ),
-                                            onChanged: (value) =>
-                                                controller.search(value),
-                                            decoration: InputDecoration(
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 0.0),
+                                                      // // buildDataColumn(
+                                                      // //     "Description",
+                                                      // //     "Description",
+                                                      // //     // ColumnSize.M,
+                                                      // //     controller
+                                                      // //         .DescriptionFilterText,
+                                                      // //     200),
+                                                      // buildDataColumn(
+                                                      //   'Description',
+                                                      //   'Title',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller
+                                                      //       .DescriptionFilterText,
+                                                      //   200,
+                                                      // ),
+                                                      // buildDataColumn(
+                                                      //   'PermitTypeName',
+                                                      //   'Permit Type Name',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller
+                                                      //       .PermitTypeNameFilterText,
+                                                      //   200,
+                                                      // ),
+                                                      // buildDataColumn(
+                                                      //   'EquipmentCategories',
+                                                      //   'Equipment Category',
+                                                      //   //  ColumnSize.S,
+                                                      //   controller
+                                                      //       .EquipmentCategoriesFilterText,
+                                                      //   180,
+                                                      // ),
+                                                      // buildDataColumn(
+                                                      //     "WorkingAreaName",
+                                                      //     "Working Area", // ColumnSize.L,
+                                                      //     controller
+                                                      //         .WorkingAreaNameFilterText,
+                                                      //     200),
+                                                      // buildDataColumn(
+                                                      //     "RequestByName",
+                                                      //     "Requested By",
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .RequestByNameFilterText,
+                                                      //     200),
+                                                      // buildDataColumn(
+                                                      //     "ApprovedByName",
+                                                      //     "Approved By",
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .ApprovedByNameFilterText,
+                                                      //     200),
+                                                      // buildDataColumn(
+                                                      //     "CurrentStatusShort",
+                                                      //     "Status",
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .CurrentStatusShortFilterText,
+                                                      //     200),
+                                                      // buildDataColumn(
+                                                      //     "PTW Status code",
+                                                      //     "Status code",
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .PtwStatusFilterText,
+                                                      //     200),
+                                                      // buildDataColumn(
+                                                      //     'Action'.tr,
+                                                      //     'Actions',
+                                                      //     // ColumnSize.L,
+                                                      //     controller
+                                                      //         .ActionFilterText,
+                                                      //     230),
+                                                    ],
+                                                  );
+                                                },
                                               ),
-                                              focusedBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                    color: Colors.grey,
-                                                    width: 0.0),
-                                              ),
-                                              contentPadding:
-                                                  Dimens.edgeInsets10_0_0_0,
-                                              hintText: 'search'.tr,
-                                              hintStyle: Styles.grey12,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    controller.newPermitList.value == null ||
-                                            controller.newPermitList.value == 0
-                                        ? Center(child: Text('No data'))
-                                        : Expanded(
-                                            child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    PermitListDataSource(
-                                                        controller);
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight:
-                                                      Get.height * 0.12,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  // Get.height * 0.12,
-                                                  minWidth:
-                                                      3000, //Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
-                                                        buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
-                                                          controller
-                                                                  .columnwidth[
-                                                              entry.key],
-                                                        ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .ActionFilterText,
-                                                      150,
-                                                    ),
-                                                    // buildDataColumn(
-                                                    //   'PermitId',
-                                                    //   'Permit Id',
-                                                    //   //  ColumnSize.S,
-                                                    //   controller
-                                                    //       .PermitIdFilterText,
-                                                    //   130,
-                                                    // ),
-
-                                                    // // buildDataColumn(
-                                                    // //     "Description",
-                                                    // //     "Description",
-                                                    // //     // ColumnSize.M,
-                                                    // //     controller
-                                                    // //         .DescriptionFilterText,
-                                                    // //     200),
-                                                    // buildDataColumn(
-                                                    //   'Description',
-                                                    //   'Title',
-                                                    //   //  ColumnSize.S,
-                                                    //   controller
-                                                    //       .DescriptionFilterText,
-                                                    //   200,
-                                                    // ),
-                                                    // buildDataColumn(
-                                                    //   'PermitTypeName',
-                                                    //   'Permit Type Name',
-                                                    //   //  ColumnSize.S,
-                                                    //   controller
-                                                    //       .PermitTypeNameFilterText,
-                                                    //   200,
-                                                    // ),
-                                                    // buildDataColumn(
-                                                    //   'EquipmentCategories',
-                                                    //   'Equipment Category',
-                                                    //   //  ColumnSize.S,
-                                                    //   controller
-                                                    //       .EquipmentCategoriesFilterText,
-                                                    //   180,
-                                                    // ),
-                                                    // buildDataColumn(
-                                                    //     "WorkingAreaName",
-                                                    //     "Working Area", // ColumnSize.L,
-                                                    //     controller
-                                                    //         .WorkingAreaNameFilterText,
-                                                    //     200),
-                                                    // buildDataColumn(
-                                                    //     "RequestByName",
-                                                    //     "Requested By",
-                                                    //     // ColumnSize.L,
-                                                    //     controller
-                                                    //         .RequestByNameFilterText,
-                                                    //     200),
-                                                    // buildDataColumn(
-                                                    //     "ApprovedByName",
-                                                    //     "Approved By",
-                                                    //     // ColumnSize.L,
-                                                    //     controller
-                                                    //         .ApprovedByNameFilterText,
-                                                    //     200),
-                                                    // buildDataColumn(
-                                                    //     "CurrentStatusShort",
-                                                    //     "Status",
-                                                    //     // ColumnSize.L,
-                                                    //     controller
-                                                    //         .CurrentStatusShortFilterText,
-                                                    //     200),
-                                                    // buildDataColumn(
-                                                    //     "PTW Status code",
-                                                    //     "Status code",
-                                                    //     // ColumnSize.L,
-                                                    //     controller
-                                                    //         .PtwStatusFilterText,
-                                                    //     200),
-                                                    // buildDataColumn(
-                                                    //     'Action'.tr,
-                                                    //     'Actions',
-                                                    //     // ColumnSize.L,
-                                                    //     controller
-                                                    //         .ActionFilterText,
-                                                    //     230),
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          )
-                                  ]),
+                                            )
+                                    ]),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                if (controller.openFromDateToStartDatePicker)
-                  Positioned(
-                    right: 230,
-                    top: 90,
-                    child: DatePickerWidget(
-                      selectionMode: DateRangePickerSelectionMode.range,
-                      monthCellStyle: DateRangePickerMonthCellStyle(
-                        todayCellDecoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ColorValues.appDarkBlueColor),
-                      ), // last date of this year
-                      // controller: DateRangePickerController(),
-                      initialSelectedRange: PickerDateRange(
-                        controller.fromDate.value,
-                        controller.toDate.value,
-                      ),
-
-                      onSubmit: (value) {
-                        print('po valu ${value.toString()}');
-                        PickerDateRange? data = value as PickerDateRange;
-
-                        var pickUpDate =
-                            DateTime.parse(data.startDate.toString());
-                        controller.fromDate.value = pickUpDate;
-                        var dropDate = DateTime.parse(data.endDate.toString());
-                        dropDate != null
-                            ? controller.toDate.value = dropDate
-                            : controller.toDate.value = pickUpDate;
-
-                        controller.getNewPermitListByDate();
-                        controller.openFromDateToStartDatePicker =
-                            !controller.openFromDateToStartDatePicker;
-                        controller.update(['stock_Mangement_Date']);
-
-                        // Get.toNamed(
-                        //   Routes.stockManagementGoodsOrdersScreen,
-                        // );
-                      },
-                    ),
+                    ],
                   ),
-              ],
+                  if (controller.openFromDateToStartDatePicker)
+                    Positioned(
+                      right: 230,
+                      top: 90,
+                      child: DatePickerWidget(
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorValues.appDarkBlueColor),
+                        ), // last date of this year
+                        // controller: DateRangePickerController(),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+
+                        onSubmit: (value) {
+                          print('po valu ${value.toString()}');
+                          PickerDateRange? data = value as PickerDateRange;
+
+                          var pickUpDate =
+                              DateTime.parse(data.startDate.toString());
+                          controller.fromDate.value = pickUpDate;
+                          var dropDate =
+                              DateTime.parse(data.endDate.toString());
+                          dropDate != null
+                              ? controller.toDate.value = dropDate
+                              : controller.toDate.value = pickUpDate;
+
+                          controller.getNewPermitListByDate();
+                          controller.openFromDateToStartDatePicker =
+                              !controller.openFromDateToStartDatePicker;
+                          controller.update(['stock_Mangement_Date']);
+
+                          // Get.toNamed(
+                          //   Routes.stockManagementGoodsOrdersScreen,
+                          // );
+                        },
+                      ),
+                    ),
+                ],
+              ),
             );
           });
         });
