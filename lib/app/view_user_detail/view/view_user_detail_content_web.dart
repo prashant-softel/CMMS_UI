@@ -451,8 +451,8 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                           ? controller
                                                                               .plantListModel
                                                                               .map((plants) => TableViewRow(height: 90, cells: [
-                                                                                    TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
-                                                                                    TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
+                                                                                    TableViewCell(child: Text("${plants?.name ?? ""}")),
+                                                                                    TableViewCell(child: Text("${plants?.spv ?? ""}")),
                                                                                     TableViewCell(child: Text("----")),
                                                                                   ]))
                                                                               .toList()

@@ -94,7 +94,7 @@ class AddUserController extends GetxController {
   var gender = 'Select Gender'.obs;
   AccessLevel? selectedItem;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  RxList<PlantList?> plantListModel = <PlantList?>[].obs;
+  RxList<FacilityModel?> plantListModel = <FacilityModel?>[].obs;
   // RxList<Responsibility?> responsibilitymodel = <Responsibility>[].obs;
   var loginIdCtrlr = TextEditingController();
   FocusNode loginIdFocus = FocusNode();
@@ -335,9 +335,16 @@ class AddUserController extends GetxController {
       plantListModel.value = _userDetailModel.plant_list ?? [];
       responsList.value = _userDetailModel.responsibility ?? [];
       responsList.value = _userDetailModel.responsibility ?? [];
+      filteredfacilityNameList.value = _userDetailModel.plant_list!
+          .map((e) => FacilityModel(
+                id: e.id ?? 0,
+                name: e.name ?? "",
+                spv: e.spv ?? "",
+              ))
+          .toList();
+      selectedfacilityNameIdList.value =
+          filteredfacilityNameList.map((e) => e!.id).toList();
       selectedresIdsList.value = responsList.map((obj) => obj!.id).toList();
-      //selectedresIdsList.add(responsList[equipCatIndex]?.id ?? 0);
-
       selectedResNameList.value = responsList
           .map((responsibility) => DesignationModel(
                 id: responsibility?.id ?? 0,

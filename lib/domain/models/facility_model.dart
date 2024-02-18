@@ -8,46 +8,49 @@ String facilityListToJson(List<FacilityModel> data) =>
 
 class FacilityModel {
   factory FacilityModel.fromJson(Map<String, dynamic> json) => FacilityModel(
-        id: json['id'],
-        plant_id: json['plant_id'],
-        plant_name: json['plant_name'],
+        id: json['id'] ?? 0,
         name: json['name'],
         address: json['address'] ?? '',
         city: json['city'] ?? '',
         state: json['state'] ?? '',
         country: json['country'] ?? '',
-        pincode: json['pin'],
+        pincode: json['pin'] ?? '',
+        spv: json['spv'] ?? '',
+        spv_id: json['spv_id'] ?? 0,
       );
-  FacilityModel(
-      {required this.id,
-      required this.name,
-      required this.address,
-      required this.city,
-      required this.state,
-      required this.country,
-      this.pincode,
-      this.plant_id,
-      this.plant_name});
+  FacilityModel({
+    required this.id,
+    required this.name,
+    this.address,
+    this.city,
+    this.state,
+    this.country,
+    this.spv,
+    this.spv_id,
+    this.pincode,
+  });
 
   int id;
-  int? plant_id;
-  String? plant_name;
+
   String name;
   String? address;
-  String city;
-  String state;
-  String country;
+  String? city;
+  String? state;
+  String? country;
   dynamic pincode;
+  int? spv_id;
+
+  String? spv;
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'plant_id': plant_id,
-        'plant_name': plant_name,
         'name': name,
         'address': address,
         'city': city,
         'state': state,
         'country': country,
         'pin': pincode,
+        'spv': spv,
+        'spv_id': spv_id,
       };
 }

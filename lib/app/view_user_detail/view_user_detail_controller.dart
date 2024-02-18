@@ -1,5 +1,6 @@
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class ViewUserDetailController extends GetxController {
   ViewUserDetailPresenter viewUserDetailPresenter;
   Rx<int> userId = 0.obs;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  RxList<PlantList?> plantListModel = <PlantList?>[].obs;
+  RxList<FacilityModel?> plantListModel = <FacilityModel?>[].obs;
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
   RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
   Rx<GetNotificationByUserIdModel?> notificationByUserIdModel =
