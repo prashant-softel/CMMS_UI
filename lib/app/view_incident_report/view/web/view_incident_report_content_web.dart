@@ -33,1902 +33,1904 @@ class ViewIncidentReportContentWeb
   // final ViewIncidentReportController controller = Get.find();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        // appBar: AppBar(
-        //   title: HeaderWidget(),
-        //   elevation: 0,
-        //   toolbarHeight: 60,
-        //   automaticallyImplyLeading: false,
-        // ),
-        body: Row(
-          children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Dimens.box0
-                : Container(),
-            Expanded(
-              child: RepaintBoundary(
-                key: controller.printKey,
-                child: Container(
-                  // margin: Dimens.edgeInsets16,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.withOpacity(.3)),
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: 1100,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        HeaderWidget(),
-                        Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
+  Widget build(BuildContext context) => SelectionArea(
+    child: Scaffold(
+          // appBar: AppBar(
+          //   title: HeaderWidget(),
+          //   elevation: 0,
+          //   toolbarHeight: 60,
+          //   automaticallyImplyLeading: false,
+          // ),
+          body: Row(
+            children: [
+              Responsive.isMobile(context) || Responsive.isTablet(context)
+                  ? Dimens.box0
+                  : Container(),
+              Expanded(
+                child: RepaintBoundary(
+                  key: controller.printKey,
+                  child: Container(
+                    // margin: Dimens.edgeInsets16,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.withOpacity(.3)),
+                    ),
+                    constraints: BoxConstraints(
+                      maxWidth: 1100,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          HeaderWidget(),
+                          Container(
+                            height: 55,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(0),
+                              border: Border.all(
+                                color: Color.fromARGB(255, 227, 224, 224),
+                                width: 1,
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.home,
-                                color: ColorValues.greyLightColor,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offNamed(Routes.home);
-                                },
-                                child: Text(
-                                  "DASHBOARD",
-                                  style: Styles.greyLight14,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 236, 234, 234)
+                                      .withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offNamed(Routes.incidentReportListWeb);
-                                },
-                                child: Text(" / INCIDENT REPORT LIST",
-                                    style: Styles.greyLight14),
-                              ),
-                              Text(" / VIEW INCIDENT REPORT",
-                                  style: Styles.greyLight14)
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1,
-                          // height: MediaQuery.of(context).size.height / 1,
-                          child: Card(
-                            color: Colors.lightBlue.shade50,
-                            child: Wrap(
+                              ],
+                            ),
+                            child: Row(
                               children: [
-                                GetBuilder<ViewIncidentReportController>(
-                                    id: 'incident-report',
-                                    builder: (controller) {
-                                      return Obx(
-                                        () => Column(
-                                          children: [
-                                            CustomAppBar(
-                                              title: 'View Incident Report'.tr,
-                                              action: Row(
-                                                children: [
-                                                  Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 2,
-                                                              horizontal: 5),
-                                                      margin: EdgeInsets.only(
-                                                          top: 5),
-                                                      decoration: BoxDecoration(
-                                                        color: controller
-                                                                    .incidentReportDetailsModel
-                                                                    .value
-                                                                    ?.status_short ==
-                                                                118
-                                                            ? ColorValues
-                                                                .appPurpleColor
-                                                            : ColorValues
-                                                                .lightBlueColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: Obx(
-                                                        () => Text(
-                                                          "Status :${controller.incidentReportDetailsModel.value?.status ?? ""} ",
+                                Icon(
+                                  Icons.home,
+                                  color: ColorValues.greyLightColor,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(Routes.home);
+                                  },
+                                  child: Text(
+                                    "DASHBOARD",
+                                    style: Styles.greyLight14,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(Routes.incidentReportListWeb);
+                                  },
+                                  child: Text(" / INCIDENT REPORT LIST",
+                                      style: Styles.greyLight14),
+                                ),
+                                Text(" / VIEW INCIDENT REPORT",
+                                    style: Styles.greyLight14)
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 1,
+                            // height: MediaQuery.of(context).size.height / 1,
+                            child: Card(
+                              color: Colors.lightBlue.shade50,
+                              child: Wrap(
+                                children: [
+                                  GetBuilder<ViewIncidentReportController>(
+                                      id: 'incident-report',
+                                      builder: (controller) {
+                                        return Obx(
+                                          () => Column(
+                                            children: [
+                                              CustomAppBar(
+                                                title: 'View Incident Report'.tr,
+                                                action: Row(
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                                vertical: 2,
+                                                                horizontal: 5),
+                                                        margin: EdgeInsets.only(
+                                                            top: 5),
+                                                        decoration: BoxDecoration(
+                                                          color: controller
+                                                                      .incidentReportDetailsModel
+                                                                      .value
+                                                                      ?.status_short ==
+                                                                  118
+                                                              ? ColorValues
+                                                                  .appPurpleColor
+                                                              : ColorValues
+                                                                  .lightBlueColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
                                                         ),
-                                                      )),
-                                                  Container(
-                                                    height: 30,
-                                                    width: 250,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Colors.blue,
-                                                        width: 1,
+                                                        child: Obx(
+                                                          () => Text(
+                                                            "Status :${controller.incidentReportDetailsModel.value?.status ?? ""} ",
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                      height: 30,
+                                                      width: 250,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                10),
+                                                        border: Border.all(
+                                                          color: Colors.blue,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              color:
+                                                                  Colors.green),
+                                                        ],
                                                       ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            color:
-                                                                Colors.green),
+                                                      child: Center(
+                                                          child: Text(
+                                                        '${controller.incidentReportDetailsModel.value?.status_short}',
+                                                        style: TextStyle(
+                                                            color: Colors.white),
+                                                      )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Dimens.boxHeight10,
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.end,
+                                                      children: [
+                                                        CustomRichText(
+                                                            title: 'Id: '),
+                                                        CustomRichText(
+                                                            title: 'Plant: '),
+                                                        CustomRichText(
+                                                            title: 'Block: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Date & Time: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Description: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Victim Name: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Incident Investigation Done By: '),
+                                                        CustomRichText(
+                                                            title: 'Risk Type: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Legal Applicability: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Damaged Assets cost approx.: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Asset Restoration action taken by: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Available: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Status: '),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Insurance Remarks: '),
                                                       ],
                                                     ),
-                                                    child: Center(
-                                                        child: Text(
-                                                      '${controller.incidentReportDetailsModel.value?.status_short}',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    )),
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: Column(
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
+                                                        CrossAxisAlignment.start,
                                                     children: [
-                                                      CustomRichText(
-                                                          title: 'Id: '),
-                                                      CustomRichText(
-                                                          title: 'Plant: '),
-                                                      CustomRichText(
-                                                          title: 'Block: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Incident Date & Time: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Incident Description: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Victim Name: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Incident Investigation Done By: '),
-                                                      CustomRichText(
-                                                          title: 'Risk Type: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Legal Applicability: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Damaged Assets cost approx.: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Asset Restoration action taken by: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Available: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Status: '),
-                                                      CustomRichText(
-                                                          title:
-                                                              'Insurance Remarks: '),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.id}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.facility_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.block_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentDateTimeCtrlrWeb.text}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 150,
-                                                      child: Text(
-                                                        '${controller.incidentReportDetailsModel.value?.description}',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.id}',
                                                         style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.victim_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.risk_type_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 300,
-                                                      child: Text(
-                                                        '${controller.incidentReportDetailsModel.value?.insurance_remark}',
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.facility_name}',
                                                         style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-
-                                                /////
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'Title: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Categories: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Reporting Date & Time: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Incident Severity: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Action Taken Date & Time: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Incident Investigation Verification done by: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'ESI Applicability: '),
-                                                    CustomRichText(
-                                                        title:
-                                                            'RCA Upload Required: '),
-                                                    Dimens.boxHeight10,
-                                                    CustomRichText(
-                                                        title:
-                                                            'Gen loss due to asset damage: '),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.title}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.equipment_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.reportingDateTimeCtrlrWeb.text}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.severity}',
-                                                      style: TextStyle(
-                                                          color: Colors.red),
-                                                    ),
-                                                    Text(
-                                                      '${controller.actionTakenDateTimeCtrlrWeb.text}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.verified_by_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                          '${controller.incidentReportDetailsModel.value?.rca_required_name}',
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.block_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentDateTimeCtrlrWeb.text}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 150,
+                                                        child: Text(
+                                                          '${controller.incidentReportDetailsModel.value?.description}',
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
+                                                              color:
+                                                                  Color.fromARGB(
                                                                       255,
                                                                       5,
                                                                       92,
                                                                       163)),
                                                         ),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .appDarkBlueColor,
-                                                          icon:
-                                                              Icons.visibility,
-                                                          message: 'RCA',
-                                                          onPress: () {
-                                                            // controller.viewIncidentReport(
-                                                            //     id: int.tryParse(
-                                                            //         '${record[0]}'));
-                                                            // print('record:${int.tryParse('${record[0]}')}');
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Text(
-                                                      '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 5, 92, 163)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-
-                                            ///Details Of Injured Person
-                                            controller
-                                                    .detailsOfInjuredPersonList!
-                                                    .isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .detailsOfInjuredPersonList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
                                                       ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.victim_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.risk_type_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 300,
+                                                        child: Text(
+                                                          '${controller.incidentReportDetailsModel.value?.insurance_remark}',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      5,
+                                                                      92,
+                                                                      163)),
                                                         ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Details Of Injured Person",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
+                                                      ),
+                                                    ],
+                                                  ),
+    
+                                                  /////
+                                                  Spacer(),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'Title: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Equipment Categories: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Reporting Date & Time: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Incident Severity: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Action Taken Date & Time: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'Incident Investigation Verification done by: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'ESI Applicability: '),
+                                                      CustomRichText(
+                                                          title:
+                                                              'RCA Upload Required: '),
+                                                      Dimens.boxHeight10,
+                                                      CustomRichText(
+                                                          title:
+                                                              'Gen loss due to asset damage: '),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.title}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.equipment_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.reportingDateTimeCtrlrWeb.text}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.severity}',
+                                                        style: TextStyle(
+                                                            color: Colors.red),
+                                                      ),
+                                                      Text(
+                                                        '${controller.actionTakenDateTimeCtrlrWeb.text}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.verified_by_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                            '${controller.incidentReportDetailsModel.value?.rca_required_name}',
+                                                            style: TextStyle(
                                                                 color: Color
                                                                     .fromARGB(
                                                                         255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Name Of Injured\nPerson",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Gender",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Trade/\nDesignation",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Address",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Name Of\nContractor",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Body Part\nInjured",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Work Experience",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Plant &\nEquipment",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Exact Location",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
+                                                                        5,
+                                                                        92,
+                                                                        163)),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon:
+                                                                Icons.visibility,
+                                                            message: 'RCA',
+                                                            onPress: () {
+                                                              // controller.viewIncidentReport(
+                                                              //     id: int.tryParse(
+                                                              //         '${record[0]}'));
+                                                              // print('record:${int.tryParse('${record[0]}')}');
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Text(
+                                                        '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
+                                                        style: TextStyle(
+                                                            color: Color.fromARGB(
+                                                                255, 5, 92, 163)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+    
+                                              ///Details Of Injured Person
+                                              controller
+                                                      .detailsOfInjuredPersonList!
+                                                      .isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
                                                                       .detailsOfInjuredPersonList
                                                                       ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.person_id
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(
-                                                                        '${controller.detailsOfInjuredPersonList?[index]?.sex == 1 ? "Male" : controller.detailsOfInjuredPersonList?[index]?.sex == 2 ? "Female" : controller.detailsOfInjuredPersonList?[index]?.sex == 3 ? "TransGender" : "".toString()}')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.designation
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        controller.detailsOfInjuredPersonList?[index]?.address.toString() ??
-                                                                            '',
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.name_contractor
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.body_part_and_nature_of_injury
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.work_experience_years
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.plant_equipment_involved
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .detailsOfInjuredPersonList?[index]
-                                                                            ?.location_of_incident
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            ///Investigation Block
-                                            controller.incidentReportDetailsModel
-                                                        .value?.status_short ==
-                                                    null
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: EdgeInsets.all(20),
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
                                                           color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
                                                         ),
-                                                      ],
-                                                    ),
-                                                    child: Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
                                                       child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
                                                         children: [
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
-                                                                    left: 20),
-                                                            child: Text(
-                                                              "Investigation",
-                                                              style: Styles
-                                                                  .blue700,
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Details Of Injured Person",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
-                                                          Dimens.boxHeight10,
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            20),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Name Of Injured\nPerson",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Gender",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Trade/\nDesignation",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Address",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Name Of\nContractor",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Body Part\nInjured",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Work Experience",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Plant &\nEquipment",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Exact Location",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .detailsOfInjuredPersonList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.person_id
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(
+                                                                          '${controller.detailsOfInjuredPersonList?[index]?.sex == 1 ? "Male" : controller.detailsOfInjuredPersonList?[index]?.sex == 2 ? "Female" : controller.detailsOfInjuredPersonList?[index]?.sex == 3 ? "TransGender" : "".toString()}')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.designation
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(
                                                                         Text(
-                                                                          'What task or type of job was being performed? ',
-                                                                          style:
-                                                                              Styles.black15,
+                                                                          controller.detailsOfInjuredPersonList?[index]?.address.toString() ??
+                                                                              '',
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
                                                                         ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.type_of_job}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Was the person involved in these activities trained and if so, when? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.type_of_job}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Was the person authorized/licensed to carry out that type of work / use machinery? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.is_person_authorized}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'What instructions had been given? By Whom? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.instructions_given}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'What safety equipment and /protection was used/ available? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.safety_equipments}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Were correct safe procedures being observed? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.safe_procedure_observed}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'What unsafe condition contributed to the incident? ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.unsafe_condition_contributed}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Did unsafe act/s cause the incident? If yes. Mention the same ',
-                                                                          style:
-                                                                              Styles.black15,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight3,
-                                                                        Text(
-                                                                          '${controller.incidentReportDetailsModel.value?.unsafe_act_cause}',
-                                                                          style:
-                                                                              TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                  ],
-                                                                ),
+                                                                      ),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.name_contractor
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.body_part_and_nature_of_injury
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.work_experience_years
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.plant_equipment_involved
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfInjuredPersonList?[index]
+                                                                              ?.location_of_incident
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
-                                                  ),
-
-                                            ///Why Why Analysis
-                                            controller
-                                                    .whyWhyAnalysisList!.isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .whyWhyAnalysisList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
+    
+                                              ///Investigation Block
+                                              controller.incidentReportDetailsModel
+                                                          .value?.status_short ==
+                                                      null
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: EdgeInsets.all(20),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
                                                           color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
                                                         ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Why Why Analysis",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
                                                           ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Why",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Cause",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .whyWhyAnalysisList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .whyWhyAnalysisList?[index]
-                                                                            ?.why
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .whyWhyAnalysisList?[index]
-                                                                            ?.cause
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            ///Root Cause Analysis
-                                            controller.rootCauseList!.isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .rootCauseList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
+                                                        ],
                                                       ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Root Cause Analysis",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Cause",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .rootCauseList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .rootCauseList?[index]
-                                                                            ?.cause
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            ///Immediate Correction
-                                            controller.immediateCorrectionList!
-                                                    .isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .immediateCorrectionList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Immediate Correction",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Correction",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .immediateCorrectionList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .immediateCorrectionList?[index]
-                                                                            ?.details
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            ///Proposed Action Plan
-                                            controller.proposedActionPlanList!
-                                                    .isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .proposedActionPlanList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Proposed Action Plan",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Action as per plan",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Responsibility",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Target date",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Remark",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .proposedActionPlanList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .proposedActionPlanList?[index]
-                                                                            ?.actions_as_per_plan
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .proposedActionPlanList?[index]
-                                                                            ?.responsibility
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .proposedActionPlanList?[index]
-                                                                            ?.target_date
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .proposedActionPlanList?[index]
-                                                                            ?.remarks
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            ///Investigation team
-                                            controller.investiagtionTeamList!
-                                                    .isEmpty
-                                                ? Dimens.box0
-                                                : Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .investiagtionTeamList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    // width:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         1.2,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Investigation Team",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Divider(
-                                                        //   color: ColorValues.greyLightColour,
-                                                        // ),
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Name",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Designation",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .investiagtionTeamList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .investiagtionTeamList?[index]
-                                                                            ?.name
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .investiagtionTeamList?[index]
-                                                                            ?.designation
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-
-                                            controller.incidentReportDetailsModel
-                                                            .value?.id !=
-                                                        null &&
-                                                    varUserAccessModel
-                                                            .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants
-                                                                        .kIncidentReportFeatureId &&
-                                                                e.approve ==
-                                                                    UserAccessConstants
-                                                                        .kHaveApproveAccess)
-                                                            .length >
-                                                        0
-                                                ? Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: 20),
-                                                    child: Column(
-                                                      children: [
-                                                        Row(
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                                8.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Detail Investigation Required: '),
-                                                            SizedBox(
-                                                              width: 3,
-                                                            ),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () => Switch(
-                                                                  activeColor:
-                                                                      Colors
-                                                                          .green,
-                                                                  value: controller
-                                                                      .detailInvestigationTeamValue
-                                                                      .value,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    controller
-                                                                        .detailInvestigationTeamValue
-                                                                        .value = value;
-                                                                    print(
-                                                                        'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                                  },
-                                                                ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 20),
+                                                              child: Text(
+                                                                "Investigation",
+                                                                style: Styles
+                                                                    .blue700,
                                                               ),
+                                                            ),
+                                                            Dimens.boxHeight10,
+                                                            Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              20),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What task or type of job was being performed? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.type_of_job}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Was the person involved in these activities trained and if so, when? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.type_of_job}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Was the person authorized/licensed to carry out that type of work / use machinery? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.is_person_authorized}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What instructions had been given? By Whom? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.instructions_given}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What safety equipment and /protection was used/ available? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.safety_equipments}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Were correct safe procedures being observed? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.safe_procedure_observed}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What unsafe condition contributed to the incident? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.unsafe_condition_contributed}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Did unsafe act/s cause the incident? If yes. Mention the same ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          Text(
+                                                                            '${controller.incidentReportDetailsModel.value?.unsafe_act_cause}',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ],
                                                         ),
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Why Why Analysis Required: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () => Switch(
-                                                                  activeColor:
-                                                                      Colors
-                                                                          .green,
-                                                                  value: controller
-                                                                      .whyWhyAnalysisValue
-                                                                      .value,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    controller
-                                                                        .whyWhyAnalysisValue
-                                                                        .value = value;
-
-                                                                    print(
-                                                                        'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                  },
+                                                      ),
+                                                    ),
+    
+                                              ///Why Why Analysis
+                                              controller
+                                                      .whyWhyAnalysisList!.isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .whyWhyAnalysisList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Why Why Analysis",
+                                                                  style: Styles
+                                                                      .blue700,
                                                                 ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Why",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Cause",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .whyWhyAnalysisList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .whyWhyAnalysisList?[index]
+                                                                              ?.why
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .whyWhyAnalysisList?[index]
+                                                                              ?.cause
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+    
+                                              ///Root Cause Analysis
+                                              controller.rootCauseList!.isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .rootCauseList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Root Cause Analysis",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Cause",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .rootCauseList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .rootCauseList?[index]
+                                                                              ?.cause
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+    
+                                              ///Immediate Correction
+                                              controller.immediateCorrectionList!
+                                                      .isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .immediateCorrectionList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Immediate Correction",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Correction",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .immediateCorrectionList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .immediateCorrectionList?[index]
+                                                                              ?.details
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+    
+                                              ///Proposed Action Plan
+                                              controller.proposedActionPlanList!
+                                                      .isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .proposedActionPlanList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Proposed Action Plan",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Action as per plan",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Responsibility",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Target date",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Remark",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .proposedActionPlanList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .proposedActionPlanList?[index]
+                                                                              ?.actions_as_per_plan
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .proposedActionPlanList?[index]
+                                                                              ?.responsibility
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .proposedActionPlanList?[index]
+                                                                              ?.target_date
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .proposedActionPlanList?[index]
+                                                                              ?.remarks
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+    
+                                              ///Investigation team
+                                              controller.investiagtionTeamList!
+                                                      .isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .investiagtionTeamList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Investigation Team",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Name",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Designation",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .investiagtionTeamList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .investiagtionTeamList?[index]
+                                                                              ?.name
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .investiagtionTeamList?[index]
+                                                                              ?.designation
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+    
+                                              controller.incidentReportDetailsModel
+                                                              .value?.id !=
+                                                          null &&
+                                                      varUserAccessModel
+                                                              .value.access_list!
+                                                              .where((e) =>
+                                                                  e.feature_id ==
+                                                                      UserAccessConstants
+                                                                          .kIncidentReportFeatureId &&
+                                                                  e.approve ==
+                                                                      UserAccessConstants
+                                                                          .kHaveApproveAccess)
+                                                              .length >
+                                                          0
+                                                  ? Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 20),
+                                                      child: Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Detail Investigation Required: '),
+                                                              SizedBox(
+                                                                width: 3,
+                                                              ),
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .detailInvestigationTeamValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .detailInvestigationTeamValue
+                                                                          .value = value;
+                                                                      print(
+                                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Why Why Analysis Required: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () => Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .whyWhyAnalysisValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .whyWhyAnalysisValue
+                                                                          .value = value;
+    
+                                                                      print(
+                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+    
+                                              ///Incident Report History
+                                              controller.irId.value != null
+                                                  ? Container(
+                                                      margin: Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .historyList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset: Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Incident Report History ",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Divider(
+                                                            color: ColorValues
+                                                                .greyLightColour,
+                                                          ),
+                                                          // Column(
+                                                          //   children: [
+                                                          //     Row(
+                                                          //       children: [
+                                                          //         Text(
+                                                          //             "Time Stamp"),
+                                                          //         Text(
+                                                          //             "Posted By"),
+                                                          //         Text("Comment"),
+                                                          //         Text(
+                                                          //             "Location"),
+                                                          //         Text("Status"),
+                                                          //       ],
+                                                          //     )
+                                                          //   ]..addAll([
+                                                          //       ...(controller
+                                                          //               .historyList?.value ??
+                                                          //           [])
+                                                          //     ].map((e) {
+                                                          //       return Row(
+                                                          //         children: [
+                                                          //           Text(
+                                                          //               "${e?.createdAt??''}"),
+                                                          //           Text(
+                                                          //               "${e?.createdByName}"),
+                                                          //           Text(
+                                                          //               "${e?.comment}"),
+                                                          //           Text(
+                                                          //               "--"),
+                                                          //           Text(
+                                                          //               "${e?.status_name ??''}"),
+                                                          //         ],
+                                                          //       );
+                                                          //     })),
+                                                          // ),
+    
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Time Stamp",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Module Ref ID",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Comment",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Module Type",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Status",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .historyList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .historyList?[index]
+                                                                              ?.createdAt
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .historyList?[index]
+                                                                              ?.moduleRefId
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .historyList?[index]
+                                                                              ?.comment
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .historyList?[index]
+                                                                              ?.moduleType
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .historyList?[index]
+                                                                              ?.status_name
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : Dimens.box0,
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                  Obx(
+                                    () => Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            icon: Icons.print_outlined,
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            text: "Print",
+                                            onPressed: () {
+                                              controller.generateInvoice();
+                                            },
+                                          ),
+                                        ),
+                                        Dimens.boxWidth10,
+                                        controller.incidentReportDetailsModel
+                                                        .value?.id !=
+                                                    null &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kIncidentReportFeatureId &&
+                                                            e.edit ==
+                                                                UserAccessConstants
+                                                                    .kHaveEditAccess)
+                                                        .length >
+                                                    0
+                                            ? Dimens.box0
+                                            : Dimens.box0,
+                                        controller.incidentReportDetailsModel
+                                                        .value?.id !=
+                                                    null &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kIncidentReportFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Row(
+                                                children: [
+                                                  controller.incidentReportDetailsModel
+                                                                  .value?.status ==
+                                                              181 ||
+                                                          controller
+                                                                  .incidentReportDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              182
+                                                      ? Row(
+                                                          children: [
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appGreenColor,
+                                                                text: "Approve",
+                                                                icon: Icons.add,
+                                                                onPressed: () {
+                                                                  Get.dialog(
+                                                                      ApproveIncidentReportDialog(
+                                                                    id: controller
+                                                                        .irId
+                                                                        .value,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .rejectColor,
+                                                                text: "Reject",
+                                                                icon: Icons.close,
+                                                                onPressed: () {
+                                                                  Get.dialog(IncidentReportRejectDialog(
+                                                                      id: controller
+                                                                          .irId
+                                                                          .value));
+                                                                },
                                                               ),
                                                             ),
                                                           ],
                                                         )
-                                                      ],
-                                                    ),
-                                                  )
-                                                : Dimens.box0,
-
-                                            ///Incident Report History
-                                            controller.irId.value != null
-                                                ? Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: ((controller
-                                                                    .historyList
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        125,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Incident Report History ",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Divider(
-                                                          color: ColorValues
-                                                              .greyLightColour,
-                                                        ),
-                                                        // Column(
-                                                        //   children: [
-                                                        //     Row(
-                                                        //       children: [
-                                                        //         Text(
-                                                        //             "Time Stamp"),
-                                                        //         Text(
-                                                        //             "Posted By"),
-                                                        //         Text("Comment"),
-                                                        //         Text(
-                                                        //             "Location"),
-                                                        //         Text("Status"),
-                                                        //       ],
-                                                        //     )
-                                                        //   ]..addAll([
-                                                        //       ...(controller
-                                                        //               .historyList?.value ??
-                                                        //           [])
-                                                        //     ].map((e) {
-                                                        //       return Row(
-                                                        //         children: [
-                                                        //           Text(
-                                                        //               "${e?.createdAt??''}"),
-                                                        //           Text(
-                                                        //               "${e?.createdByName}"),
-                                                        //           Text(
-                                                        //               "${e?.comment}"),
-                                                        //           Text(
-                                                        //               "--"),
-                                                        //           Text(
-                                                        //               "${e?.status_name ??''}"),
-                                                        //         ],
-                                                        //       );
-                                                        //     })),
-                                                        // ),
-
-                                                        Expanded(
-                                                          child: DataTable2(
-                                                            border: TableBorder.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        206,
-                                                                        229,
-                                                                        234)),
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Time Stamp",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Module Ref ID",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Comment",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Module Type",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                "Status",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                      .historyList
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) =>
-                                                                  DataRow(
-                                                                      cells: [
-                                                                    DataCell(Text(controller
-                                                                            .historyList?[index]
-                                                                            ?.createdAt
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .historyList?[index]
-                                                                            ?.moduleRefId
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .historyList?[index]
-                                                                            ?.comment
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .historyList?[index]
-                                                                            ?.moduleType
-                                                                            .toString() ??
-                                                                        '')),
-                                                                    DataCell(Text(controller
-                                                                            .historyList?[index]
-                                                                            ?.status_name
-                                                                            .toString() ??
-                                                                        '')),
-                                                                  ]),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                : Dimens.box0,
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                                Obx(
-                                  () => Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        height: 45,
-                                        child: CustomElevatedButton(
-                                          icon: Icons.print_outlined,
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          text: "Print",
-                                          onPressed: () {
-                                            controller.generateInvoice();
-                                          },
-                                        ),
-                                      ),
-                                      Dimens.boxWidth10,
-                                      controller.incidentReportDetailsModel
-                                                      .value?.id !=
-                                                  null &&
-                                              varUserAccessModel
-                                                      .value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kIncidentReportFeatureId &&
-                                                          e.edit ==
-                                                              UserAccessConstants
-                                                                  .kHaveEditAccess)
-                                                      .length >
-                                                  0
-                                          ? Dimens.box0
-                                          : Dimens.box0,
-                                      controller.incidentReportDetailsModel
-                                                      .value?.id !=
-                                                  null &&
-                                              varUserAccessModel
-                                                      .value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kIncidentReportFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0
-                                          ? Row(
-                                              children: [
-                                                controller.incidentReportDetailsModel
-                                                                .value?.status ==
-                                                            181 ||
-                                                        controller
-                                                                .incidentReportDetailsModel
-                                                                .value
-                                                                ?.status ==
-                                                            182
-                                                    ? Row(
-                                                        children: [
-                                                          Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .appGreenColor,
-                                                              text: "Approve",
-                                                              icon: Icons.add,
-                                                              onPressed: () {
-                                                                Get.dialog(
-                                                                    ApproveIncidentReportDialog(
-                                                                  id: controller
-                                                                      .irId
-                                                                      .value,
-                                                                ));
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          Container(
-                                                            height: 45,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .rejectColor,
-                                                              text: "Reject",
-                                                              icon: Icons.close,
-                                                              onPressed: () {
-                                                                Get.dialog(IncidentReportRejectDialog(
-                                                                    id: controller
-                                                                        .irId
-                                                                        .value));
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Row(
-                                                        children: [
-                                                          controller.incidentReportDetailsModel.value
-                                                                          ?.status ==
-                                                                      185 ||
-                                                                  controller
-                                                                          .incidentReportDetailsModel
-                                                                          .value
-                                                                          ?.status ==
-                                                                      184
-                                                              ? Row(
-                                                                  children: [
-                                                                    Container(
-                                                                      height:
-                                                                          45,
-                                                                      child:
-                                                                          CustomElevatedButton(
-                                                                        backgroundColor:
-                                                                            ColorValues.appGreenColor,
-                                                                        text:
-                                                                            "Approve IR",
-                                                                        icon: Icons
-                                                                            .add,
-                                                                        onPressed:
-                                                                            () {
-                                                                          Get.dialog(
-                                                                              ApproveIncidentReportDialog(
-                                                                            id: controller.irId.value,
-                                                                          ));
-                                                                        },
+                                                      : Row(
+                                                          children: [
+                                                            controller.incidentReportDetailsModel.value
+                                                                            ?.status ==
+                                                                        185 ||
+                                                                    controller
+                                                                            .incidentReportDetailsModel
+                                                                            .value
+                                                                            ?.status ==
+                                                                        184
+                                                                ? Row(
+                                                                    children: [
+                                                                      Container(
+                                                                        height:
+                                                                            45,
+                                                                        child:
+                                                                            CustomElevatedButton(
+                                                                          backgroundColor:
+                                                                              ColorValues.appGreenColor,
+                                                                          text:
+                                                                              "Approve IR",
+                                                                          icon: Icons
+                                                                              .add,
+                                                                          onPressed:
+                                                                              () {
+                                                                            Get.dialog(
+                                                                                ApproveIncidentReportDialog(
+                                                                              id: controller.irId.value,
+                                                                            ));
+                                                                          },
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    Container(
-                                                                      height:
-                                                                          45,
-                                                                      child:
-                                                                          CustomElevatedButton(
-                                                                        backgroundColor:
-                                                                            ColorValues.rejectColor,
-                                                                        text:
-                                                                            "Reject IR",
-                                                                        icon: Icons
-                                                                            .close,
-                                                                        onPressed:
-                                                                            () {
-                                                                          Get.dialog(
-                                                                              IncidentReportSecondRejectDialog(id: controller.irId.value));
-                                                                        },
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      Container(
+                                                                        height:
+                                                                            45,
+                                                                        child:
+                                                                            CustomElevatedButton(
+                                                                          backgroundColor:
+                                                                              ColorValues.rejectColor,
+                                                                          text:
+                                                                              "Reject IR",
+                                                                          icon: Icons
+                                                                              .close,
+                                                                          onPressed:
+                                                                              () {
+                                                                            Get.dialog(
+                                                                                IncidentReportSecondRejectDialog(id: controller.irId.value));
+                                                                          },
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                )
-                                                              : Dimens.box0
-                                                        ],
-                                                      ),
-                                              ],
-                                            )
-                                          : Dimens.box0,
-                                    ],
-                                  ),
-                                )
-                              ],
+                                                                    ],
+                                                                  )
+                                                                : Dimens.box0
+                                                          ],
+                                                        ),
+                                                ],
+                                              )
+                                            : Dimens.box0,
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+    
+          // ),
         ),
-
-        // ),
-      );
+  );
 
   ///Below All For WEB
   ///

@@ -18,283 +18,285 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      HeaderWidget(),
-      Container(
-        height: 45,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Color.fromARGB(255, 227, 224, 224),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 2),
+    return SelectionArea(
+      child: Column(children: [
+        HeaderWidget(),
+        Container(
+          height: 45,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromARGB(255, 227, 224, 224),
+              width: 1,
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.home,
-              color: ColorValues.greyLightColor,
-            ),
-            InkWell(
-              onTap: () {
-                Get.offNamed(Routes.home);
-              },
-              child: Text(
-                "DASHBOARD",
-                style: Styles.greyLight14,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                Get.offAllNamed(Routes.purchaseGoodsorder);
-              },
-              child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
-            ),
-            Text(" / REQUEST GOODS  ", style: Styles.greyLight14)
-          ],
-        ),
-      ),
-      Expanded(
-        child: SingleChildScrollView(
-          child: Obx(
-            () => Container(
-              width: Get.width * 7,
-              margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-              // height: Get.height,
-              child: Card(
-                color: ColorValues.cardColor,
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+            ],
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.home,
+                color: ColorValues.greyLightColor,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 10, right: 10, left: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, right: 10, left: 10),
-                            child: Text(
-                              " Request  Orders",
-                              style: Styles.blackBold14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                    ),
-                    Dimens.boxHeight10,
-                    AddRowInReqGoodsOrder(),
-
-                    Dimens.boxHeight15,
-                    controller.historyList!.isEmpty
-                        ? Dimens.box0
-                        : Container(
-                            margin: Dimens.edgeInsets20,
-                            height:
-                                ((controller.historyList?.length ?? 0) * 50) +
-                                    125,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: ColorValues.lightGreyColorWithOpacity35,
-                                width: 1,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offAllNamed(Routes.purchaseGoodsorder);
+                },
+                child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
+              ),
+              Text(" / REQUEST GOODS  ", style: Styles.greyLight14)
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Obx(
+              () => Container(
+                width: Get.width * 7,
+                margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                // height: Get.height,
+                child: Card(
+                  color: ColorValues.cardColor,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, right: 10, left: 10),
+                              child: Text(
+                                " Request  Orders",
+                                style: Styles.blackBold14,
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorValues.appBlueBackgroundColor,
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
                             ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Goods Order History ",
-                                        style: Styles.blue700,
-                                      ),
-                                    ],
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: ColorValues.greyLightColour,
+                      ),
+                      Dimens.boxHeight10,
+                      AddRowInReqGoodsOrder(),
+      
+                      Dimens.boxHeight15,
+                      controller.historyList!.isEmpty
+                          ? Dimens.box0
+                          : Container(
+                              margin: Dimens.edgeInsets20,
+                              height:
+                                  ((controller.historyList?.length ?? 0) * 50) +
+                                      125,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorValues.appBlueBackgroundColor,
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 2),
                                   ),
-                                ),
-                                Divider(
-                                  color: ColorValues.greyLightColour,
-                                ),
-                                Expanded(
-                                  child: DataTable2(
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn(
-                                          label: Text(
-                                        "Time Stamp",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn(
-                                          label: Text(
-                                        "Posted By",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn(
-                                          label: Text(
-                                        "Comment",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn(
-                                          label: Text(
-                                        "Location",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn(
-                                          label: Text(
-                                        "Status",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.historyList?.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text(controller
-                                                .historyList?[index]?.createdAt
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .historyList?[index]
-                                                ?.createdByName
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .historyList?[index]?.comment
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text('--')),
-                                        DataCell(Text(controller
-                                                .historyList?[index]
-                                                ?.status_name
-                                                .toString() ??
-                                            '')),
-                                      ]),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Goods Order History ",
+                                          style: Styles.blue700,
+                                        ),
+                                      ],
                                     ),
                                   ),
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Expanded(
+                                    child: DataTable2(
+                                      border: TableBorder.all(
+                                          color:
+                                              Color.fromARGB(255, 206, 229, 234)),
+                                      columns: [
+                                        DataColumn(
+                                            label: Text(
+                                          "Time Stamp",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        DataColumn(
+                                            label: Text(
+                                          "Posted By",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        DataColumn(
+                                            label: Text(
+                                          "Comment",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        DataColumn(
+                                            label: Text(
+                                          "Location",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        DataColumn(
+                                            label: Text(
+                                          "Status",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                      ],
+                                      rows: List<DataRow>.generate(
+                                        controller.historyList?.length ?? 0,
+                                        (index) => DataRow(cells: [
+                                          DataCell(Text(controller
+                                                  .historyList?[index]?.createdAt
+                                                  .toString() ??
+                                              '')),
+                                          DataCell(Text(controller
+                                                  .historyList?[index]
+                                                  ?.createdByName
+                                                  .toString() ??
+                                              '')),
+                                          DataCell(Text(controller
+                                                  .historyList?[index]?.comment
+                                                  .toString() ??
+                                              '')),
+                                          DataCell(Text('--')),
+                                          DataCell(Text(controller
+                                                  .historyList?[index]
+                                                  ?.status_name
+                                                  .toString() ??
+                                              '')),
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+      
+                      // (controller.getPurchaseDetailsByIDModel.value?.status !=
+                      //         341)
+                      //     ? Container()
+                      //     :
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(children: [
+                          Text('Comment: '),
+                          Expanded(
+                            child: TextField(
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    height: 1.0,
+                                    color: Colors.black),
+                              ),
+                              controller: controller.commentCtrlr,
+                              // enabled: controller.isJobCardStarted.value,
+                              decoration: InputDecoration(
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightGreyColor,
+                                    width: 1.0,
+                                  ),
                                 ),
-                              ],
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightBlueColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: ColorValues.appLightBlueColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                              ),
+                              keyboardType: TextInputType.multiline,
+                              minLines: 5,
+                              maxLines: null,
                             ),
                           ),
-
-                    // (controller.getPurchaseDetailsByIDModel.value?.status !=
-                    //         341)
-                    //     ? Container()
-                    //     :
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(children: [
-                        Text('Comment: '),
-                        Expanded(
-                          child: TextField(
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                  fontSize: 16.0,
-                                  height: 1.0,
-                                  color: Colors.black),
-                            ),
-                            controller: controller.commentCtrlr,
-                            // enabled: controller.isJobCardStarted.value,
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorValues.appLightGreyColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorValues.appLightBlueColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: ColorValues.appLightBlueColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                            ),
-                            keyboardType: TextInputType.multiline,
-                            minLines: 5,
-                            maxLines: null,
+                        ]),
+                      ),
+      
+                      Dimens.boxHeight15,
+                      Row(
+                        children: [
+                          Spacer(),
+                          CustomElevatedButton(
+                            backgroundColor: ColorValues.appRedColor,
+                            text: 'cancel',
+                            onPressed: () {
+                              // controller.AddInventory();
+                            },
                           ),
-                        ),
-                      ]),
-                    ),
-
-                    Dimens.boxHeight15,
-                    Row(
-                      children: [
-                        Spacer(),
-                        CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: 'cancel',
-                          onPressed: () {
-                            // controller.AddInventory();
-                          },
-                        ),
-                        Dimens.boxWidth15,
-                        controller.roId == 0
-                            ? CustomElevatedButton(
-                                backgroundColor: ColorValues.appGreenColor,
-                                text: 'Submit',
-                                onPressed: () {
-                                  controller.submitPurchaseOrderData();
-                                },
-                              )
-                            : CustomElevatedButton(
-                                backgroundColor: ColorValues.updateColor,
-                                text: 'Update',
-                                onPressed: () {
-                                  controller.updatePurchaseOrderData();
-                                },
-                              ),
-                        Spacer()
-                      ],
-                    ),
-                    Dimens.boxHeight15,
-                  ],
+                          Dimens.boxWidth15,
+                          controller.roId == 0
+                              ? CustomElevatedButton(
+                                  backgroundColor: ColorValues.appGreenColor,
+                                  text: 'Submit',
+                                  onPressed: () {
+                                    controller.submitPurchaseOrderData();
+                                  },
+                                )
+                              : CustomElevatedButton(
+                                  backgroundColor: ColorValues.updateColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    controller.updatePurchaseOrderData();
+                                  },
+                                ),
+                          Spacer()
+                        ],
+                      ),
+                      Dimens.boxHeight15,
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    ]);
+      ]),
+    );
 
     //  ),
   }
