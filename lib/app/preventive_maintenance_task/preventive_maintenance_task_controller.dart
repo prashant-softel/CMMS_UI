@@ -187,6 +187,10 @@ class PreventiveMaintenanceTaskController extends GetxController {
     preventiveMaintenanceTaskPresenter.clearValue();
   }
 
+  void clearStoreDatatype() {
+    preventiveMaintenanceTaskPresenter.clearValuetype();
+  }
+
   void isDeleteDialog({String? task_id, String? task}) {
     Get.dialog(
       AlertDialog(
