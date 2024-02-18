@@ -16,4 +16,8 @@ class ModuleCleaningListPlanPresenter {
       facility_id: facility_id,
     );
   }
+
+  void clearValueMcId() async => moduleCleaningListPlanUsecase.clearValueMcId();
+  void clearValuePlanId() async =>
+      moduleCleaningListPlanUsecase.clearValuePlanId();
 }

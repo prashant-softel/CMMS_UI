@@ -18,12 +18,13 @@ class PreventiveListPresenter {
     int? facilityId,
     int? type,
     bool? isLoading,
+    bool? isExport,
   }) async =>
       await preventivelistUsecase.getPreventiveCheckList(
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          isExport: isExport);
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,
   }) async =>

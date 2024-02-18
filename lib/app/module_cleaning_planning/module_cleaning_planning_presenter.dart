@@ -69,4 +69,17 @@ class ModuleCleaningPlanningPresenter {
       isLoading: isLoading ?? false,
     );
   }
+
+  void saveValueMcId({String? mcid}) async {
+    return moduleCleaningPlanningUsecase.saveValueMcId(mcid: mcid);
+  }
+
+  Future<String?> getValueMcId() async =>
+      await moduleCleaningPlanningUsecase.getValueMcId();
+  void saveValuePlanId({String? planId}) async {
+    return moduleCleaningPlanningUsecase.saveValuePlanId(planId: planId);
+  }
+
+  Future<String?> getValuePlanId() async =>
+      await moduleCleaningPlanningUsecase.getValuePlanId();
 }

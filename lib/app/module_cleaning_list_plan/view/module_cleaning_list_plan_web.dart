@@ -177,36 +177,34 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) =>
-                                            <PopupMenuEntry<String>>[]..addAll(
-                                                  controller.columnVisibility
-                                                      .value.entries
-                                                      .map((e) {
-                                                return PopupMenuItem<String>(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                            valueListenable:
-                                                                controller
-                                                                    .columnVisibility,
-                                                            builder: (context,
-                                                                value, child) {
-                                                              return Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                    value: value[
-                                                                        e.key],
-                                                                    onChanged:
-                                                                        (newValue) {
-                                                                      controller.setColumnVisibility(
-                                                                          e.key,
-                                                                          newValue!);
-                                                                    },
-                                                                  ),
-                                                                  Text(e.key),
-                                                                ],
-                                                              );
-                                                            }));
-                                              })),
+                                        itemBuilder: (BuildContext context) => <
+                                            PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -575,6 +573,8 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             int id =
                                 ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
+                              controller.clearStoreDataMcid();
+                              controller.clearStoreDataPlanid();
                               Get.toNamed(Routes.viewMcPlaning,
                                   arguments: {'mcid': id});
                             }
@@ -607,13 +607,15 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
                                   int id = ModuleCleaningPlanningListDetails
                                           ?.planId ??
                                       0;
                                   if (id != 0) {
                                     Get.toNamed(Routes.moduleCleaningPlanning,
                                         arguments: {
-                                          "id": id,
+                                          "mcid": id,
                                           "planId":
                                               ModuleCleaningPlanningListDetails
                                                   ?.planId
@@ -661,6 +663,8 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 icon: Icons.add,
                                 message: 'Approve/Reject',
                                 onPress: () {
+                                  controller.clearStoreDataMcid();
+                                  controller.clearStoreDataPlanid();
                                   int id = ModuleCleaningPlanningListDetails
                                           ?.planId ??
                                       0;

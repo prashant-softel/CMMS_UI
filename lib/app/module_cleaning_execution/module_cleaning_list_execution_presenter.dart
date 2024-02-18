@@ -6,12 +6,11 @@ class ModuleCleaningListExecutionPresenter {
   ModuleCleaningListExecutionPresenter(this.moduleCleaningExecutionPlanUsecase);
   ModuleCleaningListExecutionUsecase moduleCleaningExecutionPlanUsecase;
 
-   Future<List<MCTaskListModel>> getMCTaskList({
+  Future<List<MCTaskListModel>> getMCTaskList({
     required bool isLoading,
     required int? facility_id,
     String? start_date,
     required String end_date,
-   
   }) async {
     return moduleCleaningExecutionPlanUsecase.getMCTaskList(
       isLoading: isLoading,
@@ -21,23 +20,21 @@ class ModuleCleaningListExecutionPresenter {
     );
   }
 
- 
-
   Future<Map<String, dynamic>?> abandonExecutionButton({
-   abandoneJsonString,
-  required bool isLoading,
-    
+    abandoneJsonString,
+    required bool isLoading,
   }) async {
-     return moduleCleaningExecutionPlanUsecase.abandonExecutionButton(
-        abandoneJsonString: abandoneJsonString,
+    return moduleCleaningExecutionPlanUsecase.abandonExecutionButton(
+      abandoneJsonString: abandoneJsonString,
       isLoading: isLoading,
-      );
+    );
   }
-
-  
-     
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await moduleCleaningExecutionPlanUsecase.getFacilityList(
           isLoading: isLoading);
+  void clearValueMcId() async =>
+      moduleCleaningExecutionPlanUsecase.clearValueMcId();
+  void clearValuePlanId() async =>
+      moduleCleaningExecutionPlanUsecase.clearValuePlanId();
 }

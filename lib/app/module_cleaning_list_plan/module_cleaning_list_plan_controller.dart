@@ -121,7 +121,9 @@ class ModuleCleaningListPlanController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {}
+    switch (list.runtimeType) {
+      
+    }
   }
 
   void search(String keyword) {
@@ -159,5 +161,13 @@ class ModuleCleaningListPlanController extends GetxController {
                 false))
         .toList();
     moduleCleaningListPlan.value = filteredList;
+  }
+
+  void clearStoreDataMcid() {
+    moduleCleaningListPlanPresenter.clearValueMcId();
+  }
+
+  void clearStoreDataPlanid() {
+    moduleCleaningListPlanPresenter.clearValuePlanId();
   }
 }

@@ -213,9 +213,18 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {}
+    switch (list.runtimeType) {
+      
+    }
   }
 
+  void clearStoreDataMcid() {
+    moduleCleaningListExecutionPresenter.clearValueMcId();
+  }
+
+  void clearStoreDataPlanid() {
+    moduleCleaningListExecutionPresenter.clearValuePlanId();
+  }
   // void getPmTaskListByDate() {
   //   getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   // }

@@ -18,4 +18,7 @@ class ModuleCleaningListPlanUsecase {
       facility_id: facility_id,
     );
   }
+
+  void clearValueMcId() async => repository.clearData(LocalKeys.mcid);
+  void clearValuePlanId() async => repository.clearData(LocalKeys.planId);
 }

@@ -8,12 +8,11 @@ class ModuleCleaningListExecutionUsecase {
 
   ModuleCleaningListExecutionUsecase(this.repository);
 
-    Future<List<MCTaskListModel>> getMCTaskList({
+  Future<List<MCTaskListModel>> getMCTaskList({
     required bool isLoading,
     required int? facility_id,
     String? start_date,
     required String end_date,
-    
   }) async {
     return repository.getMCTaskList(
       isLoading: isLoading,
@@ -23,9 +22,7 @@ class ModuleCleaningListExecutionUsecase {
     );
   }
 
-   
-
-   Future<Map<String, dynamic>> abandonExecutionButton({
+  Future<Map<String, dynamic>> abandonExecutionButton({
     abandoneJsonString,
     bool? isLoading,
   }) async =>
@@ -45,4 +42,6 @@ class ModuleCleaningListExecutionUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(isLoading);
+  void clearValueMcId() async => repository.clearData(LocalKeys.mcid);
+  void clearValuePlanId() async => repository.clearData(LocalKeys.planId);
 }
