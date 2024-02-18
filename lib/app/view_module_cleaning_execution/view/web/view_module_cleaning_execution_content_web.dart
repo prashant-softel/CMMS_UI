@@ -193,7 +193,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.id}',
+                                                  ' ${controller.mcid.value}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],
@@ -1138,7 +1138,8 @@ class ViewModuleCleaningExecutionContentWeb
                                                         onPressed: () {
                                                           Get.dialog(
                                                               RejectMcExecutionDialog(
-                                                            id: controller.id,
+                                                            id: controller
+                                                                .mcid.value,
                                                           ));
                                                         },
                                                       ),
@@ -1172,7 +1173,8 @@ class ViewModuleCleaningExecutionContentWeb
                                                         onPressed: () {
                                                           Get.dialog(
                                                               ApproveMcExecutionDialog(
-                                                            id: controller.id,
+                                                            id: controller
+                                                                .mcid.value,
                                                           ));
                                                         },
                                                       ),

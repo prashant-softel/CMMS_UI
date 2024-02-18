@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
-
+import 'dart:html' as html;
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -87,6 +87,7 @@ import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
 import '../../app/navigators/app_pages.dart';
@@ -4898,6 +4899,7 @@ class Repository {
       {int? type,
       int? facilityId,
       bool? isLoading,
+      bool? isExport,
       int? frequencyid,
       int? categoryId}) async {
     try {
@@ -4919,7 +4921,11 @@ class Repository {
                     PreventiveCheckListModel.fromJson(
                         Map<String, dynamic>.from(m)))
                 .toList();
-
+        String jsonData =
+            preventiveCheckListModelToJson(_PreventiveCheckListModelList);
+        if (isExport == true) {
+          exportToExcel(jsonData);
+        }
         return _PreventiveCheckListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
@@ -4929,6 +4935,70 @@ class Repository {
       print(error.toString());
       return [];
     }
+  }
+
+  Future<void> exportToExcel(String jsonData) async {
+    // Load the data
+    // List<List<String>> data = [
+    //   ["One", "Two", "Three"],
+    //   ["1", "2", "3"],
+    //   ["1", "2", "3"],
+    //   ["1", "2", "3"],
+    // ]; // Define your own function to get the data
+    List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+    List<List<dynamic>> data = [
+      [
+        'Facility_Name',
+        'ID',
+        'CheckList',
+        'Frequency',
+        'Category',
+        'Man Power',
+        'Duration'
+      ],
+      ...jsonDataList
+          .map((facilityJson) => [
+                facilityJson['facility_name'],
+                facilityJson['id'].toString(),
+                facilityJson['checklist_number'],
+                facilityJson['frequency_name'],
+                facilityJson['category_name'],
+                facilityJson['manPower'].toString(),
+                facilityJson['duration'].toString(),
+              ])
+          .toList(),
+    ];
+    // Create Excel file
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Sheet1'];
+
+    // Populate Excel file with data
+    for (int row = 0; row < data.length; row++) {
+      for (int col = 0; col < data[row].length; col++) {
+        sheetObject
+            .cell(CellIndex.indexByColumnRow(rowIndex: row, columnIndex: col))
+            .value = "${data[row][col]}";
+      }
+    }
+
+    // Save Excel file
+    String fileName = 'checklist.xlsx'; // Specify the file name
+    List<int> bytes = excel.save()!;
+
+    // Create a Blob containing the Excel data
+    final blob = html.Blob([bytes]);
+
+    // Create an object URL for the Blob
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create a link element
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute("download", fileName)
+      ..click(); // Trigger download
+
+    // Revoke the object URL to free up memory
+    html.Url.revokeObjectUrl(url);
   }
 
   Future<List<ModuleListModel?>?> getModuleList(

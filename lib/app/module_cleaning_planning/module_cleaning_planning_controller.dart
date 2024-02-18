@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/create_mc_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
@@ -46,6 +47,7 @@ class ModuleCleaningPlanningController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> id = 0.obs;
+  Rx<int> planId = 0.obs;
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
@@ -88,7 +90,7 @@ class ModuleCleaningPlanningController extends GetxController {
   @override
   void onInit() async {
     try {
-      await setUserId();
+      await setMcId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
       });
@@ -114,15 +116,38 @@ class ModuleCleaningPlanningController extends GetxController {
     super.onInit();
   }
 
-  Future<void> setUserId() async {
-    try {
-      var dataFromPreviousScreen = Get.arguments;
+  // Future<void> setUserId() async {
+  //   try {
+  //     var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
-      // id= Get.arguments;
-      print('AddStock:$id');
+  //     id.value = dataFromPreviousScreen['id'];
+  //     // id= Get.arguments;
+  //     print('AddStock:$id');
+  //   } catch (e) {
+  //     print(e.toString() + 'userId');
+  //   }
+  // }
+  Future<void> setMcId() async {
+    try {
+      final _mcid = await moduleCleaningPlanningPresenter.getValueMcId();
+      final _planId = await moduleCleaningPlanningPresenter.getValuePlanId();
+
+      if (_mcid == null || _mcid == '' || _mcid == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        id.value = dataFromPreviousScreen['mcid'];
+        planId.value = dataFromPreviousScreen['planId'];
+
+        moduleCleaningPlanningPresenter.saveValueMcId(
+            mcid: id.value.toString());
+        moduleCleaningPlanningPresenter.saveValuePlanId(
+            planId: planId.value.toString());
+      } else {
+        id.value = int.tryParse(_mcid) ?? 0;
+        planId.value = int.tryParse(_planId.toString()) ?? 0;
+      }
     } catch (e) {
-      print(e.toString() + 'userId');
+      Utility.showDialog(e.toString(), 'mcid');
     }
   }
 

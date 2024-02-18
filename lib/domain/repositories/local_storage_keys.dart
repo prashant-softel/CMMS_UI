@@ -39,6 +39,7 @@ abstract class LocalKeys {
   static const jobCardId = 'JcId';
   static const importType = 'importType';
   static const mcid = 'mcid';
+  static const planId = 'planId';
 
   static const refreshToken = 'refresh-token';
   static const userType = 'userType';

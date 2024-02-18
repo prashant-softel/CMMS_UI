@@ -811,9 +811,7 @@ class AddUserController extends GetxController {
                       child: CustomMultiSelectDialogField(
                         buttonText: 'Add Facility',
                         title: 'Select Facility',
-                        initialValue: (selectedFacilityNameList.isNotEmpty)
-                            ? selectedfacilityNameIdList
-                            : [],
+                        initialValue: selectedfacilityNameIdList,
                         items: facilityNameList
                             .map(
                               (facilityName) => MultiSelectItem(
