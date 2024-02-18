@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cmms/domain/models/designation_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
 
 import '../../app/utils/utility.dart';
 
@@ -37,7 +38,7 @@ class UserDetailsModel {
   String? photoPath;
   String? company_name;
   int? company_id;
-  List<PlantList>? plant_list;
+  List<FacilityModel>? plant_list;
   List<DesignationModel>? responsibility;
 
   UserDetailsModel(
@@ -76,7 +77,8 @@ class UserDetailsModel {
   factory UserDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['plant_list'] as List;
     var list1 = parsedJson['responsibility'] as List;
-    List<PlantList> plantList = list.map((i) => PlantList.fromJson(i)).toList();
+    List<FacilityModel> plantList =
+        list.map((i) => FacilityModel.fromJson(i)).toList();
     List<DesignationModel> responsibility =
         list1.map((i) => DesignationModel.fromJson(i)).toList();
 
@@ -115,22 +117,22 @@ class UserDetailsModel {
   }
 }
 
-class PlantList {
-  int? plant_id;
-  String? plant_name;
-  int? spv_id;
-  String? spv_name;
-  PlantList({this.plant_id, this.plant_name, this.spv_id, this.spv_name});
+// class PlantList {
+//   int? plant_id;
+//   String? plant_name;
+//   int? spv_id;
+//   String? spv_name;
+//   PlantList({this.plant_id, this.plant_name, this.spv_id, this.spv_name});
 
-  factory PlantList.fromJson(Map<String, dynamic> parsedJson) {
-    return PlantList(
-      plant_id: parsedJson['plant_id'],
-      plant_name: parsedJson['plant_name'],
-      spv_id: parsedJson['spv_id'],
-      spv_name: parsedJson['spv_name'],
-    );
-  }
-}
+//   factory PlantList.fromJson(Map<String, dynamic> parsedJson) {
+//     return PlantList(
+//       plant_id: parsedJson['plant_id'],
+//       plant_name: parsedJson['plant_name'],
+//       spv_id: parsedJson['spv_id'],
+//       spv_name: parsedJson['spv_name'],
+//     );
+//   }
+// }
 
 // class Responsibility {
 //   int? id;
