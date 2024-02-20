@@ -7161,4 +7161,21 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getVegTaskList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }
