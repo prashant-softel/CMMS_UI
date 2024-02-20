@@ -38,8 +38,8 @@ class VegetationPlanListController extends GetxController {
     'Plan Title': true,
     'No of Days': true,
     'Created By': true,
-    'frequency': true,
-
+    'Frequency': true,
+    'Status': true,
     // "search": true,
   });
 
@@ -77,7 +77,7 @@ class VegetationPlanListController extends GetxController {
       'Plan Title': planTitleFilterText,
       'No of Days': noOfDaysFilterText,
       'Created By': createdByFilterText,
-      'frequency': frequencyFilterText,
+      'Frequency': frequencyFilterText,
       "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -144,6 +144,11 @@ class VegetationPlanListController extends GetxController {
                     .contains(keyword.toLowerCase()) ??
                 false) ||
             (item.frequency
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.statusShort
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??

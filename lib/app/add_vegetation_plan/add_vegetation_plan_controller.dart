@@ -167,49 +167,38 @@ class AddVegetationPlanController extends GetxController {
   //   // return;
   //   int i = -1;
 
-  //   List<Schedules>? sch =
-  //       vegPlanDetailsModel.value?.schedules.map<Schedule>((e) {
+  //   List<Schedule>? sch =
+  //       vegPlanDetailsModel.value?.schedules?.map<Schedule>((e) {
   //     i++;
-  //     var row = rowItem.value[i];
   //     return Schedule(
   //         cleaningDay: e.cleaningDay,
-  //         cleaningType: int.tryParse(
-  //                 "${row[4]['value'] == 'Dry' ? 1 : (row[4]['value'] == 'Wel' ? 2 : null)}") ??
-  //             null,
   //         equipments: e.equipments?.map((e) {
   //           return Equipments(id: e?.id);
   //         }).toList());
   //   }).toList();
   //   print({"sch": sch});
-  //   // rowItem.value.forEach((element) {
-  //   //   Schedule item = Schedule(
-  //   //     cleaningType: int.tryParse('${element[4]["id"]}'),
-  //   //   );
-
-  //   //   // Schedule.add(item);
-  //   // });
 
   //   String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
   //   String _vegTitleController = vegTitleController.text.trim();
   //   String _startDateTc = startDateTc.text.trim();
 
   //   CreateVegPlanModel createVegModel = CreateVegPlanModel(
-  //       planId: id.value,
+  //       // planId: id.value,
   //       facilityId: facilityId,
-  //       startDate: _startDateTc,
+  //       // startDate: _startDateTc,
   //       frequencyId: selectedfrequencyId,
   //       noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
   //       title: _vegTitleController,
   //       schedules: sch ?? []);
 
   //   var updateMcModelJsonString = [createVegModel.toJson()];
-  //   Map<String, dynamic>? responseCreateMcModel =
-  //       await addVegetationPresenter.updateMcPlan(
-  //     updateMcPlans: updateMcModelJsonString,
-  //     isLoading: true,
-  //   );
-  //   if (responseCreateMcModel == null) {}
-  //   print('update Veg   data: $updateMcModelJsonString');
+  //   // Map<String, dynamic>? responseCreateMcModel =
+  //   //     await addVegetationPresenter.updateVegPlan(
+  //   //   updateMcPlans: updateMcModelJsonString,
+  //   //   isLoading: true,
+  //   // );
+  //   // if (responseCreateMcModel == null) {}
+  //   // print('update Veg   data: $updateMcModelJsonString');
   // }
 
   Future<void> getVegPlanDetail({required int planId}) async {

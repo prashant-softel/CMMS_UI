@@ -1,17 +1,15 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:flutter/material.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-import '../navigators/app_pages.dart';
-// import '../theme/colors_value.dart';
-import '../theme/dimens.dart';
-import '../theme/styles.dart';
-
-class MCPlanUpdatedMessageDialog extends GetView {
+class VegPlanUpdatedMessageDialog extends GetView {
   List<dynamic>? warrantyClaimId;
   String? data;
 
-  MCPlanUpdatedMessageDialog({super.key, this.warrantyClaimId, this.data});
+  VegPlanUpdatedMessageDialog({super.key, this.warrantyClaimId, this.data});
   // final WarrantyClaimController controller = Get.find();
 
   @override
@@ -45,7 +43,7 @@ class MCPlanUpdatedMessageDialog extends GetView {
                     ),
                     RichText(
                       text: TextSpan(
-                        text: 'MC Plan Updated Successfully with Id ',
+                        text: 'Veg Plan Updated Successfully with Id ',
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
                           TextSpan(
@@ -69,7 +67,7 @@ class MCPlanUpdatedMessageDialog extends GetView {
               child: ElevatedButton(
                 style: Styles.darkBlueElevatedButtonStyle,
                 onPressed: () {
-                  Get.offAllNamed(Routes.moduleCleaningListPlan);
+                  Get.offAllNamed(Routes.vegetationPlanListScreen);
                   // controller.getNewPermitList(_controller.facilityId, _controller.userId);
                   // controller.getWarrantyClaimList();
                   Get.back();

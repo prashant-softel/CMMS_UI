@@ -83,7 +83,7 @@ class VegPlanMessageApproveDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.moduleCleaningListPlan);
+                    Get.offAllNamed(Routes.vegetationPlanListScreen);
                   },
                   child: const Text('Vegetation List'),
                 ),
