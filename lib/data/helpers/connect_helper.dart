@@ -56,6 +56,7 @@ import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/veg_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
 import 'package:cmms/data/data.dart';
@@ -2842,7 +2843,7 @@ class ConnectHelper {
       },
     );
 
-    print('Update MC Response:${responseModel.data}');
+    print('Update Veg Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     // if (res.e != null) {
@@ -7126,6 +7127,37 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateVegPlan({
+    required String auth,
+    updateVegPlans,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/UpdateVegetationPlan',
+      Request.post,
+      updateVegPlans,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update MC Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(VegPlanUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
 
     return responseModel;
   }

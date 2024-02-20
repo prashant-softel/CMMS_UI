@@ -28,634 +28,661 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
   final WarrantyClaimController controller = Get.find();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Row(
-          children: [
-            Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Dimens.box0
-                : HomeDrawer(),
-            Expanded(
-              child: Container(
-                // margin: Dimens.edgeInsets16,
-                height: Get.height,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withOpacity(.3)),
-                ),
-                constraints: BoxConstraints(
-                  maxWidth: 1100,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      HeaderWidget(),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.circular(0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 227, 224, 224),
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 236, 234, 234)
-                                  .withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
+  Widget build(BuildContext context) => SelectionArea(
+    child: Scaffold(
+          body: Row(
+            children: [
+              Responsive.isMobile(context) || Responsive.isTablet(context)
+                  ? Dimens.box0
+                  : HomeDrawer(),
+              Expanded(
+                child: Container(
+                  // margin: Dimens.edgeInsets16,
+                  height: Get.height,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.withOpacity(.3)),
+                  ),
+                  constraints: BoxConstraints(
+                    maxWidth: 1100,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        HeaderWidget(),
+                        Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(0),
+                            border: Border.all(
+                              color: Color.fromARGB(255, 227, 224, 224),
+                              width: 1,
                             ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: ColorValues.greyLightColor,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.offNamed(Routes.home);
-                              },
-                              child: Text(
-                                "DASHBOARD",
-                                style: Styles.greyLight14,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 236, 234, 234)
+                                    .withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 2),
                               ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.offNamed(Routes.warrantyClaimList);
-                              },
-                              child: Text(" / Warranty Claim List",
-                                  style: Styles.greyLight14),
-                            ),
-                            Text(" / Add Warranty Claim",
-                                style: Styles.greyLight14)
-                          ],
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.home,
+                                color: ColorValues.greyLightColor,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.offNamed(Routes.home);
+                                },
+                                child: Text(
+                                  "DASHBOARD",
+                                  style: Styles.greyLight14,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.offNamed(Routes.warrantyClaimList);
+                                },
+                                child: Text(" / Warranty Claim List",
+                                    style: Styles.greyLight14),
+                              ),
+                              Text(" / Add Warranty Claim",
+                                  style: Styles.greyLight14)
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      CustomAppBar(
-                        title: 'New Warranty Claim'.tr,
-                      ),
-                      Dimens.boxHeight10,
-                      Card(
-                        color: Colors.lightBlue.shade50,
-                        child: Wrap(
-                          children: [
-                            GetBuilder<WarrantyClaimController>(
-                                id: 'block_field',
-                                builder: (controller) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.55,
-                                            child: CustomTextField(
-                                              label: 'Warranty Claim Title: ',
-                                              textController: controller
-                                                  .warrantyClaimTitleTextController,
-                                              focusnode: controller.wtitleFocus,
-                                              scroll: controller.wtitleScroll,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.3,
-                                            height: 80,
-                                            child: CustomTextField(
-                                              label:
-                                                  'Warranty Brief Description: ',
-                                              textController: controller
-                                                  .warrantyClaimBriefDescTextController,
-                                              focusnode: controller.wdescFocus,
-                                              scroll: controller.wdescScroll,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10,
+                        SizedBox(
+                          height: 30,
+                        ),
+                        CustomAppBar(
+                          title: 'New Warranty Claim'.tr,
+                        ),
+                        Dimens.boxHeight10,
+                        Card(
+                          color: Colors.lightBlue.shade50,
+                          child: Wrap(
+                            children: [
+                              GetBuilder<WarrantyClaimController>(
+                                  id: 'block_field',
+                                  builder: (controller) {
+                                    return Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2.55,
+                                              child: CustomTextField(
+                                                label: 'Warranty Claim Title: ',
+                                                textController: controller
+                                                    .warrantyClaimTitleTextController,
+                                                focusnode: controller.wtitleFocus,
+                                                scroll: controller.wtitleScroll,
                                               ),
-                                              CustomRichText(
-                                                  title:
-                                                      'Equipment Categories: '),
-                                              SizedBox(
-                                                width: 27,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.3,
+                                              height: 80,
+                                              child: CustomTextField(
+                                                label:
+                                                    'Warranty Brief Description: ',
+                                                textController: controller
+                                                    .warrantyClaimBriefDescTextController,
+                                                focusnode: controller.wdescFocus,
+                                                scroll: controller.wdescScroll,
                                               ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4.2,
-                                                child: Obx(
-                                                  () => DropdownWebWidget(
-                                                    dropdownList: controller
-                                                        .equipmentCategoryList,
-                                                    isValueSelected: controller
-                                                        .isEquipmentCategorySelected
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedEquipmentCategory
-                                                        .value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                CustomRichText(
+                                                    title:
+                                                        'Equipment Categories: '),
+                                                SizedBox(
+                                                  width: 27,
+                                                ),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4.2,
+                                                  child: Obx(
+                                                    () => DropdownWebWidget(
+                                                      dropdownList: controller
+                                                          .equipmentCategoryList,
+                                                      isValueSelected: controller
+                                                          .isEquipmentCategorySelected
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedEquipmentCategory
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 55,
-                                              ),
-                                              CustomRichText(
-                                                  title: 'Equipment Name: '),
-                                              SizedBox(
-                                                width: 15,
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    4.2,
-                                                child: Obx(
-                                                  () => DropdownWebWidget(
-                                                    dropdownList: controller
-                                                        .eqipmentNameList,
-                                                    isValueSelected: controller
-                                                        .isEquipmentNameSelected
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedEquipmentName
-                                                        .value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
+                                                SizedBox(
+                                                  width: 55,
                                                 ),
-
-                                                // LoginCustomTextfield(),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-
-                                      ///Affected Part
-                                      SizedBox(
-                                        height: 220,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.2,
-                                        child: Center(
-                                          child: Container(
-                                            margin: Dimens.edgeInsets16,
-                                            height: Get.height,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(.3)),
-                                            ),
-                                            constraints: BoxConstraints(
-                                              maxWidth: 1100,
-                                            ),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title: 'Affected Part'.tr,
+                                                CustomRichText(
+                                                    title: 'Equipment Name: '),
+                                                SizedBox(
+                                                  width: 15,
+                                                ),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      4.2,
+                                                  child: Obx(
+                                                    () => DropdownWebWidget(
+                                                      dropdownList: controller
+                                                          .eqipmentNameList,
+                                                      isValueSelected: controller
+                                                          .isEquipmentNameSelected
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedEquipmentName
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
                                                   ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 150),
-                                                        child: Row(
-                                                          children: [
-                                                            Dimens.boxHeight20,
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Select Affected Part: '),
-                                                            SizedBox(
-                                                              width: 15,
-                                                            ),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  4.2,
-                                                              child:
-                                                                  //               Obx(
-                                                                  //   () => DropdownWebWidget(
-                                                                  //     dropdownList: controller
-                                                                  //         .equipmentCategoryList,
-                                                                  //     isValueSelected: controller
-                                                                  //         .isEquipmentCategorySelected
-                                                                  //         .value,
-                                                                  //     selectedValue: controller
-                                                                  //         .selectedEquipmentCategory
-                                                                  //         .value,
-                                                                  //     onValueChanged: controller
-                                                                  //         .onValueChanged,
-                                                                  //   ),
-                                                                  // ),
-                                                                  Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .affectedPartEqipmentNameList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isAffectedPartSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedAffectedPart
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
+    
+                                                  // LoginCustomTextfield(),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+    
+                                        ///Affected Part
+                                        SizedBox(
+                                          height: 220,
+                                          width:
+                                              MediaQuery.of(context).size.width /
+                                                  1.2,
+                                          child: Center(
+                                            child: Container(
+                                              margin: Dimens.edgeInsets16,
+                                              height: Get.height,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.grey
+                                                        .withOpacity(.3)),
+                                              ),
+                                              constraints: BoxConstraints(
+                                                maxWidth: 1100,
+                                              ),
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  children: [
+                                                    CustomAppBar(
+                                                      title: 'Affected Part'.tr,
+                                                    ),
+                                                    Dimens.boxHeight10,
+                                                    Wrap(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 150),
+                                                          child: Row(
+                                                            children: [
+                                                              Dimens.boxHeight20,
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Select Affected Part: '),
+                                                              SizedBox(
+                                                                width: 15,
                                                               ),
-                                                              //     CustomMultiSelectDialogField(
-                                                              //   buttonText:
-                                                              //       'Affected parts',
-                                                              //   title:
-                                                              //       'Select Affected Part',
-                                                              //   initialValue: (controller
-                                                              //           .selectedAffectedPartEquipmentIdList
-                                                              //           .isNotEmpty)
-                                                              //       ? controller
-                                                              //           .selectedAffectedPartEquipmentIdList
-                                                              //       : [],
-                                                              //   items: controller
-                                                              //       .affectedPartEqipmentNameList
-                                                              //       .map(
-                                                              //         (equipmentList) =>
-                                                              //             MultiSelectItem(
-                                                              //           equipmentList
-                                                              //               ?.id,
-                                                              //           equipmentList?.name ??
-                                                              //               '',
-                                                              //         ),
-                                                              //       )
-                                                              //       .toList(),
-                                                              //   onConfirm:
-                                                              //       (selectedOptionsList) =>
-                                                              //           {
-                                                              //     controller
-                                                              //         .affectedPartSelected(
-                                                              //             selectedOptionsList),
-                                                              //     print(
-                                                              //         'Affected part Equipment Name list ${controller.selectedAffectedPartEquipmentIdList}')
-                                                              //   },
-                                                              // ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 100,
-                                                            ),
-                                                          ],
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4.2,
+                                                                child:
+                                                                    //               Obx(
+                                                                    //   () => DropdownWebWidget(
+                                                                    //     dropdownList: controller
+                                                                    //         .equipmentCategoryList,
+                                                                    //     isValueSelected: controller
+                                                                    //         .isEquipmentCategorySelected
+                                                                    //         .value,
+                                                                    //     selectedValue: controller
+                                                                    //         .selectedEquipmentCategory
+                                                                    //         .value,
+                                                                    //     onValueChanged: controller
+                                                                    //         .onValueChanged,
+                                                                    //   ),
+                                                                    // ),
+                                                                    Obx(
+                                                                  () =>
+                                                                      DropdownWebWidget(
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .affectedPartEqipmentNameList,
+                                                                    isValueSelected:
+                                                                        controller
+                                                                            .isAffectedPartSelected
+                                                                            .value,
+                                                                    selectedValue:
+                                                                        controller
+                                                                            .selectedAffectedPart
+                                                                            .value,
+                                                                    onValueChanged:
+                                                                        controller
+                                                                            .onValueChanged,
+                                                                  ),
+                                                                ),
+                                                                //     CustomMultiSelectDialogField(
+                                                                //   buttonText:
+                                                                //       'Affected parts',
+                                                                //   title:
+                                                                //       'Select Affected Part',
+                                                                //   initialValue: (controller
+                                                                //           .selectedAffectedPartEquipmentIdList
+                                                                //           .isNotEmpty)
+                                                                //       ? controller
+                                                                //           .selectedAffectedPartEquipmentIdList
+                                                                //       : [],
+                                                                //   items: controller
+                                                                //       .affectedPartEqipmentNameList
+                                                                //       .map(
+                                                                //         (equipmentList) =>
+                                                                //             MultiSelectItem(
+                                                                //           equipmentList
+                                                                //               ?.id,
+                                                                //           equipmentList?.name ??
+                                                                //               '',
+                                                                //         ),
+                                                                //       )
+                                                                //       .toList(),
+                                                                //   onConfirm:
+                                                                //       (selectedOptionsList) =>
+                                                                //           {
+                                                                //     controller
+                                                                //         .affectedPartSelected(
+                                                                //             selectedOptionsList),
+                                                                //     print(
+                                                                //         'Affected part Equipment Name list ${controller.selectedAffectedPartEquipmentIdList}')
+                                                                //   },
+                                                                // ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 100,
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          CustomTextField(
-                                            label: 'Failure Date & Time: ',
-                                            suffixIcon: Icon(
-                                              Icons.calendar_month,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            CustomTextField(
+                                              label: 'Failure Date & Time: ',
+                                              suffixIcon: Icon(
+                                                Icons.calendar_month,
+                                              ),
+                                              // textController:
+                                              //     controller.categoryTextController,
+                                              textController: controller
+                                                  .failureDateTimeCtrlrWeb,
+    
+                                              onTap: () {
+                                                pickFailureDateTime_web(context);
+                                              },
                                             ),
-                                            // textController:
-                                            //     controller.categoryTextController,
-                                            textController: controller
-                                                .failureDateTimeCtrlrWeb,
-
-                                            onTap: () {
-                                              pickFailureDateTime_web(context);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          CustomTextField(
-                                            label: 'Approximate Daily Loss: ',
-                                          ),
-                                          SizedBox(
-                                            width: 40,
-                                          ),
-                                          CustomRichText(title: 'Severity: '),
-                                          Row(
-                                            // mainAxisAlignment:
-                                            //     MainAxisAlignment.spaceAround,
-                                            children: [
-                                              buildRadioButton('Critical',
-                                                  Colors.red, context),
-                                              buildRadioButton('High',
-                                                  Colors.orange, context),
-                                              buildRadioButton('Medium',
-                                                  Colors.yellow, context),
-                                              buildRadioButton(
-                                                  'Low', Colors.green, context),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              CustomTextField(
-                                                textController: controller
-                                                    .affectedSerialNoTextController,
-                                                readOnly: true,
-                                                label: 'Affected Sr.No.:',
-                                                hintText:
-                                                    '${controller.inventoryDetailsModel.value?.serialNumber}',
-                                              ),
-                                              CustomTextField(
-                                                textController: controller
-                                                    .manufacturerNameTextController,
-                                                readOnly: true,
-                                                hintText:
-                                                    '${controller.inventoryDetailsModel.value?.manufacturerName}',
-                                                label: 'Manufacturer Name:',
-                                              ),
-                                              CustomTextField(
-                                                textController: controller
-                                                    .orderReferenceNoTextController,
-                                                label:
-                                                    'Contract Reference No.:',
-                                              ),
-                                              CustomTextField(
-                                                textController: controller
-                                                    .warrantyStartDateTimeCtrlrWeb,
-                                                label: 'Warranty Start Date:',
-                                                suffixIcon:
-                                                    Icon(Icons.calendar_month),
-                                                onTap: () {
-                                                  pickWarrantyStartDateTime_web(
-                                                      context);
-                                                },
-                                              ),
-                                              CustomTextField(
-                                                textController: controller
-                                                    .warrantyEndDateTimeCtrlrWeb,
-                                                label: 'Warranty End Date:',
-                                                suffixIcon:
-                                                    Icon(Icons.calendar_month),
-                                                onTap: () {
-                                                  pickWarrantyEndDateTime_web(
-                                                      context);
-                                                },
-                                              ),
-                                              CustomTextField(
-                                                textController: controller
-                                                    .costOfReplacementTextController,
-                                                readOnly: true,
-                                                hintText:
-                                                    '${controller.inventoryDetailsModel.value?.cost}',
-                                                label: 'Cost of Replacement:',
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-
-                                          ///Additional Email
-                                          SizedBox(
-                                            height: 500,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.2,
-                                            child: Center(
-                                              child: Container(
-                                                margin: Dimens.edgeInsets16,
-                                                height: Get.height,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.grey
-                                                          .withOpacity(.3)),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            CustomTextField(
+                                              label: 'Approximate Daily Loss: ',
+                                            ),
+                                            SizedBox(
+                                              width: 40,
+                                            ),
+                                            CustomRichText(title: 'Severity: '),
+                                            Row(
+                                              // mainAxisAlignment:
+                                              //     MainAxisAlignment.spaceAround,
+                                              children: [
+                                                buildRadioButton('Critical',
+                                                    Colors.red, context),
+                                                buildRadioButton('High',
+                                                    Colors.orange, context),
+                                                buildRadioButton('Medium',
+                                                    Colors.yellow, context),
+                                                buildRadioButton(
+                                                    'Low', Colors.green, context),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .affectedSerialNoTextController,
+                                                  readOnly: true,
+                                                  label: 'Affected Sr.No.:',
+                                                  hintText:
+                                                      '${controller.inventoryDetailsModel.value?.serialNumber}',
                                                 ),
-                                                constraints: BoxConstraints(
-                                                  maxWidth: 1100,
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .manufacturerNameTextController,
+                                                  readOnly: true,
+                                                  hintText:
+                                                      '${controller.inventoryDetailsModel.value?.manufacturerName}',
+                                                  label: 'Manufacturer Name:',
                                                 ),
-                                                child: SingleChildScrollView(
-                                                  child: Obx(
-                                                    () => Column(
-                                                      children: [
-                                                        CustomAppBar(
-                                                          title:
-                                                              'Additional Emails'
-                                                                  .tr,
-                                                          // action: ActionButton(
-                                                          //   icon: Icons.add,
-                                                          //   label: 'Add',
-                                                          //   // onPress:
-                                                          //   //     () async {},
-                                                          //   color: Colors.blue,
-                                                          //   onPressed: () {},
-                                                          // ),
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Wrap(
-                                                          children: [
-                                                            Column(
-                                                              children: [
-                                                                SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      1.5,
-                                                                  child:
-                                                                      DefaultTabController(
-                                                                    length: 2,
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .orderReferenceNoTextController,
+                                                  label:
+                                                      'Contract Reference No.:',
+                                                ),
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .warrantyStartDateTimeCtrlrWeb,
+                                                  label: 'Warranty Start Date:',
+                                                  suffixIcon:
+                                                      Icon(Icons.calendar_month),
+                                                  onTap: () {
+                                                    pickWarrantyStartDateTime_web(
+                                                        context);
+                                                  },
+                                                ),
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .warrantyEndDateTimeCtrlrWeb,
+                                                  label: 'Warranty End Date:',
+                                                  suffixIcon:
+                                                      Icon(Icons.calendar_month),
+                                                  onTap: () {
+                                                    pickWarrantyEndDateTime_web(
+                                                        context);
+                                                  },
+                                                ),
+                                                CustomTextField(
+                                                  textController: controller
+                                                      .costOfReplacementTextController,
+                                                  readOnly: true,
+                                                  hintText:
+                                                      '${controller.inventoryDetailsModel.value?.cost}',
+                                                  label: 'Cost of Replacement:',
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 30,
+                                            ),
+    
+                                            ///Additional Email
+                                            SizedBox(
+                                              height: 500,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2.2,
+                                              child: Center(
+                                                child: Container(
+                                                  margin: Dimens.edgeInsets16,
+                                                  height: Get.height,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(.3)),
+                                                  ),
+                                                  constraints: BoxConstraints(
+                                                    maxWidth: 1100,
+                                                  ),
+                                                  child: SingleChildScrollView(
+                                                    child: Obx(
+                                                      () => Column(
+                                                        children: [
+                                                          CustomAppBar(
+                                                            title:
+                                                                'Additional Emails'
+                                                                    .tr,
+                                                            // action: ActionButton(
+                                                            //   icon: Icons.add,
+                                                            //   label: 'Add',
+                                                            //   // onPress:
+                                                            //   //     () async {},
+                                                            //   color: Colors.blue,
+                                                            //   onPressed: () {},
+                                                            // ),
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Wrap(
+                                                            children: [
+                                                              Column(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width /
+                                                                        1.5,
                                                                     child:
-                                                                        Column(
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .all(
-                                                                              1.0),
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                45,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              border: Border.all(color: Colors.grey),
-                                                                              color: Colors.white,
-                                                                              borderRadius: BorderRadius.circular(1),
-                                                                            ),
+                                                                        DefaultTabController(
+                                                                      length: 2,
+                                                                      child:
+                                                                          Column(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: const EdgeInsets
+                                                                                .all(
+                                                                                1.0),
                                                                             child:
-                                                                                TabBar(
-                                                                              labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                                                                              labelColor: Colors.black,
-                                                                              indicator: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
-                                                                              unselectedLabelColor: Colors.black,
-                                                                              tabs: [
-                                                                                Tab(
-                                                                                  child: Text('Employee'),
-                                                                                ),
-                                                                                Tab(
-                                                                                  child: Text(
-                                                                                    'External Emails',
+                                                                                Container(
+                                                                              height:
+                                                                                  45,
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                border: Border.all(color: Colors.grey),
+                                                                                color: Colors.white,
+                                                                                borderRadius: BorderRadius.circular(1),
+                                                                              ),
+                                                                              child:
+                                                                                  TabBar(
+                                                                                labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                                                                                labelColor: Colors.black,
+                                                                                indicator: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
+                                                                                unselectedLabelColor: Colors.black,
+                                                                                tabs: [
+                                                                                  Tab(
+                                                                                    child: Text('Employee'),
                                                                                   ),
-                                                                                ),
-                                                                              ],
+                                                                                  Tab(
+                                                                                    child: Text(
+                                                                                      'External Emails',
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
                                                                             ),
                                                                           ),
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              250,
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 2,
-                                                                          child:
-                                                                              TabBarView(children: [
-                                                                            ///First TabBar View
-                                                                            Container(
-                                                                                // decoration: BoxDecoration(color: Colors.grey),
-                                                                                child: Column(
-                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                              children: [
-                                                                                SizedBox(
-                                                                                  height: 15,
-                                                                                ),
-
-                                                                                emailDropdown(
-                                                                                  context,
-                                                                                  'Select Employees',
-                                                                                ),
-
-                                                                                SizedBox(
-                                                                                  height: 10,
-                                                                                ),
-                                                                                // emailDropdown(context, 'Sujit Kumar'),
-                                                                                // SizedBox(
-                                                                                //   height: 10,
-                                                                                // ),
-                                                                                // emailDropdown(context, 'Amit Kumar'),
-                                                                                // SizedBox(
-                                                                                //   height: 10,
-                                                                                // ),
-                                                                                // emailDropdown(context, 'Joseph Fernandez'),
-                                                                              ],
-                                                                            )),
-
-                                                                            ////Second TabBar View
-                                                                            ///
-                                                                            // Center(child: Text('Second Tab'))
-                                                                            SingleChildScrollView(
-                                                                              child: Column(
+                                                                          SizedBox(
+                                                                            height:
+                                                                                250,
+                                                                            width:
+                                                                                MediaQuery.of(context).size.width / 2,
+                                                                            child:
+                                                                                TabBarView(children: [
+                                                                              ///First TabBar View
+                                                                              Container(
+                                                                                  // decoration: BoxDecoration(color: Colors.grey),
+                                                                                  child: Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   SizedBox(
-                                                                                    height: 10,
+                                                                                    height: 15,
                                                                                   ),
-                                                                                  Row(
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    children: [
-                                                                                      // Text(
-                                                                                      //   'Sr. No',
-                                                                                      //   style: TextStyle(fontWeight: FontWeight.bold),
-                                                                                      // ),
-                                                                                      SizedBox(
-                                                                                        width: 75,
-                                                                                      ),
-                                                                                      Text(
-                                                                                        'Name',
-                                                                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                                                                      ),
-                                                                                      Dimens.boxWidth140,
-                                                                                      Text(
-                                                                                        'Email',
-                                                                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                                                                      ),
-                                                                                      Dimens.boxWidth150,
-                                                                                      Text(
-                                                                                        'Mobile',
-                                                                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                                                                      ),
-                                                                                    ],
+    
+                                                                                  emailDropdown(
+                                                                                    context,
+                                                                                    'Select Employees',
                                                                                   ),
+    
                                                                                   SizedBox(
                                                                                     height: 10,
                                                                                   ),
-                                                                                  Column(
-                                                                                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                                                      children: [
-                                                                                    // for (var rowData in controller.rowList) Text(rowData)
-
-                                                                                    // for (var rowData2 in controller.rowList2)
-                                                                                    //   Text(rowData2),
-
-                                                                                    // for (var rowData3 in controller.rowList3)
-                                                                                    //   Text(rowData3)
-                                                                                  ]..addAll(controller.externalEmails.map((data) => Row(
-                                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                                            children: [
-                                                                                              SizedBox(
-                                                                                                width: 75,
-                                                                                              ),
-                                                                                              SizedBox(width: 200, child: Text('${data.name}')),
-                                                                                              SizedBox(width: 200, child: Text('${data.email}')),
-                                                                                              SizedBox(width: 100, child: Text('${data.mobile}')),
-                                                                                            ],
-                                                                                          )))),
-
+                                                                                  // emailDropdown(context, 'Sujit Kumar'),
                                                                                   // SizedBox(
-                                                                                  //     width: MediaQuery.of(context).size.width / 3,
-                                                                                  //     child: CustomTextField(
-                                                                                  //       textController: controller.serialNoTextFieldController,
-                                                                                  //       label: 'Sr. No.',
-                                                                                  //     )),
-                                                                                  Dimens.boxHeight10,
-                                                                                  SizedBox(
+                                                                                  //   height: 10,
+                                                                                  // ),
+                                                                                  // emailDropdown(context, 'Amit Kumar'),
+                                                                                  // SizedBox(
+                                                                                  //   height: 10,
+                                                                                  // ),
+                                                                                  // emailDropdown(context, 'Joseph Fernandez'),
+                                                                                ],
+                                                                              )),
+    
+                                                                              ////Second TabBar View
+                                                                              ///
+                                                                              // Center(child: Text('Second Tab'))
+                                                                              SingleChildScrollView(
+                                                                                child: Column(
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      height: 10,
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      children: [
+                                                                                        // Text(
+                                                                                        //   'Sr. No',
+                                                                                        //   style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                        // ),
+                                                                                        SizedBox(
+                                                                                          width: 75,
+                                                                                        ),
+                                                                                        Text(
+                                                                                          'Name',
+                                                                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                        ),
+                                                                                        Dimens.boxWidth140,
+                                                                                        Text(
+                                                                                          'Email',
+                                                                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                        ),
+                                                                                        Dimens.boxWidth150,
+                                                                                        Text(
+                                                                                          'Mobile',
+                                                                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    SizedBox(
+                                                                                      height: 10,
+                                                                                    ),
+                                                                                    Column(
+                                                                                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                        children: [
+                                                                                      // for (var rowData in controller.rowList) Text(rowData)
+    
+                                                                                      // for (var rowData2 in controller.rowList2)
+                                                                                      //   Text(rowData2),
+    
+                                                                                      // for (var rowData3 in controller.rowList3)
+                                                                                      //   Text(rowData3)
+                                                                                    ]..addAll(controller.externalEmails.map((data) => Row(
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              children: [
+                                                                                                SizedBox(
+                                                                                                  width: 75,
+                                                                                                ),
+                                                                                                SizedBox(width: 200, child: Text('${data.name}')),
+                                                                                                SizedBox(width: 200, child: Text('${data.email}')),
+                                                                                                SizedBox(width: 100, child: Text('${data.mobile}')),
+                                                                                              ],
+                                                                                            )))),
+    
+                                                                                    // SizedBox(
+                                                                                    //     width: MediaQuery.of(context).size.width / 3,
+                                                                                    //     child: CustomTextField(
+                                                                                    //       textController: controller.serialNoTextFieldController,
+                                                                                    //       label: 'Sr. No.',
+                                                                                    //     )),
+                                                                                    Dimens.boxHeight10,
+                                                                                    SizedBox(
+                                                                                        width: MediaQuery.of(context).size.width / 3,
+                                                                                        child: Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              ' Name: ',
+                                                                                              style: Styles.black14,
+                                                                                            ),
+                                                                                            Container(
+                                                                                              decoration: BoxDecoration(
+                                                                                                  border: Border.all(
+                                                                                                color: Color(0xFE50000),
+                                                                                                width: 0.5,
+                                                                                              )),
+                                                                                              height: MediaQuery.of(context).size.height * 0.040,
+                                                                                              // margin: Dimens.edgeInsets5,
+                                                                                              constraints: BoxConstraints(
+                                                                                                maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                                minWidth: 100,
+                                                                                              ),
+                                                                                              child: LoginCustomTextfield(
+                                                                                                textController: controller.nameTextFieldController,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        )),
+                                                                                    SizedBox(
                                                                                       width: MediaQuery.of(context).size.width / 3,
                                                                                       child: Row(
                                                                                         children: [
                                                                                           Text(
-                                                                                            ' Name: ',
+                                                                                            '  Email: ',
                                                                                             style: Styles.black14,
                                                                                           ),
                                                                                           Container(
@@ -671,640 +698,615 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                               minWidth: 100,
                                                                                             ),
                                                                                             child: LoginCustomTextfield(
-                                                                                              textController: controller.nameTextFieldController,
+                                                                                              textController: controller.emailTextFieldController,
                                                                                             ),
                                                                                           ),
                                                                                         ],
-                                                                                      )),
-                                                                                  SizedBox(
-                                                                                    width: MediaQuery.of(context).size.width / 3,
-                                                                                    child: Row(
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          '  Email: ',
-                                                                                          style: Styles.black14,
-                                                                                        ),
-                                                                                        Container(
-                                                                                          decoration: BoxDecoration(
-                                                                                              border: Border.all(
-                                                                                            color: Color(0xFE50000),
-                                                                                            width: 0.5,
-                                                                                          )),
-                                                                                          height: MediaQuery.of(context).size.height * 0.040,
-                                                                                          // margin: Dimens.edgeInsets5,
-                                                                                          constraints: BoxConstraints(
-                                                                                            maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                            minWidth: 100,
-                                                                                          ),
-                                                                                          child: LoginCustomTextfield(
-                                                                                            textController: controller.emailTextFieldController,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
+                                                                                      ),
                                                                                     ),
-                                                                                  ),
-                                                                                  SizedBox(
-                                                                                    width: MediaQuery.of(context).size.width / 3,
-                                                                                    child: Row(
-                                                                                      children: [
-                                                                                        Text(
-                                                                                          'Mobile: ',
-                                                                                          style: Styles.black14,
-                                                                                        ),
-                                                                                        Container(
-                                                                                          decoration: BoxDecoration(
-                                                                                              border: Border.all(
-                                                                                            color: Color(0xFE50000),
-                                                                                            width: 0.5,
-                                                                                          )),
-                                                                                          height: MediaQuery.of(context).size.height * 0.040,
-                                                                                          // margin: Dimens.edgeInsets5,
-                                                                                          constraints: BoxConstraints(
-                                                                                            maxWidth: MediaQuery.of(context).size.width / 4,
-                                                                                            minWidth: 100,
+                                                                                    SizedBox(
+                                                                                      width: MediaQuery.of(context).size.width / 3,
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            'Mobile: ',
+                                                                                            style: Styles.black14,
                                                                                           ),
-                                                                                          child: LoginCustomTextfield(
-                                                                                            inputFormatters: [
-                                                                                              FilteringTextInputFormatter.digitsOnly
-                                                                                            ],
-                                                                                            textController: controller.mobileTextFieldController,
+                                                                                          Container(
+                                                                                            decoration: BoxDecoration(
+                                                                                                border: Border.all(
+                                                                                              color: Color(0xFE50000),
+                                                                                              width: 0.5,
+                                                                                            )),
+                                                                                            height: MediaQuery.of(context).size.height * 0.040,
+                                                                                            // margin: Dimens.edgeInsets5,
+                                                                                            constraints: BoxConstraints(
+                                                                                              maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                              minWidth: 100,
+                                                                                            ),
+                                                                                            child: LoginCustomTextfield(
+                                                                                              inputFormatters: [
+                                                                                                FilteringTextInputFormatter.digitsOnly
+                                                                                              ],
+                                                                                              textController: controller.mobileTextFieldController,
+                                                                                            ),
                                                                                           ),
-                                                                                        ),
-                                                                                      ],
+                                                                                        ],
+                                                                                      ),
                                                                                     ),
-                                                                                  ),
-                                                                                  ElevatedButton(
-                                                                                    onPressed: () {
-                                                                                      // controller.addRow(controller.serialNoTextFieldController.text);
-                                                                                      // controller.serialNoTextFieldController.clear();
-
-                                                                                      // controller.addRow(controller.nameTextFieldController.text);
-                                                                                      // controller.nameTextFieldController.clear();
-
-                                                                                      // controller.addRow(controller.emailTextFieldController.text);
-                                                                                      // controller.emailTextFieldController.clear();
-                                                                                      controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
-                                                                                      controller.nameTextFieldController.clear();
-                                                                                      controller.emailTextFieldController.clear();
-                                                                                      controller.mobileTextFieldController.clear();
-                                                                                    },
-                                                                                    child: Text(
-                                                                                      'Add',
-                                                                                      style: TextStyle(color: ColorValues.whiteColor),
+                                                                                    ElevatedButton(
+                                                                                      onPressed: () {
+                                                                                        // controller.addRow(controller.serialNoTextFieldController.text);
+                                                                                        // controller.serialNoTextFieldController.clear();
+    
+                                                                                        // controller.addRow(controller.nameTextFieldController.text);
+                                                                                        // controller.nameTextFieldController.clear();
+    
+                                                                                        // controller.addRow(controller.emailTextFieldController.text);
+                                                                                        // controller.emailTextFieldController.clear();
+                                                                                        controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
+                                                                                        controller.nameTextFieldController.clear();
+                                                                                        controller.emailTextFieldController.clear();
+                                                                                        controller.mobileTextFieldController.clear();
+                                                                                      },
+                                                                                      child: Text(
+                                                                                        'Add',
+                                                                                        style: TextStyle(color: ColorValues.whiteColor),
+                                                                                      ),
                                                                                     ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            )
-                                                                          ]),
-                                                                        )
-                                                                      ],
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            ]),
+                                                                          )
+                                                                        ],
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-
-                                                            /// Employee
-                                                          ],
-                                                        ),
-                                                      ],
+                                                                ],
+                                                              ),
+    
+                                                              /// Employee
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      // SizedBox(
-                                      //   height: 20,
-                                      // ),
-                                      // Wrap(
-                                      //   children: [
-                                      //     SizedBox(
-                                      //       width: 20,
-                                      //     ),
-                                      //     Container(
-                                      //       height: 250,
-                                      //       width: MediaQuery.of(context)
-                                      //               .size
-                                      //               .width /
-                                      //           1.15,
-                                      //       decoration: BoxDecoration(
-                                      //           border: Border.all(
-                                      //               color: Colors.grey)),
-                                      //       child: Column(
-                                      //         crossAxisAlignment:
-                                      //             CrossAxisAlignment.start,
-                                      //         children: [
-                                      //           Padding(
-                                      //             padding:
-                                      //                 const EdgeInsets.only(
-                                      //                     left: 20, top: 15),
-                                      //             child:
-                                      //                 Text('Equipment Images'),
-                                      //           ),
-                                      //           Dimens.boxHeight30,
-                                      //           Row(
-                                      //             children: [
-                                      //               ////
-                                      //               /// FILE UPLOAD WIDGET
-                                      //               Container(
-                                      //                 height: Get.height * 0.2,
-                                      //                 width: Get.width / 1.3,
-                                      //                 child: Row(
-                                      //                     //
-                                      //                     children: [
-                                      //                       Expanded(
-                                      //                         flex: 2,
-                                      //                         child:
-                                      //                             FileUploadWidgetWithDropzone(),
-                                      //                       ),
-                                      //                       Dimens.boxWidth10,
-                                      //                       Expanded(
-                                      //                           flex: 8,
-                                      //                           child:
-                                      //                               FileUploadDetailsWidgetWeb()),
-                                      //                     ]),
-                                      //               ),
-                                      //             ],
-                                      //           ),
-                                      //         ],
-                                      //       ),
-                                      //     )
-                                      //   ],
-                                      // ),
-
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Row(
-                                                // mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  SizedBox(
-                                                    height: 80,
-                                                    child: CustomTextField(
-                                                      width: 550,
-                                                      textController: controller
-                                                          .immediateCorrectiveActionTextController,
-                                                      focusnode: controller
-                                                          .immcoracFocus,
-                                                      scroll: controller
-                                                          .immcoracScroll,
-                                                      label:
-                                                          'Immediate Corrective Action by Buyer: ',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          Spacer(),
-                                          // SizedBox(
-                                          //   width: 210,
-                                          // ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Request to Supplier: ',
-                                                style: Styles.black14,
-                                              ),
-                                              Container(
-                                                // color: Color.fromARGB(
-                                                //     255, 206, 205, 205),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                  color: Color(0xFE50000),
-                                                  // width: 0.5,
-                                                )),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.070,
-                                                // width: 500,
-                                                // margin: Dimens.edgeInsets5,
-                                                constraints: BoxConstraints(
-                                                    // maxWidth:
-                                                    //     MediaQuery.of(context)
-                                                    //             .size
-                                                    //             .width /
-                                                    //         7,
-                                                    // minWidth: 200,
-                                                    ),
-                                                child: LoginCustomTextfield(
-                                                  width: 400,
-                                                  readOnly: true,
-                                                  ishint:
-                                                      '${controller.inventoryDetailsModel.value?.supplierName}',
-                                                  textController: controller
-                                                      .requestManufactureTextController,
-                                                ),
-                                              ),
-                                              //  CustomTextField(
-                                              //   textController: controller
-                                              //       .requestManufactureTextController,
-                                              //   readOnly: true,
-                                              //   label:
-                                              //       'Request to Supplier: ',
-                                              //   hintText:
-                                              //       '${controller.inventoryDetailsModel.value?.supplierName}',
-                                              // ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          CustomRichText(
-                                              title: 'Select Currency Unit: '),
-                                          Dimens.boxWidth5,
-                                          SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                6.3,
-                                            child: Obx(
-                                              () => DropdownWebWidget(
-                                                dropdownList:
-                                                    controller.unitCurrencyList,
-                                                isValueSelected: controller
-                                                    .isUnitCurrencySelected
-                                                    .value,
-                                                selectedValue: controller
-                                                    .selectedUnitCurrency.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  );
-                                }),
-
-                            ////Supplier Actions
-                            Container(
-                              // width: MediaQuery.of(context).size.width / 1.15,
-                              margin: Dimens.edgeInsets20,
-                              // height: Get.height,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.grey.withOpacity(.3)),
-                              ),
-                              constraints: BoxConstraints(
-                                maxWidth: 1100,
-                              ),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    CustomAppBar(
-                                      title: 'Schedule of Supplier Actions'.tr,
-                                      // action: ActionButton(
-                                      //   icon: Icons.add,
-                                      //   label: 'Add',
-                                      //   // onPress:
-                                      //   //     () async {},
-                                      //   color: Colors.blue,
-                                      //   onPressed: () {
-                                      //     controller
-                                      //         .updateSupplierActionText(
-                                      //       controller
-                                      //           .supplierActionTextFieldController
-                                      //           .text,
-                                      //       controller
-                                      //           .supplierActionDateTimeCtrlrWeb
-                                      //           .text,
-                                      //       // controller.isCheckedRequire
-                                      //       //     .value
-                                      //     );
-                                      //     controller
-                                      //         .supplierActionTextFieldController
-                                      //         .clear();
-                                      //     controller
-                                      //         .supplierActionDateTimeCtrlrWeb
-                                      //         .clear();
-                                      //     // controller.isCheckedRequire
-                                      //     //     .value = false;
-                                      //   },
-                                      // ),
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Obx(
-                                      () => Wrap(children: [
-                                        Row(children: [
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text('#'),
-                                          SizedBox(
-                                            width: 35,
-                                          ),
-                                          Text('Supplier Action'),
-                                          SizedBox(
-                                            width: 215,
-                                          ),
-                                          Text('Required'),
-                                          SizedBox(
-                                            width: 180,
-                                          ),
-                                          Text('Required by Date'),
-                                          SizedBox(
-                                            width: 150,
-                                          ),
-                                          // Text('Action'),
-                                        ]),
+                                            )
+                                          ],
+                                        ),
+                                        // SizedBox(
+                                        //   height: 20,
+                                        // ),
+                                        // Wrap(
+                                        //   children: [
+                                        //     SizedBox(
+                                        //       width: 20,
+                                        //     ),
+                                        //     Container(
+                                        //       height: 250,
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width /
+                                        //           1.15,
+                                        //       decoration: BoxDecoration(
+                                        //           border: Border.all(
+                                        //               color: Colors.grey)),
+                                        //       child: Column(
+                                        //         crossAxisAlignment:
+                                        //             CrossAxisAlignment.start,
+                                        //         children: [
+                                        //           Padding(
+                                        //             padding:
+                                        //                 const EdgeInsets.only(
+                                        //                     left: 20, top: 15),
+                                        //             child:
+                                        //                 Text('Equipment Images'),
+                                        //           ),
+                                        //           Dimens.boxHeight30,
+                                        //           Row(
+                                        //             children: [
+                                        //               ////
+                                        //               /// FILE UPLOAD WIDGET
+                                        //               Container(
+                                        //                 height: Get.height * 0.2,
+                                        //                 width: Get.width / 1.3,
+                                        //                 child: Row(
+                                        //                     //
+                                        //                     children: [
+                                        //                       Expanded(
+                                        //                         flex: 2,
+                                        //                         child:
+                                        //                             FileUploadWidgetWithDropzone(),
+                                        //                       ),
+                                        //                       Dimens.boxWidth10,
+                                        //                       Expanded(
+                                        //                           flex: 8,
+                                        //                           child:
+                                        //                               FileUploadDetailsWidgetWeb()),
+                                        //                     ]),
+                                        //               ),
+                                        //             ],
+                                        //           ),
+                                        //         ],
+                                        //       ),
+                                        //     )
+                                        //   ],
+                                        // ),
+    
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        Column(
-                                          children: []..addAll(controller
-                                              .supplierActions
-                                              .map((element) => Row(
-                                                    children: [
-                                                      // Text('${element.name}'),
-                                                      // Text('${element.required_by_date}')
-
-                                                      supplierActionData(
-                                                          '${element.srNumber}',
-                                                          '${element.name}',
-                                                          context,
-                                                          0,
-                                                          '${element.required_by_date}'),
-                                                    ],
-                                                  ))),
-                                        ),
-
-                                        // supplierActionData(
-                                        //     '2',
-                                        //     'Material Replinishment',
-                                        //     context,
-                                        //     1),
-                                        // supplierActionData(
-                                        //     '3',
-                                        //     'Preventive Action Plan',
-                                        //     context,
-                                        //     2),
-                                        // supplierActionData(
-                                        //     '4',
-                                        //     'Claim Closure Date',
-                                        //     context,
-                                        //     3)
-                                        Column(
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    3,
-                                                child: CustomTextField(
-                                                  textController: controller
-                                                      .supplierActionSrNumberTextFieldController,
-                                                  label: '  Serial Number',
-                                                )),
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    3,
-                                                child: CustomTextField(
-                                                  textController: controller
-                                                      .supplierActionTextFieldController,
-                                                  label: 'Supplier Action',
-                                                )),
-
-                                            ///Checkbox
-                                            Row(
+                                            Column(
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 340),
-                                                  child: Text(
-                                                    'Required',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
-                                                  ),
+                                                Row(
+                                                  // mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 80,
+                                                      child: CustomTextField(
+                                                        width: 550,
+                                                        textController: controller
+                                                            .immediateCorrectiveActionTextController,
+                                                        focusnode: controller
+                                                            .immcoracFocus,
+                                                        scroll: controller
+                                                            .immcoracScroll,
+                                                        label:
+                                                            'Immediate Corrective Action by Buyer: ',
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                SizedBox(
-                                                  width: 70,
-                                                ),
-                                                Checkbox(
-                                                    value: controller
-                                                        .isCheckedRequire.value,
-                                                    onChanged: (bool? value) {
-                                                      controller
-                                                          .requireToggleCheckbox();
-                                                    }),
                                               ],
                                             ),
-
+                                            Spacer(),
+                                            // SizedBox(
+                                            //   width: 210,
+                                            // ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Request to Supplier: ',
+                                                  style: Styles.black14,
+                                                ),
+                                                Container(
+                                                  // color: Color.fromARGB(
+                                                  //     255, 206, 205, 205),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                    color: Color(0xFE50000),
+                                                    // width: 0.5,
+                                                  )),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.070,
+                                                  // width: 500,
+                                                  // margin: Dimens.edgeInsets5,
+                                                  constraints: BoxConstraints(
+                                                      // maxWidth:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         7,
+                                                      // minWidth: 200,
+                                                      ),
+                                                  child: LoginCustomTextfield(
+                                                    width: 400,
+                                                    readOnly: true,
+                                                    ishint:
+                                                        '${controller.inventoryDetailsModel.value?.supplierName}',
+                                                    textController: controller
+                                                        .requestManufactureTextController,
+                                                  ),
+                                                ),
+                                                //  CustomTextField(
+                                                //   textController: controller
+                                                //       .requestManufactureTextController,
+                                                //   readOnly: true,
+                                                //   label:
+                                                //       'Request to Supplier: ',
+                                                //   hintText:
+                                                //       '${controller.inventoryDetailsModel.value?.supplierName}',
+                                                // ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            CustomRichText(
+                                                title: 'Select Currency Unit: '),
+                                            Dimens.boxWidth5,
                                             SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  3,
-                                              child: CustomTextField(
-                                                label: ' Required Date ',
-                                                suffixIcon: Icon(
-                                                  Icons.calendar_month,
+                                                  6.3,
+                                              child: Obx(
+                                                () => DropdownWebWidget(
+                                                  dropdownList:
+                                                      controller.unitCurrencyList,
+                                                  isValueSelected: controller
+                                                      .isUnitCurrencySelected
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedUnitCurrency.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
-                                                // textController:
-                                                //     controller.categoryTextController,
-                                                textController: controller
-                                                    .supplierActionDateTimeCtrlrWeb,
-
-                                                onTap: () {
-                                                  pickRequiredSupplierDate_web(
-                                                      context);
-                                                },
                                               ),
                                             ),
-
-                                            ElevatedButton(
-                                              child: Text(
-                                                'Add',
-                                                style: TextStyle(
-                                                    color: ColorValues
-                                                        .appGreenColor),
-                                              ),
-                                              onPressed: () {
-                                                controller
-                                                    .updateSupplierActionText(
-                                                  controller
-                                                      .supplierActionTextFieldController
-                                                      .text,
-                                                  controller
-                                                      .supplierActionDateTimeCtrlrWeb
-                                                      .text,
-                                                  controller
-                                                      .supplierActionSrNumberTextFieldController
-                                                      .text,
-
-                                                  // controller.isCheckedRequire
-                                                  //     .value
-                                                );
-                                                controller
-                                                    .supplierActionSrNumberTextFieldController
-                                                    .clear();
-                                                controller
-                                                    .supplierActionTextFieldController
-                                                    .clear();
-                                                controller
-                                                    .supplierActionDateTimeCtrlrWeb
-                                                    .clear();
-                                                // controller.isCheckedRequire
-                                                //     .value = false;
-                                              },
-                                            )
                                           ],
                                         ),
-                                      ]),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    );
+                                  }),
+    
+                              ////Supplier Actions
+                              Container(
+                                // width: MediaQuery.of(context).size.width / 1.15,
+                                margin: Dimens.edgeInsets20,
+                                // height: Get.height,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey.withOpacity(.3)),
+                                ),
+                                constraints: BoxConstraints(
+                                  maxWidth: 1100,
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      CustomAppBar(
+                                        title: 'Schedule of Supplier Actions'.tr,
+                                        // action: ActionButton(
+                                        //   icon: Icons.add,
+                                        //   label: 'Add',
+                                        //   // onPress:
+                                        //   //     () async {},
+                                        //   color: Colors.blue,
+                                        //   onPressed: () {
+                                        //     controller
+                                        //         .updateSupplierActionText(
+                                        //       controller
+                                        //           .supplierActionTextFieldController
+                                        //           .text,
+                                        //       controller
+                                        //           .supplierActionDateTimeCtrlrWeb
+                                        //           .text,
+                                        //       // controller.isCheckedRequire
+                                        //       //     .value
+                                        //     );
+                                        //     controller
+                                        //         .supplierActionTextFieldController
+                                        //         .clear();
+                                        //     controller
+                                        //         .supplierActionDateTimeCtrlrWeb
+                                        //         .clear();
+                                        //     // controller.isCheckedRequire
+                                        //     //     .value = false;
+                                        //   },
+                                        // ),
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Obx(
+                                        () => Wrap(children: [
+                                          Row(children: [
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text('#'),
+                                            SizedBox(
+                                              width: 35,
+                                            ),
+                                            Text('Supplier Action'),
+                                            SizedBox(
+                                              width: 215,
+                                            ),
+                                            Text('Required'),
+                                            SizedBox(
+                                              width: 180,
+                                            ),
+                                            Text('Required by Date'),
+                                            SizedBox(
+                                              width: 150,
+                                            ),
+                                            // Text('Action'),
+                                          ]),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            children: []..addAll(controller
+                                                .supplierActions
+                                                .map((element) => Row(
+                                                      children: [
+                                                        // Text('${element.name}'),
+                                                        // Text('${element.required_by_date}')
+    
+                                                        supplierActionData(
+                                                            '${element.srNumber}',
+                                                            '${element.name}',
+                                                            context,
+                                                            0,
+                                                            '${element.required_by_date}'),
+                                                      ],
+                                                    ))),
+                                          ),
+    
+                                          // supplierActionData(
+                                          //     '2',
+                                          //     'Material Replinishment',
+                                          //     context,
+                                          //     1),
+                                          // supplierActionData(
+                                          //     '3',
+                                          //     'Preventive Action Plan',
+                                          //     context,
+                                          //     2),
+                                          // supplierActionData(
+                                          //     '4',
+                                          //     'Claim Closure Date',
+                                          //     context,
+                                          //     3)
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      3,
+                                                  child: CustomTextField(
+                                                    textController: controller
+                                                        .supplierActionSrNumberTextFieldController,
+                                                    label: '  Serial Number',
+                                                  )),
+                                              SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      3,
+                                                  child: CustomTextField(
+                                                    textController: controller
+                                                        .supplierActionTextFieldController,
+                                                    label: 'Supplier Action',
+                                                  )),
+    
+                                              ///Checkbox
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 340),
+                                                    child: Text(
+                                                      'Required',
+                                                      style:
+                                                          TextStyle(fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 70,
+                                                  ),
+                                                  Checkbox(
+                                                      value: controller
+                                                          .isCheckedRequire.value,
+                                                      onChanged: (bool? value) {
+                                                        controller
+                                                            .requireToggleCheckbox();
+                                                      }),
+                                                ],
+                                              ),
+    
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    3,
+                                                child: CustomTextField(
+                                                  label: ' Required Date ',
+                                                  suffixIcon: Icon(
+                                                    Icons.calendar_month,
+                                                  ),
+                                                  // textController:
+                                                  //     controller.categoryTextController,
+                                                  textController: controller
+                                                      .supplierActionDateTimeCtrlrWeb,
+    
+                                                  onTap: () {
+                                                    pickRequiredSupplierDate_web(
+                                                        context);
+                                                  },
+                                                ),
+                                              ),
+    
+                                              ElevatedButton(
+                                                child: Text(
+                                                  'Add',
+                                                  style: TextStyle(
+                                                      color: ColorValues
+                                                          .appGreenColor),
+                                                ),
+                                                onPressed: () {
+                                                  controller
+                                                      .updateSupplierActionText(
+                                                    controller
+                                                        .supplierActionTextFieldController
+                                                        .text,
+                                                    controller
+                                                        .supplierActionDateTimeCtrlrWeb
+                                                        .text,
+                                                    controller
+                                                        .supplierActionSrNumberTextFieldController
+                                                        .text,
+    
+                                                    // controller.isCheckedRequire
+                                                    //     .value
+                                                  );
+                                                  controller
+                                                      .supplierActionSrNumberTextFieldController
+                                                      .clear();
+                                                  controller
+                                                      .supplierActionTextFieldController
+                                                      .clear();
+                                                  controller
+                                                      .supplierActionDateTimeCtrlrWeb
+                                                      .clear();
+                                                  // controller.isCheckedRequire
+                                                  //     .value = false;
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                        ]),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Dimens.boxHeight10,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Wrap(
+                                  children: [
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      height: 250,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.15,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.grey)),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, top: 15),
+                                            child: Text('Attachments'),
+                                          ),
+                                          Dimens.boxHeight30,
+                                          Row(
+                                            children: [
+                                              /// File Upload Widget
+                                              Container(
+                                                height: Get.height * 0.2,
+                                                width: Get.width / 1.3,
+                                                child: Row(
+                                                    //
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child:
+                                                            FileUploadWidgetWithDropzone(),
+                                                      ),
+                                                      Dimens.boxWidth10,
+                                                      Expanded(
+                                                          flex: 8,
+                                                          child:
+                                                              FileUploadDetailsWidgetWeb()),
+                                                    ]),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+    
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    CustomRichText(title: 'Select Approver: '),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4.2,
+                                      child: Obx(
+                                        () => DropdownWebWidget(
+                                          dropdownList: controller.employeeList,
+                                          isValueSelected: controller
+                                              .isemployeeListSelected.value,
+                                          selectedValue: controller
+                                              .selectedEmployeeList.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                            Dimens.boxHeight10,
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Wrap(
+    
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  SizedBox(
+                                    height: 150,
+                                  ),
+                                  CustomElevatedButton(
+                                    backgroundColor: ColorValues.appGreenColor,
+                                    onPressed: () {
+                                      controller.saveAsDraft();
+                                    },
+                                    text: 'Save As Draft',
+                                  ),
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Container(
-                                    height: 250,
-                                    width: MediaQuery.of(context).size.width /
-                                        1.15,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey)),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 20, top: 15),
-                                          child: Text('Attachments'),
-                                        ),
-                                        Dimens.boxHeight30,
-                                        Row(
-                                          children: [
-                                            /// File Upload Widget
-                                            Container(
-                                              height: Get.height * 0.2,
-                                              width: Get.width / 1.3,
-                                              child: Row(
-                                                  //
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child:
-                                                          FileUploadWidgetWithDropzone(),
-                                                    ),
-                                                    Dimens.boxWidth10,
-                                                    Expanded(
-                                                        flex: 8,
-                                                        child:
-                                                            FileUploadDetailsWidgetWeb()),
-                                                  ]),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.only(top: 30),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  CustomRichText(title: 'Select Approver: '),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 4.2,
-                                    child: Obx(
-                                      () => DropdownWebWidget(
-                                        dropdownList: controller.employeeList,
-                                        isValueSelected: controller
-                                            .isemployeeListSelected.value,
-                                        selectedValue: controller
-                                            .selectedEmployeeList.value,
-                                        onValueChanged:
-                                            controller.onValueChanged,
-                                      ),
-                                    ),
+                                  CustomElevatedButton(
+                                    backgroundColor: ColorValues.appGreenColor,
+                                    onPressed: () {
+                                      // showAlertDialog();
+                                      controller.createWarrantyClaim();
+                                    },
+                                    text: 'Submit For Release',
                                   ),
                                 ],
-                              ),
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 150,
-                                ),
-                                CustomElevatedButton(
-                                  backgroundColor: ColorValues.appGreenColor,
-                                  onPressed: () {
-                                    controller.saveAsDraft();
-                                  },
-                                  text: 'Save As Draft',
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                CustomElevatedButton(
-                                  backgroundColor: ColorValues.appGreenColor,
-                                  onPressed: () {
-                                    // showAlertDialog();
-                                    controller.createWarrantyClaim();
-                                  },
-                                  text: 'Submit For Release',
-                                ),
-                              ],
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          // ),
         ),
-        // ),
-      );
+  );
 
   ///Alert Dialog
   // static void showAlertDialog({

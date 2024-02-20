@@ -36,485 +36,503 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
     return GetBuilder<TransactionReportListController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
-          return Obx(
-            () {
-              final dataSource = TransactionReportListDataSource(controller);
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    HeaderWidget(),
-                    Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color.fromARGB(255, 227, 224, 224),
-                          width: 1,
+          return SelectionArea(
+            child: Obx(
+              () {
+                final dataSource = TransactionReportListDataSource(controller);
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(255, 236, 234, 234)
-                                .withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(
+                                    Routes.stockManagementDashboardScreen);
+                              },
+                              child: Text(" / STOCK MANAGEMENT",
+                                  style: Styles.greyLight14),
+                            ),
+                            Text(" / TRANSACTION REPORT LIST ",
+                                style: Styles.greyLight14)
+                          ],
+                        ),
                       ),
-                      child: Row(
+                      Stack(
                         children: [
-                          Icon(
-                            Icons.home,
-                            color: ColorValues.greyLightColor,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.home);
-                            },
-                            child: Text(
-                              "DASHBOARD",
-                              style: Styles.greyLight14,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(
-                                  Routes.stockManagementDashboardScreen);
-                            },
-                            child: Text(" / STOCK MANAGEMENT",
-                                style: Styles.greyLight14),
-                          ),
-                          Text(" / TRANSACTION REPORT LIST ",
-                              style: Styles.greyLight14)
-                        ],
-                      ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          width: Get.width * 7,
-                          margin: EdgeInsets.only(left: 10, top: 30, right: 10),
-                          height: Get.height,
-                          child: Card(
-                            color: Color.fromARGB(255, 245, 248, 250),
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                          Container(
+                            width: Get.width * 7,
+                            margin:
+                                EdgeInsets.only(left: 10, top: 30, right: 10),
+                            height: Get.height,
+                            child: Card(
+                              color: Color.fromARGB(255, 245, 248, 250),
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Transaction Report List",
+                                          style: Styles.blackBold16,
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Date Range'),
+                                            Dimens.boxWidth10,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement_Date']);
+                                              },
+                                              hintText:
+                                                  '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Row(
                                     children: [
-                                      Text(
-                                        "Transaction Report List",
-                                        style: Styles.blackBold16,
+                                      PopupMenuButton<String>(
+                                        tooltip: "",
+                                        elevation: 25.0,
+                                        child: Container(
+                                          height: 35,
+                                          margin: EdgeInsets.only(left: 10),
+                                          padding: EdgeInsets.only(
+                                              top: 4,
+                                              bottom: 4,
+                                              right: 8,
+                                              left: 8),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            'Column Visibility',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
+                                        onSelected: (String value) {
+                                          // Handle column selection
+                                        },
                                       ),
                                       Spacer(),
-                                      Row(
-                                        children: [
-                                          CustomRichText(title: 'Date Range'),
-                                          Dimens.boxWidth10,
-                                          CustomTextFieldForStock(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            numberTextField: true,
-                                            onTap: () {
-                                              controller
-                                                      .openFromDateToStartDatePicker =
-                                                  !controller
-                                                      .openFromDateToStartDatePicker;
-                                              controller.update(
-                                                  ['stock_Mangement_Date']);
-                                            },
-                                            hintText:
-                                                '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                      Container(
+                                        width: 200,
+                                        height: 35,
+                                        margin: Dimens.edgeInsets0_0_16_0,
+                                        child: TextField(
+                                          style: GoogleFonts.lato(
+                                            textStyle: TextStyle(
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black),
                                           ),
-                                        ],
+                                          onChanged: (value) =>
+                                              controller.search(value),
+                                          decoration: InputDecoration(
+                                            enabledBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0),
+                                            ),
+                                            focusedBorder:
+                                                const OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0),
+                                            ),
+                                            contentPadding:
+                                                Dimens.edgeInsets10_0_0_0,
+                                            hintText: 'search'.tr,
+                                            hintStyle: Styles.grey12,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Divider(
-                                  color: ColorValues.greyLightColour,
-                                ),
-                                Row(
-                                  children: [
-                                    PopupMenuButton<String>(
-                                      tooltip: "",
-                                      elevation: 25.0,
-                                      child: Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        padding: EdgeInsets.only(
-                                            top: 4,
-                                            bottom: 4,
-                                            right: 8,
-                                            left: 8),
-                                        decoration: BoxDecoration(
-                                          color: ColorValues.appLightBlueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Actor Type: ',
+                                          style: Styles.blackBold14,
                                         ),
-                                        child: Text(
-                                          'Column Visibility',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
-                                      onSelected: (String value) {
-                                        // Handle column selection
-                                      },
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      width: 200,
-                                      height: 35,
-                                      margin: Dimens.edgeInsets0_0_16_0,
-                                      child: TextField(
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(
-                                              fontSize: 16.0,
-                                              height: 1.0,
-                                              color: Colors.black),
-                                        ),
-                                        onChanged: (value) =>
-                                            controller.search(value),
-                                        decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
-                                          ),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
-                                          ),
-                                          contentPadding:
-                                              Dimens.edgeInsets10_0_0_0,
-                                          hintText: 'search'.tr,
-                                          hintStyle: Styles.grey12,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10, bottom: 10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Actor Type: ',
-                                        style: Styles.blackBold14,
-                                      ),
-                                      Dimens.boxWidth20,
-                                      Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .2),
-                                        child: DropdownWebWidget(
-                                          width: MediaQuery.of(context)
+                                        Dimens.boxWidth20,
+                                        Container(
+                                          width: (MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              2,
-                                          dropdownList: controller.actorType,
-                                          isValueSelected: controller
-                                              .isSelectedactorType.value,
-                                          selectedValue: controller
-                                              .selectedActorType.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
+                                              .2),
+                                          child: DropdownWebWidget(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                2,
+                                            dropdownList: controller.actorType,
+                                            isValueSelected: controller
+                                                .isSelectedactorType.value,
+                                            selectedValue: controller
+                                                .selectedActorType.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
                                         ),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        'Actor ID: ',
-                                        style: Styles.blackBold14,
-                                      ),
-                                      Dimens.boxWidth20,
-                                      controller.selectedactorTypeId ==
-                                              AppConstants.kTask
-                                          ? Container(
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              child: DropdownWebWidget(
-                                                width: MediaQuery.of(context)
+                                        Spacer(),
+                                        Text(
+                                          'Actor ID: ',
+                                          style: Styles.blackBold14,
+                                        ),
+                                        Dimens.boxWidth20,
+                                        controller.selectedactorTypeId ==
+                                                AppConstants.kTask
+                                            ? Container(
+                                                width: (MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    2,
-                                                dropdownList:
-                                                    controller.pmTaskList,
-                                                isValueSelected: controller
-                                                    .isSelectedpmtask.value,
-                                                selectedValue: controller
-                                                    .selectedpmtask.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            )
-                                          : controller.selectedactorTypeId ==
-                                                  AppConstants.kEngineer
-                                              ? Container(
-                                                  width: (MediaQuery.of(context)
+                                                    .2),
+                                                child: DropdownWebWidget(
+                                                  width: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
+                                                      2,
+                                                  dropdownList:
+                                                      controller.pmTaskList,
+                                                  isValueSelected: controller
+                                                      .isSelectedpmtask.value,
+                                                  selectedValue: controller
+                                                      .selectedpmtask.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              )
+                                            : controller.selectedactorTypeId ==
+                                                    AppConstants.kEngineer
+                                                ? Container(
                                                     width:
-                                                        MediaQuery.of(context)
+                                                        (MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            2,
-                                                    dropdownList:
-                                                        controller.userList,
-                                                    isValueSelected: controller
-                                                        .isSelectedUser.value,
-                                                    selectedValue: controller
-                                                        .selectedUser.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                )
-                                              : controller.selectedactorTypeId ==
-                                                      AppConstants.kStore
-                                                  ? Container(
-                                                      width: (MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width *
-                                                          .2),
-                                                      child: DropdownWebWidget(
-                                                        width: MediaQuery.of(
+                                                            .2),
+                                                    child: DropdownWebWidget(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              2,
+                                                      dropdownList:
+                                                          controller.userList,
+                                                      isValueSelected:
+                                                          controller
+                                                              .isSelectedUser
+                                                              .value,
+                                                      selectedValue: controller
+                                                          .selectedUser.value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
+                                                  )
+                                                : controller.selectedactorTypeId ==
+                                                        AppConstants.kStore
+                                                    ? Container(
+                                                        width: (MediaQuery.of(
                                                                     context)
                                                                 .size
                                                                 .width *
-                                                            2,
-                                                        dropdownList: controller
-                                                            .facilityNameList,
-                                                        isValueSelected: controller
-                                                            .isSelectedfacility
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedfacility
-                                                            .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged,
-                                                      ),
-                                                    )
-                                                  : controller.selectedactorTypeId ==
-                                                          AppConstants
-                                                              .kInventory
-                                                      ? Container(
-                                                          width: (MediaQuery.of(
+                                                            .2),
+                                                        child:
+                                                            DropdownWebWidget(
+                                                          width: MediaQuery.of(
                                                                       context)
                                                                   .size
                                                                   .width *
-                                                              .2),
-                                                          child:
-                                                              DropdownWebWidget(
-                                                            width: MediaQuery.of(
+                                                              2,
+                                                          dropdownList: controller
+                                                              .facilityNameList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isSelectedfacility
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedfacility
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
+                                                      )
+                                                    : controller.selectedactorTypeId ==
+                                                            AppConstants
+                                                                .kInventory
+                                                        ? Container(
+                                                            width: (MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .width *
-                                                                2,
-                                                            dropdownList: controller
-                                                                .inventoryNameList,
-                                                            isValueSelected:
-                                                                controller
-                                                                    .isSelectedInventory
-                                                                    .value,
-                                                            selectedValue:
-                                                                controller
-                                                                    .selectedInventory
-                                                                    .value,
-                                                            onValueChanged:
-                                                                controller
-                                                                    .onValueChanged,
-                                                          ),
-                                                        )
-                                                      : controller.selectedactorTypeId ==
-                                                              AppConstants
-                                                                  .kJobCard
-                                                          ? Container(
-                                                              width: (MediaQuery.of(
+                                                                .2),
+                                                            child:
+                                                                DropdownWebWidget(
+                                                              width: MediaQuery.of(
                                                                           context)
                                                                       .size
                                                                       .width *
-                                                                  .2),
-                                                              child:
-                                                                  DropdownWebWidget(
-                                                                width: MediaQuery.of(
+                                                                  2,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .inventoryNameList,
+                                                              isValueSelected:
+                                                                  controller
+                                                                      .isSelectedInventory
+                                                                      .value,
+                                                              selectedValue:
+                                                                  controller
+                                                                      .selectedInventory
+                                                                      .value,
+                                                              onValueChanged:
+                                                                  controller
+                                                                      .onValueChanged,
+                                                            ),
+                                                          )
+                                                        : controller.selectedactorTypeId ==
+                                                                AppConstants
+                                                                    .kJobCard
+                                                            ? Container(
+                                                                width: (MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width *
-                                                                    2,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .jobList,
-                                                                isValueSelected:
-                                                                    controller
-                                                                        .isSelectedJob
-                                                                        .value,
-                                                                selectedValue:
-                                                                    controller
-                                                                        .selectedJob
-                                                                        .value,
-                                                                onValueChanged:
-                                                                    controller
-                                                                        .onValueChanged,
-                                                              ),
-                                                            )
-                                                          : Dimens.box0
-                                    ],
+                                                                    .2),
+                                                                child:
+                                                                    DropdownWebWidget(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      2,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .jobList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isSelectedJob
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedJob
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              )
+                                                            : Dimens.box0
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                // SizedBox(
-                                //   height: 20,
-                                // ),
-                                controller.transactionReportList.isEmpty
-                                    ? Center(child: Text('No data'))
-                                    : Expanded(
-                                        child: ValueListenableBuilder(
-                                            valueListenable:
-                                                controller.columnVisibility,
-                                            builder: (context, value, child) {
-                                              final dataSource =
-                                                  TransactionReportListDataSource(
-                                                      controller);
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  controller.transactionReportList.isEmpty
+                                      ? Center(child: Text('No data'))
+                                      : Expanded(
+                                          child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                final dataSource =
+                                                    TransactionReportListDataSource(
+                                                        controller);
 
-                                              return PaginatedDataTable2(
-                                                columnSpacing: 10,
-                                                dataRowHeight: 70,
-                                                source:
-                                                    dataSource, // Custom DataSource class
-                                                // headingRowHeight:
-                                                //     Get.height * 0.12,
-                                                minWidth: Get.width * 1.2,
-                                                showCheckboxColumn: false,
-                                                rowsPerPage:
-                                                    10, // Number of rows per page
-                                                availableRowsPerPage: [
-                                                  10,
-                                                  20,
-                                                  30,
-                                                  50
-                                                ],
-                                                columns: [
-                                                  for (var entry
-                                                      in value.entries)
-                                                    if (entry.value)
-                                                      buildDataColumn(
-                                                        entry.key,
-                                                        controller.filterText[
-                                                            entry.key]!,
-                                                        controller.columnwidth[
-                                                            entry.key],
-                                                      ),
-                                                  buildDataColumn(
-                                                    'Actions',
-                                                    controller
-                                                        .userDateFilterText,
-                                                    150,
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                      ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        if (controller.openFromDateToStartDatePicker)
-                          Positioned(
-                            right: 150,
-                            top: 85,
-                            child: DatePickerWidget(
-                              selectionMode: DateRangePickerSelectionMode.range,
-                              monthCellStyle: DateRangePickerMonthCellStyle(
-                                todayCellDecoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: ColorValues.appDarkBlueColor),
-                              ), // last date of this year
-                              // controller: DateRangePickerController(),
-                              initialSelectedRange: PickerDateRange(
-                                controller.fromDate.value,
-                                controller.toDate.value,
+                                                return PaginatedDataTable2(
+                                                  columnSpacing: 10,
+                                                  dataRowHeight: 70,
+                                                  source:
+                                                      dataSource, // Custom DataSource class
+                                                  // headingRowHeight:
+                                                  //     Get.height * 0.12,
+                                                  minWidth: Get.width * 1.2,
+                                                  showCheckboxColumn: false,
+                                                  rowsPerPage:
+                                                      10, // Number of rows per page
+                                                  availableRowsPerPage: [
+                                                    10,
+                                                    20,
+                                                    30,
+                                                    50
+                                                  ],
+                                                  columns: [
+                                                    for (var entry
+                                                        in value.entries)
+                                                      if (entry.value)
+                                                        buildDataColumn(
+                                                          entry.key,
+                                                          controller.filterText[
+                                                              entry.key]!,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key],
+                                                        ),
+                                                    buildDataColumn(
+                                                      'Actions',
+                                                      controller
+                                                          .userDateFilterText,
+                                                      150,
+                                                    ),
+                                                  ],
+                                                );
+                                              }),
+                                        ),
+                                ],
                               ),
-
-                              onSubmit: (value) {
-                                print('po valu ${value.toString()}');
-                                PickerDateRange? data =
-                                    value as PickerDateRange;
-
-                                var pickUpDate =
-                                    DateTime.parse(data.startDate.toString());
-                                controller.fromDate.value = pickUpDate;
-                                var dropDate =
-                                    DateTime.parse(data.endDate.toString());
-                                dropDate != null
-                                    ? controller.toDate.value = dropDate
-                                    : controller.toDate.value = pickUpDate;
-
-                                controller.getTransactionListByDate();
-                                controller.openFromDateToStartDatePicker =
-                                    !controller.openFromDateToStartDatePicker;
-                                controller.update(['stock_Mangement_Date']);
-
-                                // Get.toNamed(
-                                //   Routes.stockManagementGoodsOrdersScreen,
-                                // );
-                              },
                             ),
                           ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+                          if (controller.openFromDateToStartDatePicker)
+                            Positioned(
+                              right: 150,
+                              top: 85,
+                              child: DatePickerWidget(
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
+                                monthCellStyle: DateRangePickerMonthCellStyle(
+                                  todayCellDecoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorValues.appDarkBlueColor),
+                                ), // last date of this year
+                                // controller: DateRangePickerController(),
+                                initialSelectedRange: PickerDateRange(
+                                  controller.fromDate.value,
+                                  controller.toDate.value,
+                                ),
+
+                                onSubmit: (value) {
+                                  print('po valu ${value.toString()}');
+                                  PickerDateRange? data =
+                                      value as PickerDateRange;
+
+                                  var pickUpDate =
+                                      DateTime.parse(data.startDate.toString());
+                                  controller.fromDate.value = pickUpDate;
+                                  var dropDate =
+                                      DateTime.parse(data.endDate.toString());
+                                  dropDate != null
+                                      ? controller.toDate.value = dropDate
+                                      : controller.toDate.value = pickUpDate;
+
+                                  controller.getTransactionListByDate();
+                                  controller.openFromDateToStartDatePicker =
+                                      !controller.openFromDateToStartDatePicker;
+                                  controller.update(['stock_Mangement_Date']);
+
+                                  // Get.toNamed(
+                                  //   Routes.stockManagementGoodsOrdersScreen,
+                                  // );
+                                },
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         });
   }

@@ -141,168 +141,173 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
         builder: (controller) {
           // return Obx(() {
 
-          return Column(
-            children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
+          return SelectionArea(
+            child: Column(
+              children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
                     ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.masterDashboard);
-                      },
-                      child: Text(" / MASTER", style: Styles.greyLight14),
-                    ),
-                    Text(" / DSM CHARGES LIST", style: Styles.greyLight14),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ScrollConfiguration(
-                  behavior: ScrollConfiguration.of(context)
-                      .copyWith(scrollbars: false),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      width: Get.width * 7,
-                      margin: EdgeInsets.all(10),
-                      height: Get.height,
-                      child: Card(
-                        color: Color.fromARGB(255, 245, 248, 250),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
                         ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.masterDashboard);
+                        },
+                        child: Text(" / MASTER", style: Styles.greyLight14),
+                      ),
+                      Text(" / DSM CHARGES LIST", style: Styles.greyLight14),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: Get.width * 7,
+                        margin: EdgeInsets.all(10),
+                        height: Get.height,
+                        child: Card(
+                          color: Color.fromARGB(255, 245, 248, 250),
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "F&S DSM CHARGES",
+                                        style: Styles.blackBold16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  color: ColorValues.greyLightColour,
+                                ),
+                                Row(
                                   children: [
-                                    Text(
-                                      "F&S DSM CHARGES",
-                                      style: Styles.blackBold16,
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {},
+                                        text: 'Column Visibility',
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'Copy'),
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'Excel'),
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'PDF'),
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      width: 300,
+                                      height: 40,
+                                      margin: Dimens.edgeInsets0_0_16_0,
+                                      child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
+                                        onChanged: (value) {},
+                                        // =>
+                                        // controller.search(value),
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Colors.grey,
+                                              width: 0.0,
+                                            ),
+                                          ),
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
+                                          hintText: 'search'.tr,
+                                          hintStyle: Styles.grey16,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Column Visibility',
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'Copy'),
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'Excel'),
-                                  ),
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'PDF'),
-                                  ),
-                                  Spacer(),
-                                  Container(
-                                    width: 300,
-                                    height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
-                                    child: TextField(
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                            fontSize: 16.0,
-                                            height: 1.0,
-                                            color: Colors.black),
-                                      ),
-                                      onChanged: (value) {},
-                                      // =>
-                                      // controller.search(value),
-                                      decoration: InputDecoration(
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        contentPadding: Dimens.edgeInsets05_10,
-                                        hintText: 'search'.tr,
-                                        hintStyle: Styles.grey16,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ]),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ]),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         });
   }

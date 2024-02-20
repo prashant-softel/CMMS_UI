@@ -1,7 +1,9 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
@@ -627,56 +629,54 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                   //       ),
 
                                   Dimens.boxHeight12,
-                                  // varUserAccessModel.value.access_list!
-                                  //             .where((e) =>
-                                  //                 e.feature_id ==
-                                  //                     UserAccessConstants
-                                  //                         .kModuleCleaningFeatureId &&
-                                  //                 e.approve ==
-                                  //                     UserAccessConstants
-                                  //                         .kHaveApproveAccess)
-                                  //             .length >
-                                  //         0
-                                  //     ? Row(
-                                  //         children: [
-                                  //           Spacer(),
-
-                                  //           Container(
-                                  //             height: 45,
-                                  //             child: CustomElevatedButton(
-                                  //               backgroundColor:
-                                  //                   ColorValues.rejectColor,
-                                  //               text: "Reject",
-                                  //               icon: Icons.close,
-                                  //               onPressed: () {
-                                  //                 Get.dialog(RejectVegetation(
-                                  //                   id: controller.id.value,
-                                  //                 ));
-                                  //               },
-                                  //             ),
-                                  //           ),
-                                  //           Dimens.boxWidth10,
-
-                                  //           Container(
-                                  //             height: 45,
-                                  //             child: CustomElevatedButton(
-                                  //               backgroundColor:
-                                  //                   ColorValues.appGreenColor,
-                                  //               text: "Approve",
-                                  //               icon: Icons.add,
-                                  //               onPressed: () {
-                                  //                 Get.dialog(ApproveMcPlan(
-                                  //                   id: controller.id.value,
-                                  //                 ));
-                                  //               },
-                                  //             ),
-                                  //           ),
-
-                                  // : Dimens.box0,
-                                  // Spacer(),
-                                  // ],
-                                  // )
-                                  // : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kModuleCleaningFeatureId &&
+                                                  e.approve ==
+                                                      UserAccessConstants
+                                                          .kHaveApproveAccess)
+                                              .length >
+                                          0
+                                      ? Row(
+                                          children: [
+                                            Spacer(),
+                                            Container(
+                                              height: 45,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.rejectColor,
+                                                text: "Reject",
+                                                icon: Icons.close,
+                                                onPressed: () {
+                                                  controller
+                                                      .vegPlanRejectButton(
+                                                    id: controller.id.value,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Dimens.boxWidth10,
+                                            Container(
+                                              height: 45,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "Approve",
+                                                icon: Icons.add,
+                                                onPressed: () {
+                                                  controller
+                                                      .vegPlanApprovedButton(
+                                                    id: controller.id.value,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            Spacer(),
+                                          ],
+                                        )
+                                      : Dimens.box0,
                                   Dimens.boxHeight12,
                                 ],
                               ),

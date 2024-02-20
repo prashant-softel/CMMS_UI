@@ -30,236 +30,238 @@ class MrsListContentWeb extends StatelessWidget {
         builder: (controller) {
           return Obx(() {
             final dataSource = MrsListDataSource(controller);
-            return Column(children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
+            return SelectionArea(
+              child: Column(children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.stockManagementDashboardScreen);
-                      },
-                      child: Text(" / STOCK MANAGEMENT",
-                          style: Styles.greyLight14),
-                    ),
-                    Text(" / MRS LIST", style: Styles.greyLight14),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Stack(children: [
-                  Container(
-                    width: Get.width * 7,
-                    margin: EdgeInsets.only(
-                        left: 10, top: 10, right: 10, bottom: 10),
-                    height: Get.height,
-                    child: Card(
-                      color: Color.fromARGB(255, 245, 248, 250),
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.stockManagementDashboardScreen);
+                        },
+                        child: Text(" / STOCK MANAGEMENT",
+                            style: Styles.greyLight14),
+                      ),
+                      Text(" / MRS LIST", style: Styles.greyLight14),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Stack(children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(
+                          left: 10, top: 10, right: 10, bottom: 10),
+                      height: Get.height,
+                      child: Card(
+                        color: Color.fromARGB(255, 245, 248, 250),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Material Requsition Slip",
+                                    style: Styles.blackBold16,
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      CustomRichText(title: 'Date Range'),
+                                      Dimens.boxWidth10,
+                                      CustomTextFieldForStock(
+                                        width:
+                                            MediaQuery.of(context).size.width / 5,
+                                        numberTextField: true,
+                                        onTap: () {
+                                          controller
+                                                  .openFromDateToStartDatePicker =
+                                              !controller
+                                                  .openFromDateToStartDatePicker;
+                                          controller
+                                              .update(['stock_Mangement_Date']);
+                                        },
+                                        hintText:
+                                            '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: ColorValues.greyLightColour,
+                            ),
+                            Row(
                               children: [
-                                Text(
-                                  "Material Requsition Slip",
-                                  style: Styles.blackBold16,
-                                ),
                                 Spacer(),
-                                Row(
-                                  children: [
-                                    CustomRichText(title: 'Date Range'),
-                                    Dimens.boxWidth10,
-                                    CustomTextFieldForStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      numberTextField: true,
-                                      onTap: () {
-                                        controller
-                                                .openFromDateToStartDatePicker =
-                                            !controller
-                                                .openFromDateToStartDatePicker;
-                                        controller
-                                            .update(['stock_Mangement_Date']);
-                                      },
-                                      hintText:
-                                          '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                Container(
+                                  width: 300,
+                                  height: 40,
+                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  child: TextField(
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
                                     ),
-                                  ],
+                                    onChanged: (value) =>
+                                        controller.search(value),
+                                    decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      contentPadding: Dimens.edgeInsets05_10,
+                                      hintText: 'search'.tr,
+                                      hintStyle: Styles.grey16,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          Divider(
-                            color: ColorValues.greyLightColour,
-                          ),
-                          Row(
-                            children: [
-                              Spacer(),
-                              Container(
-                                width: 300,
-                                height: 40,
-                                margin: Dimens.edgeInsets0_0_16_0,
-                                child: TextField(
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                        fontSize: 16.0,
-                                        height: 1.0,
-                                        color: Colors.black),
-                                  ),
-                                  onChanged: (value) =>
-                                      controller.search(value),
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.grey,
-                                        width: 0.0,
-                                      ),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.grey,
-                                        width: 0.0,
-                                      ),
-                                    ),
-                                    contentPadding: Dimens.edgeInsets05_10,
-                                    hintText: 'search'.tr,
-                                    hintStyle: Styles.grey16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          controller.mrsList.isEmpty
-                              ? Center(child: Text('No data'))
-                              : Expanded(
-                                  child: ValueListenableBuilder(
-                                      valueListenable:
-                                          controller.columnVisibility,
-                                      builder: (context, value, child) {
-                                        final dataSource =
-                                            MrsListDataSource(controller);
-
-                                        return PaginatedDataTable2(
-                                          // fixedLeftColumns: 1,
-                                          dataRowHeight:
-                                              70, //Get.height * 0.10,
-                                          columnSpacing: 10,
-                                          source:
-                                              dataSource, // Custom DataSource class
-                                          // headingRowHeight: Get.height * 0.12,
-                                          minWidth: Get.width * 1.2,
-                                          showCheckboxColumn: false,
-                                          rowsPerPage:
-                                              10, // Number of rows per page
-                                          availableRowsPerPage: [
-                                            10,
-                                            20,
-                                            30,
-                                            50
-                                          ],
-                                          columns: [
-                                            for (var entry in value.entries)
-                                              if (entry.value)
-                                                buildDataColumn(
-                                                  entry.key,
-                                                  controller
-                                                      .filterText[entry.key]!,
-                                                  controller
-                                                      .columnwidth[entry.key],
-                                                ),
-                                            buildDataColumn(
-                                              'Actions',
-                                              controller.idFilterText,
-                                              200,
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                )
-                        ],
-                      ),
-                    ),
-                  ),
-                  if (controller.openFromDateToStartDatePicker)
-                    Positioned(
-                      right: 150,
-                      top: 85,
-                      child: DatePickerWidget(
-                        selectionMode: DateRangePickerSelectionMode.range,
-                        monthCellStyle: DateRangePickerMonthCellStyle(
-                          todayCellDecoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ColorValues.appDarkBlueColor),
-                        ), // last date of this year
-                        // controller: DateRangePickerController(),
-                        initialSelectedRange: PickerDateRange(
-                          controller.fromDate.value,
-                          controller.toDate.value,
+                            controller.mrsList.isEmpty
+                                ? Center(child: Text('No data'))
+                                : Expanded(
+                                    child: ValueListenableBuilder(
+                                        valueListenable:
+                                            controller.columnVisibility,
+                                        builder: (context, value, child) {
+                                          final dataSource =
+                                              MrsListDataSource(controller);
+              
+                                          return PaginatedDataTable2(
+                                            // fixedLeftColumns: 1,
+                                            dataRowHeight:
+                                                70, //Get.height * 0.10,
+                                            columnSpacing: 10,
+                                            source:
+                                                dataSource, // Custom DataSource class
+                                            // headingRowHeight: Get.height * 0.12,
+                                            minWidth: Get.width * 1.2,
+                                            showCheckboxColumn: false,
+                                            rowsPerPage:
+                                                10, // Number of rows per page
+                                            availableRowsPerPage: [
+                                              10,
+                                              20,
+                                              30,
+                                              50
+                                            ],
+                                            columns: [
+                                              for (var entry in value.entries)
+                                                if (entry.value)
+                                                  buildDataColumn(
+                                                    entry.key,
+                                                    controller
+                                                        .filterText[entry.key]!,
+                                                    controller
+                                                        .columnwidth[entry.key],
+                                                  ),
+                                              buildDataColumn(
+                                                'Actions',
+                                                controller.idFilterText,
+                                                200,
+                                              ),
+                                            ],
+                                          );
+                                        }),
+                                  )
+                          ],
                         ),
-
-                        onSubmit: (value) {
-                          print('po valu ${value.toString()}');
-                          PickerDateRange? data = value as PickerDateRange;
-
-                          var pickUpDate =
-                              DateTime.parse(data.startDate.toString());
-                          controller.fromDate.value = pickUpDate;
-                          var dropDate =
-                              DateTime.parse(data.endDate.toString());
-                          dropDate != null
-                              ? controller.toDate.value = dropDate
-                              : controller.toDate.value = pickUpDate;
-
-                          controller.getMrsListByDate();
-                          controller.openFromDateToStartDatePicker =
-                              !controller.openFromDateToStartDatePicker;
-                          controller.update(['stock_Mangement_Date']);
-
-                          // Get.toNamed(
-                          //   Routes.stockManagementGoodsOrdersScreen,
-                          // );
-                        },
                       ),
                     ),
-                ]),
-              ),
-            ]);
+                    if (controller.openFromDateToStartDatePicker)
+                      Positioned(
+                        right: 150,
+                        top: 85,
+                        child: DatePickerWidget(
+                          selectionMode: DateRangePickerSelectionMode.range,
+                          monthCellStyle: DateRangePickerMonthCellStyle(
+                            todayCellDecoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: ColorValues.appDarkBlueColor),
+                          ), // last date of this year
+                          // controller: DateRangePickerController(),
+                          initialSelectedRange: PickerDateRange(
+                            controller.fromDate.value,
+                            controller.toDate.value,
+                          ),
+              
+                          onSubmit: (value) {
+                            print('po valu ${value.toString()}');
+                            PickerDateRange? data = value as PickerDateRange;
+              
+                            var pickUpDate =
+                                DateTime.parse(data.startDate.toString());
+                            controller.fromDate.value = pickUpDate;
+                            var dropDate =
+                                DateTime.parse(data.endDate.toString());
+                            dropDate != null
+                                ? controller.toDate.value = dropDate
+                                : controller.toDate.value = pickUpDate;
+              
+                            controller.getMrsListByDate();
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['stock_Mangement_Date']);
+              
+                            // Get.toNamed(
+                            //   Routes.stockManagementGoodsOrdersScreen,
+                            // );
+                          },
+                        ),
+                      ),
+                  ]),
+                ),
+              ]),
+            );
           });
         });
   }
