@@ -13,13 +13,15 @@ class PermitApprovedDialog extends GetView {
   int? permitId;
   String? ptwStatus;
   int? jobId;
+  int? type;
 
   PermitApprovedDialog(
       {super.key,
       this.permitApprovedDialog,
       this.permitId,
       this.ptwStatus,
-      this.jobId});
+      this.jobId,
+      this.type});
   final ViewPermitController controller = Get.find();
 
   @override
@@ -328,7 +330,10 @@ class PermitApprovedDialog extends GetView {
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
                 controller.permitApprovedButton(
-                    permitId: permitId, ptwStatus: '$ptwStatus', jobId: jobId);
+                    permitId: permitId,
+                    ptwStatus: '$ptwStatus',
+                    jobId: jobId,
+                    type: type);
                 print('jobId:$jobId');
                 Get.back();
               },

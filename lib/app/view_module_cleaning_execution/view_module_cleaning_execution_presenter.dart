@@ -64,4 +64,17 @@ class ViewModuleCleaningExecutionPresenter {
   //     await addModuleCleaningExecutionUsecase.getFacilityList();
 
   ///
+  ///
+  void saveValueMcId({String? mcid}) async {
+    return viewModuleCleaningExecutionUsecase.saveValueMcId(mcid: mcid);
+  }
+
+  Future<String?> getValueMcId() async =>
+      await viewModuleCleaningExecutionUsecase.getValueMcId();
+  void saveValuePlanId({String? planId}) async {
+    return viewModuleCleaningExecutionUsecase.saveValuePlanId(planId: planId);
+  }
+
+  Future<String?> getValuePlanId() async =>
+      await viewModuleCleaningExecutionUsecase.getValuePlanId();
 }

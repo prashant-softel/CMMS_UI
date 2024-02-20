@@ -94,7 +94,7 @@ class AddUserController extends GetxController {
   var gender = 'Select Gender'.obs;
   AccessLevel? selectedItem;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  RxList<PlantList?> plantListModel = <PlantList?>[].obs;
+  RxList<FacilityModel?> plantListModel = <FacilityModel?>[].obs;
   // RxList<Responsibility?> responsibilitymodel = <Responsibility>[].obs;
   var loginIdCtrlr = TextEditingController();
   FocusNode loginIdFocus = FocusNode();
@@ -334,10 +334,16 @@ class AddUserController extends GetxController {
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
       responsList.value = _userDetailModel.responsibility ?? [];
-      responsList.value = _userDetailModel.responsibility ?? [];
+      filteredfacilityNameList.value = _userDetailModel.plant_list!
+          .map((e) => FacilityModel(
+                id: e.id ?? 0,
+                name: e.name ?? "",
+                spv: e.spv ?? "",
+              ))
+          .toList();
+      selectedfacilityNameIdList.value =
+          filteredfacilityNameList.map((e) => e!.id).toList();
       selectedresIdsList.value = responsList.map((obj) => obj!.id).toList();
-      //selectedresIdsList.add(responsList[equipCatIndex]?.id ?? 0);
-
       selectedResNameList.value = responsList
           .map((responsibility) => DesignationModel(
                 id: responsibility?.id ?? 0,
@@ -729,8 +735,8 @@ class AddUserController extends GetxController {
     // Display the copied list
 
     newselectedResNameList.forEach((e) {
-      reslist.add(
-          UserResponbility(responsibility: e.name, since_when: "2023-11-27"));
+      reslist.add(UserResponbility(
+          responsibility: e.responsibility, since_when: "2023-11-27"));
     });
     Credentials credentials =
         Credentials(password: _password, user_name: _loginId);
@@ -805,9 +811,7 @@ class AddUserController extends GetxController {
                       child: CustomMultiSelectDialogField(
                         buttonText: 'Add Facility',
                         title: 'Select Facility',
-                        initialValue: (selectedFacilityNameList.isNotEmpty)
-                            ? selectedfacilityNameIdList
-                            : [],
+                        initialValue: selectedfacilityNameIdList,
                         items: facilityNameList
                             .map(
                               (facilityName) => MultiSelectItem(

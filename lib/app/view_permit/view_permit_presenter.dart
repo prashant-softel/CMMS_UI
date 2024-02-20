@@ -50,13 +50,14 @@ class ViewPermitPresenter {
     String? ptwStatus,
     int? jobId,
     required bool isLoading,
+    int? type,
   }) async {
     return viewPermitUsecase.permitApprovedButton(
-      rejectCancelPermitJsonString: rejectCancelPermitJsonString,
-      ptwStatus: ptwStatus,
-      jobId: jobId,
-      isLoading: isLoading,
-    );
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        isLoading: isLoading,
+        type: type);
   }
   // Future<void> permitApprovedButton({
   //   String? comment,
@@ -413,4 +414,10 @@ class ViewPermitPresenter {
   void clearpmTaskValue() async => viewPermitUsecase.clearpmTaskValue();
   void clearStoreDataPMtaskId() async =>
       viewPermitUsecase.clearStoreDataPMtaskId();
+  void saveTypeValue({String? type}) async {
+    return viewPermitUsecase.saveTypeValue(type: type);
+  }
+
+  Future<String?> getTypeValue() async =>
+      await viewPermitUsecase.getTypeValue();
 }

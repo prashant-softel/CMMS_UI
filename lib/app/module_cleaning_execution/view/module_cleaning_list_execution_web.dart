@@ -178,36 +178,34 @@ class _ModuleCleaningListExecutionState
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) =>
-                                            <PopupMenuEntry<String>>[]..addAll(
-                                                  controller.columnVisibility
-                                                      .value.entries
-                                                      .map((e) {
-                                                return PopupMenuItem<String>(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                            valueListenable:
-                                                                controller
-                                                                    .columnVisibility,
-                                                            builder: (context,
-                                                                value, child) {
-                                                              return Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                    value: value[
-                                                                        e.key],
-                                                                    onChanged:
-                                                                        (newValue) {
-                                                                      controller.setColumnVisibility(
-                                                                          e.key,
-                                                                          newValue!);
-                                                                    },
-                                                                  ),
-                                                                  Text(e.key),
-                                                                ],
-                                                              );
-                                                            }));
-                                              })),
+                                        itemBuilder: (BuildContext context) => <
+                                            PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -550,9 +548,11 @@ class MCExcutionListDataSource extends DataTableSource {
                               int id = McExcutionListDetails?.id ?? 0;
                               int planId = McExcutionListDetails?.planId ?? 0;
                               if (id != 0) {
+                                controller.clearStoreDataMcid();
+                                controller.clearStoreDataPlanid();
                                 Get.toNamed(
                                     Routes.viewModuleCleaningExecutionScreen,
-                                    arguments: {'id': id, "planId": planId});
+                                    arguments: {'mcid': id, "planId": planId});
                               }
                             },
                           ),
@@ -561,12 +561,14 @@ class MCExcutionListDataSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
+                              controller.clearStoreDataMcid();
+                              controller.clearStoreDataPlanid();
                               int id = McExcutionListDetails?.id ?? 0;
                               int planId = McExcutionListDetails?.planId ?? 0;
                               if (id != 0) {
                                 Get.toNamed(
                                     Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"id": id, "planId": planId});
+                                    arguments: {"mcid": id, "planId": planId});
                               }
                             },
                           ),
@@ -575,12 +577,14 @@ class MCExcutionListDataSource extends DataTableSource {
                             icon: Icons.add,
                             message: 'Start/End',
                             onPress: () {
+                              controller.clearStoreDataMcid();
+                              controller.clearStoreDataPlanid();
                               int id = McExcutionListDetails?.id ?? 0;
                               int planId = McExcutionListDetails?.planId ?? 0;
                               if (id != 0) {
                                 Get.toNamed(
                                     Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"id": id, "planId": planId});
+                                    arguments: {"mcid": id, "planId": planId});
                               }
                             },
                           )
@@ -595,6 +599,8 @@ class MCExcutionListDataSource extends DataTableSource {
         int id = McExcutionListDetails?.id ?? 0;
         int planId = McExcutionListDetails?.planId ?? 0;
         if (id != 0) {
+          controller.clearStoreDataMcid();
+          controller.clearStoreDataPlanid();
           Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
               arguments: {"id": id, "planId": planId});
         }

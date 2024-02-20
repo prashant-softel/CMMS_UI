@@ -222,7 +222,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                     ],
                                   ),
                                   Dimens.boxWidth15,
-      
+
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -377,7 +377,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                   ),
                                                   Container(
                                                     height: Get.height + 50,
-      
+
                                                     //  height: 500,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -462,8 +462,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                                   controller.plantListModel.map<DataRow>((plants) {
                                                                                 return DataRow(
                                                                                   cells: [
-                                                                                    DataCell(Text("${plants?.plant_name ?? ""}")),
-                                                                                    DataCell(Text("${plants?.spv_name ?? ""}")),
+                                                                                    DataCell(Text("${plants?.name ?? ""}")),
+                                                                                    DataCell(Text("${plants?.spv ?? ""}")),
                                                                                     DataCell(Text("----")),
                                                                                   ],
                                                                                   // Additional properties can be set for each DataRow if needed

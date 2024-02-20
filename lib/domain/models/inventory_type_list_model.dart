@@ -4,7 +4,7 @@ List<InventoryTypeListModel> inventoryTypeListModelFromJson(String str) =>
     List<InventoryTypeListModel>.from(
         json.decode(str).map((x) => InventoryTypeListModel.fromJson(x)));
 
-String preventiveCheckListModelToJson(List<InventoryTypeListModel> data) =>
+String preventiveCheckListModelToJson1(List<InventoryTypeListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class InventoryTypeListModel {

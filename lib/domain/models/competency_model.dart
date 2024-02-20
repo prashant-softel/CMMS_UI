@@ -4,7 +4,7 @@ List<CompetencyModel> preventiveCheckListModelFromJson(String str) =>
     List<CompetencyModel>.from(
         json.decode(str).map((x) => CompetencyModel.fromJson(x)));
 
-String preventiveCheckListModelToJson(List<CompetencyModel> data) =>
+String preventiveCheckListModelToJson1(List<CompetencyModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CompetencyModel {
@@ -12,12 +12,7 @@ class CompetencyModel {
   String? name;
   String? description;
 
-
-  CompetencyModel({
-    this.id,
-    this.name,
-    this.description
-  });
+  CompetencyModel({this.id, this.name, this.description});
 
   factory CompetencyModel.fromJson(Map<String, dynamic> json) =>
       CompetencyModel(

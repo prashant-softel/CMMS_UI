@@ -9,6 +9,8 @@ import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
 import 'package:cmms/domain/repositories/repository.dart';
 
+import '../repositories/local_storage_keys.dart';
+
 class ModuleCleaningPlanningUsecase {
   ModuleCleaningPlanningUsecase(this.repository);
   Repository repository;
@@ -108,4 +110,12 @@ class ModuleCleaningPlanningUsecase {
         planId: planId,
         isLoading: isLoading ?? false,
       );
+  void saveValueMcId({String? mcid}) async =>
+      repository.saveValue(LocalKeys.mcid, mcid);
+  Future<String?> getValueMcId() async =>
+      await repository.getStringValue(LocalKeys.mcid);
+  void saveValuePlanId({String? planId}) async =>
+      repository.saveValue(LocalKeys.planId, planId);
+  Future<String?> getValuePlanId() async =>
+      await repository.getStringValue(LocalKeys.planId);
 }

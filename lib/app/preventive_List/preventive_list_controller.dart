@@ -112,14 +112,14 @@ class PreventiveListController extends GetxController {
             homecontroller.facilityId$.listen((event) {
           facilityId = event;
           Future.delayed(Duration(seconds: 2), () {
-            getPreventiveCheckList(facilityId, type.value, true);
+            getPreventiveCheckList(facilityId, type.value, true, false);
           });
         });
         checklistFocus.addListener(() {
-      if (!checklistFocus.hasFocus) {
-        checklistScroll.jumpTo(0.0);
-      }
-    });
+          if (!checklistFocus.hasFocus) {
+            checklistScroll.jumpTo(0.0);
+          }
+        });
       }
       super.onInit();
     } catch (e) {
@@ -211,13 +211,16 @@ class PreventiveListController extends GetxController {
   }
 
   Future<void> getPreventiveCheckList(
-      int facilityId, int type, bool isLoading) async {
+      int facilityId, int type, bool isLoading, bool isExport) async {
     preventiveCheckList?.value = <PreventiveCheckListModel>[];
     BufferPreventiveCheckList?.value = <PreventiveCheckListModel>[];
 
     final _preventiveCheckList =
         await preventiveListPresenter.getPreventiveCheckList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+            facilityId: facilityId,
+            type: type,
+            isLoading: isLoading,
+            isExport: isExport);
 
     if (_preventiveCheckList != null) {
       preventiveCheckList!.value = _preventiveCheckList;
@@ -332,7 +335,7 @@ class PreventiveListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getPreventiveCheckList(facilityId, type.value, true);
+      getPreventiveCheckList(facilityId, type.value, true, false);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -381,7 +384,8 @@ class PreventiveListController extends GetxController {
                   onPressed: () {
                     deleteCkecklist(checklist_id).then((value) {
                       Get.back();
-                      getPreventiveCheckList(facilityId, type.value, true);
+                      getPreventiveCheckList(
+                          facilityId, type.value, true, false);
                     });
                   },
                   text: 'Yes'),
@@ -426,5 +430,9 @@ class PreventiveListController extends GetxController {
       isLoading: true,
     );
     return true;
+  }
+
+  void export() {
+    getPreventiveCheckList(facilityId, type.value, true, true);
   }
 }

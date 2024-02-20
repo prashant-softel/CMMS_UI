@@ -52,6 +52,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // String jsonData = facilityListToJson(yourFacilityModelList);
+
   Future<void> exportToExcel() async {
     // Load the data
     List<List<String>> data = [
@@ -60,8 +62,33 @@ class _MyHomePageState extends State<MyHomePage> {
       ["1", "2", "3"],
       ["1", "2", "3"],
     ]; // Define your own function to get the data
-
-    // Create Excel file
+    // List<List<String>> data = [
+    //   [
+    //     'id',
+    //     'name',
+    //     'address',
+    //     'city',
+    //     'state',
+    //     'country',
+    //     'pincode',
+    //     'spv',
+    //     'spv_id'
+    //   ],
+    //   ...jsonData
+    //       .map((facilityJson) => [
+    //             facilityJson['id'].toString(),
+    //             facilityJson['name'],
+    //             facilityJson['address'] ?? '',
+    //             facilityJson['city'] ?? '',
+    //             facilityJson['state'] ?? '',
+    //             facilityJson['country'] ?? '',
+    //             facilityJson['pin']?.toString() ?? '',
+    //             facilityJson['spv'] ?? '',
+    //             facilityJson['spv_id']?.toString() ?? '',
+    //           ])
+    //       .toList(),
+    // ];
+    // // Create Excel file
     var excel = Excel.createExcel();
     Sheet sheetObject = excel['Sheet1'];
 
