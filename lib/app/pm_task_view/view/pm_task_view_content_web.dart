@@ -376,29 +376,52 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye,
-                                                          message: "View",
-                                                          onPress: () {
-                                                            controller.selectedItem = controller
-                                                                .scheduleCheckPoint!
-                                                                .firstWhere((element) =>
-                                                                    "${element?.schedule_id}" ==
-                                                                    controller
-                                                                        .scheduleCheckPoint?[
-                                                                            index]
-                                                                        ?.schedule_id
-                                                                        .toString());
-                                                            if (controller
-                                                                    .selectedItem !=
-                                                                null) {
-                                                              Get.dialog(
-                                                                  ObservationPMTaskViewDialog());
-                                                            }
-                                                          })
+                                                      controller.pmtaskViewModel.value
+                                                                          ?.status ==
+                                                                      167 &&
+                                                                  varUserAccessModel
+                                                                          .value
+                                                                          .access_list!
+                                                                          .where((e) =>
+                                                                              e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
+                                                                              e.add ==
+                                                                                  UserAccessConstants
+                                                                                      .kHaveAddAccess)
+                                                                          .length >
+                                                                      0 ||
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  161 ||
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  162
+                                                          ?                                                           Dimens.box0
+: TableActionButton(
+                                                              color: ColorValues
+                                                                  .viewColor,
+                                                              icon: Icons
+                                                                  .remove_red_eye,
+                                                              message: "View",
+                                                              onPress: () {
+                                                                controller.selectedItem = controller
+                                                                    .scheduleCheckPoint!
+                                                                    .firstWhere((element) =>
+                                                                        "${element?.schedule_id}" ==
+                                                                        controller
+                                                                            .scheduleCheckPoint?[index]
+                                                                            ?.schedule_id
+                                                                            .toString());
+                                                                if (controller
+                                                                        .selectedItem !=
+                                                                    null) {
+                                                                  Get.dialog(
+                                                                      ObservationPMTaskViewDialog());
+                                                                }
+                                                              })
                                                     ],
                                                   )),
                                                 ]),
@@ -774,26 +797,19 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                         "View MRS",
                                                                     onPress:
                                                                         () {
-                                                                      final _flutterSecureStorage =
-                                                                          const FlutterSecureStorage();
-
-                                                                      _flutterSecureStorage
-                                                                          .delete(
-                                                                              key: "mrsId");
                                                                       String
                                                                           mrsId =
                                                                           controller.listMrsByTaskId?[index]?.mrsId.toString() ??
                                                                               "";
-                                                                      print({
-                                                                        "mrsId":
-                                                                            mrsId
-                                                                      });
+
                                                                       Get.toNamed(
                                                                           Routes
                                                                               .mrsViewScreen,
                                                                           arguments: {
                                                                             'mrsId':
-                                                                                int.tryParse("$mrsId")
+                                                                                int.tryParse("$mrsId"),
+                                                                            'type':
+                                                                                1
                                                                           });
                                                                     }),
                                                                 TableActionButton(

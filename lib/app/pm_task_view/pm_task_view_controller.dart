@@ -249,7 +249,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     Map<String, dynamic>? responseMapStart =
         await preventiveMaintenanceTaskViewPresenter.setPmTask(
       scheduleId: scheduleId.value,
-      isLoading: false,
+      isLoading: true,
     );
     if (responseMapStart != null && responseMapStart.length > 0) {
       // getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);

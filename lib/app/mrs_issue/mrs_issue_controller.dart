@@ -1,5 +1,6 @@
 import 'package:cmms/app/mrs_issue/mrs_issue_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/issue_mrs_model.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MrsIssueController extends GetxController {
   final HomeController homecontroller = Get.find();
   Rx<int> mrsId = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
-  RxList<CmmrsItems?> cmmrsItemsDetail = <CmmrsItems>[].obs;
+  RxList<GetAssetItemsModel?> cmmrsItemsDetail = <GetAssetItemsModel>[].obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/edit_mrs/edit_mrs_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -181,10 +183,11 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       ),
                       child: Column(children: [
                         // Column(
-                        //     children: []..addAll(controller.rowItem.value.map((e) {
+                        //     children: []
+                        //       ..addAll(controller.rowItem.value.map((e) {
                         //         return Text(jsonEncode(e));
                         //       }))),
-                        // Text(jsonEncode(controller.dropdownMapperData)),
+                        //  Text(jsonEncode(controller.dropdownMapperData)),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Row(
@@ -234,14 +237,15 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                 color: Color.fromARGB(255, 206, 229, 234)),
                             columns: [
                               DataColumn2(
-                                  // fixedWidth: 500,
+                                  fixedWidth: 500,
                                   label: Text(
-                                "Equipment Name",
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              )),
+                                    "Equipment Name",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
                               DataColumn2(
-                                  fixedWidth: 250,
+                                  fixedWidth: 200,
                                   label: Text(
                                     "Material Type",
                                     style: TextStyle(
@@ -257,7 +261,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                         fontWeight: FontWeight.bold),
                                   )),
                               DataColumn2(
-                                  fixedWidth: 110,
+                                  fixedWidth: 200,
                                   label: Text(
                                     "Available Qty",
                                     style: TextStyle(
@@ -265,7 +269,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                         fontWeight: FontWeight.bold),
                                   )),
                               DataColumn2(
-                                  fixedWidth: 110,
+                                  fixedWidth: 200,
                                   label: Text(
                                     "Requested Qty",
                                     style: TextStyle(
@@ -317,17 +321,17 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                             orElse: null);
                                                   },
                                                 ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text("Approval :"),
-                                                    Text(
-                                                        // "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                        "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}"),
-                                                  ],
-                                                ),
+                                                // SizedBox(
+                                                //   height: 10,
+                                                // ),
+                                                // Row(
+                                                //   children: [
+                                                //     Text("Approval :"),
+                                                //     Text(
+                                                //         // "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                                //         "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}"),
+                                                //   ],
+                                                // ),
                                               ],
                                             ),
                                           )
@@ -369,7 +373,8 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                         ),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          inputFormatters: <TextInputFormatter>[
+                                                          inputFormatters: <
+                                                              TextInputFormatter>[
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly
                                                           ],
