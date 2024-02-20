@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/inventory_status_list/view/inventory_status_list_mobile.dart';
 import 'package:cmms/app/inventory_status_list/view/inventory_status_list_web.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../inventory_status_list_controller.dart';
 class InventoryStatusListScreen extends GetView<InventoryStatusListController> {
   InventoryStatusListScreen({super.key});
   final controller = Get.find<InventoryStatusListController>();
+  final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +27,44 @@ class InventoryStatusListScreen extends GetView<InventoryStatusListController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Data Coming Soon......")),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: InventoryStatusListContentWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: InventoryStatusListContentWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
+      ),
     );
   }
 }

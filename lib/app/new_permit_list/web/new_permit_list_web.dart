@@ -84,10 +84,10 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                 Get.offAllNamed(Routes.breakdown);
                               },
                               child: Text(" / BREAKDOWN MAINTAINANCE",
-                                  style: Styles.greyMediumLight12),
+                                  style: Styles.greyLight14),
                             ),
                             Text(" / PERMIT LIST",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ],
                         ),
                       ),
