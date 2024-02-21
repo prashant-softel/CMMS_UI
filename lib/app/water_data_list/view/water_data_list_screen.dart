@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/view/water_data_list_web.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 
@@ -10,6 +11,7 @@ import '../../utils/responsive.dart';
 class WaterDataListScreen extends GetView<WaterDataListController> {
   WaterDataListScreen({super.key});
   final controller = Get.find<WaterDataListController>();
+  final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +26,44 @@ class WaterDataListScreen extends GetView<WaterDataListController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Data Coming Soon......")),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: WaterDataListWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: WaterDataListWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
+      ),
     );
   }
 }

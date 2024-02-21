@@ -76,6 +76,8 @@ import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart'
 import 'package:cmms/app/incident_report_dashboard/view/incident_report_dashboard_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
+import 'package:cmms/app/incident_risk_type/incident_risk_type_binding.dart';
+import 'package:cmms/app/incident_risk_type/view/incident_risk_type_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
 import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
@@ -1170,6 +1172,11 @@ class AppPages {
       name: _Paths.dsmCharges,
       page: DsmChargesListScreen.new,
       binding: DsmChargesListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.incidentRiskType,
+      page: IncidentRiskTypeScreen.new,
+      binding: IncidentRiskTypeBinding(),
     ),
   ];
 }

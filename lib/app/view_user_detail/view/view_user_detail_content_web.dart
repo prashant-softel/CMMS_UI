@@ -60,7 +60,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                         Get.offNamed(Routes.setting);
                       },
                       child:
-                          Text(" / SETTING", style: Styles.greyMediumLight12),
+                          Text(" / SETTING", style: Styles.greyLight14),
                     ),
                     InkWell(
                         onTap: () {
@@ -71,8 +71,8 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                           Get.offNamed(Routes.userList);
                         },
                         child: Text(" / USER LIST",
-                            style: Styles.greyMediumLight12)),
-                    Text(" / VIEW USER", style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)),
+                    Text(" / VIEW USER", style: Styles.greyLight14)
                   ],
                 ),
               ),
