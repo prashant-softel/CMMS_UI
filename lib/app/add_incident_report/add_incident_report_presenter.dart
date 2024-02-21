@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/block_model.dart';
+import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -38,7 +39,12 @@ class AddIncidentReportPresenter {
         isLoading: isLoading ?? false,
         businessType: businessType,
       );
-
+  Future<List<BodyInjuredModel?>?> getBodyInjuredData({
+    bool? isLoading,
+  }) async =>
+      await incidentReportUsecase.getBodyInjuredData(
+        isLoading: isLoading ?? false,
+      );
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     required int id,

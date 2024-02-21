@@ -5036,7 +5036,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                       4,
                                                                   dropdownList:
                                                                       controller
-                                                                          .businessList,
+                                                                          .bodyinjuredList,
                                                                   selectedValue:
                                                                       mapData[
                                                                           "value"],
@@ -5049,7 +5049,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                     });
                                                                     mapData["value"] =
                                                                         selectedValue;
-                                                                    controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
+                                                                    controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
                                                                         (element) =>
                                                                             element.name ==
                                                                             selectedValue,

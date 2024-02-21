@@ -78,6 +78,7 @@ import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
+import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
@@ -2791,6 +2792,30 @@ class Repository {
       return [];
     } catch (error) {
       log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<BodyInjuredModel>> getBodyInjuredData({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBodyInjuredData(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var bodyinjuredList = bodyInjuredModelFromJson(res.data);
+        return bodyinjuredList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'body pary injured');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
       return [];
     }
   }
@@ -10042,7 +10067,6 @@ class Repository {
   }
 
   Future<List<BodyInjuredModel>> getBodyInjuredList({
-    required int? facility_id,
     // int? blockId,
     // required String categoryIds,
     required bool isLoading,
@@ -10052,7 +10076,6 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getBodyInjuredList(
-        facility_id: facility_id,
         isLoading: isLoading,
         auth: auth,
       );
@@ -10351,6 +10374,39 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<List<VegTaskListModel>> getVegTaskList({
+    required int? facility_id,
+    required bool isLoading,
+    // String? start_date,
+    // required String end_date,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getVegTaskList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        // start_date: start_date,
+        // end_date: end_date,
+        auth: auth,
+      );
+      print('VegTaskList: ${res.data}');
+
+      if (!res.hasError) {
+        var vegTaskList = VegTaskListModelFromJson(res.data);
+        return vegTaskList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getVegTaskList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
   //end

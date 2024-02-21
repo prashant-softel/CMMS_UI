@@ -143,6 +143,16 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getBodyInjuredData({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBodyInjuredData(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
   Future<ResponseModel> getmanufacturerList({
     int? BusinessType,
     required bool isLoading,
@@ -4005,14 +4015,12 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> getBodyInjuredList({
-    int? facility_id,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getBodyInjuredList(
       isLoading: isLoading,
       auth: auth,
-      facility_id: facility_id,
     );
   }
 
@@ -4114,5 +4122,21 @@ class DataRepository extends DomainRepository {
         updateVegPlans: updateVegPlans,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getVegTaskList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+    // String? start_date,
+    // required String end_date,
+  }) async {
+    return await connectHelper.getVegTaskList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      // start_date: start_date,
+      // end_date: end_date,
+    );
+  }
 //end
 }

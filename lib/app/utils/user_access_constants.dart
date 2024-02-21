@@ -59,6 +59,10 @@ abstract class UserAccessConstants {
   static int kModuleCleaningFeatureId = 32;
   static String kFeatureModuleCleaning = "MC";
 
+  // Vegetation Control
+  static int kVegetationControlFeatureId = 33;
+  static String kFeatureVegetationControl = "Veg";
+
   ///USER ACCESS
   static int kHaveAddAccess = 1;
   static int kNotHaveAddAccess = 0;

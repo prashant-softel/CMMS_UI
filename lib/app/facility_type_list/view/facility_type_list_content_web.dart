@@ -36,7 +36,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -64,7 +65,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                       },
                       child: Text(" / MASTERS", style: Styles.greyLight14),
                     ),
-                    Text(" / FACILITY LIST", style: Styles.greyLight14)
+                    Text(" / FACILITY LIST1", style: Styles.greyLight14)
                   ],
                 ),
               ),
@@ -141,7 +142,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             ),
                                           ),
                                         ),
-      
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -150,7 +151,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Plant Name ')),
@@ -172,7 +173,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -184,7 +186,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                controller: controller.titleCtrlr,
+                                                controller:
+                                                    controller.titleCtrlr,
                                                 focusNode: controller.nameFocus,
                                                 scrollController:
                                                     controller.nameScroll,
@@ -226,7 +229,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -238,7 +242,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -269,7 +274,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-      
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -296,7 +301,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -352,7 +358,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -365,7 +372,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -415,7 +423,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -459,8 +468,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       controller: controller,
                                                       dropdownList:
                                                           controller.SpvList,
-                                                      isValueSelected: controller
-                                                          .isSelectedSpv.value,
+                                                      isValueSelected:
+                                                          controller
+                                                              .isSelectedSpv
+                                                              .value,
                                                       selectedValue: controller
                                                           .selectedSpv.value,
                                                       onValueChanged:
@@ -503,7 +514,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -531,10 +543,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       spreadRadius: 1.0,
                                                     ),
                                                     BoxShadow(
-                                                      color:
-                                                          ColorValues.whiteColor,
-                                                      offset:
-                                                          const Offset(0.0, 0.0),
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
                                                       blurRadius: 0.0,
                                                       spreadRadius: 0.0,
                                                     ),
@@ -548,8 +560,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       .selectedOwner.value,
                                                   // onValueChanged:
                                                   //     controller.onValueChanged(46, 46),
-                                                  onValueChanged: (selectedValue,
-                                                      isValueSelected) {
+                                                  onValueChanged:
+                                                      (selectedValue,
+                                                          isValueSelected) {
                                                     controller
                                                         .onValueChangedOwner(
                                                             selectedValue,
@@ -588,7 +601,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -620,10 +634,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       spreadRadius: 1.0,
                                                     ),
                                                     BoxShadow(
-                                                      color:
-                                                          ColorValues.whiteColor,
-                                                      offset:
-                                                          const Offset(0.0, 0.0),
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
                                                       blurRadius: 0.0,
                                                       spreadRadius: 0.0,
                                                     ),
@@ -635,8 +649,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       .isSelectedCustomer.value,
                                                   selectedValue: controller
                                                       .selectedCustomer.value,
-                                                  onValueChanged: (selectedValue,
-                                                      isValueSelected) {
+                                                  onValueChanged:
+                                                      (selectedValue,
+                                                          isValueSelected) {
                                                     controller
                                                         .onValueChangedCustomer(
                                                             selectedValue,
@@ -670,7 +685,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -702,10 +718,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       spreadRadius: 1.0,
                                                     ),
                                                     BoxShadow(
-                                                      color:
-                                                          ColorValues.whiteColor,
-                                                      offset:
-                                                          const Offset(0.0, 0.0),
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
                                                       blurRadius: 0.0,
                                                       spreadRadius: 0.0,
                                                     ),
@@ -717,8 +733,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       .isSelectedOperator.value,
                                                   selectedValue: controller
                                                       .selectedOperator.value,
-                                                  onValueChanged: (selectedValue,
-                                                      isValueSelected) {
+                                                  onValueChanged:
+                                                      (selectedValue,
+                                                          isValueSelected) {
                                                     controller
                                                         .onValueChangedOperator(
                                                             selectedValue,
@@ -760,7 +777,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -810,31 +828,36 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -851,7 +874,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -880,7 +903,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -942,8 +966,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child:
-                                                  CustomRichText(title: 'State '),
+                                              child: CustomRichText(
+                                                  title: 'State '),
                                             ),
                                             Container(
                                               height: MediaQuery.of(context)
@@ -962,7 +986,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1024,8 +1049,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child:
-                                                  CustomRichText(title: 'City '),
+                                              child: CustomRichText(
+                                                  title: 'City '),
                                             ),
                                             Container(
                                               height: MediaQuery.of(context)
@@ -1044,7 +1069,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1088,7 +1114,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     dropdownList:
                                                         controller.cityList,
                                                     isValueSelected: controller
-                                                        .isSelectedCityType.value,
+                                                        .isSelectedCityType
+                                                        .value,
                                                     selectedValue: controller
                                                         .selectedCity.value,
                                                     onValueChanged: controller
@@ -1126,7 +1153,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1173,31 +1201,36 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isZipCodeInvalid.value
+                                                          .isZipCodeInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isZipCodeInvalid.value
+                                                          .isZipCodeInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isZipCodeInvalid.value
+                                                          .isZipCodeInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -1260,8 +1293,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         // print("$controller.selectedItem");
                                         child: controller.selectedItem == null
                                             ? CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appDarkBlueColor,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
                                                 onPressed: () {
                                                   controller
                                                       .createFacilityType()
@@ -1275,8 +1308,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 },
                                                 text: 'Create Facility ')
                                             : CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appDarkBlueColor,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
                                                 onPressed: () {
                                                   controller
                                                       .updateFacilityList(
@@ -1288,7 +1321,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     if (value == true)
                                                       controller
                                                           .issuccessCreatechecklist();
-                                                    controller.toggleContainer();
+                                                    controller
+                                                        .toggleContainer();
                                                   });
                                                 },
                                                 text: 'Update')),
@@ -1338,19 +1372,22 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -1359,11 +1396,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
@@ -1476,7 +1513,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 .facilityTypeList[index].spv ??
                                             '')),
                                         DataCell(Text(controller
-                                                .facilityTypeList[index].owner ??
+                                                .facilityTypeList[index]
+                                                .owner ??
                                             '')),
                                         // DataCell(Text(controller
                                         //         .facilityTypeList?[index]
@@ -1501,17 +1539,16 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 icon: Icons.edit,
                                                 message: 'Edit',
                                                 onPress: () {
-                                                  controller.selectedItem =
-                                                      controller
-                                                          .facilityTypeList
-                                                          .firstWhere((element) =>
-                                                              "${element.id}" ==
-                                                              controller
-                                                                  .facilityTypeList[
-                                                                      index]
-                                                                  .id
-                                                                  .toString());
-      
+                                                  controller.selectedItem = controller
+                                                      .facilityTypeList
+                                                      .firstWhere((element) =>
+                                                          "${element.id}" ==
+                                                          controller
+                                                              .facilityTypeList[
+                                                                  index]
+                                                              .id
+                                                              .toString());
+
                                                   controller.titleCtrlr.text =
                                                       controller.selectedItem
                                                               ?.name ??
@@ -1526,18 +1563,20 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                               ?.address ??
                                                           '';
                                                   controller.zipcodeCtrlr.text =
-                                                      controller.selectedItem?.pin
+                                                      controller
+                                                              .selectedItem?.pin
                                                               .toString() ??
                                                           '';
-      
+
                                                   controller.selectedSpv.value =
                                                       controller.selectedItem
                                                               ?.spv ??
                                                           '';
-                                                  controller.selectedOwner.value =
-                                                      controller.selectedItem
-                                                              ?.owner ??
-                                                          '';
+                                                  controller.selectedOwner
+                                                      .value = controller
+                                                          .selectedItem
+                                                          ?.owner ??
+                                                      '';
                                                   controller.selectedOperator
                                                       .value = controller
                                                           .selectedItem
@@ -1548,14 +1587,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .selectedItem
                                                           ?.customer ??
                                                       '';
-                                                  controller.selectedCity.value =
-                                                      controller.selectedItem
-                                                              ?.city ??
-                                                          '';
-                                                  controller.selectedState.value =
-                                                      controller.selectedItem
-                                                              ?.state ??
-                                                          '';
+                                                  controller.selectedCity
+                                                      .value = controller
+                                                          .selectedItem?.city ??
+                                                      '';
+                                                  controller.selectedState
+                                                      .value = controller
+                                                          .selectedItem
+                                                          ?.state ??
+                                                      '';
                                                   controller.selectedCountry
                                                       .value = controller
                                                           .selectedItem
@@ -1563,13 +1603,13 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       '';
                                                   controller.isContainerVisible
                                                       .value = true;
-      
+
                                                   // controller.descriptionCtrlr
                                                   //     .text = controller
                                                   //         .selectedItem
                                                   //         ?. ??
                                                   //     '';
-      
+
                                                   // int spvId = int.tryParse(
                                                   //         facilityTypeList?.name ??
                                                   //             "") ??

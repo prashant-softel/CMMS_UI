@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -99,6 +100,13 @@ class AddIncidentReportUsecase {
       facility_id: facility_id,
     );
   }
+
+  Future<List<BodyInjuredModel?>?> getBodyInjuredData({
+    required bool isLoading,
+  }) async =>
+      await _repository.getBodyInjuredData(
+        isLoading: isLoading,
+      );
 
   Future<List<RiskTypeModel>> getRiskTypeList(
       {required bool isLoading, required int? facility_id}) async {

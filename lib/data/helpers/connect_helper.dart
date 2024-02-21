@@ -487,6 +487,22 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getBodyInjuredData({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetBodyPartsList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getBlockTypeList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6923,7 +6939,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateBodyParts',
-      Request.patch,
+      Request.put,
       bodyInjuredJsonString,
       isLoading ?? false,
       {
@@ -6953,9 +6969,9 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getBodyInjuredList(
-      {required bool isLoading, required String auth, int? facility_id}) async {
+      {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetBodyPartsList?facility_id=$facility_id',
+      'MISMaster/GetBodyPartsList',
       Request.getMultiparts,
       null,
       isLoading,
@@ -7159,6 +7175,23 @@ class ConnectHelper {
       warrantyClaimId: parsedJson['id'],
     ));
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getVegTaskList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegetationTaskList?facility_Id=$facility_id',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }
