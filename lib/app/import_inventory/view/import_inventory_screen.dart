@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
@@ -10,6 +11,7 @@ import 'import_inventory_content_web.dart';
 class ImportInventoryScreen extends GetView<ImportInventoryController> {
   ImportInventoryScreen({super.key});
   final controller = Get.find<ImportInventoryController>();
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +26,44 @@ class ImportInventoryScreen extends GetView<ImportInventoryController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Data Coming Soon......")),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: ImportInventoryContentWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: ImportInventoryContentWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
+      ),
     );
   }
 }

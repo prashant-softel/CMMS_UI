@@ -43,7 +43,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
             children: [
               Responsive.isMobile(context) || Responsive.isTablet(context)
                   ? Dimens.box0
-                  : HomeDrawer(),
+                  : Container(),
               Expanded(
                 child: Container(
                   // margin: Dimens.edgeInsets16,

@@ -5,10 +5,9 @@ import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class AddIncidentReportScreen extends GetView<AddIncidentReportController> {
   AddIncidentReportScreen({Key? key});
-  
+  final homecontroller = Get.find<HomeController>();
 
   ///
   @override
@@ -16,21 +15,30 @@ class AddIncidentReportScreen extends GetView<AddIncidentReportController> {
   {
     return //
         Scaffold(
-      body:
-           
-          Container(
-        child: Column(
-            //
-            children: [
-              // if (Responsive.isMobile(context))
-              //   Expanded(
-              //     child: IncidentReportMobile(),
-              //   ),
-              if (Responsive.isDesktop(context))
-                Expanded(
-                  child: AddIncidentReportContentWeb(),
-                ),
-            ]),
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                  left: homecontroller.menuButton.value ? 250.0 : 70.0),
+              child: Column(
+                  //
+                  children: [
+                    // if (Responsive.isMobile(context))
+                    //   Expanded(
+                    //     child: IncidentReportMobile(),
+                    //   ),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: AddIncidentReportContentWeb(),
+                      ),
+                  ]),
+            ),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
       ),
     );
 
