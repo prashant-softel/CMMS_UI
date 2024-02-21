@@ -1455,6 +1455,8 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(personAuthorizedInvolvedTextCtrlr.text.trim());
       String? _instruction =
           htmlEscape.convert(instructionsTextCtrlr.text.trim());
+      String? _is_person_involved =
+          htmlEscape.convert(personInvolvedTextCtrlr.text.trim());
       String? _safetyEquipment =
           htmlEscape.convert(SafetyEquipmetsTextCtrlr.text.trim());
       String? _correctSafetyProcedure =
@@ -1602,6 +1604,7 @@ class AddIncidentReportController extends GetxController {
               severity: selectedSeverity.value,
               //new data adding
               type_of_job: _jobType,
+              is_person_involved: _is_person_involved,
               is_person_authorized: _personAuthorized,
               instructions_given: _instruction,
               safety_equipments: _safetyEquipment,
