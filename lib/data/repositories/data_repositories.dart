@@ -143,6 +143,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getBodyInjuredData({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getBodyInjuredData(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getmanufacturerList({
     int? BusinessType,
     required bool isLoading,

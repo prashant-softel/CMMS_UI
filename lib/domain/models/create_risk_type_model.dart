@@ -1,4 +1,3 @@
-
 class CreateRiskTypeModel {
   String name;
   String description;
@@ -15,7 +14,28 @@ class CreateRiskTypeModel {
       );
 
   Map<String, dynamic> toJson() => {
-          'name': name,
-          'description': description,
+        'name': name,
+        'description': description,
+      };
+}
+
+class BodyInjeredTypeModel {
+  String bodyparts;
+  String description;
+
+  BodyInjeredTypeModel({
+    required this.bodyparts,
+    required this.description,
+  });
+
+  factory BodyInjeredTypeModel.fromJson(Map<String, dynamic> json) =>
+      BodyInjeredTypeModel(
+        bodyparts: json['bodyparts'],
+        description: json['description'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'bodyparts': bodyparts,
+        'description': description,
       };
 }
