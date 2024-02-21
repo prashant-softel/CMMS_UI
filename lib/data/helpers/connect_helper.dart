@@ -487,6 +487,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getBodyInjuredData({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetBodyPartsList?facility_id=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getBlockTypeList(
       {required bool isLoading, required String auth, int? job_type_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(

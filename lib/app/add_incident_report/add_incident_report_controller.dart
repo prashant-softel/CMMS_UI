@@ -5,6 +5,7 @@ import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart'
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -90,11 +91,18 @@ class AddIncidentReportController extends GetxController {
   ///Business List
 
   RxList<BusinessListModel> businessList = <BusinessListModel>[].obs;
+  RxList<BodyInjuredModel?> bodyinjuredList = <BodyInjuredModel>[].obs;
+
   Map<String, BusinessListModel> dropdownBusinessListMapperData = {};
+  Map<String, BodyInjuredModel> dropdownBodyinjuredListMapperData = {};
 
   Rx<bool> isBusinessListSelected = true.obs;
   Rx<String> selectedIBusinessList = ''.obs;
+  Rx<bool> isBodyinjuredListSelected = true.obs;
+  Rx<String> selectedIBodyinjuredList = ''.obs;
+
   int selectedBusinessListId = 0;
+  int selectedBodyinjuredListId = 0;
 
   // ///Dropdown testing
   RxList<String> dataList = <String>['Data 1', 'Data 2'].obs;
@@ -539,6 +547,9 @@ class AddIncidentReportController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         addOneMoreData();
       });
+      Future.delayed(Duration(seconds: 1), () {
+        getBodyInjuredData();
+      });
 
       await getIncidentReportHistory(id: irId.value);
     } catch (e) {}
@@ -936,6 +947,21 @@ class AddIncidentReportController extends GetxController {
     update(['business_list']);
   }
 
+  void getBodyInjuredData() async {
+    bodyinjuredList.value = <BodyInjuredModel>[];
+    final _bodyinjuredList = await incidentReportPresenter.getBodyInjuredData(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    print('bodyinjured List:$bodyinjuredList');
+    for (var bodyinjured_list in _bodyinjuredList!) {
+      bodyinjuredList.add(bodyinjured_list!);
+    }
+
+    update(['business_list']);
+  }
+
   Future<void> getIncidentReportHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 131;
@@ -1258,6 +1284,16 @@ class AddIncidentReportController extends GetxController {
               businessList.indexWhere((x) => x.name == value);
           selectedBusinessListId = businessList[businessListIndex].id ?? 0;
           print('name of contractor:$selectedBusinessListId');
+        }
+
+        break;
+      case RxList<BodyInjuredModel>:
+        {
+          int bodyPartInjuredListIndex =
+              bodyinjuredList.indexWhere((x) => x?.bodyparts == value);
+          selectedBodyinjuredListId =
+              bodyinjuredList[bodyPartInjuredListIndex]?.id ?? 0;
+          print('name of contractor:$selectedBodyinjuredListId');
         }
 
         break;

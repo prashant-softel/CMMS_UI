@@ -2796,6 +2796,32 @@ class Repository {
     }
   }
 
+  Future<List<BodyInjuredModel>> getBodyInjuredData({
+    int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getBodyInjuredData(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var bodyinjuredList = bodyInjuredModelFromJson(res.data);
+        return bodyinjuredList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'body pary injured');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<BlockTypeListModel>> getBlockTypeList({
     required int? job_type_id,
     required bool isLoading,

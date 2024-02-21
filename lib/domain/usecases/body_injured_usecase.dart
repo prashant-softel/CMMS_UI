@@ -35,8 +35,8 @@ class BodyInjuredUsecase {
     );
   }
 
-    deleteBodyInjured(
-      {required Object bodypart_id, required bool isLoading}) async =>
+  deleteBodyInjured(
+          {required Object bodypart_id, required bool isLoading}) async =>
       await repository.deleteBodyInjured(
         bodypart_id,
         isLoading,
@@ -51,7 +51,7 @@ class BodyInjuredUsecase {
         bodyInjuredJsonString: bodyInjuredJsonString,
       );
 
-    Future<bool> createBodyInjured({
+  Future<bool> createBodyInjured({
     bodyInjuredJsonString,
     bool? isLoading,
   }) async =>

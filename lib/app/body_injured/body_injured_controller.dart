@@ -68,7 +68,8 @@ class BodyInjuredController extends GetxController {
   int selectedJobSOPId = 0;
   RxList<BodyInjuredModel> filteredData = <BodyInjuredModel>[].obs;
 
-  PaginationController BodyInjuredListPaginationController = PaginationController(
+  PaginationController BodyInjuredListPaginationController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -134,12 +135,12 @@ class BodyInjuredController extends GetxController {
         getBodyInjuredList();
       });
     });
-  bodypnameFocus.addListener(() {
+    bodypnameFocus.addListener(() {
       if (!bodypnameFocus.hasFocus) {
         bodypnameScroll.jumpTo(0.0);
       }
     });
-  bodypdescFocus.addListener(() {
+    bodypdescFocus.addListener(() {
       if (!bodypdescFocus.hasFocus) {
         bodypdescScroll.jumpTo(0.0);
       }
@@ -160,9 +161,9 @@ class BodyInjuredController extends GetxController {
       bodyinjuredList.add(facilityType_list);
       BufferBodyInjuredList.add(facilityType_list);
     }
-  //   // selectedSopPermit.value = _SPVList[0].name ?? '';
+    //   // selectedSopPermit.value = _SPVList[0].name ?? '';
 
-  //   // supplierNameList = _supplierNameList;
+    //   // supplierNameList = _supplierNameList;
     BodyInjuredListPaginationController = PaginationController(
       rowCount: bodyinjuredList.length,
       rowsPerPage: 10,
@@ -200,8 +201,8 @@ class BodyInjuredController extends GetxController {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      CreateRiskTypeModel createCheckpoint =
-          CreateRiskTypeModel(name: _title, description: _description);
+      BodyInjeredTypeModel createCheckpoint =
+          BodyInjeredTypeModel(bodyparts: _title, description: _description);
       print("OUT ");
       var facilitylistJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
