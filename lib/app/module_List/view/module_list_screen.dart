@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ import 'module_listContent_web.dart';
 class ModuleListScreen extends GetView<ModuleListController> {
   ModuleListScreen({super.key});
   final controller = Get.find<ModuleListController>();
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +28,44 @@ class ModuleListScreen extends GetView<ModuleListController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Data Coming Soon......")),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: ModuleListContentWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: ModuleListContentWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
+      ),
     );
   }
 }

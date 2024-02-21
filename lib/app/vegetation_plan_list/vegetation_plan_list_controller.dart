@@ -80,12 +80,15 @@ class VegetationPlanListController extends GetxController {
       'Frequency': frequencyFilterText,
       "Status": statusFilterText,
     };
+    // facilityIdStreamSubscription?.cancel();
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
+      Future.delayed(Duration(seconds: 1), () async {
         getVegetationPlanList(facilityId, true);
+        // facilityIdStreamSubscription!.cancel();
       });
     });
+    // onClose() => facilityIdStreamSubscription?.cancel();
     super.onInit();
   }
 
@@ -161,4 +164,10 @@ class VegetationPlanListController extends GetxController {
         .toList();
     vegetationPlanList.value = filteredList;
   }
+
+  // @override
+  // void onClose() {
+  //   facilityIdStreamSubscription?.cancel();
+  //   super.onClose();
+  // }
 }
