@@ -633,7 +633,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                               .where((e) =>
                                                   e.feature_id ==
                                                       UserAccessConstants
-                                                          .kModuleCleaningFeatureId &&
+                                                          .kVegetationControlFeatureId &&
                                                   e.approve ==
                                                       UserAccessConstants
                                                           .kHaveApproveAccess)

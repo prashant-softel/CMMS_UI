@@ -4130,5 +4130,16 @@ class DataRepository extends DomainRepository {
       // end_date: end_date,
     );
   }
+
+  Future<ResponseModel> getVegExecutionDetail({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async =>
+      await connectHelper.getVegExecutionDetail(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
 //end
 }
