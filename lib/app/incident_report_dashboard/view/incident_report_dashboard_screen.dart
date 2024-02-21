@@ -113,33 +113,39 @@ class IncidentReportDashboardScreen
                                       );
                                     }),
                                 _incidentReportList(
-                                  tittle: "Body Injured",
-                                  ontap: () {
-                                    Get.toNamed(
-                                      Routes.Bodyinjured,
-                                    );
-                                  }),
+                                    tittle: "Body Injured",
+                                    ontap: () {
+                                      Get.toNamed(
+                                        Routes.Bodyinjured,
+                                      );
+                                    }),
+                                _incidentReportList(
+                                    tittle: "Incident Risk",
+                                    ontap: () {
+                                      Get.toNamed(Routes.incidentRiskType);
+                                    }),
 
-                              //  if (Responsive.isDesktop(context))
-                              // _incidentReportList(
-                              //     tittle: "Add Incident Report",
-                              //     ontap: () {
-                              //       Get.toNamed(
-                              //         Routes.addIncidentReportContentWeb,
-                              //       );
-                              //     }),
-                            ],
-                          )
-                        ]),
-                  ),
-                ],
+                                //  if (Responsive.isDesktop(context))
+                                // _incidentReportList(
+                                //     tittle: "Add Incident Report",
+                                //     ontap: () {
+                                //       Get.toNamed(
+                                //         Routes.addIncidentReportContentWeb,
+                                //       );
+                                //     }),
+                              ],
+                            )
+                          ]),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            AnimatedPositioned(
-              duration: Duration(milliseconds: 450),
-              child: HomeDrawer(),
-            ),
-          ],),
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 450),
+                child: HomeDrawer(),
+              ),
+            ],
+          ),
         ),
       ),
     );

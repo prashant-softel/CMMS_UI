@@ -81,10 +81,10 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                   Routes.stockManagementGoodsOrdersScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" /  VIEW GOODS ORDER DETAILS",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ],
                       ),
                     ),

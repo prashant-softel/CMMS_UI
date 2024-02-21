@@ -1,17 +1,16 @@
-import 'package:cmms/app/audit_list/audit_list_controller.dart';
-import 'package:cmms/app/audit_list/view/audit_list_content_web.dart';
 import 'package:cmms/app/home/home_controller.dart';
-
+import 'package:cmms/app/incident_risk_type/incident_risk_type_controller.dart';
+import 'package:cmms/app/incident_risk_type/view/incident_risk_type_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class AuditListScreen extends GetView<AuditListScreenController> {
-  AuditListScreen({super.key});
-  final controller = Get.find<AuditListScreenController>();
-  final HomeController homecontroller = Get.find();
+class IncidentRiskTypeScreen extends GetView<IncidentRiskTypeController> {
+  IncidentRiskTypeScreen({super.key});
+  final controller = Get.find<IncidentRiskTypeController>();
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class AuditListScreen extends GetView<AuditListScreenController> {
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(
-                              child: AuditListContentWeb(),
+                              child: IncidentRiskTypeWeb(),
                             )
                         ],
                       ),

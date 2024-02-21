@@ -10,6 +10,7 @@ import '../../utils/responsive.dart';
 class StatutoryScreen extends GetView<StatutoryController> {
   StatutoryScreen({super.key});
   final controller = Get.find<StatutoryController>();
+  final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +25,42 @@ class StatutoryScreen extends GetView<StatutoryController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: StatutoryMobile(),
+                    (Responsive.isMobile(context) ||
+                            Responsive.isTablet(context))
+                        ? Dimens.box0
+                        : Container(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: StatutoryMobile(),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: StatutoryWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: StatutoryWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+                child: HomeDrawer(), duration: Duration(milliseconds: 450))
+          ],
+        ),
+      ),
     );
   }
 }
