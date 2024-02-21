@@ -55,4 +55,14 @@ class AddVegetationPresenter {
       isLoading: isLoading ?? false,
     );
   }
+
+  Future<Map<String, dynamic>?> updateVegPlan({
+    updateVegPlans,
+    required bool isLoading,
+  }) async {
+    return vegetationlistUsecase.updateVegPlan(
+      updateVegPlans: updateVegPlans,
+      isLoading: isLoading,
+    );
+  }
 }

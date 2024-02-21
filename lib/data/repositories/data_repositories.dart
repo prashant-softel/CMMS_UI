@@ -4103,5 +4103,16 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, task_id: task_id);
     return response;
   }
+
+  Future<ResponseModel> updateVegPlan({
+    required String auth,
+    updateVegPlans,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateVegPlan(
+        auth: auth,
+        updateVegPlans: updateVegPlans,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

@@ -67,4 +67,13 @@ class VegetationlistUsecase {
         planId: planId,
         isLoading: isLoading ?? false,
       );
+
+  Future<Map<String, dynamic>> updateVegPlan({
+    updateVegPlans,
+    bool? isLoading,
+  }) async =>
+      await repository.updateVegPlan(
+        updateVegPlans,
+        isLoading,
+      );
 }

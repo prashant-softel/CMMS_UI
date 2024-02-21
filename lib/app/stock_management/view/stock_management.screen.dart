@@ -71,7 +71,7 @@ class StockManagementDashboardScreen
                                         //   child: DropdownButtonHideUnderline(
                                         //     child: DropdownButton(
                                         //       onChanged: (value) {},
-      
+
                                         //       icon: const Icon(
                                         //           Icons.keyboard_arrow_down_outlined),
                                         //       elevation: 9,
@@ -99,7 +99,8 @@ class StockManagementDashboardScreen
                                     Text(
                                       "Stock Management",
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -135,17 +136,18 @@ class StockManagementDashboardScreen
                                       ontap: () {
                                         Get.offNamed(Routes.purchaseGoodsorder);
                                       }),
-      
+
                                   //  if (Responsive.isDesktop(context))
                                   _stockManagementList(
                                       tittle: "Goods Order  List",
                                       ontap: () {
                                         Get.toNamed(
-                                          Routes.stockManagementGoodsOrdersScreen,
+                                          Routes
+                                              .stockManagementGoodsOrdersScreen,
                                         );
                                         //controller.checkPoint();
                                       }),
-                                   _stockManagementList(
+                                  _stockManagementList(
                                       tittle: "MRS List",
                                       ontap: () {
                                         Get.offNamed(Routes.mrsListScreen);
@@ -159,10 +161,10 @@ class StockManagementDashboardScreen
                                   //   tittle: "Receive Goods Order",
                                   //    ontap: () {
                                   //   Get.toNamed(
-                                    //         Routes.receiveGoodsOrders,
-                                    //       );
-      
-                                       //       // controller.receiveGoodsOrders();
+                                  //         Routes.receiveGoodsOrders,
+                                  //       );
+
+                                  //       // controller.receiveGoodsOrders();
                                   //    }),
                                 ],
                               ),
@@ -173,7 +175,8 @@ class StockManagementDashboardScreen
                                     Text(
                                       "Stock Report",
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -225,7 +228,8 @@ class StockManagementDashboardScreen
                                   _stockManagementList(
                                       tittle: "Faulty Material Report",
                                       ontap: () {
-                                        Get.offNamed(Routes.faultyMaterialReport);
+                                        Get.offNamed(
+                                            Routes.faultyMaterialReport);
                                       }),
                                 ],
                               ),
@@ -236,7 +240,8 @@ class StockManagementDashboardScreen
                                     Text(
                                       "Masters",
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -275,11 +280,12 @@ class StockManagementDashboardScreen
                                   _stockManagementList(
                                       tittle: "Add Asset Master",
                                       ontap: () {
-                                        Get.offNamed(Routes.addassetMaster);}),
-                          _importPlan(
-                              tittle: "Import Material",
-                              ontap: () {
-                                controller.importMaterial();
+                                        Get.offNamed(Routes.addassetMaster);
+                                      }),
+                                  _importPlan(
+                                      tittle: "Import Material",
+                                      ontap: () {
+                                        controller.importMaterial();
                                       }),
                                 ],
                               ),
