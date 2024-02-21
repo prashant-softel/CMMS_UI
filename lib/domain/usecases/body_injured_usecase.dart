@@ -28,10 +28,9 @@ class BodyInjuredUsecase {
   Repository repository;
 
   Future<List<BodyInjuredModel>> getBodyInjuredList(
-      {required bool isLoading, required int? facility_id}) async {
+      {required bool isLoading}) async {
     return repository.getBodyInjuredList(
       isLoading: isLoading,
-      facility_id: facility_id,
     );
   }
 

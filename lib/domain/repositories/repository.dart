@@ -2797,13 +2797,11 @@ class Repository {
   }
 
   Future<List<BodyInjuredModel>> getBodyInjuredData({
-    int? facilityId,
     required bool isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getBodyInjuredData(
-        facilityId: facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -10069,7 +10067,6 @@ class Repository {
   }
 
   Future<List<BodyInjuredModel>> getBodyInjuredList({
-    required int? facility_id,
     // int? blockId,
     // required String categoryIds,
     required bool isLoading,
@@ -10079,7 +10076,6 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getBodyInjuredList(
-        facility_id: facility_id,
         isLoading: isLoading,
         auth: auth,
       );

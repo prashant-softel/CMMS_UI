@@ -81,7 +81,7 @@ class BodyInjuredController extends GetxController {
       return;
     }
     List<BodyInjuredModel> filteredList = BufferBodyInjuredList.where((item) =>
-            (item.bodyparts
+            (item.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -153,17 +153,12 @@ class BodyInjuredController extends GetxController {
     BufferBodyInjuredList.value = <BodyInjuredModel>[];
     final _bodypartList = await bodyinjuredpresenter.getBodyInjuredList(
       isLoading: true,
-      // categoryIds: categoryIds,
-      facility_id: selectedJobSOPId,
-      // job_type_id: 36,
     );
     for (var facilityType_list in _bodypartList) {
       bodyinjuredList.add(facilityType_list);
       BufferBodyInjuredList.add(facilityType_list);
     }
-    //   // selectedSopPermit.value = _SPVList[0].name ?? '';
 
-    //   // supplierNameList = _supplierNameList;
     BodyInjuredListPaginationController = PaginationController(
       rowCount: bodyinjuredList.length,
       rowsPerPage: 10,
@@ -202,7 +197,7 @@ class BodyInjuredController extends GetxController {
       String _description = descriptionCtrlr.text.trim();
 
       BodyInjeredTypeModel createCheckpoint =
-          BodyInjeredTypeModel(bodyparts: _title, description: _description);
+          BodyInjeredTypeModel(name: _title, description: _description);
       print("OUT ");
       var facilitylistJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
@@ -242,13 +237,13 @@ class BodyInjuredController extends GetxController {
     });
   }
 
-  Future<bool> updateBodyInjured(checklistId) async {
+  Future<bool> updateBodyInjured(id) async {
     String _name = titleCtrlr.text.trim();
     String _description = descriptionCtrlr.text.trim();
 
     BodyInjuredModel createChecklist = BodyInjuredModel(
-      id: checklistId,
-      bodyparts: _name,
+      id: id,
+      name: _name,
       description: _description,
     );
     var bodyinjuredJsonString = createChecklist.toJson();

@@ -40,12 +40,10 @@ class AddIncidentReportPresenter {
         businessType: businessType,
       );
   Future<List<BodyInjuredModel?>?> getBodyInjuredData({
-    int? facilityId,
     bool? isLoading,
   }) async =>
       await incidentReportUsecase.getBodyInjuredData(
         isLoading: isLoading ?? false,
-        facilityId: facilityId,
       );
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,

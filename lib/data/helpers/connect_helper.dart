@@ -490,10 +490,9 @@ class ConnectHelper {
   Future<ResponseModel> getBodyInjuredData({
     required bool isLoading,
     required String auth,
-    int? facilityId,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetBodyPartsList?facility_id=$facilityId',
+      'MISMaster/GetBodyPartsList',
       Request.getMultiparts,
       null,
       isLoading,
@@ -6940,7 +6939,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateBodyParts',
-      Request.patch,
+      Request.put,
       bodyInjuredJsonString,
       isLoading ?? false,
       {
@@ -6970,9 +6969,9 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getBodyInjuredList(
-      {required bool isLoading, required String auth, int? facility_id}) async {
+      {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetBodyPartsList?facility_id=$facility_id',
+      'MISMaster/GetBodyPartsList',
       Request.getMultiparts,
       null,
       isLoading,
