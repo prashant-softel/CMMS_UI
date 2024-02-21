@@ -7194,4 +7194,22 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> getVegExecutionDetail({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegExecutionDetails?executionId=$executionId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('MCExecutionResponseModel${responseModel.data}');
+    return responseModel;
+  }
 }

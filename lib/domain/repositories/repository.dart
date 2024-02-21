@@ -77,6 +77,7 @@ import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
+import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
@@ -1599,7 +1600,7 @@ class Repository {
               endMCExecutionDetailsModelFromJson(res.data);
 
           var responseMap = _endMCExecutionDetailModel;
-          print({"MCExecutionResponseData", responseMap});
+          print({"VegExecutionResponseData", responseMap});
           return responseMap;
         }
       } else {
@@ -10407,6 +10408,40 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<VegExecutionDetailsModel?> getVegExecutionDetail({
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getVegExecutionDetail(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"VegExecutiondetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final VegExecutionDetailsModel _endMCExecutionDetailModel =
+              vegExecutionDetailsModelFromJson(res.data);
+
+          var responseMap = _endMCExecutionDetailModel;
+          print({"VegExecutionResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'VegExecutionDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
     }
   }
   //end
