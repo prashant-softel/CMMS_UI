@@ -102,11 +102,9 @@ class AddIncidentReportUsecase {
   }
 
   Future<List<BodyInjuredModel?>?> getBodyInjuredData({
-    required int? facilityId,
     required bool isLoading,
   }) async =>
       await _repository.getBodyInjuredData(
-        facilityId: facilityId,
         isLoading: isLoading,
       );
 

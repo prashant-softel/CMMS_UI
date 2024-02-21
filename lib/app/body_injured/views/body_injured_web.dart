@@ -621,7 +621,7 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
                                         DataCell(Text(controller
-                                            .bodyinjuredList[index].bodyparts
+                                            .bodyinjuredList[index].name
                                             .toString())),
                                         DataCell(Text(controller
                                                 .bodyinjuredList[index]
@@ -648,7 +648,7 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
 
                                                 controller.titleCtrlr.text =
                                                     controller.selectedItem
-                                                            ?.bodyparts ??
+                                                            ?.name ??
                                                         '';
                                                 controller.descriptionCtrlr
                                                     .text = controller
@@ -672,7 +672,7 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
                                                         .toString(),
                                                     bodypart: controller
                                                         .bodyinjuredList[index]
-                                                        .bodyparts);
+                                                        .name);
                                               },
                                             ),
                                           ],

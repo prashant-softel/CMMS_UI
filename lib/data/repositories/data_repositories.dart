@@ -144,14 +144,12 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> getBodyInjuredData({
-    int? facilityId,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getBodyInjuredData(
       isLoading: isLoading,
       auth: auth,
-      facilityId: facilityId,
     );
   }
 
@@ -4017,14 +4015,12 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> getBodyInjuredList({
-    int? facility_id,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getBodyInjuredList(
       isLoading: isLoading,
       auth: auth,
-      facility_id: facility_id,
     );
   }
 

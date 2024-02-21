@@ -4,8 +4,9 @@
 
 import 'dart:convert';
 
-List<BodyInjuredModel> bodyInjuredModelFromJson(String str) => List<BodyInjuredModel>.from(
-    json.decode(str).map((x) => BodyInjuredModel.fromJson(x)));
+List<BodyInjuredModel> bodyInjuredModelFromJson(String str) =>
+    List<BodyInjuredModel>.from(
+        json.decode(str).map((x) => BodyInjuredModel.fromJson(x)));
 
 String BodyInjuredModelToJson(List<BodyInjuredModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -13,23 +14,24 @@ String BodyInjuredModelToJson(List<BodyInjuredModel> data) =>
 class BodyInjuredModel {
   BodyInjuredModel({
     this.id,
-    this.bodyparts,
+    this.name,
     this.description,
   });
 
   int? id;
-  String? bodyparts;
+  String? name;
   String? description;
 
-  factory BodyInjuredModel.fromJson(Map<String, dynamic> json) => BodyInjuredModel(
+  factory BodyInjuredModel.fromJson(Map<String, dynamic> json) =>
+      BodyInjuredModel(
         id: json["id"],
-        bodyparts: json["bodyparts"],
-    description: json["description"],
+        name: json["name"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-    "bodyparts": bodyparts,
-    "description": description,
+        "name": name,
+        "description": description,
       };
 }

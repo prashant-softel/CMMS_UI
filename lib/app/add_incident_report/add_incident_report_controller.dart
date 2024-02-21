@@ -951,8 +951,6 @@ class AddIncidentReportController extends GetxController {
     bodyinjuredList.value = <BodyInjuredModel>[];
     final _bodyinjuredList = await incidentReportPresenter.getBodyInjuredData(
       isLoading: true,
-      // categoryIds: categoryIds,
-      facilityId: facilityId,
     );
     print('bodyinjured List:$bodyinjuredList');
     for (var bodyinjured_list in _bodyinjuredList!) {
@@ -1290,7 +1288,7 @@ class AddIncidentReportController extends GetxController {
       case RxList<BodyInjuredModel>:
         {
           int bodyPartInjuredListIndex =
-              bodyinjuredList.indexWhere((x) => x?.bodyparts == value);
+              bodyinjuredList.indexWhere((x) => x?.name == value);
           selectedBodyinjuredListId =
               bodyinjuredList[bodyPartInjuredListIndex]?.id ?? 0;
           print('name of contractor:$selectedBodyinjuredListId');
@@ -1529,7 +1527,7 @@ class AddIncidentReportController extends GetxController {
           name_contractor:
               dropdownBusinessListMapperData[element[5]["value"]]?.name,
           body_part_and_nature_of_injury:
-              dropdownBusinessListMapperData[element[6]["value"]]?.name,
+              dropdownBodyinjuredListMapperData[element[6]["value"]]?.name,
           work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
           plant_equipment_involved:
               dropdownEquipmentNameMapperData[element[8]["value"]]?.name,
