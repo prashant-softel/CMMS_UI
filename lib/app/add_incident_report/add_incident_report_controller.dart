@@ -682,6 +682,8 @@ class AddIncidentReportController extends GetxController {
       reportingDateTimeCtrlr.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
       titleTextCtrlr.text = incidentReportDetailsModel.value?.title ?? '';
+      personInvolvedTextCtrlr.text =
+          incidentReportDetailsModel.value?.is_person_involved ?? '';
       incidentreportDescriptionCtrlr.text =
           incidentReportDetailsModel.value?.description ?? '';
       selectedVictimNameList.value =
@@ -706,6 +708,7 @@ class AddIncidentReportController extends GetxController {
 
       ///For Update
       selectedBlockId = incidentReportDetailsModel.value?.block_id ?? 0;
+
       selectedEquipmentnameId =
           incidentReportDetailsModel.value?.equipment_id ?? 0;
       selectedVictimNameId = incidentReportDetailsModel.value?.victim_id ?? 0;
@@ -1668,6 +1671,8 @@ class AddIncidentReportController extends GetxController {
           htmlEscape.convert(unsafeActCauseTextCtrlr.text.trim());
       String? _otherVictimName =
           htmlEscape.convert(otherVictimNameTextCtrlr.text.trim());
+      String? _is_person_involved =
+          htmlEscape.convert(personInvolvedTextCtrlr.text.trim());
 
       // int costOfReplacement =
       //     int.parse(costOfReplacementTextController.text.trim());
@@ -1777,6 +1782,7 @@ class AddIncidentReportController extends GetxController {
               block_id: selectedBlockId,
               equipment_id: selectedEquipmentnameId,
               risk_level: 2,
+              is_person_involved: _is_person_involved,
               victim_id: selectedVictimNameId,
               action_taken_by: selectedAssetRestorationActionTakenById,
               inverstigated_by: selectedIncidentInvestigationDoneById,

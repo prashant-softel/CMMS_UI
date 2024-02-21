@@ -76,6 +76,7 @@ class IncidentReportDetailsModel {
     this.type_of_job,
     this.is_activities_trained,
     this.is_person_authorized,
+    this.is_person_involved,
     this.instructions_given,
     this.safety_equipments,
     this.safe_procedure_observed,
@@ -105,6 +106,7 @@ class IncidentReportDetailsModel {
   int? created_by_id;
   DateTime? incident_datetime;
   int? victim_id;
+  String? is_person_involved;
   String? victim_name;
   int? action_taken_by;
   String? action_taken_by_name;
@@ -176,6 +178,7 @@ class IncidentReportDetailsModel {
         facility_name: json["facility_name"],
         block_id: json['block_id'],
         block_name: json['block_name'] ?? '',
+        is_person_involved: json['is_person_involved'],
         equipment_id: json['equipment_id'],
         equipment_name: json['equipment_name'],
         risk_level: json['risk_level'],
@@ -281,6 +284,7 @@ class IncidentReportDetailsModel {
         "facility_name": facility_name,
         "block_id": block_id,
         "block_name": block_name,
+        "is_person_involved": is_person_involved,
         "equipment_id": equipment_id,
         "equipment_name": equipment_name,
         "risk_level": risk_level,
