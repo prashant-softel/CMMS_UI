@@ -28,6 +28,7 @@ class CreateIncidentReportModel {
   int? damaged_cost;
   int? generation_loss;
   int? job_id;
+  String? is_person_involved;
   String? description;
   String? type_of_job;
   String? is_person_authorized;
@@ -71,6 +72,7 @@ class CreateIncidentReportModel {
     this.damaged_cost,
     this.generation_loss,
     this.job_id,
+    this.is_person_involved,
     this.description,
     this.type_of_job,
     this.is_person_authorized,
@@ -115,7 +117,10 @@ class CreateIncidentReportModel {
         rca_required: json['rca_required'],
         damaged_cost: json['damaged_cost'],
         generation_loss: json['generation_loss'],
+
         job_id: json['job_id'],
+        is_person_involved: json['is_person_involved'],
+
         description: json['description'],
         type_of_job: json['type_of_job'],
         is_person_authorized: json['is_person_authorized'],
@@ -167,6 +172,8 @@ class CreateIncidentReportModel {
         "esi_applicability_remark": esi_applicability_remark,
         "victim_id": victim_id,
         "title": title,
+        "is_person_involved": is_person_involved,
+
         "action_taken_by": action_taken_by,
         "action_taken_datetime": action_taken_datetime,
         "inverstigated_by": inverstigated_by,
