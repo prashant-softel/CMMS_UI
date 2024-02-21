@@ -117,6 +117,8 @@ import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/vegetation_control/vegetation_binding.dart';
 import 'package:cmms/app/vegetation_control/view/vegetation_dashboard_screen.dart';
+import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_binding.dart';
+import 'package:cmms/app/vegetation_execution_plan_list/view/veg_execution_list_screen.dart';
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_binding.dart';
 import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
@@ -573,7 +575,11 @@ class AppPages {
       page: ViewVegPlanScreen.new,
       binding: ViewVegPlanBinding(), 
     ),
-
+    GetPage<dynamic>(
+      name: _Paths.vegExecutionListScreen,
+      page: VegExecutionListScreen.new,
+      binding:VegExecutionListBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.pmTaskView,
       page: PreventiveMaintenanceTaskViewScreen.new,
