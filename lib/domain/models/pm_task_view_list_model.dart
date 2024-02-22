@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../app/utils/utility.dart';
+
 PmtaskViewModel pmtaskViewModelFromJson(String str) =>
     PmtaskViewModel.fromJson(json.decode(str));
 
@@ -72,9 +74,15 @@ class PmtaskViewModel {
         status: json["status"] ?? "",
         facility_id: json["facility_id"] ?? "",
         assigned_to_id: json["assigned_to_id"] ?? "",
-        done_date: json["done_date"] ?? "",
-        due_date: json["due_date"] ?? "",
-        last_done_date: json["last_done_date"] ?? "",
+        done_date: json['done_date'] == null
+            ? json['done_date']
+            : Utility.getFormatedyearMonthDay(json['done_date']),
+        due_date: json['due_date'] == null
+            ? json['due_date']
+            : Utility.getFormatedyearMonthDay(json['due_date']),
+        last_done_date: json['last_done_date'] == null
+            ? json['last_done_date']
+            : Utility.getFormatedyearMonthDay(json['last_done_date']),
         plan_title: json["plan_title"] ?? "",
         status_short: json["status_short"] ?? "",
         task_code: json["task_code"] ?? "",

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<PmTaskListModel> pmTaskListModelFromJson(String str) =>
     List<PmTaskListModel>.from(
         json.decode(str).map((x) => PmTaskListModel.fromJson(x)));
@@ -50,8 +52,12 @@ class PmTaskListModel {
         assigned_to_name: json['assigned_to_name'] ?? '',
         category_id: json['category_id'] ?? 0,
         category_name: json['category_name'] ?? '',
-        done_date: json['done_date'] ?? '',
-        due_date: json['due_date'] ?? '',
+        done_date: json['done_date'] == null
+            ? json['done_date']
+            : Utility.getFormatedyearMonthDay(json['done_date']),
+        due_date: json['due_date'] == null
+            ? json['due_date']
+            : Utility.getFormatedyearMonthDay(json['due_date']),
         facility_id: json['facility_id'] ?? 0,
         permit_code: json['permit_code'] ?? '',
         permit_id: json['permit_id'] ?? 0,
@@ -60,7 +66,9 @@ class PmTaskListModel {
         frequency_id: json['frequency_id'] ?? 0,
         frequency_name: json['frequency_name'] ?? '',
         id: json['id'] ?? 0,
-        last_done_date: json['last_done_date'] ?? '',
+        last_done_date: json['last_done_date'] == null
+            ? json['last_done_date']
+            : Utility.getFormatedyearMonthDay(json['last_done_date']),
         name: json['plan_title'] ?? '',
       );
 

@@ -343,7 +343,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                         onPressed: () {
                           Get.back();
 
-                          Get.offAllNamed(Routes.pmTask);
+                          Get.offAndToNamed(Routes.pmTask);
                         },
                         backgroundColor: ColorValues.appDarkBlueColor,
                         textColor: ColorValues.whiteColor,

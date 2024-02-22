@@ -87,6 +87,7 @@ import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/services/export_to_excel_service.dart';
 import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 // import 'package:mixpanel_flutter/mixpanel_flutter.dart';
@@ -3384,8 +3385,8 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           type == 1
-              ? Get.offAllNamed(Routes.pmTaskView)
-              : Get.offAllNamed(Routes.newPermitList);
+              ? Get.offAndToNamed(Routes.pmTaskView)
+              : Get.offAndToNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -4924,7 +4925,31 @@ class Repository {
         String jsonData =
             preventiveCheckListModelToJson(_PreventiveCheckListModelList);
         if (isExport == true) {
-          exportToExcel(jsonData);
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'Facility_Name',
+              'ID',
+              'CheckList',
+              'Frequency',
+              'Category',
+              'Man Power',
+              'Duration'
+            ],
+            ...jsonDataList
+                .map((facilityJson) => [
+                      facilityJson['facility_name'],
+                      facilityJson['id'].toString(),
+                      facilityJson['checklist_number'],
+                      facilityJson['frequency_name'],
+                      facilityJson['category_name'],
+                      facilityJson['manPower'].toString(),
+                      facilityJson['duration'].toString(),
+                    ])
+                .toList(),
+          ];
+          exportToExcel(data, "checklist.xlsx");
         }
         return _PreventiveCheckListModelList;
       } else {
@@ -4935,70 +4960,6 @@ class Repository {
       print(error.toString());
       return [];
     }
-  }
-
-  Future<void> exportToExcel(String jsonData) async {
-    // Load the data
-    // List<List<String>> data = [
-    //   ["One", "Two", "Three"],
-    //   ["1", "2", "3"],
-    //   ["1", "2", "3"],
-    //   ["1", "2", "3"],
-    // ]; // Define your own function to get the data
-    List<dynamic> jsonDataList = jsonDecode(jsonData);
-
-    List<List<dynamic>> data = [
-      [
-        'Facility_Name',
-        'ID',
-        'CheckList',
-        'Frequency',
-        'Category',
-        'Man Power',
-        'Duration'
-      ],
-      ...jsonDataList
-          .map((facilityJson) => [
-                facilityJson['facility_name'],
-                facilityJson['id'].toString(),
-                facilityJson['checklist_number'],
-                facilityJson['frequency_name'],
-                facilityJson['category_name'],
-                facilityJson['manPower'].toString(),
-                facilityJson['duration'].toString(),
-              ])
-          .toList(),
-    ];
-    // Create Excel file
-    var excel = Excel.createExcel();
-    Sheet sheetObject = excel['Sheet1'];
-
-    // Populate Excel file with data
-    for (int row = 0; row < data.length; row++) {
-      for (int col = 0; col < data[row].length; col++) {
-        sheetObject
-            .cell(CellIndex.indexByColumnRow(rowIndex: row, columnIndex: col))
-            .value = "${data[row][col]}";
-      }
-    }
-
-    // Save Excel file
-    String fileName = 'checklist.xlsx'; // Specify the file name
-    List<int> bytes = excel.save()!;
-
-    // Create a Blob containing the Excel data
-    final blob = html.Blob([bytes]);
-
-    // Create an object URL for the Blob
-    final url = html.Url.createObjectUrlFromBlob(blob);
-
-    // Create a link element
-    final anchor = html.AnchorElement(href: url)
-      ..setAttribute("download", fileName)
-      ..click(); // Trigger download
-
-    // Revoke the object URL to free up memory
-    html.Url.revokeObjectUrl(url);
   }
 
   Future<List<ModuleListModel?>?> getModuleList(

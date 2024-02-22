@@ -77,29 +77,29 @@ class CalibrationDetailModel {
       requestApprovedBy: json['request_approved_by'],
       requestRejectedBy: json['request_rejected_by'],
       requestApprovedAt: json['request_approved_at'] == null
-          ? ""
+          ? json['request_approved_at']
           : Utility.getFormatedyearMonthDay(json['request_approved_at']),
-      requestRejectedAt: json['request_rejected_at'],
-      //     ? ""
-      //     : Utility.getFormatedyearMonthDay(json['request_rejected_at']),
+      requestRejectedAt: json['request_rejected_at'] == null
+          ? json['request_rejected_at']
+          : Utility.getFormatedyearMonthDay(json['request_rejected_at']),
       approvedBy: json['approved_by'],
       rejectedBy: json['rejected_by'],
-      startedAt: json['started_at'],
-      //     ? ""
-      //     : Utility.getFormatedyearMonthDay(json['started_at']),
+      startedAt: json['started_at'] == null
+          ? json['started_at']
+          : Utility.getFormatedyearMonthDay(json['started_at']),
       statusShort: json['status_short'],
       statusLong: json['status_long'],
-      requestedAt: json['requested_at'],
-      // ? ""
-      // : Utility.getFormatedyearMonthDay(json['requested_at']),
+      requestedAt: json['requested_at'] == null
+          ? json['requested_at']
+          : Utility.getFormatedyearMonthDay(json['requested_at']),
       requestedBy: json['requested_by'],
-      completedAt: json['completed_at'],
-      //     ? ""
-      //     : Utility.getFormatedyearMonthDay(json['completed_at']),
+      completedAt: json['completed_at'] == null
+          ? json['completed_at']
+          : Utility.getFormatedyearMonthDay(json['completed_at']),
       completedBy: json['completed_by'],
-      closedAt: json['closed_at'],
-      //     ? ""
-      //     : Utility.getFormatedyearMonthDay(json['closed_at']),
+      closedAt: json['closed_at'] == null
+          ? json['closed_at']
+          : Utility.getFormatedyearMonthDay(json['closed_at']),
       closedBy: json['closed_by'],
       assetId: json['asset_id'],
       assetName: json['asset_name'],
@@ -113,7 +113,9 @@ class CalibrationDetailModel {
       frequencyName: json['frequency_name'],
       vendorName: json['vendor_name'],
       responsiblePerson: json['responsible_person'],
-      receivedDate: json['received_date'],
+      receivedDate: json['received_date'] == null
+          ? json['received_date']
+          : Utility.getFormatedyearMonthDay(json['received_date']),
       assetHealthStatus: json['asset_health_status'],
     );
   }

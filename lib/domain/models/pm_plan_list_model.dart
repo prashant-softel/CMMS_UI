@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/app.dart';
+
 List<PmPlanListModel> pmPlanModelFromJson(String str) =>
     List<PmPlanListModel>.from(
         json.decode(str).map((x) => PmPlanListModel.fromJson(x)));
@@ -68,7 +70,9 @@ class PmPlanListModel {
         created_by_name: parsedJson['created_by_name'],
         facility_id: parsedJson['facility_id'],
         facility_name: parsedJson['facility_name'],
-        plan_date: parsedJson['plan_date'],
+        plan_date: parsedJson['plan_date'] == null
+            ? parsedJson['plan_date']
+            : Utility.getFormatedyearMonthDay(parsedJson['plan_date']),
         plan_freq_id: parsedJson['plan_freq_id'],
         plan_freq_name: parsedJson['plan_freq_name'],
         plan_id: parsedJson['plan_id'],
@@ -86,7 +90,10 @@ class PmPlanListModel {
         rejected_at: parsedJson['rejected_at'],
         rejected_by_id: parsedJson['rejected_by_id'],
         rejected_by_name: parsedJson['rejected_by_name'],
-        next_schedule_date: parsedJson['next_schedule_date']);
+        next_schedule_date: parsedJson['next_schedule_date'] == null
+            ? parsedJson['next_schedule_date']
+            : Utility.getFormatedyearMonthDay(
+                parsedJson['next_schedule_date']));
   }
   Map<String, dynamic> toJson() => {
         "category_id": category_id,
