@@ -10427,10 +10427,10 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          final VegExecutionDetailsModel _endMCExecutionDetailModel =
+          final VegExecutionDetailsModel _endVegExecutionDetailModel =
               vegExecutionDetailsModelFromJson(res.data);
 
-          var responseMap = _endMCExecutionDetailModel;
+          var responseMap = _endVegExecutionDetailModel;
           print({"VegExecutionResponseData", responseMap});
           return responseMap;
         }

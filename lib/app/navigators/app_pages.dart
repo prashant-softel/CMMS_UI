@@ -183,6 +183,8 @@ import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.d
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
+import 'package:cmms/app/view_veg_execution/view/view_veg_execution_screen.dart';
+import 'package:cmms/app/view_veg_execution/view_veg_execution_binding.dart';
 import 'package:cmms/app/view_vegetation_plan/view/view_veg_plan_screen.dart';
 import 'package:cmms/app/view_vegetation_plan/view_veg_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
@@ -581,6 +583,11 @@ class AppPages {
       name: _Paths.vegExecutionListScreen,
       page: VegExecutionListScreen.new,
       binding:VegExecutionListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewVegExecutionPlanScreen,
+      page: ViewVegExecutionScreen.new,
+      binding: ViewVegExecutionBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.pmTaskView,

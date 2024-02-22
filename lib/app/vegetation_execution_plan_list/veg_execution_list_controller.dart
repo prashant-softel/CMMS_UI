@@ -147,6 +147,8 @@ class VegExecutionListController extends GetxController {
                 false) ||
             (item?.doneDate?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
+            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
             (item?.status_short
                     ?.toString()
                     .toLowerCase()
@@ -184,8 +186,8 @@ class VegExecutionListController extends GetxController {
         // end_date: endDate,
         facility_id: facilityId);
 
-    for (var mc_task_list in list) {
-      vegTaskList.add(mc_task_list);
+    for (var veg_task_list in list) {
+      vegTaskList.add(veg_task_list);
     }
 
     vegTaskList.value = list;
@@ -203,18 +205,18 @@ class VegExecutionListController extends GetxController {
       }
     }
 
-    // update(['mc_task_list']);
+    // update(['veg_task_list']);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}
   }
 
-  // void clearStoreDataMcid() {
-  //   vegExecutionListPresenter.clearValueMcId();
-  // }
+  void clearStoreDataVegid() {
+    vegExecutionListPresenter.clearValueVegId();
+  }
 
-  // void clearStoreDataPlanid() {
-  //   vegExecutionListPresenter.clearValuePlanId();
-  // }
+  void clearStoreDataVegPlanid() {
+    vegExecutionListPresenter.clearValueVegPlanId();
+  }
 }

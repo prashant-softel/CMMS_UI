@@ -7,9 +7,8 @@ class VegExecutionListPresenter {
 
   VegExecutionListUsecase vegExecutionListUsecase;
 
-   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
-      await vegExecutionListUsecase.getFacilityList(
-          isLoading: isLoading);
+  Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
+      await vegExecutionListUsecase.getFacilityList(isLoading: isLoading);
   // void clearValueMcId() async =>
   //     vegExecutionListUsecase.clearValueMcId();
   // void clearValuePlanId() async =>
@@ -29,4 +28,8 @@ class VegExecutionListPresenter {
     );
   }
 
+  void clearValueVegId() async =>
+      vegExecutionListUsecase.clearValueVegId();
+  void clearValueVegPlanId() async =>
+      vegExecutionListUsecase.clearValueVegPlanId();
 }

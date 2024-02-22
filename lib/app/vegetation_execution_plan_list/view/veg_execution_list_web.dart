@@ -470,7 +470,7 @@ class VegExcutionListDataSource extends DataTableSource {
       '${VegExcutionListDetails?.noOfDays ?? ''}',
       '${VegExcutionListDetails?.startDate ?? ''}',
       '${VegExcutionListDetails?.doneDate ?? ''}',
-      '${VegExcutionListDetails?.status_short ?? ''}',
+      '${VegExcutionListDetails?.status ?? ''}',
 
       'Actions',
     ];
@@ -505,32 +505,32 @@ class VegExcutionListDataSource extends DataTableSource {
                         'MC ${VegExcutionListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: Container(
-                      //     padding: Dimens.edgeInsets8_2_8_2,
-                      //     decoration: BoxDecoration(
-                      //       color: controller.vegTaskList
-                      //                   .firstWhere(
-                      //                     (e) =>
-                      //                         e?.id ==
-                      //                         VegExcutionListDetails!.id,
-                      //                     orElse: () => VegTaskListModel(id: 00),
-                      //                   )
-                      //                   ?.status ==
-                      //               301
-                      //           ? ColorValues.approveColor
-                      //           : ColorValues.addNewColor,
-                      //       borderRadius: BorderRadius.circular(4),
-                      //     ),
-                      //     child: Text(
-                      //       '${VegExcutionListDetails?.status_short}',
-                      //       style: Styles.white10.copyWith(
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: controller.vegTaskList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              VegExcutionListDetails!.id,
+                                          orElse: () => VegTaskListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    301
+                                ? ColorValues.approveColor
+                                : ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${VegExcutionListDetails?.status_short}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 : (value == 'Actions')
@@ -541,15 +541,15 @@ class VegExcutionListDataSource extends DataTableSource {
                             icon: Icons.remove_red_eye_outlined,
                             message: 'View',
                             onPress: () {
-                              // int id = VegExcutionListDetails?.id ?? 0;
-                              // int planId = VegExcutionListDetails?.planId ?? 0;
-                              // if (id != 0) {
-                              //   controller.clearStoreDataMcid();
-                              //   controller.clearStoreDataPlanid();
-                              //   Get.toNamed(
-                              //       Routes.viewModuleCleaningExecutionScreen,
-                              //       arguments: {'mcid': id, "planId": planId});
-                              // }
+                              int id = VegExcutionListDetails?.id ?? 0;
+                              int vegplanId = VegExcutionListDetails?.planId ?? 0;
+                              if (id != 0) {
+                                controller.clearStoreDataVegid();
+                                controller.clearStoreDataVegPlanid();
+                                Get.toNamed(
+                                    Routes.viewVegExecutionPlanScreen,
+                                    arguments: {'vegid': id, "vegplanId": vegplanId});
+                              }
                             },
                           ),
                           TableActionButton(
@@ -557,14 +557,14 @@ class VegExcutionListDataSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              // controller.clearStoreDataMcid();
+                              // controller.clearStoreDatavegid();
                               // controller.clearStoreDataPlanid();
                               // int id = VegExcutionListDetails?.id ?? 0;
-                              // int planId = VegExcutionListDetails?.planId ?? 0;
+                              // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
                               // if (id != 0) {
                               //   Get.toNamed(
                               //       Routes.addModuleCleaningExecutionContentWeb,
-                              //       arguments: {"mcid": id, "planId": planId});
+                              //       arguments: {"vegid": id, "vegplanId": vegplanId});
                               // }
                             },
                           ),
@@ -573,14 +573,14 @@ class VegExcutionListDataSource extends DataTableSource {
                             icon: Icons.add,
                             message: 'Start/End',
                             onPress: () {
-                              // controller.clearStoreDataMcid();
+                              // controller.clearStoreDatavegid();
                               // controller.clearStoreDataPlanid();
                               // int id = VegExcutionListDetails?.id ?? 0;
-                              // int planId = VegExcutionListDetails?.planId ?? 0;
+                              // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
                               // if (id != 0) {
                               //   Get.toNamed(
                               //       Routes.addModuleCleaningExecutionContentWeb,
-                              //       arguments: {"mcid": id, "planId": planId});
+                              //       arguments: {"vegid": id, "vegplanId": vegplanId});
                               // }
                             },
                           )
@@ -593,12 +593,12 @@ class VegExcutionListDataSource extends DataTableSource {
       //   ],
       // onSelectChanged: (_) {
       //   int id = VegExcutionListDetails?.id ?? 0;
-      //   int planId = VegExcutionListDetails?.planId ?? 0;
+      //   int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
       //   if (id != 0) {
-      //     // controller.clearStoreDataMcid();
+      //     // controller.clearStoreDatavegid();
       //     // controller.clearStoreDataPlanid();
       //     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
-      //         arguments: {"id": id, "planId": planId});
+      //         arguments: {"id": id, "vegplanId": vegplanId});
       //   }
       // },
     );
