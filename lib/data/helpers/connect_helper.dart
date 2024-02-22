@@ -7212,4 +7212,76 @@ class ConnectHelper {
     print('MCExecutionResponseModel${responseModel.data}');
     return responseModel;
   }
+
+  Future<ResponseModel> createIncidentRiskType({
+    required String auth,
+    bool? isLoading,
+    required incidentRiskTypeJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/CreateIncidentType', //Add Incident Type API
+      Request.post,
+      incidentRiskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getIncidentRiskType(
+      {required bool isLoading, required String auth, int? facility_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetIncidentTypeList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateIncidentRiskType({
+    required String auth,
+    bool? isLoading,
+    required incidentRiskTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateIncidentType',
+      Request.post,
+      incidentRiskTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteIncidentRiskType({
+    required String auth,
+    bool? isLoading,
+    required risktype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteIncidentType?id=$risktype_id',
+      Request.delete,
+      risktype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/usecases/incident_risk_type_usecase.dart';
 
 import '../../domain/models/body_injured_model.dart';
@@ -12,36 +13,36 @@ class IncidentRiskTypePresenter {
   // Future<String?> getUserAccessList() async =>
   //     await jobTypeListUsecase.getUserAccessList();
 
-  // Future<List<BodyInjuredModel>> getBodyInjuredList({
-  //   required bool isLoading,
-  // }) async {
-  //   return bodyInjuredUsecase.getBodyInjuredList(isLoading: isLoading);
-  // }
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType({
+    required bool isLoading,
+  }) async {
+    return incidentRiskTypeUsecase.getIncidentRiskType(isLoading: isLoading);
+  }
 
-  // Future<bool> createBodyInjured({
-  //   bodyInjuredJsonString,
-  //   required bool isLoading,
-  // }) async {
-  //   print("presenter Create Facility type function.");
-  //   bodyInjuredUsecase.createBodyInjured(
-  //     bodyInjuredJsonString: bodyInjuredJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> createIncidentRiskType({
+    incidentRiskTypeJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter Create Facility type function.");
+    incidentRiskTypeUsecase.createIncidentRiskType(
+      incidentRiskTypeJsonString: incidentRiskTypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
-  // deleteBodyInjured(String? bodypart_id, {required bool isLoading}) async =>
-  //     await bodyInjuredUsecase.deleteBodyInjured(
-  //       bodypart_id: bodypart_id ?? 0,
-  //       isLoading: isLoading,
-  //     );
-  // Future<bool> updateBodyInjured(
-  //     {bodyInjuredJsonString, required bool isLoading}) async {
-  //   print("presenter");
-  //   bodyInjuredUsecase.updateBodyInjured(
-  //     bodyInjuredJsonString: bodyInjuredJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  deleteIncidentRiskType(String? risktype_id, {required bool isLoading}) async =>
+      await incidentRiskTypeUsecase.deleteIncidentRiskType(
+        risktype_id: risktype_id ?? 0,
+        isLoading: isLoading,
+      );
+  Future<bool> updateIncidentRiskType(
+      {incidentRiskTypeJsonString, required bool isLoading}) async {
+    print("presenter");
+    incidentRiskTypeUsecase.updateIncidentRiskType(
+      incidentRiskTypeJsonString: incidentRiskTypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'dart:html' as html;
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
@@ -10442,6 +10443,98 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<bool> createIncidentRiskType(
+      {bool? isLoading, incidentRiskTypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createIncidentRiskType(
+          auth: auth,
+          isLoading: isLoading,
+          incidentRiskTypeJsonString: incidentRiskTypeJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' riskerror');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType({
+    // required int? facility_id,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getIncidentRiskType(
+        // facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Incident Risk Type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var incidentriskTypeList = incidentRiskTypeModelFromJson(res.data);
+        return incidentriskTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+  Future<bool> updateIncidentRiskType({
+    bool? isLoading,
+    incidentRiskTypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateIncidentRiskType(
+        auth: auth,
+        isLoading: isLoading,
+        incidentRiskTypeJsonString: incidentRiskTypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  Future<void> deleteIncidentRiskType(Object risktype_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteIncidentRiskType(
+        auth: auth,
+        risktype_id: risktype_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteModuleList');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
   //end
