@@ -34,7 +34,7 @@ class ViewIncidentReportContentWeb
 
   @override
   Widget build(BuildContext context) => SelectionArea(
-    child: Scaffold(
+        child: Scaffold(
           // appBar: AppBar(
           //   title: HeaderWidget(),
           //   elevation: 0,
@@ -125,17 +125,19 @@ class ViewIncidentReportContentWeb
                                           () => Column(
                                             children: [
                                               CustomAppBar(
-                                                title: 'View Incident Report'.tr,
+                                                title:
+                                                    'View Incident Report'.tr,
                                                 action: Row(
                                                   children: [
                                                     Container(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
                                                                 vertical: 2,
                                                                 horizontal: 5),
                                                         margin: EdgeInsets.only(
                                                             top: 5),
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: controller
                                                                       .incidentReportDetailsModel
                                                                       .value
@@ -159,8 +161,8 @@ class ViewIncidentReportContentWeb
                                                       width: 250,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
+                                                            BorderRadius
+                                                                .circular(10),
                                                         border: Border.all(
                                                           color: Colors.blue,
                                                           width: 1,
@@ -175,7 +177,8 @@ class ViewIncidentReportContentWeb
                                                           child: Text(
                                                         '${controller.incidentReportDetailsModel.value?.status_short}',
                                                         style: TextStyle(
-                                                            color: Colors.white),
+                                                            color:
+                                                                Colors.white),
                                                       )),
                                                     ),
                                                   ],
@@ -192,7 +195,8 @@ class ViewIncidentReportContentWeb
                                                             left: 10),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment.end,
+                                                          CrossAxisAlignment
+                                                              .end,
                                                       children: [
                                                         CustomRichText(
                                                             title: 'Id: '),
@@ -213,7 +217,8 @@ class ViewIncidentReportContentWeb
                                                             title:
                                                                 'Incident Investigation Done By: '),
                                                         CustomRichText(
-                                                            title: 'Risk Type: '),
+                                                            title:
+                                                                'Risk Type: '),
                                                         CustomRichText(
                                                             title:
                                                                 'Legal Applicability: '),
@@ -240,31 +245,48 @@ class ViewIncidentReportContentWeb
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.id}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.facility_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.block_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       SizedBox(
                                                         width: 150,
@@ -273,8 +295,8 @@ class ViewIncidentReportContentWeb
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       5,
                                                                       92,
@@ -284,58 +306,90 @@ class ViewIncidentReportContentWeb
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.victim_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.risk_type_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       SizedBox(
                                                         width: 300,
                                                         child: Text(
                                                           '${controller.incidentReportDetailsModel.value?.insurance_remark}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Color.fromARGB(
+                                                              color: Color
+                                                                  .fromARGB(
                                                                       255,
                                                                       5,
                                                                       92,
@@ -344,7 +398,7 @@ class ViewIncidentReportContentWeb
                                                       ),
                                                     ],
                                                   ),
-    
+
                                                   /////
                                                   Spacer(),
                                                   Column(
@@ -385,25 +439,38 @@ class ViewIncidentReportContentWeb
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.title}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.equipment_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.reportingDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.severity}',
@@ -413,20 +480,32 @@ class ViewIncidentReportContentWeb
                                                       Text(
                                                         '${controller.actionTakenDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.verified_by_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                       Row(
                                                         children: [
@@ -446,8 +525,8 @@ class ViewIncidentReportContentWeb
                                                           TableActionButton(
                                                             color: ColorValues
                                                                 .appDarkBlueColor,
-                                                            icon:
-                                                                Icons.visibility,
+                                                            icon: Icons
+                                                                .visibility,
                                                             message: 'RCA',
                                                             onPress: () {
                                                               // controller.viewIncidentReport(
@@ -461,21 +540,26 @@ class ViewIncidentReportContentWeb
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
                                                         style: TextStyle(
-                                                            color: Color.fromARGB(
-                                                                255, 5, 92, 163)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    5,
+                                                                    92,
+                                                                    163)),
                                                       ),
                                                     ],
                                                   ),
                                                 ],
                                               ),
-    
+
                                               ///Details Of Injured Person
                                               controller
                                                       .detailsOfInjuredPersonList!
                                                       .isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .detailsOfInjuredPersonList
                                                                       ?.length ??
@@ -499,7 +583,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -684,14 +769,15 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               ///Investigation Block
                                               controller.incidentReportDetailsModel
                                                           .value?.status_short ==
                                                       null
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: EdgeInsets.all(20),
+                                                      margin:
+                                                          EdgeInsets.all(20),
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                           color: ColorValues
@@ -704,14 +790,15 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
                                                       child: Container(
                                                         padding:
-                                                            const EdgeInsets.all(
-                                                                8.0),
+                                                            const EdgeInsets
+                                                                .all(8.0),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
@@ -747,8 +834,7 @@ class ViewIncidentReportContentWeb
                                                                     children: [
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'What task or type of job was being performed? ',
@@ -768,8 +854,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'Was the person involved in these activities trained and if so, when? ',
@@ -779,7 +864,7 @@ class ViewIncidentReportContentWeb
                                                                           Dimens
                                                                               .boxHeight3,
                                                                           Text(
-                                                                            '${controller.incidentReportDetailsModel.value?.type_of_job}',
+                                                                            '${controller.incidentReportDetailsModel.value?.is_person_involved}',
                                                                             style:
                                                                                 TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                           ),
@@ -789,8 +874,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'Was the person authorized/licensed to carry out that type of work / use machinery? ',
@@ -810,8 +894,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'What instructions had been given? By Whom? ',
@@ -831,8 +914,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'What safety equipment and /protection was used/ available? ',
@@ -852,8 +934,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'Were correct safe procedures being observed? ',
@@ -873,8 +954,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'What unsafe condition contributed to the incident? ',
@@ -894,8 +974,7 @@ class ViewIncidentReportContentWeb
                                                                           .boxHeight10,
                                                                       Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             'Did unsafe act/s cause the incident? If yes. Mention the same ',
@@ -922,13 +1001,14 @@ class ViewIncidentReportContentWeb
                                                         ),
                                                       ),
                                                     ),
-    
+
                                               ///Why Why Analysis
-                                              controller
-                                                      .whyWhyAnalysisList!.isEmpty
+                                              controller.whyWhyAnalysisList!
+                                                      .isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .whyWhyAnalysisList
                                                                       ?.length ??
@@ -952,7 +1032,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1032,12 +1113,13 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               ///Root Cause Analysis
                                               controller.rootCauseList!.isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .rootCauseList
                                                                       ?.length ??
@@ -1061,7 +1143,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1126,13 +1209,15 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               ///Immediate Correction
-                                              controller.immediateCorrectionList!
+                                              controller
+                                                      .immediateCorrectionList!
                                                       .isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .immediateCorrectionList
                                                                       ?.length ??
@@ -1156,7 +1241,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1221,13 +1307,14 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               ///Proposed Action Plan
                                               controller.proposedActionPlanList!
                                                       .isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .proposedActionPlanList
                                                                       ?.length ??
@@ -1251,7 +1338,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1361,13 +1449,14 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               ///Investigation team
                                               controller.investiagtionTeamList!
                                                       .isEmpty
                                                   ? Dimens.box0
                                                   : Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .investiagtionTeamList
                                                                       ?.length ??
@@ -1391,7 +1480,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1471,12 +1561,12 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
-    
+
                                               controller.incidentReportDetailsModel
                                                               .value?.id !=
                                                           null &&
-                                                      varUserAccessModel
-                                                              .value.access_list!
+                                                      varUserAccessModel.value
+                                                              .access_list!
                                                               .where((e) =>
                                                                   e.feature_id ==
                                                                       UserAccessConstants
@@ -1551,7 +1641,7 @@ class ViewIncidentReportContentWeb
                                                                       controller
                                                                           .whyWhyAnalysisValue
                                                                           .value = value;
-    
+
                                                                       print(
                                                                           'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
                                                                     },
@@ -1564,11 +1654,12 @@ class ViewIncidentReportContentWeb
                                                       ),
                                                     )
                                                   : Dimens.box0,
-    
+
                                               ///Incident Report History
                                               controller.irId.value != null
                                                   ? Container(
-                                                      margin: Dimens.edgeInsets20,
+                                                      margin:
+                                                          Dimens.edgeInsets20,
                                                       height: ((controller
                                                                       .historyList
                                                                       ?.length ??
@@ -1587,7 +1678,8 @@ class ViewIncidentReportContentWeb
                                                                 .appBlueBackgroundColor,
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
@@ -1646,7 +1738,7 @@ class ViewIncidentReportContentWeb
                                                           //       );
                                                           //     })),
                                                           // ),
-    
+
                                                           Expanded(
                                                             child: DataTable2(
                                                               border: TableBorder.all(
@@ -1756,7 +1848,8 @@ class ViewIncidentReportContentWeb
                                       }),
                                   Obx(
                                     () => Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
                                           height: 45,
@@ -1841,7 +1934,8 @@ class ViewIncidentReportContentWeb
                                                                     ColorValues
                                                                         .rejectColor,
                                                                 text: "Reject",
-                                                                icon: Icons.close,
+                                                                icon:
+                                                                    Icons.close,
                                                                 onPressed: () {
                                                                   Get.dialog(IncidentReportRejectDialog(
                                                                       id: controller
@@ -1873,12 +1967,11 @@ class ViewIncidentReportContentWeb
                                                                               ColorValues.appGreenColor,
                                                                           text:
                                                                               "Approve IR",
-                                                                          icon: Icons
-                                                                              .add,
+                                                                          icon:
+                                                                              Icons.add,
                                                                           onPressed:
                                                                               () {
-                                                                            Get.dialog(
-                                                                                ApproveIncidentReportDialog(
+                                                                            Get.dialog(ApproveIncidentReportDialog(
                                                                               id: controller.irId.value,
                                                                             ));
                                                                           },
@@ -1895,12 +1988,11 @@ class ViewIncidentReportContentWeb
                                                                               ColorValues.rejectColor,
                                                                           text:
                                                                               "Reject IR",
-                                                                          icon: Icons
-                                                                              .close,
+                                                                          icon:
+                                                                              Icons.close,
                                                                           onPressed:
                                                                               () {
-                                                                            Get.dialog(
-                                                                                IncidentReportSecondRejectDialog(id: controller.irId.value));
+                                                                            Get.dialog(IncidentReportSecondRejectDialog(id: controller.irId.value));
                                                                           },
                                                                         ),
                                                                       ),
@@ -1927,10 +2019,10 @@ class ViewIncidentReportContentWeb
               ),
             ],
           ),
-    
+
           // ),
         ),
-  );
+      );
 
   ///Below All For WEB
   ///
