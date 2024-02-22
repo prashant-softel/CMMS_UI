@@ -6,14 +6,16 @@ import 'package:cmms/domain/usecases/home_usecase.dart';
 import 'package:cmms/domain/usecases/view_veg_execution_usecase.dart';
 import 'package:get/get.dart';
 
-class ViewVegPlanBinding extends Bindings {
+class ViewVegExecutionBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ViewVegExecutionController>(
+    Get.lazyPut(
       () => ViewVegExecutionController(
-        ViewVegExecutionPresenter(
-          ViewVegExecutionUsecase(
-            Get.find(),
+        Get.put(
+          ViewVegExecutionPresenter(
+            ViewVegExecutionUsecase(
+              Get.find(),
+            ),
           ),
         ),
       ),

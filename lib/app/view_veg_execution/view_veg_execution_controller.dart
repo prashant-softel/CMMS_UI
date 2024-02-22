@@ -15,6 +15,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewVegExecutionController extends GetxController {
   ViewVegExecutionController(this.viewVegExecutionPresenter);
+  
   ViewVegExecutionPresenter viewVegExecutionPresenter;
 
   final HomeController homeController = Get.find();
@@ -34,19 +35,19 @@ class ViewVegExecutionController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
-  void addRowItem() {
-    rowItem.value.add([
-      {"key": "Days", "value": ''},
-      {"key": "Scheduled Module", "value": ''},
-      {"key": "Cleaned", "value": ''},
-      {"key": "Abandoned", "value": ''},
-      {"key": "Pending", "value": ''},
-      {"key": "Water Used", "value": ''},
-      {"key": "Start Date", "value": ''},
-      {'key': "End Date", "value": ''},
-      {'key': "Remark", "value": ''},
-    ]);
-  }
+  // void addRowItem() {
+  //   rowItem.value.add([
+  //     {"key": "Days", "value": ''},
+  //     {"key": "Scheduled Module", "value": ''},
+  //     {"key": "Cleaned", "value": ''},
+  //     {"key": "Abandoned", "value": ''},
+  //     {"key": "Pending", "value": ''},
+  //     {"key": "Water Used", "value": ''},
+  //     {"key": "Start Date", "value": ''},
+  //     {'key': "End Date", "value": ''},
+  //     {'key': "Remark", "value": ''},
+  //   ]);
+  // }
 
   RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
@@ -86,11 +87,11 @@ class ViewVegExecutionController extends GetxController {
         facilityId = event;
       });
 
-      // if (vegid != null) {
-      //   Future.delayed(Duration(seconds: 1), () {
-      //     getVegExecutionDetail(executionId: vegid.value);
-      //   });
-      // }
+      if (vegid != null) {
+        Future.delayed(Duration(seconds: 1), () {
+          getVegExecutionDetail(executionId: vegid.value);
+        });
+      }
       super.onInit();
     } catch (e) {
       print(e);
@@ -126,12 +127,12 @@ class ViewVegExecutionController extends GetxController {
     // newPermitDetails!.value = <NewPermitListModel>[];
     vegExecutionDetailsList?.value = <VegExecutionDetailsModel>[];
 
-    final _mcExecutionDetails = await viewVegExecutionPresenter
+    final _vegExecutionDetails = await viewVegExecutionPresenter
         .getVegExecutionDetail(executionId: executionId);
-    print('View MC Execution Detail:$_mcExecutionDetails');
+    print('View Vegetation Execution Detail:$_vegExecutionDetails');
 
-    if (_mcExecutionDetails != null) {
-      vegExecutionDetailsModel.value = _mcExecutionDetails;
+    if (_vegExecutionDetails != null) {
+      vegExecutionDetailsModel.value = _vegExecutionDetails;
       plannedAtDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${vegExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text =

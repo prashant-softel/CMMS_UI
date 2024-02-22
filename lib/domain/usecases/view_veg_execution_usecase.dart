@@ -6,6 +6,11 @@ class ViewVegExecutionUsecase {
   ViewVegExecutionUsecase(this.repository);
   Repository repository;
 
+  Future<void> generateToken() async {
+    return await repository.generateToken();
+  }
+
+
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
     required int executionId,
