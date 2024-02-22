@@ -38,8 +38,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
-  RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
-      <ScheduleCheckPoint?>[].obs;
+  RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
   RxList<ChecklistObservation>? checklistObservations =
       <ChecklistObservation>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
@@ -70,6 +69,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile');
   // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
   var repository = Get.find<Repository>();
+  Rx<List<List<Map<String, String>>>> rowItemclone =
+      Rx<List<List<Map<String, String>>>>([]);
+  Map<String, ScheduleCheckPoint> checkdropdownMapperData = {};
 
   ///fileIDs
   List<dynamic> fileIds = [];
@@ -166,10 +168,25 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
-      scheduleCheckPoints!.value = _permitDetails.schedules ?? [];
+      _permitDetails.schedules?.forEach((element) {
+        rowItemclone.value.add([
+          {
+            "key": "asset",
+            "value": '${element.name}',
+            "id": '${element.assetsID}'
+          },
+          {'key': "Checklist", "value": '${element.checklist_name}'},
+          {'key': "dropdown", "value": ''},
+        ]);
+      });
+      if (_permitDetails.schedules != null) {
+        for (var _frequencyList in _permitDetails.schedules ?? []) {
+          scheduleCheckPoints.add(_frequencyList);
+        }
+      }
       getMrsListByModuleTask(taskId: scheduleId ?? 0);
     }
-    selectedasset.value = scheduleCheckPoints![0]?.name ?? "";
+    // selectedasset.value = scheduleCheckPoints[0].name ?? "";
     update(["getPmtaskViewList"]);
 
     // print({"checklistObservations", checklistObservations});
@@ -287,7 +304,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                      text: 'Are You Want to clone the',
+                      text: 'Do you want to clone the ',
                       style: Styles.blue700,
                       children: <TextSpan>[
                         TextSpan(
@@ -323,9 +340,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                       child: CustomElevatedButton(
                         text: "Clone",
                         onPressed: () {
+                          var select = scheduleCheckPoints.firstWhere(
+                            (element) => element.name == selectedasset.value,
+                          );
+
                           cloneSchedule(
                               from_schedule_id: selectedItem?.schedule_id ?? 0,
-                              to_schedule_id: selectedAssetsId);
+                              to_schedule_id: select.schedule_id ?? 0);
                         },
                         backgroundColor: ColorValues.appDarkBlueColor,
                         textColor: ColorValues.whiteColor,

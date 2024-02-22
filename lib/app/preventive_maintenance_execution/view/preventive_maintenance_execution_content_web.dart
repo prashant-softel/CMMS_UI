@@ -132,19 +132,19 @@ class PreventiveMaintenanceExecutionContentWeb
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            "PM Task ID : ",
+                                            "PM Task ID: ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "PM Plan Title  :  ",
+                                            "PM Plan Title:  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Equipment Category :  ",
+                                            "Equipment Category:  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Frequency : ",
+                                            "Frequency: ",
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -174,7 +174,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            "Assigned To :  ",
+                                            "Assigned To:  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
@@ -186,7 +186,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Due Date : ",
+                                            "Due Date: ",
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -218,11 +218,11 @@ class PreventiveMaintenanceExecutionContentWeb
                                 ),
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.scheduleCheckPoints
-                                                  ?.length ??
-                                              0) *
-                                          45) +
-                                      140,
+                                  height:
+                                      ((controller.rowItemclone.value.length ??
+                                                  0) *
+                                              45) +
+                                          140,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -282,105 +282,213 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   fontWeight: FontWeight.bold),
                                             )),
                                           ],
-                                          rows: List<DataRow>.generate(
-                                            controller.scheduleCheckPoints
-                                                    ?.length ??
-                                                0,
-                                            (index) => DataRow(cells: [
-                                              DataCell(Text(controller
-                                                      .scheduleCheckPoints?[
-                                                          index]
-                                                      ?.name
-                                                      .toString() ??
-                                                  '')),
-                                              DataCell(Text(controller
-                                                      .scheduleCheckPoints?[
-                                                          index]
-                                                      ?.checklist_name ??
-                                                  '')),
-                                              DataCell(Row(
-                                                children: [
-                                                  Container(
-                                                    height: 25,
-                                                    width: 90,
-                                                    child: CustomElevatedButton(
-                                                      size: 12,
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appDarkBlueColor,
-                                                      text: "Clone",
-                                                      onPressed: () {
-                                                        controller
-                                                                .selectedItem =
-                                                            null;
-                                                        controller.selectedItem = controller
-                                                            .scheduleCheckPoints!
-                                                            .firstWhere((element) =>
-                                                                "${element?.schedule_id}" ==
+                                          rows: controller.rowItemclone.value
+                                              .map((record) {
+                                            return DataRow(
+                                              // height: 130,
+                                              cells: record.map((mapData) {
+                                                return DataCell(
+                                                  (mapData['key'] == "dropdown")
+                                                      ? Row(
+                                                          children: [
+                                                            Container(
+                                                              height: 25,
+                                                              width: 90,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                size: 12,
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appDarkBlueColor,
+                                                                text: "Clone",
+                                                                onPressed: () {
+                                                                  controller
+                                                                          .selectedItem =
+                                                                      null;
+                                                                  controller.selectedItem = controller
+                                                                      .scheduleCheckPoints
+                                                                      .firstWhere((element) =>
+                                                                          "${element.name}" ==
+                                                                          record[0]['value']
+                                                                              .toString());
+
+                                                                  if (controller
+                                                                          .selectedItem !=
+                                                                      null) {
+                                                                    controller.cloneDialog(controller
+                                                                        .selectedasset
+                                                                        .value);
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            DropdownWebWidget(
+                                                              width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2) -
+                                                                  100,
+                                                              controller:
+                                                                  controller,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .scheduleCheckPoints,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                mapData["value"] =
+                                                                    selectedValue;
+
                                                                 controller
-                                                                    .scheduleCheckPoints?[
-                                                                        index]
-                                                                    ?.schedule_id
-                                                                    .toString());
-                                                        if (controller
-                                                                .selectedItem !=
-                                                            null) {
-                                                          controller.cloneDialog(
-                                                              controller
-                                                                  .selectedasset
-                                                                  .value);
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Dimens.boxWidth10,
-                                                  DropdownWebWidget(
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            100,
-                                                    controller: controller,
-                                                    dropdownList: controller
-                                                        .scheduleCheckPoints,
-                                                    isValueSelected: controller
-                                                        .isAssetsSelected.value,
-                                                    selectedValue: controller
-                                                        .selectedasset.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                  Spacer(),
-                                                  TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: "Edit",
-                                                      onPress: () {
-                                                        controller
-                                                                .selectedItem =
-                                                            null;
-                                                        controller.selectedItem = controller
-                                                            .scheduleCheckPoints!
-                                                            .firstWhere((element) =>
-                                                                "${element?.schedule_id}" ==
-                                                                controller
-                                                                    .scheduleCheckPoints?[
-                                                                        index]
-                                                                    ?.schedule_id
-                                                                    .toString());
-                                                        if (controller
-                                                                .selectedItem !=
-                                                            null) {
-                                                          Get.dialog(
-                                                              ObservationPmExecutionViewDialog());
-                                                        }
-                                                      })
-                                                ],
-                                              )),
-                                            ]),
-                                          ),
+                                                                        .selectedasset
+                                                                        .value =
+                                                                    selectedValue;
+
+                                                                controller.checkdropdownMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                              },
+                                                            ),
+                                                            // Spacer(),
+                                                            TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                message: "Edit",
+                                                                onPress: () {
+                                                                  controller
+                                                                          .selectedItem =
+                                                                      null;
+                                                                  controller.selectedItem = controller
+                                                                      .scheduleCheckPoints
+                                                                      .firstWhere((element) =>
+                                                                          "${element.name}" ==
+                                                                          record[0]['value']
+                                                                              .toString());
+                                                                  if (controller
+                                                                          .selectedItem !=
+                                                                      null) {
+                                                                    Get.dialog(
+                                                                        ObservationPmExecutionViewDialog());
+                                                                  }
+                                                                })
+                                                          ],
+                                                        )
+                                                      : Text(mapData['value'] ??
+                                                          ''),
+                                                );
+                                              }).toList(),
+                                            );
+                                          }).toList(),
+
+                                          // List<DataRow>.generate(
+                                          //   controller.rowItemclone.value
+                                          //           ?.length ??
+                                          //       0,
+                                          //   (index) => DataRow(cells: [
+                                          //     DataCell(Text(controller
+                                          //             .r?[index]?.name
+                                          //             .toString() ??
+                                          //         '')),
+                                          //     DataCell(Text(controller
+                                          //             .scheduleCheckPoints?[
+                                          //                 index]
+                                          //             ?.checklist_name ??
+                                          //         '')),
+                                          //     DataCell(
+                                          // Row(
+                                          //       children: [
+                                          //         Container(
+                                          //           height: 25,
+                                          //           width: 90,
+                                          //           child: CustomElevatedButton(
+                                          //             size: 12,
+                                          //             backgroundColor:
+                                          //                 ColorValues
+                                          //                     .appDarkBlueColor,
+                                          //             text: "Clone",
+                                          //             onPressed: () {
+                                          //               controller
+                                          //                       .selectedItem =
+                                          //                   null;
+                                          //               controller.selectedItem = controller
+                                          //                   .scheduleCheckPoints!
+                                          //                   .firstWhere((element) =>
+                                          //                       "${element?.schedule_id}" ==
+                                          //                       controller
+                                          //                           .scheduleCheckPoints?[
+                                          //                               index]
+                                          //                           ?.schedule_id
+                                          //                           .toString());
+                                          //               if (controller
+                                          //                       .selectedItem !=
+                                          //                   null) {
+                                          //                 controller.cloneDialog(
+                                          //                     controller
+                                          //                         .selectedasset
+                                          //                         .value);
+                                          //               }
+                                          //             },
+                                          //           ),
+                                          //         ),
+                                          //         Dimens.boxWidth10,
+                                          //         DropdownWebWidget(
+                                          //           width:
+                                          //               (MediaQuery.of(context)
+                                          //                           .size
+                                          //                           .width *
+                                          //                       .2) -
+                                          //                   100,
+                                          //           controller: controller,
+                                          //           dropdownList: controller
+                                          //               .scheduleCheckPoints,
+                                          //           isValueSelected: controller
+                                          //               .isAssetsSelected.value,
+                                          //           selectedValue: controller
+                                          //               .selectedasset.value,
+                                          //           onValueChanged: controller
+                                          //               .onValueChanged,
+                                          //         ),
+                                          //         Spacer(),
+                                          //         TableActionButton(
+                                          //             color:
+                                          //                 ColorValues.editColor,
+                                          //             icon: Icons.edit,
+                                          //             message: "Edit",
+                                          //             onPress: () {
+                                          //               controller
+                                          //                       .selectedItem =
+                                          //                   null;
+                                          //               controller.selectedItem = controller
+                                          //                   .scheduleCheckPoints!
+                                          //                   .firstWhere((element) =>
+                                          //                       "${element?.schedule_id}" ==
+                                          //                       controller
+                                          //                           .scheduleCheckPoints?[
+                                          //                               index]
+                                          //                           ?.schedule_id
+                                          //                           .toString());
+                                          //               if (controller
+                                          //                       .selectedItem !=
+                                          //                   null) {
+                                          //                 Get.dialog(
+                                          //                     ObservationPmExecutionViewDialog());
+                                          //               }
+                                          //             })
+                                          //       ],
+                                          //     )),
+                                          //   ]),
+                                          // ),
                                         ),
                                       ),
                                     ],

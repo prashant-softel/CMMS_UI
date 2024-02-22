@@ -47,27 +47,29 @@ class CalibrationListModel {
 
   factory CalibrationListModel.fromJson(Map<String, dynamic> json) =>
       CalibrationListModel(
-          asset_health_status: json['asset_health_status'] ?? '',
-          asset_id: json['asset_id'] ?? 0,
-          calibration_id: json['calibration_id'] ?? 0,
-          statusID: json['statusID'] ?? 0,
-          asset_name: json['asset_name'] ?? '',
-          frequency_id: json['frequency_id'] ?? 0,
-          frequency_name: json['frequency_name'] ?? '',
-          next_calibration_due_date: json['next_calibration_due_date'] == null
-              ? ""
-              : Utility.getFormatedyearMonthDay(
-                  json['next_calibration_due_date']),
-          asset_serial: json['asset_serial'] ?? '',
-          calibration_status: json['calibration_status'] ?? '',
-          category_name: json['category_name'] ?? '',
-          vendor_name: json['vendor_name'] ?? '',
-          received_date: json['received_date'] ?? '',
-          responsible_person: json['responsible_person'] ?? '',
-          last_calibration_date: json['last_calibration_date'] == null
-              ? ""
-              : Utility.getFormatedyearMonthDay(json['last_calibration_date']));
-
+        asset_health_status: json['asset_health_status'] ?? '',
+        asset_id: json['asset_id'] ?? 0,
+        calibration_id: json['calibration_id'] ?? 0,
+        statusID: json['statusID'] ?? 0,
+        asset_name: json['asset_name'] ?? '',
+        frequency_id: json['frequency_id'] ?? 0,
+        frequency_name: json['frequency_name'] ?? '',
+        next_calibration_due_date: json['next_calibration_due_date'] == null
+            ? json['next_calibration_due_date']
+            : Utility.getFormatedyearMonthDay(
+                json['next_calibration_due_date']),
+        asset_serial: json['asset_serial'] ?? '',
+        calibration_status: json['calibration_status'] ?? '',
+        category_name: json['category_name'] ?? '',
+        vendor_name: json['vendor_name'] ?? '',
+        received_date: json['received_date'] == null
+            ? json['received_date']
+            : Utility.getFormatedyearMonthDay(json['received_date']),
+        responsible_person: json['responsible_person'] ?? '',
+        last_calibration_date: json['last_calibration_date'] == null
+            ? json['last_calibration_date']
+            : Utility.getFormatedyearMonthDay(json['last_calibration_date']),
+      );
   Map<String, dynamic> toJson() => {
         "asset_health_status": asset_health_status,
         "asset_id": asset_id,

@@ -18,9 +18,9 @@ class EditMrsController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetItemsModel> dropdownMapperData = {};
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
 
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
@@ -39,17 +39,21 @@ class EditMrsController extends GetxController {
   void onInit() async {
     try {
       await setMrsId();
-      if (mrsId != 0) {
-        await getMrsDetails(mrsId: mrsId.value, isloading: true);
-      }
+
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getEquipmentList(
+        Future.delayed(Duration(seconds: 1), () async {
+          await getEquipmentList(
             facilityId,
           );
+          if (mrsId != 0) {
+            await getMrsDetails(mrsId: mrsId.value, isloading: true);
+          }
         });
       });
+      // if (mrsId != 0) {
+      //   await getMrsDetails(mrsId: mrsId.value, isloading: true);
+      // }
       super.onInit();
     } catch (e) {
       print(e);
@@ -78,9 +82,15 @@ class EditMrsController extends GetxController {
         mrsId: mrsId, isLoading: isloading);
 
     if (_mrsDetailsModel != null) {
+      whereUsedId = _mrsDetailsModel.whereUsedRefID ?? 0;
+      activityCtrlr.text = _mrsDetailsModel.activity ?? "";
+      // activityCtrlr.text = _mrsDetailsModel. ?? "";
+      remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
+      whereUsedCtrlr.text = _mrsDetailsModel.whereUsedRefID.toString();
+
       rowItem.value = [];
       _mrsDetailsModel.cmmrsItems?.forEach((element) {
-        rowItem.value.add(
+        rowItem.add(
           [
             {"key": "Drop_down", "value": '${element.asset_name}'},
             {'key': "Material_Type", "value": '${element.asset_type}'},
@@ -90,15 +100,13 @@ class EditMrsController extends GetxController {
           ],
         );
         // dropdownMapperData = element.approval_required;
-        dropdownMapperData[element.asset_name ?? ""] = assetItemList
-            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
+        // dropdownMapperData[element.asset_type ?? ""] = assetItemList.firstWhere(
+        //     (e) => e?.asset_type == element.asset_type,
+        //     orElse: null)!;
+        dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
+            (e) => e!.asset_type == element.asset_type,
+            orElse: null);
       });
-
-      whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
-      activityCtrlr.text = _mrsDetailsModel.activity ?? "";
-      // activityCtrlr.text = _mrsDetailsModel. ?? "";
-      remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
-      whereUsedCtrlr.text = _mrsDetailsModel.whereUsedRefID.toString();
     }
     print({"mrsdetailss", _mrsDetailsModel});
   }
@@ -118,7 +126,7 @@ class EditMrsController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
       {'key': "Image", "value": ''},
@@ -133,10 +141,10 @@ class EditMrsController extends GetxController {
     String _setTemp = setTemlateCtrlr.text.trim();
     String _wheredused = whereUsedCtrlr.text.trim();
     List<Equipments> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       Equipments item = Equipments(
         id: dropdownMapperData[element[0]["value"]]?.id,
-        issued_qty: dropdownMapperData[element[0]["value"]]?.available_qty,
+        issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
         asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
         equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
         asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
