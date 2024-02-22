@@ -142,7 +142,7 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                                           false
                                                       ? controller.selectedItem ==
                                                               null
-                                                          ? "Risk Type Create Successfully in the List."
+                                                          ? "Risk Type Created Successfully in the List."
                                                           : "Risk Type updated Successfully in the List."
                                                       : "Facility is not added.",
                                                   style: TextStyle(
@@ -161,11 +161,6 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            // Text(
-                                            //   "Title",
-                                            //   style: Styles.blackBold16,
-                                            // ),
-
                                             Expanded(
                                                 child: CustomRichText(
                                                     title:
@@ -208,9 +203,9 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                                 controller:
                                                     controller.titleCtrlr,
                                                 focusNode:
-                                                    controller.bodypnameFocus,
+                                                    controller.irnameFocus,
                                                 scrollController:
-                                                    controller.bodypnameScroll,
+                                                    controller.irnameScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 autofocus: false,
@@ -455,21 +450,21 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                // controller
-                                                //     .createBodyInjured()
-                                                //     .then(
-                                                //   (value) {
-                                                //     print("CREATE");
-                                                //     print("value,$value");
-                                                //     if (value == true) {
-                                                //       controller
-                                                //           .issuccessCreatechecklist();
-                                                //       // Close the Create risktype container
-                                                //       controller
-                                                //           .toggleContainer();
-                                                //     }
-                                                //   },
-                                                // );
+                                                controller
+                                                    .createIncidentRiskType()
+                                                    .then(
+                                                  (value) {
+                                                    print("CREATE");
+                                                    print("value,$value");
+                                                    if (value == true) {
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                      // Close the Create risktype container
+                                                      controller
+                                                          .toggleContainer();
+                                                    }
+                                                  },
+                                                );
                                               },
                                               text: 'Create Incident Risk',
                                             ),
@@ -478,19 +473,20 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              //   controller
-                                              //       .updateBodyInjured(controller
-                                              //           .selectedItem?.id)
-                                              //       .then(
-                                              //     (value) {
-                                              //       print("UPDATE");
-                                              //       print("value,$value");
-                                              //       if (value == true)
-                                              //         controller
-                                              //             .issuccessCreatechecklist();
-                                              //       controller.toggleContainer();
-                                              //     },
-                                              //   );
+                                              controller
+                                                  .updateIncidentRiskType(
+                                                      controller
+                                                          .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -618,14 +614,14 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                           )),
                                     ],
                                     rows: List<DataRow>.generate(
-                                      controller.bodyinjuredList.length,
+                                      controller.incidentrisktypeList.length,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
                                         DataCell(Text(controller
-                                            .bodyinjuredList[index].name
+                                            .incidentrisktypeList[index].name
                                             .toString())),
                                         // DataCell(Text(controller
-                                        //         .bodyinjuredList[index]
+                                        //         .incidentrisktypeList[index]
                                         //         .description ??
                                         //     '')),
                                         DataCell(Row(
@@ -636,12 +632,13 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                               message: 'Edit',
                                               onPress: () {
                                                 controller.selectedItem =
-                                                    controller.bodyinjuredList
+                                                    controller
+                                                        .incidentrisktypeList
                                                         .firstWhere(
                                                   (element) =>
                                                       "${element.id}" ==
                                                       controller
-                                                          .bodyinjuredList[
+                                                          .incidentrisktypeList[
                                                               index]
                                                           .id
                                                           .toString(),
@@ -667,12 +664,12 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                               message: 'Delete',
                                               onPress: () {
                                                 controller.isDeleteDialog(
-                                                    bodypart_id: controller
-                                                        .bodyinjuredList[index]
+                                                    risktype_id: controller
+                                                        .incidentrisktypeList[index]
                                                         .id
                                                         .toString(),
-                                                    bodypart: controller
-                                                        .bodyinjuredList[index]
+                                                    irisktype: controller
+                                                        .incidentrisktypeList[index]
                                                         .name);
                                               },
                                             ),

@@ -11,7 +11,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_risk_type_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class RiskTypeController extends GetxController {
   RiskTypeController(
     this.riskTypeListPresenter,
@@ -134,12 +133,12 @@ class RiskTypeController extends GetxController {
         getRiskTypeList();
       });
     });
-  rnameFocus.addListener(() {
+    rnameFocus.addListener(() {
       if (!rnameFocus.hasFocus) {
         rnameScroll.jumpTo(0.0);
       }
     });
-  rdescFocus.addListener(() {
+    rdescFocus.addListener(() {
       if (!rdescFocus.hasFocus) {
         rdescScroll.jumpTo(0.0);
       }
@@ -160,9 +159,9 @@ class RiskTypeController extends GetxController {
       riskTypeList.add(facilityType_list);
       BufferRiskTypeList.add(facilityType_list);
     }
-  //   // selectedSopPermit.value = _SPVList[0].name ?? '';
+    //   // selectedSopPermit.value = _SPVList[0].name ?? '';
 
-  //   // supplierNameList = _supplierNameList;
+    //   // supplierNameList = _supplierNameList;
     RiskTypeListPaginationController = PaginationController(
       rowCount: riskTypeList.length,
       rowsPerPage: 10,

@@ -4149,5 +4149,46 @@ class DataRepository extends DomainRepository {
         executionId: executionId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createIncidentRiskType({
+    auth,
+    bool? isLoading,
+    incidentRiskTypeJsonString,
+  }) async {
+    var response = await connectHelper.createIncidentRiskType(
+        auth: auth,
+        isLoading: isLoading,
+        incidentRiskTypeJsonString: incidentRiskTypeJsonString);
+    return response;
+  }
+  Future<ResponseModel> getIncidentRiskType({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getIncidentRiskType(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+  Future<ResponseModel> updateIncidentRiskType({
+    auth,
+    bool? isLoading,
+    incidentRiskTypeJsonString,
+  }) async {
+    var response = await connectHelper.updateIncidentRiskType(
+      auth: auth,
+      isLoading: isLoading,
+      incidentRiskTypeJsonString: incidentRiskTypeJsonString,
+    );
+    return response;
+  }
+  Future<ResponseModel> deleteIncidentRiskType({
+    auth,
+    bool? isLoading,
+    risktype_id,
+  }) async {
+    var response = await connectHelper.deleteIncidentRiskType(
+        auth: auth, isLoading: isLoading, risktype_id: risktype_id);
+    return response;
+  }
 //end
 }
