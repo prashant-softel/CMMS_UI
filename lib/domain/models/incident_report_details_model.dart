@@ -421,6 +421,7 @@ class DetailsOfInjuredPersonUpdate {
         "plant_equipment_involved": plant_equipment_involved,
         "location_of_incident": location_of_incident
       };
+      
 }
 
 //Investigation team
@@ -468,6 +469,9 @@ class ProposedActionPlanUpdate {
     this.responsibility,
     this.target_date,
     this.remarks,
+    this.hse_remark,
+    this.id_Status,
+    this.status_name,
   });
 
   int? incidents_id;
@@ -475,6 +479,9 @@ class ProposedActionPlanUpdate {
   String? responsibility;
   String? target_date;
   String? remarks;
+  String? hse_remark;
+  int? id_Status;
+  String? status_name;
 
   factory ProposedActionPlanUpdate.fromJson(Map<String, dynamic> json) =>
       ProposedActionPlanUpdate(
@@ -483,6 +490,9 @@ class ProposedActionPlanUpdate {
         responsibility: json['responsibility'],
         target_date: json['target_date'],
         remarks: json["remarks"],
+        hse_remark: json["hse_remark"],
+        id_Status: json["id_Status"],
+        status_name: json["status_name"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -491,6 +501,9 @@ class ProposedActionPlanUpdate {
         "responsibility": responsibility,
         "target_date": target_date,
         "remarks": remarks,
+        "hse_remark": hse_remark,
+        "id_Status": id_Status,
+        "status_name": status_name,
       };
 }
 
