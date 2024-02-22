@@ -243,8 +243,9 @@ class ViewIncidentReportController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getuserAccessData();
       });
-
-      await getIncidentReportHistory(id: irId.value);
+      Future.delayed(Duration(seconds: 1), () {
+        getIncidentReportHistory(id: irId.value);
+      });
     } catch (e) {}
 
     super.onInit();

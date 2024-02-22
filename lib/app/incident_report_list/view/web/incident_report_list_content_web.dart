@@ -120,7 +120,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                           Spacer(),
                                           Row(
                                             children: [
-                                              CustomRichText(title: 'Date Range'),
+                                              CustomRichText(
+                                                  title: 'Date Range'),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
                                                 width: MediaQuery.of(context)
@@ -160,7 +161,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                     Get.toNamed(Routes
                                                         .addIncidentReportContentWeb);
                                                   },
-                                                  color: ColorValues.addNewColor,
+                                                  color:
+                                                      ColorValues.addNewColor,
                                                 )
                                               : Dimens.box0
                                         ],
@@ -198,10 +200,12 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                             ),
                                           ),
                                           itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<String>>[]..addAll(
-                                                    controller.columnVisibility
-                                                        .value.entries
-                                                        .map((e) {
+                                              <PopupMenuEntry<String>>[]
+                                                ..addAll(controller
+                                                    .columnVisibility
+                                                    .value
+                                                    .entries
+                                                    .map((e) {
                                                   return PopupMenuItem<String>(
                                                       child:
                                                           ValueListenableBuilder(
@@ -209,7 +213,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                   controller
                                                                       .columnVisibility,
                                                               builder: (context,
-                                                                  value, child) {
+                                                                  value,
+                                                                  child) {
                                                                 return Row(
                                                                   children: [
                                                                     Checkbox(
@@ -231,7 +236,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                             // Handle column selection
                                           },
                                         ),
-            
+
                                         // Container(
                                         //   height: 35,
                                         //   margin: EdgeInsets.only(left: 10),
@@ -304,11 +309,12 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                             child: ValueListenableBuilder(
                                                 valueListenable:
                                                     controller.columnVisibility,
-                                                builder: (context, value, child) {
+                                                builder:
+                                                    (context, value, child) {
                                                   final dataSource =
                                                       IncidentReportListDataSource(
                                                           controller);
-            
+
                                                   return PaginatedDataTable2(
                                                     columnSpacing: 10,
                                                     dataRowHeight: 70,
@@ -332,7 +338,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                         if (entry.value)
                                                           buildDataColumn(
                                                             entry.key,
-                                                            controller.filterText[
+                                                            controller
+                                                                    .filterText[
                                                                 entry.key]!,
                                                             controller
                                                                     .columnwidth[
@@ -369,26 +376,27 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                     controller.fromDate.value,
                                     controller.toDate.value,
                                   ),
-            
+
                                   onSubmit: (value) {
                                     print('po valu ${value.toString()}');
                                     PickerDateRange? data =
                                         value as PickerDateRange;
-            
-                                    var pickUpDate =
-                                        DateTime.parse(data.startDate.toString());
+
+                                    var pickUpDate = DateTime.parse(
+                                        data.startDate.toString());
                                     controller.fromDate.value = pickUpDate;
                                     var dropDate =
                                         DateTime.parse(data.endDate.toString());
                                     dropDate != null
                                         ? controller.toDate.value = dropDate
                                         : controller.toDate.value = pickUpDate;
-            
+
                                     controller.getIncidentReportListByDate();
                                     controller.openFromDateToStartDatePicker =
-                                        !controller.openFromDateToStartDatePicker;
+                                        !controller
+                                            .openFromDateToStartDatePicker;
                                     controller.update(['stock_Mangement_Date']);
-            
+
                                     // Get.toNamed(
                                     //   Routes.stockManagementGoodsOrdersScreen,
                                     // );
@@ -525,8 +533,12 @@ class IncidentReportListDataSource extends DataTableSource {
       '${incidentReportListDetails?.title ?? ''}',
       '${incidentReportListDetails?.block_name ?? ''}',
       '${incidentReportListDetails?.equipment_name ?? ''}',
-      '${incidentReportListDetails?.approved_by ?? ''}',
-      '${incidentReportListDetails?.approved_at ?? ''}',
+      incidentReportListDetails?.status == 181
+          ? "-"
+          : '${incidentReportListDetails?.approved_by ?? ''}',
+      incidentReportListDetails?.status == 181
+          ? "-"
+          : '${incidentReportListDetails?.approved_at ?? ''}',
       '${incidentReportListDetails?.reported_by_name ?? ''}',
       '${incidentReportListDetails?.reported_at ?? ''}',
       '${incidentReportListDetails?.status ?? ''}',
