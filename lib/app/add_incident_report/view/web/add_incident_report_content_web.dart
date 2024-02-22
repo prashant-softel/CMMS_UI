@@ -3540,7 +3540,7 @@ class AddPrposedAction extends StatelessWidget {
                                                     });
                                                     mapData["value"] =
                                                         selectedValue;
-                                                    controller.dropdownStatusMapperData[
+                                                    controller.statusDropDownMapperData[
                                                             selectedValue] =
                                                         list.firstWhere(
                                                             (element) =>

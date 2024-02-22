@@ -235,7 +235,7 @@ class AddIncidentReportController extends GetxController {
   Map<String, InventoryModel> dropdownEquipmentNameMapperData = {};
 
   Map<String, GenderModel> dropdownGenderMapperData = {};
-  Map<String, GenderModel> dropdownStatusMapperData = {};
+  // Map<String, GenderModel> dropdownStatusMapperData = {};
 
   RxList<GenderModel> genderList = <GenderModel>[
     GenderModel(name: "Please Select", id: 0),
@@ -243,6 +243,9 @@ class AddIncidentReportController extends GetxController {
     GenderModel(name: 'Female', id: 2),
     GenderModel(name: 'TransGender', id: 3),
   ].obs;
+
+  Map<String, StatusModel> statusDropDownMapperData = {};
+
   RxList<StatusModel> statusList = <StatusModel>[
     StatusModel(name: "Please Select", id: 0),
     StatusModel(name: 'Open', id: 1),
@@ -823,10 +826,10 @@ class AddIncidentReportController extends GetxController {
                 '${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse('${element?.target_date}'))}'
           },
           {'key': "Remark", "value": '${element?.remarks}'},
-          {'key': "HSC", "value": '${element?.remarks}'},
+          {'key': "HSC", "value": '${element?.hse_remark}'},
           {
             "key": "Status",
-            "value": '${element?.responsibility}',
+            "value": '${element?.id_Status}',
           },
           {'key': "Action ", "value": ''},
         ]);
@@ -1940,7 +1943,8 @@ class AddIncidentReportController extends GetxController {
           responsibility: element[1]["value"],
           // target_date: element[2]["value"] ?? '0',
           target_date: "2023-11-26T12:00:00",
-
+          hse_remark: element[4]["value"],
+          id_Status: statusDropDownMapperData[element[5]["value"]]?.id,
           // target_date:
           //     '${DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(DateTime.parse('${element[2]["value"] ?? '0'}'))}',
           remarks: element[3]["value"] ?? '0',
