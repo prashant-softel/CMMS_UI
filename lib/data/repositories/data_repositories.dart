@@ -4190,5 +4190,38 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, risktype_id: risktype_id);
     return response;
   }
+
+  Future<ResponseModel> startVegExecutionScheduleButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.startVegExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> endVegScheduleExecutionButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endVegScheduleExecutionButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> abandonVegExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandonVegExecutionButton(
+        auth: auth,
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

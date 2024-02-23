@@ -11,6 +11,7 @@ import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.
 import 'package:cmms/app/widgets/Incident_report_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/abandon_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
@@ -22,6 +23,7 @@ import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
+import 'package:cmms/app/widgets/end_veg_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
@@ -52,6 +54,7 @@ import 'package:cmms/app/widgets/reject_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/req_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/req_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
+import 'package:cmms/app/widgets/start_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
@@ -7282,6 +7285,83 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> startVegExecutionScheduleButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/StartVegScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartVegExecutionMessageDialog(
+      data: parsedJson['message'],
+      startVegId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+ Future<ResponseModel> endVegScheduleExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/EndVegScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndVegScheduleExecutionMessageDialog(
+      data: parsedJson['message'],
+      endVegId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> abandonVegExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Cleaning/AbandonVegetationExecution',
+      Request.put,
+      abandoneJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        AbandonVegExecutionMessageDialog(data: parsedJson['message']));
     return responseModel;
   }
 }

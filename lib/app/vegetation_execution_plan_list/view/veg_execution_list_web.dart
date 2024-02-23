@@ -304,18 +304,18 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                                         in value.entries)
                                                       if (entry.value)
                                                         buildDataColumn(
-                                                            entry.key,
-                                                            controller
-                                                                    .filterText[
-                                                                entry.key]!
-                                                            // controller
-                                                            //         .columnwidth[
-                                                            //     entry.key],
-                                                            ),
+                                                          entry.key,
+                                                          controller.filterText[
+                                                              entry.key]!,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key],
+                                                        ),
                                                     buildDataColumn(
                                                       'Actions',
                                                       controller
                                                           .vegExecutionFilterText,
+                                                      150,
                                                     ),
                                                   ],
                                                 );
@@ -386,13 +386,13 @@ DataColumn2 buildDataColumn(
 
   /// ColumnSize columnSize,
   RxString filterText,
-  // double? fixedWidth,
+  double? fixedWidth,
   //  {required Function(String) onSearchCallBack}
 ) {
   return //
       DataColumn2(
     // size: columnSize,
-    // fixedWidth: fixedWidth,
+    fixedWidth: fixedWidth,
 
     label: //
         Column(
@@ -515,7 +515,8 @@ class VegExcutionListDataSource extends DataTableSource {
                                           (e) =>
                                               e?.id ==
                                               VegExcutionListDetails!.id,
-                                          orElse: () => VegTaskListModel(id: 00),
+                                          orElse: () =>
+                                              VegTaskListModel(id: 00),
                                         )
                                         ?.status ==
                                     301
@@ -542,13 +543,16 @@ class VegExcutionListDataSource extends DataTableSource {
                             message: 'View',
                             onPress: () {
                               int id = VegExcutionListDetails?.id ?? 0;
-                              int vegplanId = VegExcutionListDetails?.planId ?? 0;
+                              int vegplanId =
+                                  VegExcutionListDetails?.planId ?? 0;
                               if (id != 0) {
                                 controller.clearStoreDataVegid();
                                 controller.clearStoreDataVegPlanid();
-                                Get.toNamed(
-                                    Routes.viewVegExecutionPlanScreen,
-                                    arguments: {'vegid': id, "vegplanId": vegplanId});
+                                Get.toNamed(Routes.viewVegExecutionPlanScreen,
+                                    arguments: {
+                                      'vegid': id,
+                                      "vegplanId": vegplanId
+                                    });
                               }
                             },
                           ),
@@ -593,7 +597,7 @@ class VegExcutionListDataSource extends DataTableSource {
       //   ],
       // onSelectChanged: (_) {
       //   int id = VegExcutionListDetails?.id ?? 0;
-      //   int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
+      //   int vegplanId = VegExcutionListDetails?.planId ?? 0;
       //   if (id != 0) {
       //     // controller.clearStoreDatavegid();
       //     // controller.clearStoreDataPlanid();

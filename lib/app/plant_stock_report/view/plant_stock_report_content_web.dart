@@ -132,7 +132,8 @@ class _PlantStockReportContentWebState
                                         dropdownList: controller.assetList,
                                         selectedItems:
                                             controller.selectedAssetsNameList,
-                                        onValueChanged: controller.onValueChanged,
+                                        onValueChanged:
+                                            controller.onValueChanged,
                                       ),
                                     ),
                                     Spacer(),
@@ -141,17 +142,18 @@ class _PlantStockReportContentWebState
                                         CustomRichText(title: 'Date Range'),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
                                           numberTextField: true,
                                           onTap: () {
                                             controller
                                                     .openFromDateToStartDatePicker =
                                                 !controller
                                                     .openFromDateToStartDatePicker;
-                                            controller
-                                                .update(['stock_Mangement_Date']);
+                                            controller.update(
+                                                ['stock_Mangement_Date']);
                                           },
                                           hintText:
                                               '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
@@ -165,7 +167,7 @@ class _PlantStockReportContentWebState
                                     //   onPressed: () {
                                     //     final _flutterSecureStorage =
                                     //         const FlutterSecureStorage();
-              
+
                                     //     _flutterSecureStorage.delete(key: "mrsId");
                                     //     Get.toNamed(Routes.createMrs);
                                     //   },
@@ -229,15 +231,15 @@ class _PlantStockReportContentWebState
                                     ),
                                     itemBuilder: (BuildContext context) =>
                                         <PopupMenuEntry<String>>[]..addAll(
-                                              controller
-                                                  .columnVisibility.value.entries
+                                              controller.columnVisibility.value
+                                                  .entries
                                                   .map((e) {
                                             return PopupMenuItem<String>(
                                                 child: ValueListenableBuilder(
                                                     valueListenable: controller
                                                         .columnVisibility,
-                                                    builder:
-                                                        (context, value, child) {
+                                                    builder: (context, value,
+                                                        child) {
                                                       return Row(
                                                         children: [
                                                           Checkbox(
@@ -259,7 +261,7 @@ class _PlantStockReportContentWebState
                                       // Handle column selection
                                     },
                                   ),
-              
+
                                   Spacer(),
                                   Container(
                                     width: 300,
@@ -305,7 +307,7 @@ class _PlantStockReportContentWebState
                                           builder: (context, value, child) {
                                             final dataSource =
                                                 PlantListDataSource(controller);
-              
+
                                             return PaginatedDataTable2(
                                               // fixedLeftColumns: 1,
                                               // dataRowHeight:
@@ -331,10 +333,10 @@ class _PlantStockReportContentWebState
                                                   if (entry.value)
                                                     buildDataColumn(
                                                       entry.key,
-                                                      controller
-                                                          .filterText[entry.key]!,
-                                                      controller
-                                                          .columnwidth[entry.key],
+                                                      controller.filterText[
+                                                          entry.key]!,
+                                                      controller.columnwidth[
+                                                          entry.key],
                                                     ),
                                               ],
                                             );
@@ -360,11 +362,11 @@ class _PlantStockReportContentWebState
                               controller.fromDate.value,
                               controller.toDate.value,
                             ),
-              
+
                             onSubmit: (value) {
                               print('po valu ${value.toString()}');
                               PickerDateRange? data = value as PickerDateRange;
-              
+
                               var pickUpDate =
                                   DateTime.parse(data.startDate.toString());
                               controller.fromDate.value = pickUpDate;
@@ -373,12 +375,12 @@ class _PlantStockReportContentWebState
                               dropDate != null
                                   ? controller.toDate.value = dropDate
                                   : controller.toDate.value = pickUpDate;
-              
+
                               controller.getPlantStockListByDate();
                               controller.openFromDateToStartDatePicker =
                                   !controller.openFromDateToStartDatePicker;
                               controller.update(['stock_Mangement_Date']);
-              
+
                               // Get.toNamed(
                               //   Routes.stockManagementGoodsOrdersScreen,
                               // );
