@@ -68,9 +68,11 @@ class CreateMrsController extends GetxController {
             homecontroller.facilityId$.listen((event) {
           facilityId = event;
           Future.delayed(Duration(seconds: 1), () {
-            getEquipmentList(
-              facilityId,
-            );
+            if (facilityId > 0) {
+              getEquipmentList(
+                facilityId,
+              );
+            }
           });
         });
       }
