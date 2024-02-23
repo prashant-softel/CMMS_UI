@@ -196,8 +196,8 @@ class BodyInjuredController extends GetxController {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      BodyInjeredTypeModel createCheckpoint =
-          BodyInjeredTypeModel(name: _title, description: _description);
+      BodyInjeredTypeModel createCheckpoint = BodyInjeredTypeModel(
+          name: _title, description: _description, sequence_no: 0);
       print("OUT ");
       var facilitylistJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
@@ -241,12 +241,13 @@ class BodyInjuredController extends GetxController {
     String _name = titleCtrlr.text.trim();
     String _description = descriptionCtrlr.text.trim();
 
-    BodyInjuredModel createChecklist = BodyInjuredModel(
+    BodyInjeredTypeModel createbodyinjured = BodyInjeredTypeModel(
       id: id,
       name: _name,
       description: _description,
+      sequence_no: id,
     );
-    var bodyinjuredJsonString = createChecklist.toJson();
+    var bodyinjuredJsonString = createbodyinjured.toJson();
 
     print({"businessTypeJsonString", bodyinjuredJsonString});
     await bodyinjuredpresenter.updateBodyInjured(
