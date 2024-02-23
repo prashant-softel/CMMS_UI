@@ -6940,7 +6940,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateBodyParts',
       Request.put,
-      bodyInjuredJsonString,
+      jsonEncode(bodyInjuredJsonString),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

@@ -135,33 +135,33 @@ class FacilityTypeListController extends GetxController {
     // getInventoryCategoryList();
     // getFrequencyList();
 
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () async {
-        if (countryList.isEmpty) {
-          await getCountryList();
-        }
+    // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+    //   facilityId = event;
+    Future.delayed(Duration(seconds: 1), () async {
+      if (countryList.isEmpty) {
+        await getCountryList();
+      }
 
-        // Check if the business lists are already fetched
-        if (ownerList.isEmpty) {
-          await getBusinessList(1);
-        }
-        if (customerList.isEmpty) {
-          await getBusinessList(2);
-        }
-        if (operatorList.isEmpty) {
-          await getBusinessList(3);
-        }
-        if (SpvList.isEmpty) {
-          await getSpvList();
-        }
-        // getCountryList();
-        getFacilityTypeList();
-        // getBusinessList(1);
-        // getBusinessList(2);
-        // getBusinessList(3);\
-      });
+      // Check if the business lists are already fetched
+      if (ownerList.isEmpty) {
+        await getBusinessList(1);
+      }
+      if (customerList.isEmpty) {
+        await getBusinessList(2);
+      }
+      if (operatorList.isEmpty) {
+        await getBusinessList(3);
+      }
+      if (SpvList.isEmpty) {
+        await getSpvList();
+      }
+      // getCountryList();
+      getFacilityTypeList();
+      // getBusinessList(1);
+      // getBusinessList(2);
+      // getBusinessList(3);\
     });
+    // });
 
     nameFocus.addListener(() {
       if (!nameFocus.hasFocus) {
@@ -433,9 +433,9 @@ class FacilityTypeListController extends GetxController {
     print(" Selected Facility : ");
 
     int indexId = customerList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      customerId = customerList[indexId]?.id ?? 0;
-    }
+    // if (indexId > 0) {
+    customerId = customerList[indexId]?.id ?? 0;
+    // }
     selectedCustomer.value = list;
     isSelectedCustomer.value = true;
     print("index received is : $indexId & customer id  : $customerId");
@@ -448,9 +448,9 @@ class FacilityTypeListController extends GetxController {
     print(" Selected Facility : ");
 
     int indexId = operatorList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      operatorId = operatorList[indexId]?.id ?? 0;
-    }
+    // if (indexId > 0) {
+    operatorId = operatorList[indexId]?.id ?? 0;
+    // }
     selectedOperator.value = list;
     isSelectedOperator.value = true;
     print("index received is : $indexId & operator id  : $operatorId");
@@ -462,9 +462,9 @@ class FacilityTypeListController extends GetxController {
     print(" Selected Facility : ");
 
     int indexId = SpvList.indexWhere((x) => x?.name == newValue);
-    if (indexId > 0) {
-      SpvId = SpvList[indexId]?.id ?? 0;
-    }
+    // if (indexId > 0) {
+    SpvId = SpvList[indexId]?.id ?? 0;
+    // }
     selectedSpv.value = list;
     isSelectedSpv.value = true;
     print("index received is : $indexId & SPV id  : $SpvId");
@@ -559,10 +559,11 @@ class FacilityTypeListController extends GetxController {
       int _zipcode = int.parse(pin);
       String _description = descriptionCtrlr.text.trim();
       CreateFacilityType createCheckpoint = CreateFacilityType(
+        id: 0,
         name: _title,
         ownerId: ownerId,
-        customerId: customerId,
-        operatorId: operatorId,
+        customerId: operatorId,
+        operatorId: customerId,
         spvId: SpvId,
         address: _address,
         cityId: selectedCityId,
@@ -673,30 +674,32 @@ class FacilityTypeListController extends GetxController {
   }
 
   Future<bool> updateFacilityList(checklistId) async {
-    String _name = titleCtrlr.text.trim();
-    String _description = descriptionCtrlr.text.trim();
-    String _pin = zipcodeCtrlr.text.trim();
+    String _title = titleCtrlr.text.trim();
     String _address = addressCtrlr.text.trim();
+    String? pin = zipcodeCtrlr.text.trim();
+    pin = (pin != "" ? zipcodeCtrlr.text.trim() : "0");
+    int _zipcode = int.parse(pin);
+    String _description = descriptionCtrlr.text.trim();
 
-    UpdateFacilityTypeModel createChecklist = UpdateFacilityTypeModel(
+    CreateFacilityType createCheckpoint = CreateFacilityType(
+      name: _title,
       id: checklistId,
-      name: _name,
-      description: _description,
-      zipcode: int.parse(_pin),
+      ownerId: ownerId,
+      customerId: operatorId,
+      operatorId: customerId,
+      spvId: SpvId,
       address: _address,
-      countryId: selectedCountryId,
       cityId: selectedCityId,
       stateId: selectedStateId,
-      operatorId: operatorId,
-      spvId: SpvId,
-      ownerId: ownerId,
-      customerId: customerId,
+      countryId: selectedCountryId,
+      zipcode: _zipcode,
+      description: _description,
       photoId: 0,
       latitude: 0.0,
       longitude: 0.0,
-      timezone: "default",
+      timezone: "default_hardcoded",
     );
-    var businessTypeJsonString = createChecklist.toJson();
+    var businessTypeJsonString = createCheckpoint.toJson();
 
     print({"businessTypeJsonString", businessTypeJsonString});
     await facilityTypeListPresenter.updateFacilityList(
