@@ -91,9 +91,11 @@ class BlockTypeListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getBlockTypeList(facilityId);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getBlockTypeList(facilityId);
+        });
+      }
     });
 
     titleFocus.addListener(() {

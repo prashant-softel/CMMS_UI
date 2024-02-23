@@ -1314,8 +1314,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   controller
                                                       .updateFacilityList(
                                                           controller
-                                                              .selectedFacilityId
-                                                              ?.id)
+                                                              .selectedItem?.id)
                                                       .then((value) {
                                                     print("value,$value");
                                                     if (value == true)
@@ -1580,12 +1579,12 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   controller.selectedOperator
                                                       .value = controller
                                                           .selectedItem
-                                                          ?.operator ??
+                                                          ?.customer ??
                                                       '';
                                                   controller.selectedCustomer
                                                       .value = controller
                                                           .selectedItem
-                                                          ?.customer ??
+                                                          ?.operator ??
                                                       '';
                                                   controller.selectedCity
                                                       .value = controller

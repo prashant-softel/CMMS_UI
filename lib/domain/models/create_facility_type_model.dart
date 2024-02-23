@@ -1,5 +1,6 @@
-
 class CreateFacilityType {
+  int id;
+
   String name;
   int ownerId;
   int customerId;
@@ -24,6 +25,7 @@ class CreateFacilityType {
     required this.spvId,
     required this.address,
     required this.cityId,
+    required this.id,
     required this.stateId,
     required this.countryId,
     required this.zipcode,
@@ -37,6 +39,7 @@ class CreateFacilityType {
   factory CreateFacilityType.fromJson(Map<String, dynamic> json) =>
       CreateFacilityType(
         name: json['name'],
+        id: json['id'],
         ownerId: json['ownerId'],
         customerId: json['customerId'],
         operatorId: json['operatorId'],
@@ -55,6 +58,7 @@ class CreateFacilityType {
 
   Map<String, dynamic> toJson() => {
         'name': name,
+        'id': id,
         'ownerId': ownerId,
         'customerId': customerId,
         'operatorId': operatorId,

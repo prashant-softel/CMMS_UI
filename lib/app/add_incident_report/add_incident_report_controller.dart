@@ -500,13 +500,16 @@ class AddIncidentReportController extends GetxController {
       await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getFacilityList();
-        });
+        if (facilityId > 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getFacilityList();
+          });
+          Future.delayed(Duration(seconds: 1), () {
+            getBlocksList(facilityId);
+          });
+        }
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(facilityId);
-      });
+
       if (irId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getIncidentReportDetail(id: irId.value);
