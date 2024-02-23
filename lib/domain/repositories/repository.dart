@@ -10498,5 +10498,88 @@ class Repository {
       print(error.toString());
     }
   }
+
+  Future<void> startVegExecutionScheduleButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.startVegExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('StartScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'startVegScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> endVegScheduleExecutionButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.endVegScheduleExecutionButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('EndScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'endVegScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> abandonVegExecutionButton(
+    abandoneJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.abandonVegExecutionButton(
+        auth: auth,
+        abandoneJsonString: json.encode(abandoneJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      print('Response Abandon Execution: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'abandonExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
   //end
 }

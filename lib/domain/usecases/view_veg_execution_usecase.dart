@@ -10,7 +10,6 @@ class ViewVegExecutionUsecase {
     return await repository.generateToken();
   }
 
-
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
     required int executionId,
@@ -19,6 +18,15 @@ class ViewVegExecutionUsecase {
         executionId: executionId,
         isLoading: isLoading ?? false,
       );  
+
+  // Future<Map<String, dynamic>> vegExecutionApprovedButton({
+  //   mcExecutionApproveJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.vegExecutionApprovedButton(
+  //       mcExecutionApproveJsonString,
+  //       isLoading,
+  //     );
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await repository.getFacilityList(true);

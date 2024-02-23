@@ -64,17 +64,17 @@ class VegExecutionListController extends GetxController {
     "Status": true,
     // "search": true,
   });
-  // final Map<String, double> columnwidth = {
-  //   "ID": 150,
-  //   "Title": 200,
-  //   "Plan ID": 100,
-  //   // "Responsibility": 200,
-  //   "Frequency": 163,
-  //   "No Of Days": 153,
-  //   "Start Date": 130,
-  //   "Done Date": 120,
-  //   "Status": 100
-  // };
+  final Map<String, double> columnwidth = {
+    "ID": 150,
+    "Title": 200,
+    "Plan ID": 100,
+    // "Responsibility": 200,
+    "Frequency": 163,
+    "No Of Days": 153,
+    "Start Date": 130,
+    "Done Date": 120,
+    "Status": 100
+  };
 
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
