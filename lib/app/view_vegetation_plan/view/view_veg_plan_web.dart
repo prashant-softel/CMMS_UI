@@ -628,56 +628,59 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                   //         ),
                                   //       ),
 
-                                  Dimens.boxHeight12,
-                                  varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kVegetationControlFeatureId &&
-                                                  e.approve ==
-                                                      UserAccessConstants
-                                                          .kHaveApproveAccess)
-                                              .length >
-                                          0
-                                      ? Row(
-                                          children: [
-                                            Spacer(),
-                                            Container(
-                                              height: 45,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.rejectColor,
-                                                text: "Reject",
-                                                icon: Icons.close,
-                                                onPressed: () {
-                                                  controller
-                                                      .vegPlanRejectButton(
-                                                    id: controller.id.value,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              height: 45,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "Approve",
-                                                icon: Icons.add,
-                                                onPressed: () {
-                                                  controller
-                                                      .vegPlanApprovedButton(
-                                                    id: controller.id.value,
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Spacer(),
-                                          ],
-                                        )
-                                      : Dimens.box0,
-                                  Dimens.boxHeight12,
+                                  // Dimens.boxHeight12,
+                                  // controller.vegPlanDetailsModel.value
+                                  //                 ?.status ==
+                                  //             371 &&
+                                  //         varUserAccessModel.value.access_list!
+                                  //                 .where((e) =>
+                                  //                     e.feature_id ==
+                                  //                         UserAccessConstants
+                                  //                             .kVegetationControlFeatureId &&
+                                  //                     e.approve ==
+                                  //                         UserAccessConstants
+                                  //                             .kHaveApproveAccess)
+                                  //                 .length >
+                                  //             0
+                                  //     ? Row(
+                                  //         children: [
+                                  //           Spacer(),
+                                  //           Container(
+                                  //             height: 45,
+                                  //             child: CustomElevatedButton(
+                                  //               backgroundColor:
+                                  //                   ColorValues.rejectColor,
+                                  //               text: "Reject",
+                                  //               icon: Icons.close,
+                                  //               onPressed: () {
+                                  //                 controller
+                                  //                     .vegPlanRejectButton(
+                                  //                   id: controller.id.value,
+                                  //                 );
+                                  //               },
+                                  //             ),
+                                  //           ),
+                                  //           Dimens.boxWidth10,
+                                  //           Container(
+                                  //             height: 45,
+                                  //             child: CustomElevatedButton(
+                                  //               backgroundColor:
+                                  //                   ColorValues.appGreenColor,
+                                  //               text: "Approve",
+                                  //               icon: Icons.add,
+                                  //               onPressed: () {
+                                  //                 controller
+                                  //                     .vegPlanApprovedButton(
+                                  //                   id: controller.id.value,
+                                  //                 );
+                                  //               },
+                                  //             ),
+                                  //           ),
+                                  //           Spacer(),
+                                  //         ],
+                                  //       )
+                                  //     : Dimens.box0,
+                                  // Dimens.boxHeight12,
                                 ],
                               ),
                             ),
@@ -689,6 +692,52 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                   // Dimens.boxHeight40,
                 ],
               ),
+              floatingActionButton:
+                  controller.vegPlanDetailsModel.value?.status == 371 &&
+                          varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kVegetationControlFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0
+                      ? Row(
+                          children: [
+                            Spacer(),
+                            Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.rejectColor,
+                                text: "Reject",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  controller.vegPlanRejectButton(
+                                    id: controller.id.value,
+                                  );
+                                },
+                              ),
+                            ),
+                            Dimens.boxWidth10,
+                            Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: "Approve",
+                                icon: Icons.add,
+                                onPressed: () {
+                                  controller.vegPlanApprovedButton(
+                                    id: controller.id.value,
+                                  );
+                                },
+                              ),
+                            ),
+                            Spacer(),
+                          ],
+                        )
+                      : Dimens.box0,
             ),
           ),
         );

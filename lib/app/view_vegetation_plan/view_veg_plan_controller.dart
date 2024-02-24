@@ -25,7 +25,7 @@ class ViewVegPlanController extends GetxController {
   // RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
-  RxList<VegPlanDetailModel?>? vegPlanDetailsList = <VegPlanDetailModel?>[].obs;
+  RxList<VegPlanDetailModel?> vegPlanDetailsList = <VegPlanDetailModel>[].obs;
   Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   List<int?> scheduleId = [];
