@@ -49,10 +49,10 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
         Obx(
       () => Container(
           // color: ColorValues.greyBorderColor,
-          height: widget.height, // MediaQuery.of(context).size.height * 0.040,
+          height: 45, // MediaQuery.of(context).size.height * 0.040,
           width: widget.width,
           // margin: widget.margin,
-          padding: EdgeInsets.symmetric(vertical: 5),
+          // padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
@@ -80,56 +80,57 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
           ),
           child: //
 
-              DropdownSearch<String>.multiSelection(
-                  items: widget.dropdownList
-                          ?.map<String>((item) => item.name)
-                          .toList() ??
-                      [], //widget.items,
-                  popupProps: PopupPropsMultiSelection.menu(
-                    searchFieldProps: TextFieldProps(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: ColorValues.appBlueBackgroundColor),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: ColorValues.appBlueBackgroundColor),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+              SingleChildScrollView(
+            child: DropdownSearch<String>.multiSelection(
+                items: widget.dropdownList
+                        ?.map<String>((item) => item.name)
+                        .toList() ??
+                    [], //widget.items,
+                popupProps: PopupPropsMultiSelection.menu(
+                  searchFieldProps: TextFieldProps(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: ColorValues.appBlueBackgroundColor),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: ColorValues.appBlueBackgroundColor),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    showSelectedItems: true,
-                    onItemAdded: (selectedItems, addedItem) {},
-                    // disabledItemFn: (String s) => s.startsWith('I'),
-                    showSearchBox: true,
                   ),
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                        border: InputBorder.none,
-                        enabledBorder:
-                            OutlineInputBorder(borderSide: BorderSide.none),
-                        focusedBorder:
-                            OutlineInputBorder(borderSide: BorderSide.none),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide:
-                              BorderSide(color: ColorValues.redColorDark),
-                        ),
-                        contentPadding: Dimens.edgeInsets05_0_5_0,
-                        hintText: "Select",
-                        suffixIcon: null),
-                  ),
-                  onChanged: (List<String>? _selectedValue) {
-                    widget.selectedItems = _selectedValue ?? [];
-                    widget.onValueChanged(
-                        widget.dropdownList, widget.selectedItems);
-                  },
-                  selectedItems: widget.selectedItems
-                      .map<String>((item) => item.name)
-                      .toList() //["Brazil"],
-                  )),
+                  showSelectedItems: true,
+                  onItemAdded: (selectedItems, addedItem) {},
+                  // disabledItemFn: (String s) => s.startsWith('I'),
+                  showSearchBox: true,
+                ),
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                      border: InputBorder.none,
+                      enabledBorder:
+                          OutlineInputBorder(borderSide: BorderSide.none),
+                      focusedBorder:
+                          OutlineInputBorder(borderSide: BorderSide.none),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(color: ColorValues.redColorDark),
+                      ),
+                      // contentPadding: EdgeInsets.all(5),
+                      hintText: "Select",
+                      suffixIcon: null),
+                ),
+                onChanged: (List<String>? _selectedValue) {
+                  widget.selectedItems = _selectedValue ?? [];
+                  widget.onValueChanged(
+                      widget.dropdownList, widget.selectedItems);
+                },
+                selectedItems: widget.selectedItems
+                    .map<String>((item) => item.name)
+                    .toList() //["Brazil"],
+                ),
+          )),
     );
   }
 }

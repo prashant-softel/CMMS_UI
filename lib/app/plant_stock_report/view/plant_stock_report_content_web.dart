@@ -109,6 +109,7 @@ class _PlantStockReportContentWebState
                                     ),
                                     Spacer(),
                                     Container(
+                                      height: 45,
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
