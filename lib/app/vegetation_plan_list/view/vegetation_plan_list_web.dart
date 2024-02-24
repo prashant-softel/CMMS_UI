@@ -86,8 +86,8 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                           Container(
                             width: Get.width * 7,
                             margin:
-                                EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                                EdgeInsets.only(left: 10, top: 10, right: 10),
+                            height: Get.height * .85,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -371,7 +371,7 @@ class VegetationPlanListDataSource extends DataTableSource {
       '${VegetationListDetails?.noOfCleaningDays ?? ''}',
       '${VegetationListDetails?.createdBy ?? ''}',
       '${VegetationListDetails?.frequency ?? ''}',
-      '${VegetationListDetails?.statusShort ?? ''}',
+      '${VegetationListDetails?.status ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -405,22 +405,22 @@ class VegetationPlanListDataSource extends DataTableSource {
                         'VC ${VegetationListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
-                      // Align(
-                      //   alignment: Alignment.centerLeft,
-                      //   child: Container(
-                      //     padding: Dimens.edgeInsets8_2_8_2,
-                      //     decoration: BoxDecoration(
-                      //       color: ColorValues.addNewColor,
-                      //       borderRadius: BorderRadius.circular(4),
-                      //     ),
-                      //     child: Text(
-                      //       ' ${VegetationListDetails?.statusShort}',
-                      //       style: Styles.white10.copyWith(
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            ' ${VegetationListDetails?.statusShort}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 : (value == 'Actions')
@@ -438,25 +438,25 @@ class VegetationPlanListDataSource extends DataTableSource {
                           },
                         ),
                         varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    371
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kVegetationControlFeatureId &&
+                                        e.edit ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            // &&
+                            // controller.vegetationPlanList
+                            //         .firstWhere(
+                            //           (e) =>
+                            //               e.planId ==
+                            //               VegetationListDetails!.planId,
+                            //           orElse: () => VegetationPlanListModel(
+                            //               planId: 00),
+                            //         )
+                            //         .status ==
+                            //     371
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
