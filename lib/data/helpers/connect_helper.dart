@@ -7364,4 +7364,57 @@ class ConnectHelper {
         AbandonVegExecutionMessageDialog(data: parsedJson['message']));
     return responseModel;
   }
+  Future<ResponseModel> createWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktypeJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'JobWorkType/CreateJobWorkType', //AddBusiness
+      Request.post,
+      worktypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> deleteWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/DeleteJobWorkType?id=$worktype_id',
+      Request.delete,
+      worktype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> updateWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/UpdateJobWorkType',
+      Request.put,
+      jsonEncode(worktypeJsonString),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

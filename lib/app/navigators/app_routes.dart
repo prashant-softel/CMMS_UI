@@ -197,6 +197,7 @@ abstract class Routes {
   static const viewHazWasteData = _Paths.viewHazWasteData;
   static const dsmCharges = _Paths.dsmCharges;
   static const viewAuditTask = _Paths.viewAuditTask;
+  static const worktype = _Paths.worktype;
 }
 
 abstract class _Paths {
@@ -209,6 +210,7 @@ abstract class _Paths {
   static const editJob = '/edit-job-screen';
   static const facility = '/facility';
   static const viewAuditTask = '/viewAuditTask';
+  static const worktype = '/work-type-screen';
 
   static const jobCardDetails = '/job-card-details';
   static const jobCardList = '/job-card-list-screen';

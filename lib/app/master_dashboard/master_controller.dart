@@ -115,6 +115,11 @@ class MastersController extends GetxController {
       Routes.blockTypeListScreen,
     );
   }
+  Future<void> goToWorkTypeList() async {
+    Get.toNamed(
+      Routes.worktype,
+    );
+  }
 
   // Future<void> goToBodyinjured() async {
   //   Get.toNamed(
