@@ -57,10 +57,10 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                       Get.offNamed(Routes.mrsListScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT ",
-                        style: Styles.greyMediumLight12),
+                        style: Styles.greyLight14),
                   ),
                   Text(" / MATERIAL REQUISITION SLIP  VIEW",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14)
                 ],
               ),
             ),

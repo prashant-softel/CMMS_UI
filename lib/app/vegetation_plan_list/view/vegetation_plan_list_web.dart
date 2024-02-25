@@ -516,6 +516,12 @@ class VegetationPlanListDataSource extends DataTableSource {
           ),
         );
       }).toList(),
+      onSelectChanged: (_) {
+          int id = VegetationListDetails?.planId ?? 0;
+          if (id != 0) {
+            Get.toNamed(Routes.viewVegetationPlanScreen, arguments: {'id': id});
+          }
+        }
     );
   }
 

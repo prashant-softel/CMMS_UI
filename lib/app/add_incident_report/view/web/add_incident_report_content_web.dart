@@ -2651,6 +2651,42 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                     : position == 8
                                         ? controller.unsafeActCauseTextCtrlr
                                         : null,
+        focusNode: position == 1
+            ? controller.typeOfJbFocusNode
+            : position == 2
+                ? controller.personInvolvedFocusNode
+                : position == 3
+                    ? controller.personAuthorizedInvolvedFocusNode
+                    : position == 4
+                        ? controller.instructionsFocusNode
+                        : position == 5
+                            ? controller.safetyEquipmentsFocusNode
+                            : position == 6
+                                ? controller.correctSafeFocusNode
+                                : position == 7
+                                    ? controller.unsafeConditionsFocusNode
+                                    : position == 8
+                                        ? controller.unsafeActCauseFocusNode
+                                        : null,
+        scroll: position == 1
+            ? controller.typeOfJbScrollController
+            : position == 2
+                ? controller.personInvolvedScrollController
+                : position == 3
+                    ? controller.personAuthorizedInvolvedScrollController
+                    : position == 4
+                        ? controller.instructionsScrollController
+                        : position == 5
+                            ? controller.safetyEquipmentsScrollController
+                            : position == 6
+                                ? controller.correctSafeScrollController
+                                : position == 7
+                                    ? controller
+                                        .unsafeConditionsScrollController
+                                    : position == 8
+                                        ? controller
+                                            .unsafeActCauseScrollController
+                                        : null,
       ),
     );
   }
