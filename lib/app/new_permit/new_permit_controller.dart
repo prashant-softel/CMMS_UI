@@ -469,6 +469,7 @@ class NewPermitController extends GetxController {
 
   void removeItem(int index) {
     filteredEquipmentNameList.removeAt(index);
+    print("Item at index $index removed successfully.");
   }
 
   Future<void> setId() async {
