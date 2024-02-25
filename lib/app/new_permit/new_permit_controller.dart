@@ -467,6 +467,10 @@ class NewPermitController extends GetxController {
     super.onInit();
   }
 
+  void removeItem(int index) {
+    filteredEquipmentNameList.removeAt(index);
+  }
+
   Future<void> setId() async {
     try {
       var jobDetail;

@@ -187,10 +187,33 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 ),
                                 Spacer(),
                                 GestureDetector(
-                                    onTap: () {
-                                      controller.addRowItem();
-                                    },
-                                    child: Icon(Icons.add)),
+                                  onTap: () {
+                                    controller.addRowItem();
+                                  },
+                                  child: Container(
+                                    height: 25,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      color: ColorValues.addNewColor,
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(5)),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        " + Add ",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w100,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -219,54 +242,37 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               }).toList(),
                               rows: controller.rowItem.value.map((record) {
                                 return TableViewRow(
-                                  height: 85,
+                                  height: 50,
                                   cells: record.map((mapData) {
                                     return TableViewCell(
                                       child: (mapData['key'] == "Drop_down")
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.all(5.0),
-                                              child: Column(
-                                                children: [
-                                                  DropdownWebWidget(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            4,
-                                                    dropdownList: controller
-                                                        .assetItemList,
-                                                    selectedValue:
-                                                        mapData["value"],
-                                                    onValueChanged:
-                                                        (list, selectedValue) {
-                                                      // print({
-                                                      //   selectedValue:
-                                                      //       selectedValue
-                                                      // });
-                                                      mapData["value"] =
-                                                          selectedValue;
-                                                      controller.dropdownMapperData[
-                                                              selectedValue] =
-                                                          list.firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  selectedValue,
-                                                              orElse: null);
-                                                    },
-                                                  ),
-                                                  // Dimens.boxHeight5,
-                                                  // Row(
-                                                  //   children: [
-                                                  //     Text(
-                                                  //         "Approval required:"),
-                                                  //     Dimens.boxWidth10,
-                                                  //     Text(
-                                                  //         "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}")
-                                                  //   ],
-                                                  // )
-                                                ],
+                                              child: DropdownWebWidget(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    4,
+                                                dropdownList:
+                                                    controller.assetItemList,
+                                                selectedValue: mapData["value"],
+                                                onValueChanged:
+                                                    (list, selectedValue) {
+                                                  // print({
+                                                  //   selectedValue:
+                                                  //       selectedValue
+                                                  // });
+                                                  mapData["value"] =
+                                                      selectedValue;
+                                                  controller.dropdownMapperData[
+                                                          selectedValue] =
+                                                      list.firstWhere(
+                                                          (element) =>
+                                                              element.name ==
+                                                              selectedValue,
+                                                          orElse: null);
+                                                },
                                               ),
                                             )
                                           : (mapData['key'] == "Requested_Qty")
