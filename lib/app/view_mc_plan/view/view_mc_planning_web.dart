@@ -76,10 +76,10 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                             Get.offNamed(Routes.moduleCleaningDashboard);
                           },
                           child: Text(" / MODULE CLEANING",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
                         Text(" / VIEW MODULE CLEANING PLANNING ",
-                            style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)
                       ],
                     ),
                   ),

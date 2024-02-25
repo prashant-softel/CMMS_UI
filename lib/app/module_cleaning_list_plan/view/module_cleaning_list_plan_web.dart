@@ -707,13 +707,18 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "UserId");
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        int id = ModuleCleaningPlanningListDetails?.planId ?? 0;
+        if (id != 0) {
+          controller.clearStoreDataMcid();
+          controller.clearStoreDataPlanid();
+          Get.toNamed(Routes.viewMcPlaning, arguments: {'mcid': id});
+        }
+        //   final _flutterSecureStorage = const FlutterSecureStorage();
+        //   _flutterSecureStorage.delete(key: "UserId");
+        //   Get.toNamed(Routes.viewUserDetail,
+        //       arguments: {'userId': UserDetails?.id});
+      },
     );
   }
 

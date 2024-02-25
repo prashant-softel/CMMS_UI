@@ -773,11 +773,17 @@ class GoodsOrderListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      // controller.clearStoreData();
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        controller.clearStoreData();
+        int roId = int.tryParse(GoodsOrderListDetails?.name ?? "") ?? 0;
+        if (roId != 0) {
+          Get.toNamed(Routes.purchaseGoodsorderView,
+              arguments: {'roId': roId, "roType": 1});
+        }
+        // controller.clearStoreData();
+        //   Get.toNamed(Routes.viewUserDetail,
+        //       arguments: {'userId': UserDetails?.id});
+      },
     );
   }
 
