@@ -166,7 +166,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(
+                                                                    .only(
                                                                 right: 140),
                                                         child: Text(
                                                           'REQUEST A PERMIT TO WORK',
@@ -1612,7 +1612,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         right:
                                                                             50,
                                                                         top:
@@ -1641,9 +1641,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         Dimens
                                                                             .boxHeight10,
                                                                         Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .only(
-                                                                              left: 70),
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 70),
                                                                           child:
                                                                               Text(
                                                                             'Request a Permit For a PM',
@@ -1652,8 +1651,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .only(
+                                                                          padding: const EdgeInsets.only(
                                                                               top: 10,
                                                                               left: 40,
                                                                               right: 10),
@@ -1762,9 +1760,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         Dimens
                                                                             .boxHeight10,
                                                                         Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .only(
-                                                                              left: 10),
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 10),
                                                                           child:
                                                                               Text(
                                                                             'Request a Permit For a Job',
@@ -1773,8 +1770,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .only(
+                                                                          padding: const EdgeInsets.only(
                                                                               top: 10,
                                                                               left: 40,
                                                                               right: 10),
@@ -2042,10 +2038,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       Spacer(),
                                                                       // Dimens.boxWidth47,
                                                                       Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            right:
-                                                                                20),
+                                                                        padding:
+                                                                            const EdgeInsets.only(right: 20),
                                                                         child:
                                                                             Column(
                                                                           crossAxisAlignment:
@@ -2330,7 +2324,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                                   Padding(
                                                                     padding: const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             150,
                                                                         right:
@@ -2357,7 +2351,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             70),
                                                                 child: Row(
@@ -2687,8 +2681,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                             icon: Icons.delete_outline,
                                                                                                                             message: 'Remove',
                                                                                                                             onPress: () {
-                                                                                                                              // controller.showNewPermitListDetails(
-                                                                                                                              //     controller.permitId.value);
+                                                                                                                              int index = _inventoryDetailList.indexOf(value);
+                                                                                                                              controller.removeItem(index);
                                                                                                                             },
                                                                                                                           ),
                                                                                                                         ],
@@ -3311,7 +3305,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         left:
                                                                             28,
                                                                         right:
