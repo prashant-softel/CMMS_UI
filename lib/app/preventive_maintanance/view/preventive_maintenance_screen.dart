@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/header_widget_all_dash.dart';
 import '../preventive_maintenance_controller.dart';
 
 class PreventiveScreen extends GetView<PreventiveController> {
@@ -86,157 +87,161 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                                   value: facility?.name ?? '',
                                                   child: Text(
                                                       facility?.name ?? ''),
-                                              );
-                                            }).toList(),
+                                                );
+                                              }).toList(),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
+                              if (Responsive.isDesktop(context))
+                                HeaderWidgetAllDash(),
+
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Preventive Maintenance",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                            1, // Adjust the height of the line if needed
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            if (Responsive.isDesktop(context)) HeaderWidget(),
-                            Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Preventive Maintenance",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 159, 156, 156),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          10), // Add some space between the text and the line
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors
-                                          .grey, // Customize the color of the line if needed
-                                      height:
-                                          1, // Adjust the height of the line if needed
-                                    ),
-                                  ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: const EdgeInsets.all(16),
+                                crossAxisSpacing: 40,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                    Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : 5,
+                                children: <Widget>[
+                                  _priventiveList(
+                                      tittle: "PM Plans",
+                                      ontap: () {
+                                        controller.pmPlanList();
+                                      }),
+                                  _priventiveList(
+                                      tittle: "Import Plan",
+                                      ontap: () {
+                                        controller.importPlan();
+                                      }),
+                                  _priventiveList(
+                                      tittle: "PM Tasks",
+                                      ontap: () {
+                                        controller.pmTask();
+                                      }),
                                 ],
                               ),
-                            ),
-                            GridView.count(
-                              shrinkWrap: true,
-                              primary: false,
-                              padding: const EdgeInsets.all(16),
-                              crossAxisSpacing: 40,
-                              mainAxisSpacing: 6,
-                              crossAxisCount:
-                                  Responsive.isMobile(context) ? 2 : 5,
-                              childAspectRatio: Responsive.isMobile(context)
-                                  ? (itemWidth / itemHeight)
-                                  : 5,
-                              children: <Widget>[
-                                _priventiveList(
-                                    tittle: "PM Plans",
-                                    ontap: () {
-                                      controller.pmPlanList();
-                                    }),
-                                _priventiveList(
-                                    tittle: "Import Plan",
-                                    ontap: () {
-                                      controller.importPlan();
-                                    }),
-                                _priventiveList(
-                                    tittle: "PM Tasks",
-                                    ontap: () {
-                                      controller.pmTask();
-                                    }),
-                              ],
-                            ),
-                            // GridView.count(
-                            //   shrinkWrap: true,
-                            //   primary: false,
-                            //   padding: const EdgeInsets.all(16),
-                            //   crossAxisSpacing: 40,
-                            //   mainAxisSpacing: 6,
-                            //   crossAxisCount:
-                            //       Responsive.isMobile(context) ? 2 : 5,
-                            //   childAspectRatio: Responsive.isMobile(context)
-                            //       ? (itemWidth / itemHeight)
-                            //       : 5,
-                            //   children: <Widget>[
-                            //     _priventiveList(
-                            //         tittle: "PM Tasks",
-                            //         ontap: () {
-                            //           controller.pmTask();
-                            //         }),
-                            //   ],
-                            // ),
-                            Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Masters",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 159, 156, 156),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                              // GridView.count(
+                              //   shrinkWrap: true,
+                              //   primary: false,
+                              //   padding: const EdgeInsets.all(16),
+                              //   crossAxisSpacing: 40,
+                              //   mainAxisSpacing: 6,
+                              //   crossAxisCount:
+                              //       Responsive.isMobile(context) ? 2 : 5,
+                              //   childAspectRatio: Responsive.isMobile(context)
+                              //       ? (itemWidth / itemHeight)
+                              //       : 5,
+                              //   children: <Widget>[
+                              //     _priventiveList(
+                              //         tittle: "PM Tasks",
+                              //         ontap: () {
+                              //           controller.pmTask();
+                              //         }),
+                              //   ],
+                              // ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Masters",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                          10), // Add some space between the text and the line
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors
-                                          .grey, // Customize the color of the line if needed
-                                      height:
-                                          1, // Adjust the height of the line if needed
+                                    SizedBox(
+                                        width:
+                                            10), // Add some space between the text and the line
+                                    Expanded(
+                                      child: Divider(
+                                        color: Colors
+                                            .grey, // Customize the color of the line if needed
+                                        height:
+                                            1, // Adjust the height of the line if needed
+                                      ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                              ),
+                              GridView.count(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: const EdgeInsets.all(16),
+                                crossAxisSpacing: 40,
+                                mainAxisSpacing: 6,
+                                crossAxisCount:
+                                    Responsive.isMobile(context) ? 2 : 5,
+                                childAspectRatio: Responsive.isMobile(context)
+                                    ? (itemWidth / itemHeight)
+                                    : 5,
+                                children: <Widget>[
+                                  _priventiveList(
+                                      tittle: "Check List",
+                                      ontap: () {
+                                        controller.createChecklist();
+                                      }),
+                                  _priventiveList(
+                                      tittle: "Check Point",
+                                      ontap: () {
+                                        controller.checkPoint();
+                                      }),
+                                  _priventiveList(
+                                      tittle: "Import Checklist",
+                                      ontap: () {
+                                        controller.importChecklist();
+                                      }),
                                 ],
                               ),
-                            ),
-                            GridView.count(
-                              shrinkWrap: true,
-                              primary: false,
-                              padding: const EdgeInsets.all(16),
-                              crossAxisSpacing: 40,
-                              mainAxisSpacing: 6,
-                              crossAxisCount:
-                                  Responsive.isMobile(context) ? 2 : 5,
-                              childAspectRatio: Responsive.isMobile(context)
-                                  ? (itemWidth / itemHeight)
-                                  : 5,
-                              children: <Widget>[
-                                _priventiveList(
-                                    tittle: "Check List",
-                                    ontap: () {
-                                      controller.createChecklist();
-                                    }),
-                                _priventiveList(
-                                    tittle: "Check Point",
-                                    ontap: () {
-                                      controller.checkPoint();
-                                    }),
-                                _priventiveList(
-                                    tittle: "Import Checklist",
-                                    ontap: () {
-                                      controller.importChecklist();
-                                    }),
-                              ],
-                            ),
-                          ]),
-                    ),
-                  ],
+                            ]),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 450),
-                child: HomeDrawer(),
-              ),
-            ],
-          ),
-        )),
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 450),
+                  child: HomeDrawer(),
+                ),
+              ],
+            ),
+          )),
     );
   }
 

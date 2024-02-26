@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 
@@ -63,7 +64,8 @@ class ModuleCleaningDashboardScreen
                                   ),
                                 ),
                               ),
-                            if (Responsive.isDesktop(context)) HeaderWidget(),
+                            if (Responsive.isDesktop(context))                                  HeaderWidgetAllDash(),
+
                             Container(
                               margin: EdgeInsets.only(left: 20),
                               child: Row(

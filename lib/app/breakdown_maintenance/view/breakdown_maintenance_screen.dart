@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/header_widget_all_dash.dart';
 
 // import '../../navigators/app_pages.dart';
 
@@ -103,7 +104,9 @@ class BreakdownMaintenanceScreen
                                     ),
                                   ),
                                 if (Responsive.isDesktop(context))
-                                  HeaderWidget(),
+                                  HeaderWidgetAllDash(),
+
+                                // HeaderWidget(),
                                 Container(
                                   margin: EdgeInsets.only(left: 20),
                                   child: Row(
@@ -196,60 +199,60 @@ class BreakdownMaintenanceScreen
                                   ],
                                 ),
                                 Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Permit",
-                                      style: TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 159, 156, 156),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Permit",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 159, 156, 156),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            10), // Add some space between the text and the line
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors
-                                            .grey, // Customize the color of the line if needed
-                                        height:
-                                            1, // Adjust the height of the line if needed
+                                      SizedBox(
+                                          width:
+                                              10), // Add some space between the text and the line
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors
+                                              .grey, // Customize the color of the line if needed
+                                          height:
+                                              1, // Adjust the height of the line if needed
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              GridView.count(
-                                shrinkWrap: true,
-                                primary: false,
-                                padding: Dimens.edgeInsets15,
-                                crossAxisSpacing: 70,
-                                mainAxisSpacing: 6,
-                                crossAxisCount:
-                                    Responsive.isMobile(context) ? 2 : 5,
-                                childAspectRatio: Responsive.isMobile(context)
-                                    ? (itemWidth / itemHeight)
-                                    : 5,
-                                children: <Widget>[
-                                  varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kPermitFeatureId &&
-                                                  e.view ==
-                                                      UserAccessConstants
-                                                          .kHaveViewAccess)
-                                              .length >
-                                          0
-                                      ? createContentTile(
-                                          title: "Permit List",
-                                          onTap: () {
-                                            controller.newPermitList();
-                                          })
-                                      : Container(),
+                                GridView.count(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  padding: Dimens.edgeInsets15,
+                                  crossAxisSpacing: 70,
+                                  mainAxisSpacing: 6,
+                                  crossAxisCount:
+                                      Responsive.isMobile(context) ? 2 : 5,
+                                  childAspectRatio: Responsive.isMobile(context)
+                                      ? (itemWidth / itemHeight)
+                                      : 5,
+                                  children: <Widget>[
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kPermitFeatureId &&
+                                                    e.view ==
+                                                        UserAccessConstants
+                                                            .kHaveViewAccess)
+                                                .length >
+                                            0
+                                        ? createContentTile(
+                                            title: "Permit List",
+                                            onTap: () {
+                                              controller.newPermitList();
+                                            })
+                                        : Container(),
 
                                     //Add New Permit
                                     varUserAccessModel.value.access_list!

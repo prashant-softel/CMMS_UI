@@ -1,5 +1,6 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -60,7 +61,8 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                   ),
                                 ),
                               ),
-                            if (Responsive.isDesktop(context)) HeaderWidget(),
+                            if (Responsive.isDesktop(context))
+                              HeaderWidgetAllDash(),
                             Container(
                               margin: EdgeInsets.only(left: 20),
                               child: Row(

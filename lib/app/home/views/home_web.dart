@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -140,7 +141,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
             length: 6,
             child: Column(
               children: [
-                HeaderWidget(),
+                HeaderWidgetAllDash(),
+                // HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
