@@ -2687,8 +2687,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                                             icon: Icons.delete_outline,
                                                                                                                             message: 'Remove',
                                                                                                                             onPress: () {
-                                                                                                                              // controller.showNewPermitListDetails(
-                                                                                                                              //     controller.permitId.value);
+                                                                                                                              int index = _inventoryDetailList.indexOf(value);
+                                                                                                                              print("Index to remove: $index");
+                                                                                                                              controller.removeItem(index);
                                                                                                                             },
                                                                                                                           ),
                                                                                                                         ],

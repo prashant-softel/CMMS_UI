@@ -22,59 +22,58 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
-        children: [
-          HeaderWidget(),
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 227, 224, 224),
-                width: 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
+      () => SelectionArea(
+        child: Column(
+          children: [
+            HeaderWidget(),
+            Container(
+              height: 45,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 227, 224, 224),
+                  width: 1,
                 ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.home,
-                  color: ColorValues.greyLightColor,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.offNamed(Routes.home);
-                  },
-                  child: Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    final _flutterSecureStorage = const FlutterSecureStorage();
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.home,
+                    color: ColorValues.greyLightColor,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      final _flutterSecureStorage =
+                          const FlutterSecureStorage();
 
-                    _flutterSecureStorage.delete(key: "mrsId");
-                    Get.back();
-                  },
-                  child: Text(" / STOCK MANAGEMENT ",
-                      style: Styles.greyLight14),
-                ),
-                Text(" / NEW MATERIAL SLIP ", style: Styles.greyLight14)
-              ],
+                      _flutterSecureStorage.delete(key: "mrsId");
+                      Get.back();
+                    },
+                    child:
+                        Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
+                  ),
+                  Text(" / NEW MATERIAL SLIP ", style: Styles.greyLight14)
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                color: ColorValues.whiteColor,
-                height: Get.height,
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -230,7 +229,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                         ),
                         Expanded(
                           child: DataTable2(
-                            // minWidth: 2000,
+                            minWidth: 2000,
                             dataRowHeight: 105,
                             columnSpacing: 10,
                             border: TableBorder.all(
@@ -493,37 +492,37 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       ),
                     ),
                     Dimens.boxHeight15,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.updateColor,
-                            text: 'Update',
-                            onPressed: () {
-                              // controller.addUser();
-                              controller.editMrs();
-                            },
-                          ),
-                        ),
-                        Dimens.boxWidth20,
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.cancelColor,
-                            text: "Cancel",
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.updateColor,
+                    text: 'Update',
+                    onPressed: () {
+                      // controller.addUser();
+                      controller.editMrs();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth20,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.cancelColor,
+                    text: "Cancel",
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
