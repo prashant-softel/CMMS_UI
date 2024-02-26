@@ -4223,5 +4223,38 @@ class DataRepository extends DomainRepository {
         abandoneJsonString: abandoneJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> createWorkType({
+    auth,
+    bool? isLoading,
+    worktypeJsonString,
+  }) async {
+    var response = await connectHelper.createWorkType(
+        auth: auth,
+        isLoading: isLoading,
+        worktypeJsonString: worktypeJsonString);
+    return response;
+  }
+  Future<ResponseModel> deleteWorkType({
+    auth,
+    bool? isLoading,
+    worktype_id,
+  }) async {
+    var response = await connectHelper.deleteWorkType(
+        auth: auth, isLoading: isLoading, worktype_id: worktype_id);
+    return response;
+  }
+  Future<ResponseModel> updateWorkType({
+    auth,
+    bool? isLoading,
+    worktypeJsonString,
+  }) async {
+    var response = await connectHelper.updateWorkType(
+      auth: auth,
+      isLoading: isLoading,
+      worktypeJsonString: worktypeJsonString,
+    );
+    return response;
+  }
 //end
 }

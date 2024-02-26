@@ -42,3 +42,35 @@ class WorkTypeModel {
         "status": status,
       };
 }
+
+class UpdateWorkTypeModel {
+  UpdateWorkTypeModel({
+    this.id,
+    this.categoryid,
+    // this.categoryName,
+    this.workType,
+    // this.status,
+  });
+
+  int? id;
+  int? categoryid;
+  // String? categoryName;
+  String? workType;
+  // int? status;
+
+  factory UpdateWorkTypeModel.fromJson(Map<String, dynamic> json) => UpdateWorkTypeModel(
+        id: json["id"],
+        categoryid: json["categoryid"],
+        // categoryName: json["categoryName"],
+        workType: json["workType"],
+        // status: json["status"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "categoryid": categoryid,
+        // "categoryName": categoryName,
+        "workType": workType,
+        // "status": status,
+      };
+}

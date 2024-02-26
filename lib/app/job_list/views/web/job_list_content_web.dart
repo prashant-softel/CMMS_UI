@@ -466,6 +466,7 @@ class JobDataSource extends DataTableSource {
         DataCell(
           Text(
             'JOB${jobDetails?.id ?? ''}',
+
           ),
         ),
         DataCell(
@@ -473,7 +474,8 @@ class JobDataSource extends DataTableSource {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${jobDetails?.name ?? ''}'),
+              Text('${jobDetails?.name ?? ''}',
+                  overflow: TextOverflow.ellipsis),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),

@@ -7315,7 +7315,7 @@ class ConnectHelper {
     return responseModel;
   }
 
- Future<ResponseModel> endVegScheduleExecutionButton({
+  Future<ResponseModel> endVegScheduleExecutionButton({
     required String auth,
     bool? isLoading,
     int? scheduleId,
@@ -7362,6 +7362,62 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         AbandonVegExecutionMessageDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> createWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktypeJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'JobWorkType/CreateJobWorkType', //AddBusiness
+      Request.post,
+      worktypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktype_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/DeleteJobWorkType?id=$worktype_id',
+      Request.delete,
+      worktype_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWorkType({
+    required String auth,
+    bool? isLoading,
+    required worktypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/UpdateJobWorkType',
+      Request.patch,
+      worktypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }

@@ -10456,6 +10456,7 @@ class Repository {
       return [];
     }
   }
+
   Future<bool> updateIncidentRiskType({
     bool? isLoading,
     incidentRiskTypeJsonString,
@@ -10480,7 +10481,9 @@ class Repository {
       return false;
     }
   }
-  Future<void> deleteIncidentRiskType(Object risktype_id, bool isLoading) async {
+
+  Future<void> deleteIncidentRiskType(
+      Object risktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteIncidentRiskType(
@@ -10579,6 +10582,70 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<bool> createWorkType({bool? isLoading, worktypeJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWorkType(
+          auth: auth,
+          isLoading: isLoading,
+          worktypeJsonString: worktypeJsonString);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createworktype');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteWorkType(Object worktype_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteWorkType(
+        auth: auth,
+        worktype_id: worktype_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteworktypeList');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<bool> updateWorkType({
+    bool? isLoading,
+    worktypeJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWorkType(
+        auth: auth,
+        isLoading: isLoading,
+        worktypeJsonString: worktypeJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateworktypelist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
   //end
