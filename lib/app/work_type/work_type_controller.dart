@@ -20,56 +20,28 @@ class WorkTypeController extends GetxController {
       <InventoryCategoryModel>[].obs;
   FocusNode worktypenameFocus = FocusNode();
   ScrollController worktypenameScroll = ScrollController();
-  // FocusNode bodypdescFocus = FocusNode();
-  // ScrollController bodypdescScroll = ScrollController();
   WorkTypeModel? selectedItem;
-  WorkTypeModel? selectedItemupdate;
   Rx<bool> isFormInvalid = false.obs;
-  RxBool isCheckedRequire = false.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   RxBool isContainerVisible = false.obs;
-  void requiretoggleCheckbox() {
-    isCheckedRequire.value =
-        !isCheckedRequire.value; // Toggle the checkbox state
-  }
-
-  //checkbox
-  RxBool isChecked = true.obs;
-
-  Rx<String> selectedequipment = ''.obs;
-  Rx<bool> isSelectedequipment = true.obs;
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
 
   int facilityId = 0;
-  // int categoryId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-  // PreventiveCheckListModel? preventiveCheckListModel;
-
-  RxList<String> preventiveCheckListTableColumns = <String>[].obs;
-  // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
 
   int selectedEquipmentId = 0;
-  // int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
-  ///SOP Permit List
   Rx<bool> isTitleInvalid = false.obs;
-  Rx<bool> isDescriptionInvalid = false.obs;
   RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
   RxList<WorkTypeModel> BufferworktypeList = <WorkTypeModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
-  RxList<String?> selectedSopPermitDataList = <String>[].obs;
-  RxList<int?> selectedSopPermitIdList = <int>[].obs;
-  int selectedSOPId = 0;
-  int selectedJobSOPId = 0;
-  RxList<WorkTypeModel> filteredData = <WorkTypeModel>[].obs;
   RxList<InventoryCategoryModel?> assetcategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<bool> isselectedassetc = true.obs;
@@ -87,35 +59,22 @@ class WorkTypeController extends GetxController {
       return;
     }
     List<WorkTypeModel> filteredList = BufferworktypeList.where((item) => (item
-                .workType
-                ?.toString()
-                .toLowerCase()
-                .contains(keyword.toLowerCase()) ??
-            false)
-        // ||
-        // (item.description
-        //         ?.toString()
-        //         .toLowerCase()
-        //         .contains(keyword.toLowerCase()) ??
-        //     false) // Add this condition to filter by searchId
-        ).toList();
+            .workType
+            ?.toString()
+            .toLowerCase()
+            .contains(keyword.toLowerCase()) ??
+        false)).toList();
     worktypeList.value = filteredList;
   }
 
   //Facility list / demo plant
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
-  Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
-  // var descriptionCtrlr = TextEditingController();
 
   @override
   void onInit() async {
-    // getInventoryCategoryList();
-    // getFrequencyList();
-
     facilityIdStreamSubscription =
         homecontroller.facilityId$.listen((event) async {
       facilityId = event;
@@ -124,9 +83,6 @@ class WorkTypeController extends GetxController {
         await getInventoryCategoryList(facilityId.toString());
         await getWorkTypeList();
       }
-      // Future.delayed(Duration(seconds: 1), () {
-      //   // getWorkTypeList();
-      // });
     });
     worktypenameFocus.addListener(() {
       if (!worktypenameFocus.hasFocus) {
@@ -158,13 +114,10 @@ class WorkTypeController extends GetxController {
   Future<bool> updateWorkType(id) async {
     String _name = titleCtrlr.text.trim();
 
-    // String _description = descriptionCtrlr.text.trim();
-
     UpdateWorkTypeModel createChecklist = UpdateWorkTypeModel(
       id: id,
       categoryid: selectedEquipmentId,
       workType: _name,
-      // description: _description,
     );
     var worktypeJsonString = createChecklist.toJson();
 
@@ -176,56 +129,12 @@ class WorkTypeController extends GetxController {
     return true;
   }
 
-  // Future<void> getWorkTypeList({
-  //   List<int>? receivedCategoryIds,
-  // }) async {
-  //   worktypeList.value = <WorkTypeModel>[];
-  //   String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
-  //   final _workTypeList = await worktypepresenter.getWorkTypeList(
-  //     categoryIds: lststrCategoryIds,
-  //     isLoading: false,
-  //   );
-  //   worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
-  // }
-  // Future<void> getIncidentRiskType() async {
-  //   worktypeList.value = <WorkTypeModel>[];
-  //   BufferworktypeList.value = <WorkTypeModel>[];
-  //   final _worktypeList = await worktypepresenter.getIncidentRiskType(
-  //     isLoading: true,
-  //   );
-  //   for (var facilityType_list in _worktypeList) {
-  //     worktypeList.add(facilityType_list);
-  //     BufferworktypeList.add(facilityType_list);
-  //   }
-
-  //   workTypeListPaginationController = PaginationController(
-  //     rowCount: worktypeList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['Incidentrisktype_list']);
-  // }
-
   void toggleContainer() {
     isContainerVisible.toggle();
   }
 
   Future<bool> createWorkType() async {
     print("CREATE CONTROLLER");
-    // if (titleCtrlr.text.trim() == '') {
-    //   isTitleInvalid.value = true;
-    //   isFormInvalid.value = true;
-    // }
-    // checkForm();
-    // print("FORMVALIDITIY : $isFormInvalid.value");
-    // print(
-    //     "title : ${titleCtrlr.text.trim()}, assetcategoryId : $selectedEquipmentId");
-    // if (isFormInvalid.value == true) {
-    //   return false;
-    // }
-    // if (titleCtrlr.text.trim() == '') {
-    //   Fluttertoast.showToast(
-    //       msg: "Please enter required field", fontSize: 16.0);
-    // } else {
     String _title = titleCtrlr.text.trim();
     print(_title);
     UpdateWorkTypeModel workType = UpdateWorkTypeModel(
@@ -240,8 +149,6 @@ class WorkTypeController extends GetxController {
       isLoading: true,
     );
     return true;
-    // }
-    // return true;
   }
 
   Future<void> getWorkTypeList({
@@ -277,15 +184,7 @@ class WorkTypeController extends GetxController {
   cleardata() {
     titleCtrlr.text = '';
     selectedEquipmentId = 0;
-    // descriptionCtrlr.text = '';
-    // selectedStateId = 0;
-    // selectedCountryId = 0;
-    // selectedCityId = 0;
-    // ownerId = 0;
     selectedItem = null;
-    // customerId = 0;
-    // operatorId = 0;
-    // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
       getWorkTypeList();
