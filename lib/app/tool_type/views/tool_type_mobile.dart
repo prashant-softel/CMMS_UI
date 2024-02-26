@@ -1,10 +1,9 @@
 import 'package:cmms/app/body_injured/body_injured_controller.dart';
-import 'package:cmms/app/work_type/work_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WorkTypeContentMobile extends GetView<WorkTypeController> {
-  WorkTypeContentMobile({Key? key}) : super(key: key);
+class IncidentRiskTypeContentMobile extends GetView<BodyInjuredController> {
+  IncidentRiskTypeContentMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -114,6 +114,8 @@ import 'package:cmms/app/schedule_course/View/schedule_course_screen.dart';
 import 'package:cmms/app/schedule_course/schedule_course_binding.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_binding.dart';
 import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.dart';
+import 'package:cmms/app/tool_type/tool_type_binding.dart';
+import 'package:cmms/app/tool_type/views/tool_type_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
 import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
@@ -1192,5 +1194,10 @@ class AppPages {
       page: WorkTypeScreen.new,
       binding: WorkTypeBinding(),
     ),
+    GetPage<dynamic> (
+      name: _Paths.tooltype,
+      page: ToolTypeScreen.new,
+      binding: ToolTypeBinding(),
+    )
   ];
 }

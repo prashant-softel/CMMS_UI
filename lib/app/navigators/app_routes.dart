@@ -198,6 +198,7 @@ abstract class Routes {
   static const dsmCharges = _Paths.dsmCharges;
   static const viewAuditTask = _Paths.viewAuditTask;
   static const worktype = _Paths.worktype;
+  static const tooltype = _Paths.tooltype;
 }
 
 abstract class _Paths {
@@ -211,6 +212,7 @@ abstract class _Paths {
   static const facility = '/facility';
   static const viewAuditTask = '/viewAuditTask';
   static const worktype = '/work-type-screen';
+  static const tooltype = '/tool-type-screen';
 
   static const jobCardDetails = '/job-card-details';
   static const jobCardList = '/job-card-list-screen';
