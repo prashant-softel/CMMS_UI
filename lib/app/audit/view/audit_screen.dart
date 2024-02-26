@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/audit/audit_controller.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,8 +94,10 @@ class AuditScreen extends GetView<AuditController> {
                                 //       ),
                                 //     ),
                                 //   ),
-      
-                                if (Responsive.isDesktop(context)) HeaderWidget(),
+
+                                if (Responsive.isDesktop(context))
+                                  HeaderWidgetAllDash(),
+
                                 GridView.count(
                                   shrinkWrap: true,
                                   primary: false,
@@ -131,8 +134,8 @@ class AuditScreen extends GetView<AuditController> {
                                       Text(
                                         "Masters",
                                         style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 159, 156, 156),
+                                          color: Color.fromARGB(
+                                              255, 159, 156, 156),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),

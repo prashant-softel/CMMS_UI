@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,8 @@ class MastersDashboard extends GetView<MastersController> {
                                   ),
                                 ),
                               ),
-                            if (Responsive.isDesktop(context)) HeaderWidget(),
+                            if (Responsive.isDesktop(context))
+                              HeaderWidgetAllDash(),
                             Container(
                               margin: EdgeInsets.only(left: 20),
                               child: Text(
@@ -383,6 +385,23 @@ class MastersDashboard extends GetView<MastersController> {
                                                   controller
                                                       .goToBlockTypeList();
                                                 });
+
+                                        // : Dimens.box0;
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return
+                                            //  varUserAccessModel.value.access_list!
+                                            //             .where((e) =>
+                                            //                 e.feature_id == 5 && e.add == 0)
+                                            //             .length >
+                                            //         0
+                                            //     ?
+                                            createContentTile(
+                                                title: "Work Type",
+                                                onTap: () {
+                                                  controller.goToWorkTypeList();
+                                                });
+
                                         // : Dimens.box0;
                                       }))),
                                       // OnHover(builder: (((isHovered) {

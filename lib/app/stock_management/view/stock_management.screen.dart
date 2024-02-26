@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/header_widget_all_dash.dart';
 import '../../navigators/app_pages.dart';
 
 class StockManagementDashboardScreen
@@ -91,7 +92,8 @@ class StockManagementDashboardScreen
                                     ),
                                   ),
                                 ),
-                              if (Responsive.isDesktop(context)) HeaderWidget(),
+                              if (Responsive.isDesktop(context))
+                                HeaderWidgetAllDash(),
                               Container(
                                 margin: EdgeInsets.only(left: 20),
                                 child: Row(
