@@ -87,8 +87,9 @@ class VegetationPlanListController extends GetxController {
         getVegetationPlanList(facilityId, true);
         // facilityIdStreamSubscription!.cancel();
       });
+      print("get plan called");
     });
-    // onClose() => facilityIdStreamSubscription?.cancel();
+
     super.onInit();
   }
 

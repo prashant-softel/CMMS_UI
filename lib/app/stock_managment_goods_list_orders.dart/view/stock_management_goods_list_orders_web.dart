@@ -94,8 +94,9 @@ class _StockManagementGoodsOrdersWebState
                         children: [
                           Container(
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                            margin:
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * .85 - 5,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -155,7 +156,8 @@ class _StockManagementGoodsOrdersWebState
                                                 label: "Add New",
                                                 onPressed: () {
                                                   controller.clearStoreData();
-                                                  controller.clearTypeStoreData();
+                                                  controller
+                                                      .clearTypeStoreData();
                                                   Get.offNamed(Routes
                                                       .updateGoodsOrdersDetailsScreen);
                                                 },
@@ -182,7 +184,8 @@ class _StockManagementGoodsOrdersWebState
                                               right: 8,
                                               left: 8),
                                           decoration: BoxDecoration(
-                                            color: ColorValues.appLightBlueColor,
+                                            color:
+                                                ColorValues.appLightBlueColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -201,35 +204,35 @@ class _StockManagementGoodsOrdersWebState
                                                       .value.entries
                                                       .map((e) {
                                                 return PopupMenuItem<String>(
-                                                    child: ValueListenableBuilder(
-                                                        valueListenable:
-                                                            controller
-                                                                .columnVisibility,
-                                                        builder: (context, value,
-                                                            child) {
-                                                          return Row(
-                                                            children: [
-                                                              Checkbox(
-                                                                value:
-                                                                    value[e.key],
-                                                                onChanged:
-                                                                    (newValue) {
-                                                                  controller
-                                                                      .setColumnVisibility(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
                                                                           e.key,
                                                                           newValue!);
-                                                                },
-                                                              ),
-                                                              Text(e.key),
-                                                            ],
-                                                          );
-                                                        }));
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
                                               })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
                                       ),
-                
+
                                       // Container(
                                       //   height: 35,
                                       //   margin: EdgeInsets.only(left: 10),
@@ -296,7 +299,7 @@ class _StockManagementGoodsOrdersWebState
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   controller.goodsOrdersList.isEmpty
                                       ? Center(child: Text('No data'))
@@ -308,7 +311,7 @@ class _StockManagementGoodsOrdersWebState
                                                 final dataSource =
                                                     GoodsOrderListDataSource(
                                                         controller);
-                
+
                                                 return PaginatedDataTable2(
                                                   columnSpacing: 10,
                                                   dataRowHeight: 60,
@@ -334,7 +337,8 @@ class _StockManagementGoodsOrdersWebState
                                                           entry.key,
                                                           controller.filterText[
                                                               entry.key]!,
-                                                          controller.columnwidth[
+                                                          controller
+                                                                  .columnwidth[
                                                               entry.key],
                                                         ),
                                                     buildDataColumn(
@@ -356,7 +360,8 @@ class _StockManagementGoodsOrdersWebState
                               right: 150,
                               top: 85,
                               child: DatePickerWidget(
-                                selectionMode: DateRangePickerSelectionMode.range,
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
                                 monthCellStyle: DateRangePickerMonthCellStyle(
                                   todayCellDecoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -367,12 +372,12 @@ class _StockManagementGoodsOrdersWebState
                                   controller.fromDate.value,
                                   controller.toDate.value,
                                 ),
-                
+
                                 onSubmit: (value) {
                                   print('po valu ${value.toString()}');
                                   PickerDateRange? data =
                                       value as PickerDateRange;
-                
+
                                   var pickUpDate =
                                       DateTime.parse(data.startDate.toString());
                                   controller.fromDate.value = pickUpDate;
@@ -381,12 +386,12 @@ class _StockManagementGoodsOrdersWebState
                                   dropDate != null
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
-                
+
                                   controller.getPmTaskListByDate();
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);
-                
+
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );

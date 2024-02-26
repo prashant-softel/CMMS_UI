@@ -84,8 +84,8 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                           Container(
                             width: Get.width * 7,
                             margin:
-                                EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * .85 - 5,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -236,8 +236,8 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                       // ),
                                       Spacer(),
                                       Container(
-                                        width: 200,
-                                        height: 35,
+                                        width: 300,
+                                        height: 40,
                                         margin: Dimens.edgeInsets0_0_16_0,
                                         child: TextField(
                                           style: TextStyle(
@@ -269,7 +269,7 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   controller.vegTaskList.isEmpty
                                       ? Center(child: Text('No data'))
