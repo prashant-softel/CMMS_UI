@@ -354,7 +354,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                       ],
                                                       controller: controller,
                                                       dropdownList: controller
-                                                          .assetcategoryList,
+                                                          .equipmentCategoryList,
                                                       isValueSelected:
                                                           controller
                                                               .isselectedassetc
@@ -366,7 +366,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                           (selectedValue,
                                                               isValueSelected) {
                                                         controller
-                                                            .onValueChangedAssetc(
+                                                            .onValueChanged(
                                                                 selectedValue,
                                                                 isValueSelected);
                                                       },
@@ -552,27 +552,26 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                   },
                                                 );
                                               },
-                                              text: 'Create work Type',
+                                              text: 'Create Work Type',
                                             ),
                                           )
                                         : CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateIncidentRiskType(
-                                              //         controller
-                                              //             .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWorkType(controller
+                                                      .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -744,11 +743,11 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                     controller.selectedItem
                                                             ?.workType ??
                                                         '';
-                                                // controller.descriptionCtrlr
-                                                //     .text = controller
-                                                //         .selectedItem
-                                                //         ?.description ??
-                                                //     '';
+                                                controller.selectedassetcategory
+                                                    .value = controller
+                                                        .selectedItem
+                                                        ?.categoryName ??
+                                                    '';
 
                                                 controller.isContainerVisible
                                                     .value = true;

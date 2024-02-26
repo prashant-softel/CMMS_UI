@@ -34,14 +34,14 @@ Future<List<WorkTypeModel?>?> getWorkTypeList(
         isLoading,
       );
 
-  // Future<bool> updateIncidentRiskType({
-  //   incidentRiskTypeJsonString,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.updateIncidentRiskType(
-  //       isLoading: isLoading,
-  //       incidentRiskTypeJsonString: incidentRiskTypeJsonString,
-  //     );
+  Future<bool> updateWorkType({
+    worktypeJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateWorkType(
+        isLoading: isLoading,
+        worktypeJsonString: worktypeJsonString,
+      );
 
   Future<bool> createWorkType({
     worktypeJsonString,

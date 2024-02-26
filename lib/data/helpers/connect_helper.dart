@@ -7315,7 +7315,7 @@ class ConnectHelper {
     return responseModel;
   }
 
- Future<ResponseModel> endVegScheduleExecutionButton({
+  Future<ResponseModel> endVegScheduleExecutionButton({
     required String auth,
     bool? isLoading,
     int? scheduleId,
@@ -7364,6 +7364,7 @@ class ConnectHelper {
         AbandonVegExecutionMessageDialog(data: parsedJson['message']));
     return responseModel;
   }
+
   Future<ResponseModel> createWorkType({
     required String auth,
     bool? isLoading,
@@ -7383,6 +7384,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteWorkType({
     required String auth,
     bool? isLoading,
@@ -7400,6 +7402,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> updateWorkType({
     required String auth,
     bool? isLoading,
@@ -7407,8 +7410,8 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JobWorkType/UpdateJobWorkType',
-      Request.put,
-      jsonEncode(worktypeJsonString),
+      Request.patch,
+      worktypeJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

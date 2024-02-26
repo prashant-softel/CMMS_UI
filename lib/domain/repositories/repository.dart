@@ -10456,6 +10456,7 @@ class Repository {
       return [];
     }
   }
+
   Future<bool> updateIncidentRiskType({
     bool? isLoading,
     incidentRiskTypeJsonString,
@@ -10480,7 +10481,9 @@ class Repository {
       return false;
     }
   }
-  Future<void> deleteIncidentRiskType(Object risktype_id, bool isLoading) async {
+
+  Future<void> deleteIncidentRiskType(
+      Object risktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteIncidentRiskType(
@@ -10581,8 +10584,8 @@ class Repository {
       return Map();
     }
   }
-  Future<bool> createWorkType(
-      {bool? isLoading, worktypeJsonString}) async {
+
+  Future<bool> createWorkType({bool? isLoading, worktypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createWorkType(
@@ -10601,6 +10604,7 @@ class Repository {
       return false;
     }
   }
+
   Future<void> deleteWorkType(Object worktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10619,6 +10623,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   Future<bool> updateWorkType({
     bool? isLoading,
     worktypeJsonString,
@@ -10635,7 +10640,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        Utility.showDialog(res.errorCode.toString(), 'updateworktypelist');
         return false;
       }
     } catch (error) {

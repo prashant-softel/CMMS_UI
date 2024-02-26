@@ -46,13 +46,13 @@ Future<List<WorkTypeModel?>?> getWorkTypeList({
         worktype_id: worktype_id ?? 0,
         isLoading: isLoading,
       );
-  // Future<bool> updateIncidentRiskType(
-  //     {incidentRiskTypeJsonString, required bool isLoading}) async {
-  //   print("presenter");
-  //   incidentRiskTypeUsecase.updateIncidentRiskType(
-  //     incidentRiskTypeJsonString: incidentRiskTypeJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> updateWorkType(
+      {worktypeJsonString, required bool isLoading}) async {
+    print("presenter");
+    workTypeUsecase.updateWorkType(
+      worktypeJsonString: worktypeJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }
