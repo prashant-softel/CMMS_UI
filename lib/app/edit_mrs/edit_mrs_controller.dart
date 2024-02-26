@@ -42,14 +42,16 @@ class EditMrsController extends GetxController {
 
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () async {
-          await getEquipmentList(
-            facilityId,
-          );
-          if (mrsId != 0) {
-            await getMrsDetails(mrsId: mrsId.value, isloading: true);
-          }
-        });
+        if (facilityId > 0) {
+          Future.delayed(Duration(seconds: 1), () async {
+            await getEquipmentList(
+              facilityId,
+            );
+            if (mrsId != 0) {
+              await getMrsDetails(mrsId: mrsId.value, isloading: true);
+            }
+          });
+        }
       });
       // if (mrsId != 0) {
       //   await getMrsDetails(mrsId: mrsId.value, isloading: true);
@@ -93,9 +95,9 @@ class EditMrsController extends GetxController {
         rowItem.add(
           [
             {"key": "Drop_down", "value": '${element.asset_name}'},
-            {'key': "Material_Type", "value": '${element.asset_type}'},
+            {'key': "Material_Type", "value": ''},
             {'key': "Image", "value": '${element.approved_date}'},
-            {'key': "Available_Qty", "value": '${element.available_qty}'},
+            {'key': "Available_Qty", "value": ''},
             {'key': "Requested_Qty", "value": '${element.requested_qty}'},
           ],
         );
@@ -105,6 +107,9 @@ class EditMrsController extends GetxController {
         //     orElse: null)!;
         dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
             (e) => e!.asset_type == element.asset_type,
+            orElse: null);
+        dropdownMapperData[element.asset_name] = assetItemList.firstWhere(
+            (e) => e!.available_qty == element.available_qty,
             orElse: null);
       });
     }

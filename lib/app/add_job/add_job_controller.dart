@@ -115,7 +115,7 @@ class AddJobController extends GetxController {
         // Future.delayed(Duration(seconds: 1), () async {
         await getBlocksList(facilityId);
         getAssignedToList(facilityId);
-        await getInventoryCategoryList(selectedFacilityId.toString());
+        await getInventoryCategoryList(facilityId.toString());
         await getWorkTypeList();
 
         // });
@@ -288,7 +288,7 @@ class AddJobController extends GetxController {
 
   void saveJob() async {
     try {
-      checkForm();
+      // checkForm();
       if (isFormInvalid.value) {
         return;
       }
@@ -296,8 +296,16 @@ class AddJobController extends GetxController {
       int _permitId = selectedPermitId;
       String _title = htmlEscape.convert(jobTitleCtrlr.text.trim());
       String _description = htmlEscape.convert(jobDescriptionCtrlr.text.trim());
+      String originalDateTimeString = breakdownTimeCtrlr.text;
 
-      String _breakdownTime = convertDateTimeToAPIFormat();
+      // Parse the original date and time string
+      DateTime originalDateTime =
+          DateFormat("dd-MM-yyyy HH:mm").parse(originalDateTimeString);
+
+      // Format the DateTime object to the desired format
+      String _breakdownTime =
+          DateFormat("yyyy-MM-ddTHH:mm:ss'Z'").format(originalDateTime.toUtc());
+
       print(_breakdownTime);
       selectedAssetsIdList.clear();
 

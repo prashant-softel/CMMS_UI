@@ -29,6 +29,23 @@ class AddIncidentReportController extends GetxController {
   AddIncidentReportPresenter incidentReportPresenter;
 
   final HomeController homeController = Get.find();
+  FocusNode typeOfJbFocusNode = FocusNode();
+  FocusNode personInvolvedFocusNode = FocusNode();
+  FocusNode personAuthorizedInvolvedFocusNode = FocusNode();
+  FocusNode instructionsFocusNode = FocusNode();
+  FocusNode safetyEquipmentsFocusNode = FocusNode();
+  FocusNode correctSafeFocusNode = FocusNode();
+  FocusNode unsafeConditionsFocusNode = FocusNode();
+  FocusNode unsafeActCauseFocusNode = FocusNode();
+  ScrollController typeOfJbScrollController = ScrollController();
+  ScrollController personInvolvedScrollController = ScrollController();
+  ScrollController personAuthorizedInvolvedScrollController =
+      ScrollController();
+  ScrollController instructionsScrollController = ScrollController();
+  ScrollController safetyEquipmentsScrollController = ScrollController();
+  ScrollController correctSafeScrollController = ScrollController();
+  ScrollController unsafeConditionsScrollController = ScrollController();
+  ScrollController unsafeActCauseScrollController = ScrollController();
 
   //Additional Email work
   var rowList = <String>[].obs;
@@ -560,6 +577,46 @@ class AddIncidentReportController extends GetxController {
       await getIncidentReportHistory(id: irId.value);
     } catch (e) {}
 
+    typeOfJbFocusNode.addListener(() {
+      if (!typeOfJbFocusNode.hasFocus) {
+        typeOfJbScrollController.jumpTo(0.0);
+      }
+    });
+    personInvolvedFocusNode.addListener(() {
+      if (!personInvolvedFocusNode.hasFocus) {
+        personInvolvedScrollController.jumpTo(0.0);
+      }
+    });
+    personAuthorizedInvolvedFocusNode.addListener(() {
+      if (!personAuthorizedInvolvedFocusNode.hasFocus) {
+        personAuthorizedInvolvedScrollController.jumpTo(0.0);
+      }
+    });
+    instructionsFocusNode.addListener(() {
+      if (!instructionsFocusNode.hasFocus) {
+        instructionsScrollController.jumpTo(0.0);
+      }
+    });
+    safetyEquipmentsFocusNode.addListener(() {
+      if (!safetyEquipmentsFocusNode.hasFocus) {
+        safetyEquipmentsScrollController.jumpTo(0.0);
+      }
+    });
+    correctSafeFocusNode.addListener(() {
+      if (!correctSafeFocusNode.hasFocus) {
+        correctSafeScrollController.jumpTo(0.0);
+      }
+    });
+    unsafeConditionsFocusNode.addListener(() {
+      if (!unsafeConditionsFocusNode.hasFocus) {
+        unsafeConditionsScrollController.jumpTo(0.0);
+      }
+    });
+    unsafeActCauseFocusNode.addListener(() {
+      if (!unsafeActCauseFocusNode.hasFocus) {
+        unsafeActCauseScrollController.jumpTo(0.0);
+      }
+    });
     super.onInit();
   }
 

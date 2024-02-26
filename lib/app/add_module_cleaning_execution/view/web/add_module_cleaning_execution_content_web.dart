@@ -81,10 +81,10 @@ class AddModuleCleaningExecutionContentWeb
                               Get.offNamed(Routes.moduleCleaningListExecution);
                             },
                             child: Text(" / MODULE CLEANING EXECUTION LIST",
-                                style: Styles.greyMediumLight12),
+                                style: Styles.greyLight14),
                           ),
                           Text(" / CREATE MODULE CLEANING EXECUTION",
-                              style: Styles.greyMediumLight12)
+                              style: Styles.greyLight14)
                         ],
                       ),
                     ),

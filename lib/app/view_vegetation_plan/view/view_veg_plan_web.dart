@@ -72,17 +72,17 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                             Get.offNamed(Routes.vegetationDashboard);
                           },
                           child: Text(" / VEGETATION CONTROL",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
                         InkWell(
                           onTap: () {
                             Get.offNamed(Routes.vegetationPlanListScreen);
                           },
                           child: Text(" / VEGETATION PLAN LIST",
-                              style: Styles.greyMediumLight12),
+                              style: Styles.greyLight14),
                         ),
                         Text(" / VIEW VEGETATION PLAN ",
-                            style: Styles.greyMediumLight12)
+                            style: Styles.greyLight14)
                       ],
                     ),
                   ),
