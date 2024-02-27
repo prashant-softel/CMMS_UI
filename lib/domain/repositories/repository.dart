@@ -74,6 +74,7 @@ import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
+import 'package:cmms/domain/models/tool_type_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -10641,6 +10642,26 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'updateworktypelist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  Future<bool> createToolType({bool? isLoading, required String? tool_name}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createToolType(
+        auth: auth,
+        isLoading: isLoading,
+        tool_name: tool_name,
+      );
+
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' createtooltype');
         return false;
       }
     } catch (error) {

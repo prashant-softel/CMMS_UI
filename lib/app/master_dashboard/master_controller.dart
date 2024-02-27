@@ -116,11 +116,6 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> goToWorkTypeList() async {
-    Get.toNamed(
-      Routes.worktype,
-    );
-  }
 
   Future<void> goToToolTypeList() async {
     Get.toNamed(

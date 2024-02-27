@@ -7420,4 +7420,19 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> createToolType(
+      {bool? isLoading, required String auth, String? tool_name}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/CreateMasterTool?tool_name=$tool_name',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

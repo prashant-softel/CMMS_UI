@@ -59,11 +59,9 @@ class PurchaseGoodsorderViewWeb
                 onTap: () {
                   Get.offAllNamed(Routes.purchaseGoodsorder);
                 },
-                child: Text(" / STOCK MANAGEMENT ",
-                    style: Styles.greyLight14),
+                child: Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
               ),
-              Text(" / VIEW REQUEST ORDER DETAILS",
-                  style: Styles.greyLight14)
+              Text(" / VIEW REQUEST ORDER DETAILS", style: Styles.greyLight14)
             ],
           ),
         ),
@@ -427,7 +425,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                 DataColumn2(
                     fixedWidth: 150,
                     label: Text(
-                      "Ordered Qty",
+                      "Requested Qty",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
