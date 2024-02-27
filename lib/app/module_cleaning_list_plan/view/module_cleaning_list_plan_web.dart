@@ -88,8 +88,8 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                           Container(
                             width: Get.width * 7,
                             margin:
-                                EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * 0.85 - 5,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -177,34 +177,36 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) => <
-                                            PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },

@@ -199,7 +199,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                             child: LoginCustomTextfield(
                                               textController: controller
                                                   .titleTextFieldCtrlr,
-                                                  inputFormatters: [
+                                              inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .deny(
                                                   RegExp('[\'^]'),
@@ -357,7 +357,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           Dimens.boxWidth5,
                                           Container(
                                             height: 35,
-                                            width: 77,
+                                            width: 95,
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
@@ -387,7 +387,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           Dimens.boxWidth5,
                                           Container(
                                             height: 35,
-                                            width: 77,
+                                            width: 95,
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.greenColor,
@@ -474,7 +474,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           Dimens.boxWidth5,
                                           Container(
                                             height: 35,
-                                            width: 77,
+                                            width: 95,
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
@@ -500,7 +500,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                           Dimens.boxWidth5,
                                           Container(
                                             height: 35,
-                                            width: 77,
+                                            width: 95,
                                             child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.greenColor,
@@ -565,7 +565,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                               ),
                               Container(
                                   height: 40,
-                                  width: (Get.width * .2) - 70,
+                                  width: 200,
                                   child: controller.selectedItem == null
                                       ? CustomElevatedButton(
                                           backgroundColor:

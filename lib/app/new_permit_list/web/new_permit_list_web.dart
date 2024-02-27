@@ -86,8 +86,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                               child: Text(" / BREAKDOWN MAINTAINANCE",
                                   style: Styles.greyLight14),
                             ),
-                            Text(" / PERMIT LIST",
-                                style: Styles.greyLight14),
+                            Text(" / PERMIT LIST", style: Styles.greyLight14),
                           ],
                         ),
                       ),
@@ -98,7 +97,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                           child: SingleChildScrollView(
                             child: Container(
                               width: Get.width * 7,
-                              height: Get.height,
+                              height: Get.height * 0.86,
                               child: Card(
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 elevation: 10,

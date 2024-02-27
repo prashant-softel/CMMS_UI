@@ -49,7 +49,7 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
         Obx(
       () => Container(
           // color: ColorValues.greyBorderColor,
-          height: 45, // MediaQuery.of(context).size.height * 0.040,
+          height: 40, // MediaQuery.of(context).size.height * 0.040,
           width: widget.width,
           // margin: widget.margin,
           // padding: EdgeInsets.symmetric(vertical: 5),

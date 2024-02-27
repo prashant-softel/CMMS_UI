@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -140,7 +141,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
             length: 6,
             child: Column(
               children: [
-                HeaderWidget(),
+                HeaderWidgetAllDash(),
+                // HeaderWidget(),
                 Container(
                   height: 45,
                   decoration: BoxDecoration(
@@ -257,7 +259,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text("Overview",
-                                                  style: Styles.black20),
+                                                  style: Styles.black15),
                                               // Dimens.boxHeight20,
                                               // Spacer(),
                                               Center(
@@ -380,12 +382,14 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                               Styles.black15)),
                                                   Spacer(),
                                                   Container(
-                                                    height: Get.height * 0.1,
-                                                    width: Get.width * 0.08,
+                                                    height: Get.height * 0.09,
+                                                    width: Get.width * 0.09,
                                                     margin: EdgeInsets.only(
                                                         left: 20, right: 10),
                                                     padding: EdgeInsets.only(
-                                                        left: 10, top: 10),
+                                                        left: 10,
+                                                        top: 10,
+                                                        right: 10),
                                                     decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius:
@@ -404,55 +408,93 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text("Total - 100",
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    Get.width *
-                                                                            0.009 -
-                                                                        1)),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Total",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                              "100",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                          ],
+                                                        ),
                                                         // Dimens.boxHeight2,
-                                                        Text("Completed - 51",
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    Get.width *
-                                                                            0.009 -
-                                                                        1)),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Completed",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                              "51",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                          ],
+                                                        ),
                                                         // Dimens.boxHeight5,
-                                                        Text("Pending - 49",
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    Get.width *
-                                                                            0.009 -
-                                                                        1)),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Pending",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                            Spacer(),
+                                                            Text(
+                                                              "49",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      Get.width *
+                                                                              0.009 -
+                                                                          1),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                               // Dimens.boxHeight20,
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  SemicircularIndicator(
-                                                    radius: 100,
-                                                    color: Color.fromARGB(
-                                                        255, 195, 146, 230),
-                                                    backgroundColor:
-                                                        Colors.lightGreen,
-                                                    strokeWidth: 13,
-                                                    bottomPadding: 0,
-                                                    child: Text(
-                                                      '75%',
-                                                      style: TextStyle(
-                                                          fontSize: 32,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color:
-                                                              Colors.redAccent),
-                                                    ),
-                                                  ),
-                                                ],
+                                              SemicircularIndicator(
+                                                radius: 100,
+                                                color: Color.fromARGB(
+                                                    255, 195, 146, 230),
+                                                backgroundColor:
+                                                    Colors.lightGreen,
+                                                strokeWidth: 13,
+                                                bottomPadding: 0,
+                                                child: Text(
+                                                  '75%',
+                                                  style: TextStyle(
+                                                      fontSize: 32,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.redAccent),
+                                                ),
                                               ),
                                             ],
                                           ),

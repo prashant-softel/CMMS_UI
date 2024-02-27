@@ -494,7 +494,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                               ),
                               Container(
                                   height: 40,
-                                  width: (Get.width * .2 - 50),
+                                  width: 200,
                                   child: controller.selectedItem == null
                                       ? CustomElevatedButton(
                                           backgroundColor:

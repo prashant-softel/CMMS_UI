@@ -109,15 +109,26 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                         ),
                                         Spacer(),
                                         Dimens.boxWidth10,
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: "Add New",
-                                          onPressed: () {
-                                            Get.offNamed(
-                                                Routes.addVegetationPlanScreen);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        ),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kVegetationControlFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  Get.offNamed(Routes
+                                                      .addVegetationPlanScreen);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
@@ -438,29 +449,66 @@ class VegetationPlanListDataSource extends DataTableSource {
                           },
                         ),
                         varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kVegetationControlFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0
-                            // &&
-                            // controller.vegetationPlanList
-                            //         .firstWhere(
-                            //           (e) =>
-                            //               e.planId ==
-                            //               VegetationListDetails!.planId,
-                            //           orElse: () => VegetationPlanListModel(
-                            //               planId: 00),
-                            //         )
-                            //         .status ==
-                            //     371
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kVegetationControlFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveEditAccess)
+                                        .length >
+                                    0 &&
+                                controller.vegetationPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              VegetationListDetails!.planId,
+                                          orElse: () => VegetationPlanListModel(
+                                              planId: 00),
+                                        )
+                                        .status ==
+                                    371
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
                                 message: 'Edit',
+                                onPress: () {
+                                  int id = VegetationListDetails?.planId ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.addVegetationPlanScreen,
+                                        arguments: {
+                                          "veg_id": id,
+                                          "planId":
+                                              VegetationListDetails?.planId
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kVegetationControlFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveEditAccess)
+                                        .length >
+                                    0 &&
+                                controller.vegetationPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              VegetationListDetails!.planId,
+                                          orElse: () => VegetationPlanListModel(
+                                              planId: 00),
+                                        )
+                                        .status ==
+                                    352
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Resubmit',
                                 onPress: () {
                                   int id = VegetationListDetails?.planId ?? 0;
                                   if (id != 0) {
