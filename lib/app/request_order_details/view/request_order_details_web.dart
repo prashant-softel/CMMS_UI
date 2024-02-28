@@ -100,7 +100,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       ),
                       Dimens.boxHeight10,
                       AddRowInReqGoodsOrder(),
-      
+
                       Dimens.boxHeight15,
                       controller.historyList!.isEmpty
                           ? Dimens.box0
@@ -111,7 +111,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                       125,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: ColorValues.lightGreyColorWithOpacity35,
+                                  color:
+                                      ColorValues.lightGreyColorWithOpacity35,
                                   width: 1,
                                 ),
                                 boxShadow: [
@@ -142,8 +143,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                   Expanded(
                                     child: DataTable2(
                                       border: TableBorder.all(
-                                          color:
-                                              Color.fromARGB(255, 206, 229, 234)),
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
                                       columns: [
                                         DataColumn(
                                             label: Text(
@@ -185,7 +186,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                         controller.historyList?.length ?? 0,
                                         (index) => DataRow(cells: [
                                           DataCell(Text(controller
-                                                  .historyList?[index]?.createdAt
+                                                  .historyList?[index]
+                                                  ?.createdAt
                                                   .toString() ??
                                               '')),
                                           DataCell(Text(controller
@@ -210,7 +212,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                 ],
                               ),
                             ),
-      
+
                       // (controller.getPurchaseDetailsByIDModel.value?.status !=
                       //         341)
                       //     ? Container()
@@ -256,7 +258,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                           ),
                         ]),
                       ),
-      
+
                       Dimens.boxHeight15,
                       Row(
                         children: [
@@ -397,7 +399,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                 DataColumn2(
                     fixedWidth: 150,
                     label: Text(
-                      "Ordered Qty",
+                      "Requested Qty",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
