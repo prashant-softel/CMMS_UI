@@ -65,7 +65,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                       },
                       child: Text(" / MASTERS", style: Styles.greyLight14),
                     ),
-                    Text(" / FACILITY LIST1", style: Styles.greyLight14)
+                    Text(" / FACILITY LIST", style: Styles.greyLight14)
                   ],
                 ),
               ),

@@ -1,9 +1,7 @@
 import 'dart:async';
-
-import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_presenter.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/edit_vegetation_plan/edit_vegetation_plan_presenter.dart';
 import 'package:cmms/domain/models/create_veg_plan_model.dart';
-// import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
@@ -12,16 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class AddVegetationPlanController extends GetxController {
-  AddVegetationPlanController(this.addVegetationPresenter);
+class EditVegetationPlanController extends GetxController {
+  EditVegetationPlanController(this.editVegetationPresenter);
 
-  AddVegetationPresenter addVegetationPresenter;
+  EditVegetationPresenter editVegetationPresenter;
   final HomeController homeController = Get.find();
 
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  // RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxList<Schedules?> schedules = <Schedules>[].obs;
   Rx<DateTime> selectedStartTime = DateTime.now().obs;
   Rx<VegPlanDetailModel?> vegPlanDetailsModel = VegPlanDetailModel().obs;
@@ -61,12 +58,6 @@ class AddVegetationPlanController extends GetxController {
 
   Map<String, TypeModel> typedropdownMapperData = {};
 
-  // RxList<TypeModel> cleaningType = <TypeModel>[
-  //   TypeModel(name: "Please Select", id: "0"),
-  //   TypeModel(name: 'Dry', id: "1"),
-  //   TypeModel(name: 'Wet', id: "2"),
-  // ].obs;
-
   void addRowItem() {
     rowItem.value.add([
       {"key": "day", "value": ''},
@@ -80,11 +71,10 @@ class AddVegetationPlanController extends GetxController {
   void onInit() async {
     try {
       await setVegPlanId();
-      // await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-      if (vegPlanId != 0) {
+      if (vegPlanId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getVegPlanDetail(planId: vegPlanId.value);
         });
@@ -106,7 +96,7 @@ class AddVegetationPlanController extends GetxController {
   // Future<void> setUserId() async {
   //   try {
   //     var dataFromPreviousScreen = Get.arguments;
-  //     vegPlanId.value = dataFromPreviousScreen['id'];
+  //     id.value = dataFromPreviousScreen['id'];
   //     print('AddVegetationPlan:$id');
   //   } catch (e) {
   //     print(e.toString() + 'userId');
@@ -115,11 +105,12 @@ class AddVegetationPlanController extends GetxController {
 
   Future<void> setVegPlanId() async {
     try {
-      final _vegPlanId = await addVegetationPresenter.getValue();
+      final _vegPlanId = await editVegetationPresenter.getValue();
       if (_vegPlanId == null || _vegPlanId == '' || _vegPlanId == "null") {
         var dataFromPreviousScreen = Get.arguments;
         vegPlanId.value = dataFromPreviousScreen['vegPlanId'];
-        addVegetationPresenter.saveValue(vegPlanId: vegPlanId.value.toString());
+        editVegetationPresenter.saveValue(
+            vegPlanId: vegPlanId.value.toString());
       } else {
         vegPlanId.value = int.tryParse(_vegPlanId) ?? 0;
       }
@@ -130,101 +121,49 @@ class AddVegetationPlanController extends GetxController {
 
   Future<void> getVegEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <VegetationEquipmentModel>[];
-    final list = await addVegetationPresenter.getVegEquipmentModelList(
+    final list = await editVegetationPresenter.getVegEquipmentModelList(
         isLoading: isLoading, facilityId: facilityId);
     equipmentList.value = list;
     update(['veg_equipment_list']);
   }
 
-  void createVegPlan() async {
-    var mappedData = {};
-    List<Schedule> schedule = [];
-    equipmentList.value.forEach((element) {
-      (element!.invs ?? []).forEach((invsItem) {
-        if (invsItem.selectedDay != null) {
-          mappedData[invsItem.selectedDay] = [
-            ...(mappedData[invsItem.selectedDay] ?? []),
-            invsItem.invId
-          ];
-        }
-      });
-    });
-    mappedData.forEach((key, value) {
-      List<Equipments> eqp = value.map<Equipments>((e) {
-        return Equipments(id: e);
-      }).toList();
-      schedule
-          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
-    });
+  Future<void> updateVegPlan() async {
+    List<Schedule>? sch =
+        vegPlanDetailsModel.value?.schedules?.map<Schedule>((e) {
+      // i++;
+      return Schedule(
+          cleaningDay: e.cleaningDay,
+          equipments: e.equipments?.map((e) {
+            return Equipments(id: e?.id);
+          }).toList());
+    }).toList();
+    print({"sch": sch});
 
-    print({"mappedData": mappedData});
-
+    String _startDate = startDateTc.text.trim();
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _vegTitleController = vegTitleController.text.trim();
-    String _startDate = startDateTc.text.trim();
 
-    CreateVegPlanModel createVegModel = CreateVegPlanModel(
+    CreateVegPlanModel createVegPlan = CreateVegPlanModel(
+        planId: vegPlanId.value,
         facilityId: facilityId,
-        frequencyId: selectedfrequencyId,
-        planId: 0,
+        title: _vegTitleController,
         startDate: _startDate,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-        title: _vegTitleController,
-        schedules: schedule);
-
-    var createVegModelJsonString = [createVegModel.toJson()];
-    Map<String, dynamic>? responseCreateVegModel =
-        await addVegetationPresenter.createVegetationPlan(
-      createVegetationPlans: createVegModelJsonString,
+        frequencyId: selectedfrequencyId,
+        schedules: sch ?? []);
+    var updateVegPlanJsonString = createVegPlan.toJson();
+    Map<String, dynamic>? responseUpdateVegPlan =
+        await editVegetationPresenter.updateVegPlan(
+      updateVegPlans: updateVegPlanJsonString,
       isLoading: true,
     );
-    if (responseCreateVegModel == null) {}
-    print('Create  Create GO  data: $createVegModelJsonString');
+    if (responseUpdateVegPlan == null) {
+      print("update veg plan: $updateVegPlanJsonString");
+    }
   }
 
-  // void updateMcPlan() async {
-  //   // return;
-  //   int i = -1;
-
-  //   List<Schedule>? sch =
-  //       vegPlanDetailsModel.value?.schedules?.map<Schedule>((e) {
-  //     i++;
-  //     return Schedule(
-  //         cleaningDay: e.cleaningDay,
-  //         equipments: e.equipments?.map((e) {
-  //           return Equipments(id: e?.id);
-  //         }).toList());
-  //   }).toList();
-  //   print({"sch": sch});
-
-  //   String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
-  //   String _vegTitleController = vegTitleController.text.trim();
-  //   String _startDateTc = startDateTc.text.trim();
-
-  //   CreateVegPlanModel createVegModel = CreateVegPlanModel(
-  //       // planId: id.value,
-  //       facilityId: facilityId,
-  //       // startDate: _startDateTc,
-  //       frequencyId: selectedfrequencyId,
-  //       noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-  //       title: _vegTitleController,
-  //       schedules: sch ?? []);
-
-  //   var updateMcModelJsonString = [createVegModel.toJson()];
-  //   // Map<String, dynamic>? responseCreateMcModel =
-  //   //     await addVegetationPresenter.updateVegPlan(
-  //   //   updateMcPlans: updateMcModelJsonString,
-  //   //   isLoading: true,
-  //   // );
-  //   // if (responseCreateMcModel == null) {}
-  //   // print('update Veg   data: $updateMcModelJsonString');
-  // }
-
-  Future<void> getVegPlanDetail({required int planId}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
-    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
-
-    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
+  Future<void> getVegPlanDetail({required int planId, bool? isLoading}) async {
+    final _vegPlanDetails = await editVegetationPresenter.getVegPlanDetail(
         planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetails');
 
@@ -253,24 +192,9 @@ class AddVegetationPlanController extends GetxController {
     }
   }
 
-  // Future<void> getAssignedToList() async {
-  //   assignedToList.clear();
-  //   final _assignedToList =
-  //       await addVegetationPresenter.getAssignedToList(
-  //     facilityId: facilityId,
-  //   );
-
-  //   if (_assignedToList != null) {
-  //     for (var assignedTo in _assignedToList) {
-  //       assignedToList.add(assignedTo);
-  //     }
-  //     // selectedAssignedTo.value =
-  //     //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
-  //   }
-  // }
-
   Future<void> getFrequencyList() async {
-    final list = await addVegetationPresenter.getFrequencyList(isLoading: true);
+    final list =
+        await editVegetationPresenter.getFrequencyList(isLoading: true);
 
     if (list != null) {
       for (var _frequencyList in list) {

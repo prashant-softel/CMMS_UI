@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class VegetationlistUsecase {
@@ -76,4 +77,9 @@ class VegetationlistUsecase {
         updateVegPlans,
         isLoading,
       );
+
+      void saveValue({String? vegPlanId}) async =>
+      repository.saveValue(LocalKeys.vegplanId, vegPlanId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.vegplanId);
 }

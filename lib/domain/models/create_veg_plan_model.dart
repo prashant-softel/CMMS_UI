@@ -5,24 +5,30 @@ CreateVegPlanModel createMcPlaningModelFromJson(String str) =>
 
 class CreateVegPlanModel {
   int? facilityId;
+  int? planId;
   String? title;
   int? noOfCleaningDays;
   int? frequencyId;
+  String? startDate;
   List<Schedule>? schedules;
 
   CreateVegPlanModel(
       {this.facilityId,
+      this.planId,
       this.title,
       this.noOfCleaningDays,
       this.frequencyId,
+      this.startDate,
       this.schedules});
 
   factory CreateVegPlanModel.fromJson(Map<String, dynamic> json) =>
       CreateVegPlanModel(
         facilityId: json['facilityId'],
         title: json['title'],
+        planId: json['planId'],
         noOfCleaningDays: json['noOfCleaningDays'],
         frequencyId: json['frequencyId'],
+        startDate: json['startDate'],
         schedules: json["schedules"] != null
             ? List<Schedule>.from(
                 json["schedules"].map((x) => Schedule.fromJson(x)))
@@ -31,7 +37,9 @@ class CreateVegPlanModel {
 
   Map<String, dynamic> toJson() => {
         "title": title,
+        "planId" : planId,
         "facilityId": facilityId,
+        "startDate": startDate,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
         "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),

@@ -1,4 +1,4 @@
-import 'package:cmms/app/add_vegetation_plan/add_vegetation_plan_controller.dart';
+import 'package:cmms/app/edit_vegetation_plan/edit_vegetation_plan_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
@@ -18,20 +18,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class AddVegetationPlanWeb extends StatefulWidget {
-  AddVegetationPlanWeb({
+class EditVegetationPlanWeb extends StatefulWidget {
+  EditVegetationPlanWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddVegetationPlanWeb> createState() => _AddVegetationPlanWebState();
+  State<EditVegetationPlanWeb> createState() => _EditVegetationPlanWebState();
 }
 
-class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
+class _EditVegetationPlanWebState extends State<EditVegetationPlanWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddVegetationPlanController>(
-      id: 'stock_Mangement',
+    return GetBuilder<EditVegetationPlanController>(
+      // id: 'stock_Mangement',
       builder: (controller) {
         return SelectionArea(
           child: Obx(
@@ -93,7 +93,7 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                     style: Styles.greyLight14),
                               ),
                               Text(
-                                " / ADD VEGETATION PLAN",
+                                " / EDIT VEGETATION PLAN",
                                 style: Styles.greyLight14,
                               )
                             ],

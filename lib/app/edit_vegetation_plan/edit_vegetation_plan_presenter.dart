@@ -4,8 +4,8 @@ import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/usecases/vegetation_list_usecase.dart';
 
-class AddVegetationPresenter {
-  AddVegetationPresenter(this.vegetationlistUsecase);
+class EditVegetationPresenter {
+  EditVegetationPresenter(this.vegetationlistUsecase);
   VegetationlistUsecase vegetationlistUsecase;
 
   Future<List<FrequencyModel?>?> getFrequencyList({

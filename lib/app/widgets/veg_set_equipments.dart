@@ -208,7 +208,7 @@ class VegSetEquipment extends GetView {
               ));
         }),
         actions: [
-          controller.id == 0
+          controller.vegPlanId == 0
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
