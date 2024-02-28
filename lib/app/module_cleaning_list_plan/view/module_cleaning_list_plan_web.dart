@@ -671,10 +671,10 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                           ?.planId ??
                                       0;
                                   if (id != 0) {
-                                    Get.toNamed(
-                                      Routes.viewMcPlaning,
-                                      arguments: {'id': id, "type": 1},
-                                    );
+                                    controller.clearStoreDataMcid();
+                                    controller.clearStoreDataPlanid();
+                                    Get.toNamed(Routes.viewMcPlaning,
+                                        arguments: {'mcid': id});
                                   }
                                 },
                               )

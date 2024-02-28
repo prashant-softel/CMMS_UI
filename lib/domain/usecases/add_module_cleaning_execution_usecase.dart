@@ -133,4 +133,12 @@ class AddModuleCleaningExecutionUsecase {
 
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
+  void saveValueMcId({String? mcid}) async =>
+      _repository.saveValue(LocalKeys.mcid, mcid);
+  Future<String?> getValueMcId() async =>
+      await _repository.getStringValue(LocalKeys.mcid);
+  void saveValuePlanId({String? planId}) async =>
+      _repository.saveValue(LocalKeys.planId, planId);
+  Future<String?> getValuePlanId() async =>
+      await _repository.getStringValue(LocalKeys.planId);
 }
