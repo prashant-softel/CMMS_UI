@@ -136,22 +136,26 @@ class AddModuleCleaningExecutionController extends GetxController {
   ///
 
   Map<String, dynamic> data = {};
-  dynamic planId = [];
+  // dynamic planId = [];
+  Rx<int> mcid = 0.obs;
+  Rx<int> planId = 0.obs;
   @override
   void onInit() async {
     //  isCheckedList.assignAll(List.generate(equipmentList.length, (index) => false));
 
-    data = Get.arguments;
-    print('Data Id ${data['id']}');
-    print('Data Status ${data['status']}');
-    print('plan Id:${data['planId']}');
-    print('cleaning Days:${data['cleaningDays']}');
-    print('water Used:${data['waterUsed']}');
+    await setMcId();
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
+      Future.delayed(Duration(seconds: 1), () async {
+        await getFacilityList();
+        await getInventoryCategoryList();
+        if (mcid > 0) {
+          //   Future.delayed(Duration(seconds: 1), () {
+          await getMCExecutionDetail(executionId: mcid.value);
+          await getMCTaskEquipmentList(mcid.value, true);
+          //  });
+        }
       });
     });
 
@@ -159,20 +163,32 @@ class AddModuleCleaningExecutionController extends GetxController {
     //   getTypePermitList();
     // });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getMCTaskEquipmentList(data['id'], true);
-    });
-
-    if (data['id'] != null) {
-      Future.delayed(Duration(seconds: 1), () {
-        getMCExecutionDetail(executionId: data['id']!);
-      });
-    }
-
     super.onInit();
+  }
+
+  Future<void> setMcId() async {
+    try {
+      final _mcid = await addModuleCleaningExecutionPresenter.getValueMcId();
+      final _planId =
+          await addModuleCleaningExecutionPresenter.getValuePlanId();
+
+      if (_mcid == null || _mcid == '' || _mcid == "null") {
+        data = Get.arguments;
+
+        mcid.value = data['mcid'];
+        planId.value = data['planId'];
+
+        addModuleCleaningExecutionPresenter.saveValueMcId(
+            mcid: mcid.value.toString());
+        addModuleCleaningExecutionPresenter.saveValuePlanId(
+            planId: planId.value.toString());
+      } else {
+        mcid.value = int.tryParse(_mcid) ?? 0;
+        planId.value = int.tryParse(_planId.toString()) ?? 0;
+      }
+    } catch (e) {
+      // Utility.showDialog(e.toString(), 'mcid');
+    }
   }
 
   Future<void> getFacilityList() async {
@@ -193,7 +209,7 @@ class AddModuleCleaningExecutionController extends GetxController {
     equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
     final list = await addModuleCleaningExecutionPresenter
-        .getMCTaskEquipmentList(isLoading: isLoading, taskId: data['id']);
+        .getMCTaskEquipmentList(isLoading: isLoading, taskId: taskId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {

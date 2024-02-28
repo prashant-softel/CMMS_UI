@@ -184,11 +184,11 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' ${controller.data['planId']}',
+                                                  ' ${controller.planId}',
                                                   style: Styles.blue17,
                                                 ),
                                                 Text(
-                                                  ' ${controller.data['id']}',
+                                                  ' ${controller.mcid}',
                                                   style: Styles.blue17,
                                                 ),
                                               ],

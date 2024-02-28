@@ -122,5 +122,16 @@ class AddModuleCleaningExecutionPresenter {
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addModuleCleaningExecutionUsecase.getFacilityList();
 
-  ///
+  void saveValueMcId({String? mcid}) async {
+    return addModuleCleaningExecutionUsecase.saveValueMcId(mcid: mcid);
+  }
+
+  Future<String?> getValueMcId() async =>
+      await addModuleCleaningExecutionUsecase.getValueMcId();
+  void saveValuePlanId({String? planId}) async {
+    return addModuleCleaningExecutionUsecase.saveValuePlanId(planId: planId);
+  }
+
+  Future<String?> getValuePlanId() async =>
+      await addModuleCleaningExecutionUsecase.getValuePlanId();
 }

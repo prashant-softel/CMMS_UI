@@ -150,7 +150,7 @@ class viewModuleCleaningExecutionController extends GetxController {
         planId.value = int.tryParse(_planId.toString()) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString(), 'mcid');
+      // Utility.showDialog(e.toString(), 'mcid');
     }
   }
 
