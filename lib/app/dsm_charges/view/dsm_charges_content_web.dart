@@ -195,7 +195,7 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                       child: Container(
                         width: Get.width * 7,
                         margin: EdgeInsets.all(10),
-                        height: Get.height,
+                        height: Get.height * .84,
                         child: Card(
                           color: Color.fromARGB(255, 245, 248, 250),
                           elevation: 10,

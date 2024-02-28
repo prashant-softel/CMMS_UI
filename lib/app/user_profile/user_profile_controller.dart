@@ -58,6 +58,7 @@ class UserProfileController extends GetxController {
   Future<void> getUserDetails({int? userId, bool? isloading}) async {
     final _userDetailModel = await userProfilePresenter.getUserDetails(
         userId: userId, isLoading: isloading);
+    print(_userDetailModel);
 
     if (_userDetailModel != null) {
       userDetailModel.value = _userDetailModel;

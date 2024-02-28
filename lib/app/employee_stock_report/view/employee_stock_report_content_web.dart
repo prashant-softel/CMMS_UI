@@ -68,7 +68,8 @@ class EmployeeStockReportContentWeb
                           ),
                           InkWell(
                             onTap: () {
-                              Get.offNamed(Routes.stockManagementDashboardScreen);
+                              Get.offNamed(
+                                  Routes.stockManagementDashboardScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyLight14),
@@ -86,9 +87,9 @@ class EmployeeStockReportContentWeb
                               width: Get.width,
                               margin:
                                   EdgeInsets.only(left: 10, top: 10, right: 10),
-                              height: Get.height,
+                              height: Get.height * .85 - 10,
                               //height: Get.height - 300,
-              
+
                               child: Card(
                                 color: Color.fromARGB(255, 245, 248, 250),
                                 elevation: 10,
@@ -130,15 +131,16 @@ class EmployeeStockReportContentWeb
                                                 ),
                                                 BoxShadow(
                                                   color: ColorValues.whiteColor,
-                                                  offset: const Offset(0.0, 0.0),
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
                                                   blurRadius: 0.0,
                                                   spreadRadius: 0.0,
                                                 ),
                                               ],
                                               controller: controller,
                                               dropdownList: controller.userList,
-                                              isValueSelected:
-                                                  controller.isSelectedUser.value,
+                                              isValueSelected: controller
+                                                  .isSelectedUser.value,
                                               selectedValue:
                                                   controller.selectedUser.value,
                                               onValueChanged:
@@ -148,7 +150,8 @@ class EmployeeStockReportContentWeb
                                           Spacer(),
                                           Row(
                                             children: [
-                                              CustomRichText(title: 'Date Range'),
+                                              CustomRichText(
+                                                  title: 'Date Range'),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
                                                 width: MediaQuery.of(context)
@@ -161,8 +164,8 @@ class EmployeeStockReportContentWeb
                                                           .openFromDateToStartDatePicker =
                                                       !controller
                                                           .openFromDateToStartDatePicker;
-                                                  controller
-                                                      .update(['employeeReport']);
+                                                  controller.update(
+                                                      ['employeeReport']);
                                                 },
                                                 hintText:
                                                     '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
@@ -231,10 +234,12 @@ class EmployeeStockReportContentWeb
                                             ),
                                           ),
                                           itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<String>>[]..addAll(
-                                                    controller.columnVisibility
-                                                        .value.entries
-                                                        .map((e) {
+                                              <PopupMenuEntry<String>>[]
+                                                ..addAll(controller
+                                                    .columnVisibility
+                                                    .value
+                                                    .entries
+                                                    .map((e) {
                                                   return PopupMenuItem<String>(
                                                       child:
                                                           ValueListenableBuilder(
@@ -242,7 +247,8 @@ class EmployeeStockReportContentWeb
                                                                   controller
                                                                       .columnVisibility,
                                                               builder: (context,
-                                                                  value, child) {
+                                                                  value,
+                                                                  child) {
                                                                 return Row(
                                                                   children: [
                                                                     Checkbox(
@@ -264,7 +270,7 @@ class EmployeeStockReportContentWeb
                                             // Handle column selection
                                           },
                                         ),
-              
+
                                         Spacer(),
                                         Container(
                                           width: 200,
@@ -308,11 +314,12 @@ class EmployeeStockReportContentWeb
                                             child: ValueListenableBuilder(
                                                 valueListenable:
                                                     controller.columnVisibility,
-                                                builder: (context, value, child) {
+                                                builder:
+                                                    (context, value, child) {
                                                   final dataSource =
                                                       PlantListDataSource(
                                                           controller);
-              
+
                                                   return PaginatedDataTable2(
                                                     // fixedLeftColumns: 1,
                                                     dataRowHeight:
@@ -339,7 +346,8 @@ class EmployeeStockReportContentWeb
                                                         if (entry.value)
                                                           buildDataColumn(
                                                             entry.key,
-                                                            controller.filterText[
+                                                            controller
+                                                                    .filterText[
                                                                 entry.key]!,
                                                             controller
                                                                     .columnwidth[
@@ -370,26 +378,28 @@ class EmployeeStockReportContentWeb
                                     controller.fromDate.value,
                                     controller.toDate.value,
                                   ),
-              
+
                                   onSubmit: (value) {
                                     print('po valu ${value.toString()}');
                                     PickerDateRange? data =
                                         value as PickerDateRange;
-              
-                                    var pickUpDate =
-                                        DateTime.parse(data.startDate.toString());
+
+                                    var pickUpDate = DateTime.parse(
+                                        data.startDate.toString());
                                     controller.fromDate.value = pickUpDate;
                                     var dropDate =
                                         DateTime.parse(data.endDate.toString());
                                     dropDate != null
                                         ? controller.toDate.value = dropDate
                                         : controller.toDate.value = pickUpDate;
-              
-                                    controller.getEmployeeReportListListByDate();
+
+                                    controller
+                                        .getEmployeeReportListListByDate();
                                     controller.openFromDateToStartDatePicker =
-                                        !controller.openFromDateToStartDatePicker;
+                                        !controller
+                                            .openFromDateToStartDatePicker;
                                     controller.update(['employeeReport']);
-              
+
                                     // Get.toNamed(
                                     //   Routes.stockManagementGoodsOrdersScreen,
                                     // );

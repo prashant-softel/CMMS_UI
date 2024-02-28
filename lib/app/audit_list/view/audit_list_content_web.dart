@@ -93,8 +93,9 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                         children: [
                           Container(
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                            margin:
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * .84,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -176,7 +177,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                               right: 8,
                                               left: 8),
                                           decoration: BoxDecoration(
-                                            color: ColorValues.appLightBlueColor,
+                                            color:
+                                                ColorValues.appLightBlueColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -195,29 +197,29 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                       .value.entries
                                                       .map((e) {
                                                 return PopupMenuItem<String>(
-                                                    child: ValueListenableBuilder(
-                                                        valueListenable:
-                                                            controller
-                                                                .columnVisibility,
-                                                        builder: (context, value,
-                                                            child) {
-                                                          return Row(
-                                                            children: [
-                                                              Checkbox(
-                                                                value:
-                                                                    value[e.key],
-                                                                onChanged:
-                                                                    (newValue) {
-                                                                  controller
-                                                                      .setColumnVisibility(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
                                                                           e.key,
                                                                           newValue!);
-                                                                },
-                                                              ),
-                                                              Text(e.key),
-                                                            ],
-                                                          );
-                                                        }));
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
                                               })),
                                         onSelected: (String value) {
                                           // Handle column selection
@@ -268,12 +270,14 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                             enabledBorder:
                                                 const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
                                             focusedBorder:
                                                 const OutlineInputBorder(
                                               borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 0.0),
+                                                  color: Colors.grey,
+                                                  width: 0.0),
                                             ),
                                             contentPadding:
                                                 Dimens.edgeInsets10_0_0_0,
@@ -297,7 +301,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                 final dataSource =
                                                     AuditListListDataSource(
                                                         controller);
-            
+
                                                 return PaginatedDataTable2(
                                                   columnSpacing: 10,
                                                   dataRowHeight: 70,
@@ -328,7 +332,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                                         ),
                                                     buildDataColumn(
                                                       'Actions',
-                                                      controller.planIdFilterText,
+                                                      controller
+                                                          .planIdFilterText,
                                                       // 150,
                                                     ),
                                                   ],
@@ -344,7 +349,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                               right: 150,
                               top: 85,
                               child: DatePickerWidget(
-                                selectionMode: DateRangePickerSelectionMode.range,
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
                                 monthCellStyle: DateRangePickerMonthCellStyle(
                                   todayCellDecoration: BoxDecoration(
                                       shape: BoxShape.circle,
@@ -355,12 +361,12 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                   controller.fromDate.value,
                                   controller.toDate.value,
                                 ),
-            
+
                                 onSubmit: (value) {
                                   print('po valu ${value.toString()}');
                                   PickerDateRange? data =
                                       value as PickerDateRange;
-            
+
                                   var pickUpDate =
                                       DateTime.parse(data.startDate.toString());
                                   controller.fromDate.value = pickUpDate;
@@ -369,12 +375,12 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                   dropDate != null
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
-            
+
                                   controller.getAuditListByDate();
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);
-            
+
                                   // Get.toNamed(
                                   //   Routes.stockManagementGoodsOrdersScreen,
                                   // );

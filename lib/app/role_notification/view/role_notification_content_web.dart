@@ -54,7 +54,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -91,9 +92,9 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                   child: Container(
                     width: Get.width,
                     margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-                    height: Get.height,
+                    height: Get.height * .8,
                     //height: Get.height - 300,
-      
+
                     child: Card(
                       color: Color.fromARGB(255, 245, 248, 250),
                       elevation: 10,
@@ -123,7 +124,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                 ),
                                 Dimens.boxWidth20,
                                 Container(
-                                  width: (MediaQuery.of(context).size.width * .2),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   child: DropdownWebWidget(
                                     boxShadow: [
                                       BoxShadow(
@@ -146,7 +148,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                     dropdownList: controller.roleList,
                                     isValueSelected:
                                         controller.isSelectedRole.value,
-                                    selectedValue: controller.selectedRole.value,
+                                    selectedValue:
+                                        controller.selectedRole.value,
                                     onValueChanged: controller.onValueChanged,
                                   ),
                                 ),
@@ -186,18 +189,20 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                           Column(
                             children: [
                               Container(
-                                  height: Get.height - 300,
+                                  // height: Get.height - 300,
+                                  height: Get.height * .5,
                                   width: Get.width,
                                   margin: Dimens.edgeInsets15,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color:
-                                          ColorValues.lightGreyColorWithOpacity35,
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
                                       width: 1,
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: ColorValues.appBlueBackgroundColor,
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -230,7 +235,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                                                         " "
                                                                         "${getnotificationListDetails?.notification_name.value}")),
                                                                 TableViewCell(
-                                                                  child: Obx(() {
+                                                                  child:
+                                                                      Obx(() {
                                                                     return _rowItem(
                                                                         getnotificationListDetails
                                                                             ?.default_flag
@@ -247,7 +253,8 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                                                   }),
                                                                 ),
                                                                 TableViewCell(
-                                                                  child: Obx(() {
+                                                                  child:
+                                                                      Obx(() {
                                                                     return _rowItem(
                                                                         getnotificationListDetails
                                                                             ?.can_change
@@ -269,7 +276,7 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                                         )
                                       : Dimens.box0),
                               Container(
-                                margin: EdgeInsets.only(bottom: 40, top: 30),
+                                // margin: EdgeInsets.only(bottom: 40, top: 30),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

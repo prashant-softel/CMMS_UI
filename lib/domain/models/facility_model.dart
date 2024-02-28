@@ -9,7 +9,7 @@ String facilityListToJson(List<FacilityModel> data) =>
 class FacilityModel {
   factory FacilityModel.fromJson(Map<String, dynamic> json) => FacilityModel(
         id: json['id'] ?? 0,
-        name: json['name'],
+        name: json['name'] ?? '',
         address: json['address'] ?? '',
         city: json['city'] ?? '',
         state: json['state'] ?? '',
