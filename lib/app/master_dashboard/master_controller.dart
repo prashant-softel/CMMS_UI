@@ -116,7 +116,6 @@ class MastersController extends GetxController {
     );
   }
 
-
   Future<void> goToToolTypeList() async {
     Get.toNamed(
       Routes.tooltype,
@@ -234,6 +233,12 @@ class MastersController extends GetxController {
   Future<void> goToDsmChargesScreen() async {
     Get.toNamed(
       Routes.dsmCharges,
+    );
+  }
+
+  Future<void> goToImportDsmListChargesScreen() async {
+    Get.toNamed(
+      Routes.importDsmListChargesListScreen,
     );
   }
 
