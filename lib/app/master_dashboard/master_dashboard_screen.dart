@@ -688,6 +688,31 @@ class MastersDashboard extends GetView<MastersController> {
                                       }))),
                                     ],
                                   ),
+
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Import DSM List",
+                                            onTap: () {
+                                              controller
+                                                  .goToImportDsmListChargesScreen();
+                                            });
+                                      }))),
+                                    ],
+                                  ),
+
                                   Container(
                                     margin: EdgeInsets.only(left: 20),
                                     child: Row(

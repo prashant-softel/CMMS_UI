@@ -74,6 +74,8 @@ import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
 import 'package:cmms/app/grievance_list/views/grievance_list_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
 import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
+import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_binding.dart';
+import 'package:cmms/app/import_dsm_list_charges/view/import_dsm_list_charges_screen.dart';
 import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart';
 import 'package:cmms/app/incident_report_dashboard/view/incident_report_dashboard_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
@@ -588,12 +590,12 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.viewVegetationPlanScreen,
       page: ViewVegPlanScreen.new,
-      binding: ViewVegPlanBinding(), 
+      binding: ViewVegPlanBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.vegExecutionListScreen,
       page: VegExecutionListScreen.new,
-      binding:VegExecutionListBinding(),
+      binding: VegExecutionListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.viewVegExecutionPlanScreen,
@@ -1201,10 +1203,15 @@ class AppPages {
       page: WorkTypeScreen.new,
       binding: WorkTypeBinding(),
     ),
-    GetPage<dynamic> (
+    GetPage<dynamic>(
       name: _Paths.tooltype,
       page: ToolTypeScreen.new,
       binding: ToolTypeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.importDsmListChargesListScreen,
+      page: ImportDsmListChargesListScreen.new,
+      binding: ImportDsmListChargesListBinding(),
     )
   ];
 }
