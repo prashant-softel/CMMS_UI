@@ -40,8 +40,8 @@ class ToolTypeController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   Rx<bool> isTitleInvalid = false.obs;
-  RxList<ToolTypeModel?> tooltypeList = <ToolTypeModel>[].obs;
-  RxList<ToolTypeModel> BuffertooltypeList = <ToolTypeModel>[].obs;
+  RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
+  RxList<ToolTypeModel> BufferworktypeList = <ToolTypeModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
   RxList<InventoryCategoryModel?> assetcategoryList =
@@ -54,20 +54,20 @@ class ToolTypeController extends GetxController {
     rowsPerPage: 10,
   );
 
-  void search(String keyword) {
-    print('Keyword: $keyword');
-    if (keyword.isEmpty) {
-      tooltypeList.value = BuffertooltypeList.value;
-      return;
-    }
-    List<ToolTypeModel> filteredList = BuffertooltypeList.where((item) => (item
-            .tool_name
-            ?.toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()) ??
-        false)).toList();
-    tooltypeList.value = filteredList;
-  }
+  // void search(String keyword) {
+  //   print('Keyword: $keyword');
+  //   if (keyword.isEmpty) {
+  //     worktypeList.value = BuffertooltypeList.value;
+  //     return;
+  //   }
+  //   List<ToolTypeModel> filteredList = BuffertooltypeList.where((item) => (item
+  //           .tool_name
+  //           ?.toString()
+  //           .toLowerCase()
+  //           .contains(keyword.toLowerCase()) ??
+  //       false)).toList();
+  //   tooltypeList.value = filteredList;
+  // }
 
   //Facility list / demo plant
   Rx<bool> isFacilitySelected = true.obs;
@@ -82,8 +82,8 @@ class ToolTypeController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         isFacilitySelected.value = true;
-        // await getInventoryCategoryList(facilityId.toString());
-        // await getWorkTypeList();
+        await getInventoryCategoryList(facilityId.toString());
+        await getWorkTypeList();
       }
     });
     tooltypenameFocus.addListener(() {
@@ -94,7 +94,6 @@ class ToolTypeController extends GetxController {
 
     super.onInit();
   }
-
 
   // Future<bool> updateWorkType(id) async {
   //   String _name = titleCtrlr.text.trim();
@@ -131,35 +130,33 @@ class ToolTypeController extends GetxController {
     return true;
   }
 
-  // Future<void> getWorkTypeList({
-  //   List<int>? receivedCategoryIds,
-  // }) async {
-  //   tooltypeList.value = <ToolTypeModel>[];
-  //   String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
-  //   final _workTypeList = await worktypepresenter.getWorkTypeList(
-  //     categoryIds: lststrCategoryIds,
-  //     isLoading: false,
-  //   );
-  //   tooltypeList.value = _workTypeList ?? <ToolTypeModel>[];
-  // }
+  Future<void> getWorkTypeList() async {
+    worktypeList.value = <WorkTypeModel>[];
+    final _workTypeList = await worktypepresenter.getWorkTypeList(
+      categoryIds:
+          selectedEquipmentId == 0 ? "" : selectedEquipmentId.toString(),
+      isLoading: false,
+    );
+    worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
+  }
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
     await {cleardata()};
   }
 
-  // Future<void> getInventoryCategoryList(String? facilityId) async {
-  //   equipmentCategoryList.value = <InventoryCategoryModel>[];
-  //   final _equipmentCategoryList =
-  //       await worktypepresenter.getInventoryCategoryList(
-  //     isLoading: false,
-  //   );
-  //   if (_equipmentCategoryList != null) {
-  //     for (var equimentCategory in _equipmentCategoryList) {
-  //       equipmentCategoryList.add(equimentCategory);
-  //     }
-  //   }
-  // }
+  Future<void> getInventoryCategoryList(String? facilityId) async {
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
+    final _equipmentCategoryList =
+        await worktypepresenter.getInventoryCategoryList(
+      isLoading: false,
+    );
+    if (_equipmentCategoryList != null) {
+      for (var equimentCategory in _equipmentCategoryList) {
+        equipmentCategoryList.add(equimentCategory);
+      }
+    }
+  }
 
   cleardata() {
     titleCtrlr.text = '';
@@ -242,4 +239,23 @@ class ToolTypeController extends GetxController {
   //     isFormInvalid.value = false;
   //   }
   // }
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<InventoryCategoryModel>:
+        {
+          int equipmentIndex =
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
+          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+
+          getWorkTypeList();
+        }
+
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+  }
 }

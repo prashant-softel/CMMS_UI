@@ -568,7 +568,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
                                         DataCell(Text(controller
-                                            .worktypeList[index]!.workType
+                                            .worktypeList[index]!.name
                                             .toString())),
                                         DataCell(Text(controller
                                                 .worktypeList[index]!
@@ -594,7 +594,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
 
                                                 controller.titleCtrlr.text =
                                                     controller.selectedItem
-                                                            ?.workType ??
+                                                            ?.name ??
                                                         '';
                                                 controller.selectedassetcategory
                                                     .value = controller
@@ -617,7 +617,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                         .toString(),
                                                     worktype: controller
                                                         .worktypeList[index]!
-                                                        .workType);
+                                                        .name);
                                               },
                                             ),
                                           ],

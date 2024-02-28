@@ -16,21 +16,21 @@ class WorkTypeModel {
     this.id,
     this.categoryid,
     this.categoryName,
-    this.workType,
+    this.name,
     this.status,
   });
 
   int? id;
   int? categoryid;
   String? categoryName;
-  String? workType;
+  String? name;
   int? status;
 
   factory WorkTypeModel.fromJson(Map<String, dynamic> json) => WorkTypeModel(
         id: json["id"],
         categoryid: json["categoryid"],
         categoryName: json["categoryName"],
-        workType: json["workType"],
+        name: json["workType"],
         status: json["status"],
       );
 
@@ -38,7 +38,7 @@ class WorkTypeModel {
         "id": id,
         "categoryid": categoryid,
         "categoryName": categoryName,
-        "workType": workType,
+        "workType": name,
         "status": status,
       };
 }
@@ -58,7 +58,8 @@ class UpdateWorkTypeModel {
   String? workType;
   // int? status;
 
-  factory UpdateWorkTypeModel.fromJson(Map<String, dynamic> json) => UpdateWorkTypeModel(
+  factory UpdateWorkTypeModel.fromJson(Map<String, dynamic> json) =>
+      UpdateWorkTypeModel(
         id: json["id"],
         categoryid: json["categoryid"],
         // categoryName: json["categoryName"],

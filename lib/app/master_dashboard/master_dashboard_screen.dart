@@ -387,6 +387,21 @@ class MastersDashboard extends GetView<MastersController> {
                                                 });
 
                                         // : Dimens.box0;
+                                      }))), // : Dimens.box0;
+
+                                      OnHover(builder: (((isHovered) {
+                                        return
+                                            //  varUserAccessModel.value.access_list!
+                                            //             .where((e) =>
+                                            //                 e.feature_id == 5 && e.add == 0)
+                                            //             .length >
+                                            //         0
+                                            //     ?
+                                            createContentTile(
+                                                title: "Work Type",
+                                                onTap: () {
+                                                  controller.goToWorkTypeList();
+                                                });
                                       }))),
                                       OnHover(builder: (((isHovered) {
                                         return

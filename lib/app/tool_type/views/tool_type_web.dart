@@ -162,6 +162,176 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                         ),
                                         Row(
                                           mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Category ')),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .20),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  child: Obx(
+                                                    () => DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .equipmentCategoryList,
+                                                      isValueSelected:
+                                                          controller
+                                                              .isselectedassetc
+                                                              .value,
+                                                      selectedValue: controller
+                                                          .selectedassetcategory
+                                                          .value,
+                                                      onValueChanged:
+                                                          (selectedValue,
+                                                              isValueSelected) {
+                                                        controller
+                                                            .onValueChanged(
+                                                                selectedValue,
+                                                                isValueSelected);
+                                                      },
+                                                    ),
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight5,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Work Type ')),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .20),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  child: Obx(
+                                                    () => DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .worktypeList,
+                                                      isValueSelected: controller
+                                                          .isworktypeListSelected
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .assetc.value,
+                                                      onValueChanged:
+                                                          (selectedValue,
+                                                              isValueSelected) {
+                                                        controller
+                                                            .onValueChanged(
+                                                                selectedValue,
+                                                                isValueSelected);
+                                                      },
+                                                    ),
+                                                  )),
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight5,
+                                        Row(
+                                          mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
@@ -406,8 +576,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               height: 1.0,
                                               color: Colors.black),
                                         ),
-                                        onChanged: (value) =>
-                                            controller.search(value),
+                                        onChanged: (value) {},
                                         decoration: InputDecoration(
                                           enabledBorder:
                                               const OutlineInputBorder(
@@ -439,6 +608,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                               Expanded(
                                 child: Obx(
                                   () => DataTable2(
+                                    minWidth: 1000,
                                     key: UniqueKey(),
                                     dataRowHeight: 50,
                                     columnSpacing: 10,
@@ -463,6 +633,14 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                             fontWeight: FontWeight.bold),
                                       )),
                                       DataColumn2(
+                                          // fixedWidth: 150,
+                                          label: Text(
+                                        "Work type",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
                                           fixedWidth: 100,
                                           label: Text(
                                             'Action',
@@ -472,12 +650,11 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                           )),
                                     ],
                                     rows: List<DataRow>.generate(
-                                      controller.tooltypeList.length,
+                                      controller.worktypeList.length,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                            .tooltypeList[index]!.tool_name
-                                            .toString())),
+                                        DataCell(Text("ram")),
+                                        DataCell(Text("ram")),
                                         DataCell(Row(
                                           children: [
                                             TableActionButton(
