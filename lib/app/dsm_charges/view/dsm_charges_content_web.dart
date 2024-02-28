@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -174,6 +175,91 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                                 Divider(
                                   color: ColorValues.greyLightColour,
                                 ),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    left: 10,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Site name :",
+                                              style: Styles.black15,
+                                            ),
+                                            Dimens.boxWidth5,
+                                            DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  6,
+                                              dropdownList: controller.siteName,
+                                              // selectedValue: ,
+                                              onValueChanged:
+                                                  (wasteData, selectedValue) {},
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Year :",
+                                              style: Styles.black15,
+                                            ),
+                                            Dimens.boxWidth5,
+                                            DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  6,
+                                              dropdownList: controller.year,
+                                              onValueChanged:
+                                                  (wasteData, selectedValue) {},
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Month :",
+                                              style: Styles.black15,
+                                            ),
+                                            Dimens.boxWidth5,
+                                            DropdownWebStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  6,
+                                              dropdownList: controller.month,
+                                              // selectedValue: ,
+                                              onValueChanged:
+                                                  (wasteData, selectedValue) {},
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                        height: 30,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appDarkBlueColor,
+                                          onPressed: () {},
+                                          text: 'Search',
+                                        ),
+                                      ),
+                                      Dimens.boxWidth10
+                                    ],
+                                  ),
+                                ),
+                                Dimens.boxHeight10,
                                 Row(
                                   children: [
                                     Container(

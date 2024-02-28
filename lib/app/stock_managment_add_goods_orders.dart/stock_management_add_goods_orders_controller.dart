@@ -697,6 +697,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
     selectedReqOrderId = int.tryParse(goodsOrdersList[0]?.name ?? "") ?? 0;
     selectedReqOrder.value = goodsOrdersList[0]?.name ?? "";
+
     getRoDetailsByID(requestID: selectedReqOrderId);
 
     update(['requ']);
