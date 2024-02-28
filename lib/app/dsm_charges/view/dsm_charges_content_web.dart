@@ -3,6 +3,8 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,114 +24,67 @@ class DsmChargesListContentWeb extends StatefulWidget {
 
 final List<Map<String, dynamic>> statutoryData = [
   {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Barod",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Bellary",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
   {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
+    "Year": "2023",
+    'Month': 'May',
+    'Site Name': 'Alote',
+    'Actual Gen': '15.00 ',
+    'Forecosting Gen': '15.00',
+    'Devaition': '15%',
+    'DSM Penalty': '15.00',
   },
 ];
 
@@ -299,6 +254,100 @@ class _DsmChargesListContentWebState extends State<DsmChargesListContentWeb> {
                                 ),
                                 SizedBox(
                                   height: 20,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    width: Get.width,
+                                    height: Get.height,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: DataTable2(
+                                        headingRowHeight: 50,
+                                        columnSpacing: 12,
+                                        horizontalMargin: 12,
+                                        minWidth: 2000,
+                                        columns: [
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Year',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Month',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Site Name',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Actual Gen',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Forecosting Gen',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'Devaition',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                          DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              'DSM Penalty',
+                                              style: Styles.blackBold14,
+                                            ),
+                                            // size: ColumnSize.L,
+                                          ),
+                                        ],
+                                        rows: statutoryData.map(
+                                          (data) {
+                                            return DataRow(
+                                              cells: [
+                                                DataCell(Text(data['Year'])),
+                                                DataCell(Text(data['Month'])),
+                                                DataCell(
+                                                    Text(data['Site Name'])),
+                                                DataCell(
+                                                    Text(data['Actual Gen'])),
+                                                DataCell(Text(
+                                                    data['Forecosting Gen'])),
+                                                DataCell(
+                                                    Text(data['Devaition'])),
+                                                DataCell(
+                                                    Text(data['DSM Penalty'])),
+                                              ],
+                                            );
+                                          },
+                                        ).toList(),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ]),
                         ),
