@@ -123,7 +123,7 @@ class ObservationListWeb extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
-                    margin: EdgeInsets.only(left: 10, top: 30, right: 10),
+                    margin: EdgeInsets.only(left: 10, top: 15, right: 10),
                     child: Column(
                       children: [
                         Card(

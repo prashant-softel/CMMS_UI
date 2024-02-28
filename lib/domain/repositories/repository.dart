@@ -6761,10 +6761,13 @@ class Repository {
         userId: userId,
         isLoading: isLoading,
       );
+      final response = res.data;
+      print("Result: $response");
       if (!res.hasError) {
-        final UserDetailsModel _userDetailModel =
-            userDetailsModelFromJson(res.data);
-        return _userDetailModel;
+        final UserDetailsModel? _userDetailsModel =
+            userDetailsModelFromJson(response);
+        print(_userDetailsModel);
+        return _userDetailsModel;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getUserDetails');
@@ -6773,6 +6776,7 @@ class Repository {
     } //
     catch (error) {
       print(error.toString());
+      print("ieojfes");
       return null;
     }
   }

@@ -128,7 +128,7 @@ class TBTSOPListController extends GetxController {
           titleScroll.jumpTo(0.0);
         }
       });
-      
+
       descFocus.addListener(() {
         if (!descFocus.hasFocus) {
           descScroll.jumpTo(0.0);
@@ -300,9 +300,9 @@ class TBTSOPListController extends GetxController {
           description: _description,
           tbt_jobType: selectedJobTypesId,
           tbt_remarks: "PM Document",
-          sop_fileId: 225,
+          sop_fileId: sopFileId,
           sop_file_desc: "PM Document",
-          jsa_fileId: 220);
+          jsa_fileId: jsaFileId);
       var sopJsonString = createSOPModel.toJson();
       Map<String, dynamic>? responseSopCreate =
           await tbtSOPListPresenter.createSOP(
@@ -461,9 +461,9 @@ class TBTSOPListController extends GetxController {
         description: _description,
         tbt_jobType: selectedJobTypesId,
         tbt_remarks: "PM Document",
-        sop_fileId: 225,
+        sop_fileId: sopFileId,
         sop_file_desc: "PM Document",
-        jsa_fileId: 220);
+        jsa_fileId: jsaFileId);
     var updateSop = createTbt.toJson();
 
     print({"updateTbt", updateSop});

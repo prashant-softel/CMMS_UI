@@ -32,7 +32,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -58,8 +59,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                       onTap: () {
                         Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
-                      child:
-                          Text(" / STOCK MANAGEMENT", style: Styles.greyLight14),
+                      child: Text(" / STOCK MANAGEMENT",
+                          style: Styles.greyLight14),
                     ),
                     Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
                     // Text(" / CREATE CHECKLIST NUMBER",
@@ -481,7 +482,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 10, top: 30),
+                        margin: EdgeInsets.only(left: 10, top: 15),
                         height: Get.height / 1.1,
                         child: Card(
                           color: Color.fromARGB(255, 251, 252, 253),
@@ -557,7 +558,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 10,
                               ),
                               controller.moduleList!.isEmpty
                                   ? Container(
@@ -763,8 +764,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                                             icon: Icons.delete,
                                                             message: 'Delete',
                                                             onPress: () {
-                                                              print(
-                                                                  _moduleList[0]);
+                                                              print(_moduleList[
+                                                                  0]);
                                                               controller.isDeleteDialog(
                                                                   module_id:
                                                                       _moduleList[

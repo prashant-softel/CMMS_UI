@@ -92,7 +92,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                   child: Container(
                     width: Get.width,
                     margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-                    height: Get.height,
+                    height: Get.height * .85 - 10,
                     //height: Get.height - 300,
 
                     child: Card(
@@ -115,7 +115,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                             color: ColorValues.greyLightColour,
                           ),
                           Container(
-                            margin: EdgeInsets.all(20),
+                            margin: EdgeInsets.all(15),
                             child: Row(
                               children: [
                                 Text(
@@ -189,7 +189,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                           Column(
                             children: [
                               Container(
-                                  height: Get.height - 300,
+                                  height: Get.height * .55,
                                   width: Get.width,
                                   margin: Dimens.edgeInsets15,
                                   decoration: BoxDecoration(
@@ -394,7 +394,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                               .toList())
                                       : Dimens.box0),
                               Container(
-                                margin: EdgeInsets.only(bottom: 40, top: 30),
+                                // margin: EdgeInsets.only(bottom: 15, top: 10),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

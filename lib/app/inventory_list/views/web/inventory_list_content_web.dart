@@ -55,15 +55,16 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                               Icons.home,
                               color: ColorValues.greyLightColor,
                             ),
-                            Text(" /DASHBOARD", style: Styles.greyLight14),
+                            Text("DASHBOARD", style: Styles.greyLight14),
                             InkWell(
                               onTap: () {
                                 Get.offNamed(Routes.masterDashboard);
                               },
-                              child: Text("/ MASTER", style: Styles.greyLight14),
+                              child:
+                                  Text(" / MASTER", style: Styles.greyLight14),
                             ),
                             Text(
-                              "/ASSETS LIST",
+                              " / ASSETS LIST",
                               style: Styles.greyLight14,
                             ),
                           ],
@@ -73,8 +74,9 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                         children: [
                           Container(
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                            margin:
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * .84,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
@@ -118,7 +120,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         //     ),
                                         //   ],
                                         // ),
-            
+
                                         ActionButton(
                                           icon: Icons.upload,
                                           label: 'importAsset'.tr,
@@ -162,7 +164,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                               right: 8,
                                               left: 8),
                                           decoration: BoxDecoration(
-                                            color: ColorValues.appLightBlueColor,
+                                            color:
+                                                ColorValues.appLightBlueColor,
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -181,29 +184,29 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                       .value.entries
                                                       .map((e) {
                                                 return PopupMenuItem<String>(
-                                                    child: ValueListenableBuilder(
-                                                        valueListenable:
-                                                            controller
-                                                                .columnVisibility,
-                                                        builder: (context, value,
-                                                            child) {
-                                                          return Row(
-                                                            children: [
-                                                              Checkbox(
-                                                                value:
-                                                                    value[e.key],
-                                                                onChanged:
-                                                                    (newValue) {
-                                                                  controller
-                                                                      .setColumnVisibility(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
                                                                           e.key,
                                                                           newValue!);
-                                                                },
-                                                              ),
-                                                              Text(e.key),
-                                                            ],
-                                                          );
-                                                        }));
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
                                               })),
                                         onSelected: (String value) {
                                           // Handle column selection
@@ -260,7 +263,7 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                 final dataSource =
                                                     InventoryListDataSource(
                                                         controller);
-            
+
                                                 return PaginatedDataTable2(
                                                   columnSpacing: 10,
                                                   dataRowHeight: 70,
@@ -286,7 +289,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                                           entry.key,
                                                           controller.filterText[
                                                               entry.key]!,
-                                                          controller.columnwidth[
+                                                          controller
+                                                                  .columnwidth[
                                                               entry.key],
                                                         ),
                                                     buildDataColumn(

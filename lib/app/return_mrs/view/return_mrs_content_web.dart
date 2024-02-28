@@ -82,8 +82,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                     child: Stack(children: [
                       Container(
                         width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 10, top: 30),
-                        height: Get.height,
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        height: Get.height * .85 - 5,
                         child: Card(
                           color: Color.fromARGB(255, 245, 248, 250),
                           elevation: 10,
@@ -180,8 +180,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                   // ),
                                   Spacer(),
                                   Container(
-                                    width: 200,
-                                    height: 35,
+                                    width: 300,
+                                    height: 40,
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: GoogleFonts.lato(
@@ -201,7 +201,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                           borderSide: const BorderSide(
                                               color: Colors.grey, width: 0.0),
                                         ),
-                                        contentPadding: Dimens.edgeInsets10_0_0_0,
+                                        contentPadding:
+                                            Dimens.edgeInsets10_0_0_0,
                                         hintText: 'search'.tr,
                                         hintStyle: Styles.grey12,
                                       ),
@@ -219,7 +220,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                             final dataSource =
                                                 ReturnMrsListDataSource(
                                                     controller);
-              
+
                                             return PaginatedDataTable2(
                                               // fixedLeftColumns: 1,
                                               dataRowHeight:
@@ -243,10 +244,10 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                   if (entry.value)
                                                     buildDataColumn(
                                                       entry.key,
-                                                      controller
-                                                          .filterText[entry.key]!,
-                                                      controller
-                                                          .columnwidth[entry.key],
+                                                      controller.filterText[
+                                                          entry.key]!,
+                                                      controller.columnwidth[
+                                                          entry.key],
                                                     ),
                                                 buildDataColumn(
                                                   'Actions',
@@ -257,7 +258,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                             );
                                           }),
                                     )
-              
+
                               // controller.mrsList!.isEmpty
                               //     ? Expanded(
                               //         child: ScrollableTableView(
@@ -459,7 +460,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                               //                                             () {
                               //                                           final _flutterSecureStorage =
                               //                                               const FlutterSecureStorage();
-              
+
                               //                                           _flutterSecureStorage.delete(
                               //                                               key:
                               //                                                   "mrsId");
@@ -487,7 +488,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                               //                                             () {
                               //                                           final _flutterSecureStorage =
                               //                                               const FlutterSecureStorage();
-              
+
                               //                                           _flutterSecureStorage.delete(
                               //                                               key:
                               //                                                   "mrsId");
@@ -528,7 +529,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                               //                                             () {
                               //                                           final _flutterSecureStorage =
                               //                                               const FlutterSecureStorage();
-              
+
                               //                                           _flutterSecureStorage.delete(
                               //                                               key:
                               //                                                   "mrsId");
@@ -600,11 +601,11 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                               //                                             () {
                               //                                           final _flutterSecureStorage =
                               //                                               const FlutterSecureStorage();
-              
+
                               //                                           _flutterSecureStorage.delete(
                               //                                               key:
                               //                                                   "mrsId");
-              
+
                               //                                           int mrsId =
                               //                                               mrsListDetails?.id ??
                               //                                                   0;
@@ -710,11 +711,11 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                       //         controller.fromDate.value,
                       //         controller.toDate.value,
                       //       ),
-              
+
                       //       onSubmit: (value) {
                       //         print('po valu ${value.toString()}');
                       //         PickerDateRange? data = value as PickerDateRange;
-              
+
                       //         var pickUpDate =
                       //             DateTime.parse(data.startDate.toString());
                       //         controller.fromDate.value = pickUpDate;
@@ -723,12 +724,12 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                       //         dropDate != null
                       //             ? controller.toDate.value = dropDate
                       //             : controller.toDate.value = pickUpDate;
-              
+
                       //         controller.getMrsListByDate();
                       //         controller.openFromDateToStartDatePicker =
                       //             !controller.openFromDateToStartDatePicker;
                       //         controller.update(['stock_Mangement_Date']);
-              
+
                       //         // Get.toNamed(
                       //         //   Routes.stockManagementGoodsOrdersScreen,
                       //         // );
@@ -896,7 +897,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color: controller.mrsList.firstWhere(
+                            color: controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>
                                               ReturnMrsListModel(id: 00),
@@ -904,7 +906,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                                         ?.status ==
                                     322
                                 ? ColorValues.rejectedStatusColor
-                                : controller.mrsList.firstWhere(
+                                : controller.mrsList
+                                            .firstWhere(
                                               (e) => e?.id == MrsDetails!.id,
                                               orElse: () =>
                                                   ReturnMrsListModel(id: 00),
@@ -912,7 +915,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                                             ?.status ==
                                         321
                                     ? ColorValues.submitColor
-                                    : controller.mrsList.firstWhere(
+                                    : controller.mrsList
+                                                .firstWhere(
                                                   (e) =>
                                                       e?.id == MrsDetails!.id,
                                                   orElse: () =>
@@ -922,7 +926,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                 ?.status ==
                                             323
                                         ? ColorValues.appLightBlueColor
-                                        : controller.mrsList.firstWhere(
+                                        : controller.mrsList
+                                                    .firstWhere(
                                                       (e) =>
                                                           e?.id ==
                                                           MrsDetails!.id,
@@ -933,7 +938,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                     ?.status ==
                                                 324
                                             ? ColorValues.issueStatusColor
-                                            : controller.mrsList.firstWhere(
+                                            : controller.mrsList
+                                                        .firstWhere(
                                                           (e) =>
                                                               e?.id ==
                                                               MrsDetails!.id,
@@ -944,7 +950,8 @@ class ReturnMrsListDataSource extends DataTableSource {
                                                         ?.status ==
                                                     326
                                                 ? ColorValues.appYellowColor
-                                                : controller.mrsList.firstWhere(
+                                                : controller.mrsList
+                                                            .firstWhere(
                                                               (e) =>
                                                                   e?.id ==
                                                                   MrsDetails!

@@ -87,7 +87,7 @@ class _FaultyMaterialReportContentWebState
                       Container(
                         width: Get.width * 7,
                         margin: EdgeInsets.all(10),
-                        height: Get.height,
+                        height: Get.height * .85 - 10,
                         child: Card(
                           color: Color.fromARGB(255, 245, 248, 250),
                           elevation: 10,
@@ -112,17 +112,18 @@ class _FaultyMaterialReportContentWebState
                                         CustomRichText(title: 'Date Range'),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
                                           numberTextField: true,
                                           onTap: () {
                                             controller
                                                     .openFromDateToStartDatePicker =
                                                 !controller
                                                     .openFromDateToStartDatePicker;
-                                            controller
-                                                .update(['stock_Mangement_Date']);
+                                            controller.update(
+                                                ['stock_Mangement_Date']);
                                           },
                                           hintText:
                                               '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
@@ -136,7 +137,7 @@ class _FaultyMaterialReportContentWebState
                                     //   onPressed: () {
                                     //     final _flutterSecureStorage =
                                     //         const FlutterSecureStorage();
-            
+
                                     //     _flutterSecureStorage.delete(key: "mrsId");
                                     //     Get.toNamed(Routes.createMrs);
                                     //   },
@@ -189,8 +190,8 @@ class _FaultyMaterialReportContentWebState
                                   // ),
                                   Spacer(),
                                   Container(
-                                    width: 200,
-                                    height: 35,
+                                    width: 300,
+                                    height: 40,
                                     margin: Dimens.edgeInsets0_0_16_0,
                                     child: TextField(
                                       style: GoogleFonts.lato(
@@ -210,7 +211,8 @@ class _FaultyMaterialReportContentWebState
                                           borderSide: const BorderSide(
                                               color: Colors.grey, width: 0.0),
                                         ),
-                                        contentPadding: Dimens.edgeInsets10_0_0_0,
+                                        contentPadding:
+                                            Dimens.edgeInsets10_0_0_0,
                                         hintText: 'search'.tr,
                                         hintStyle: Styles.grey12,
                                       ),
@@ -218,7 +220,8 @@ class _FaultyMaterialReportContentWebState
                                   ),
                                 ],
                               ),
-                              controller.faultyMaterialReportList.isEmpty == true
+                              controller.faultyMaterialReportList.isEmpty ==
+                                      true
                                   ? Center(child: Text('No data'))
                                   : Expanded(
                                       child: ValueListenableBuilder(
@@ -228,7 +231,7 @@ class _FaultyMaterialReportContentWebState
                                             final dataSource =
                                                 FaultyStockReportListDataSource(
                                                     controller);
-            
+
                                             return PaginatedDataTable2(
                                               // fixedLeftColumns: 1,
                                               dataRowHeight:
@@ -252,10 +255,10 @@ class _FaultyMaterialReportContentWebState
                                                   if (entry.value)
                                                     buildDataColumn(
                                                       entry.key,
-                                                      controller
-                                                          .filterText[entry.key]!,
-                                                      controller
-                                                          .columnwidth[entry.key],
+                                                      controller.filterText[
+                                                          entry.key]!,
+                                                      controller.columnwidth[
+                                                          entry.key],
                                                     ),
                                               ],
                                             );
@@ -281,11 +284,11 @@ class _FaultyMaterialReportContentWebState
                               controller.fromDate.value,
                               controller.toDate.value,
                             ),
-            
+
                             onSubmit: (value) {
                               print('po valu ${value.toString()}');
                               PickerDateRange? data = value as PickerDateRange;
-            
+
                               var pickUpDate =
                                   DateTime.parse(data.startDate.toString());
                               controller.fromDate.value = pickUpDate;
@@ -294,12 +297,12 @@ class _FaultyMaterialReportContentWebState
                               dropDate != null
                                   ? controller.toDate.value = dropDate
                                   : controller.toDate.value = pickUpDate;
-            
+
                               controller.getPlantStockListByDate();
                               controller.openFromDateToStartDatePicker =
                                   !controller.openFromDateToStartDatePicker;
                               controller.update(['stock_Mangement_Date']);
-            
+
                               // Get.toNamed(
                               //   Routes.stockManagementGoodsOrdersScreen,
                               // );

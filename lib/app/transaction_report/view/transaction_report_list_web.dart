@@ -94,8 +94,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                           Container(
                             width: Get.width * 7,
                             margin:
-                                EdgeInsets.only(left: 10, top: 30, right: 10),
-                            height: Get.height,
+                                EdgeInsets.only(left: 10, top: 15, right: 10),
+                            height: Get.height * .85 - 10,
                             child: Card(
                               color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 10,
