@@ -403,174 +403,210 @@ class VegetationPlanListDataSource extends DataTableSource {
 
     // print({"cell": cells});
     return DataRow.byIndex(
-      index: index,
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: (value == 'planId')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'VC ${VegetationListDetails?.planId}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            ' ${VegetationListDetails?.statusShort}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
+        index: index,
+        cells: cells.map((value) {
+          return DataCell(
+            Padding(
+              padding: EdgeInsets.zero,
+              child: (value == 'planId')
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'VC ${VegetationListDetails?.planId}',
+                        ),
+                        Dimens.boxHeight10,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: Dimens.edgeInsets8_2_8_2,
+                            decoration: BoxDecoration(
+                              color: ColorValues.addNewColor,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              ' ${VegetationListDetails?.statusShort}',
+                              style: Styles.white10.copyWith(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            int id = VegetationListDetails?.planId ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.viewVegetationPlanScreen,
-                                  arguments: {'id': id});
-                            }
-                          },
-                        ),
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    371
-                            ? TableActionButton(
-                                color: ColorValues.editColor,
-                                icon: Icons.edit,
-                                message: 'Edit',
-                                onPress: () {
-                                  int id = VegetationListDetails?.planId ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.addVegetationPlanScreen,
-                                        arguments: {
-                                          "veg_id": id,
-                                          "planId":
-                                              VegetationListDetails?.planId
-                                        });
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0 &&
-                                controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    352
-                            ? TableActionButton(
-                                color: Color.fromARGB(255, 116, 78, 130),
-                                icon: Icons.ads_click,
-                                message: 'Resubmit',
-                                onPress: () {
-                                  int id = VegetationListDetails?.planId ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.addVegetationPlanScreen,
-                                        arguments: {
-                                          "veg_id": id,
-                                          "planId":
-                                              VegetationListDetails?.planId
-                                        });
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        controller.vegetationPlanList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.planId ==
-                                              VegetationListDetails!.planId,
-                                          orElse: () => VegetationPlanListModel(
-                                              planId: 00),
-                                        )
-                                        .status ==
-                                    371 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kVegetationControlFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.appGreenColor,
-                                icon: Icons.add,
-                                message: 'Approve/Reject',
-                                onPress: () {
-                                  // controller.clearStoreDataMcid();
-                                  // controller.clearStoreDataPlanid();
-                                  int id = VegetationListDetails?.planId ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(
-                                      Routes.viewVegetationPlanScreen,
-                                      arguments: {'id': id, "type": 1},
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0
-                      ])
-                    : Text(value.toString()),
-          ),
-        );
-      }).toList(),
-      onSelectChanged: (_) {
+                      ],
+                    )
+                  : (value == 'Actions')
+                      ? Wrap(children: [
+                          TableActionButton(
+                            color: ColorValues.viewColor,
+                            icon: Icons.remove_red_eye_outlined,
+                            message: 'view',
+                            onPress: () {
+                              int id = VegetationListDetails?.planId ?? 0;
+                              if (id != 0) {
+                                Get.toNamed(Routes.viewVegetationPlanScreen,
+                                    arguments: {'id': id});
+                              }
+                            },
+                          ),
+                          varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kVegetationControlFeatureId &&
+                                              e.edit ==
+                                                  UserAccessConstants
+                                                      .kHaveEditAccess)
+                                          .length >
+                                      0 &&
+                                  controller.vegetationPlanList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                VegetationListDetails!.planId,
+                                            orElse: () =>
+                                                VegetationPlanListModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      371
+                              ? TableActionButton(
+                                  color: ColorValues.editColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    int id = VegetationListDetails?.planId ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(
+                                          Routes.editVegetationPlanScreen,
+                                          arguments: {"vegPlanId": id});
+                                    }
+                                  },
+                                )
+                              : Dimens.box0,
+                          // varUserAccessModel.value.access_list!
+                          //                 .where((e) =>
+                          //                     e.feature_id ==
+                          //                         UserAccessConstants
+                          //                             .kVegetationControlFeatureId &&
+                          //                     e.delete ==
+                          //                         UserAccessConstants
+                          //                             .kHaveEditAccess)
+                          //                 .length >
+                          //             0 &&
+                          //         controller.vegetationPlanList
+                          //                 .firstWhere(
+                          //                   (e) =>
+                          //                       e.planId ==
+                          //                       VegetationListDetails!.planId,
+                          //                   orElse: () =>
+                          //                       VegetationPlanListModel(
+                          //                           planId: 00),
+                          //                 )
+                          //                 .status ==
+                          //             371
+                          //     ? TableActionButton(
+                          //         color: ColorValues.deleteColor,
+                          //         icon: Icons.delete,
+                          //         message: 'Delete',
+                          //         onPress: () {
+                          //           int id = VegetationListDetails?.planId ?? 0;
+                          //           if (id != 0) {
+                          //             Get.toNamed(
+
+                          //                 Routes.vegetationPlanListScreen,
+                          //                );
+                          //           }
+                          //         },
+                          //       )
+                          //     : Dimens.box0,
+                          varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kVegetationControlFeatureId &&
+                                              e.edit ==
+                                                  UserAccessConstants
+                                                      .kHaveEditAccess)
+                                          .length >
+                                      0 &&
+                                  controller.vegetationPlanList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                VegetationListDetails!.planId,
+                                            orElse: () =>
+                                                VegetationPlanListModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      352
+                              ? TableActionButton(
+                                  color: Color.fromARGB(255, 116, 78, 130),
+                                  icon: Icons.ads_click,
+                                  message: 'Resubmit',
+                                  onPress: () {
+                                    int id = VegetationListDetails?.planId ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(
+                                          Routes.addVegetationPlanScreen,
+                                          arguments: {
+                                            "veg_id": id,
+                                            "planId":
+                                                VegetationListDetails?.planId
+                                          });
+                                    }
+                                  },
+                                )
+                              : Dimens.box0,
+                          controller.vegetationPlanList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                VegetationListDetails!.planId,
+                                            orElse: () =>
+                                                VegetationPlanListModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      371 &&
+                                  varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kVegetationControlFeatureId &&
+                                              e.approve ==
+                                                  UserAccessConstants
+                                                      .kHaveApproveAccess)
+                                          .length >
+                                      0
+                              ? TableActionButton(
+                                  color: ColorValues.appGreenColor,
+                                  icon: Icons.add,
+                                  message: 'Approve/Reject',
+                                  onPress: () {
+                                    // controller.clearStoreDataMcid();
+                                    // controller.clearStoreDataPlanid();
+                                    int id = VegetationListDetails?.planId ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(
+                                        Routes.viewVegetationPlanScreen,
+                                        arguments: {'id': id, "type": 1},
+                                      );
+                                    }
+                                  },
+                                )
+                              : Dimens.box0
+                        ])
+                      : Text(value.toString()),
+            ),
+          );
+        }).toList(),
+        onSelectChanged: (_) {
           int id = VegetationListDetails?.planId ?? 0;
           if (id != 0) {
             Get.toNamed(Routes.viewVegetationPlanScreen, arguments: {'id': id});
           }
-        }
-    );
+        });
   }
 
   @override
