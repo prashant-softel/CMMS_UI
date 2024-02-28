@@ -242,6 +242,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToImportDsmChargesScreen() async {
+    Get.toNamed(
+      Routes.importDsmChargesScreen,
+    );
+  }
+
   Future<void> goToCompetencyScreen() async {
     Get.toNamed(
       Routes.competencyScreen,

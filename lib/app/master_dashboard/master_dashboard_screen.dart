@@ -710,6 +710,14 @@ class MastersDashboard extends GetView<MastersController> {
                                                   .goToImportDsmListChargesScreen();
                                             });
                                       }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Import DSM",
+                                            onTap: () {
+                                              controller
+                                                  .goToImportDsmChargesScreen();
+                                            });
+                                      }))),
                                     ],
                                   ),
 
