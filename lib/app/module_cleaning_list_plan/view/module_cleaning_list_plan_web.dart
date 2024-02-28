@@ -138,6 +138,9 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
+                                            controller.clearStoreDataMcid();
+                                            controller.clearStoreDataPlanid();
+
                                             Get.offNamed(
                                                 Routes.moduleCleaningPlanning);
                                           },

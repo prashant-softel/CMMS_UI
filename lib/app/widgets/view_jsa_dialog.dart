@@ -62,8 +62,9 @@ class ViewJSADialog extends GetView {
                                 onTap: () async {
                                   // final url = '${_controller.jsaData}';
                                   // "https://www.w3.org/1999/xhtml/"
-                                  String baseUrl = 'http://65.0.20.19/CMMS_API/';
-                                  String endpoint = '${_controller.sopData}';
+                                  String baseUrl =
+                                      'http://65.0.20.19/CMMS_API/';
+                                  String endpoint = '${_controller.jsaData}';
 
                                   // Concatenate the links
                                   String fullUrl = baseUrl + endpoint;

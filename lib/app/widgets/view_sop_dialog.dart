@@ -56,14 +56,29 @@ class ViewSOPDialog extends GetView {
                             width: 150,
                             child: InkWell(
                                 onTap: () async {
-                                  final url = '${_controller.sopData}';
+                                  // final url = '${_controller.jsaData}';
+                                  // "https://www.w3.org/1999/xhtml/"
+                                  String baseUrl =
+                                      'http://65.0.20.19/CMMS_API/';
+                                  String endpoint = '${_controller.sopData}';
+
+                                  // Concatenate the links
+                                  String fullUrl = baseUrl + endpoint;
                                   // final url =
-                                  //     'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-                                  print('SOPUrl:$url');
-                                  if (await canLaunch(url)) {
-                                    await launch(url);
+                                  //     'http://65.0.20.19/O3_Files${_controller.jsaData}';
+                                  print('JSAUrl:$fullUrl');
+                                  if (await canLaunch(fullUrl)) {
+                                    await launch(fullUrl);
                                   }
                                 },
+                                // final url = '${_controller.sopData}';
+                                // // final url =
+                                // //     'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+                                // print('SOPUrl:$url');
+                                // if (await canLaunch(url)) {
+                                //   await launch(url);
+                                // }
+                                // },
                                 child: Image.asset('assets/files/pdf2.png'))),
                         SizedBox(
                           height: 10,
