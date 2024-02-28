@@ -4256,5 +4256,16 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+  Future<ResponseModel> createToolType({
+    auth,
+    String? tool_name,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createToolType(
+        auth: auth,
+        isLoading: isLoading,
+        tool_name: tool_name);
+    return response;
+  }
 //end
 }

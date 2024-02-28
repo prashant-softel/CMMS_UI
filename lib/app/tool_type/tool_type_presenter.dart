@@ -12,7 +12,7 @@ class ToolTypePresenter {
   //   int? facilityId,
   //   bool? isLoading,
   // }) async =>
-  //     await workTypeUsecase.getInventoryCategoryList(
+  //     await toolTypeUsecase.getInventoryCategoryList(
   //       auth: auth ?? "",
   //       facilityId: facilityId ?? 0,
   //       isLoading: isLoading ?? false,
@@ -22,32 +22,32 @@ class ToolTypePresenter {
   //   String? categoryIds,
   //   bool? isLoading,
   // }) async =>
-  //     await workTypeUsecase.getWorkTypeList(
+  //     await toolTypeUsecase.getWorkTypeList(
   //       categoryIds: categoryIds,
   //       isLoading: isLoading ?? false,
   //     );
 
-  // Future<bool> createWorkType({
-  //   worktypeJsonString,
-  //   required bool isLoading,
-  // }) async {
-  //   print("presenter Create work type function.");
-  //   workTypeUsecase.createWorkType(
-  //     worktypeJsonString: worktypeJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> createToolType({
+    required String? tool_name,
+    required bool isLoading,
+  }) async {
+    print("presenter Create tool type function.");
+    toolTypeUsecase.createToolType(
+      tool_name: tool_name,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
   // deleteWorkType(String? worktype_id, {required bool isLoading}) async =>
-  //     await workTypeUsecase.deleteWorkType(
+  //     await toolTypeUsecase.deleteWorkType(
   //       worktype_id: worktype_id ?? 0,
   //       isLoading: isLoading,
   //     );
   // Future<bool> updateWorkType(
   //     {worktypeJsonString, required bool isLoading}) async {
   //   print("presenter");
-  //   workTypeUsecase.updateWorkType(
+  //   toolTypeUsecase.updateWorkType(
   //     worktypeJsonString: worktypeJsonString,
   //     isLoading: isLoading,
   //   );

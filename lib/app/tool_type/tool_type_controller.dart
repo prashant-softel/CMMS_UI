@@ -4,6 +4,7 @@ import 'package:cmms/app/tool_type/tool_type_presenter.dart';
 import 'package:cmms/app/work_type/work_type_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/tool_type_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,9 +20,9 @@ class ToolTypeController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
       <InventoryCategoryModel>[].obs;
-  FocusNode worktypenameFocus = FocusNode();
-  ScrollController worktypenameScroll = ScrollController();
-  WorkTypeModel? selectedItem;
+  FocusNode tooltypenameFocus = FocusNode();
+  ScrollController tooltypenameScroll = ScrollController();
+  ToolTypeModel? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -39,8 +40,8 @@ class ToolTypeController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   Rx<bool> isTitleInvalid = false.obs;
-  RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
-  RxList<WorkTypeModel> BufferworktypeList = <WorkTypeModel>[].obs;
+  RxList<ToolTypeModel?> tooltypeList = <ToolTypeModel>[].obs;
+  RxList<ToolTypeModel> BuffertooltypeList = <ToolTypeModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
   RxList<InventoryCategoryModel?> assetcategoryList =
@@ -56,16 +57,16 @@ class ToolTypeController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      worktypeList.value = BufferworktypeList.value;
+      tooltypeList.value = BuffertooltypeList.value;
       return;
     }
-    List<WorkTypeModel> filteredList = BufferworktypeList.where((item) => (item
-            .workType
+    List<ToolTypeModel> filteredList = BuffertooltypeList.where((item) => (item
+            .tool_name
             ?.toString()
             .toLowerCase()
             .contains(keyword.toLowerCase()) ??
         false)).toList();
-    worktypeList.value = filteredList;
+    tooltypeList.value = filteredList;
   }
 
   //Facility list / demo plant
@@ -85,32 +86,15 @@ class ToolTypeController extends GetxController {
         // await getWorkTypeList();
       }
     });
-    worktypenameFocus.addListener(() {
-      if (!worktypenameFocus.hasFocus) {
-        worktypenameScroll.jumpTo(0.0);
+    tooltypenameFocus.addListener(() {
+      if (!tooltypenameFocus.hasFocus) {
+        tooltypenameScroll.jumpTo(0.0);
       }
     });
 
     super.onInit();
   }
 
-  // void onValueChanged(dynamic list, dynamic value) {
-  //   switch (list.runtimeType) {
-  //     case RxList<InventoryCategoryModel>:
-  //       {
-  //         int equipmentIndex =
-  //             equipmentCategoryList.indexWhere((x) => x?.name == value);
-  //         selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-  //       }
-
-  //       break;
-  //     default:
-  //       {
-  //         //statements;
-  //       }
-  //       break;
-  //   }
-  // }
 
   // Future<bool> updateWorkType(id) async {
   //   String _name = titleCtrlr.text.trim();
@@ -134,34 +118,29 @@ class ToolTypeController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  // Future<bool> createWorkType() async {
-  //   print("CREATE CONTROLLER");
-  //   String _title = titleCtrlr.text.trim();
-  //   print(_title);
-  //   UpdateWorkTypeModel workType = UpdateWorkTypeModel(
-  //       workType: _title, categoryid: selectedEquipmentId, id: 0);
-  //   print("OUT ");
-  //   var worktypelistJsonString =
-  //       workType.toJson(); //createCheckPointToJson([workType]);
+  Future<bool> createToolType() async {
+    print("CREATE CONTROLLER");
+    String tool_name = titleCtrlr.text.trim();
+    print(tool_name);
 
-  //   print({"checkpointJsonString", worktypelistJsonString});
-  //   await worktypepresenter.createWorkType(
-  //     worktypeJsonString: worktypelistJsonString,
-  //     isLoading: true,
-  //   );
-  //   return true;
-  // }
+    print({"tool name is: ", tool_name});
+    await worktypepresenter.createToolType(
+      tool_name: tool_name,
+      isLoading: true,
+    );
+    return true;
+  }
 
   // Future<void> getWorkTypeList({
   //   List<int>? receivedCategoryIds,
   // }) async {
-  //   worktypeList.value = <WorkTypeModel>[];
+  //   tooltypeList.value = <ToolTypeModel>[];
   //   String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
   //   final _workTypeList = await worktypepresenter.getWorkTypeList(
   //     categoryIds: lststrCategoryIds,
   //     isLoading: false,
   //   );
-  //   worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
+  //   tooltypeList.value = _workTypeList ?? <ToolTypeModel>[];
   // }
 
   Future<void> issuccessCreatechecklist() async {

@@ -205,9 +205,9 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                                 controller:
                                                     controller.titleCtrlr,
                                                 focusNode: controller
-                                                    .worktypenameFocus,
+                                                    .tooltypenameFocus,
                                                 scrollController: controller
-                                                    .worktypenameScroll,
+                                                    .tooltypenameScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 autofocus: false,
@@ -290,91 +290,6 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                                child: CustomRichText(
-                                                    title: 'Work Type ')),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .20),
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.040,
-                                                  child: Obx(
-                                                    () => DropdownWebWidget(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          offset: const Offset(
-                                                              0.0, 0.0),
-                                                          blurRadius: 0.0,
-                                                          spreadRadius: 0.0,
-                                                        ),
-                                                      ],
-                                                      controller: controller,
-                                                      dropdownList: controller
-                                                          .equipmentCategoryList,
-                                                      isValueSelected:
-                                                          controller
-                                                              .isselectedassetc
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedassetcategory
-                                                          .value,
-                                                      onValueChanged:
-                                                          (selectedValue,
-                                                              isValueSelected) {
-                                                        // controller
-                                                        //     .onValueChanged(
-                                                        //         selectedValue,
-                                                        //         isValueSelected);
-                                                      },
-                                                    ),
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
                                         SizedBox(
                                           height: 40,
                                         ),
@@ -410,22 +325,22 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                // controller
-                                                //     .createWorkType()
-                                                //     .then(
-                                                //   (value) {
-                                                //     print("CREATE");
-                                                //     print("value,$value");
-                                                //     if (value == true) {
-                                                //       controller
-                                                //           .issuccessCreatechecklist();
-                                                //       controller
-                                                //           .toggleContainer();
-                                                //     }
-                                                //   },
-                                                // );
+                                                controller
+                                                    .createToolType()
+                                                    .then(
+                                                  (value) {
+                                                    print("CREATE");
+                                                    print("value,$value");
+                                                    if (value == true) {
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                      controller
+                                                          .toggleContainer();
+                                                    }
+                                                  },
+                                                );
                                               },
-                                              text: 'Create Work Type',
+                                              text: 'Create Tool Type',
                                             ),
                                           )
                                         : CustomElevatedButton(
@@ -542,15 +457,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                       DataColumn2(
                                           // fixedWidth: 150,
                                           label: Text(
-                                        "Tool Type",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Work Type",
+                                        "Tool Name",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
@@ -565,16 +472,12 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                           )),
                                     ],
                                     rows: List<DataRow>.generate(
-                                      controller.worktypeList.length,
+                                      controller.tooltypeList.length,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
                                         DataCell(Text(controller
-                                            .worktypeList[index]!.workType
+                                            .tooltypeList[index]!.tool_name
                                             .toString())),
-                                        DataCell(Text(controller
-                                                .worktypeList[index]!
-                                                .categoryName ??
-                                            '')),
                                         DataCell(Row(
                                           children: [
                                             TableActionButton(
@@ -582,29 +485,29 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               icon: Icons.edit,
                                               message: 'Edit',
                                               onPress: () {
-                                                controller.selectedItem =
-                                                    controller.worktypeList
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      "${element!.id}" ==
-                                                      controller
-                                                          .worktypeList[index]!
-                                                          .id
-                                                          .toString(),
-                                                );
+                                                // controller.selectedItem =
+                                                //     controller.worktypeList
+                                                //         .firstWhere(
+                                                //   (element) =>
+                                                //       "${element!.id}" ==
+                                                //       controller
+                                                //           .worktypeList[index]!
+                                                //           .id
+                                                //           .toString(),
+                                                // );
 
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.workType ??
-                                                        '';
-                                                controller.selectedassetcategory
-                                                    .value = controller
-                                                        .selectedItem
-                                                        ?.categoryName ??
-                                                    '';
+                                                // controller.titleCtrlr.text =
+                                                //     controller.selectedItem
+                                                //             ?.workType ??
+                                                //         '';
+                                                // controller.selectedassetcategory
+                                                //     .value = controller
+                                                //         .selectedItem
+                                                //         ?.categoryName ??
+                                                //     '';
 
-                                                controller.isContainerVisible
-                                                    .value = true;
+                                                // controller.isContainerVisible
+                                                //     .value = true;
                                               },
                                             ),
                                             TableActionButton(
