@@ -202,6 +202,7 @@ abstract class Routes {
   static const tooltype = _Paths.tooltype;
   static const importDsmListChargesListScreen =
       _Paths.importDsmListChargesListScreen;
+  static const importDsmChargesScreen = _Paths.importDsmChargesScreen;
 }
 
 abstract class _Paths {
@@ -401,4 +402,5 @@ abstract class _Paths {
   static const dsmCharges = '/dsm-charges';
   static const importDsmListChargesListScreen =
       '/importDsmListChargesListScreen';
+  static const importDsmChargesScreen = '/importDsmChargesScreen';
 }

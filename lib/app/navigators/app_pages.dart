@@ -74,6 +74,8 @@ import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
 import 'package:cmms/app/grievance_list/views/grievance_list_screen.dart';
 import 'package:cmms/app/hoto/hoto_list_binding.dart';
 import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
+import 'package:cmms/app/import_dsm_charges/import_dsm_charges_binding.dart';
+import 'package:cmms/app/import_dsm_charges/view/import_dsm_charges_screen.dart';
 import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_binding.dart';
 import 'package:cmms/app/import_dsm_list_charges/view/import_dsm_list_charges_screen.dart';
 import 'package:cmms/app/incident_report_dashboard/incident_report_binding.dart';
@@ -1212,6 +1214,11 @@ class AppPages {
       name: _Paths.importDsmListChargesListScreen,
       page: ImportDsmListChargesListScreen.new,
       binding: ImportDsmListChargesListBinding(),
-    )
+    ),
+    GetPage<dynamic>(
+      name: _Paths.importDsmChargesScreen,
+      page: ImportDsmChargesScreen.new,
+      binding: ImportDsmChargesBinding(),
+    ),
   ];
 }
