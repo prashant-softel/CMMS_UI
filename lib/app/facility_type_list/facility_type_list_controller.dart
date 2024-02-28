@@ -358,6 +358,16 @@ class FacilityTypeListController extends GetxController {
           print('CityId:${selectedCityId}');
         }
         break;
+      case RxList<BusinessListModel>:
+        {
+          int customerIndex = customerList.indexWhere((x) => x?.name == value);
+          customerId = customerList[customerIndex]?.id ?? 0;
+          if (customerId > 0) {
+            isSelectedCityType.value = true;
+          }
+          selectedCustomer.value = value;
+        }
+        break;
 
       default:
         {
