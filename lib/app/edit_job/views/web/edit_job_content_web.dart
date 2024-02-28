@@ -373,7 +373,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                                 MultiSelectItem(
                                                                     workType
                                                                         ?.id,
-                                                                    workType?.workType ??
+                                                                    workType?.name ??
                                                                         ''))
                                                             .toList(),
                                                         onConfirm:

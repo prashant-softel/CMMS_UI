@@ -7,24 +7,23 @@ class ToolTypeUsecase {
   ToolTypeUsecase(this.repository);
   Repository repository;
 
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getInventoryCategoryList(
+        auth,
+        facilityId,
+        isLoading,
+      );
 
-  // Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-  //   String? auth,
-  //   int? facilityId,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.getInventoryCategoryList(
-  //       auth,
-  //       facilityId,
-  //       isLoading,
-  //     );
-
-  // Future<List<WorkTypeModel?>?> getWorkTypeList(
-  //         {bool? isLoading, String? categoryIds}) async =>
-  //     await repository.getWorkTypeList(
-  //       isLoading,
-  //       categoryIds,
-  //     );
+  Future<List<WorkTypeModel?>?> getWorkTypeList(
+          {bool? isLoading, String? categoryIds}) async =>
+      await repository.getWorkTypeList(
+        isLoading,
+        categoryIds,
+      );
 
   // deleteWorkType(
   //         {required Object worktype_id, required bool isLoading}) async =>

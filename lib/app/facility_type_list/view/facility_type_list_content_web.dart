@@ -1595,11 +1595,37 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .selectedItem
                                                           ?.state ??
                                                       '';
+                                                  controller.selectedStateId =
+                                                      controller.selectedItem
+                                                              ?.stateid ??
+                                                          0;
+                                                  if (controller
+                                                          .selectedStateId >
+                                                      0) {
+                                                    controller.getCityList(
+                                                        controller
+                                                            .selectedStateId);
+                                                  }
                                                   controller.selectedCountry
                                                       .value = controller
                                                           .selectedItem
                                                           ?.country ??
                                                       '';
+                                                  controller.selectedCountryId =
+                                                      controller.selectedItem
+                                                              ?.countryid ??
+                                                          0;
+                                                  if (controller
+                                                          .selectedCountryId >
+                                                      0) {
+                                                    controller.getStateList(
+                                                        controller
+                                                            .selectedCountryId);
+                                                  }
+                                                  controller.selectedCityId =
+                                                      controller.selectedItem
+                                                              ?.cityId ??
+                                                          0;
                                                   controller.isContainerVisible
                                                       .value = true;
 

@@ -143,7 +143,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -151,8 +152,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -174,16 +178,19 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         textStyle: TextStyle(
                                                             fontSize: 16.0,
                                                             height: 1.0,
-                                                            color: Colors.black),
+                                                            color:
+                                                                Colors.black),
                                                       ),
                                                       controller: controller
                                                           .jobTitleCtrlr,
-                                                      focusNode:
-                                                          controller.jobNameFocus,
-                                                      scrollController: controller
-                                                          .jobNameScroll,
+                                                      focusNode: controller
+                                                          .jobNameFocus,
+                                                      scrollController:
+                                                          controller
+                                                              .jobNameScroll,
                                                       autofocus: false,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         fillColor: ColorValues
                                                             .whiteColor,
                                                         filled: true,
@@ -193,12 +200,14 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                                 10.0,
                                                                 5.0,
                                                                 10.0),
-                                                        border: InputBorder.none,
+                                                        border:
+                                                            InputBorder.none,
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(5.0),
+                                                                  .circular(
+                                                                      5.0),
                                                           borderSide: BorderSide(
                                                               color: Colors
                                                                   .transparent),
@@ -207,7 +216,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(5.0),
+                                                                  .circular(
+                                                                      5.0),
                                                           borderSide: BorderSide(
                                                               color: Colors
                                                                   .transparent),
@@ -249,7 +259,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             : null,
                                                       ),
                                                       onChanged: (value) {
-                                                        if (value.trim().length >
+                                                        if (value
+                                                                .trim()
+                                                                .length >
                                                             3) {
                                                           controller
                                                               .isJobTitleInvalid
@@ -281,7 +293,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -289,8 +302,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -303,11 +319,13 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: Obx(
-                                                    () => MultiSelectDialogField(
+                                                    () =>
+                                                        MultiSelectDialogField(
                                                       dialogWidth: 300,
                                                       dialogHeight: 400,
                                                       searchable: true,
-                                                      validator: (selectedItems) {
+                                                      validator:
+                                                          (selectedItems) {
                                                         if (controller
                                                                 .isEquipmentCategorySelected
                                                                 .value ==
@@ -318,7 +336,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         }
                                                       },
                                                       autovalidateMode:
-                                                          AutovalidateMode.always,
+                                                          AutovalidateMode
+                                                              .always,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                           color: controller
@@ -331,11 +350,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           width: 1.0,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                5),
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                      buttonIcon: Icon(
-                                                          Icons.arrow_drop_down),
+                                                      buttonIcon: Icon(Icons
+                                                          .arrow_drop_down),
                                                       items: controller
                                                           .equipmentCategoryList
                                                           .map(
@@ -367,9 +386,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 ),
                                               ],
                                             ),
-              
+
                                             Dimens.boxHeight10,
-              
+
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -379,7 +398,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -387,8 +407,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -424,7 +447,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         autovalidateMode:
                                                             AutovalidateMode
                                                                 .always,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           border: Border.all(
                                                             color: controller
                                                                         .isWorkAreaSelected
@@ -504,9 +528,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         spreadRadius: 0.0,
                                                       ), //BoxShadow
                                                     ],
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                   ),
                                                   child: TextField(
                                                     style: GoogleFonts.lato(
@@ -516,26 +542,29 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           color: Colors.black),
                                                     ),
                                                     onTap: () {
-                                                      controller
-                                                          .pickDateTime(context);
+                                                      controller.pickDateTime(
+                                                          context);
                                                     },
                                                     controller: controller
                                                         .breakdownTimeCtrlr,
                                                     autofocus: false,
                                                     readOnly: true,
                                                     decoration: InputDecoration(
-                                                      fillColor:
-                                                          ColorValues.whiteColor,
+                                                      fillColor: ColorValues
+                                                          .whiteColor,
                                                       filled: true,
                                                       contentPadding:
-                                                          EdgeInsets.fromLTRB(5.0,
-                                                              10.0, 5.0, 10.0),
+                                                          EdgeInsets.fromLTRB(
+                                                              5.0,
+                                                              10.0,
+                                                              5.0,
+                                                              10.0),
                                                       border: InputBorder.none,
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10.0),
+                                                            BorderRadius
+                                                                .circular(10.0),
                                                         borderSide: BorderSide(
                                                             color: Colors
                                                                 .transparent),
@@ -543,8 +572,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10.0),
+                                                            BorderRadius
+                                                                .circular(10.0),
                                                         borderSide: BorderSide(
                                                             color: Colors
                                                                 .transparent),
@@ -553,7 +582,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     onChanged: (value) {},
                                                   ),
                                                 ),
-              
+
                                                 // CustomTextFieldForStock(
                                                 //   width: MediaQuery.of(context)
                                                 //           .size
@@ -573,7 +602,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 // ),
                                               ],
                                             ),
-              
+
                                             //  Dimens.boxHeight10,
                                           ],
                                         ),
@@ -584,7 +613,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           children: [
                                             ///
                                             //   Dimens.boxHeight10,
-              
+
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -593,7 +622,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -601,8 +631,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -618,15 +651,17 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     () => DropdownWebWidget(
                                                       dropdownList:
                                                           controller.blockList,
-                                                      isValueSelected: controller
-                                                          .isBlockSelected.value,
+                                                      isValueSelected:
+                                                          controller
+                                                              .isBlockSelected
+                                                              .value,
                                                       selectedValue: controller
                                                           .selectedBlock.value,
                                                       onValueChanged: controller
                                                           .onDropdownValueChanged,
                                                       // focusNode: controller.focusNode,
                                                     ),
-              
+
                                                     // MultiSelectDialogField(
                                                     //   dialogWidth: 300,
                                                     //   dialogHeight: 400,
@@ -667,7 +702,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -675,8 +711,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -689,11 +728,13 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           .width *
                                                       .2),
                                                   child: Obx(
-                                                    () => MultiSelectDialogField(
+                                                    () =>
+                                                        MultiSelectDialogField(
                                                       dialogWidth: 300,
                                                       dialogHeight: 400,
                                                       searchable: true,
-                                                      validator: (selectedItems) {
+                                                      validator:
+                                                          (selectedItems) {
                                                         if (controller
                                                                 .isWorkTypeSelected
                                                                 .value ==
@@ -704,7 +745,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         }
                                                       },
                                                       autovalidateMode:
-                                                          AutovalidateMode.always,
+                                                          AutovalidateMode
+                                                              .always,
                                                       decoration: BoxDecoration(
                                                         border: Border.all(
                                                           color: controller
@@ -717,24 +759,25 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           width: 1.0,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                5),
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                      buttonIcon: Icon(
-                                                          Icons.arrow_drop_down),
+                                                      buttonIcon: Icon(Icons
+                                                          .arrow_drop_down),
                                                       items: controller
                                                           .workTypeList
                                                           .map((e) =>
                                                               MultiSelectItem(
                                                                   e,
-                                                                  e?.workType ??
+                                                                  e?.name ??
                                                                       ''))
                                                           .toList(),
                                                       onConfirm:
                                                           (selectedOptionsList) =>
                                                               {
-                                                        controller.workTypesSelected(
-                                                            selectedOptionsList),
+                                                        controller
+                                                            .workTypesSelected(
+                                                                selectedOptionsList),
                                                         controller
                                                                 .isWorkTypeSelected
                                                                 .value =
@@ -758,7 +801,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -766,8 +810,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(255,
-                                                                236, 234, 234)
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -810,7 +857,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     initialValue: controller
                                                         .toolsRequiredToWorkTypeList
                                                         .toList(), // Select all items initially
-              
+
                                                     items: controller
                                                         .toolsRequiredToWorkTypeList
                                                         .map((e) => MultiSelectItem(
@@ -818,9 +865,10 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             e?.linkedToolName ??
                                                                 ''))
                                                         .toList(),
-              
+
                                                     onConfirm:
-                                                        (selectedOptionsList) => {
+                                                        (selectedOptionsList) =>
+                                                            {
                                                       controller
                                                           .toolsRequiredSelected(
                                                               selectedOptionsList),
@@ -836,7 +884,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 ),
                                               ],
                                             ),
-              
+
                                             // Dimens.boxHeight10,
                                             // Row(
                                             //   children: [
@@ -882,7 +930,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                             //   ],
                                             // ),
                                             // Dimens.boxHeight10,
-              
+
                                             Dimens.boxHeight10,
                                           ],
                                         ),
@@ -937,7 +985,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                   ),
                                                   controller: controller
                                                       .jobDescriptionCtrlr,
-                                                  focusNode: controller.descFocus,
+                                                  focusNode:
+                                                      controller.descFocus,
                                                   scrollController:
                                                       controller.descScroll,
                                                   keyboardType:
@@ -957,8 +1006,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           BorderRadius.circular(
                                                               10.0),
                                                       borderSide: BorderSide(
-                                                          color:
-                                                              Colors.transparent),
+                                                          color: Colors
+                                                              .transparent),
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
@@ -966,8 +1015,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                           BorderRadius.circular(
                                                               10.0),
                                                       borderSide: BorderSide(
-                                                          color:
-                                                              Colors.transparent),
+                                                          color: Colors
+                                                              .transparent),
                                                     ),
                                                     focusedErrorBorder: controller
                                                             .isJobDescriptionInvalid
@@ -975,7 +1024,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         ? OutlineInputBorder(
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                             borderSide:
                                                                 BorderSide(
                                                               color: ColorValues
@@ -989,7 +1039,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         ? OutlineInputBorder(
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                             borderSide:
                                                                 BorderSide(
                                                               color: ColorValues
@@ -1004,7 +1055,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                         : null,
                                                   ),
                                                   onChanged: (value) {
-                                                    if (value.trim().length > 3) {
+                                                    if (value.trim().length >
+                                                        3) {
                                                       controller
                                                           .isJobDescriptionInvalid
                                                           .value = false;
@@ -1024,7 +1076,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                   ],
                                 ),
                               ),
-              
+
                               ///File Upload
                               Padding(
                                 padding: const EdgeInsets.only(left: 60),
@@ -1054,9 +1106,10 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 children: [
                                                   /// FILE UPLOAD WIDGET
                                                   SizedBox(
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     child: Container(
                                                       height: Get.height * 0.2,
                                                       width: Get.width,
@@ -1086,7 +1139,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                   ),
                                 ),
                               ),
-              
+
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Submit',

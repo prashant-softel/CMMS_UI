@@ -320,7 +320,7 @@ class EditJobController extends GetxController {
         for (var _workType in jobDetailsModel.value?.workTypeList ?? []) {
           WorkTypeModel workType = WorkTypeModel(
             id: _workType.workTypeId,
-            workType: _workType.workTypeName,
+            name: _workType.workTypeName,
           );
           selectedWorkTypeList.add(workType);
           selectedWorkTypeIdList.add(workType.id ?? 0);

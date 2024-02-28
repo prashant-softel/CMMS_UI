@@ -84,12 +84,13 @@ class WorkTypeWidget extends StatelessWidget {
             ),
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workTypeList
-                .map((e) => MultiSelectItem(e, e?.workType ?? ''))
+                .map((e) => MultiSelectItem(e, e?.name ?? ''))
                 .toList(),
-            onConfirm: (selectedOptionsList) =>
-                {controller.workTypesSelected(selectedOptionsList),
-                  controller.isWorkTypeSelected.value = selectedOptionsList.isNotEmpty,
-                },
+            onConfirm: (selectedOptionsList) => {
+              controller.workTypesSelected(selectedOptionsList),
+              controller.isWorkTypeSelected.value =
+                  selectedOptionsList.isNotEmpty,
+            },
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),

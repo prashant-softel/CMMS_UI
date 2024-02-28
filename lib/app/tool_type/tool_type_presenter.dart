@@ -7,25 +7,25 @@ class ToolTypePresenter {
   ToolTypePresenter(this.toolTypeUsecase);
   ToolTypeUsecase toolTypeUsecase;
 
-  // Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-  //   String? auth,
-  //   int? facilityId,
-  //   bool? isLoading,
-  // }) async =>
-  //     await toolTypeUsecase.getInventoryCategoryList(
-  //       auth: auth ?? "",
-  //       facilityId: facilityId ?? 0,
-  //       isLoading: isLoading ?? false,
-  //     );
-  // Future<List<WorkTypeModel?>?> getWorkTypeList({
-  //   String? auth,
-  //   String? categoryIds,
-  //   bool? isLoading,
-  // }) async =>
-  //     await toolTypeUsecase.getWorkTypeList(
-  //       categoryIds: categoryIds,
-  //       isLoading: isLoading ?? false,
-  //     );
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await toolTypeUsecase.getInventoryCategoryList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<List<WorkTypeModel?>?> getWorkTypeList({
+    String? auth,
+    String? categoryIds,
+    bool? isLoading,
+  }) async =>
+      await toolTypeUsecase.getWorkTypeList(
+        categoryIds: categoryIds,
+        isLoading: isLoading ?? false,
+      );
 
   Future<bool> createToolType({
     required String? tool_name,

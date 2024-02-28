@@ -90,7 +90,7 @@ class WorkTypeWidget extends StatelessWidget {
             buttonIcon: Icon(Icons.arrow_drop_down),
             items: controller.workTypeList
                 .map((workType) =>
-                    MultiSelectItem(workType?.id, workType?.workType ?? ''))
+                    MultiSelectItem(workType?.id, workType?.name ?? ''))
                 .toList(),
             onConfirm: (selectedOptionsList) =>
                 {controller.workTypesSelected(selectedOptionsList)},

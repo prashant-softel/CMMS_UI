@@ -236,6 +236,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToWorkTypeList() async {
+    Get.toNamed(
+      Routes.worktype,
+    );
+  }
+
   Future<void> goToImportDsmListChargesScreen() async {
     Get.toNamed(
       Routes.importDsmListChargesListScreen,
