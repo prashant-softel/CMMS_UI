@@ -13,7 +13,6 @@ import '../../domain/models/create_asset_sm_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 
 import '../../domain/models/unit_measurement_model.dart';
-import '../../domain/models/user_detail_model.dart';
 import '../controllers/file_upload_controller.dart';
 import 'add_asset_master_presenter.dart';
 

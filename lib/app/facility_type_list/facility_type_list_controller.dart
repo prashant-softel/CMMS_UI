@@ -15,7 +15,6 @@ import '../../domain/models/business_list_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/create_facility_type_model.dart';
 import '../../domain/models/state.dart';
-import '../../domain/models/update_facility_type_model.dart';
 
 class FacilityTypeListController extends GetxController {
   FacilityTypeListController(

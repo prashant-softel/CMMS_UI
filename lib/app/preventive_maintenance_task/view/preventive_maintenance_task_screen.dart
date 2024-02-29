@@ -2,10 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/preventive_maintenance_task/view/preventive_maintenance_task_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
 import '../preventive_maintenance_task_controller.dart';
 
 class PreventiveMaintenanceTaskScreen

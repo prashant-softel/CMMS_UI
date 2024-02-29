@@ -87,12 +87,10 @@ class ViewVegExecutionController extends GetxController {
         facilityId = event;
       });
 
-      if (vegid != null) {
-        Future.delayed(Duration(seconds: 1), () {
-          getVegExecutionDetail(executionId: vegid.value);
-        });
-      }
-      super.onInit();
+      Future.delayed(Duration(seconds: 1), () {
+        getVegExecutionDetail(executionId: vegid.value);
+      });
+          super.onInit();
     } catch (e) {
       print(e);
     }

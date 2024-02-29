@@ -8,7 +8,6 @@ import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
-import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';

@@ -1,8 +1,6 @@
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/usecases/incident_risk_type_usecase.dart';
 
-import '../../domain/models/body_injured_model.dart';
-import '../../domain/usecases/body_injured_usecase.dart';
 
 class IncidentRiskTypePresenter {
   IncidentRiskTypePresenter(this.incidentRiskTypeUsecase);

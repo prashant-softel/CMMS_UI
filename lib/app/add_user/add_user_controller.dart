@@ -3,7 +3,6 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
-import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/save_user_notification_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/services.dart';

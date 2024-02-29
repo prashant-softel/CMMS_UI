@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/usecases/tool_type_usecase.dart';
-import 'package:cmms/domain/usecases/work_type_usecase.dart';
 
 class ToolTypePresenter {
   ToolTypePresenter(this.toolTypeUsecase);

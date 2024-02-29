@@ -3,8 +3,6 @@ import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:cmms/app/permit_type/view/permit_type_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'permit_type_mobile.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';

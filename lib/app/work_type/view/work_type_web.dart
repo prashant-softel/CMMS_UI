@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
-import 'package:cmms/app/incident_risk_type/incident_risk_type_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/work_type/work_type_controller.dart';
 import 'package:data_table_2/data_table_2.dart';

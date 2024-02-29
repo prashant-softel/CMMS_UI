@@ -411,13 +411,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       case RxList<ScheduleCheckPoint?>:
         {
           int assetsIndex =
-              scheduleCheckPoints!.indexWhere((x) => x?.name == value);
+              scheduleCheckPoints.indexWhere((x) => x.name == value);
           selectedAssetsId =
-              scheduleCheckPoints![assetsIndex]?.schedule_id ?? 0;
+              scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
           if (selectedAssetsId > 0) {
             isAssetsSelected.value = true;
           }
-          selectedasset.value = scheduleCheckPoints![assetsIndex]?.name ?? "";
+          selectedasset.value = scheduleCheckPoints[assetsIndex].name ?? "";
         }
         break;
     }

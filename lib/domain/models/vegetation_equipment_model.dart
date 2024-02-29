@@ -38,7 +38,7 @@ class VegetationEquipmentModel {
         "blockId": blockId,
         "blockName": blockName,
         "area": area,
-        "invs": List<dynamic>.from(invs!.map((x) => x))
+        "invs": List<dynamic>.from(invs.map((x) => x))
       };
 }
 

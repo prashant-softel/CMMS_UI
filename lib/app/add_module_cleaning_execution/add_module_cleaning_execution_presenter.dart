@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
-import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';

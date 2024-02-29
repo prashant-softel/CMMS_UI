@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cmms/domain/models/get_asset_items_model.dart';
-import 'package:flutter/material.dart';
 
 MrsDetailsModel mrsDetailsModelFromJson(String str) =>
     MrsDetailsModel.fromJson(json.decode(str));

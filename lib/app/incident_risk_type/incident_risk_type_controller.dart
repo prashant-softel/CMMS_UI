@@ -1,17 +1,13 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/body_injured/body_injured_presenter.dart';
 import 'package:cmms/app/incident_risk_type/incident_risk_type_presenter.dart';
-import 'package:cmms/domain/models/IncidentRiskTypeModel.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/body_injured_model.dart';
-import '../../domain/models/create_risk_type_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class IncidentRiskTypeController extends GetxController {

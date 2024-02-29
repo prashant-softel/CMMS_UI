@@ -1,21 +1,8 @@
-import 'dart:typed_data';
 
-import 'package:cmms/domain/models/access_level_model.dart';
-import 'package:cmms/domain/models/add_user_model.dart';
-import 'package:cmms/domain/models/country_model.dart';
-import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
-import 'package:cmms/domain/models/get_notification_model.dart';
-import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 
 import '../../domain/models/asset_category_model.dart';
 import '../../domain/models/asset_type_list_sm_model.dart';
-import '../../domain/models/blood_model.dart';
-import '../../domain/models/city_model.dart';
-import '../../domain/models/role_model.dart';
-import '../../domain/models/state_model.dart';
 import '../../domain/models/unit_measurement_model.dart';
-import '../../domain/models/user_detail_model.dart';
 import '../../domain/usecases/add_asset_master_usecase.dart';
 
 class AddAssetMasterPresenter {

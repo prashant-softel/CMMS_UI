@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/master_responsibility/responsivility_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/models/designation_model.dart';
 // import '../module_list_controller.dart';
 
 class ResponsibilityListContentMobile

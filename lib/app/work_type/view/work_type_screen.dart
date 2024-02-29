@@ -1,6 +1,4 @@
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/incident_risk_type/incident_risk_type_controller.dart';
-import 'package:cmms/app/incident_risk_type/view/incident_risk_type_web.dart';
 import 'package:cmms/app/work_type/view/work_type_web.dart';
 import 'package:cmms/app/work_type/work_type_controller.dart';
 import 'package:flutter/material.dart';
