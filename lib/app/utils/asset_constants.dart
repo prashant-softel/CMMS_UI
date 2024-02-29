@@ -80,7 +80,7 @@ abstract class AssetConstants {
   static const String walletVector = 'assets/icons/wallet_vector.svg';
   static const String check = 'assets/images/bluecircle.svg';
   static const String uncheck = 'assets/images/circle.svg';
-  static const String cmmsLogo = 'assets/assets/icons/cmms_logo.png';
+  static const String cmmsLogo = 'assets/icons/cmms_logo.png';
   static const String varifiedBadge = 'assets/icons/verified_clipart.svg';
   static const String homeTutorClipart = 'assets/icons/60_sec_home.svg';
   static const String searchIcon = 'assets/icons/search.svg';
