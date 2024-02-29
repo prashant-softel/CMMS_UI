@@ -2364,6 +2364,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> deleteWorkTypeTool({
+    auth,
+    bool? isLoading,
+    worktypetool_id,
+  }) async {
+    var response = await connectHelper.deleteWorkTypeTool(
+        auth: auth, isLoading: isLoading, worktypetool_id: worktypetool_id);
+    return response;
+  }
+
   Future<ResponseModel> deleteModulelist({
     auth,
     bool? isLoading,
@@ -4160,6 +4170,7 @@ class DataRepository extends DomainRepository {
         incidentRiskTypeJsonString: incidentRiskTypeJsonString);
     return response;
   }
+
   Future<ResponseModel> getIncidentRiskType({
     required bool isLoading,
     required String auth,
@@ -4169,6 +4180,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   Future<ResponseModel> updateIncidentRiskType({
     auth,
     bool? isLoading,
@@ -4181,6 +4193,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> deleteIncidentRiskType({
     auth,
     bool? isLoading,
@@ -4235,6 +4248,19 @@ class DataRepository extends DomainRepository {
         worktypeJsonString: worktypeJsonString);
     return response;
   }
+
+  Future<ResponseModel> createWorkTypeTool({
+    auth,
+    bool? isLoading,
+    worktypetoolJsonString,
+  }) async {
+    var response = await connectHelper.createWorkTypeTool(
+        auth: auth,
+        isLoading: isLoading,
+        worktypetoolJsonString: worktypetoolJsonString);
+    return response;
+  }
+
   Future<ResponseModel> deleteWorkType({
     auth,
     bool? isLoading,
@@ -4244,6 +4270,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, worktype_id: worktype_id);
     return response;
   }
+
   Future<ResponseModel> updateWorkType({
     auth,
     bool? isLoading,
@@ -4256,15 +4283,14 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> createToolType({
     auth,
     String? tool_name,
     bool? isLoading,
   }) async {
     var response = await connectHelper.createToolType(
-        auth: auth,
-        isLoading: isLoading,
-        tool_name: tool_name);
+        auth: auth, isLoading: isLoading, tool_name: tool_name);
     return response;
   }
 //end

@@ -8,23 +8,35 @@ String facilityListToJson(List<ToolsModel> data) =>
 
 class ToolsModel {
   factory ToolsModel.fromJson(Map<String, dynamic> json) => ToolsModel(
-        id: json['id'],
-        linkedToolName: json['linkedToolName'],
-        input: json['input'],
+        id: json["id"],
+        Equipment_name: json["equipment_name"],
+        workTypeName: json["workTypeName"],
+        linkedToolName: json["linkedToolName"],
+        WorkTypeId: json["WorkTypeId"],
+        equipmentCategoryId: json["equipmentCategoryId"],
       );
   ToolsModel({
-    this.id,
-    this.linkedToolName,
-    this.input,
+    required this.id,
+    required this.Equipment_name,
+    required this.workTypeName,
+    required this.linkedToolName,
+    required this.WorkTypeId,
+    required this.equipmentCategoryId,
   });
 
-  int? id;
-  String? linkedToolName;
-  int? input;
+  int id;
+  String Equipment_name;
+  String workTypeName;
+  String linkedToolName;
+  int WorkTypeId;
+  int equipmentCategoryId;
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'linkedToolName': linkedToolName,
-        'input': input,
+        "id": id,
+        "equipment_name": Equipment_name,
+        "workTypeName": workTypeName,
+        "linkedToolName": linkedToolName,
+        "WorkTypeId": WorkTypeId,
+        "equipmentCategoryId": equipmentCategoryId,
       };
 }

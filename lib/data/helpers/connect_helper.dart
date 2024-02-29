@@ -4223,6 +4223,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteWorkTypeTool({
+    required String auth,
+    bool? isLoading,
+    required worktypetool_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/DeleteMasterTool?id=$worktypetool_id',
+      Request.delete,
+      worktypetool_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateChecklistNumber({
     required String auth,
     bool? isLoading,
@@ -7376,6 +7395,26 @@ class ConnectHelper {
       'JobWorkType/CreateJobWorkType', //AddBusiness
       Request.post,
       worktypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> createWorkTypeTool({
+    required String auth,
+    bool? isLoading,
+    required worktypetoolJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'JobWorkType/CreateMasterTool', //AddBusiness
+      Request.post,
+      worktypetoolJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
