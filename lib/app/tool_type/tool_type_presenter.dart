@@ -58,13 +58,13 @@ class ToolTypePresenter {
         worktypetool_id: worktypetool_id ?? 0,
         isLoading: isLoading,
       );
-  // Future<bool> updateWorkType(
-  //     {worktypeJsonString, required bool isLoading}) async {
-  //   print("presenter");
-  //   toolTypeUsecase.updateWorkType(
-  //     worktypeJsonString: worktypeJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> updateWorkTypeTool(
+      {worktypetoolJsonString, required bool isLoading}) async {
+    print("presenter");
+    toolTypeUsecase.updateWorkTypeTool(
+      worktypetoolJsonString: worktypetoolJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

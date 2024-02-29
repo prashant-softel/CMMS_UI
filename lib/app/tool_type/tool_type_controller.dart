@@ -40,9 +40,9 @@ class ToolTypeController extends GetxController {
 
   Rx<bool> isTitleInvalid = false.obs;
   RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
-  RxList<ToolsModel?> toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
+  RxList<ToolsModel?>? toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
 
-  RxList<ToolsModel> BufferworktypeList = <ToolsModel>[].obs;
+  RxList<ToolsModel?>? BufferworktypetoolList = <ToolsModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
   RxList<InventoryCategoryModel?> assetcategoryList =
@@ -55,20 +55,31 @@ class ToolTypeController extends GetxController {
     rowsPerPage: 10,
   );
 
-  // void search(String keyword) {
-  //   print('Keyword: $keyword');
-  //   if (keyword.isEmpty) {
-  //     worktypeList.value = BuffertooltypeList.value;
-  //     return;
-  //   }
-  //   List<ToolTypeModel> filteredList = BuffertooltypeList.where((item) => (item
-  //           .tool_name
-  //           ?.toString()
-  //           .toLowerCase()
-  //           .contains(keyword.toLowerCase()) ??
-  //       false)).toList();
-  //   tooltypeList.value = filteredList;
-  // }
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      toolsRequiredToWorkTypeList!.value = BufferworktypetoolList!.value;
+      return;
+    }
+    List<ToolsModel?> filteredList = BufferworktypetoolList!
+        .where((item) =>
+            (item!.linkedToolName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.Equipment_name?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.workTypeName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    toolsRequiredToWorkTypeList!.value = filteredList;
+  }
 
   //Facility list / demo plant
   Rx<bool> isFacilitySelected = true.obs;
@@ -98,11 +109,14 @@ class ToolTypeController extends GetxController {
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
     print("Work type in controller, $workTypeIds");
+    BufferworktypetoolList?.value = <ToolsModel>[];
+
     final list = await worktypeToolpresenter.getToolsRequiredToWorkTypeList(
       isLoading: false,
       workTypeIds: workTypeIds.toString(),
     );
-    toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
+    toolsRequiredToWorkTypeList!.value = list ?? <ToolsModel>[];
+    BufferworktypetoolList!.value = toolsRequiredToWorkTypeList!.value;
 
     // str = toolsRequiredToWorkTypeList.join(" , ");
     // print({"str", str});
@@ -166,7 +180,7 @@ class ToolTypeController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getToolsRequiredToWorkTypeList(selectedWorkTypeId);
+      getToolsRequiredToWorkTypeList("");
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -210,7 +224,8 @@ class ToolTypeController extends GetxController {
                 onPressed: () {
                   deleteWorkTypeTool(worktype_id).then((value) {
                     Get.back();
-                    getToolsRequiredToWorkTypeList("");
+                    cleardata();
+                    // getToolsRequiredToWorkTypeList("");
                   });
                 },
                 child: Text('YES'),
@@ -285,6 +300,25 @@ class ToolTypeController extends GetxController {
 
     print({"checkpointJsonString", worktypetoolJsonString});
     await worktypeToolpresenter.createWorkTypeTool(
+      worktypetoolJsonString: worktypetoolJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+
+  Future<bool> updateWorkTypeTool(toolId) async {
+    String _title = titleCtrlr.text.trim();
+    print(_title);
+    WorkTypeToolModel workTypeTool = WorkTypeToolModel(
+        Toolname: _title,
+        equipmentCategoryId: selectedEquipmentId,
+        id: toolId,
+        workTypeId: selectedWorkTypeId);
+    var worktypetoolJsonString =
+        workTypeTool.toJson(); //createCheckPointToJson([workType]);
+
+    print({"checkpointJsonString", worktypetoolJsonString});
+    await worktypeToolpresenter.updateWorkTypeTool(
       worktypetoolJsonString: worktypetoolJsonString,
       isLoading: true,
     );

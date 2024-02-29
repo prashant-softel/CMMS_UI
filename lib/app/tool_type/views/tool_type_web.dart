@@ -515,19 +515,19 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateWorkType(controller
-                                              //         .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWorkTypeTool(controller
+                                                      .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -574,7 +574,9 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               height: 1.0,
                                               color: Colors.black),
                                         ),
-                                        onChanged: (value) {},
+                                        onChanged: (value) {
+                                          controller.search(value);
+                                        },
                                         decoration: InputDecoration(
                                           enabledBorder:
                                               const OutlineInputBorder(
@@ -657,15 +659,15 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                     ],
                                     rows: List<DataRow>.generate(
                                       controller
-                                          .toolsRequiredToWorkTypeList.length,
+                                          .toolsRequiredToWorkTypeList!.length,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
                                         DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList[index]?.linkedToolName}")),
+                                            "${controller.toolsRequiredToWorkTypeList![index]?.linkedToolName}")),
                                         DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList[index]?.Equipment_name}")),
+                                            "${controller.toolsRequiredToWorkTypeList![index]?.Equipment_name}")),
                                         DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList[index]?.workTypeName}")),
+                                            "${controller.toolsRequiredToWorkTypeList![index]?.workTypeName}")),
                                         DataCell(Row(
                                           children: [
                                             TableActionButton(
@@ -673,29 +675,46 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               icon: Icons.edit,
                                               message: 'Edit',
                                               onPress: () {
-                                                // controller.selectedItem =
-                                                //     controller.worktypeList
-                                                //         .firstWhere(
-                                                //   (element) =>
-                                                //       "${element!.id}" ==
-                                                //       controller
-                                                //           .worktypeList[index]!
-                                                //           .id
-                                                //           .toString(),
-                                                // );
+                                                controller.selectedItem = controller
+                                                    .toolsRequiredToWorkTypeList!
+                                                    .firstWhere(
+                                                  (element) =>
+                                                      "${element!.id}" ==
+                                                      controller
+                                                          .toolsRequiredToWorkTypeList![
+                                                              index]!
+                                                          .id
+                                                          .toString(),
+                                                );
 
-                                                // controller.titleCtrlr.text =
-                                                //     controller.selectedItem
-                                                //             ?.workType ??
-                                                //         '';
-                                                // controller.selectedassetcategory
-                                                //     .value = controller
-                                                //         .selectedItem
-                                                //         ?.categoryName ??
-                                                //     '';
-
-                                                // controller.isContainerVisible
-                                                //     .value = true;
+                                                controller.titleCtrlr.text =
+                                                    controller.selectedItem
+                                                            ?.linkedToolName ??
+                                                        '';
+                                                controller.assetc.value =
+                                                    controller.selectedItem
+                                                            ?.workTypeName ??
+                                                        '';
+                                                controller.selectedassetcategory
+                                                    .value = controller
+                                                        .selectedItem
+                                                        ?.Equipment_name ??
+                                                    '';
+                                                controller.selectedEquipmentId =
+                                                    controller.selectedItem
+                                                            ?.equipmentCategoryId ??
+                                                        0;
+                                                controller.selectedWorkTypeId =
+                                                    controller.selectedItem
+                                                            ?.WorkTypeId ??
+                                                        0;
+                                                if (controller
+                                                        .selectedEquipmentId >
+                                                    0) {
+                                                  controller.getWorkTypeList();
+                                                }
+                                                controller.isContainerVisible
+                                                    .value = true;
                                               },
                                             ),
                                             TableActionButton(
@@ -705,12 +724,12 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               onPress: () {
                                                 controller.isDeleteDialog(
                                                     worktype_id: controller
-                                                        .toolsRequiredToWorkTypeList[
+                                                        .toolsRequiredToWorkTypeList![
                                                             index]!
                                                         .id
                                                         .toString(),
                                                     worktype: controller
-                                                        .toolsRequiredToWorkTypeList[
+                                                        .toolsRequiredToWorkTypeList![
                                                             index]!
                                                         .linkedToolName);
                                               },
