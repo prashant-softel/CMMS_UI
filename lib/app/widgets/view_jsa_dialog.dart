@@ -64,6 +64,7 @@ class ViewJSADialog extends GetView {
                                   // "https://www.w3.org/1999/xhtml/"
                                   String baseUrl =
                                       'http://65.0.20.19/CMMS_API/';
+                                  // String baseUrl = 'http://172.20.43.9:83/api/';
                                   String endpoint = '${_controller.jsaData}';
 
                                   // Concatenate the links
