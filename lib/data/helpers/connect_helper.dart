@@ -4261,6 +4261,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateWorkTypeTool({
+    required String auth,
+    bool? isLoading,
+    required worktypetoolJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JobWorkType/UpdateMasterTool',
+      Request.put,
+      json.encode(
+        worktypetoolJsonString,
+      ),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateModulelistNumber({
     required String auth,
     bool? isLoading,

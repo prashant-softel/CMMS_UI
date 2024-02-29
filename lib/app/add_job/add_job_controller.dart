@@ -116,7 +116,7 @@ class AddJobController extends GetxController {
         await getBlocksList(facilityId);
         getAssignedToList(facilityId);
         await getInventoryCategoryList(facilityId.toString());
-        await getWorkTypeList();
+        // await getWorkTypeList();
 
         // });
       }

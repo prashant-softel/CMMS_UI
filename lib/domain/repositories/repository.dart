@@ -6319,6 +6319,31 @@ class Repository {
     }
   }
 
+  Future<bool> updateWorkTypeTool({
+    bool? isLoading,
+    worktypetoolJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWorkTypeTool(
+        auth: auth,
+        isLoading: isLoading,
+        worktypetoolJsonString: worktypetoolJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWorkTypeTool');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> updateModulelistNumber({
     bool? isLoading,
     modulelistJsonString,

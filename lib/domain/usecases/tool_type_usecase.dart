@@ -33,14 +33,14 @@ class ToolTypeUsecase {
         isLoading,
       );
 
-  // Future<bool> updateWorkType({
-  //   worktypeJsonString,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.updateWorkType(
-  //       isLoading: isLoading,
-  //       worktypeJsonString: worktypeJsonString,
-  //     );
+  Future<bool> updateWorkTypeTool({
+    worktypetoolJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateWorkTypeTool(
+        isLoading: isLoading,
+        worktypetoolJsonString: worktypetoolJsonString,
+      );
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
     String? auth,
     String? workTypeIds,

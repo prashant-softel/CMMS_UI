@@ -2397,6 +2397,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateWorkTypeTool({
+    auth,
+    bool? isLoading,
+    worktypetoolJsonString,
+  }) async {
+    var response = await connectHelper.updateWorkTypeTool(
+      auth: auth,
+      isLoading: isLoading,
+      worktypetoolJsonString: worktypetoolJsonString,
+    );
+    return response;
+  }
+
   Future<ResponseModel> updateModulelistNumber({
     auth,
     bool? isLoading,
