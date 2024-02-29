@@ -1,10 +1,8 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/role_access/rele_access_controller.dart';
-import 'package:cmms/app/role_access/view/role_access_content_mobile.dart';
 import 'package:cmms/app/role_access/view/role_access_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';

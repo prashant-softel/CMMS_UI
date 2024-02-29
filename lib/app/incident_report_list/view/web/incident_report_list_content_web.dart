@@ -720,13 +720,13 @@ class IncidentReportListDataSource extends DataTableSource {
                                       controller.clearStoreData();
 
                                       int irId =
-                                          incidentReportListDetails?.id ?? 0;
+                                          incidentReportListDetails.id ?? 0;
                                       if (irId != 0) {
                                         Get.toNamed(
                                             Routes.addIncidentReportContentWeb,
                                             arguments: {
                                               'irId':
-                                                  incidentReportListDetails?.id,
+                                                  incidentReportListDetails.id,
                                             });
                                       }
                                     },
@@ -751,13 +751,13 @@ class IncidentReportListDataSource extends DataTableSource {
                                       controller.clearStoreData();
 
                                       int irId =
-                                          incidentReportListDetails?.id ?? 0;
+                                          incidentReportListDetails.id ?? 0;
                                       if (irId != 0) {
                                         Get.toNamed(
                                             Routes.addIncidentReportContentWeb,
                                             arguments: {
                                               'irId':
-                                                  incidentReportListDetails?.id,
+                                                  incidentReportListDetails.id,
                                             });
                                       }
                                     },

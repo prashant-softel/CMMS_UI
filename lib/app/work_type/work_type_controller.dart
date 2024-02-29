@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/work_type/work_type_presenter.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';

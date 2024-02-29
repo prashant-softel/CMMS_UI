@@ -4,7 +4,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
-import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
@@ -117,12 +116,10 @@ class viewModuleCleaningExecutionController extends GetxController {
         getMCTaskEquipmentList(facilityId, true);
       });
 
-      if (mcid != null) {
-        Future.delayed(Duration(seconds: 1), () {
-          getMCExecutionDetail(executionId: mcid.value);
-        });
-      }
-
+      Future.delayed(Duration(seconds: 1), () {
+        getMCExecutionDetail(executionId: mcid.value);
+      });
+    
       super.onInit();
     } catch (e) {
       print(e);

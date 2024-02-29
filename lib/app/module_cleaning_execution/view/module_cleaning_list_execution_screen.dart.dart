@@ -3,10 +3,6 @@ import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_executio
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
 
 class ModuleCleaningListExecutionScreen
     extends GetView<ModuleCleaningListExecutionController> {

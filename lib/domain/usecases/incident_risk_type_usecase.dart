@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/body_injured_model.dart';
 
 
 class IncidentRiskTypeUsecase {

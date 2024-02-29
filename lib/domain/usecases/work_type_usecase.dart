@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';

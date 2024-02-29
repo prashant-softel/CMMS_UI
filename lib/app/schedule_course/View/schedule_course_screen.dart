@@ -1,6 +1,4 @@
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
-import 'package:cmms/app/schedule_course/View/schedule_course_mobile.dart';
 import 'package:cmms/app/schedule_course/View/schedule_course_web.dart';
 import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';

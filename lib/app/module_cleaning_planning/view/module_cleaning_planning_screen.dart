@@ -1,13 +1,9 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/module_cleaning_planning/view/module_cleaning_planning_web.dart';
-import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/widgets/header_widget.dart';
-import '../../utils/responsive.dart';
 
 class ModuleCleaningPlanningScreen
     extends GetView<ModuleCleaningPlanningController> {

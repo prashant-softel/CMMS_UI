@@ -1,6 +1,5 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
-import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/facility_model.dart';

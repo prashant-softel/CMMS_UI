@@ -141,7 +141,7 @@ class VegSetEquipment extends GetView {
                                       onChanged: (newValue) {
                                         setState(() {
                                           e.selectedDay = newValue!;
-                                          e.invs!.forEach((element) {
+                                          e.invs.forEach((element) {
                                             element.selectedDay = newValue;
                                           });
                                         });
