@@ -375,7 +375,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                             DataColumn2(
                                                 //fixedWidth: 150,
                                                 label: Text(
-                                              'Assest name',
+                                              'Asset name',
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
@@ -383,7 +383,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                             DataColumn2(
                                                 fixedWidth: 150,
                                                 label: Text(
-                                                  'Assest ID',
+                                                  'Asset ID',
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -392,7 +392,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                             DataColumn2(
                                                 // fixedWidth: 300,
                                                 label: Text(
-                                              'Parent Assest',
+                                              'Parent Asset',
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
