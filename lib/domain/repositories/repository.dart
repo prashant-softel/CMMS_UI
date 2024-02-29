@@ -74,7 +74,6 @@ import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
-import 'package:cmms/domain/models/tool_type_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -6258,6 +6257,26 @@ class Repository {
     }
   }
 
+  Future<void> deleteWorkTypeTool(
+      Object worktypetool_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteWorkTypeTool(
+        auth: auth,
+        worktypetool_id: worktypetool_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteWorkTypeTool');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteModulelist(Object module_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10610,6 +10629,27 @@ class Repository {
     }
   }
 
+  Future<bool> createWorkTypeTool(
+      {bool? isLoading, worktypetoolJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWorkTypeTool(
+          auth: auth,
+          isLoading: isLoading,
+          worktypetoolJsonString: worktypetoolJsonString);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' worktypetoolJsonString');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<void> deleteWorkType(Object worktype_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10653,7 +10693,9 @@ class Repository {
       return false;
     }
   }
-  Future<bool> createToolType({bool? isLoading, required String? tool_name}) async {
+
+  Future<bool> createToolType(
+      {bool? isLoading, required String? tool_name}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createToolType(

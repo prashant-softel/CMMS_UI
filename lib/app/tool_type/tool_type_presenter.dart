@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/usecases/tool_type_usecase.dart';
 import 'package:cmms/domain/usecases/work_type_usecase.dart';
@@ -27,23 +28,37 @@ class ToolTypePresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<bool> createToolType({
-    required String? tool_name,
+  Future<bool> createWorkTypeTool({
+    worktypetoolJsonString,
     required bool isLoading,
   }) async {
-    print("presenter Create tool type function.");
-    toolTypeUsecase.createToolType(
-      tool_name: tool_name,
+    print("presenter Create work type function.");
+    toolTypeUsecase.createWorkTypeTool(
+      worktypetoolJsonString: worktypetoolJsonString,
       isLoading: isLoading,
     );
     return true;
   }
 
-  // deleteWorkType(String? worktype_id, {required bool isLoading}) async =>
-  //     await toolTypeUsecase.deleteWorkType(
-  //       worktype_id: worktype_id ?? 0,
-  //       isLoading: isLoading,
-  //     );
+  Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
+    String? auth,
+    String? workTypeIds,
+    bool? isLoading,
+  }) async {
+    print("Work type id in presenter: $workTypeIds");
+    return toolTypeUsecase.getToolsRequiredToWorkTypeList(
+      auth: auth ?? "",
+      workTypeIds: workTypeIds,
+      isLoading: isLoading,
+    );
+  }
+
+  deleteWorkTypeTool(String? worktypetool_id,
+          {required bool isLoading}) async =>
+      await toolTypeUsecase.deleteWorkTypeTool(
+        worktypetool_id: worktypetool_id ?? 0,
+        isLoading: isLoading,
+      );
   // Future<bool> updateWorkType(
   //     {worktypeJsonString, required bool isLoading}) async {
   //   print("presenter");

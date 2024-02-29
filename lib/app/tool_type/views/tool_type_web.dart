@@ -496,7 +496,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .createToolType()
+                                                    .createWorkTypeTool()
                                                     .then(
                                                   (value) {
                                                     print("CREATE");
@@ -635,6 +635,14 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                       DataColumn2(
                                           // fixedWidth: 150,
                                           label: Text(
+                                        "Category",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
+                                          // fixedWidth: 150,
+                                          label: Text(
                                         "Work type",
                                         style: TextStyle(
                                             fontSize: 15,
@@ -650,11 +658,16 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                           )),
                                     ],
                                     rows: List<DataRow>.generate(
-                                      controller.worktypeList.length,
+                                      controller
+                                          .toolsRequiredToWorkTypeList.length,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
-                                        DataCell(Text("ram")),
-                                        DataCell(Text("ram")),
+                                        DataCell(Text(
+                                            "${controller.toolsRequiredToWorkTypeList[index]?.linkedToolName}")),
+                                        DataCell(Text(
+                                            "${controller.toolsRequiredToWorkTypeList[index]?.Equipment_name}")),
+                                        DataCell(Text(
+                                            "${controller.toolsRequiredToWorkTypeList[index]?.workTypeName}")),
                                         DataCell(Row(
                                           children: [
                                             TableActionButton(
@@ -692,13 +705,16 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               icon: Icons.delete,
                                               message: 'Delete',
                                               onPress: () {
-                                                // controller.isDeleteDialog(
-                                                //     worktype_id: controller
-                                                //         .worktypeList[index]!.id
-                                                //         .toString(),
-                                                //     worktype: controller
-                                                //         .worktypeList[index]!
-                                                //         .workType);
+                                                controller.isDeleteDialog(
+                                                    worktype_id: controller
+                                                        .toolsRequiredToWorkTypeList[
+                                                            index]!
+                                                        .id
+                                                        .toString(),
+                                                    worktype: controller
+                                                        .toolsRequiredToWorkTypeList[
+                                                            index]!
+                                                        .linkedToolName);
                                               },
                                             ),
                                           ],

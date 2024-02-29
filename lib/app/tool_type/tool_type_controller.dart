@@ -1,28 +1,25 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tool_type/tool_type_presenter.dart';
-import 'package:cmms/app/work_type/work_type_presenter.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/tool_type_model.dart';
+import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
+import 'package:cmms/domain/models/work_type_tool_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ToolTypeController extends GetxController {
   ToolTypeController(
-    this.worktypepresenter,
+    this.worktypeToolpresenter,
   );
-  ToolTypePresenter worktypepresenter;
+  ToolTypePresenter worktypeToolpresenter;
   final HomeController homecontroller = Get.find();
   RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   FocusNode tooltypenameFocus = FocusNode();
   ScrollController tooltypenameScroll = ScrollController();
-  ToolTypeModel? selectedItem;
   Rx<bool> isFormInvalid = false.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
@@ -36,19 +33,23 @@ class ToolTypeController extends GetxController {
   );
 
   int selectedEquipmentId = 0;
+  int selectedWorkTypeId = 0;
+
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   Rx<bool> isTitleInvalid = false.obs;
   RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
-  RxList<ToolTypeModel> BufferworktypeList = <ToolTypeModel>[].obs;
+  RxList<ToolsModel?> toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
+
+  RxList<ToolsModel> BufferworktypeList = <ToolsModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
   RxList<InventoryCategoryModel?> assetcategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<bool> isselectedassetc = true.obs;
   Rx<String> selectedassetcategory = ''.obs;
-
+  ToolsModel? selectedItem;
   PaginationController workTypeListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -83,7 +84,7 @@ class ToolTypeController extends GetxController {
       if (facilityId > 0) {
         isFacilitySelected.value = true;
         await getInventoryCategoryList(facilityId.toString());
-        await getWorkTypeList();
+        await getToolsRequiredToWorkTypeList("");
       }
     });
     tooltypenameFocus.addListener(() {
@@ -95,6 +96,18 @@ class ToolTypeController extends GetxController {
     super.onInit();
   }
 
+  Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
+    print("Work type in controller, $workTypeIds");
+    final list = await worktypeToolpresenter.getToolsRequiredToWorkTypeList(
+      isLoading: false,
+      workTypeIds: workTypeIds.toString(),
+    );
+    toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
+
+    // str = toolsRequiredToWorkTypeList.join(" , ");
+    // print({"str", str});
+    update(['toolsRequiredToWorkTypeList']);
+  }
   // Future<bool> updateWorkType(id) async {
   //   String _name = titleCtrlr.text.trim();
 
@@ -117,24 +130,10 @@ class ToolTypeController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  Future<bool> createToolType() async {
-    print("CREATE CONTROLLER");
-    String tool_name = titleCtrlr.text.trim();
-    print(tool_name);
-
-    print({"tool name is: ", tool_name});
-    await worktypepresenter.createToolType(
-      tool_name: tool_name,
-      isLoading: true,
-    );
-    return true;
-  }
-
   Future<void> getWorkTypeList() async {
     worktypeList.value = <WorkTypeModel>[];
-    final _workTypeList = await worktypepresenter.getWorkTypeList(
-      categoryIds:
-          selectedEquipmentId == 0 ? "" : selectedEquipmentId.toString(),
+    final _workTypeList = await worktypeToolpresenter.getWorkTypeList(
+      categoryIds: selectedEquipmentId.toString(),
       isLoading: false,
     );
     worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
@@ -148,7 +147,7 @@ class ToolTypeController extends GetxController {
   Future<void> getInventoryCategoryList(String? facilityId) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
-        await worktypepresenter.getInventoryCategoryList(
+        await worktypeToolpresenter.getInventoryCategoryList(
       isLoading: false,
     );
     if (_equipmentCategoryList != null) {
@@ -161,10 +160,13 @@ class ToolTypeController extends GetxController {
   cleardata() {
     titleCtrlr.text = '';
     selectedEquipmentId = 0;
+    selectedassetcategory.value = '';
+    assetc.value = '';
+    selectedWorkTypeId = 0;
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      // getWorkTypeList();
+      getToolsRequiredToWorkTypeList(selectedWorkTypeId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -206,10 +208,10 @@ class ToolTypeController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  // deleteWorkType(worktype_id).then((value) {
-                  //   Get.back();
-                  //   getWorkTypeList();
-                  // });
+                  deleteWorkTypeTool(worktype_id).then((value) {
+                    Get.back();
+                    getToolsRequiredToWorkTypeList("");
+                  });
                 },
                 child: Text('YES'),
               ),
@@ -220,14 +222,14 @@ class ToolTypeController extends GetxController {
     );
   }
 
-  // Future<void> deleteWorkType(String? worktype_id) async {
-  //   {
-  //     await worktypepresenter.deleteWorkType(
-  //       worktype_id,
-  //       isLoading: true,
-  //     );
-  //   }
-  // }
+  Future<void> deleteWorkTypeTool(String? worktypetool_id) async {
+    {
+      await worktypeToolpresenter.deleteWorkTypeTool(
+        worktypetool_id,
+        isLoading: true,
+      );
+    }
+  }
 
   // void checkForm() {
   //   if (selectedassetcategory.value == '') {
@@ -251,11 +253,41 @@ class ToolTypeController extends GetxController {
         }
 
         break;
+      case RxList<WorkTypeModel>:
+        {
+          int equipmentIndex = worktypeList.indexWhere((x) => x?.name == value);
+          selectedWorkTypeId = worktypeList[equipmentIndex]?.id ?? 0;
+
+          getToolsRequiredToWorkTypeList(selectedWorkTypeId);
+        }
+
+        break;
       default:
         {
           //statements;
         }
         break;
     }
+  }
+
+  Future<bool> createWorkTypeTool() async {
+    print("CREATE CONTROLLER");
+    String _title = titleCtrlr.text.trim();
+    print(_title);
+    WorkTypeToolModel workTypeTool = WorkTypeToolModel(
+        Toolname: _title,
+        equipmentCategoryId: selectedEquipmentId,
+        id: 0,
+        workTypeId: selectedWorkTypeId);
+    print("OUT ");
+    var worktypetoolJsonString =
+        workTypeTool.toJson(); //createCheckPointToJson([workType]);
+
+    print({"checkpointJsonString", worktypetoolJsonString});
+    await worktypeToolpresenter.createWorkTypeTool(
+      worktypetoolJsonString: worktypetoolJsonString,
+      isLoading: true,
+    );
+    return true;
   }
 }
