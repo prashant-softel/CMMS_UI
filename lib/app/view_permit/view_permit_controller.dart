@@ -1620,7 +1620,7 @@ class ViewPermitController extends GetxController {
     //     pen: PdfPen(PdfColor(142, 170, 219)));
     //Generate PDF grid.
     //  final PdfGrid grid = getGrid();
-    var url = "assets/files/logo.png";
+    var url = "assets/assets/files/logo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
