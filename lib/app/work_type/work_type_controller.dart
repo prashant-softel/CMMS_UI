@@ -36,7 +36,7 @@ class WorkTypeController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   Rx<bool> isTitleInvalid = false.obs;
-  RxList<WorkTypeModel?> worktypeList = <WorkTypeModel>[].obs;
+  RxList<WorkTypeModel?> worktypeList = <WorkTypeModel?>[].obs;
   RxList<WorkTypeModel> BufferworktypeList = <WorkTypeModel>[].obs;
   Rx<bool> isworktypeListSelected = true.obs;
   Rx<String> assetc = ''.obs;
@@ -52,16 +52,21 @@ class WorkTypeController extends GetxController {
 
   void search(String keyword) {
     print('Keyword: $keyword');
+
     if (keyword.isEmpty) {
-      worktypeList.value = BufferworktypeList.value;
+      worktypeList.value = BufferworktypeList.toList();
       return;
     }
-    List<WorkTypeModel> filteredList = BufferworktypeList.where((item) => (item
-            .name
-            ?.toString()
-            .toLowerCase()
-            .contains(keyword.toLowerCase()) ??
-        false)).toList();
+
+    List<WorkTypeModel> filteredList = BufferworktypeList.where((item) =>
+        (item?.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            false) ||
+        (item?.categoryName
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false)).toList();
+
     worktypeList.value = filteredList;
   }
 
@@ -111,10 +116,10 @@ class WorkTypeController extends GetxController {
 
   Future<bool> updateWorkType(id) async {
     String _name = titleCtrlr.text.trim();
-
+    int _catId = selectedEquipmentId;
     UpdateWorkTypeModel createChecklist = UpdateWorkTypeModel(
       id: id,
-      categoryid: selectedEquipmentId,
+      categoryid: _catId,
       workType: _name,
     );
     var worktypeJsonString = createChecklist.toJson();
@@ -135,11 +140,11 @@ class WorkTypeController extends GetxController {
     print("CREATE CONTROLLER");
     String _title = titleCtrlr.text.trim();
     print(_title);
-    UpdateWorkTypeModel workType = UpdateWorkTypeModel(
-        workType: _title, categoryid: selectedEquipmentId, id: 0);
+    WorkTypeModel name =
+        WorkTypeModel(name: _title, categoryid: selectedEquipmentId, id: 0);
     print("OUT ");
     var worktypelistJsonString =
-        workType.toJson(); //createCheckPointToJson([workType]);
+        name.toJson(); //createCheckPointToJson([workType]);
 
     print({"checkpointJsonString", worktypelistJsonString});
     await worktypepresenter.createWorkType(
@@ -153,12 +158,18 @@ class WorkTypeController extends GetxController {
     List<int>? receivedCategoryIds,
   }) async {
     worktypeList.value = <WorkTypeModel>[];
+    BufferworktypeList.value = <WorkTypeModel>[];
     String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
     final _workTypeList = await worktypepresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
       isLoading: false,
     );
     worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
+    BufferworktypeList.value =
+        _workTypeList?.whereType<WorkTypeModel>()?.toList() ??
+            <WorkTypeModel>[];
+
+    // BufferworktypeList.value = worktypeList.value
   }
 
   Future<void> issuccessCreatechecklist() async {

@@ -40,16 +40,14 @@ class AssetMasterController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<AssetMasterModel?>?
-  moduleList =
-      <AssetMasterModel?>[].obs;
+  RxList<AssetMasterModel?>? moduleList = <AssetMasterModel?>[].obs;
+  RxList<AssetMasterModel> buffermodulelist = <AssetMasterModel>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-
 
   AssetMasterModel? moduleListModel;
   var isToggleOn = false.obs;
@@ -64,21 +62,27 @@ class AssetMasterController extends GetxController {
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
   }
+
   void toggle1() {
     isToggle1On.value = !isToggle1On.value;
   }
+
   void toggle2() {
     isToggle2On.value = !isToggle2On.value;
   }
+
   void toggle3() {
     isToggle3On.value = !isToggle3On.value;
   }
+
   void toggle4() {
     isToggle4On.value = !isToggle4On.value;
   }
+
   void toggle5() {
     isToggle5On.value = !isToggle5On.value;
   }
+
   void toggle6() {
     isToggle6On.value = !isToggle6On.value;
   }
@@ -93,7 +97,6 @@ class AssetMasterController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -104,17 +107,24 @@ class AssetMasterController extends GetxController {
   }
 
   Future<void> getAssetMasterList(
-      int facilityId, int type, bool isLoading)
-  async {
+      int facilityId, int type, bool isLoading) async {
     moduleList?.value = <AssetMasterModel>[];
-    final _moduleList =
-        await moduleListPresenter.getAssetMasterList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    final _moduleList = await moduleListPresenter.getAssetMasterList(
+        facilityId: facilityId, type: type, isLoading: isLoading);
+    buffermodulelist.value = <AssetMasterModel>[];
+    // moduleList!.value = _moduleList ?? <AssetMasterModel>[];
+    buffermodulelist.value =
+        _moduleList?.whereType<AssetMasterModel>().toList() ??
+            <AssetMasterModel>[];
 
     if (_moduleList != null) {
-      moduleList!.value = _moduleList.cast<AssetMasterModel?>();
+      moduleList!.value = _moduleList;
+      buffermodulelist.value =
+          _moduleList?.whereType<AssetMasterModel>().toList() ??
+              <AssetMasterModel>[];
+
       paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
+        rowCount: moduleList!.length,
         rowsPerPage: 10,
       );
 
@@ -129,16 +139,35 @@ class AssetMasterController extends GetxController {
     }
   }
 
+  void search(String keyword) {
+    print('Keyword: $keyword');
+
+    if (keyword.isEmpty) {
+      moduleList!.value = buffermodulelist.toList();
+    } else {
+      List<AssetMasterModel> filteredList = buffermodulelist
+          .where((item) => (item?.asset_name?.toString()?.toLowerCase() ?? '')
+              .contains(keyword.toLowerCase()))
+          .toList();
+
+      moduleList?.value = filteredList;
+    }
+    // Update paginationController when the list changes
+    paginationController = PaginationController(
+      rowCount: moduleList!.length,
+      rowsPerPage: 10,
+    );
+  }
+
   Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
 
-
   Future<bool> createModuleListNumber() async {
     if (modulelistNumberCtrlr.text.trim() == '' ||
-        featureCtrlr.text.trim() == ''  ) {
+        featureCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
@@ -146,20 +175,20 @@ class AssetMasterController extends GetxController {
       String _featureNumber = featureCtrlr.text.trim();
 
       CreateModuleListModel createModuleList = CreateModuleListModel(
-          moduleName : _moduleListNumber,
-          featureName : _featureNumber,
-          menuImage : null,
-          add : isToggleOn.value?1:0,
-          edit: isToggle1On.value?1:0,
-          delete: isToggle2On.value?1:0,
-          view: isToggle3On.value?1:0,
-          approve: isToggle4On.value?1:0,
-          issue: isToggle5On.value?1:0,
-          selfView: isToggle6On.value?1:0,
+        moduleName: _moduleListNumber,
+        featureName: _featureNumber,
+        menuImage: null,
+        add: isToggleOn.value ? 1 : 0,
+        edit: isToggle1On.value ? 1 : 0,
+        delete: isToggle2On.value ? 1 : 0,
+        view: isToggle3On.value ? 1 : 0,
+        approve: isToggle4On.value ? 1 : 0,
+        issue: isToggle5On.value ? 1 : 0,
+        selfView: isToggle6On.value ? 1 : 0,
       );
 
       var moduleListJsonString =
-        createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+          createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
       await moduleListPresenter.createModulelistNumber(
@@ -284,4 +313,3 @@ class AssetMasterController extends GetxController {
   //   return true;
   // }
 }
-

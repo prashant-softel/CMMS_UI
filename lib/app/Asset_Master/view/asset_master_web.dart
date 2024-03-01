@@ -1,8 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../asset_master_Controller.dart';
 // import '../mrs_Details_Controller.dart';
@@ -497,6 +499,38 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                 title: 'Material Master',
                                 action: Row(children: [
                                   Dimens.boxWidth10,
+                                  Container(
+                                    width: 300,
+                                    height: 40,
+                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    child: TextField(
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            height: 1.0,
+                                            color: Colors.black),
+                                      ),
+                                      onChanged: (value) =>
+                                          controller.search(value),
+                                      decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        contentPadding: Dimens.edgeInsets05_10,
+                                        hintText: 'search'.tr,
+                                        hintStyle: Styles.grey16,
+                                      ),
+                                    ),
+                                  ),
                                   ActionButton(
                                     icon: Icons.add,
                                     label: 'Add Material'.tr,
@@ -591,8 +625,8 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                           "Min. Reorder Qty ",
                                           "Description",
                                           "Unit Of Measurement",
-                                          "Approval Required"
-                                              "Action"
+                                          "Approval Required",
+                                          "Action"
                                         ].map((column) {
                                           if (column == "Action") {
                                             return TableViewColumn(

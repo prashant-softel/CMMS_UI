@@ -277,7 +277,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         ),
                                         Spacer(),
                                         Text(
-                                          'Actor ID: ',
+                                          'Task Name: ',
                                           style: Styles.blackBold14,
                                         ),
                                         Dimens.boxWidth20,
@@ -469,12 +469,6 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                                   .columnwidth[
                                                               entry.key],
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .userDateFilterText,
-                                                      150,
-                                                    ),
                                                   ],
                                                 );
                                               }),
@@ -656,7 +650,6 @@ class TransactionReportListDataSource extends DataTableSource {
       '${transactionReportListDetails?.assetItemName ?? ''}',
       '${transactionReportListDetails?.qty ?? ''}',
       '${transactionReportListDetails?.lastUpdated ?? ''}',
-      'Actions',
     ];
     var cells = [];
     int i = 0;
@@ -672,7 +665,6 @@ class TransactionReportListDataSource extends DataTableSource {
       }
       i++;
     }
-    cells.add('Actions');
 
     // print({"cell": cells});
     return DataRow.byIndex(
@@ -708,34 +700,7 @@ class TransactionReportListDataSource extends DataTableSource {
                       // ),
                     ],
                   )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          // onPress: () {
-                          //   int id = transactionReportListDetails?.id ?? 0;
-                          //   if (id != 0) {
-                          //     Get.toNamed(Routes.viewGoodsOrders,
-                          //         arguments: {'id': id});
-                          //   }
-                          // },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          // onPress: () {
-                          //   int id = transactionReportListDetails?.id ?? 0;
-                          //   if (id != 0) {
-                          //     Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                          //         arguments: {"id": id});
-                          //   }
-                          // },
-                        ),
-                      ])
-                    : Text(value.toString()),
+                : Text(value.toString()),
           ),
         );
       }).toList(),
