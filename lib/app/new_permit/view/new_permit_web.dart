@@ -1,3 +1,122 @@
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class NewPermitWeb extends GetView<NewPermitController> {
+  NewPermitWeb({Key? key}) : super(key: key);
+  final NewPermitController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectionArea(
+      child: Column(children: [
+        HeaderWidget(),
+        Container(
+          height: 45,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromARGB(255, 227, 224, 224),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.home,
+                color: ColorValues.greyLightColor,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.offAllNamed(Routes.breakdown);
+                },
+                child: Text(" / BREAKDOWN MAINTENANCE ",
+                    style: Styles.greyLight14),
+              ),
+              Text(" / NEW PERMIT  ", style: Styles.greyLight14)
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Obx(
+              () => Container(
+                width: Get.width * 7,
+                margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                // height: Get.height,
+                child: Card(
+                  color: ColorValues.cardColor,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/widgets/custom_elevated_button.dart';
 // import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';

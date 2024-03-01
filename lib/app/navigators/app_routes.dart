@@ -37,6 +37,7 @@ abstract class Routes {
   static const misDashboard = _Paths.misDashboard;
 
   static const newPermit = _Paths.newPermit;
+  static const createPermit = _Paths.createPermit;
   static const newPermitList = _Paths.newPermitList;
   static const warrantyClaimList = _Paths.warrantyClaimList;
   static const preventiveMaintenanceMapping =
@@ -244,6 +245,7 @@ abstract class _Paths {
   static const scheduleCourse = '/scheduleCourse';
 
   static const newPermit = '/new-permit';
+  static const createPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
   static const preventiveList =
       '/preventive-maintenance/preventive-list-screen';
