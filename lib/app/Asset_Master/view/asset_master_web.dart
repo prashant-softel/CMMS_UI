@@ -758,7 +758,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                           ),
                                         ].map((_moduleList) {
                                           return TableViewRow(
-                                              height: 130,
+                                              height: 46,
                                               cells: _moduleList.map((value) {
                                                 return TableViewCell(
                                                     child: Column(children: [

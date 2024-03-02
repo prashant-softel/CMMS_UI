@@ -394,20 +394,33 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                               text: 'Upload',
                                               size: 12,
                                               onPressed: () {
-                                                controller
-                                                    .browseFiles(
-                                                        fileBytes: controller
-                                                            .fileBytes,
-                                                        position: 0)
-                                                    .then((value) {
-                                                  controller.isSuccessDialog();
-
+                                                if (controller.fileBytes ==
+                                                        null ||
+                                                    controller
+                                                        .fileBytes!.isEmpty) {
+                                                  // Show an error message indicating no file is selected
                                                   Fluttertoast.showToast(
+                                                    msg: "Please select a file",
+                                                    fontSize: 16.0,
+                                                  );
+                                                } else {
+                                                  // File bytes are present, proceed with the upload
+                                                  controller
+                                                      .browseFiles(
+                                                          fileBytes: controller
+                                                              .fileBytes,
+                                                          position: 0)
+                                                      .then((value) {
+                                                    controller
+                                                        .isSuccessDialog();
+
+                                                    Fluttertoast.showToast(
                                                       msg:
-                                                          "file upload  Successfully",
-                                                      fontSize: 16.0);
-                                                });
-                                                //  controller.savePmMapping();
+                                                          "File uploaded successfully",
+                                                      fontSize: 16.0,
+                                                    );
+                                                  });
+                                                }
                                               },
                                             ),
                                           ),
@@ -507,19 +520,32 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                               text: 'Upload',
                                               size: 12,
                                               onPressed: () {
-                                                controller
-                                                    .browseFiles(
-                                                        fileBytes: controller
-                                                            .fileBytes2,
-                                                        position: 1)
-                                                    .then((value) {
-                                                  controller.isSuccessDialog2();
-
-                                                  //   // Fluttertoast.showToast(
-                                                  //   //     msg: "file upload  Successfully",
-                                                  //   //     fontSize: 16.0);
-                                                });
-                                                //  controller.savePmMapping();
+                                                if (controller.fileBytes2 ==
+                                                        null ||
+                                                    controller
+                                                        .fileBytes2!.isEmpty) {
+                                                  // Show an error message indicating no file is selected
+                                                  Fluttertoast.showToast(
+                                                    msg: "Please select a file",
+                                                    fontSize: 16.0,
+                                                  );
+                                                } else {
+                                                  // File bytes are present, proceed with the upload
+                                                  controller
+                                                      .browseFiles(
+                                                          fileBytes: controller
+                                                              .fileBytes2,
+                                                          position: 1)
+                                                      .then((value) {
+                                                    controller
+                                                        .isSuccessDialog2();
+                                                    Fluttertoast.showToast(
+                                                      msg:
+                                                          "File uploaded successfully",
+                                                      fontSize: 16.0,
+                                                    );
+                                                  });
+                                                }
                                               },
                                             ),
                                           ),
