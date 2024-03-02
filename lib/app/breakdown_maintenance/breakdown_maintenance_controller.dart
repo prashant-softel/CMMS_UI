@@ -23,7 +23,9 @@ class BreakdownMaintenanceController extends GetxController {
   @override
   void onInit() async {
     getFacilityList();
-    addListener(() {controller.menuButton.value;});
+    addListener(() {
+      controller.menuButton.value;
+    });
     super.onInit();
   }
 
@@ -94,11 +96,6 @@ class BreakdownMaintenanceController extends GetxController {
   Future<void> goToJobCardList() async {
     Get.toNamed(
       Routes.goToJobCardList,
-    );
-  }
-  Future<void> goToWorkTypeList() async {
-    Get.toNamed(
-      Routes.worktype,
     );
   }
 }

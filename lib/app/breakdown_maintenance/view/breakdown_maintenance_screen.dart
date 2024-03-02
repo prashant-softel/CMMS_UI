@@ -195,22 +195,6 @@ class BreakdownMaintenanceScreen
                                               controller.goToJobCardList();
                                             })
                                         : Container(),
-                                    varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kJobFeatureId &&
-                                                    e.view ==
-                                                        UserAccessConstants
-                                                            .kHaveViewAccess)
-                                                .length >
-                                            0
-                                        ? createContentTile(
-                                            title: "Work Type",
-                                            onTap: () {
-                                              controller.goToWorkTypeList();
-                                            })
-                                        : Container(),
                                   ],
                                 ),
                                 Container(
