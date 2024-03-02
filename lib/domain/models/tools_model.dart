@@ -12,7 +12,7 @@ class ToolsModel {
         Equipment_name: json["equipment_name"],
         workTypeName: json["workTypeName"],
         linkedToolName: json["linkedToolName"],
-        WorkTypeId: json["WorkTypeId"],
+        WorkTypeId: json["workTypeId"],
         equipmentCategoryId: json["equipmentCategoryId"],
       );
   ToolsModel({
@@ -36,7 +36,7 @@ class ToolsModel {
         "equipment_name": Equipment_name,
         "workTypeName": workTypeName,
         "linkedToolName": linkedToolName,
-        "WorkTypeId": WorkTypeId,
+        "workTypeId": WorkTypeId,
         "equipmentCategoryId": equipmentCategoryId,
       };
 }
