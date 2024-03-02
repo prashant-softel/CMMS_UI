@@ -263,6 +263,7 @@ class ToolTypeController extends GetxController {
           int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+          assetc.value = '';
 
           getWorkTypeList();
         }

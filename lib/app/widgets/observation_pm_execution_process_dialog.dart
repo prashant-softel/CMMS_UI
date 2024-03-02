@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -153,7 +154,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 Expanded(
                                   child: DataTable2(
                                     dataRowHeight: 100,
-                                    minWidth: 2000,
+                                    minWidth: 2500,
                                     border: TableBorder.all(
                                         color:
                                             Color.fromARGB(255, 206, 229, 234)),
@@ -223,7 +224,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 100,
+                                          fixedWidth: 150,
                                           label: Text(
                                             "Create Job",
                                             style: TextStyle(
@@ -553,6 +554,15 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Action",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
                                             ],
                                             rows: controller.rowItem.value
                                                 .map((record) {
@@ -601,48 +611,78 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                             ? Text(
                                                                 "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
                                                             : (mapData['key'] ==
-                                                                    "Issued_Qty")
-                                                                ? Text(
-                                                                    "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0) - (controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
-                                                                : (mapData['key'] ==
-                                                                        "Consumed_Qty")
-                                                                    ? Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
+                                                                    "Action ")
+                                                                ? Padding(
+                                                                    padding: EdgeInsets
+                                                                        .only(
                                                                             top:
                                                                                 10),
-                                                                        child: Container(
-                                                                            decoration: BoxDecoration(
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.black26,
-                                                                                  offset: const Offset(
-                                                                                    5.0,
-                                                                                    5.0,
-                                                                                  ),
-                                                                                  blurRadius: 5.0,
-                                                                                  spreadRadius: 1.0,
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          label:
+                                                                              '',
+                                                                          message:
+                                                                              '',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.rowItem.remove(record);
+                                                                          },
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : (mapData['key'] ==
+                                                                        "Issued_Qty")
+                                                                    ? Text(
+                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0) - (controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                    : (mapData['key'] ==
+                                                                            "Consumed_Qty")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(top: 10),
+                                                                            child: Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black26,
+                                                                                      offset: const Offset(
+                                                                                        5.0,
+                                                                                        5.0,
+                                                                                      ),
+                                                                                      blurRadius: 5.0,
+                                                                                      spreadRadius: 1.0,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: ColorValues.whiteColor,
+                                                                                  borderRadius: BorderRadius.circular(5),
                                                                                 ),
-                                                                              ],
-                                                                              color: ColorValues.whiteColor,
-                                                                              borderRadius: BorderRadius.circular(5),
-                                                                            ),
-                                                                            child: LoginCustomTextfield(
-                                                                              width: (Get.width * .4),
-                                                                              keyboardType: TextInputType.number,
-                                                                              inputFormatters: <TextInputFormatter>[
-                                                                                FilteringTextInputFormatter.digitsOnly
-                                                                              ],
-                                                                              maxLine: 1,
-                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                              onChanged: (txt) {
-                                                                                mapData["value"] = txt;
-                                                                              },
-                                                                            )),
-                                                                      )
-                                                                    : Text(mapData[
-                                                                            'value'] ??
-                                                                        ''),
+                                                                                child: LoginCustomTextfield(
+                                                                                  width: (Get.width * .4),
+                                                                                  keyboardType: TextInputType.number,
+                                                                                  inputFormatters: <TextInputFormatter>[
+                                                                                    FilteringTextInputFormatter.digitsOnly
+                                                                                  ],
+                                                                                  maxLine: 1,
+                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                  onChanged: (txt) {
+                                                                                    mapData["value"] = txt;
+                                                                                  },
+                                                                                )),
+                                                                          )
+                                                                        : Text(mapData['value'] ??
+                                                                            ''),
                                                   );
                                                 }).toList(),
                                               );

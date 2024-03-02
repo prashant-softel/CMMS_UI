@@ -98,6 +98,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -412,8 +413,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         {
           int assetsIndex =
               scheduleCheckPoints.indexWhere((x) => x.name == value);
-          selectedAssetsId =
-              scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
+          selectedAssetsId = scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
           if (selectedAssetsId > 0) {
             isAssetsSelected.value = true;
           }

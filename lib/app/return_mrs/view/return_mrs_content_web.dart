@@ -129,6 +129,8 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                       icon: Icons.add,
                                       label: "Add New",
                                       onPressed: () {
+                                        controller.clearStoreData();
+
                                         Get.toNamed(Routes.mrsReturnScreen);
                                       },
                                       color: ColorValues.addNewColor,
