@@ -17,6 +17,7 @@ import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
+import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -1107,8 +1108,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         "View SOP",
                                                                     onPressed:
                                                                         () {
-                                                                      // controller.createNewPermit();
-                                                                      // Get.dialog<void>(ViewJSADialog());
+                                                                      controller
+                                                                          .createNewPermits();
+                                                                      Get.dialog<
+                                                                              void>(
+                                                                          ViewJSADialog());
                                                                     },
                                                                   )),
                                                               SizedBox(
@@ -2801,8 +2805,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 text:
                                                                     "View SOP",
                                                                 onPressed: () {
-                                                                  // controller.createNewPermit();
-                                                                  // Get.dialog<void>(ViewJSADialog());
+                                                                  // controller
+                                                                  //     .createNewPermits();
+                                                                  Get.dialog<
+                                                                          void>(
+                                                                      ViewJSADialog());
                                                                 },
                                                               )),
                                                           SizedBox(

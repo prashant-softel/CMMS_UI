@@ -47,31 +47,6 @@ class VegPlanMessageApproveDialog extends GetView {
                   Text('${id}',
                       style: TextStyle(color: Colors.green),
                       textAlign: TextAlign.center),
-                  //     SizedBox(height: 20,),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       SizedBox(
-                  //         width: 15,
-                  //       ),
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () => Get.offAllNamed(Routes.newPermit),
-                  //         child: const Text('Permit List'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.blueElevatedButtonStyle,
-                  //         onPressed: () => Get.offAndToNamed(Routes.newPermitList),
-                  //         child: const Text('View This Permit'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
                 ]),
           );
         }),

@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class CustomMultiSelectDialogField extends StatefulWidget {
-  List initialValue;
-  List<MultiSelectItem<int?>> items;
-  String? title;
-  String? buttonText;
+  final List<dynamic>? initialValue;
+  final List<MultiSelectItem>? items;
+  final String? title;
+  final String? buttonText;
+  final Function(dynamic selectedOptionsList) onConfirm;
 
-  Function(dynamic selectedOptionsList) onConfirm;
-
-  // var title;
-
-  CustomMultiSelectDialogField(
-      {super.key,
-      required this.initialValue,
-      required this.items,
-      this.title,
-      this.buttonText,
-      required this.onConfirm});
+  CustomMultiSelectDialogField({
+    this.initialValue,
+    this.items,
+    this.title,
+    this.buttonText,
+    required this.onConfirm,
+  });
 
   @override
   State<CustomMultiSelectDialogField> createState() =>
@@ -29,7 +26,6 @@ class _CustomMultiSelectDialogFieldState
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height * 0.070,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -46,12 +42,17 @@ class _CustomMultiSelectDialogFieldState
         searchable: true,
         title: Text('${widget.title}'),
         buttonText: Text('${widget.buttonText}'),
-        initialValue: widget.initialValue,
+        initialValue: widget.initialValue!,
         decoration: BoxDecoration(border: Border()),
         buttonIcon: Icon(Icons.arrow_drop_down),
-        items: widget.items,
+        items: widget.items!,
         onConfirm: widget.onConfirm,
-        chipDisplay: MultiSelectChipDisplay(),
+        chipDisplay: MultiSelectChipDisplay<dynamic>(
+          onTap: (value) {
+            // Handle chip removal
+            widget.onConfirm([...widget.initialValue!..remove(value)]);
+          },
+        ),
       ),
     );
   }

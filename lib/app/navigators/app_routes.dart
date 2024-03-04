@@ -245,7 +245,7 @@ abstract class _Paths {
   static const scheduleCourse = '/scheduleCourse';
 
   static const newPermit = '/new-permit';
-  static const createPermit = '/new-permit';
+  static const createPermit = '/new-permit-add';
   static const createCheckList = '/create_preventive_checklist-screen';
   static const preventiveList =
       '/preventive-maintenance/preventive-list-screen';

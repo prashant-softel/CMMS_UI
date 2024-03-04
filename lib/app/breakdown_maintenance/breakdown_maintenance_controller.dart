@@ -93,6 +93,12 @@ class BreakdownMaintenanceController extends GetxController {
     );
   }
 
+  Future<void> additionalPermit() async {
+    Get.toNamed(
+      Routes.createPermit,
+    );
+  }
+
   Future<void> goToJobCardList() async {
     Get.toNamed(
       Routes.goToJobCardList,
