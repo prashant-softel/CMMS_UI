@@ -3410,7 +3410,7 @@ class Repository {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
           type == 1
-              ? Get.offAndToNamed(Routes.pmTaskView)
+              ? Get.offAllNamed(Routes.pmTaskView)
               : Get.offAndToNamed(Routes.newPermitList);
           return responseMap;
         } else {
