@@ -340,6 +340,7 @@ import '../competency_list/view/competency_list_screen.dart';
 import '../competency_list/competency_list_binding.dart';
 import '../warranty_certificate/view/warranty_certificate_screen.dart';
 import '../warranty_certificate/warranty_certificate_binding.dart';
+import 'package:cmms/app/new_permit/new_binding.dart';
 
 // coverage:ignore-file
 
@@ -465,7 +466,7 @@ class AppPages {
     GetPage<dynamic>(
       name: _Paths.createPermit,
       page: CreatePermitScreen.new,
-      binding: NewPermitBinding(),
+      binding: NewBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.newPermitList,

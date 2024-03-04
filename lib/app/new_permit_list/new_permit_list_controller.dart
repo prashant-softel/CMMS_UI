@@ -347,7 +347,7 @@ class NewPermitListController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.newPermit, arguments: {
+    Get.toNamed(Routes.createPermit, arguments: {
       'permitId': permitId,
       'isChecked': false,
       "jobModel": jobDetailsModel.value,
@@ -362,7 +362,7 @@ class NewPermitListController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.newPermit, arguments: {
+    Get.toNamed(Routes.createPermit, arguments: {
       'permitId': permitId,
       'isChecked': isChecked,
       "jobModel": jobDetailsModel.value,

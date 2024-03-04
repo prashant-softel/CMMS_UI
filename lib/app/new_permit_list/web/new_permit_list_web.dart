@@ -165,7 +165,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                       controller
                                                           .clearisCheckedtoreData();
                                                       Get.toNamed(
-                                                          Routes.newPermit);
+                                                          Routes.createPermit);
                                                     },
                                                     color:
                                                         ColorValues.addNewColor,

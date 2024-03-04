@@ -251,7 +251,7 @@ class JobDetailsController extends GetxController {
     clearisCheckedtoreData();
     clearpmTaskValue();
     clearPermitStoreData();
-    Get.toNamed(Routes.newPermit, arguments: {
+    Get.toNamed(Routes.createPermit, arguments: {
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
       "isChecked": false,

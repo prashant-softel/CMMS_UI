@@ -1520,12 +1520,12 @@ class ViewPermitController extends GetxController {
 
   Future<void> createNewPermits() async {
     Get.toNamed(
-      Routes.newPermit,
+      Routes.createPermit,
     );
   }
 
   void goToNewPermitScreen() {
-    Get.toNamed(Routes.newPermit);
+    Get.toNamed(Routes.createPermit);
   }
 
   Future<void> viewJobDetails(int? _jobId) async {
@@ -2673,7 +2673,7 @@ class ViewPermitController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.newPermit, arguments: {
+    Get.toNamed(Routes.createPermit, arguments: {
       'permitId': permitId,
       'isChecked': isChecked,
       "jobModel": jobDetailsModel.value,

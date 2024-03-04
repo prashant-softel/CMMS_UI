@@ -405,7 +405,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.newPermit, arguments: {
+    Get.toNamed(Routes.createPermit, arguments: {
       "pmTaskModel": pmtaskViewModel.value,
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
