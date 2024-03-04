@@ -208,7 +208,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 185,
                                           label: Text(
                                             "Input Type",
                                             style: TextStyle(
