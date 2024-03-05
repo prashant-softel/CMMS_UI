@@ -12,10 +12,7 @@ class EmployeeStockReportUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getUserList(
-        facilityId,
-        isLoading,
-      );
+      await repository.getUserList(facilityId, isLoading, false);
   Future<List<PlantStockListModel>?> getEmployeeStockReportList(
           {int? facilityId,
           bool? isLoading,

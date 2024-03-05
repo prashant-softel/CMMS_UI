@@ -4,14 +4,12 @@ import '../../domain/usecases/user_list_usecase.dart';
 class UserListPresenter {
   UserListPresenter(this.userListUsecase);
   UserListUsecase userListUsecase;
-  Future<List<UserListModel>?> getUserList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<List<UserListModel>?> getUserList(
+          {int? facilityId, bool? isLoading, bool? isExport}) async =>
       await userListUsecase.getUserList(
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          isExport: isExport);
   deleteUser(String? user_id, {required bool isLoading}) async =>
       await userListUsecase.deleteUser(
         user_id: user_id ?? 0,

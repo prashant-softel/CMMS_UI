@@ -2,11 +2,14 @@ import 'dart:typed_data';
 import 'dart:html' as html;
 import 'package:excel/excel.dart';
 
-Future<void> exportToExcel(List<List> data, String fileName) async {
+Future<void> exportToExcel(
+    Map<String, List<List<dynamic>>> data, String fileName) async {
   Excel excel = createExcel();
-  Sheet sheetObject = excel['Sheet1'];
 
-  populateExcelWithData(sheetObject, data);
+  data.forEach((sheetName, sheetData) {
+    Sheet sheetObject = excel[sheetName];
+    populateExcelWithData(sheetObject, sheetData);
+  });
 
   List<int> bytes = excel.save()!;
 

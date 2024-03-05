@@ -12,26 +12,28 @@ String inventoryModelToJson(List<InventoryModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class InventoryModel {
-  InventoryModel({
-    this.id,
-    this.name,
-    this.facilityName,
-    this.blockName,
-    this.description,
-    this.type,
-    this.categoryId,
-    this.categoryName,
-    this.parentId,
-    this.parentName,
-    this.customerName,
-    this.ownerName,
-    this.operatorName,
-    this.serialNumber,
-    this.specialTool,
-    this.warrantyId,
-    this.calibrationDueDate,
-    this.status,
-  });
+  InventoryModel(
+      {this.id,
+      this.name,
+      this.facilityName,
+      this.blockName,
+      this.description,
+      this.type,
+      this.categoryId,
+      this.categoryName,
+      this.parentId,
+      this.parentName,
+      this.customerName,
+      this.ownerName,
+      this.operatorName,
+      this.serialNumber,
+      this.specialTool,
+      this.warrantyId,
+      this.calibrationDueDate,
+      this.status,
+      this.linkedToBlockId,
+      this.linkedToBlockName,
+      this.moduleQuantity});
 
   int? id;
   String? name;
@@ -52,6 +54,10 @@ class InventoryModel {
   DateTime? calibrationDueDate;
   String? status;
 
+  int? linkedToBlockId;
+  String? linkedToBlockName;
+
+  int? moduleQuantity;
   factory InventoryModel.fromJson(Map<String, dynamic> json) => InventoryModel(
         id: json["id"],
         name: json["name"],
@@ -69,6 +75,9 @@ class InventoryModel {
         serialNumber: json["serialNumber"],
         specialTool: json["specialTool"],
         warrantyId: json["warrantyId"],
+        linkedToBlockId: json["linkedToBlockId"],
+        linkedToBlockName: json["linkedToBlockName"],
+        moduleQuantity: json["moduleQuantity"],
         calibrationDueDate: json['calibrationDueDate'] == null
             ? null
             : DateTime.parse(json['calibrationDueDate'] as String),
@@ -78,8 +87,11 @@ class InventoryModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "linkedToBlockId": linkedToBlockId,
+        "moduleQuantity": moduleQuantity,
+        "linkedToBlockName": linkedToBlockName,
         "facilityName": facilityName,
-        "block_name": blockName,
+        "blockName": blockName,
         "description": description,
         "type": type,
         "categoryId": categoryId,

@@ -36,6 +36,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var isToggleBoolOn = false.obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  RxList<List<Map<String, String>>> rowItemobs =
+      <List<Map<String, String>>>[].obs;
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;

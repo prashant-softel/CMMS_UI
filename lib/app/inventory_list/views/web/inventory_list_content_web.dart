@@ -1,5 +1,6 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -211,6 +212,17 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
+                                      ),
+                                      Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {
+                                              controller.export();
+                                            },
+                                            text: 'Excel'),
                                       ),
                                       Spacer(),
                                       Container(

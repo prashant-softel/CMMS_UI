@@ -27,10 +27,9 @@ class InventoryListUsecase {
   Future<List<InventoryModel>> getInventoryAssetsList({
     required bool isLoading,
     required int? facility_id,
+    bool? isExport,
   }) async {
     return _repository.getInventoryAssetsList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-    );
+        isLoading: isLoading, facility_id: facility_id, isExport: isExport);
   }
 }

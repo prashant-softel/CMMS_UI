@@ -284,7 +284,9 @@ class PreventiveCheckPointController extends GetxController {
   }
 
   Future<void> getCheckPointlist(
-      {required String selectedchecklistId, required int facilityId}) async {
+      {required String selectedchecklistId,
+      required int facilityId,
+      bool? isExport}) async {
     preventiveCheckpoint?.value = <CheckPointModel>[];
     BufferPreventiveCheckPoint?.value = <CheckPointModel>[];
 
@@ -294,7 +296,8 @@ class PreventiveCheckPointController extends GetxController {
               selectedchecklistId,
             ),
             isLoading: true,
-            facilityId: facilityId);
+            facilityId: facilityId,
+            isExport: isExport);
 
     if (_preventiveCheckpoint != null) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
@@ -470,5 +473,12 @@ class PreventiveCheckPointController extends GetxController {
       isLoading: true,
     );
     return true;
+  }
+
+  void export() {
+    getCheckPointlist(
+        selectedchecklistId: 0.toString(),
+        facilityId: facilityId,
+        isExport: true);
   }
 }
