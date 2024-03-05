@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
+import 'dart:html' as html;
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class ObservationPMTaskViewDialog extends GetView {
@@ -153,6 +154,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
+                                          fixedWidth: 200,
+                                          label: Text(
+                                            "Uploaded Image",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
                                           fixedWidth: 180,
                                           label: Text(
                                             "Type",
@@ -189,96 +198,122 @@ class ObservationPMTaskViewDialog extends GetView {
                                       controller.selectedItem
                                               ?.checklist_observation?.length ??
                                           0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text('${index + 1}')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .check_point_id
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .check_point_name ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .requirement ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .failure_waightage
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(
+                                      (index) => DataRow(
+                                        cells: [
+                                          DataCell(Text('${index + 1}')),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .check_point_id
+                                                  .toString() ??
+                                              '')),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .check_point_name ??
+                                              '')),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .requirement ??
+                                              '')),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .failure_waightage
+                                                  .toString() ??
+                                              '')),
+                                          DataCell(Text(
+                                            controller
+                                                        .selectedItem
+                                                        ?.checklist_observation?[
+                                                            index]
+                                                        .cp_ok ==
+                                                    1
+                                                ? "OK"
+                                                : "Not OK",
+                                            style: controller
+                                                        .selectedItem
+                                                        ?.checklist_observation?[
+                                                            index]
+                                                        .cp_ok ==
+                                                    1
+                                                ? Styles.greencolor16
+                                                : Styles.redcolor16,
+                                          )),
+                                          DataCell(
+                                            Center(
+                                              child: TableActionButton(
+                                                color: ColorValues.viewColor,
+                                                icon: Icons.remove_red_eye,
+                                                message: "View",
+                                                onPress: () {
+                                                  String imageUrl =
+                                                      "assets/files/logo.png";
+                                                  String imagePath = html.window
+                                                          .location.origin +
+                                                      '/' +
+                                                      imageUrl;
+                                                  html.window.open(
+                                                      imagePath, '_blank');
+                                                },
+                                              ),
+                                            ),
+                                          ),
                                           controller
                                                       .selectedItem
                                                       ?.checklist_observation?[
                                                           index]
-                                                      .cp_ok ==
+                                                      .check_point_type ==
                                                   1
-                                              ? "OK"
-                                              : "Not OK",
-                                          style: controller
+                                              ? DataCell(Text(
+                                                  "${controller.selectedItem?.checklist_observation?[index].type_text}"))
+                                              : controller
+                                                          .selectedItem
+                                                          ?.checklist_observation?[
+                                                              index]
+                                                          .check_point_type ==
+                                                      2
+                                                  ? DataCell(Column(
+                                                      children: [
+                                                        Text(
+                                                            "${controller.selectedItem?.checklist_observation?[index].type_text}"),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                                "min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
+                                                            Dimens.boxWidth12,
+                                                            Text(
+                                                                "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ))
+                                                  : DataCell(Text('Text')),
+                                          DataCell(Text(controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .observation ??
+                                              '')),
+                                          controller
                                                       .selectedItem
                                                       ?.checklist_observation?[
                                                           index]
-                                                      .cp_ok ==
-                                                  1
-                                              ? Styles.greencolor16
-                                              : Styles.redcolor16,
-                                        )),
-                                        controller
-                                                    .selectedItem
-                                                    ?.checklist_observation?[
-                                                        index]
-                                                    .check_point_type ==
-                                                1
-                                            ? DataCell(Text(
-                                                "${controller.selectedItem?.checklist_observation?[index].type_text}"))
-                                            : controller
-                                                        .selectedItem
-                                                        ?.checklist_observation?[
-                                                            index]
-                                                        .check_point_type ==
-                                                    2
-                                                ? DataCell(Column(
-                                                    children: [
-                                                      Text(
-                                                          "${controller.selectedItem?.checklist_observation?[index].type_text}"),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                              "min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
-                                                          Dimens.boxWidth12,
-                                                          Text(
-                                                              "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ))
-                                                : DataCell(Text('Text')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .observation ??
-                                            '')),
-                                        controller
-                                                    .selectedItem
-                                                    ?.checklist_observation?[
-                                                        index]
-                                                    .linked_job_id ==
-                                                0
-                                            ? DataCell(Text(''))
-                                            : DataCell(Text(
-                                                "JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.toString() ?? ''}",
-                                                style:
-                                                    Styles.primary15Underlined,
-                                              )),
-                                      ]),
+                                                      .linked_job_id ==
+                                                  0
+                                              ? DataCell(Text(''))
+                                              : DataCell(Text(
+                                                  "JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.toString() ?? ''}",
+                                                  style: Styles
+                                                      .primary15Underlined,
+                                                )),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

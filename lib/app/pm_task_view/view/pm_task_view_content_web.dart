@@ -399,8 +399,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       .value
                                                                       ?.status ==
                                                                   162
-                                                          ?                                                           Dimens.box0
-: TableActionButton(
+                                                          ? Dimens.box0
+                                                          : TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
                                                               icon: Icons
