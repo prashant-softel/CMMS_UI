@@ -145,7 +145,8 @@ abstract class Utility {
 
   /// get formated [DateTime] eg. 12-01-2021
   static String getDayMonthYear(DateTime dateTime) =>
-      '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
+      // '${getOnlyDate(dateTime)}-${DateFormat('MM').format(dateTime)}-${DateFormat.y().format(dateTime)}';
+      DateFormat('dd-MM-yyyy').format(dateTime);
 
   /// get formated [DateTime] eg. 12
   static String getOnlyDate(DateTime dateTime) =>

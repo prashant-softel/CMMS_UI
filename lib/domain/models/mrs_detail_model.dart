@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 
 MrsDetailsModel mrsDetailsModelFromJson(String str) =>
@@ -72,7 +73,8 @@ class MrsDetailsModel {
             parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
         requestd_date: parsedJson["requestd_date"] == null
             ? ""
-            : parsedJson['requestd_date'],
+            : Utility.getDayMonthYear(
+                DateTime.parse(parsedJson['requestd_date'])),
         requested_by_emp_ID: parsedJson["requested_by_emp_ID"] == null
             ? 0
             : parsedJson['requested_by_emp_ID'],
