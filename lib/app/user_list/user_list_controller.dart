@@ -105,19 +105,20 @@ class UserListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getUserList(facilityId, true);
+        getUserList(facilityId, true, false);
       });
     });
 
     super.onInit();
   }
 
-  Future<void> getUserList(int facilityId, bool isLoading) async {
+  Future<void> getUserList(
+      int facilityId, bool isLoading, bool isExport) async {
     userList.value = <UserListModel>[];
     filteredData.value = <UserListModel>[];
 
     final _userList = await userListPresenter.getUserList(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId, isLoading: isLoading, isExport: isExport);
 
     if (_userList != null) {
       userList.value = _userList;
@@ -167,7 +168,7 @@ class UserListController extends GetxController {
                 onPressed: () {
                   deleteUser(user_id).then((value) {
                     Get.back();
-                    getUserList(facilityId, true);
+                    getUserList(facilityId, true, false);
                   });
                 },
                 child: Text('YES'),
@@ -186,5 +187,9 @@ class UserListController extends GetxController {
         isLoading: true,
       );
     }
+  }
+
+  void export() {
+    getUserList(facilityId, true, true);
   }
 }

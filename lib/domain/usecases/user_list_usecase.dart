@@ -6,17 +6,11 @@ class UserListUsecase {
   final Repository repository;
 
   UserListUsecase(this.repository);
-  Future<List<UserListModel>?> getUserList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await repository.getUserList(
-        facilityId,
-        isLoading,
-      );
+  Future<List<UserListModel>?> getUserList(
+          {int? facilityId, bool? isLoading, bool? isExport}) async =>
+      await repository.getUserList(facilityId, isLoading, isExport);
 
-      deleteUser(
-      {required Object user_id, required bool isLoading}) async =>
+  deleteUser({required Object user_id, required bool isLoading}) async =>
       await repository.deleteUser(
         user_id,
         isLoading,

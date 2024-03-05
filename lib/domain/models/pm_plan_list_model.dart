@@ -6,6 +6,9 @@ List<PmPlanListModel> pmPlanModelFromJson(String str) =>
     List<PmPlanListModel>.from(
         json.decode(str).map((x) => PmPlanListModel.fromJson(x)));
 
+String pmPlanModelToJson(List<PmPlanListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class PmPlanListModel {
   int? plan_id;
   String? plan_name;
@@ -86,7 +89,7 @@ class PmPlanListModel {
         approved_by_id: parsedJson['approved_by_id'],
         approved_by_name: parsedJson['approved_by_name'],
         assign_to_id: parsedJson['assign_to_id'],
-        assign_to_name: parsedJson['assign_to_name'],
+        assign_to_name: parsedJson['assigned_to_name'],
         rejected_at: parsedJson['rejected_at'],
         rejected_by_id: parsedJson['rejected_by_id'],
         rejected_by_name: parsedJson['rejected_by_name'],
@@ -101,7 +104,7 @@ class PmPlanListModel {
         "approved_by_id": approved_by_id,
         "approved_by_name": approved_by_name,
         "assign_to_id": assign_to_id,
-        "assign_to_name": assign_to_name,
+        "assigned_to_name": assign_to_name,
         "rejected_by_name": rejected_by_name,
         "rejected_at": rejected_at,
         "rejected_by_id": rejected_by_id,

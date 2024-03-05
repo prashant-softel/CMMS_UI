@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -192,15 +193,17 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                   //       onPressed: () {},
                                   //       text: 'Copy'),
                                   // ),
-                                  // Container(
-                                  //   height: 35,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {},
-                                  //       text: 'Excel'),
-                                  // ),
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                  ),
                                   // Container(
                                   //   height: 35,
                                   //   margin: EdgeInsets.only(left: 10),

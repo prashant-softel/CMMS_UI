@@ -425,11 +425,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                       : 0;
                                                 });
                                               })
-                                            : Text(
-                                                " JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.value.toString() ?? ""}",
-                                                style:
-                                                    Styles.primary15Underlined,
-                                              )),
+                                            : Dimens.box0),
                                       ]),
                                     ),
                                   ),
