@@ -47,13 +47,33 @@ class _CustomMultiSelectDialogFieldState
         buttonIcon: Icon(Icons.arrow_drop_down),
         items: widget.items!,
         onConfirm: widget.onConfirm,
-        chipDisplay: MultiSelectChipDisplay<dynamic>(
+        chipDisplay: CustomMultiSelectDisplay(
           onTap: (value) {
             // Handle chip removal
-            widget.onConfirm([...widget.initialValue!..remove(value)]);
+            // widget.onConfirm([...widget.initialValue!..remove(value)]);
           },
+          icon: Icon(Icons.cancel), // Customize the icon as needed
+          items: widget.items,
         ),
       ),
     );
   }
+}
+
+class CustomMultiSelectDisplay extends MultiSelectChipDisplay<dynamic> {
+  final Icon? icon;
+  final List<MultiSelectItem>? items;
+  final Function(dynamic) onTap;
+
+  CustomMultiSelectDisplay({
+    required this.onTap,
+    this.icon,
+    this.items,
+  }) : super(
+          onTap: (value) {
+            // Handle chip removal
+            onTap([...items!..remove(value)]);
+          },
+          icon: icon,
+        );
 }

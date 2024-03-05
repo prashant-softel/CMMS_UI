@@ -62,6 +62,8 @@ class ViewPermitController extends GetxController {
   var isToggleOn5 = false.obs;
   var isToggleOn6 = false.obs;
   var isToggleOn7 = false.obs;
+  String? jsaData;
+  String? sopData;
 
   ///Switch toggle
   final isSuccess = false.obs;
@@ -468,13 +470,13 @@ class ViewPermitController extends GetxController {
         });
       });
       await getViewPermitDetail(permitId: permitId.value);
-
       await getSafetyMeasureList();
       await getPermitHistory(permitId: permitId.value);
       await getPermitConditionList(isCancle: isCancle!);
       await getPermitCloseConditionList(isClose: isClose!);
       await getPermitExtendConditionList(isExtend: isExtend!);
       await getEmployeeList();
+      await getSopPermitList();
 
       super.onInit();
     } catch (e) {
@@ -1132,15 +1134,15 @@ class ViewPermitController extends GetxController {
       job_type_id: selectedJobTYpesId,
       // job_type_id: 36,
     );
-    print('SOP Permit List:${sopPermitList}');
-    for (var sopPermit_list in _sopPermitList) {
-      sopPermitList.add(sopPermit_list);
+
+    print('SOP Permit List: $_sopPermitList');
+
+    for (var sopPermitListData in _sopPermitList) {
+      sopPermitList.add(sopPermitListData);
+      jsaData = sopPermitListData.jsa_file_path ?? "";
+      sopData = sopPermitListData.sop_file_path ?? "";
     }
-    // supplierNameList = _supplierNameList;
-    // employeeNamepaginationController = PaginationController(
-    //   rowCount: employeeNameList.length,
-    //   rowsPerPage: 10,
-    // );
+
     update(['sop_permit_list']);
   }
 

@@ -25,6 +25,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewPermitWebScreen extends GetView<ViewPermitController> {
   ViewPermitWebScreen({super.key});
@@ -2804,31 +2805,66 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         .navyBlueColor,
                                                                 text:
                                                                     "View SOP",
-                                                                onPressed: () {
-                                                                  // controller
-                                                                  //     .createNewPermits();
-                                                                  Get.dialog<
-                                                                          void>(
-                                                                      ViewJSADialog());
+                                                                onPressed:
+                                                                    () async {
+                                                                  // final url = '${_controller.jsaData}';
+                                                                  // "https://www.w3.org/1999/xhtml/"
+                                                                  String
+                                                                      baseUrl =
+                                                                      'http://65.0.20.19/CMMS_API/';
+                                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                                  String
+                                                                      endpoint =
+                                                                      '${_controller.sopData}';
+
+                                                                  // Concatenate the links
+                                                                  String
+                                                                      fullUrl =
+                                                                      baseUrl +
+                                                                          endpoint;
+                                                                  // final url =
+                                                                  //     'http://65.0.20.19/O3_Files${_controller.jsaData}';
+                                                                  print(
+                                                                      'JSAUrl:$fullUrl');
+                                                                  if (await canLaunch(
+                                                                      fullUrl)) {
+                                                                    await launch(
+                                                                        fullUrl);
+                                                                  }
                                                                 },
                                                               )),
                                                           SizedBox(
                                                             width: 230,
                                                           ),
                                                           Container(
-                                                              height: 30,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .navyBlueColor,
-                                                                text:
-                                                                    "View JSA",
-                                                                onPressed: () {
-                                                                  // Get.dialog<void>(SafetyMeasureDialog());
-                                                                  // controller.createNewPermit();
-                                                                },
-                                                              )),
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .navyBlueColor,
+                                                              text: "View JSA",
+                                                              onPressed:
+                                                                  () async {
+                                                                String baseUrl =
+                                                                    'http://65.0.20.19/CMMS_API/';
+                                                                // String baseUrl = 'http://172.20.43.9:83/';
+                                                                String
+                                                                    endpoint =
+                                                                    '${_controller.jsaData}';
+                                                                String fullUrl =
+                                                                    baseUrl +
+                                                                        endpoint;
+                                                                print(
+                                                                    'JSAUrl:$fullUrl');
+                                                                if (await canLaunch(
+                                                                    fullUrl)) {
+                                                                  await launch(
+                                                                      fullUrl);
+                                                                }
+                                                              },
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ],
