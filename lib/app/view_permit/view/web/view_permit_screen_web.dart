@@ -1773,9 +1773,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 html.window
                                                     .open(pdfPath, '_blank');
                                               },
-                                              child: Text(
-                                                'Hyperlink',
-                                                style: Styles.grey15,
+                                              child: Image.asset(
+                                                'assets/files/pdf2.png',
+                                                width:
+                                                    45, // Set the desired width
+                                                height:
+                                                    35, // Set the desired height
                                               ),
                                             ),
                                           ],
