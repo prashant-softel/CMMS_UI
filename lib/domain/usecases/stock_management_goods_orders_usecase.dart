@@ -11,10 +11,7 @@ class StockManagementGoodsOrdersUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getUserList(
-        facilityId,
-        isLoading,
-      );
+      await repository.getUserList(facilityId, isLoading, false);
   deleteGoodsOrders({required Object id, required bool isLoading}) async =>
       await repository.deleteGoodsOrders(
         id,

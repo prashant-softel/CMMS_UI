@@ -8,11 +8,13 @@ class PmPlanListPresenter {
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
-          dynamic startDate}) async =>
+          dynamic startDate,
+          bool? isExport}) async =>
       await pmPlanListUsecase.getPmPlanList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,
+          isExport: isExport,
           startDate: startDate);
   deletePmPlan(String? planId, {required bool isLoading}) async =>
       await pmPlanListUsecase.deletePmPlan(

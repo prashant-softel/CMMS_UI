@@ -99,7 +99,8 @@ class PmPlanListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+        getPmPlanList(
+            facilityId, formattedTodate1, formattedFromdate1, true, false);
       });
       // isDataLoading.value = false;
 
@@ -148,14 +149,15 @@ class PmPlanListController extends GetxController {
   }
 
   Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+      bool isLoading, bool? isExport) async {
     pmPlanList.value = <PmPlanListModel>[];
     filteredData.value = <PmPlanListModel>[];
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
-        endDate: endDate);
+        endDate: endDate,
+        isExport: isExport);
     if (_pmPlanList != null) {
       pmPlanList.value = _pmPlanList;
       filteredData.value = pmPlanList.value;
@@ -177,7 +179,8 @@ class PmPlanListController extends GetxController {
   }
 
   void getPmPlanListByDate() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getPmPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, true, false);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {
@@ -223,7 +226,7 @@ class PmPlanListController extends GetxController {
                     deletePmPlan(planId).then((value) {
                       Get.back();
                       getPmPlanList(facilityId, formattedTodate1,
-                          formattedFromdate1, true);
+                          formattedFromdate1, true, false);
                     });
                   },
                   text: 'Yes'),
@@ -245,5 +248,9 @@ class PmPlanListController extends GetxController {
 
   void clearStoreData() {
     pmPlanListPresenter.clearValue();
+  }
+
+  void export() {
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true, true);
   }
 }

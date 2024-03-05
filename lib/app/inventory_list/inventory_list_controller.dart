@@ -88,10 +88,7 @@ class InventoryListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        await getInventoryAssetsList(
-          facilityId,
-          false,
-        );
+        await getInventoryAssetsList(facilityId, true, false);
       });
     });
     super.onInit();
@@ -140,13 +137,12 @@ class InventoryListController extends GetxController {
     inventoryList.value = filteredList;
   }
 
-  Future<void> getInventoryAssetsList(int facilityId, bool isLoading) async {
+  Future<void> getInventoryAssetsList(
+      int facilityId, bool isLoading, bool isExport) async {
     inventoryList.value = <InventoryModel>[];
     filteredData.value = <InventoryModel>[];
     final _inventoryList = await inventoryListPresenter.getInventoryAssetsList(
-      isLoading: true,
-      facility_id: facilityId,
-    );
+        isLoading: true, facility_id: facilityId, isExport: isExport);
     inventoryList.value = _inventoryList;
     filteredData.value = inventoryList.value;
     paginationController = PaginationController(
@@ -162,6 +158,10 @@ class InventoryListController extends GetxController {
         inventoryListTableColumns.add(key);
       }
     }
+  }
+
+  void export() {
+    getInventoryAssetsList(facilityId, true, true);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

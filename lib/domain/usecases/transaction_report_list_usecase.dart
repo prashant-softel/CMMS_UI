@@ -16,10 +16,7 @@ class TransactionReportListUsecase {
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getUserList(
-        facilityId,
-        isLoading,
-      );
+      await repository.getUserList(facilityId, isLoading, false);
 
   Future<List<TransactionReportListModel>> transactionReport({
     required bool isLoading,
