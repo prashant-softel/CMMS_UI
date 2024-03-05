@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'dart:html' as html;
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -1753,9 +1754,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "This permit is valid only when issued Et approved by an authorized issuer. This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by the parties identified on this permit. Refer PTW SOP(hyperlink). ",
-                                          style: Styles.grey15,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "This permit is valid only when issued Et approved by an authorized issuer. This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by the parties identified on this permit. Refer PTW SOP",
+                                              style: Styles.grey15,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                String pdfUrl =
+                                                    "assets/files/ptwsop.pdf";
+                                                String pdfPath = html.window
+                                                        .location.origin +
+                                                    '/' +
+                                                    pdfUrl;
+                                                html.window
+                                                    .open(pdfPath, '_blank');
+                                              },
+                                              child: Text(
+                                                'Hyperlink',
+                                                style: Styles.grey15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       Container(

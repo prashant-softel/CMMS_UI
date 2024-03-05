@@ -11,8 +11,15 @@ class DsmChargesListController extends GetxController {
 
   DsmChargesListPresenter dsmChargesListPresenter;
   final HomeController homecontroller = Get.find();
+  Rx<bool> issitenameSelected = true.obs;
+  Rx<bool> ismonthSelected = true.obs;
+  Rx<bool> isyearSelected = true.obs;
+  RxList<MonthModel?> sitenamesList = <MonthModel>[].obs;
+  RxList<int> selectedsitenameIdList = <int>[].obs;
+  RxList<int> selectedyearIdList = <int>[].obs;
+  RxList<int> selectedmonthIdList = <int>[].obs;
   RxList<MonthModel> siteName = <MonthModel>[
-    MonthModel(name: 'CHnaill', id: "1"),
+    MonthModel(name: 'CNHaill', id: "1"),
     MonthModel(name: 'Bellary', id: "2"),
   ].obs;
   RxList<MonthModel> month = <MonthModel>[
@@ -35,4 +42,58 @@ class DsmChargesListController extends GetxController {
     MonthModel(name: '2025', id: "3"),
     MonthModel(name: '2026', id: "4"),
   ].obs;
+
+  void sitenameSelected(_selectedsitenames) {
+    selectedsitenameIdList.value = <int>[];
+    for (var _selectedsitename in _selectedsitenames) {
+      // Convert String to int if needed
+      int? id = int.tryParse(_selectedsitename.id ?? "");
+      if (id != null) {
+        selectedsitenameIdList.add(id);
+      }
+    }
+    print('selected site name: $selectedsitenameIdList');
+    // getInventoryList(
+    //   facilityId: facilityId,
+    //   blockId: selectedBlockId,
+    //   receivedCategoryIds: selectedsitenameIdList,
+    // );
+    // getWorkTypeList(receivedCategoryIds: selectedsitenameIdList);
+  }
+
+  void yearSelected(_selectedyearnames) {
+    selectedyearIdList.value = <int>[];
+    for (var _selectedyear in _selectedyearnames) {
+      // Convert String to int if needed
+      int? id = int.tryParse(_selectedyear.id ?? "");
+      if (id != null) {
+        selectedyearIdList.add(id);
+      }
+    }
+    print('selected year: $selectedyearIdList');
+    // getInventoryList(
+    //   facilityId: facilityId,
+    //   blockId: selectedBlockId,
+    //   receivedCategoryIds: selectedsitenameIdList,
+    // );
+    // getWorkTypeList(receivedCategoryIds: selectedsitenameIdList);
+  }
+
+  void monthSelected(_selectedmonthnames) {
+    selectedmonthIdList.value = <int>[];
+    for (var _selectedmonth in _selectedmonthnames) {
+      // Convert String to int if needed
+      int? id = int.tryParse(_selectedmonth.id ?? "");
+      if (id != null) {
+        selectedmonthIdList.add(id);
+      }
+    }
+    print('selected month: $selectedmonthIdList');
+    // getInventoryList(
+    //   facilityId: facilityId,
+    //   blockId: selectedBlockId,
+    //   receivedCategoryIds: selectedsitenameIdList,
+    // );
+    // getWorkTypeList(receivedCategoryIds: selectedsitenameIdList);
+  }
 }
