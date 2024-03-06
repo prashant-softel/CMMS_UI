@@ -455,8 +455,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       width: Get.width * .2,
                                                       child:
                                                           CustomMultiSelectDialogField(
-                                                        title:
-                                                            'Select Equipment Category',
+                                                        title: 'Please Select',
                                                         buttonText:
                                                             'Equipment Category',
                                                         initialValue: (controller

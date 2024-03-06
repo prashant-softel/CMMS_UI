@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class CustomMultiSelectDialogField extends StatefulWidget {
+class CustomMultiSelectDialogField extends StatelessWidget {
   final List<dynamic>? initialValue;
   final List<MultiSelectItem>? items;
   final String? title;
@@ -17,14 +18,9 @@ class CustomMultiSelectDialogField extends StatefulWidget {
   });
 
   @override
-  State<CustomMultiSelectDialogField> createState() =>
-      _CustomMultiSelectDialogFieldState();
-}
-
-class _CustomMultiSelectDialogFieldState
-    extends State<CustomMultiSelectDialogField> {
-  @override
   Widget build(BuildContext context) {
+    List<dynamic> _selectedItems = initialValue ?? [];
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -38,42 +34,52 @@ class _CustomMultiSelectDialogFieldState
           ),
         ],
       ),
-      child: MultiSelectDialogField(
-        searchable: true,
-        title: Text('${widget.title}'),
-        buttonText: Text('${widget.buttonText}'),
-        initialValue: widget.initialValue!,
-        decoration: BoxDecoration(border: Border()),
-        buttonIcon: Icon(Icons.arrow_drop_down),
-        items: widget.items!,
-        onConfirm: widget.onConfirm,
-        chipDisplay: CustomMultiSelectDisplay(
-          onTap: (value) {
-            // Handle chip removal
-            // widget.onConfirm([...widget.initialValue!..remove(value)]);
-          },
-          icon: Icon(Icons.cancel), // Customize the icon as needed
-          items: widget.items,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ListTile(
+            title: Text(title!),
+            trailing: IconButton(
+              icon: Icon(Icons.arrow_drop_down),
+              onPressed: () async {
+                final selectedItems = await Get.dialog(
+                  MultiSelectDialog(
+                    searchable: true,
+                    items: items!,
+                    initialValue: _selectedItems,
+                  ),
+                );
+                if (selectedItems != null) {
+                  _selectedItems = selectedItems.cast<dynamic>().toList();
+                  onConfirm(selectedItems);
+                }
+              },
+            ),
+          ),
+          SizedBox(
+              height: 35,
+              child: ListView.builder(
+                itemCount: _selectedItems.length,
+                itemBuilder: (context, index) {
+                  final item = _selectedItems[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Chip(
+                      label: Text(items!
+                          .firstWhere((element) => element.value == item)
+                          .label), // Displaying the name of the selected item
+                      deleteIcon: Icon(Icons.cancel),
+
+                      onDeleted: () {
+                        _selectedItems!.remove(item);
+                      },
+                    ),
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+              )),
+        ],
       ),
     );
   }
-}
-
-class CustomMultiSelectDisplay extends MultiSelectChipDisplay<dynamic> {
-  final Icon? icon;
-  final List<MultiSelectItem>? items;
-  final Function(dynamic) onTap;
-
-  CustomMultiSelectDisplay({
-    required this.onTap,
-    this.icon,
-    this.items,
-  }) : super(
-          onTap: (value) {
-            // Handle chip removal
-            onTap([...items!..remove(value)]);
-          },
-          icon: icon,
-        );
 }
