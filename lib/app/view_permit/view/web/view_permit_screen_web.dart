@@ -1653,7 +1653,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         child: Text(
                                                             " / VIEW PM TASK",
                                                             style: Styles
-                                                                .greyMediumLight12),
+                                                                .greyLight14),
                                                       )
                                                     : InkWell(
                                                         onTap: () {
@@ -1663,11 +1663,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         child: Text(
                                                             " / NEW PERMIT LIST",
                                                             style: Styles
-                                                                .greyMediumLight12),
+                                                                .greyLight14),
                                                       ),
                                                 Text(" / VIEW PERMIT",
                                                     style: Styles
-                                                        .greyMediumLight12)
+                                                        .greyLight14)
                                               ],
                                             ),
                                           ),
