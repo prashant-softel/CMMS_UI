@@ -20,6 +20,7 @@ class CustomMultiSelectDialogField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<dynamic> _selectedItems = initialValue ?? [];
+    final ScrollController _firstController = ScrollController();
 
     return Container(
       decoration: BoxDecoration(
@@ -57,27 +58,33 @@ class CustomMultiSelectDialogField extends StatelessWidget {
             ),
           ),
           SizedBox(
-              height: 35,
-              child: ListView.builder(
-                itemCount: _selectedItems.length,
-                itemBuilder: (context, index) {
-                  final item = _selectedItems[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Chip(
+            height: 60,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Scrollbar(
+                thumbVisibility: true,
+                controller: _firstController,
+                // trackVisibility: true,
+                child: ListView.builder(
+                  controller: _firstController,
+                  itemCount: _selectedItems.length,
+                  itemBuilder: (context, index) {
+                    final item = _selectedItems[index];
+                    return Chip(
                       label: Text(items!
                           .firstWhere((element) => element.value == item)
                           .label), // Displaying the name of the selected item
                       deleteIcon: Icon(Icons.cancel),
-
                       onDeleted: () {
-                        _selectedItems!.remove(item);
+                        _selectedItems.remove(item);
                       },
-                    ),
-                  );
-                },
-                scrollDirection: Axis.horizontal,
-              )),
+                    );
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
