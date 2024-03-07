@@ -484,15 +484,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        Expanded(
-                                          child: Checkbox(
-                                            value: controller
-                                                .isCheckedRequire.value,
-                                            onChanged: (bool? value) {
-                                              controller
-                                                  .requiretoggleCheckbox();
-                                            },
-                                          ),
+                                        Checkbox(
+                                          value:
+                                              controller.isCheckedRequire.value,
+                                          onChanged: (bool? value) {
+                                            controller.requiretoggleCheckbox();
+                                          },
                                         ),
                                       ],
                                     ),
