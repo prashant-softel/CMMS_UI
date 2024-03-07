@@ -24,12 +24,16 @@ class TBTTypeListController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
+  void toggleContainer() {
+    isContainerVisible.toggle();
+  }
 
   //checkbox
   RxBool isChecked = true.obs;
   JobTypeListModel? selectedItem;
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isFormInvalid = false.obs;
 
   var titleCtrlr = TextEditingController();

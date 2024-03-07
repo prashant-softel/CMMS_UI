@@ -30,6 +30,9 @@ class TBTSOPListController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
+  void toggleContainer() {
+    isContainerVisible.toggle();
+  }
 
   //checkbox
   RxBool isChecked = true.obs;
@@ -41,6 +44,7 @@ class TBTSOPListController extends GetxController {
   Uint8List? fileBytes2;
 
   Rx<String> selectedequipment = ''.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
 
