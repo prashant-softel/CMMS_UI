@@ -253,23 +253,23 @@ class BreakdownMaintenanceScreen
                                             })
                                         : Container(),
 
-                                    //Add New Permit
-                                    varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kPermitFeatureId &&
-                                                    e.add ==
-                                                        UserAccessConstants
-                                                            .kHaveAddAccess)
-                                                .length >
-                                            0
-                                        ? createContentTile(
-                                            title: "Add New Permit",
-                                            onTap: () {
-                                              controller.createNewPermit();
-                                            })
-                                        : Container(),
+                                    // //Add New Permit
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id ==
+                                    //                     UserAccessConstants
+                                    //                         .kPermitFeatureId &&
+                                    //                 e.add ==
+                                    //                     UserAccessConstants
+                                    //                         .kHaveAddAccess)
+                                    //             .length >
+                                    //         0
+                                    //     ? createContentTile(
+                                    //         title: "Add New Permit",
+                                    //         onTap: () {
+                                    //           controller.createNewPermit();
+                                    //         })
+                                    //     : Container(),
                                     varUserAccessModel.value.access_list!
                                                 .where((e) =>
                                                     e.feature_id ==
