@@ -34,7 +34,7 @@ class RiskTypeListPresenter {
   }
 
 
- deleteFacility(String? business_id, {required bool isLoading}) async =>
+ deleteRiskType(String? business_id, {required bool isLoading}) async =>
      await risktypeUsecase.deleteRiskType(
        business_id: business_id ?? 0,
        isLoading: isLoading,

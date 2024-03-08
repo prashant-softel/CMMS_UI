@@ -24,6 +24,7 @@ class TBTTypeListController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
+
   void toggleContainer() {
     isContainerVisible.toggle();
   }
@@ -222,10 +223,12 @@ class TBTTypeListController extends GetxController {
 
   Future<bool> updateTbt(checklistId) async {
     String _name = titleCtrlr.text.trim();
+    String _desc = descriptionCtrlr.text.trim();
 
     JobTypeListModel createTbt = JobTypeListModel(
       id: checklistId,
       name: _name,
+      description: _desc,
       facilityId: selectedFacilityId,
     );
     var updateTbt = createTbt.toJson();
@@ -246,6 +249,7 @@ class TBTTypeListController extends GetxController {
   clearData() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
+    selectedFacilityId = 0;
   }
 
   _cleardata() {
