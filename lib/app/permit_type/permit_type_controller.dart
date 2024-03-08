@@ -52,6 +52,7 @@ class PermitTypeController extends GetxController {
   Rx<String> selectedTypePermit = ''.obs;
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
+  RxBool isContainerVisible = false.obs;
   TypePermitModel? selectedItem;
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
@@ -74,6 +75,9 @@ class PermitTypeController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  void toggleContainer() {
+    isContainerVisible.toggle();
+  }
 
   @override
   void onInit() async {

@@ -592,11 +592,11 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                 ],
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 5,
                               ),
                               controller.moduleList!.isEmpty
                                   ? Container(
-                                      height: Get.height / 1.85,
+                                      height: Get.height / 1.75,
                                       margin: Dimens.edgeInsets20,
                                       decoration: BoxDecoration(
                                         border: Border.all(
@@ -680,7 +680,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                       ),
                                     )
                                   : Container(
-                                      height: Get.height / 2.08,
+                                      height: Get.height / 1.67,
                                       margin: Dimens.edgeInsets20,
                                       decoration: BoxDecoration(
                                         border: Border.all(
@@ -758,14 +758,14 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                           ),
                                         ].map((_moduleList) {
                                           return TableViewRow(
-                                              height: 46,
+                                              height: 30,
                                               cells: _moduleList.map((value) {
                                                 return TableViewCell(
                                                     child: Column(children: [
-                                                  Divider(
-                                                    color: ColorValues
-                                                        .greyLightColour,
-                                                  ),
+                                                  // Divider(
+                                                  //   color: ColorValues
+                                                  //       .greyLightColour,
+                                                  // ),
                                                   // (value == 'No')
                                                   //     ? CustomSwitchTroggle(
                                                   //   value: value ==
