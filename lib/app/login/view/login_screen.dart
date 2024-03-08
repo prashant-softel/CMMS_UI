@@ -67,11 +67,27 @@ class LoginScreen extends GetView<LoginController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                                  child: Image.asset(
-                                    'assets/files/logodrawer.png',
-                                  ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(top: 20, bottom: 20),
+                                      child: Image.asset(
+                                        'assets/files/logodrawer.png',
+                                        width: 100,
+                                        height: 100,
+                                      ),
+                                    ),
+                                    Dimens.boxWidth5,
+                                    Text(
+                                      "GREENOps",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: ColorValues.greyColor,
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 Text(
                                   'Sign in',
