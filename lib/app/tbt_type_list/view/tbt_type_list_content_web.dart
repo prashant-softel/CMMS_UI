@@ -93,7 +93,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     child: Container(
                       width: (Get.width * .3),
                       margin: EdgeInsets.only(left: 10, top: 30),
-                      height: Get.height / 2.5,
+                      height: Get.height / 2.2,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
                         elevation: 10,
@@ -738,18 +738,20 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                           size: ColumnSize.S,
                                         ),
                                       ],
-                                      rows: List.generate(
+                                      rows: List<DataRow>.generate(
                                         controller.jobTypeList.length,
                                         (index) {
                                           var jobTypeListDetails =
                                               controller.jobTypeList[index];
                                           return DataRow(cells: [
-                                            DataCell(Text(
-                                                '${jobTypeListDetails.id}')),
-                                            DataCell(Text(
-                                                '${jobTypeListDetails.name}')),
-                                            DataCell(Text(
-                                                '${jobTypeListDetails.description}')),
+                                            DataCell(
+                                                Text((index + 1).toString())),
+                                            DataCell(Text(controller
+                                                .jobTypeList[index].name
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .jobTypeList[index].description
+                                                .toString())),
                                             DataCell(Checkbox(
                                               value: controller.isChecked.value,
                                               onChanged: (val) {},
@@ -774,7 +776,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                     controller.descriptionCtrlr
                                                         .text = controller
                                                             .selectedItem
-                                                            ?.name ??
+                                                            ?.description ??
                                                         '';
                                                     controller
                                                         .isContainerVisible

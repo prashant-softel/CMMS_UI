@@ -310,7 +310,7 @@ class RiskTypeController extends GetxController {
 
   Future<void> deleteRiskType(String? business_id) async {
     {
-      await riskTypeListPresenter.deleteFacility(
+      await riskTypeListPresenter.deleteRiskType(
         business_id,
         isLoading: true,
       );
