@@ -125,7 +125,7 @@ class AssetMasterController extends GetxController {
 
       paginationController = PaginationController(
         rowCount: moduleList!.length,
-        rowsPerPage: 10,
+        rowsPerPage: 30,
       );
 
       if (moduleList != null && moduleList!.isNotEmpty) {

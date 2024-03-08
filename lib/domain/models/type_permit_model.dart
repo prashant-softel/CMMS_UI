@@ -7,20 +7,15 @@ String facilityListToJson(List<TypePermitModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class TypePermitModel {
-  factory TypePermitModel.fromJson(Map<String, dynamic> json) => TypePermitModel(
-        id: json['id'],
-        name: json['name'],
-      );
-  TypePermitModel({
-    this.id,
-    this.name,
-  });
+  factory TypePermitModel.fromJson(Map<String, dynamic> json) =>
+      TypePermitModel(
+          id: json['id'], name: json['name'], description: json['description']);
+  TypePermitModel({this.id, this.name, this.description});
 
   int? id;
   String? name;
+  String? description;
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-      };
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'name': name, 'description': description};
 }

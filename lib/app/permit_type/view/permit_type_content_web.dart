@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
         width: Get.width,
         height: Get.height,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderWidget(),
             Container(
@@ -62,130 +64,94 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     onTap: () {
                       Get.offAllNamed(Routes.breakdown);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE", style: Styles.greyLight14),
+                    child: Text(" / BREAKDOWN MAINTENANCE",
+                        style: Styles.greyLight14),
                   ),
                   Text(" / PERMIT TYPE", style: Styles.greyLight14)
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, top: 10),
+              child: ElevatedButton(
+                style: Styles.navyBlueElevatedButtonStyle,
+                onPressed: () {
+                  controller.toggleContainer();
+                },
+                child: Obx(() {
+                  return Text(
+                    controller.isContainerVisible.value
+                        ? 'Close Permit Type'
+                        : 'Open Permit Type',
+                  );
+                }),
               ),
             ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: (Get.width * .3),
-                    margin: EdgeInsets.only(left: 10, top: 30),
-                    height: Get.height / 2,
-                    child: Card(
-                      color: Color.fromARGB(255, 251, 252, 253),
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        children: [
-                          // Text(
-                          //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 5.0, right: 10, top: 10),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Create Permit Type",
-                                    style: Styles.blackBold16,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Visibility(
-                                    visible: controller.isSuccess.value,
-                                    child: Center(
-                                      child: Wrap(
-                                        children: [
-                                          Text(
-                                            controller.selectedItem == null
-                                                ? "Permit Type added Successfully in the List."
-                                                : "Permit Type updated Successfully in the List.",
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Color.fromARGB(
-                                                    255, 24, 243, 123)),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                        ],
+                  Visibility(
+                    visible: controller.isContainerVisible.value,
+                    child: Container(
+                      width: (Get.width * .3),
+                      margin: EdgeInsets.only(left: 10, top: 30),
+                      height: Get.height / 2.5,
+                      child: Card(
+                        color: Color.fromARGB(255, 251, 252, 253),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          children: [
+                            // Text(
+                            //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5.0, right: 10, top: 10),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Create Permit Type",
+                                      style: Styles.blackBold16,
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Visibility(
+                                      visible: controller.isSuccess.value,
+                                      child: Center(
+                                        child: Wrap(
+                                          children: [
+                                            Text(
+                                              controller.isFormInvalid == false
+                                                  ? controller.selectedItem ==
+                                                          null
+                                                      ? "Permit Type added Successfully in the List."
+                                                      : "Permit Type updated Successfully in the List."
+                                                  : "Facility not added",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Color.fromARGB(
+                                                      255, 24, 243, 123)),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: CustomRichText(
-                                          title: "Facility: ",
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2) -
-                                              30,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.040,
-                                          child: DropdownWebWidget(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            controller: controller,
-                                            dropdownList:
-                                                controller.facilityList,
-                                            isValueSelected: controller
-                                                .isFacilitySelected.value,
-                                            selectedValue: controller
-                                                .selectedFacility.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: CustomRichText(
-                                          title: "Title:",
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                            child: CustomRichText(
+                                                title: 'Facility Name')),
+                                        Container(
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
@@ -208,297 +174,347 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          width: (MediaQuery.of(context)
+                                          child: Container(
+                                              width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  .2) -
-                                              30,
-                                          child: Obx(
-                                            () => TextField(
-                                              style: GoogleFonts.lato(
-                                                textStyle: TextStyle(
-                                                    fontSize: 16.0,
-                                                    height: 1.0,
-                                                    color: Colors.black),
-                                              ),
-                                              controller: controller.titleCtrlr,
-                                              focusNode:
-                                                  controller.titleFocusNode,
-                                              scrollController: controller
-                                                  .titleScrollController,
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              maxLines: 1,
-                                              autofocus: false,
-                                              decoration: InputDecoration(
-                                                fillColor:
-                                                    ColorValues.whiteColor,
-                                                filled: true,
-                                                contentPadding:
-                                                    Dimens.edgeInsets05_10,
-                                                border: InputBorder.none,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
+                                                  .20),
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.040,
+                                              child: Obx(
+                                                () => DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  controller: controller,
+                                                  dropdownList:
+                                                      controller.facilityList,
+                                                  isValueSelected: controller
+                                                      .isFacilitySelected.value,
+                                                  selectedValue: controller
+                                                      .selectedFacility.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child:
+                                                CustomRichText(title: 'Title')),
+                                        Container(
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
                                                 ),
-                                                focusedErrorBorder: controller
-                                                        .isNameInvalid.value
-                                                    ? OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        borderSide: BorderSide(
-                                                          color: ColorValues
-                                                              .redColorDark,
-                                                        ),
-                                                      )
-                                                    : InputBorder.none,
-                                                errorBorder: controller
-                                                        .isNameInvalid.value
-                                                    ? OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        borderSide: BorderSide(
-                                                          color: ColorValues
-                                                              .redColorDark,
-                                                        ),
-                                                      )
-                                                    : null,
-                                                errorText: controller
-                                                        .isNameInvalid.value
-                                                    ? "Required field"
-                                                    : null,
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
                                               ),
-                                              onChanged: (value) {
-                                                if (value.trim().length > 1) {
-                                                  controller.isNameInvalid
-                                                      .value = false;
-                                                } else {
-                                                  controller.isNameInvalid
-                                                      .value = true;
-                                                }
-                                              },
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .deny(
-                                                  RegExp('[\'^]'),
-                                                )
-                                              ],
-                                            ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                           ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: CustomRichText(
-                                          title: "Description ",
-                                          // style: Styles.blackBold16,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              color: ColorValues.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2) -
-                                                45,
-                                            child: Obx(
-                                              () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
-                                                ),
-                                                controller:
-                                                    controller.descriptionCtrlr,
-                                                focusNode:
-                                                    controller.descFocusNode,
-                                                scrollController: controller
-                                                    .descScrollController,
-                                                keyboardType:
-                                                    TextInputType.multiline,
-                                                maxLines: 1,
-                                                autofocus: false,
-                                                decoration: InputDecoration(
-                                                  fillColor:
-                                                      ColorValues.whiteColor,
-                                                  filled: true,
-                                                  contentPadding:
-                                                      Dimens.edgeInsets05_10,
-                                                  border: InputBorder.none,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedErrorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isDescriptionInvalid
-                                                          .value
+                                          child: TextField(
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                height: 1.0,
+                                                color: Colors.black),
+                                            controller: controller.titleCtrlr,
+                                            focusNode:
+                                                controller.titleFocusNode,
+                                            scrollController: controller
+                                                .titleScrollController,
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            autofocus: false,
+                                            decoration: InputDecoration(
+                                              fillColor: ColorValues.whiteColor,
+                                              filled: true,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 5, right: 5),
+                                              border: InputBorder.none,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedErrorBorder: controller
+                                                      .isNameInvalid.value
+                                                  ? OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                        color: ColorValues
+                                                            .redColorDark,
+                                                      ),
+                                                    )
+                                                  : InputBorder.none,
+                                              errorBorder: controller
+                                                      .isNameInvalid.value
+                                                  ? OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                        color: ColorValues
+                                                            .redColorDark,
+                                                      ),
+                                                    )
+                                                  : null,
+                                              errorText:
+                                                  controller.isNameInvalid.value
                                                       ? "Required field"
                                                       : null,
+                                              hintStyle: TextStyle(height: 2.0),
+                                            ),
+                                            onChanged: (value) {
+                                              if (value.trim().length > 1) {
+                                                controller.isNameInvalid.value =
+                                                    false;
+                                              } else {
+                                                controller.isNameInvalid.value =
+                                                    true;
+                                              }
+                                            },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.deny(
+                                                RegExp('[\'^]'),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            child: CustomRichText(
+                                                title: 'Description')),
+                                        Container(
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
                                                 ),
-                                                onChanged: (value) {
-                                                  if (value.trim().length > 1) {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = false;
-                                                  } else {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = true;
-                                                  }
-                                                },
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
                                               ),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                ]),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                  height: 40,
-                                  width: (Get.width * .08),
-                                  child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.appRedColor,
-                                      onPressed: () {
-                                        controller.cleardata();
-                                      },
-                                      text: 'Cancel')),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                  height: 40,
-                                  child: controller.selectedItem == null
-                                      ? CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .createPermitType()
-                                                .then((value) {
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Create Permit')
-                                      : CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .updatePermitType(
-                                                    controller.selectedItem?.id)
-                                                .then((value) {
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Update')),
-                            ],
-                          ),
-                        ],
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: TextField(
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                height: 1.0,
+                                                color: Colors.black),
+                                            controller:
+                                                controller.descriptionCtrlr,
+                                            focusNode: controller.descFocusNode,
+                                            scrollController:
+                                                controller.descScrollController,
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            autofocus: false,
+                                            decoration: InputDecoration(
+                                              fillColor: ColorValues.whiteColor,
+                                              filled: true,
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 5, right: 5),
+                                              border: InputBorder.none,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedErrorBorder: controller
+                                                      .isDescriptionInvalid
+                                                      .value
+                                                  ? OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                        color: ColorValues
+                                                            .redColorDark,
+                                                      ),
+                                                    )
+                                                  : InputBorder.none,
+                                              errorBorder: controller
+                                                      .isDescriptionInvalid
+                                                      .value
+                                                  ? OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                        color: ColorValues
+                                                            .redColorDark,
+                                                      ),
+                                                    )
+                                                  : null,
+                                              errorText: controller
+                                                      .isDescriptionInvalid
+                                                      .value
+                                                  ? "Required field"
+                                                  : null,
+                                              hintStyle: TextStyle(height: 2.0),
+                                            ),
+                                            onChanged: (value) {
+                                              if (value.trim().length > 1) {
+                                                controller.isDescriptionInvalid
+                                                    .value = false;
+                                              } else {
+                                                controller.isDescriptionInvalid
+                                                    .value = true;
+                                              }
+                                            },
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.deny(
+                                                RegExp('[\'^]'),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                  ]),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                    height: 40,
+                                    width: (Get.width * .08),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
+                                        onPressed: () {
+                                          controller.cleardata();
+                                        },
+                                        text: 'Cancel')),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                    height: 40,
+                                    child: controller.selectedItem == null
+                                        ? CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .createPermitType()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Create Permit')
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updatePermitType(controller
+                                                      .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -518,13 +534,15 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "List of Permit Type",
-                                style: Styles.blackBold16,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "List of Permit Type",
+                                    style: Styles.blackBold16,
+                                  ),
+                                  Spacer()
+                                ],
                               ),
-                            ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
                             ),
                             Row(
                               children: [
@@ -574,225 +592,211 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                 // )
                               ],
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
                             controller.typePermitList.isEmpty
                                 ? Expanded(
-                                    child: ScrollableTableView(
+                                    child: DataTable2(
                                       columns: [
-                                        "Checklist Number ",
-                                        "Active Status ",
-                                        "Category ",
-                                        "Frequency ",
-                                        "PM Manpower",
-                                        "PM Duration(in Min.)",
-                                        "Action",
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          label: column,
-                                          minWidth: Get.width * 0.16,
-                                        );
-                                      }).toList(),
-                                      rows: [
-                                        ...List.generate(
-                                          controller.typePermitList.length,
-                                          (index) {
-                                            return [
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                            ];
-                                          },
+                                        DataColumn2(
+                                          label: Text(
+                                            "Checklist Number",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
                                         ),
-                                      ].map((record) {
-                                        return TableViewRow(
-                                          height: 60,
-                                          cells: record.map((value) {
-                                            return TableViewCell(
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                        );
-                                      }).toList(),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Active status",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Category",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Frequency",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "PM Manpower",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "PM Duration(in Min.)",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Action",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.S,
+                                        ),
+                                      ],
+                                      rows: List.generate(
+                                        controller.typePermitList.length,
+                                        (index) {
+                                          return DataRow.byIndex(
+                                            index: index,
+                                            cells: [
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                            ],
+                                          );
+                                        },
+                                      ),
                                     ),
                                   )
                                 : Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .permitTypePaginationController,
+                                    child: DataTable2(
+                                      key: UniqueKey(),
+                                      dataRowHeight: 50,
+                                      columnSpacing: 10,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
                                       columns: [
-                                        "Sr.No.",
-                                        "Title",
-                                        // "Description",
-                                        // "Facility",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.typePermitList.length,
-                                          (index) {
-                                            var typePermitListDetails =
-                                                controller
-                                                    .typePermitList[index];
-                                            return [
-                                              '${typePermitListDetails?.id}',
-                                              //'${typePermitListDetails?.status ?? ''}',
-                                              '${typePermitListDetails?.name}',
-                                              "Action"
-                                            ];
-                                          },
+                                        DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text(
+                                            "Sr.No.",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 60,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                  child: (value == 'No')
-                                                      ? CustomSwitchTroggle(
-                                                          value: value == 'No'
-                                                              ? true
-                                                              : false,
-                                                          onChanged: (value) {},
-                                                        )
-                                                      : (value == "Action")
-                                                          ? Row(children: [
-                                                              // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                              //         0
-                                                              //     ?
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .editColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                message: 'Edit',
-                                                                onPress: () {
-                                                                  controller.selectedItem = controller
-                                                                      .typePermitList
-                                                                      .firstWhere((element) =>
-                                                                          "${element?.id}" ==
-                                                                          _permitTypeList[
-                                                                              0]);
-
+                                        DataColumn2(
+                                          label: Text(
+                                            "Title",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text(
+                                            "Action",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                      rows: List<DataRow>.generate(
+                                        controller.typePermitList.length,
+                                        (index) {
+                                          return DataRow(
+                                            // index: index,
+                                            cells: [
+                                              DataCell(
+                                                  Text((index + 1).toString())),
+                                              DataCell(Text(controller
+                                                  .typePermitList[index]!.name
+                                                  .toString())),
+                                              DataCell(Text(controller
+                                                  .typePermitList[index]!
+                                                  .description
+                                                  .toString())),
+                                              DataCell(Row(
+                                                children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.editColor,
+                                                    icon: Icons.edit,
+                                                    message: 'Edit',
+                                                    onPress: () {
+                                                      controller.selectedItem = controller
+                                                          .typePermitList
+                                                          .firstWhere((element) =>
+                                                              "${element?.id}" ==
+                                                              controller
+                                                                  .typePermitList[
+                                                                      index]!
+                                                                  .id
+                                                                  .toString());
+                                                      controller.titleCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.name ??
+                                                          '';
+                                                      controller
+                                                              .selectedFacility
+                                                              .value =
+                                                          controller
+                                                              .onFetchNameFromId(
                                                                   controller
-                                                                      .titleCtrlr
-                                                                      .text = controller
-                                                                          .selectedItem
-                                                                          ?.name ??
-                                                                      '';
-                                                                  controller
-                                                                          .selectedFacility
-                                                                          .value =
-                                                                      controller.onFetchNameFromId(controller
-                                                                          .selectedItem
-                                                                          ?.id)!;
-                                                                  print(
-                                                                      "$controller.selectedFacility.value");
-                                                                },
-                                                              ),
-
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .deleteColor,
-                                                                icon: Icons
-                                                                    .delete,
-                                                                message:
-                                                                    'Delete',
-                                                                onPress: () {
-                                                                  controller.isDeleteDialog(
-                                                                      checklist_id:
-                                                                          _permitTypeList[
-                                                                              0],
-                                                                      checklist:
-                                                                          _permitTypeList[
-                                                                              1]);
-                                                                },
-                                                              )
-                                                              // : Container()
-                                                            ])
-                                                          : Text(
-                                                              value,
-                                                            ));
-                                            }).toList());
-                                      }).toList(),
+                                                                      .selectedItem
+                                                                      ?.id)!;
+                                                      print(
+                                                          "${controller.selectedFacility.value}");
+                                                    },
+                                                  ),
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.deleteColor,
+                                                    icon: Icons.delete,
+                                                    message: 'Delete',
+                                                    onPress: () {
+                                                      controller.isDeleteDialog(
+                                                          checklist_id: controller
+                                                              .typePermitList[
+                                                                  index]!
+                                                              .id
+                                                              .toString(),
+                                                          checklist: controller
+                                                              .typePermitList[
+                                                                  index]!
+                                                              .name);
+                                                    },
+                                                  ),
+                                                ],
+                                              )),
+                                            ],
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.permitTypePaginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.permitTypePaginationController.currentPage}  of ${controller.permitTypePaginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .permitTypePaginationController
-                                                      .currentPage <=
-                                                  1
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .permitTypePaginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .permitTypePaginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .permitTypePaginationController
-                                                      .currentPage >=
-                                                  controller
-                                                      .permitTypePaginationController
-                                                      .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .permitTypePaginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .permitTypePaginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .permitTypePaginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                      ]),
-                                    ]);
-                                  }),
-                            ),
                           ],
                         ),
                       ),
