@@ -1358,7 +1358,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                                     message: 'Remove',
                                                                                     onPress: () {
                                                                                       // Call the removeItem method of the controller
-                                                                                      controller.removeItem(index);
+                                                                                      _removeRow(index);
+                                                                                      print("index");
                                                                                     },
                                                                                   )
                                                                                 ],
@@ -2642,6 +2643,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
               : null;
         });
   }
+
+  void _removeRow(int index) {
+    controller.filteredEmployeeNameList.removeAt(index);
+  }
 }
 
 // import 'package:cmms/app/app.dart';
@@ -3164,3 +3169,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
 //     );
 //   }
 // }
+
+
+

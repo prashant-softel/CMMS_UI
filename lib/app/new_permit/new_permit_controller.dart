@@ -468,13 +468,8 @@ class NewPermitController extends GetxController {
   }
 
   void removeItem(int index) {
-    if (index >= 0 && index < filteredEmployeeNameList.length) {
-      filteredEmployeeNameList.removeAt(index);
-
-      update();
-    } else {
-      print('Invalid index: $index');
-    }
+    filteredEquipmentNameList.removeAt(index);
+    print("Item at index $index removed successfully.");
   }
 
   Future<void> setId() async {
@@ -707,6 +702,7 @@ class NewPermitController extends GetxController {
         [];
     update(["historyList"]);
   }
+
 
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);
