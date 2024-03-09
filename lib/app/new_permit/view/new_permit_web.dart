@@ -665,16 +665,62 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   CustomAppBar(
                                                     title: 'Loto Equipment List'
                                                         .tr,
-                                                    action: ActionButton(
-                                                        label: 'Add New',
-                                                        icon: Icons.add,
-                                                        onPressed: () {
-                                                          //  showEquipmentNameAlertBox();
-                                                          Get.dialog<void>(
-                                                              showEquipmentNameAlertBox());
-                                                        },
-                                                        color: ColorValues
-                                                            .appGreenColor),
+                                                    action: Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title: "Add new"),
+                                                        Dimens.boxWidth10,
+                                                        SizedBox(
+                                                          width: 250,
+                                                          height: 50,
+                                                          child:
+                                                              CustomMultiSelectDialogField(
+                                                            buttonText:
+                                                                'Select Equipment Name',
+                                                            title:
+                                                                'Equipment Name',
+                                                            initialValue: (controller
+                                                                    .selectedEquipmentNameList
+                                                                    .isNotEmpty)
+                                                                ? controller
+                                                                    .selectedEquipmentNameIdList
+                                                                : [],
+                                                            items: controller
+                                                                .equipmentNameList
+                                                                .map(
+                                                                  (equipmentName) =>
+                                                                      MultiSelectItem(
+                                                                    equipmentName
+                                                                        ?.id,
+                                                                    equipmentName
+                                                                            ?.name ??
+                                                                        '',
+                                                                  ),
+                                                                )
+                                                                .toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) =>
+                                                                    {
+                                                              controller
+                                                                  .equipmentNameSelected(
+                                                                      selectedOptionsList),
+                                                              print(
+                                                                  'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
+                                                            },
+                                                          ),
+                                                        )
+                                                        // ActionButton(
+                                                        //     label: 'Add New',
+                                                        //     icon: Icons.add,
+                                                        //     onPressed: () {
+                                                        //       //  showEquipmentNameAlertBox();
+                                                        //       // Get.dialog<void>(
+                                                        //       //     showEquipmentNameAlertBox());
+                                                        //     },
+                                                        //     color: ColorValues
+                                                        //         .appGreenColor),
+                                                      ],
+                                                    ),
                                                   ),
                                                   Dimens.boxHeight10,
                                                   // Wrap(
@@ -794,7 +840,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         .filteredEquipmentNameList
                                                                         .length) *
                                                                     60),
-                                                                // + 90,
+                                                                // 90,
                                                                 child:
                                                                     DataTable(
                                                                   columns: [
@@ -1218,11 +1264,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                         style:
                                                             Styles.blackBold17,
                                                       ),
-                                                      // Dimens.boxWidth5,
-                                                      // Text(
-                                                      //   '17:06:2022 09:30:00',
-                                                      //   style: Styles.black17,
-                                                      // ),
                                                       _buildDateTimeField_web(
                                                           context),
                                                     ],
@@ -2461,30 +2502,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                     SizedBox(
                       height: 50,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.5,
-                      child: CustomMultiSelectDialogField(
-                        buttonText: 'Select Equipment Name',
-                        title: 'Equipment Name',
-                        initialValue:
-                            (controller.selectedEquipmentNameList.isNotEmpty)
-                                ? controller.selectedEquipmentNameIdList
-                                : [],
-                        items: controller.equipmentNameList
-                            .map(
-                              (equipmentName) => MultiSelectItem(
-                                equipmentName?.id,
-                                equipmentName?.name ?? '',
-                              ),
-                            )
-                            .toList(),
-                        onConfirm: (selectedOptionsList) => {
-                          controller.equipmentNameSelected(selectedOptionsList),
-                          print(
-                              'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
-                        },
-                      ),
-                    )
                   ]),
             ),
           );
@@ -3169,6 +3186,3 @@ class NewPermitWeb extends GetView<NewPermitController> {
 //     );
 //   }
 // }
-
-
-
