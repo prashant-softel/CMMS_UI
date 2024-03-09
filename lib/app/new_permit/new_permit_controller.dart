@@ -703,6 +703,7 @@ class NewPermitController extends GetxController {
     update(["historyList"]);
   }
 
+
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);
   }
