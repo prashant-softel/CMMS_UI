@@ -86,6 +86,7 @@ class AddInventoryController extends GetxController {
   //add invntory
   var serialNoCtrlr = TextEditingController();
   var assetsNameCtrlr = TextEditingController();
+  var moduleQuantityCtrlr = TextEditingController();
   var assesDiscriptionCtrlr = TextEditingController();
   var certificateNoCtrlr = TextEditingController();
   var discriptionCtrlr = TextEditingController();
@@ -226,26 +227,25 @@ class AddInventoryController extends GetxController {
         }
       });
       nameFocus.addListener(() {
-      if (!nameFocus.hasFocus) {
-        nameScroll.jumpTo(0.0);
-      }
-    });
-          descFocus.addListener(() {
-      if (!descFocus.hasFocus) {
-        descScroll.jumpTo(0.0);
-      }
-    });
+        if (!nameFocus.hasFocus) {
+          nameScroll.jumpTo(0.0);
+        }
+      });
+      descFocus.addListener(() {
+        if (!descFocus.hasFocus) {
+          descScroll.jumpTo(0.0);
+        }
+      });
       calremFocus.addListener(() {
-      if (!calremFocus.hasFocus) {
-        calremScroll.jumpTo(0.0);
-      }
-    });
+        if (!calremFocus.hasFocus) {
+          calremScroll.jumpTo(0.0);
+        }
+      });
       wdescFocus.addListener(() {
-      if (!wdescFocus.hasFocus) {
-        wdescScroll.jumpTo(0.0);
-      }
-    });
-
+        if (!wdescFocus.hasFocus) {
+          wdescScroll.jumpTo(0.0);
+        }
+      });
     } catch (e) {}
     super.onInit();
   }
@@ -294,6 +294,9 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.type ?? '';
       selectedTypeName.value = editAddInventoryDetailsModel.value?.type ?? "";
       assetsNameCtrlr.text = editAddInventoryDetailsModel.value?.name ?? '';
+      moduleQuantityCtrlr.text =
+          editAddInventoryDetailsModel.value?.moduleQuantity.toString() ?? '';
+
       assesDiscriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.description ?? "";
       warrentyDescriptionCtrlr.text =
@@ -355,6 +358,8 @@ class AddInventoryController extends GetxController {
   Future<bool> updateInventory() async {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
+
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
     String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -409,7 +414,7 @@ class AddInventoryController extends GetxController {
             operatorId: 3,
             ownerId: 2,
             stockCount: 50,
-            moduleQuantity: 15,
+            moduleQuantity: int.tryParse(_moduleQuantityCtrlr),
             attachments: null);
     var addInventoryJsonString = addInventoryRequestModel
         .toJson(); //createCheckListToJson([createChecklist]);
@@ -485,6 +490,8 @@ class AddInventoryController extends GetxController {
   Future<bool> AddInventory() async {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
+    String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
+
     String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
     String _certificateNoCtrlr = certificateNoCtrlr.text.trim();
     String _discriptionCtrlr = discriptionCtrlr.text.trim();
@@ -513,6 +520,7 @@ class AddInventoryController extends GetxController {
         AddInventoryRequestModel(
             id: 0,
             name: _assetsNameCtrlr,
+            moduleQuantity: int.tryParse(_moduleQuantityCtrlr),
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
             typeId: selectedTypeNameId,
@@ -540,7 +548,6 @@ class AddInventoryController extends GetxController {
             operatorId: 3,
             ownerId: 2,
             stockCount: 50,
-            moduleQuantity: 15,
             attachments: null);
     var addInventoryJsonString = [
       addInventoryRequestModel.toJson()
