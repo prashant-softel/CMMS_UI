@@ -1254,19 +1254,58 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 maxWidth: 1100,
                                               ),
                                               child: Column(children: [
-                                                CustomAppBar(
-                                                  title:
-                                                      'TBT Training Attended By'
-                                                          .tr,
-                                                  action: ActionButton(
-                                                    label: 'Add Employee',
-                                                    icon: Icons.add,
-                                                    onPressed: () {
-                                                      Get.dialog<void>(
-                                                          AddEmployeeListAlertBox());
-                                                    },
-                                                    color: ColorValues
-                                                        .appGreenColor,
+                                                Obx(
+                                                  () => CustomAppBar(
+                                                    title:
+                                                        'TBT Training Attended By'
+                                                            .tr,
+                                                    action: Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                "Add Employee"),
+                                                        Dimens.boxWidth10,
+                                                        SizedBox(
+                                                          width: 220,
+                                                          height: 50,
+                                                          child:
+                                                              CustomMultiSelectDialogField(
+                                                            buttonText:
+                                                                'Add Employee',
+                                                            title:
+                                                                'Select Employee',
+                                                            initialValue: (controller
+                                                                    .selectedEmployeeNameList
+                                                                    .isNotEmpty)
+                                                                ? controller
+                                                                    .selectedEmployeeNameIdList
+                                                                : [],
+                                                            items: controller
+                                                                .employeeNameList
+                                                                .map(
+                                                                  (employeeName) =>
+                                                                      MultiSelectItem(
+                                                                    employeeName
+                                                                        ?.id,
+                                                                    employeeName
+                                                                            ?.name ??
+                                                                        '',
+                                                                  ),
+                                                                )
+                                                                .toList(),
+                                                            onConfirm:
+                                                                (selectedOptionsList) =>
+                                                                    {
+                                                              controller
+                                                                  .employeeNameSelected(
+                                                                      selectedOptionsList),
+                                                              print(
+                                                                  'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                                 Dimens.boxHeight10,
@@ -2589,14 +2628,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Obx(
             () => Container(
               padding: Dimens.edgeInsets05_0_5_0,
               // height: double.infinity,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 1.5,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -2607,30 +2644,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                     SizedBox(
                       height: 50,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3.5,
-                      child: CustomMultiSelectDialogField(
-                        buttonText: 'Add Employee',
-                        title: 'Select Employee',
-                        initialValue:
-                            (controller.selectedEmployeeNameList.isNotEmpty)
-                                ? controller.selectedEmployeeNameIdList
-                                : [],
-                        items: controller.employeeNameList
-                            .map(
-                              (employeeName) => MultiSelectItem(
-                                employeeName?.id,
-                                employeeName?.name ?? '',
-                              ),
-                            )
-                            .toList(),
-                        onConfirm: (selectedOptionsList) => {
-                          controller.employeeNameSelected(selectedOptionsList),
-                          print(
-                              'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
-                        },
-                      ),
-                    )
                   ]),
             ),
           );

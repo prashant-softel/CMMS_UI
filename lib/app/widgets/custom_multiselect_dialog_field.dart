@@ -58,13 +58,12 @@ class CustomMultiSelectDialogField extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 60,
+            height: _selectedItems.isNotEmpty ? 60 : 0,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Scrollbar(
                 thumbVisibility: true,
                 controller: _firstController,
-                // trackVisibility: true,
                 child: ListView.builder(
                   controller: _firstController,
                   itemCount: _selectedItems.length,
