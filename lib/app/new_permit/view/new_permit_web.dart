@@ -639,11 +639,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     // loto apply
                                     ? Center(
                                         child: SizedBox(
-                                          height: ((controller
-                                                      .filteredEquipmentNameList
-                                                      .length) *
-                                                  30) +
-                                              200,
+                                          // height: ((controller
+                                          //             .filteredEquipmentNameList
+                                          //             .length) *
+                                          //         30) +
+                                          //     200,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
@@ -651,7 +651,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           child: Center(
                                             child: Container(
                                               // margin: Dimens.edgeInsets16,
-                                              height: Get.height,
+                                              // height: Get.height,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
                                                     color: Colors.grey
@@ -677,6 +677,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             .appGreenColor),
                                                   ),
                                                   Dimens.boxHeight10,
+                                                  // Wrap(
+                                                  //   children: [
                                                   Wrap(
                                                     children: [
                                                       Column(
@@ -776,100 +778,91 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           //         ),
                                                           //       )
                                                           //     :
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                2,
-                                                            child: Container(
-                                                              height: ((controller
-                                                                          .filteredEquipmentNameList
-                                                                          .length) *
-                                                                      25) +
-                                                                  90,
-                                                              child: Column(
-                                                                  //
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child: //
-                                                                          Theme(
-                                                                        data: ThemeData(
-                                                                            scrollbarTheme:
-                                                                                ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                        child:
-                                                                            ScrollableTableView(
-                                                                          // paginationController: controller.equipmentNamepaginationController,
-                                                                          columns:
-                                                                              [
-                                                                            'name',
-                                                                            'serialNumber',
-                                                                            'action'.tr,
-                                                                          ].map((column) {
-                                                                            return TableViewColumn(
-                                                                              minWidth: Get.width * 0.25,
-                                                                              label: column == "name"
-                                                                                  ? "Loto Applied On"
-                                                                                  : column == "serialNumber"
-                                                                                      ? "Serial Number"
-                                                                                      : "Action",
-                                                                            );
-                                                                          }).toList(),
-                                                                          rows: //
-                                                                              [
-                                                                            ...List.generate(
-                                                                              ///controller.selectedEquipmentNameIdList
-                                                                              controller.filteredEquipmentNameList.length,
-
-                                                                              (index) {
-                                                                                var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
-
-                                                                                //_jobId = jobDetails?.id;
-
-                                                                                controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                print('Equipment Isss5:${controller.id.value}');
-                                                                                return [
-                                                                                  '${inventoryEquipmentName?.name ?? ''}',
-                                                                                  '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                  'Actions'
-                                                                                ];
-                                                                              },
-                                                                            ),
-                                                                          ].map((_inventoryDetailList) {
-                                                                            return TableViewRow(
-                                                                                onTap: () => {
-                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                    },
-                                                                                height: 25,
-                                                                                cells: _inventoryDetailList.map((value) {
-                                                                                  return TableViewCell(
-                                                                                    //key: ,
-                                                                                    child: (value == 'Actions')
-                                                                                        ? Wrap(
-                                                                                            children: [
-                                                                                              TableActionButton(
-                                                                                                color: Colors.red,
-                                                                                                icon: Icons.delete_outline,
-                                                                                                message: 'Remove',
-                                                                                                onPress: () {
-                                                                                                  int index = _inventoryDetailList.indexOf(value);
-                                                                                                  print("Index to remove: $index");
-                                                                                                  controller.removeItem(index);
-                                                                                                },
-                                                                                              ),
-                                                                                            ],
-                                                                                          )
-                                                                                        : Text(value.toString()),
-                                                                                  );
-                                                                                }).toList());
-                                                                          }).toList(),
-                                                                        ),
-                                                                      ),
+                                                          SingleChildScrollView(
+                                                            child: SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  2,
+                                                              child: Container(
+                                                                constraints:
+                                                                    BoxConstraints(
+                                                                        minHeight:
+                                                                            110),
+                                                                height: ((controller
+                                                                        .filteredEquipmentNameList
+                                                                        .length) *
+                                                                    60),
+                                                                // + 90,
+                                                                child:
+                                                                    DataTable(
+                                                                  columns: [
+                                                                    DataColumn(
+                                                                      label: Text(
+                                                                          "Loto Applied On"),
+                                                                      tooltip:
+                                                                          "Name",
                                                                     ),
-                                                                  ]),
+                                                                    DataColumn(
+                                                                      label: Text(
+                                                                          "Serial Number"),
+                                                                      tooltip:
+                                                                          "Serial Number",
+                                                                    ),
+                                                                    DataColumn(
+                                                                      label: Text(
+                                                                          "Action"),
+                                                                      tooltip:
+                                                                          "Action",
+                                                                    ),
+                                                                  ],
+                                                                  rows: List<
+                                                                      DataRow>.generate(
+                                                                    controller
+                                                                        .filteredEquipmentNameList
+                                                                        .length,
+                                                                    (index) {
+                                                                      var inventoryEquipmentName =
+                                                                          controller
+                                                                              .filteredEquipmentNameList[index];
+                                                                      controller
+                                                                              .id
+                                                                              .value =
+                                                                          inventoryEquipmentName?.id ??
+                                                                              0;
+                                                                      print(
+                                                                          'Equipment Isss5:${controller.id.value}');
+                                                                      return DataRow(
+                                                                        cells: [
+                                                                          DataCell(
+                                                                            Text('${inventoryEquipmentName?.name ?? ''}'),
+                                                                          ),
+                                                                          DataCell(
+                                                                            Text('${inventoryEquipmentName?.serialNumber ?? ''}'),
+                                                                          ),
+                                                                          DataCell(
+                                                                            Wrap(
+                                                                              children: [
+                                                                                TableActionButton(
+                                                                                  color: Colors.red,
+                                                                                  icon: Icons.delete_outline,
+                                                                                  message: 'Remove',
+                                                                                  onPress: () {
+                                                                                    controller.removeItem(index);
+                                                                                  },
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ),
-
                                                           // SizedBox(
                                                           //   width:
                                                           //       MediaQuery.of(context).size.width / 1.2,
@@ -1234,7 +1227,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           context),
                                                     ],
                                                   ),
-                                                  Spacer(),
                                                 ],
                                               ),
                                             ),
@@ -1311,126 +1303,78 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 Dimens.boxHeight10,
                                                 Wrap(children: [
                                                   Column(children: [
-                                                    Obx(
-                                                      () => SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            1.5,
-                                                        child: Container(
-                                                          height: ((controller
-                                                                      .filteredEmployeeNameList
-                                                                      .length) *
-                                                                  30) +
-                                                              110,
-                                                          child: Column(
-                                                              //
-                                                              children: [
-                                                                Expanded(
-                                                                  child: //
-                                                                      Theme(
-                                                                    data: ThemeData(
-                                                                        scrollbarTheme:
-                                                                            ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                    child:
-                                                                        ScrollableTableView(
-                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                      columns: [
-                                                                        // 'id',
-                                                                        'name',
-                                                                        // 'gender',
-                                                                        'Contact No.',
-                                                                        'Responsibility',
-
-                                                                        'action'
-                                                                            .tr,
-                                                                      ].map(
-                                                                          (column) {
-                                                                        return TableViewColumn(
-                                                                          minWidth:
-                                                                              Get.width * 0.175,
-                                                                          label:
-                                                                              // column == "id"
-                                                                              //     ? "Employee Id"
-                                                                              //     :
-                                                                              column == "name"
-                                                                                  ? "Employee Name"
-                                                                                  // : column == "gender"
-                                                                                  //     ? "Gender"
-                                                                                  : column == "Contact No."
-                                                                                      ? "Contact No."
-                                                                                      : column == "Responsibility"
-                                                                                          ? "Responsibility"
-                                                                                          : "Action",
-                                                                        );
-                                                                      }).toList(),
-                                                                      rows: //
-                                                                          [
-                                                                        ...List
-                                                                            .generate(
-                                                                          ///controller.selectedEquipmentNameIdList
-                                                                          controller
-                                                                              .filteredEmployeeNameList
-                                                                              .length,
-
-                                                                          (index) {
-                                                                            var employeeNameDetails =
-                                                                                controller.filteredEmployeeNameList[index];
-
-                                                                            //_jobId = jobDetails?.id;
-
-                                                                            // controller.id.value = employeeNameDetails?.id ?? 0;
-                                                                            // print('Employee Idss5:${controller.id.value}');
-                                                                            return [
-                                                                              // '${employeeNameDetails?.id ?? ''}',
-                                                                              '${employeeNameDetails?.name ?? ''}',
-                                                                              // '${employeeNameDetails?.gender ?? ''}',
-                                                                              '${employeeNameDetails?.mobileNumber ?? ''}',
-                                                                              '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}',
-                                                                              'Actions'
-                                                                            ];
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              2,
+                                                      child: Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  minHeight:
+                                                                      90),
+                                                          // height: ((controller
+                                                          //             .filteredEmployeeNameList
+                                                          //             .length) *
+                                                          //         30) +
+                                                          //     110,
+                                                          child:
+                                                              SingleChildScrollView(
+                                                                  child:
+                                                                      DataTable(
+                                                            columns: [
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Employee Name")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Contact No")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Responsibility")),
+                                                              DataColumn(
+                                                                  label: Text(
+                                                                      "Action")),
+                                                            ],
+                                                            rows: List<
+                                                                    DataRow>.generate(
+                                                                controller
+                                                                    .filteredEmployeeNameList
+                                                                    .length,
+                                                                (index) {
+                                                              var employeeNameDetails =
+                                                                  controller
+                                                                          .filteredEmployeeNameList[
+                                                                      index];
+                                                              return DataRow(
+                                                                  cells: [
+                                                                    DataCell(Text(
+                                                                        '${employeeNameDetails?.name ?? ''}')),
+                                                                    DataCell(Text(
+                                                                        '${employeeNameDetails?.mobileNumber ?? ''}')),
+                                                                    DataCell(Text(
+                                                                        '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
+                                                                    DataCell(
+                                                                        Wrap(
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              Colors.red,
+                                                                          icon:
+                                                                              Icons.delete_outline,
+                                                                          message:
+                                                                              'Remove',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.removeItem(index);
                                                                           },
-                                                                        ),
-                                                                      ].map((_inventoryDetailList) {
-                                                                        print(
-                                                                            'ListData = ${_inventoryDetailList}');
-
-                                                                        return TableViewRow(
-                                                                            onTap: () =>
-                                                                                {
-                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                },
-                                                                            height:
-                                                                                25,
-                                                                            cells:
-                                                                                _inventoryDetailList.map((value) {
-                                                                              return TableViewCell(
-                                                                                //key: ,
-                                                                                child: (value == 'Actions')
-                                                                                    ? Wrap(children: [
-                                                                                        TableActionButton(
-                                                                                          color: Colors.red,
-                                                                                          icon: Icons.delete_outline,
-                                                                                          message: 'Remove',
-                                                                                          onPress: () {
-                                                                                            // controller.showNewPermitListDetails(
-                                                                                            //     controller.permitId.value);
-                                                                                            controller.removeRow(id: int.tryParse(_inventoryDetailList[0]) ?? 0);
-                                                                                            print('InventoryEmployeeList$_inventoryDetailList');
-                                                                                          },
-                                                                                        ),
-                                                                                      ])
-                                                                                    : Text(value.toString()),
-                                                                              );
-                                                                            }).toList());
-                                                                      }).toList(),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ]),
-                                                        ),
-                                                      ),
+                                                                        )
+                                                                      ],
+                                                                    ))
+                                                                  ]);
+                                                            }),
+                                                          ))),
                                                     ),
                                                   ]),
                                                 ]),
