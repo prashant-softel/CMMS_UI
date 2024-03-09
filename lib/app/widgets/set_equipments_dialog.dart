@@ -73,7 +73,7 @@ class SetEquipmentDialog extends GetView {
               ),
               // padding: EdgeInsets.only(right: 120, top: 10),
               height: height / 1.5,
-              width: double.infinity,
+              width: Get.width * 0.5,
               child: SingleChildScrollView(
                 child: Column(
                     children: [
@@ -82,29 +82,36 @@ class SetEquipmentDialog extends GetView {
                     child: Row(
                       children: [
                         Expanded(
+                          flex: 4,
                           child: Text(
                             "Assets",
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
                         Expanded(
+                          flex: 2,
                           child: Text("Modules",
                               style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
+                            flex: 2,
                             child: Text("Select Day",
                                 style: TextStyle(color: Color(0xff31576D)))),
                       ],
                     ),
+                  ),
+                  Divider(
+                    thickness: 2,
                   )
                 ]..addAll(controller.equipmentList.value.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
                           child: Column(
                             children: [
                               Row(
                                 children: [
                                   Expanded(
+                                    flex: 4,
                                     child: GestureDetector(
                                       onTap: () {
                                         setState(
@@ -129,6 +136,7 @@ class SetEquipmentDialog extends GetView {
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       "${e.moduleQuantity}",
                                       style: TextStyle(
@@ -137,6 +145,7 @@ class SetEquipmentDialog extends GetView {
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: DropdownButton<String>(
                                       value: e.selectedDay,
                                       onChanged: (newValue) {
@@ -167,13 +176,16 @@ class SetEquipmentDialog extends GetView {
                                               return Row(
                                                 children: [
                                                   Expanded(
+                                                      flex: 4,
                                                       child: Text(
                                                           smbItems.smbName ??
                                                               "")),
                                                   Expanded(
+                                                      flex: 2,
                                                       child: Text(
                                                           "${smbItems.moduleQuantity}")),
                                                   Expanded(
+                                                    flex: 2,
                                                     child:
                                                         DropdownButton<String>(
                                                       value:
@@ -203,7 +215,10 @@ class SetEquipmentDialog extends GetView {
                                           ),
                                         ),
                                     )
-                                  : Dimens.box0
+                                  : Dimens.box0,
+                              Divider(
+                                thickness: 1,
+                              )
                             ],
                           ),
                         );
