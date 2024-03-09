@@ -75,8 +75,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       children: [
                         HeaderWidget(),
                         Container(
-                          // width: MediaQuery.of(context).size.width,
-                          // height: MediaQuery.of(context).size.height * 2,
+                          width: Get.width,
+                          height: Get.height * .9,
                           child: Card(
                             color: Color.fromARGB(255, 245, 248, 250),
                             //  elevation: 20,
@@ -714,101 +714,102 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 child: Column(
                                                                     //
                                                                     children: [
-                                                                      Expanded(
-                                                                        child: //
-                                                                            ScrollableTableView(
-                                                                          // paginationController: controller.equipmentNamepaginationController,
-                                                                          columns:
-                                                                              [
-                                                                            'empName',
-                                                                            'resp',
-                                                                            'Competeness'.tr,
-                                                                          ].map((column) {
-                                                                            return TableViewColumn(
-                                                                              minWidth: Get.width * 0.19,
-                                                                              label: column == "empName"
-                                                                                  ? "Employee Name"
-                                                                                  : column == "resp"
-                                                                                      ? "Responsibility"
-                                                                                      : "Competeness",
-                                                                            );
-                                                                          }).toList(),
-                                                                          rows: //
-                                                                              [
-                                                                            ...List.generate(
-                                                                              ///controller.selectedEquipmentNameIdList
-                                                                              controller.listEmployee?.length ?? 0,
+                                                                      ScrollableTableView(
+                                                                        // paginationController: controller.equipmentNamepaginationController,
+                                                                        columns:
+                                                                            [
+                                                                          'empName',
+                                                                          'resp',
+                                                                          'Competeness'
+                                                                              .tr,
+                                                                        ].map((column) {
+                                                                          return TableViewColumn(
+                                                                            minWidth:
+                                                                                Get.width * 0.19,
+                                                                            label: column == "empName"
+                                                                                ? "Employee Name"
+                                                                                : column == "resp"
+                                                                                    ? "Responsibility"
+                                                                                    : "Competeness",
+                                                                          );
+                                                                        }).toList(),
+                                                                        rows: //
+                                                                            [
+                                                                          ...List
+                                                                              .generate(
+                                                                            ///controller.selectedEquipmentNameIdList
+                                                                            controller.listEmployee?.length ??
+                                                                                0,
 
-                                                                              (index) {
-                                                                                var employeeNameDetails = controller.listEmployee![index];
+                                                                            (index) {
+                                                                              var employeeNameDetails = controller.listEmployee![index];
 
-                                                                                //_jobId = jobDetails?.id;
+                                                                              //_jobId = jobDetails?.id;
 
-                                                                                // controller.id.value = employeeNameDetails?.id ?? 0;
-                                                                                print('Employee Idss5:${controller.id.value}');
-                                                                                return [
-                                                                                  '${employeeNameDetails?.empName ?? ''}',
-                                                                                  '${employeeNameDetails?.resp ?? ''}',
-                                                                                  'Competeness'
-                                                                                ];
-                                                                              },
-                                                                            ),
-                                                                          ].map((_inventoryDetailList) {
-                                                                            return TableViewRow(
-                                                                                onTap: () => {
-                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                    },
-                                                                                height: 45,
-                                                                                cells: _inventoryDetailList.map((value) {
-                                                                                  return TableViewCell(
-                                                                                    //key: ,
-                                                                                    child: (value == 'Competeness')
-                                                                                        ? Wrap(
-                                                                                            children: [
-                                                                                              TableActionButton(
-                                                                                                color: Colors.blue,
-                                                                                                icon: Icons.delete_outline,
-                                                                                                message: 'Compete',
-                                                                                                onPress: () {
-                                                                                                  // controller.showNewPermitListDetails(
-                                                                                                  //     controller.permitId.value);
-                                                                                                },
-                                                                                              ),
-                                                                                              // TableActionButton(
-                                                                                              //   color: ColorValues.purpleColor,
-                                                                                              //   icon: Icons.add,
-                                                                                              //   label: 'Job Card',
-                                                                                              //   onPress: () {
-                                                                                              //     // controller.goToJobCardScreen(
-                                                                                              //     //   int.tryParse(_newPermitList[0]),
-                                                                                              //     // );
-                                                                                              //   },
-                                                                                              // ),
-                                                                                              // TableActionButton(
-                                                                                              //   color: Colors.blue,
-                                                                                              //   icon: Icons.edit,
-                                                                                              //   label: 'Edit PTW',
-                                                                                              //   onPress: () {},
-                                                                                              // ),
-                                                                                              // TableActionButton(
-                                                                                              //   color: Colors.green,
-                                                                                              //   icon: Icons.visibility,
-                                                                                              //   label: 'Approve Request',
-                                                                                              //   onPress: () {},
-                                                                                              // ),
-                                                                                              // TableActionButton(
-                                                                                              //   color: Colors.red,
-                                                                                              //   icon: Icons.visibility,
-                                                                                              //   label: 'Reject Request',
-                                                                                              //   onPress: () {},
-                                                                                              // ),
-                                                                                            ],
-                                                                                          )
-                                                                                        : Text(value.toString()),
-                                                                                  );
-                                                                                }).toList());
-                                                                          }).toList(),
-                                                                        ),
+                                                                              // controller.id.value = employeeNameDetails?.id ?? 0;
+                                                                              print('Employee Idss5:${controller.id.value}');
+                                                                              return [
+                                                                                '${employeeNameDetails?.empName ?? ''}',
+                                                                                '${employeeNameDetails?.resp ?? ''}',
+                                                                                'Competeness'
+                                                                              ];
+                                                                            },
+                                                                          ),
+                                                                        ].map((_inventoryDetailList) {
+                                                                          return TableViewRow(
+                                                                              onTap: () => {
+                                                                                    print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                  },
+                                                                              height: 45,
+                                                                              cells: _inventoryDetailList.map((value) {
+                                                                                return TableViewCell(
+                                                                                  //key: ,
+                                                                                  child: (value == 'Competeness')
+                                                                                      ? Wrap(
+                                                                                          children: [
+                                                                                            TableActionButton(
+                                                                                              color: Colors.blue,
+                                                                                              icon: Icons.delete_outline,
+                                                                                              message: 'Compete',
+                                                                                              onPress: () {
+                                                                                                // controller.showNewPermitListDetails(
+                                                                                                //     controller.permitId.value);
+                                                                                              },
+                                                                                            ),
+                                                                                            // TableActionButton(
+                                                                                            //   color: ColorValues.purpleColor,
+                                                                                            //   icon: Icons.add,
+                                                                                            //   label: 'Job Card',
+                                                                                            //   onPress: () {
+                                                                                            //     // controller.goToJobCardScreen(
+                                                                                            //     //   int.tryParse(_newPermitList[0]),
+                                                                                            //     // );
+                                                                                            //   },
+                                                                                            // ),
+                                                                                            // TableActionButton(
+                                                                                            //   color: Colors.blue,
+                                                                                            //   icon: Icons.edit,
+                                                                                            //   label: 'Edit PTW',
+                                                                                            //   onPress: () {},
+                                                                                            // ),
+                                                                                            // TableActionButton(
+                                                                                            //   color: Colors.green,
+                                                                                            //   icon: Icons.visibility,
+                                                                                            //   label: 'Approve Request',
+                                                                                            //   onPress: () {},
+                                                                                            // ),
+                                                                                            // TableActionButton(
+                                                                                            //   color: Colors.red,
+                                                                                            //   icon: Icons.visibility,
+                                                                                            //   label: 'Reject Request',
+                                                                                            //   onPress: () {},
+                                                                                            // ),
+                                                                                          ],
+                                                                                        )
+                                                                                      : Text(value.toString()),
+                                                                                );
+                                                                              }).toList());
+                                                                        }).toList(),
                                                                       ),
 
                                                                       /// PAGINATION
@@ -1598,10 +1599,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         ),
                                       ]),
                                 );
-                              } else if (Responsive.isDesktop(
-                                context,
-                              )) {
-                                ///For Desktop
+                              } else if (Responsive.isDesktop(context)) {
                                 return SingleChildScrollView(
                                   child: Column(
                                       mainAxisAlignment:
@@ -1668,7 +1666,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-
                                         Padding(
                                           padding: const EdgeInsets.all(10.0),
                                           child: Row(
@@ -1765,7 +1762,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-
                                         Divider(
                                           color: ColorValues.lightGreyColor,
                                         ),
@@ -1864,33 +1860,34 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   controller.permitId != null
                                                       ? SizedBox(
                                                           width: 200,
-                                                          child: Expanded(
-                                                            child: Wrap(
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .start,
-                                                              spacing: 100,
-                                                              children: []
-                                                                ..addAll(controller
-                                                                    .listCategory!
-                                                                    .map(
-                                                                        (element) =>
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                SizedBox(
-                                                                                  height: 20,
-                                                                                  child: Text(
-                                                                                    "${element?.equipmentCat}",
-                                                                                    overflow: TextOverflow.ellipsis,
-                                                                                    style: Styles.blue17,
-                                                                                  ),
-                                                                                )
-                                                                              ],
-                                                                            ))),
-                                                            ),
+                                                          child: Wrap(
+                                                            alignment:
+                                                                WrapAlignment
+                                                                    .start,
+                                                            spacing: 100,
+                                                            children: []
+                                                              ..addAll(controller
+                                                                  .listCategory!
+                                                                  .map(
+                                                                      (element) =>
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.min,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                                child: Text(
+                                                                                  "${element?.equipmentCat}",
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                  style: Styles.blue17,
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ))),
                                                           ),
                                                         )
                                                       : Container(),
