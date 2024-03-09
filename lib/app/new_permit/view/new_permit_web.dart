@@ -1245,142 +1245,140 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               constraints: BoxConstraints(
                                                 maxWidth: 1100,
                                               ),
-                                              child: Column(children: [
-                                                Obx(
-                                                  () => CustomAppBar(
-                                                    title:
-                                                        'TBT Training Attended By'
-                                                            .tr,
-                                                    action: Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                "Add Employee"),
-                                                        Dimens.boxWidth10,
-                                                        SizedBox(
-                                                          width: 220,
-                                                          height: 50,
-                                                          child:
-                                                              CustomMultiSelectDialogField(
-                                                            buttonText:
-                                                                'Add Employee',
-                                                            title:
-                                                                'Select Employee',
-                                                            initialValue: (controller
-                                                                    .selectedEmployeeNameList
-                                                                    .isNotEmpty)
-                                                                ? controller
-                                                                    .selectedEmployeeNameIdList
-                                                                : [],
-                                                            items: controller
-                                                                .employeeNameList
-                                                                .map(
-                                                                  (employeeName) =>
-                                                                      MultiSelectItem(
-                                                                    employeeName
-                                                                        ?.id,
-                                                                    employeeName
-                                                                            ?.name ??
-                                                                        '',
-                                                                  ),
-                                                                )
-                                                                .toList(),
-                                                            onConfirm:
-                                                                (selectedOptionsList) =>
-                                                                    {
-                                                              controller
-                                                                  .employeeNameSelected(
-                                                                      selectedOptionsList),
-                                                              print(
-                                                                  'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
-                                                            },
+                                              child: Column(
+                                                children: [
+                                                  Obx(
+                                                    () => CustomAppBar(
+                                                      title:
+                                                          'TBT Training Attended By'
+                                                              .tr,
+                                                      action: Row(
+                                                        children: [
+                                                          CustomRichText(
+                                                              title:
+                                                                  "Add Employee"),
+                                                          Dimens.boxWidth10,
+                                                          SizedBox(
+                                                            width: 220,
+                                                            height: 50,
+                                                            child:
+                                                                CustomMultiSelectDialogField(
+                                                              buttonText:
+                                                                  'Add Employee',
+                                                              title:
+                                                                  'Select Employee',
+                                                              initialValue: (controller
+                                                                      .selectedEmployeeNameList
+                                                                      .isNotEmpty)
+                                                                  ? controller
+                                                                      .selectedEmployeeNameIdList
+                                                                  : [],
+                                                              items: controller
+                                                                  .employeeNameList
+                                                                  .map(
+                                                                    (employeeName) =>
+                                                                        MultiSelectItem(
+                                                                      employeeName
+                                                                          ?.id,
+                                                                      employeeName
+                                                                              ?.name ??
+                                                                          '',
+                                                                    ),
+                                                                  )
+                                                                  .toList(),
+                                                              onConfirm:
+                                                                  (selectedOptionsList) =>
+                                                                      {
+                                                                controller
+                                                                    .employeeNameSelected(
+                                                                        selectedOptionsList),
+                                                                print(
+                                                                    'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
+                                                              },
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                Dimens.boxHeight10,
-                                                Wrap(children: [
-                                                  Column(children: [
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              2,
-                                                      child: Container(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  minHeight:
-                                                                      90),
-                                                          // height: ((controller
-                                                          //             .filteredEmployeeNameList
-                                                          //             .length) *
-                                                          //         30) +
-                                                          //     110,
-                                                          child:
-                                                              SingleChildScrollView(
-                                                                  child:
-                                                                      DataTable(
-                                                            columns: [
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                      "Employee Name")),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                      "Contact No")),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                      "Responsibility")),
-                                                              DataColumn(
-                                                                  label: Text(
-                                                                      "Action")),
-                                                            ],
-                                                            rows: List<
-                                                                    DataRow>.generate(
-                                                                controller
-                                                                    .filteredEmployeeNameList
-                                                                    .length,
-                                                                (index) {
-                                                              var employeeNameDetails =
-                                                                  controller
-                                                                          .filteredEmployeeNameList[
-                                                                      index];
-                                                              return DataRow(
-                                                                  cells: [
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.name ?? ''}')),
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
-                                                                    DataCell(
-                                                                        Wrap(
-                                                                      children: [
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              Colors.red,
-                                                                          icon:
-                                                                              Icons.delete_outline,
-                                                                          message:
-                                                                              'Remove',
-                                                                          onPress:
-                                                                              () {
-                                                                            _removeRow(index);
-                                                                            print("index");
-                                                                          },
-                                                                        )
-                                                                      ],
-                                                                    ))
-                                                                  ]);
-                                                            }),
-                                                          ))),
-                                                    ),
-                                                  ]),
-                                                ]),
-                                              ]),
-                                            )
+                                                  Dimens.boxHeight10,
+                                                  Wrap(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                2,
+                                                            child: Container(
+                                                              constraints:
+                                                                  BoxConstraints(
+                                                                      minHeight:
+                                                                          90),
+                                                              child:
+                                                                  SingleChildScrollView(
+                                                                child:
+                                                                    DataTable(
+                                                                  columns: [
+                                                                    DataColumn(
+                                                                        label: Text(
+                                                                            "Employee Name")),
+                                                                    DataColumn(
+                                                                        label: Text(
+                                                                            "Contact No")),
+                                                                    DataColumn(
+                                                                        label: Text(
+                                                                            "Responsibility")),
+                                                                    DataColumn(
+                                                                        label: Text(
+                                                                            "Action")),
+                                                                  ],
+                                                                  rows: List<
+                                                                      DataRow>.generate(
+                                                                    controller
+                                                                        .filteredEmployeeNameList
+                                                                        .length,
+                                                                    (index) {
+                                                                      var employeeNameDetails =
+                                                                          controller
+                                                                              .filteredEmployeeNameList[index];
+                                                                      return DataRow(
+                                                                          cells: [
+                                                                            DataCell(Text('${employeeNameDetails?.name ?? ''}')),
+                                                                            DataCell(Text('${employeeNameDetails?.mobileNumber ?? ''}')),
+                                                                            DataCell(Text('${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
+                                                                            DataCell(
+                                                                              Wrap(
+                                                                                children: [
+                                                                                  TableActionButton(
+                                                                                    color: Colors.red,
+                                                                                    icon: Icons.delete_outline,
+                                                                                    message: 'Remove',
+                                                                                    onPress: () {
+                                                                                      // Call the removeItem method of the controller
+                                                                                      _removeRow(index);
+                                                                                      print("index");
+                                                                                    },
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          ]);
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                             // :
                                             // Container(
                                             //     margin: Dimens.edgeInsets20,

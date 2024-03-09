@@ -30,9 +30,9 @@ class PreventiveMaintenanceTaskViewScreen
             height: Get.height,
             child: Row(
               children: [
-                (Responsive.isMobile(context) || Responsive.isTablet(context))
-                    ? Dimens.box0
-                    : HomeDrawer(),
+                // (Responsive.isMobile(context) || Responsive.isTablet(context))
+                //     ? Dimens.box0
+                //     : HomeDrawer(),
                 Expanded(
                   child: Column(
                     children: [
