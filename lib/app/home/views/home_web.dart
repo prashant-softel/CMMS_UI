@@ -176,8 +176,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                 Align(
                   alignment: Alignment.center,
                   child: Container(
-                    // width: 700,
                     child: TabBar(
+                      indicatorColor: Color(0xFF363A40),
                       isScrollable: true,
                       tabs: [
                         CustomTabBar(
