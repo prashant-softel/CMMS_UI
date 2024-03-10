@@ -105,7 +105,7 @@ class AddInventoryController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedEquipmentCategoryName = ''.obs;
   Rx<bool> isEquipmentCategoryNameSelected = true.obs;
-  int selectedEquipmentCategoryNameId = 0;
+  Rx<int> selectedEquipmentCategoryNameId = 0.obs;
 
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
@@ -310,7 +310,7 @@ class AddInventoryController extends GetxController {
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
           editAddInventoryDetailsModel.value?.status ?? '';
-      selectedEquipmentCategoryNameId =
+      selectedEquipmentCategoryNameId.value =
           editAddInventoryDetailsModel.value?.categoryId ?? 0;
       selectedEquipmentCategoryName.value =
           editAddInventoryDetailsModel.value?.categoryName ?? '';
@@ -396,7 +396,7 @@ class AddInventoryController extends GetxController {
             supplierId: selectedsupplierrNameId,
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
-            categoryId: selectedEquipmentCategoryNameId,
+            categoryId: selectedEquipmentCategoryNameId.value,
             currency: selectedUnitCurrency.value,
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
@@ -529,7 +529,7 @@ class AddInventoryController extends GetxController {
             supplierId: selectedsupplierrNameId,
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
-            categoryId: selectedEquipmentCategoryNameId,
+            categoryId: selectedEquipmentCategoryNameId.value,
             currency: selectedUnitCurrency.value,
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
@@ -792,7 +792,7 @@ class AddInventoryController extends GetxController {
         {
           int equipCatIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentCategoryNameId =
+          selectedEquipmentCategoryNameId.value =
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
         }
         break;
