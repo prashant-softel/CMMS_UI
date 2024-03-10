@@ -21,8 +21,8 @@ class HeaderWidget extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return //
         SelectionArea(
-          child: Obx(
-                () => //
+      child: Obx(
+        () => //
             Container(
           height: 60,
           decoration: BoxDecoration(
@@ -109,7 +109,8 @@ class HeaderWidget extends GetView<HomeController> {
                       if (Responsive.isDesktop(context))
                         GestureDetector(
                           onTap: () {
-                            print("${varUserAccessModel.value.user_name ?? ""}");
+                            print(
+                                "${varUserAccessModel.value.user_name ?? ""}");
                           },
                           child: Text(
                             "${varUserAccessModel.value.user_name}",
@@ -132,14 +133,15 @@ class HeaderWidget extends GetView<HomeController> {
                                   child: AlertDialog(
                                     insetPadding: Dimens.edgeInsets10_0_10_0,
                                     contentPadding: EdgeInsets.all(20),
-                                    backgroundColor: ColorValues.appDarkBlueColor,
+                                    backgroundColor:
+                                        ColorValues.appDarkBlueColor,
                                     content: Column(
                                         // mainAxisSize: MainAxisSize.min,
                                         children: [
                                           GestureDetector(
                                             onTap: () {
                                               controller.clearStoreData();
-          
+
                                               Get.toNamed(Routes.profile,
                                                   arguments: {
                                                     'userId': varUserAccessModel
@@ -159,7 +161,8 @@ class HeaderWidget extends GetView<HomeController> {
                                                     style: TextStyle(
                                                       color: Color(0xffD2D0D0),
                                                       fontSize: 13,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     )),
                                               ],
                                             ),
@@ -186,7 +189,8 @@ class HeaderWidget extends GetView<HomeController> {
                                                     style: TextStyle(
                                                       color: Color(0xffD2D0D0),
                                                       fontSize: 13,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     )),
                                               ],
                                             ),
@@ -211,7 +215,8 @@ class HeaderWidget extends GetView<HomeController> {
                                                     style: TextStyle(
                                                       color: Color(0xffD2D0D0),
                                                       fontSize: 13,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     )),
                                               ],
                                             ),
@@ -234,9 +239,9 @@ class HeaderWidget extends GetView<HomeController> {
                 Icon(Icons.notifications_active, color: ColorValues.blackColor),
             ],
           ),
-                ),
-              ),
-        );
+        ),
+      ),
+    );
   }
 
   _isDeleteDialog() {
