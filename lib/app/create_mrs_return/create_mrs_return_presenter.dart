@@ -1,15 +1,24 @@
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
+
 import '../../domain/models/employe_stock_model.dart';
 import '../../domain/usecases/create_mrs_return_usecase.dart';
 
 class CreateMrsReturnPresenter {
   CreateMrsReturnPresenter(this.craetemrsReturnUsecase);
   CreateMrsReturnUsecase craetemrsReturnUsecase;
-  Future<EmployeeStockListModel?> getCmmsItemList(
-          {int? facilityId, bool? isLoading, int? userId}) async =>
+  Future<List<PlantStockListModel?>?> getCmmsItemList({
+    int? facilityId,
+    bool? isLoading,
+    int? actorID,
+    int? actorType,
+  }) async =>
       await craetemrsReturnUsecase.getCmmsItemList(
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          userId: userId);
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        actorID: actorID,
+        actorType: actorType,
+      );
   Future<Map<String, dynamic>?> createReturnMrs({
     createReturnMrsJsonString,
     required bool isLoading,

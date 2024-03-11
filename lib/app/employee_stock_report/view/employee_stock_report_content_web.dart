@@ -493,7 +493,7 @@ class PlantListDataSource extends DataTableSource {
   void filterMrss() {
     filteredPlantList = <StockDetails?>[];
     filteredPlantList = controller.StockDetailsList.where((Plant) {
-      return (Plant?.asset_name ?? '')
+      return (Plant?.name ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.assetNameFilterText.value.toLowerCase()) &&
@@ -533,7 +533,7 @@ class PlantListDataSource extends DataTableSource {
 
     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
     var cellsBuffer = [
-      '${PlantDetails?.asset_name ?? ''}',
+      '${PlantDetails?.name ?? ''}',
       '${PlantDetails?.asset_code ?? ''}',
       '${PlantDetails?.asset_type ?? ''}',
       '${PlantDetails?.opening ?? ''}',

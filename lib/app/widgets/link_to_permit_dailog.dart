@@ -84,27 +84,50 @@ class LinkToPermitDialog extends GetView {
           );
         }),
         actions: [
-          Dimens.boxWidth10,
+          // Dimens.boxWidth10,
           Center(
-            child: ElevatedButton(
-              style: Styles.yellowElevatedButtonStyle,
-              onPressed: () {
-                // _controller.getIncidentReportList(
-                //     _controller.facilityId,
-                //     _controller.formattedTodate,
-                //     _controller.formattedFromdate,
-                //     false);
-                //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                Get.offAllNamed(Routes.createMrs, arguments: {
-                  "whereUsedId": taskId,
-                  "activity": activity,
-                  "whereUsed": 27,
-                  "fromActorTypeId": 2,
-                  "to_actor_type_id": 3
-                });
-                Get.back();
-              },
-              child: const Text('Add Mrs'),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Spacer(),
+                ElevatedButton(
+                  style: Styles.greenElevatedButtonStyle,
+                  onPressed: () {
+                    // _controller.getIncidentReportList(
+                    //     _controller.facilityId,
+                    //     _controller.formattedTodate,
+                    //     _controller.formattedFromdate,
+                    //     false);
+                    //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                    Get.offAllNamed(Routes.pmTaskView,
+                        arguments: {'pmTaskId': taskId});
+                    Get.back();
+                  },
+                  child: const Text('View Task'),
+                ),
+                Dimens.boxWidth10,
+                ElevatedButton(
+                  style: Styles.yellowElevatedButtonStyle,
+                  onPressed: () {
+                    // _controller.getIncidentReportList(
+                    //     _controller.facilityId,
+                    //     _controller.formattedTodate,
+                    //     _controller.formattedFromdate,
+                    //     false);
+                    //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                    Get.offAllNamed(Routes.createMrs, arguments: {
+                      "whereUsedId": taskId,
+                      "activity": activity,
+                      "whereUsed": 27,
+                      "fromActorTypeId": 2,
+                      "to_actor_type_id": 3
+                    });
+                    Get.back();
+                  },
+                  child: const Text('Add Mrs'),
+                ),
+                Spacer()
+              ],
             ),
           ),
         ],

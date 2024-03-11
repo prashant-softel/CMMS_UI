@@ -1328,7 +1328,7 @@ class Repository {
     int? actorType,
     required int? facility_id,
     String? start_date,
-    required String end_date,
+    String? end_date,
     required bool isLoading,
   }) async {
     try {
@@ -1338,7 +1338,7 @@ class Repository {
       final res = await _dataRepository.transactionReport(
         facility_id: facility_id,
         start_date: start_date,
-        end_date: end_date,
+        end_date: end_date ?? "",
         isLoading: isLoading,
         actorID: actorID,
         actorType: actorType,
@@ -8444,6 +8444,42 @@ class Repository {
           endDate: endDate,
           userId: userId,
           selectedAssetsNameIdList: selectedAssetsNameIdList);
+
+      if (!res.hasError) {
+        final jsonPlantStockListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PlantStockListModel> _plantStockListModels =
+            jsonPlantStockListModels
+                .map<PlantStockListModel>((m) =>
+                    PlantStockListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _plantStockListModels;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPlantStockList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
+    int? facilityId,
+    bool? isLoading,
+    int? actorID,
+    int? actorType,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPlantStockListReturn(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        actorID: actorID,
+        actorType: actorType,
+      );
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);

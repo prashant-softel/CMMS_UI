@@ -15,4 +15,27 @@ class MrsListPresenter {
           endDate: endDate,
           startDate: startDate);
   void clearValue() async => mrsListUsecase.clearValue();
+  void clearpmTaskValue() async => mrsListUsecase.clearpmTaskValue();
+  void clearStoreTaskData() {
+    mrsListUsecase.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    mrsListUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    mrsListUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    mrsListUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    mrsListUsecase.clearStoreTaskWhereUsedData();
+  }
+
+  void clearStoreDataJobId() async => mrsListUsecase.clearStoreDataJobId();
+  void clearPermitStoreData() async => mrsListUsecase.clearPermitStoreData();
 }

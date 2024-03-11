@@ -151,7 +151,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                 ),
                                 child: LoginCustomTextfield(
                                   // enabled: false,
-                                  width: (MediaQuery.of(context).size.width * .2),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   textController: controller.whereUsedCtrlr,
                                 )),
                           ],
@@ -232,7 +233,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                       4,
                                                   dropdownList:
                                                       controller.assetItemList,
-                                                  selectedValue: mapData["value"],
+                                                  selectedValue:
+                                                      mapData["value"],
                                                   onValueChanged:
                                                       (list, selectedValue) {
                                                     // print({
@@ -254,15 +256,17 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                             : (mapData['key'] == "Return_Qty")
                                                 ? Padding(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Container(
                                                         width: (Get.width * .4),
                                                         // padding: EdgeInsets.all(value),
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  Colors.black26,
+                                                              color: Colors
+                                                                  .black26,
                                                               offset:
                                                                   const Offset(
                                                                 5.0,
@@ -280,7 +284,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                         ),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          inputFormatters: <TextInputFormatter>[
+                                                          inputFormatters: <
+                                                              TextInputFormatter>[
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly
                                                           ],
@@ -296,15 +301,16 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                           },
                                                         )),
                                                   )
-                                                : (mapData['key'] == "Issue_Qty")
+                                                : (mapData['key'] ==
+                                                        "Issue_Qty")
                                                     ? Text(
-                                                        "${controller.dropdownMapperData[record[0]['value']]?.quantity ?? ""}")
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.balance ?? ""}")
                                                     : (mapData['key'] ==
                                                             "is_faulty")
                                                         ? Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     top: 8.0),
                                                             child:
                                                                 CustomSwitchTroggle(
@@ -321,18 +327,16 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8.0),
+                                                                            .all(
+                                                                        8.0),
                                                                 child: Container(
-                                                                    width:
-                                                                        (Get.width *
-                                                                            .4),
+                                                                    width: (Get.width * .4),
                                                                     // padding: EdgeInsets.all(value),
-                                                                    decoration:
-                                                                        BoxDecoration(
+                                                                    decoration: BoxDecoration(
                                                                       boxShadow: [
                                                                         BoxShadow(
-                                                                          color: Colors
-                                                                              .black26,
+                                                                          color:
+                                                                              Colors.black26,
                                                                           offset:
                                                                               const Offset(
                                                                             5.0,
@@ -347,21 +351,20 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                       color: ColorValues
                                                                           .whiteColor,
                                                                       borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
+                                                                          BorderRadius.circular(
+                                                                              5),
                                                                     ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
+                                                                    child: LoginCustomTextfield(
                                                                       // inputFormatters: <
                                                                       //     TextInputFormatter>[
                                                                       //   FilteringTextInputFormatter
                                                                       //       .digitsOnly
                                                                       // ],
-                                                                      maxLine: 1,
+                                                                      maxLine:
+                                                                          1,
                                                                       textController:
                                                                           new TextEditingController(
-                                                                              text:
-                                                                                  mapData["value"] ?? ''),
+                                                                              text: mapData["value"] ?? ''),
                                                                       onChanged:
                                                                           (txt) {
                                                                         mapData["value"] =
@@ -369,9 +372,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                       },
                                                                     )),
                                                               )
-                                                            : Text(
-                                                                mapData['key'] ??
-                                                                    ''),
+                                                            : Text(mapData[
+                                                                    'key'] ??
+                                                                ''),
                                       );
                                     }).toList(),
                                   );

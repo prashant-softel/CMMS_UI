@@ -88,7 +88,7 @@ class PlantStockReportController extends GetxController {
     }
     List<StockDetails?> filteredList = filteredData
         .where((item) =>
-            (item?.asset_name
+            (item?.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -108,10 +108,7 @@ class PlantStockReportController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.inward
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.inward?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.outward
                     ?.toString()
