@@ -106,7 +106,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getPmTaskList(
+            facilityId, formattedTodate1, formattedFromdate1, false, false);
       });
       // isDataLoading.value = false;
 
@@ -165,14 +166,15 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+      bool isLoading, bool? isExport) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
-        endDate: endDate);
+        endDate: endDate,
+        isExport: isExport);
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
@@ -180,7 +182,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getPmTaskList(
+        facilityId, formattedTodate1, formattedFromdate1, false, false);
   }
 
   void clearStoreData() {
@@ -229,7 +232,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
                   deletePmTask(task_id).then((value) {
                     Get.back();
                     getPmTaskList(facilityId, formattedTodate1,
-                        formattedFromdate1, false);
+                        formattedFromdate1, false, false);
                   });
                 },
                 child: Text('YES'),
@@ -248,5 +251,9 @@ class PreventiveMaintenanceTaskController extends GetxController {
         isLoading: true,
       );
     }
+  }
+
+  void export() {
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true, true);
   }
 }

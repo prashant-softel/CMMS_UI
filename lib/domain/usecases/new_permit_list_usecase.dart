@@ -19,10 +19,11 @@ class NewPermitListUsecase {
     bool? isLoading,
     bool? self_view,
     bool? non_expired,
+    bool? isExport,
     String? start_date,
     required String end_date,
   }) async =>
-      await repository.getNewPermitList(auth, facilityId, isLoading, self_view,
+      await repository.getNewPermitList(auth, facilityId, isLoading, isExport, self_view,
           non_expired, start_date, end_date);
 
   Future<void> permitIssueButton({

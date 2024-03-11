@@ -8,7 +8,7 @@ List<JobCardModel> jobCardDetailsModelFromJson(String str) =>
     List<JobCardModel>.from(
         json.decode(str).map((x) => JobCardModel.fromJson(x)));
 
-String jobCardDetailsModelToJson(List<JobCardModel> data) =>
+String jobCardDetailslModelToJson(List<JobCardModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class JobCardModel {

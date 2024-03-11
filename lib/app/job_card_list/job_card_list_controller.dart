@@ -90,17 +90,17 @@ class JobCardListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        jobCardList(facilityId, true);
+        jobCardList(facilityId, true,false);
       });
     });
 
     super.onInit();
   }
 
-  Future<void> jobCardList(int facilityId, bool isLoading) async {
+  Future<void> jobCardList(int facilityId, bool isLoading, bool isExport) async {
     jobList.value = <JobCardModel>[];
     final _jobList = await jobCardPresenter.jobCardList(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId, isLoading: isLoading, isExport: isExport);
 
     if (_jobList != null) {
       jobList.value = _jobList;
@@ -124,5 +124,8 @@ class JobCardListController extends GetxController {
 
   void clearStoreData() {
     jobCardPresenter.clearValue();
+  }
+  void export() {
+    jobCardList(facilityId, true,true);
   }
 }

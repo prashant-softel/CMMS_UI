@@ -20,6 +20,7 @@ class NewPermitListPresenter {
     required bool non_expired,
     String? start_date,
     required String end_date,
+    bool? isExport
   }) async =>
       await newPermitListUsecase.getNewPermitList(
         auth: auth ?? "",
@@ -29,6 +30,7 @@ class NewPermitListPresenter {
         non_expired: non_expired,
         start_date: start_date,
         end_date: end_date,
+        isExport : isExport
       );
 
   Future<void> permitIssueButton({
