@@ -86,7 +86,8 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   void getMcExcustionListByDate() {
-    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1, false);
+    getMCTaskList(
+        facilityId, formattedFromdate1, formattedTodate1, false, false);
   }
 
   @override
@@ -106,11 +107,7 @@ class ModuleCleaningListExecutionController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getMCTaskList(
-          facilityId,
-          formattedTodate1,
-          formattedFromdate1,
-          false,
-        );
+            facilityId, formattedTodate1, formattedFromdate1, false, false);
       });
     });
     super.onInit();
@@ -181,11 +178,12 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   Future<void> getMCTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+      bool isLoading, bool isExport) async {
     mcTaskList.value = <MCTaskListModel>[];
 
     final list = await moduleCleaningListExecutionPresenter.getMCTaskList(
         isLoading: isLoading,
+        isExport: isExport,
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
         facility_id: facilityId);
@@ -213,9 +211,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   void clearStoreDataMcid() {
@@ -225,9 +221,13 @@ class ModuleCleaningListExecutionController extends GetxController {
   void clearStoreDataPlanid() {
     moduleCleaningListExecutionPresenter.clearValuePlanId();
   }
+
   // void getPmTaskListByDate() {
   //   getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   // }
+  void export() {
+    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1, true, true);
+  }
 }
 
 // import 'dart:async';

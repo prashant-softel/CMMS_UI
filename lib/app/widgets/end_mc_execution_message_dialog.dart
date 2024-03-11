@@ -15,7 +15,6 @@ class EndMCExecutionMessageDialog extends GetView {
   EndMCExecutionMessageDialog({super.key, this.createData, this.data});
   final ModuleCleaningListExecutionController _controller = Get.find();
 
-
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
@@ -44,9 +43,10 @@ class EndMCExecutionMessageDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
-                      // SizedBox(height: 20,),
+                  Text('${data}',
+                      style: TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -80,9 +80,14 @@ class EndMCExecutionMessageDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                 Get.offAllNamed(Routes.moduleCleaningListExecution);
-                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
-                
+                Get.offAllNamed(Routes.moduleCleaningListExecution);
+                _controller.getMCTaskList(
+                    _controller.facilityId,
+                    _controller.formattedTodate,
+                    _controller.formattedFromdate,
+                    true,
+                    false);
+
                 Get.back();
               },
               child: const Text('Ok'),

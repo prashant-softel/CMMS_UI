@@ -16,6 +16,7 @@ class JobListUsecase {
     required String auth,
     int? facilityId,
     bool? self_view,
+    bool? isExport,
     bool? isLoading,
   }) async =>
       await repository.getJobList(
@@ -23,6 +24,7 @@ class JobListUsecase {
         facilityId,
         self_view,
         isLoading,
+        isExport
       );
   void clearValue() async => repository.clearData(LocalKeys.jobId);
 }

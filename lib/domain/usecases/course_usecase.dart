@@ -17,12 +17,14 @@ class CourseUsecase {
     int? facilityId,
     bool? self_view,
     bool? isLoading,
+    bool? isExport
   }) async =>
       await repository.getJobList(
         auth,
         facilityId,
         self_view,
         isLoading,
+        isExport
       );
   void clearValue() async => repository.clearData(LocalKeys.jobId);
 }

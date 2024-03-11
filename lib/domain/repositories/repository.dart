@@ -3222,6 +3222,7 @@ class Repository {
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
     required bool isLoading,
+    bool? isExport,
     String? start_date,
     required String end_date,
   }) async {
@@ -3239,8 +3240,48 @@ class Repository {
       print('MCTaskList: ${res.data}');
 
       if (!res.hasError) {
-        var mcTaskList = mcTaskListModelFromJson(res.data);
-        return mcTaskList.reversed.toList();
+        // var mcTaskList = mcTaskListModelFromJson(res.data);
+        // return mcTaskList.reversed.toList();
+        final jsonMcTaskListModelModels = jsonDecode(res.data);
+
+        final List<MCTaskListModel> _McTaskListModelList =
+            jsonMcTaskListModelModels
+                .map<MCTaskListModel>((m) =>
+                    MCTaskListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = mcTaskListModelToJson(_McTaskListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'title',
+              'plan_id',
+              'frequency',
+              'no_of_days',
+              'start_date',
+              'done_date',
+              'short_status',
+            ],
+            ...jsonDataList
+                .map((mctaskjson) => [
+                      mctaskjson['id'],
+                      mctaskjson['title'],
+                      mctaskjson['planId'],
+                      mctaskjson['frequency'],
+                      mctaskjson['noOfDays'],
+                      mctaskjson['startDate'],
+                      mctaskjson['doneDate'],
+                      mctaskjson['status_short'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> mctasklistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(mctasklistData, "mctasklist.xlsx");
+        }
+        return _McTaskListModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getMCTaskList');
@@ -3334,6 +3375,7 @@ class Repository {
     String auth,
     int? facilityId,
     bool? isLoading,
+    bool? isExport,
     bool? self_view,
   ) async {
     try {
@@ -3354,6 +3396,54 @@ class Repository {
             .map<JobModel>(
                 (m) => JobModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
+        String jsonData = jobListToJson(_jobModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'Job_id',
+              'facility_id',
+              'facility_name',
+              'job_date',
+              'job_details',
+              'equipment_category',
+              'equipment',
+              'work_type',
+              'breakdown_time',
+              'breakdown_type',
+              'ptw_id',
+              'raised_by_id',
+              'raised_by',
+              'assgned_to_id',
+              'assigned_to_name',
+              'short_status'
+            ],
+            ...jsonDataList
+                .map((joblistjson) => [
+                      joblistjson['id'],
+                      joblistjson['facilityId'],
+                      joblistjson['facilityName'],
+                      joblistjson['jobDate'],
+                      joblistjson['jobDetails'],
+                      joblistjson['equipmentCat'],
+                      joblistjson['workingArea'],
+                      joblistjson['workType'],
+                      joblistjson['breakdownTime'],
+                      joblistjson['breakdownType'],
+                      joblistjson['ptw_id'],
+                      joblistjson['raisedBy'],
+                      joblistjson['raisedByName'],
+                      joblistjson['assignedToId'],
+                      joblistjson['assignedToName'],
+                      joblistjson['latestJCStatusShort'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> joblistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(joblistData, 'joblist.xlsx');
+        }
 
         return _jobModelList;
       } else {
@@ -10486,10 +10576,10 @@ class Repository {
     }
   }
 
-  Future<List<VegetationPlanListModel>> getVegetationPlanList({
-    required int? facility_id,
-    required bool isLoading,
-  }) async {
+  Future<List<VegetationPlanListModel>> getVegetationPlanList(
+      {required int? facility_id,
+      required bool isLoading,
+      bool? isExport}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -10510,6 +10600,48 @@ class Repository {
                     VegetationPlanListModel.fromJson(
                         Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = vegplanListModelToJson(_getVegetationPlanList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'plan_id',
+              'plan_title',
+              'days',
+              'created_by_id',
+              'created_by',
+              'created_at',
+              'frequency',
+              'assigned_to_id',
+              'assigned_to',
+              'approved_by_id',
+              'approved_by',
+              'approved_at',
+              'short_status'
+            ],
+            ...jsonDataList
+                .map((vegplanjson) => [
+                      vegplanjson['planId'],
+                      vegplanjson['title'],
+                      vegplanjson['noOfCleaningDays'],
+                      vegplanjson['createdById'],
+                      vegplanjson['createdBy'],
+                      vegplanjson['createdAt'],
+                      vegplanjson['frequency'],
+                      vegplanjson['assignedToId'],
+                      vegplanjson['assignedTo'],
+                      vegplanjson['approvedById'],
+                      vegplanjson['approvedBy'],
+                      vegplanjson['approvedAt'],
+                      vegplanjson['status_short'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> vegplanlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(vegplanlistData, "vegplanlist.xlsx");
+        }
 
         return _getVegetationPlanList.reversed.toList();
       } //
@@ -10775,6 +10907,7 @@ class Repository {
   Future<List<VegTaskListModel>> getVegTaskList({
     required int? facility_id,
     required bool isLoading,
+    bool? isExport
     // String? start_date,
     // required String end_date,
   }) async {

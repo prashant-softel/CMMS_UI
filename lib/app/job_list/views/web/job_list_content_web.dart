@@ -206,6 +206,17 @@ class JobListContentWeb extends StatelessWidget {
                             //       onPressed: () {},
                             //       text: 'PDF'),
                             // ),
+                            Container(
+                              height: 35,
+                              margin: EdgeInsets.only(left: 10),
+                              child: CustomElevatedButton(
+                                  backgroundColor:
+                                      ColorValues.appLightBlueColor,
+                                  onPressed: () {
+                                    controller.export();
+                                  },
+                                  text: 'Excel'),
+                            ),
 
                             Spacer(),
                             Container(
@@ -466,7 +477,6 @@ class JobDataSource extends DataTableSource {
         DataCell(
           Text(
             'JOB${jobDetails?.id ?? ''}',
-
           ),
         ),
         DataCell(

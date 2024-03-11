@@ -84,7 +84,7 @@ class VegetationPlanListController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
-        getVegetationPlanList(facilityId, true);
+        getVegetationPlanList(facilityId, true,false);
         // facilityIdStreamSubscription!.cancel();
       });
       print("get plan called");
@@ -93,7 +93,7 @@ class VegetationPlanListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getVegetationPlanList(int facilityId, bool isLoading) async {
+  Future<void> getVegetationPlanList(int facilityId, bool isLoading, bool isExport) async {
     vegetationPlanList.value = <VegetationPlanListModel>[];
     filteredData.value = <VegetationPlanListModel>[];
 
@@ -101,6 +101,7 @@ class VegetationPlanListController extends GetxController {
         await vegetationPlanListPresenter.getVegetationPlanList(
       isLoading: true,
       facility_id: facilityId,
+      isExport: isExport
     );
     vegetationPlanList.value = _vegetationPlanList;
     paginationController = PaginationController(
@@ -164,6 +165,9 @@ class VegetationPlanListController extends GetxController {
                 false))
         .toList();
     vegetationPlanList.value = filteredList;
+  }
+  void export() {
+    getVegetationPlanList(facilityId, true,true);
   }
 
   // @override

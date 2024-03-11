@@ -73,7 +73,7 @@ class JobListController extends GetxController {
       // Future.delayed(Duration(seconds: 1), () {
       // userId = varUserAccessModel.value.user_id ?? 0;
       // if (userId != null) {
-      getJobList(userId, true);
+      getJobList(userId, true,false);
       // }
       // });
     });
@@ -89,7 +89,7 @@ class JobListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(userId, false);
+    getJobList(userId, false,false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -152,6 +152,7 @@ class JobListController extends GetxController {
   Future<void> getJobList(
     int userId,
     bool self_view,
+    bool isExport
   ) async {
     jobList.value = <JobModel>[];
     filteredData.value = <JobModel>[];
@@ -351,12 +352,15 @@ class JobListController extends GetxController {
       isBlockSelected.value = true;
     }
     selectedBlock.value = selectedValue;
-    getJobList(userId, false);
+    getJobList(userId, false,false);
   }
 
   void clearStoreData() {
     jobListPresenter.clearValue();
   }
 
+void export() {
+    getJobList(userId, true,true);
+  }
   ///
 }
