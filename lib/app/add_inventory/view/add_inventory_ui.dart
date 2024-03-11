@@ -381,9 +381,9 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                 ),
                                               ],
                                             ),
-                                            controller.editAddInventoryDetailsModel
-                                                        .value?.categoryName ==
-                                                    "SMB"
+                                            controller.selectedEquipmentCategoryNameId
+                                                        .value ==
+                                                    9
                                                 ? Row(
                                                     children: [
                                                       CustomRichText(

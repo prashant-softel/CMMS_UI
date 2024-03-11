@@ -1,5 +1,6 @@
 import 'package:cmms/app/login/login_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -21,24 +22,24 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    email.add('');
-    password.add('');
+    // email.add('');
+    // password.add('');
   }
 
   @override
   void onClose() {
     super.onClose();
-    emailCtrlr.dispose();
-    passwordCtrlr.dispose();
-    email.close();
-    password.close();
+    // emailCtrlr.dispose();
+    // passwordCtrlr.dispose();
+    // email.close();
+    // password.close();
   }
 
   void updateemail(String value) => email.add(value);
   void updatepassword(String value) => password.add(value);
   void login() async {
     {
+      // TextInput.finishAutofillContext();
       String pattern =
           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 

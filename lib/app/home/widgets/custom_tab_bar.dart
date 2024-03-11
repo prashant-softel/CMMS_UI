@@ -13,7 +13,7 @@ class CustomTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 30,
       width: 240,
       child: Row(
         children: [

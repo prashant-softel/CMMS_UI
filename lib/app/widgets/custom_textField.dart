@@ -16,6 +16,7 @@ class LoginCustomTextfield extends GetView {
   String? errorController;
   Function(dynamic value)? onChanged;
   Function()? ontap;
+  final List<String>? autofillHints;
   Function(dynamic value)? onfieldSubmitted;
   int? maxLine;
   final bool numberTextField;
@@ -31,6 +32,7 @@ class LoginCustomTextfield extends GetView {
     this.numberTextField = false,
     this.focusNode,
     this.scroll,
+    this.autofillHints,
     this.obscureText = false,
     this.textController,
     this.widget,
@@ -69,7 +71,7 @@ class LoginCustomTextfield extends GetView {
         obscureText: obscureText,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
-
+        autofillHints: autofillHints,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 12),
