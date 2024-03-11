@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class ViewIncidentReportScreen extends GetView<ViewIncidentReportController> {
   ViewIncidentReportScreen({super.key});
   final controller = Get.find<ViewIncidentReportController>();
+  final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +24,43 @@ class ViewIncidentReportScreen extends GetView<ViewIncidentReportController> {
             (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? HomeDrawer()
                 : null,
-        body: Container(
-            width: Get.width,
-            height: Get.height,
-            child: Row(
-              children: [
-                (Responsive.isMobile(context) || Responsive.isTablet(context))
-                    ? Dimens.box0
-                    : HomeDrawer(),
-                Expanded(
-                  child: Column(
+        body: Obx(
+          () => Stack(
+            children: [
+              AnimatedContainer(
+                  duration: Duration(milliseconds: 450),
+                  margin: EdgeInsets.only(
+                      left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                  width: Get.width,
+                  height: Get.height,
+                  child: Row(
                     children: [
-                      if (Responsive.isMobile(context))
-                        Expanded(
-                          child: ViewIncidentReportMobile(),
+                      // (Responsive.isMobile(context) || Responsive.isTablet(context))
+                      //     ? Dimens.box0
+                      //     : HomeDrawer(),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            if (Responsive.isMobile(context))
+                              Expanded(
+                                child: ViewIncidentReportMobile(),
+                              ),
+                            if (Responsive.isDesktop(context))
+                              Expanded(
+                                child: ViewIncidentReportContentWeb(),
+                              )
+                          ],
                         ),
-                      if (Responsive.isDesktop(context))
-                        Expanded(
-                          child: ViewIncidentReportContentWeb(),
-                        )
+                      ),
                     ],
-                  ),
-                ),
-              ],
-            )),
+                  )),
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 450),
+                child: HomeDrawer(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
