@@ -6,6 +6,8 @@ List<ModuleCleaningListPlanModel> ModuleCleaningListPlanModelFromJson(
         String str) =>
     List<ModuleCleaningListPlanModel>.from(
         json.decode(str).map(ModuleCleaningListPlanModel.fromJson));
+String mcleaningListModelToJson(List<ModuleCleaningListPlanModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ModuleCleaningListPlanModel {
   int? id;

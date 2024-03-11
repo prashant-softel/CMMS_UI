@@ -25,10 +25,12 @@ class JobCardUsecase {
   Future<List<JobCardModel?>?> jobCardList({
     int? facilityId,
     bool? isLoading,
+    bool? isExport
   }) async =>
       await repository.jobCardList(
         facilityId,
         isLoading,
+        isExport
       );
 
   ///

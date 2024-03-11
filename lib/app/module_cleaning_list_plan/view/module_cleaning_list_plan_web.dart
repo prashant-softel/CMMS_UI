@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -242,6 +243,17 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                       //       onPressed: () {},
                                       //       text: 'PDF'),
                                       // ),
+                                      Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {
+                                              controller.export();
+                                            },
+                                            text: 'Excel'),
+                                      ),
                                       Spacer(),
                                       Container(
                                         width: 300,

@@ -87,13 +87,13 @@ class ModuleCleaningListPlanController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, true);
+        getModuleCleaningListPlan(facilityId, true,false);
       });
     });
     super.onInit();
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading) async {
+  Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading, bool isExport) async {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
     filteredData.value = <ModuleCleaningListPlanModel>[];
 
@@ -101,6 +101,7 @@ class ModuleCleaningListPlanController extends GetxController {
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
       isLoading: true,
       facility_id: facilityId,
+      isExport: isExport
     );
     moduleCleaningListPlan.value = _moduleCleaningListPlan;
     paginationController = PaginationController(
@@ -169,5 +170,8 @@ class ModuleCleaningListPlanController extends GetxController {
 
   void clearStoreDataPlanid() {
     moduleCleaningListPlanPresenter.clearValuePlanId();
+  }
+  void export() {
+   getModuleCleaningListPlan(facilityId, true,true);
   }
 }

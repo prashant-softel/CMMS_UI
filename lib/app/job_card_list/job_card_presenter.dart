@@ -24,10 +24,12 @@ class JobCardPresenter {
   Future<List<JobCardModel?>?> jobCardList({
     int? facilityId,
     bool? isLoading,
+    bool? isExport
   }) async =>
       await jobCardDetailsUsecase.jobCardList(
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
+        isExport: isExport
       );
 
   ///
