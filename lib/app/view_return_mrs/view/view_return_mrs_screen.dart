@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/view_return_mrs/view/view_return_mrs_content_web.dart';
@@ -10,6 +11,7 @@ import '../../utils/responsive.dart';
 class MrsReturnViewScreen extends GetView<MrsReturnViewController> {
   MrsReturnViewScreen({super.key});
   final controller = Get.find<MrsReturnViewController>();
+  final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +26,46 @@ class MrsReturnViewScreen extends GetView<MrsReturnViewController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawer()
               : null,
-      body: Container(
-          width: Get.width,
-          height: Get.height,
-          child: Row(
-            children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
-              Expanded(
-                child: Column(
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
                   children: [
-                    if (Responsive.isMobile(context))
-                      Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text("Data Coming Soon......")),
+                    // (Responsive.isMobile(context) ||
+                    //         Responsive.isTablet(context))
+                    //     ? Dimens.box0
+                    //     : HomeDrawer(),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Data Coming Soon......")),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: MrsReturnViewContentWeb(),
+                            )
+                        ],
                       ),
-                    if (Responsive.isDesktop(context))
-                      Expanded(
-                        child: MrsReturnViewContentWeb(),
-                      )
+                    ),
                   ],
-                ),
-              ),
-            ],
-          )),
+                )),
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 450),
+              child: HomeDrawer(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

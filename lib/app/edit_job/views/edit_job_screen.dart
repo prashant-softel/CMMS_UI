@@ -1,9 +1,8 @@
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
-import '../../theme/color_values.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 import '../edit_job_controller.dart';
 import 'mobile/edit_job_content_mobile.dart';
@@ -11,6 +10,7 @@ import 'web/edit_job_content_web.dart';
 
 class EditJobScreen extends GetView<EditJobController> {
   EditJobScreen({Key? key}) : super(key: key);
+  final HomeController homecontroller = Get.find();
 
   ///
   @override
@@ -25,45 +25,41 @@ class EditJobScreen extends GetView<EditJobController> {
               toolbarHeight: 60,
             )
           : null,
-      body:
-          //
-          Row(children: [
-        (Responsive.isMobile(context) || Responsive.isTablet(context))
-            ? Dimens.box0
-            : HomeDrawer(),
-
-        /// CARD
-        // Obx(
-        //   () => //
-        Expanded(
-          child: Container(
-            // child: Expanded(
-            child: Card(
-              color: ColorValues.appLightGreyColor,
-              elevation: 20,
-              shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                  padding: Dimens.edgeInsets10,
-                  child: (() {
-                    if (Responsive.isMobile(context)) {
-                      return //
-                          EditJobContentMobile();
-                    } //
-                    else if (Responsive.isDesktop(context)) {
-                      return //
-                          EditJobContentWeb();
-                    }
-                  }())
-                  //
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                  left: homecontroller.menuButton.value ? 250.0 : 70.0),
+              height: Get.height,
+              width: Get.width,
+              child: Row(children: [
+                Expanded(
+                  child: Container(
+                    // child: Expanded(
+                    child: (() {
+                      if (Responsive.isMobile(context)) {
+                        return //
+                            EditJobContentMobile();
+                      } //
+                      else if (Responsive.isDesktop(context)) {
+                        return //
+                            EditJobContentWeb();
+                      }
+                    }()),
                   ),
+                ),
+                // ),
+              ]),
             ),
-          ),
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 450),
+              child: HomeDrawer(),
+            ),
+          ],
         ),
-        // ),
-      ]),
+      ),
     );
 
     ///build ends
