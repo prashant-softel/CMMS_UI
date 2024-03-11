@@ -5590,6 +5590,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPlantStockListReturn({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? actorID,
+    int? actorType,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=$actorType&actorID=$actorID',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getEquipmentAssetsList({
     String? auth,
     bool? isLoading,

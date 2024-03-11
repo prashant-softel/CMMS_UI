@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
 import 'package:cmms/domain/models/create_return_mrs_model.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,10 +21,12 @@ class CreateMrsReturnController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<PlantStockListModel?> assetItemList = <PlantStockListModel?>[].obs;
+  RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
+
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
-  Map<String, CmmrsItemsModel> dropdownMapperData = {};
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
@@ -94,9 +98,19 @@ class CreateMrsReturnController extends GetxController {
     int userId = varUserAccessModel.value.user_id ?? 0;
 
     final _assetList = await createmrsReturnPresenter.getCmmsItemList(
-        facilityId: facilityId, userId: userId);
+        facilityId: facilityId,
+        actorType: fromActorTypeId.value,
+        actorID: whereUsedTypeId.value,
+        isLoading: false);
     if (_assetList != null) {
-      assetItemList.value = _assetList.cmmrsItems ?? [];
+      for (var facility in _assetList) {
+        for (var stockDetail in facility!.stockDetails) {
+          StockDetailsList.add(stockDetail);
+          //  StockDetailsList.value = facility?.stockDetails ?? [];
+        }
+      }
+
+      // assetItemList.value = _assetList.s ?? [];
       //
 
       update(["AssetList"]);
@@ -112,6 +126,7 @@ class CreateMrsReturnController extends GetxController {
       {'key': "Return_Qty", "value": ''},
       {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -127,8 +142,10 @@ class CreateMrsReturnController extends GetxController {
     List<CmmsItem> items = [];
     rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
-        asset_item_ID: dropdownMapperData[element[0]["value"]]?.id,
-        issued_qty: dropdownMapperData[element[0]["value"]]?.quantity,
+        asset_item_ID:
+            dropdownMapperData.value[element[0]["value"]]?.assetItemID,
+        issued_qty:
+            dropdownMapperData.value[element[0]["value"]]?.balance?.round(),
         returned_qty: int.tryParse(element[2]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,

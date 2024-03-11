@@ -168,4 +168,28 @@ class MrsListController extends GetxController {
   void clearStoreData() {
     mrsListPresenter.clearValue();
   }
+
+  void clearpmTaskValue() {
+    mrsListPresenter.clearpmTaskValue();
+  }
+
+  void clearStoreTaskData() {
+    mrsListPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    mrsListPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    mrsListPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    mrsListPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    mrsListPresenter.clearStoreTaskWhereUsedData();
+  }
 }

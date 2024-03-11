@@ -12,4 +12,17 @@ class MrsListUsecase {
           dynamic startDate}) async =>
       await _repository.getMrsList(facilityId, isLoading, startDate, endDate);
   void clearValue() async => _repository.clearData(LocalKeys.mrsId);
+  void clearpmTaskValue() async => _repository.clearData(LocalKeys.pmTaskModel);
+  void clearStoreTaskData() async => _repository.clearData(LocalKeys.pmTaskId);
+  void clearStoreTaskActivityData() async =>
+      _repository.clearData(LocalKeys.activity);
+  void clearStoreTaskfromActorData() async =>
+      _repository.clearData(LocalKeys.fromActorTypeId);
+  void clearStoreTasktoActorData() async =>
+      _repository.clearData(LocalKeys.toactortypeid);
+  void clearStoreTaskWhereUsedData() async =>
+      _repository.clearData(LocalKeys.whereUsed);
+  void clearStoreDataJobId() async => _repository.clearData(LocalKeys.jobId);
+  void clearPermitStoreData() async =>
+      _repository.clearData(LocalKeys.permitId);
 }

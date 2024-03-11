@@ -108,7 +108,8 @@ class MrsListContentWeb extends StatelessWidget {
                                       Dimens.boxWidth10,
                                       CustomTextFieldForStock(
                                         width:
-                                            MediaQuery.of(context).size.width / 5,
+                                            MediaQuery.of(context).size.width /
+                                                5,
                                         numberTextField: true,
                                         onTap: () {
                                           controller
@@ -175,7 +176,7 @@ class MrsListContentWeb extends StatelessWidget {
                                         builder: (context, value, child) {
                                           final dataSource =
                                               MrsListDataSource(controller);
-              
+
                                           return PaginatedDataTable2(
                                             // fixedLeftColumns: 1,
                                             dataRowHeight:
@@ -233,11 +234,11 @@ class MrsListContentWeb extends StatelessWidget {
                             controller.fromDate.value,
                             controller.toDate.value,
                           ),
-              
+
                           onSubmit: (value) {
                             print('po valu ${value.toString()}');
                             PickerDateRange? data = value as PickerDateRange;
-              
+
                             var pickUpDate =
                                 DateTime.parse(data.startDate.toString());
                             controller.fromDate.value = pickUpDate;
@@ -246,12 +247,12 @@ class MrsListContentWeb extends StatelessWidget {
                             dropDate != null
                                 ? controller.toDate.value = dropDate
                                 : controller.toDate.value = pickUpDate;
-              
+
                             controller.getMrsListByDate();
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
                             controller.update(['stock_Mangement_Date']);
-              
+
                             // Get.toNamed(
                             //   Routes.stockManagementGoodsOrdersScreen,
                             // );
@@ -387,14 +388,16 @@ class MrsListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color: controller.mrsList.firstWhere(
+                            color: controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
                                         ?.status ==
                                     322
                                 ? ColorValues.rejectedStatusColor
-                                : controller.mrsList.firstWhere(
+                                : controller.mrsList
+                                            .firstWhere(
                                               (e) => e?.id == MrsDetails!.id,
                                               orElse: () =>
                                                   MrsListModel(id: 00),
@@ -402,7 +405,8 @@ class MrsListDataSource extends DataTableSource {
                                             ?.status ==
                                         321
                                     ? ColorValues.submitColor
-                                    : controller.mrsList.firstWhere(
+                                    : controller.mrsList
+                                                .firstWhere(
                                                   (e) =>
                                                       e?.id == MrsDetails!.id,
                                                   orElse: () =>
@@ -411,7 +415,8 @@ class MrsListDataSource extends DataTableSource {
                                                 ?.status ==
                                             323
                                         ? ColorValues.appLightBlueColor
-                                        : controller.mrsList.firstWhere(
+                                        : controller.mrsList
+                                                    .firstWhere(
                                                       (e) =>
                                                           e?.id ==
                                                           MrsDetails!.id,
@@ -421,7 +426,8 @@ class MrsListDataSource extends DataTableSource {
                                                     ?.status ==
                                                 324
                                             ? ColorValues.issueStatusColor
-                                            : controller.mrsList.firstWhere(
+                                            : controller.mrsList
+                                                        .firstWhere(
                                                           (e) =>
                                                               e?.id ==
                                                               MrsDetails!.id,
@@ -432,7 +438,8 @@ class MrsListDataSource extends DataTableSource {
                                                         ?.status ==
                                                     326
                                                 ? ColorValues.appYellowColor
-                                                : controller.mrsList.firstWhere(
+                                                : controller.mrsList
+                                                            .firstWhere(
                                                               (e) =>
                                                                   e?.id ==
                                                                   MrsDetails!
@@ -492,7 +499,8 @@ class MrsListDataSource extends DataTableSource {
                                 arguments: {'mrsId': mrsId});
                           },
                         ),
-                        controller.mrsList.firstWhere(
+                        controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -525,7 +533,8 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList.firstWhere(
+                        controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -558,7 +567,8 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList.firstWhere(
+                        controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -591,7 +601,8 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList.firstWhere(
+                        controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -624,7 +635,8 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList.firstWhere(
+                        controller.mrsList
+                                        .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () => MrsListModel(id: 00),
                                         )
@@ -654,6 +666,46 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.issueMrsApprove,
                                       arguments: {'mrsId': mrsId});
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.mrsList
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () => MrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    326 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.issue ==
+                                                UserAccessConstants
+                                                    .kHaveIssueAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.appLightBlueColor,
+                                icon: Icons.keyboard_return_outlined,
+                                message: 'Return Mrs',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  controller.clearStoreTaskData();
+                                  controller.clearStoreTaskActivityData();
+                                  controller.clearStoreTasktoActorData();
+                                  controller.clearStoreTaskWhereUsedData();
+                                  controller.clearStoreTaskfromActorData();
+                                  Get.toNamed(Routes.mrsReturnScreen,
+                                      arguments: {
+                                        "whereUsed": 27,
+                                        "fromActorTypeId": 3,
+                                        "to_actor_type_id": 2,
+                                        "pmTaskId":
+                                            MrsDetails?.whereUsedTypeId ?? 0,
+                                        "activity": MrsDetails?.activity ?? ''
+                                      });
                                 },
                               )
                             : Dimens.box0,

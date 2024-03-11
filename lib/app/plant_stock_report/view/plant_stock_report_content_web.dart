@@ -230,34 +230,33 @@ class _PlantStockReportContentWebState
                                         ),
                                       ),
                                     ),
-                                    itemBuilder: (BuildContext context) =>
-                                        <PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
+                                    itemBuilder: (BuildContext context) => <
+                                        PopupMenuEntry<String>>[]..addAll(
+                                          controller
+                                              .columnVisibility.value.entries
+                                              .map((e) {
+                                        return PopupMenuItem<String>(
+                                            child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  return Row(
+                                                    children: [
+                                                      Checkbox(
+                                                        value: value[e.key],
+                                                        onChanged: (newValue) {
+                                                          controller
+                                                              .setColumnVisibility(
+                                                                  e.key,
+                                                                  newValue!);
+                                                        },
+                                                      ),
+                                                      Text(e.key),
+                                                    ],
+                                                  );
+                                                }));
+                                      })),
                                     onSelected: (String value) {
                                       // Handle column selection
                                     },
@@ -472,7 +471,7 @@ class PlantListDataSource extends DataTableSource {
   void filterMrss() {
     filteredPlantList = <StockDetails?>[];
     filteredPlantList = controller.StockDetailsList.where((Plant) {
-      return (Plant?.asset_name ?? '')
+      return (Plant?.name ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.assetNameFilterText.value.toLowerCase()) &&
@@ -512,7 +511,7 @@ class PlantListDataSource extends DataTableSource {
 
     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
     var cellsBuffer = [
-      '${PlantDetails?.asset_name ?? ''}',
+      '${PlantDetails?.name ?? ''}',
       '${PlantDetails?.asset_code ?? ''}',
       '${PlantDetails?.asset_type ?? ''}',
       '${PlantDetails?.opening ?? ''}',

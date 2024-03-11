@@ -188,8 +188,8 @@ class ChecklistObservation {
   int? is_file_required;
   TextEditingController? observation_value_controller;
   TextEditingController? type_text_value_controller;
-  int? min_range;
-  int? max_range;
+  dynamic min_range;
+  dynamic max_range;
   ChecklistObservation(
       {this.check_point_id,
       this.check_point_name,

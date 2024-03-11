@@ -36,7 +36,7 @@ class StockDetails {
   int? facility_Is_Block;
   dynamic facility_Is_Block_of_name;
   int? assetItemID;
-  String? asset_name;
+  String? name;
   String? asset_code;
   int? asset_type_ID;
   String? asset_type;
@@ -48,7 +48,7 @@ class StockDetails {
   StockDetails(
       {this.assetItemID,
       this.asset_code,
-      this.asset_name,
+      this.name,
       this.asset_type_ID,
       this.asset_type,
       this.balance,
@@ -67,7 +67,7 @@ class StockDetails {
       balance: parsedJson['balance'],
       facility_Is_Block: parsedJson['facility_Is_Block'],
       facility_Is_Block_of_name: parsedJson['facility_Is_Block_of_name'],
-      asset_name: parsedJson['asset_name'],
+      name: parsedJson['asset_name'],
       inward: parsedJson['inward'],
       opening: parsedJson['opening'],
       outward: parsedJson['outward'],
@@ -81,7 +81,7 @@ class StockDetails {
         "asset_type": asset_type,
         "facility_Is_Block": facility_Is_Block,
         "facility_Is_Block_of_name": facility_Is_Block_of_name,
-        "asset_name": asset_name,
+        "asset_name": name,
         "inward": inward,
         "opening": opening,
         "outward": outward,

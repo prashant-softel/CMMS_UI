@@ -104,8 +104,8 @@ class EmployeeStockReportController extends GetxController {
       selectedUser.value = userList[0].name ?? '';
       selectedUserId = userList[0].id ?? 0;
       Future.delayed(Duration(seconds: 1), () {
-        getEmployeeStockReportList(
-            facilityId, 12, formattedTodate1, formattedFromdate1, false);
+        getEmployeeStockReportList(facilityId, selectedUserId, formattedTodate1,
+            formattedFromdate1, false);
       });
     }
   }
@@ -117,7 +117,7 @@ class EmployeeStockReportController extends GetxController {
     }
     List<StockDetails?> filteredList = filteredData
         .where((item) =>
-            (item?.asset_name
+            (item?.name
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
@@ -137,10 +137,7 @@ class EmployeeStockReportController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.inward
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.inward?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.outward
                     ?.toString()

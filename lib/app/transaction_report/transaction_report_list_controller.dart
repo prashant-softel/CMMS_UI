@@ -226,7 +226,7 @@ class TransactionReportListController extends GetxController {
           actorType: selectedactorTypeId,
           actorID: actorId,
           endDate: formattedFromdate1,
-          isLoading: false);
+          isLoading: true);
     }
   }
 
