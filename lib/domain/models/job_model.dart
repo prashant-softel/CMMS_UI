@@ -112,7 +112,7 @@ class JobModel {
         'workType': workType,
         'raisedBy': raisedBy,
         'raisedByName': raisedByName,
-        'breakdownTime': breakdownTime,
+        'breakdownTime': breakdownTime?.toIso8601String(),
         'breakdownType': breakdownType,
         'permitId': permitId,
         'assignedToName': assignedToName,

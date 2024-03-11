@@ -13,6 +13,7 @@ class JobListPresenter {
   Future<List<JobModel?>?> getJobList({
     String? auth,
     int? facilityId,
+    bool? isExport,
     // int? userId,
     required bool self_view,
     bool? isLoading,
@@ -22,6 +23,7 @@ class JobListPresenter {
         facilityId: facilityId ?? 0,
         self_view: self_view,
         isLoading: isLoading ?? false,
+        isExport: isExport,
       );
   void clearValue() async => jobUsecase.clearValue();
 }

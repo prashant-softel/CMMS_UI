@@ -79,7 +79,7 @@ class AbandonVegExecutionMessageDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.vegExecutionListScreen);
-                _controller.getVegTaskList(_controller.facilityId, true);
+                _controller.getVegTaskList(_controller.facilityId, true,false);
                 Get.back();
               },
               child: const Text('Ok'),

@@ -6,6 +6,8 @@ List<VegetationPlanListModel> VegetationPlanListModelFromJson(
         String str) =>
     List<VegetationPlanListModel>.from(
         json.decode(str).map(VegetationPlanListModel.fromJson));
+        String vegplanListModelToJson(List<VegetationPlanListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class VegetationPlanListModel {
   int? id;

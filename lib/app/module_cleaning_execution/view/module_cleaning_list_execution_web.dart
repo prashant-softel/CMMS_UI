@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
@@ -240,6 +241,17 @@ class _ModuleCleaningListExecutionState
                                       //       onPressed: () {},
                                       //       text: 'PDF'),
                                       // ),
+                                      Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {
+                                              controller.export();
+                                            },
+                                            text: 'Excel'),
+                                      ),
                                       Spacer(),
                                       Container(
                                         width: 300,

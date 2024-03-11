@@ -55,12 +55,14 @@ class TransactionReportListUsecase {
     int? facilityId,
     bool? self_view,
     bool? isLoading,
+    bool? isExport
   }) async =>
       await repository.getJobList(
         auth,
         facilityId,
         self_view,
         isLoading,
+        isExport
       );
   Future<List<InventoryModel?>?> inventoryList({
     required bool isLoading,

@@ -16,10 +16,12 @@ class VegetationlistUsecase {
   Future<List<VegetationPlanListModel>> getVegetationPlanList({
     required bool isLoading,
     required int? facility_id,
+    bool? isExport
   }) async {
     return repository.getVegetationPlanList(
       isLoading: isLoading,
       facility_id: facility_id,
+      isExport: isExport
     );
   }
 
