@@ -196,9 +196,12 @@ class LoginScreen extends GetView<LoginController> {
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 200, bottom: 70),
+                        margin: EdgeInsets.only(
+                            top: 200, bottom: 70, left: 30, right: 30),
                         child: Image.asset(
-                          'assets/files/logo.png',
+                          'assets/files/Logo_bg_white.jpg',
+                          // width: 300,
+                          // height: 100,
                         ),
                       ),
                       Container(
