@@ -36,7 +36,7 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ),
                   child: Card(
-                    color: Color.fromARGB(255, 240, 242, 243),
+                    color: ColorValues.whiteColor,
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -67,28 +67,34 @@ class LoginScreen extends GetView<LoginController> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 20, bottom: 20),
-                                        child: Image.asset(
-                                          'assets/files/logodrawer.png',
-                                          width: 100,
-                                          height: 100,
-                                        ),
-                                      ),
-                                      Dimens.boxWidth5,
-                                      Text(
-                                        "GREENOps",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          color: ColorValues.greyColor,
-                                        ),
-                                      )
-                                    ],
+                                  Image.asset(
+                                    'assets/files/Logo_bg_white.jpg',
+                                    width: 300,
+                                    height: 100,
                                   ),
+                                  // Row(
+                                  //   children: [
+                                  //     Container(
+                                  //       margin: EdgeInsets.only(
+                                  //           top: 20, bottom: 20),
+                                  //       child: Image.asset(
+                                  //         'assets/files/logodrawer.png',
+                                  //         width: 100,
+                                  //         height: 100,
+                                  //       ),
+                                  //     ),
+                                  //     Dimens.boxWidth5,
+                                  //     Text(
+                                  //       "GREENOps",
+                                  //       style: TextStyle(
+                                  //         fontSize: 20,
+                                  //         fontWeight: FontWeight.w500,
+                                  //         color: ColorValues.greyColor,
+                                  //       ),
+                                  //     )
+                                  //   ],
+                                  // ),
+                                  Dimens.boxHeight10,
                                   Text(
                                     'Sign in',
                                     textAlign: TextAlign.right,
