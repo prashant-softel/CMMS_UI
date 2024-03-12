@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,44 +14,47 @@ class HomeScreen extends GetView<HomeController> {
     return
         //
         Scaffold(
-            appBar: Responsive.isMobile(context)
-                ? AppBar(
-                    title: Text('Home'),
-                    centerTitle: true,
-                    elevation: 0,
-                  )
-                : null,
-            drawer: //
-                (Responsive.isMobile(context) || Responsive.isTablet(context))
-                    ? HomeDrawer() //ResponsiveSideMenu()
-                    : null,
-            body: Obx(
-              () => Stack(
+      appBar: Responsive.isMobile(context)
+          ? AppBar(
+              title: Text('Home'),
+              centerTitle: true,
+              elevation: 0,
+            )
+          : null,
+      drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+          ? HomeDrawerMobile() //ResponsiveSideMenu()
+          : null,
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                  left: controller.menuButton.value ? 250.0 : 70.0),
+              child: Row(
                 children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 450),
-                    margin: EdgeInsets.only(
-                        left: controller.menuButton.value ? 250.0 : 70.0),
-                    child: Row(
+                  Expanded(
+                    child: Column(
                       children: [
-                        Expanded(
-                            child: Column(
-                          children: [
-                            (Responsive.isDesktop(context))
-                                ? Expanded(child: DashBoardHomeWeb())
-                                : Dimens.box0
-                          ],
-                        ))
+                        (Responsive.isDesktop(context))
+                            ? Expanded(child: DashBoardHomeWeb())
+                            : Dimens.box0
                       ],
                     ),
-                  ),
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 450),
-                    child: HomeDrawer(),
-                  ),
+                  )
                 ],
               ),
-            ));
+            ),
+            Responsive.isDesktop(context)
+                ? AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  )
+                : Dimens.box0
+          ],
+        ),
+      ),
+    );
   }
 }
 
