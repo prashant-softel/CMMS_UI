@@ -8,7 +8,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
   final controller = Get.find<HomeController>();
-
   @override
   Widget build(BuildContext context) {
     return
@@ -30,7 +29,12 @@ class HomeScreen extends GetView<HomeController> {
             AnimatedContainer(
               duration: Duration(milliseconds: 450),
               margin: EdgeInsets.only(
-                  left: controller.menuButton.value ? 250.0 : 70.0),
+                      left: Responsive.isDesktop(context)
+                          ? homeController.menuButton.value
+                              ? 250.0
+                              : 70.0
+                          : 0,
+                    ),
               child: Row(
                 children: [
                   Expanded(
