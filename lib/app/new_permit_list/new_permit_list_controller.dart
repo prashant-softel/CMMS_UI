@@ -182,7 +182,7 @@ class NewPermitListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-            true, false, false,false);
+            true, false, false, false);
       });
     });
 
@@ -264,8 +264,15 @@ class NewPermitListController extends GetxController {
     // update(['permit_list']);
   }
 
-  Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
-      dynamic endDate, bool isLoading, bool self_view, bool non_expired ,bool isExport) async {
+  Future<void> getNewPermitList(
+      int facilityId,
+      int userId,
+      dynamic startDate,
+      dynamic endDate,
+      bool isLoading,
+      bool self_view,
+      bool non_expired,
+      bool isExport) async {
     newPermitList.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
@@ -273,7 +280,7 @@ class NewPermitListController extends GetxController {
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
         userId: userId,
-        isExport :isExport,
+        isExport: isExport,
         self_view: varUserAccessModel.value.access_list!
                     .where((e) =>
                         e.feature_id == UserAccessConstants.kPermitFeatureId &&
@@ -418,7 +425,7 @@ class NewPermitListController extends GetxController {
 
   void getNewPermitListByDate() {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-        false, false, false,false);
+        false, false, false, false);
   }
 
   void clearStoreData() {
@@ -440,8 +447,9 @@ class NewPermitListController extends GetxController {
   void clearpmTaskValue() {
     newPermitListPresenter.clearpmTaskValue();
   }
+
   void export() {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-        false, false, false,true);
+        false, false, false, true);
   }
 }
