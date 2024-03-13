@@ -184,8 +184,8 @@ import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_exe
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
-import 'package:cmms/app/new_permit/new_permit_binding.dart';
-import 'package:cmms/app/new_permit/view/new_permit_screen.dart';
+import 'package:cmms/app/new_permit/anas_new_permit_binding.dart';
+import 'package:cmms/app/new_permit/view/anas_new_permit_screen.dart';
 import 'package:cmms/app/preventive_check_point/preventive_check_point_binding.dart';
 import 'package:cmms/app/preventive_check_point/view/preventive_check_point_screen.dart';
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
