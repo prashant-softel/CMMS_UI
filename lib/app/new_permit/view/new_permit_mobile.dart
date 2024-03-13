@@ -8,6 +8,7 @@ import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -142,7 +143,111 @@ class NewPermitMobile extends GetView<NewPermitController> {
                               },
                             ),
                           ),
+                          Dimens.boxHeight15
                         ],
+                      )
+                    : Dimens.box0,
+              ),
+              Obx(
+                () => controller.isToggleOn == true
+                    ? Container(
+                        child: Column(
+                          children: [
+                            CustomAppBar(
+                              title: "Loto Equipment List".tr,
+                            ),
+                            Dimens.boxHeight10,
+                            CustomMultiSelectDialogField(
+                              buttonText: 'Select Equipment Name',
+                              title: 'Equipment Name',
+                              initialValue: (controller
+                                      .selectedEquipmentNameList.isNotEmpty)
+                                  ? controller.selectedEquipmentNameIdList
+                                  : [],
+                              items: controller.equipmentNameList
+                                  .map(
+                                    (equipmentName) => MultiSelectItem(
+                                      equipmentName?.id,
+                                      equipmentName?.name ?? '',
+                                    ),
+                                  )
+                                  .toList(),
+                              onConfirm: (selectedOptionsList) => {
+                                controller
+                                    .equipmentNameSelected(selectedOptionsList),
+                                print(
+                                    'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
+                              },
+                            ),
+                            Dimens.boxHeight10,
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 2,
+                                child: Container(
+                                  constraints: BoxConstraints(minHeight: 110),
+                                  height: ((controller
+                                          .filteredEquipmentNameList.length) *
+                                      60),
+                                  // 90,
+                                  child: DataTable2(
+                                    minWidth: 50,
+                                    columns: [
+                                      DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text("Loto Applied On")),
+                                      DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text("Serial Number")),
+                                      DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text("Action")),
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                      controller
+                                          .filteredEquipmentNameList.length,
+                                      (index) {
+                                        var inventoryEquipmentName = controller
+                                            .filteredEquipmentNameList[index];
+                                        controller.id.value =
+                                            inventoryEquipmentName?.id ?? 0;
+                                        print(
+                                            'Equipment Isss5:${controller.id.value}');
+                                        return DataRow(
+                                          cells: [
+                                            DataCell(
+                                              Text(
+                                                  '${inventoryEquipmentName?.name ?? ''}'),
+                                            ),
+                                            DataCell(
+                                              Text(
+                                                  '${inventoryEquipmentName?.serialNumber ?? ''}'),
+                                            ),
+                                            DataCell(
+                                              Wrap(
+                                                children: [
+                                                  TableActionButton(
+                                                    color: Colors.red,
+                                                    icon: Icons.delete_outline,
+                                                    message: 'Remove',
+                                                    onPress: () {
+                                                      controller
+                                                          .removeItem(index);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       )
                     : Dimens.box0,
               ),

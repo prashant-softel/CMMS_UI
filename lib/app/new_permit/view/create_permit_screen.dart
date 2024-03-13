@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit/view/new_permit_mobile.dart';
 import 'package:cmms/app/new_permit/view/new_permit_web.dart';
@@ -16,12 +18,9 @@ class CreatePermitScreen extends GetView<NewPermitController> {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: Responsive.isMobile(context)
+        appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
-                title: Text(
-                  "Add Permit",
-                  style: Styles.blackBold14,
-                ),
+                title: HeaderWidgetMobile(),
                 centerTitle: true,
                 elevation: 0,
               )
