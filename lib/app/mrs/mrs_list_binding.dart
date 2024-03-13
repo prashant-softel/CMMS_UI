@@ -1,4 +1,4 @@
-import 'package:cmms/app/mrs/Mrs_list_controller.dart';
+import 'package:cmms/app/mrs/mrs_list_controller.dart';
 import 'package:cmms/app/mrs/mrs_list_presenter.dart';
 import 'package:cmms/domain/usecases/mrs_list_usecase.dart';
 import 'package:get/get.dart';

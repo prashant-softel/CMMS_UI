@@ -3,6 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/return_mrs/return_mrs_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -180,6 +181,17 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                   //     text: 'columnVisibility'.tr,
                                   //   ),
                                   // ),
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                  ),
                                   Spacer(),
                                   Container(
                                     width: 300,

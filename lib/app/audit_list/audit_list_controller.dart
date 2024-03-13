@@ -91,19 +91,20 @@ class AuditListScreenController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         getAuditPlanList(
-            facilityId, formattedTodate1, formattedFromdate1, true);
+            facilityId, formattedTodate1, formattedFromdate1, true,false);
       });
     });
     super.onInit();
   }
 
   Future<void> getAuditPlanList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+      dynamic endDate, bool isLoading, bool? isExport) async {
     auditPlanList.value = <AuditPlanListModel>[];
     // pmPlanList?.clear();
     final _auditPlanList = await auditListPresenter.getAuditPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
+        isExport: isExport,
         startDate: startDate,
         endDate: endDate);
     if (_auditPlanList != null) {
@@ -132,7 +133,7 @@ class AuditListScreenController extends GetxController {
   }
 
   void getAuditListByDate() {
-    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true,false);
   }
 
   Future<void> clearValue() async {
@@ -141,5 +142,8 @@ class AuditListScreenController extends GetxController {
 
   void clearStoreIdData() {
     auditListPresenter.clearStoreIdData();
+  }
+  void export () {
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true,true);
   }
 }

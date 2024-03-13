@@ -9,10 +9,11 @@ class AuditListScreenUsecase {
   Future<List<AuditPlanListModel>?> getAuditPlanList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getAuditPlanList(
-          facilityId, isLoading, startDate, endDate);
+          facilityId, isLoading,isExport, startDate, endDate);
   void saveValue({String? type}) async =>
       repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>

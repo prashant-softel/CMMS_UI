@@ -7,11 +7,13 @@ class MrsListPresenter {
   Future<List<MrsListModel?>?> getMrsList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
       await mrsListUsecase.getMrsList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          isExport: isExport,
           endDate: endDate,
           startDate: startDate);
   void clearValue() async => mrsListUsecase.clearValue();

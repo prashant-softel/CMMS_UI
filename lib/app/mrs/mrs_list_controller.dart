@@ -81,7 +81,8 @@ class MrsListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
+        getMrsList(
+            facilityId, formattedTodate1, formattedFromdate1, true, false);
       });
     });
     super.onInit();
@@ -131,13 +132,14 @@ class MrsListController extends GetxController {
   }
 
   Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+      bool isLoading, bool? isExport) async {
     mrsList.value = <MrsListModel>[];
     filteredData.value = <MrsListModel>[];
 
     final _mrsList = await mrsListPresenter.getMrsList(
         facilityId: facilityId,
         isLoading: isLoading,
+        isExport: isExport,
         startDate: startDate,
         endDate: endDate);
 
@@ -162,7 +164,7 @@ class MrsListController extends GetxController {
   }
 
   void getMrsListByDate() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true, false);
   }
 
   void clearStoreData() {
@@ -191,5 +193,9 @@ class MrsListController extends GetxController {
 
   void clearStoreTaskWhereUsedData() {
     mrsListPresenter.clearStoreTaskWhereUsedData();
+  }
+
+  void export() {
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true, true);
   }
 }

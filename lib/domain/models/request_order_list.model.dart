@@ -6,6 +6,8 @@ List<GetRequestOrderListModel> getRequestOrderListModelFromJson(String str) =>
     List<GetRequestOrderListModel>.from(
         json.decode(str).map(GetRequestOrderListModel.fromJson));
 
+String roListModelToJson(List<GetRequestOrderListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 class GetRequestOrderListModel {
   String? name;
 

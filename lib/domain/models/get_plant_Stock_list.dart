@@ -4,6 +4,8 @@ List<PlantStockListModel> MrsModelFromJson(String str) =>
     List<PlantStockListModel>.from(
         json.decode(str).map((x) => PlantStockListModel.fromJson(x)));
 
+String plantstockListModelToJson(List<PlantStockListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 class PlantStockListModel {
   int? facilityID;
   String? facilityName;

@@ -141,7 +141,7 @@ class PlantStockReportController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-            true, selectedAssetsNameIdList.value);
+            true, false, selectedAssetsNameIdList.value);
       });
       Future.delayed(Duration(seconds: 2), () {
         getAssetList(facilityId);
@@ -168,6 +168,7 @@ class PlantStockReportController extends GetxController {
       dynamic startDate,
       dynamic endDate,
       bool isLoading,
+      bool? isExport,
       List<int>? selectedAssetsNameIdList) async {
     plantStockList?.value = <PlantStockListModel>[];
     StockDetailsList.value = <StockDetails>[];
@@ -175,6 +176,7 @@ class PlantStockReportController extends GetxController {
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
         isLoading: isLoading,
+        isExport: isExport,
         startDate: startDate,
         endDate: endDate,
         selectedAssetsNameIdList: selectedAssetsNameIdList);
@@ -196,7 +198,7 @@ class PlantStockReportController extends GetxController {
 
   void getPlantStockListByDate() {
     getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
-        selectedAssetsNameIdList.value);
+        false, selectedAssetsNameIdList.value);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -218,10 +220,15 @@ class PlantStockReportController extends GetxController {
           plantStockList?.value = <PlantStockListModel>[];
 
           getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-              true, selectedAssetsNameIdList.value);
+              true, false, selectedAssetsNameIdList.value);
         }
         break;
     }
     // print({"selectedfrequency": selectedfrequency});
+  }
+
+  void export() {
+    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
+        true, selectedAssetsNameIdList.value);
   }
 }

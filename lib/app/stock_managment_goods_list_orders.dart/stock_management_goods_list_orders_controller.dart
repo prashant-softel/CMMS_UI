@@ -101,6 +101,7 @@ class StockManagementGoodsOrdersController extends GetxController {
           formattedTodate1,
           formattedFromdate1,
           false,
+          false
         );
       });
     });
@@ -152,7 +153,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   Future<void> getGoodsOrdersList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+      dynamic endDate, bool isLoading, bool isExport) async {
     goodsOrdersList.value = <GoodsOrdersListModel>[];
     filteredData.value = <GoodsOrdersListModel>[];
 
@@ -162,6 +163,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       start_date: startDate,
       end_date: endDate,
       facility_id: facilityId,
+      isExport: isExport
     );
     goodsOrdersList.value = _goodsordersList;
     paginationController = PaginationController(
@@ -195,7 +197,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
+    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false,false);
   }
 
   Future<void> deleteGoodsOrders(String? id) async {
@@ -211,5 +213,14 @@ class StockManagementGoodsOrdersController extends GetxController {
 
   void clearTypeStoreData() {
     stockManagementGoodsOrdersPresenter.clearTypeValue();
+  }
+  void export() {
+    getGoodsOrdersList(
+      facilityId,
+      formattedTodate1,
+      formattedFromdate1,
+      true,
+      true
+    );
   }
 }
