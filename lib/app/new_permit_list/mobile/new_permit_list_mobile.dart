@@ -18,17 +18,12 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
 
   @override
   Widget build(BuildContext context) {
-    ///
-    return //
-        Scaffold(
+    return Scaffold(
       body: Obx(() {
         return Container(
+          padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(
             children: [
-              SizedBox(
-                height: 50,
-              ),
-              //DropDown
               FacilitySelectionDropdownWidget(),
               Expanded(
                 child: ListView.builder(
@@ -64,205 +59,196 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                  //
-                                  children: [
-                                    Row(
-                                        //
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              'Permit Id: ${newPermitListModel?.permitId ?? 0}',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color:
-                                                    ColorValues.navyBlueColor,
-                                              ),
-                                            ),
+                              child: Column(children: [
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          'Permit Id: ${newPermitListModel?.permitId ?? 0}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorValues.navyBlueColor,
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: (status.toLowerCase() ==
-                                                        "created")
-                                                    ? Color(0xff58c3ca)
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: (status.toLowerCase() ==
+                                                    "created")
+                                                ? Color(0xff58c3ca)
+                                                : (status.toLowerCase() ==
+                                                        "assigned")
+                                                    ? Color(0xff58c352)
                                                     : (status.toLowerCase() ==
-                                                            "assigned")
-                                                        ? Color(0xff58c352)
+                                                            "linked")
+                                                        ? Color(0xff787099)
                                                         : (status.toLowerCase() ==
-                                                                "linked")
-                                                            ? Color(0xff787099)
+                                                                "in progress")
+                                                            ? Color(0xffbf8c4b)
                                                             : (status.toLowerCase() ==
-                                                                    "in progress")
+                                                                    "closed")
                                                                 ? Color(
-                                                                    0xffbf8c4b)
+                                                                    0xff3438cd)
                                                                 : (status.toLowerCase() ==
-                                                                        "closed")
+                                                                        "cancelled")
                                                                     ? Color(
-                                                                        0xff3438cd)
-                                                                    : (status.toLowerCase() ==
-                                                                            "cancelled")
-                                                                        ? Color(
-                                                                            0xFFBF4844)
-                                                                        : Color.fromARGB(
+                                                                        0xFFBF4844)
+                                                                    : Color
+                                                                        .fromARGB(
                                                                             255,
                                                                             227,
                                                                             223,
                                                                             108),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 10,
-                                                vertical: 5,
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  status,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 5,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              status,
+                                              style: const TextStyle(
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ),
-                                        ]),
-                                    Row(children: [
-                                      Expanded(
-                                        child: Text(
-                                          'Permit Type Name: ',
-                                          style: const TextStyle(
-                                            color: ColorValues.blackColor,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          '${newPermitListModel?.permitTypeName ?? 'Unassigned'}',
-                                          style: const TextStyle(
-                                            color: ColorValues.blackColor,
-                                          ),
                                         ),
                                       ),
                                     ]),
-                                    Row(//
-                                        children: [
-                                      Expanded(
-                                        child: Text(
-                                          '${newPermitListModel?.workingAreaName ?? ''}',
-                                          // 'Not Assigned',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 239, 87, 27),
-                                          ),
-                                        ),
-                                      )
-                                    ]),
-                                    Row(//
-                                        children: [
-                                      Expanded(
-                                        child: Text(
-                                          'Description: ',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                Row(children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Permit Type Name: ',
+                                      style: const TextStyle(
+                                        color: ColorValues.blackColor,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${newPermitListModel?.permitTypeName ?? 'Unassigned'}',
+                                      style: const TextStyle(
+                                        color: ColorValues.blackColor,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                                Row(//
+                                    children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${newPermitListModel?.workingAreaName ?? ''}',
+                                      // 'Not Assigned',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 239, 87, 27),
+                                      ),
+                                    ),
+                                  )
+                                ]),
+                                Row(//
+                                    children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Description: ',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      newPermitListModel?.description ?? '',
+                                      style: const TextStyle(),
+                                    ),
+                                  )
+                                ]),
+                                Row(//
+                                    children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Equipment: ',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      newPermitListModel
+                                              ?.equipment_categories ??
+                                          '',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                ]),
+                                Row(
+                                    //
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Work Area Name: ',
+                                        style: TextStyle(
+                                          color: Colors.blue.shade900,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                       Expanded(
-                                        child: Text(
-                                          newPermitListModel?.description ?? '',
-                                          style: const TextStyle(),
-                                        ),
-                                      )
-                                    ]),
-                                    Row(//
-                                        children: [
-                                      Expanded(
-                                        child: Text(
-                                          'Equipment: ',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          newPermitListModel
-                                                  ?.equipment_categories ??
-                                              '',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      )
-                                    ]),
-                                    Row(
-                                        //
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Work Area Name: ',
-                                            style: TextStyle(
-                                              color: Colors.blue.shade900,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Text(newPermitListModel
-                                                    ?.workingAreaName ??
-                                                ''),
-                                          ),
-                                        ]),
-                                    Row(//
-                                        children: [
-                                      Expanded(
-                                        child: Text(
-                                          'Approved Time: ',
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: Text(
-                                          (newPermitListModel
-                                                      ?.approvedDatetime !=
-                                                  null)
-                                              ? DateFormat('dd-MMM-yyyy hh:mm')
-                                                  .format(newPermitListModel!
-                                                      .approvedDatetime!)
-                                              : '',
-                                          style: TextStyle(color: Colors.grey),
-                                          // 'Time djhb'
-                                        ),
+                                        child: Text(newPermitListModel
+                                                ?.workingAreaName ??
+                                            ''),
                                       ),
                                     ]),
+                                Row(//
+                                    children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Approved Time: ',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      (newPermitListModel?.approvedDatetime !=
+                                              null)
+                                          ? DateFormat('dd-MMM-yyyy hh:mm')
+                                              .format(newPermitListModel!
+                                                  .approvedDatetime!)
+                                          : '',
+                                      style: TextStyle(color: Colors.grey),
+                                      // 'Time djhb'
+                                    ),
+                                  ),
+                                ]),
 
-                                    ///Edit Button
-                                    varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id == 3 &&
-                                                    e.edit == 1)
-                                                .length >
-                                            0
-                                        ? CustomElevatedButton(
-                                            onPressed: () {
-                                              var _newPermitListId =
-                                                  newPermitListModel
-                                                          ?.permitId ??
-                                                      0;
-                                              controller.editNewPermit(
-                                                  permitId: _newPermitListId);
-                                            },
-                                            text: 'Edit PTW',
-                                            icon: Icons.edit,
-                                            backgroundColor: Colors.blue,
-                                          )
-                                        : Container(),
-                                  ]),
+                                ///Edit Button
+                                varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id == 3 &&
+                                                e.edit == 1)
+                                            .length >
+                                        0
+                                    ? CustomElevatedButton(
+                                        onPressed: () {
+                                          var _newPermitListId =
+                                              newPermitListModel?.permitId ?? 0;
+                                          controller.editNewPermit(
+                                              permitId: _newPermitListId);
+                                        },
+                                        text: 'Edit PTW',
+                                        icon: Icons.edit,
+                                        backgroundColor: Colors.blue,
+                                      )
+                                    : Container(),
+                              ]),
                             ),
                           ),
                         ),
