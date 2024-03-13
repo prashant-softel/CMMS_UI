@@ -2,7 +2,7 @@ import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/training_courses/training_course_controller.dart';
 // import 'package:cmms/app/training_courses/training_course_controller.dart';
-import 'package:cmms/app/training_courses/views/mobile/training_course_mobile.dart';
+import 'package:cmms/app/training_courses/views/web/training_course_web.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +43,7 @@ class TrainingCourseScreen extends GetView<TrainingController> {
                       ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: TrainingCourseMobile(),
+                        child: TrainingCourseWeb(),
                       )
                   ],
                 ),

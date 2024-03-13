@@ -15,8 +15,8 @@ import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class NewPermitScreen extends GetView<NewPermitController> {
-  NewPermitScreen({super.key});
+class NewPermitMobile extends GetView<NewPermitController> {
+  NewPermitMobile({super.key});
   bool valuefirst = false;
   final NewPermitController _controller = Get.find();
 

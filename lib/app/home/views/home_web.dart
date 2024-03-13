@@ -108,26 +108,6 @@ final List<Map<String, dynamic>> statutoryData = [
     'Schedule start date': '01-04-2023 18:00',
     'Schedule end date': '01-04-2023 19:00',
   },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
 ];
 
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {

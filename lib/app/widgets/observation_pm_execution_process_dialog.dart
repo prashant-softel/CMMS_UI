@@ -159,14 +159,14 @@ class ObservationPmExecutionViewDialog extends GetView {
                                         color:
                                             Color.fromARGB(255, 206, 229, 234)),
                                     columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
+                                      // DataColumn2(
+                                      //     fixedWidth: 100,
+                                      //     label: Text(
+                                      //       "Sr.No.",
+                                      //       style: TextStyle(
+                                      //           fontSize: 15,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     )),
                                       DataColumn2(
                                           fixedWidth: 400,
                                           label: Text(
@@ -200,6 +200,14 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
+                                          fixedWidth: 300,
+                                          label: Text(
+                                            "Observation",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
                                           fixedWidth: 180,
                                           label: Text(
                                             "Upload Images",
@@ -208,21 +216,14 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 185,
+                                          fixedWidth: 190,
                                           label: Text(
                                             "Input Type",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Observation",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
+
                                       DataColumn2(
                                           fixedWidth: 150,
                                           label: Text(
@@ -232,202 +233,366 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                     ],
-                                    rows: List<DataRow>.generate(
-                                      controller.selectedItem
-                                              ?.checklist_observation?.length ??
-                                          0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text('${index + 1}')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .check_point_name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .requirement ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .failure_waightage
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Obx(() {
-                                          return _rowcpOkItem(
-                                              controller
-                                                  .selectedItem
-                                                  ?.checklist_observation?[
-                                                      index]
-                                                  .cp_ok
-                                                  .value, onCheck: (val) {
-                                            controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .cp_ok
-                                                .value = val == true ? 1 : 0;
-                                          });
-                                        })),
-                                        DataCell(
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  controller.selectFiles();
-                                                },
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color: ColorValues
-                                                        .appDarkBlueColor,
-                                                    border: Border.all(
-                                                      color: ColorValues
-                                                          .appDarkBlueColor,
-                                                      width: 1,
-                                                    ),
-                                                  ),
-                                                  child: Icon(Icons.upload,
-                                                      size: 30,
-                                                      color: ColorValues
-                                                          .whiteColor),
-                                                ),
-                                              ),
-                                              // Dimens.boxWidth15,
-                                              // Container(
-                                              //   width: 60,
-                                              //   decoration: BoxDecoration(
-                                              //     borderRadius:
-                                              //         BorderRadius.circular(2),
-                                              //     color: ColorValues
-                                              //         .appDarkBlueColor,
-                                              //     border: Border.all(
-                                              //       color: ColorValues
-                                              //           .appDarkBlueColor,
-                                              //       width: 1,
-                                              //     ),
-                                              //   ),
-                                              //   child: Text(
-                                              //     "${controller.fileIds.length} Files",
-                                              //     textAlign: TextAlign.center,
-                                              //     style:
-                                              //         Styles.white12.copyWith(
-                                              //       color: Theme.of(context)
-                                              //           .textTheme
-                                              //           .displaySmall!
-                                              //           .color,
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        controller
-                                                    .selectedItem
-                                                    ?.checklist_observation?[
-                                                        index]
-                                                    .check_point_type ==
-                                                1
-                                            ? DataCell(Obx(() {
-                                                return _rowBoolItem(
-                                                    controller
-                                                        .selectedItem
-                                                        ?.checklist_observation?[
-                                                            index]
-                                                        .type_bool
-                                                        .value, onCheck: (val) {
-                                                  controller
-                                                      .selectedItem
-                                                      ?.checklist_observation?[
-                                                          index]
-                                                      .type_bool
-                                                      .value = val ==
-                                                          true
-                                                      ? 1
-                                                      : 0;
-                                                });
-                                              }))
-                                            : controller
-                                                        .selectedItem
-                                                        ?.checklist_observation?[
-                                                            index]
-                                                        .check_point_type ==
-                                                    2
-                                                ? DataCell(Padding(
+                                    rows: controller.rowItemobs.value
+                                        .map((record) {
+                                      return DataRow(
+                                        // height: 130,
+                                        cells: record.map((mapData) {
+                                          return DataCell(
+                                            (mapData['key'] == "observation")
+                                                ? Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: Column(
-                                                      children: [
-                                                        LoginCustomTextfield(
-                                                          width:
-                                                              (Get.width * .8),
-                                                          textController: controller
-                                                                  .selectedItem
-                                                                  ?.checklist_observation?[
-                                                                      index]
-                                                                  .type_text_value_controller
-                                                              as TextEditingController,
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                                "Min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
-                                                            Dimens.boxWidth15,
-                                                            Text(
-                                                                "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
-                                                          ],
-                                                        )
-                                                      ],
+                                                    child: LoginCustomTextfield(
+                                                      width: (Get.width * .4),
+                                                      textController:
+                                                          new TextEditingController(
+                                                              text: mapData[
+                                                                      "value"] ??
+                                                                  ''),
+                                                      onChanged: (txt) {
+                                                        mapData["value"] = txt;
+                                                      },
+                                                      maxLine: 5,
                                                     ),
-                                                  ))
-                                                : DataCell(Text("Text")),
-                                        DataCell(Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: LoginCustomTextfield(
-                                            width: (Get.width * .4),
-                                            textController: controller
-                                                    .selectedItem
-                                                    ?.checklist_observation?[index]
-                                                    .observation_value_controller
-                                                as TextEditingController,
-                                            maxLine: 5,
-                                          ),
-                                        )),
-                                        DataCell(controller
-                                                    .selectedItem
-                                                    ?.checklist_observation?[
-                                                        index]
-                                                    .linked_job_id
-                                                    .value ==
-                                                0
-                                            ? Obx(() {
-                                                return _rowItem(
-                                                    controller
-                                                        .selectedItem
-                                                        ?.checklist_observation?[
-                                                            index]
-                                                        .linked_job_id
-                                                        .value, onCheck: (val) {
-                                                  controller
-                                                      .selectedItem
-                                                      ?.checklist_observation?[
-                                                          index]
-                                                      .linked_job_id
-                                                      .value = val ==
-                                                          true
-                                                      ? 1
-                                                      : 0;
-                                                });
-                                              })
-                                            : Dimens.box0),
-                                      ]),
-                                    ),
+                                                  )
+                                                : (mapData['key'] ==
+                                                        "uploadimg")
+                                                    ? Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          InkWell(
+                                                            onTap: () {
+                                                              controller
+                                                                  .selectFiles();
+                                                            },
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                color: ColorValues
+                                                                    .appDarkBlueColor,
+                                                                border:
+                                                                    Border.all(
+                                                                  color: ColorValues
+                                                                      .appDarkBlueColor,
+                                                                  width: 1,
+                                                                ),
+                                                              ),
+                                                              child: Icon(
+                                                                  Icons.upload,
+                                                                  size: 30,
+                                                                  color: ColorValues
+                                                                      .whiteColor),
+                                                            ),
+                                                          ),
+                                                          // Dimens.boxWidth15,
+                                                          // Container(
+                                                          //   width: 60,
+                                                          //   decoration: BoxDecoration(
+                                                          //     borderRadius:
+                                                          //         BorderRadius.circular(2),
+                                                          //     color: ColorValues
+                                                          //         .appDarkBlueColor,
+                                                          //     border: Border.all(
+                                                          //       color: ColorValues
+                                                          //           .appDarkBlueColor,
+                                                          //       width: 1,
+                                                          //     ),
+                                                          //   ),
+                                                          //   child: Text(
+                                                          //     "${controller.fileIds.length} Files",
+                                                          //     textAlign: TextAlign.center,
+                                                          //     style:
+                                                          //         Styles.white12.copyWith(
+                                                          //       color: Theme.of(context)
+                                                          //           .textTheme
+                                                          //           .displaySmall!
+                                                          //           .color,
+                                                          //     ),
+                                                          //   ),
+                                                          // ),
+                                                        ],
+                                                      )
+                                                    : (mapData['key'] == "cpok")
+                                                        ?
+                                                        //  Obx(() {
+                                                        //     return
+                                                        _rowcpOkItem(
+                                                            int.tryParse(
+                                                                '${mapData['value']}'),
+                                                            onCheck: (val) {
+                                                            mapData['value'] =
+                                                                val == true
+                                                                    ? "1"
+                                                                    : "0";
+                                                          })
+
+                                                        /// })
+                                                        : (mapData['key'] ==
+                                                                    "type" &&
+                                                                mapData['inpute_type'] ==
+                                                                    "2")
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets.all(
+                                                                        8.0),
+                                                                child: Column(
+                                                                  children: [
+                                                                    LoginCustomTextfield(
+                                                                        width: (Get.width *
+                                                                            .8),
+                                                                        textController: new TextEditingController(
+                                                                            text: mapData["value"] ??
+                                                                                ''),
+                                                                        onChanged:
+                                                                            (txt) {
+                                                                          mapData["value"] =
+                                                                              txt;
+                                                                        }),
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                            "Min:${mapData["min"]}"),
+                                                                        Dimens
+                                                                            .boxWidth15,
+                                                                        Text(
+                                                                            "Max:${mapData["max"]}")
+                                                                      ],
+                                                                    )
+                                                                  ],
+                                                                ))
+                                                            : (mapData['key'] ==
+                                                                        "type" &&
+                                                                    mapData['inpute_type'] ==
+                                                                        "0")
+                                                                ? Text('Text')
+                                                                : (mapData['key'] ==
+                                                                        "job_created")
+                                                                    ?
+                                                                    // Obx(() {
+                                                                    //     return
+                                                                    _rowItem(
+                                                                        int.tryParse('${mapData['value']}'),
+                                                                        onCheck:
+                                                                            (val) {
+                                                                        mapData[
+                                                                            'value'] = val ==
+                                                                                true
+                                                                            ? "1"
+                                                                            : "0";
+
+                                                                        // Update the reactive variable
+                                                                        //  });
+                                                                      })
+                                                                    : Text(mapData['value'] ?? ''),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+
+                                    // rows: List<DataRow>.generate(
+                                    //   controller.rowItemobs
+                                    //           ? ??
+                                    //       0,
+                                    //   (index) => DataRow(cells: [
+                                    //     DataCell(Text('${index + 1}')),
+                                    //     DataCell(Text(controller
+                                    //             .selectedItem
+                                    //             ?.checklist_observation?[index]
+                                    //             .check_point_name
+                                    //             .toString() ??
+                                    //         '')),
+                                    //     DataCell(Text(controller
+                                    //             .selectedItem
+                                    //             ?.checklist_observation?[index]
+                                    //             .requirement ??
+                                    //         '')),
+                                    //     DataCell(Text(controller
+                                    //             .selectedItem
+                                    //             ?.checklist_observation?[index]
+                                    //             .failure_waightage
+                                    //             .toString() ??
+                                    //         '')),
+                                    //     DataCell(Obx(() {
+                                    //       return _rowcpOkItem(
+                                    //           controller
+                                    //               .selectedItem
+                                    //               ?.checklist_observation?[
+                                    //                   index]
+                                    //               .cp_ok
+                                    //               .value, onCheck: (val) {
+                                    //         controller
+                                    //             .selectedItem
+                                    //             ?.checklist_observation?[index]
+                                    //             .cp_ok
+                                    //             .value = val == true ? 1 : 0;
+                                    //       });
+                                    //     })),
+                                    //     DataCell(
+                                    //       Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.center,
+                                    //         children: [
+                                    //           InkWell(
+                                    //             onTap: () {
+                                    //               controller.selectFiles();
+                                    //             },
+                                    //             child: Container(
+                                    //               decoration: BoxDecoration(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         5),
+                                    //                 color: ColorValues
+                                    //                     .appDarkBlueColor,
+                                    //                 border: Border.all(
+                                    //                   color: ColorValues
+                                    //                       .appDarkBlueColor,
+                                    //                   width: 1,
+                                    //                 ),
+                                    //               ),
+                                    //               child: Icon(Icons.upload,
+                                    //                   size: 30,
+                                    //                   color: ColorValues
+                                    //                       .whiteColor),
+                                    //             ),
+                                    //           ),
+                                    //           // Dimens.boxWidth15,
+                                    //           // Container(
+                                    //           //   width: 60,
+                                    //           //   decoration: BoxDecoration(
+                                    //           //     borderRadius:
+                                    //           //         BorderRadius.circular(2),
+                                    //           //     color: ColorValues
+                                    //           //         .appDarkBlueColor,
+                                    //           //     border: Border.all(
+                                    //           //       color: ColorValues
+                                    //           //           .appDarkBlueColor,
+                                    //           //       width: 1,
+                                    //           //     ),
+                                    //           //   ),
+                                    //           //   child: Text(
+                                    //           //     "${controller.fileIds.length} Files",
+                                    //           //     textAlign: TextAlign.center,
+                                    //           //     style:
+                                    //           //         Styles.white12.copyWith(
+                                    //           //       color: Theme.of(context)
+                                    //           //           .textTheme
+                                    //           //           .displaySmall!
+                                    //           //           .color,
+                                    //           //     ),
+                                    //           //   ),
+                                    //           // ),
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //     controller
+                                    //                 .selectedItem
+                                    //                 ?.checklist_observation?[
+                                    //                     index]
+                                    //                 .check_point_type ==
+                                    //             1
+                                    //         ? DataCell(Obx(() {
+                                    //             return _rowBoolItem(
+                                    //                 controller
+                                    //                     .selectedItem
+                                    //                     ?.checklist_observation?[
+                                    //                         index]
+                                    //                     .type_bool
+                                    //                     .value, onCheck: (val) {
+                                    //               controller
+                                    //                   .selectedItem
+                                    //                   ?.checklist_observation?[
+                                    //                       index]
+                                    //                   .type_bool
+                                    //                   .value = val ==
+                                    //                       true
+                                    //                   ? 1
+                                    //                   : 0;
+                                    //             });
+                                    //           }))
+                                    //         : controller
+                                    //                     .selectedItem
+                                    //                     ?.checklist_observation?[
+                                    //                         index]
+                                    //                     .check_point_type ==
+                                    //                 2
+                                    //             ? DataCell(Padding(
+                                    //                 padding:
+                                    //                     const EdgeInsets.all(
+                                    //                         8.0),
+                                    //                 child: Column(
+                                    //                   children: [
+                                    //                     LoginCustomTextfield(
+                                    //                       width:
+                                    //                           (Get.width * .8),
+                                    //                       textController: controller
+                                    //                               .selectedItem
+                                    //                               ?.checklist_observation?[
+                                    //                                   index]
+                                    //                               .type_text_value_controller
+                                    //                           as TextEditingController,
+                                    //                     ),
+                                    //                     Row(
+                                    //                       children: [
+                                    //                         Text(
+                                    //                             "Min:${controller.selectedItem?.checklist_observation?[index].min_range}"),
+                                    //                         Dimens.boxWidth15,
+                                    //                         Text(
+                                    //                             "Max:${controller.selectedItem?.checklist_observation?[index].max_range}")
+                                    //                       ],
+                                    //                     )
+                                    //                   ],
+                                    //                 ),
+                                    //               ))
+                                    //             : DataCell(Text("Text")),
+                                    //     DataCell(Padding(
+                                    //       padding: const EdgeInsets.all(8.0),
+                                    //       child: LoginCustomTextfield(
+                                    //         width: (Get.width * .4),
+                                    //         textController: controller
+                                    //                 .selectedItem
+                                    //                 ?.checklist_observation?[index]
+                                    //                 .observation_value_controller
+                                    //             as TextEditingController,
+                                    //         maxLine: 5,
+                                    //       ),
+                                    //     )),
+                                    //     DataCell(controller
+                                    //                 .selectedItem
+                                    //                 ?.checklist_observation?[
+                                    //                     index]
+                                    //                 .linked_job_id
+                                    //                 .value ==
+                                    //             0
+                                    //         ? Obx(() {
+                                    //             return _rowItem(
+                                    //                 controller
+                                    //                     .selectedItem
+                                    //                     ?.checklist_observation?[
+                                    //                         index]
+                                    //                     .linked_job_id
+                                    //                     .value, onCheck: (val) {
+                                    //               controller
+                                    //                   .selectedItem
+                                    //                   ?.checklist_observation?[
+                                    //                       index]
+                                    //                   .linked_job_id
+                                    //                   .value = val ==
+                                    //                       true
+                                    //                   ? 1
+                                    //                   : 0;
+                                    //             });
+                                    //           })
+                                    //         : Dimens.box0),
+                                    //   ]),
+                                    // ),
                                   ),
                                 ),
                               ],

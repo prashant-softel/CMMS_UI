@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,19 +32,29 @@ class BreakdownMaintenanceScreen
       child: Scaffold(
           appBar: Responsive.isMobile(context)
               ? AppBar(
+                  // leading: IconButton(
+                  //   icon: Icons.menu,
+                  //   onPressed: () {},
+                  // ),
+                  title: Text("Breakdown Maintenance"),
                   centerTitle: true,
                   elevation: 0,
                 )
               : null,
           drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer()
+              ? HomeDrawerMobile() //ResponsiveSideMenu()
               : null,
           body: Obx(() => Stack(
                 children: [
                   AnimatedContainer(
                     duration: Duration(milliseconds: 450),
                     margin: EdgeInsets.only(
-                        left: homeController.menuButton.value ? 250.0 : 70.0),
+                      left: Responsive.isDesktop(context)
+                          ? homeController.menuButton.value
+                              ? 250.0
+                              : 70.0
+                          : 0,
+                    ),
                     width: Get.width,
                     height: Get.height,
                     child: Row(
@@ -52,59 +63,9 @@ class BreakdownMaintenanceScreen
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (Responsive.isMobile(context) ||
-                                    Responsive.isTablet(context))
-                                  Obx(
-                                    () => //
-                                        Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Card(
-                                          shadowColor: ColorValues.greyColor,
-                                          elevation: 1,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton(
-                                                isExpanded: true,
-                                                value: controller
-                                                    .selectedFacility.value,
-                                                icon: const Icon(Icons
-                                                    .keyboard_arrow_down_outlined),
-                                                elevation: 7,
-                                                style: const TextStyle(
-                                                    color: Colors.black),
-                                                onChanged:
-                                                    (String? selectedValue) {
-                                                  controller.isFacilitySelected
-                                                      .value = true;
-                                                  controller.selectedFacility
-                                                          .value =
-                                                      selectedValue ?? '';
-                                                },
-                                                items: controller.facilityList
-                                                    .map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (facility) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: facility?.name ?? '',
-                                                    child: Text(
-                                                        facility?.name ?? ''),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                if (Responsive.isDesktop(context))
-                                  HeaderWidgetAllDash(),
-
+                                Responsive.isDesktop(context)
+                                    ? HeaderWidgetAllDash()
+                                    : Dimens.box0,
                                 // HeaderWidget(),
                                 Container(
                                   margin: EdgeInsets.only(left: 20),
@@ -388,10 +349,12 @@ class BreakdownMaintenanceScreen
                       ],
                     ),
                   ),
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 450),
-                    child: HomeDrawer(),
-                  ),
+                  Responsive.isDesktop(context)
+                      ? AnimatedPositioned(
+                          duration: Duration(milliseconds: 450),
+                          child: HomeDrawer(),
+                        )
+                      : Dimens.box0
                 ],
               ))),
     );
