@@ -36,8 +36,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var isToggleBoolOn = false.obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
-  RxList<List<Map<String, String>>> rowItemobs =
-      <List<Map<String, String>>>[].obs;
+  Rx<List<List<Map<String, String>>>> rowItemobs =
+      Rx<List<List<Map<String, String>>>>([]);
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
@@ -230,26 +230,37 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     List<PmFiles> pmfile = <PmFiles>[];
 
     List<AddObservations> addObservations = <AddObservations>[];
-    for (var checkpoint in selectedItem!.checklist_observation ?? []) {
-      checklistObservations?.add(checkpoint);
-    }
+    // for (var checkpoint in selectedItem!.checklist_observation ?? []) {
+    //   checklistObservations?.add(checkpoint);
+    // }
 // pmfile.add(PmFiles(file_id:fileIds));
-    checklistObservations?.forEach((e) {
-      //
-      // e.files?.forEach((element) { pmfile.add(PmFiles(file_id:element.));});// ));
-      addObservations.add(AddObservations(
-          execution_id: e.execution_id ?? 0,
-          observation: e.observation_value_controller?.text ?? "",
-          job_create: e.linked_job_id.value,
-          text: e.check_point_type == 1
-              ? e.type_bool.value.toString()
-              : e.check_point_type == 2
-                  ? e.type_text_value_controller?.text ?? ""
-                  : "",
-          cp_ok: e.cp_ok.value,
-          // boolean: 1,
-          pm_files: []));
+    // checklistObse rvations?.forEach((e) {
+    //   //
+    //   // e.files?.forEach((element) { pmfile.add(PmFiles(file_id:element.));});// ));
+    //   addObservations.add(AddObservations(
+    //       execution_id: e.execution_id ?? 0,
+    //       observation: e.observation_value_controller?.text ?? "",
+    //       job_create: e.linked_job_id.value,
+    //       text: e.check_point_type == 1
+    //           ? e.type_bool.value.toString()
+    //           : e.check_point_type == 2
+    //               ? e.type_text_value_controller?.text ?? ""
+    //               : "",
+    //       cp_ok: e.cp_ok.value,
+    //       // boolean: 1,
+    //       pm_files: []));
+    // });
+    rowItemobs.value.forEach((element) {
+      AddObservations item = AddObservations(
+          execution_id: int.tryParse(element[0]["id"] ?? '0'),
+          observation: element[4]["value"] ?? "",
+          job_create: int.tryParse(element[7]["value"] ?? '0'),
+          text: element[6]["value"] ?? '',
+          cp_ok: int.tryParse(element[3]["value"] ?? '0'),
+          pm_files: []);
+      addObservations.add(item);
     });
+    // });
     List<Schedules> schedule = <Schedules>[];
     // checklistObservations?.forEach((e) {
     schedule.add(Schedules(
