@@ -18,42 +18,45 @@ class AddJobContentMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return //
         SingleChildScrollView(
-      child: Column(
-          ////
-          children: [
-            ///
-            /// SELECT BLOCK DropDown
-            BlockWidget(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+            ////
+            children: [
+              ///
+              /// SELECT BLOCK DropDown
+              BlockWidget(),
 
-            ///MULTISELECT CONTROL Equipment Categories
-            EquipmentCategoriesWidget(),
+              ///MULTISELECT CONTROL Equipment Categories
+              EquipmentCategoriesWidget(),
 
-            /// WORK AREA (= EQUIPMENTS) DropDown
-            WorkAreaWidget(),
+              /// WORK AREA (= EQUIPMENTS) DropDown
+              WorkAreaWidget(),
 
-            /// WORK TYPE  DropDown
-            WorkTypeWidget(),
+              /// WORK TYPE  DropDown
+              WorkTypeWidget(),
 
-            /// TOOLS REQUIRED DropDown
-            ToolsRequiredWidget(),
+              /// TOOLS REQUIRED DropDown
+              ToolsRequiredWidget(),
 
-            /// ASSIGNED To DropDown
-            AssignedToWidget(),
+              /// ASSIGNED To DropDown
+              AssignedToWidget(),
 
-            /// JOB TITLE
-            JobTitleWidget(),
+              /// JOB TITLE
+              JobTitleWidget(),
 
-            /// JOB DESCRIPTION
-            JobDescriptionWidget(),
+              /// JOB DESCRIPTION
+              JobDescriptionWidget(),
 
-            /// BREAKDOWN TIME
-            BreakdownTimeWidget(),
+              /// BREAKDOWN TIME
+              BreakdownTimeWidget(),
 
-            /// SAVE BUTTON
-            SaveJobButtonWidget(),
+              /// SAVE BUTTON
+              SaveJobButtonWidget(),
 
-            ///
-          ]),
+              ///
+            ]),
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -39,12 +41,19 @@ class CustomMultiSelectDialogField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ListTile(
-            title: Text(title!),
+            title: Responsive.isMobile(context) || Responsive.isTablet(context)
+                ? Text(
+                    title!,
+                    style: Styles.black13,
+                  )
+                : Text(title!),
             trailing: IconButton(
               icon: Icon(Icons.arrow_drop_down),
               onPressed: () async {
                 final selectedItems = await Get.dialog(
                   MultiSelectDialog(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.height * 0.3,
                     searchable: true,
                     items: items!,
                     initialValue: _selectedItems,
