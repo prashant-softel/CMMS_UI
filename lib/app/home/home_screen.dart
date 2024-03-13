@@ -29,12 +29,12 @@ class HomeScreen extends GetView<HomeController> {
             AnimatedContainer(
               duration: Duration(milliseconds: 450),
               margin: EdgeInsets.only(
-                      left: Responsive.isDesktop(context)
-                          ? controller.menuButton.value
-                              ? 250.0
-                              : 70.0
-                          : 0,
-                    ),
+                left: Responsive.isDesktop(context)
+                    ? controller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
+              ),
               child: Row(
                 children: [
                   Expanded(

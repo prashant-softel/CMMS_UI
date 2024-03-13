@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
+import 'package:cmms/app/new_permit/view/new_permit_mobile.dart';
 import 'package:cmms/app/new_permit/view/new_permit_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,9 +43,7 @@ class CreatePermitScreen extends GetView<NewPermitController> {
                           children: [
                             if (Responsive.isMobile(context))
                               Expanded(
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text("Data Coming Soon......")),
+                                child: NewPermitMobile(),
                               ),
                             if (Responsive.isDesktop(context))
                               Expanded(
