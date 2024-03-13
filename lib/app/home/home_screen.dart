@@ -30,7 +30,7 @@ class HomeScreen extends GetView<HomeController> {
               duration: Duration(milliseconds: 450),
               margin: EdgeInsets.only(
                       left: Responsive.isDesktop(context)
-                          ? homeController.menuButton.value
+                          ? controller.menuButton.value
                               ? 250.0
                               : 70.0
                           : 0,
