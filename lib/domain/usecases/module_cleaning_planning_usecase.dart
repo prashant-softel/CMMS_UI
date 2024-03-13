@@ -101,7 +101,6 @@ class ModuleCleaningPlanningUsecase {
   }) async =>
       await repository.getPmPlanDetails(
         pmPlanId,
-        facilityId,
         isLoading,
       );
   Future<McPalningDetailsModel?> getMcPlanDetail({
