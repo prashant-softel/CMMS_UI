@@ -2,14 +2,10 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
-import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../constant/constant.dart';
-// import '../../job_list_controller.dart';
-// import '../widgets/facility_selection_dropdown_widget.dart';
 
 class NewPermitListMobile extends GetView<NewPermitListController> {
   NewPermitListMobile({Key? key, this.newPermitListModel}) : super(key: key);
@@ -20,21 +16,20 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            children: [
-              FacilitySelectionDropdownWidget(),
-              Expanded(
-                child: ListView.builder(
-                    //physics: const NeverScrollableScrollPhysics(),
+        return SelectionArea(
+          child: Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: controller.newPermitList != null
                         ? controller.newPermitList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final newPermitListModel =
-                          (controller.newPermitList != null)
+                          controller.newPermitList != null
                               ? controller.newPermitList[index]
                               : NewPermitModel();
                       var status =
@@ -119,6 +114,15 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                       ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _showPopupMenu(context);
+                                        },
+                                        child: Image.asset(
+                                          'assets/files/menu_vertical.png',
+                                          width: 40,
+                                        ),
+                                      ),
                                     ]),
                                 Row(children: [
                                   Expanded(
@@ -138,59 +142,61 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     ),
                                   ),
                                 ]),
-                                Row(//
-                                    children: [
-                                  Expanded(
-                                    child: Text(
-                                      '${newPermitListModel?.workingAreaName ?? ''}',
-                                      // 'Not Assigned',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color.fromARGB(255, 239, 87, 27),
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                                Row(//
-                                    children: [
-                                  Expanded(
-                                    child: Text(
-                                      'Description: ',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      newPermitListModel?.description ?? '',
-                                      style: const TextStyle(),
-                                    ),
-                                  )
-                                ]),
-                                Row(//
-                                    children: [
-                                  Expanded(
-                                    child: Text(
-                                      'Equipment: ',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      newPermitListModel
-                                              ?.equipment_categories ??
-                                          '',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  )
-                                ]),
                                 Row(
-                                    //
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${newPermitListModel?.workingAreaName ?? ''}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromARGB(255, 239, 87, 27),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Description: ',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        newPermitListModel?.description ?? '',
+                                        style: const TextStyle(),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Equipment: ',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        newPermitListModel
+                                                ?.equipment_categories ??
+                                            '',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
@@ -207,35 +213,34 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                             ''),
                                       ),
                                     ]),
-                                Row(//
-                                    children: [
-                                  Expanded(
-                                    child: Text(
-                                      'Approved Time: ',
-                                      style: TextStyle(color: Colors.grey),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Approved Time: ',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
                                     ),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      (newPermitListModel?.approvedDatetime !=
-                                              null)
-                                          ? DateFormat('dd-MMM-yyyy hh:mm')
-                                              .format(newPermitListModel!
-                                                  .approvedDatetime!)
-                                          : '',
-                                      style: TextStyle(color: Colors.grey),
-                                      // 'Time djhb'
+                                    Flexible(
+                                      child: Text(
+                                        (newPermitListModel?.approvedDatetime !=
+                                                null)
+                                            ? DateFormat('dd-MMM-yyyy hh:mm')
+                                                .format(newPermitListModel!
+                                                    .approvedDatetime!)
+                                            : '',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
                                     ),
-                                  ),
-                                ]),
-
-                                ///Edit Button
-                                varUserAccessModel.value.access_list!
+                                  ],
+                                ),
+                                // Edit Button
+                                (varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id == 3 &&
                                                 e.edit == 1)
                                             .length >
-                                        0
+                                        0)
                                     ? CustomElevatedButton(
                                         onPressed: () {
                                           var _newPermitListId =
@@ -253,9 +258,11 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                           ),
                         ),
                       );
-                    }),
-              ),
-            ],
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }),
@@ -270,5 +277,47 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
     );
   }
 
-  ///
+  void _showPopupMenu(BuildContext context) {
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        Offset(1000, 1000),
+        Offset(120, 120),
+      ),
+      Offset.zero & overlay.size,
+    );
+
+    showMenu(
+      context: context,
+      position: position,
+      items: <PopupMenuEntry>[
+        PopupMenuItem(
+          child: ListTile(
+            title: Text('VIEW'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        PopupMenuItem(
+          child: ListTile(
+            title: Text('Extend'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        PopupMenuItem(
+          child: ListTile(
+            title: Text('CLOSE'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
 }
