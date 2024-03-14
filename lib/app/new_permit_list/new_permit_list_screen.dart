@@ -26,17 +26,11 @@ class NewPermitListScreen extends GetView<NewPermitListController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context)
             ? AppBar(
-                title: Row(
-                  children: [
-                    Text(
-                      "Permit List",
-                      style: Styles.black16W500,
-                    ),
-                    Spacer(),
-                    HeadingProfileAppBar(),
-                  ],
+                title: HeadingProfileAppBar(
+                  title: "Permit List",
                 ),
-                centerTitle: true,
+
+                // centerTitle: true,
               )
             : null,
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))

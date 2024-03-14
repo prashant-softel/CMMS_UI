@@ -1374,7 +1374,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                             "Responsibility")),
                                                                     DataColumn(
                                                                         label: Text(
-                                                                            "Action")),
+                                                                            "Responsibility")),
                                                                   ],
                                                                   rows: List<
                                                                       DataRow>.generate(
@@ -1420,130 +1420,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 ],
                                               ),
                                             ),
-                                            // :
-                                            // Container(
-                                            //     margin: Dimens.edgeInsets20,
-                                            //     decoration: BoxDecoration(
-                                            //       border: Border.all(color: Colors.grey.withOpacity(.3)),
-                                            //     ),
-                                            //     constraints: BoxConstraints(
-                                            //       maxWidth: 1100,
-                                            //     ),
-                                            //     child: Column(children: [
-                                            //       CustomAppBar(
-                                            //         title: 'TBT Training Attended By'.tr,
-                                            //         action: ActionButton(
-                                            //           label: 'Add Employee',
-                                            //           icon: Icons.add,
-                                            //           onPressed: () {
-                                            //             Get.dialog<void>(AddEmployeeListAlertBox());
-                                            //           },
-                                            //           color: Colors.green,
-                                            //         ),
-                                            //       ),
-                                            //       Dimens.boxHeight10,
-                                            //       Wrap(children: [
-                                            //         Column(children: [
-                                            //           // Row(
-                                            //           //   mainAxisAlignment:
-                                            //           //       MainAxisAlignment
-                                            //           //           .spaceEvenly,
-                                            //           //   children: [
-                                            //           //     Text(
-                                            //           //         'Name'),
-                                            //           //     Text(
-                                            //           //         'Designation'),
-                                            //           //     Text(
-                                            //           //         'Responsibility'),
-                                            //           //     Text(
-                                            //           //         'Competeness'),
-                                            //           //     Text(
-                                            //           //         'Remove'),
-                                            //           //   ],
-                                            //           // ),
-
-                                            //           SizedBox(
-                                            //             width: MediaQuery.of(context).size.width * 1.5,
-                                            //             child: Container(
-                                            //               height: ((controller.listEmployee!.length) * 30) + 200,
-                                            //               child: Column(
-                                            //                   //
-                                            //                   children: [
-                                            //                     Expanded(
-                                            //                       child: //
-                                            //                           Theme(
-                                            //                         data: ThemeData(scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                            //                         child: ScrollableTableView(
-                                            //                           // paginationController: controller.equipmentNamepaginationController,
-                                            //                           columns: [
-                                            //                             'empName',
-                                            //                             'resp',
-                                            //                             'action'.tr,
-                                            //                           ].map((column) {
-                                            //                             return TableViewColumn(
-                                            //                               minWidth: Get.width * 0.19,
-                                            //                               label: column == "empName"
-                                            //                                   ? "Employee Name"
-                                            //                                   : column == "resp"
-                                            //                                       ? "Responsibility"
-                                            //                                       : "Action",
-                                            //                             );
-                                            //                           }).toList(),
-                                            //                           rows: //
-                                            //                               [
-                                            //                             ...List.generate(
-                                            //                               ///controller.selectedEquipmentNameIdList
-                                            //                               controller.listEmployee!.length,
-
-                                            //                               (index) {
-                                            //                                 var employeeNameDetails = controller.listEmployee![index];
-
-                                            //                                 //_jobId = jobDetails?.id;
-
-                                            //                                 // controller.id.value = employeeNameDetails?.empName ?? 0;
-                                            //                                 print('Employee Idss5:${controller.id.value}');
-                                            //                                 return [
-                                            //                                   '${employeeNameDetails?.empName ?? ''}',
-                                            //                                   '${employeeNameDetails?.resp ?? ''}',
-                                            //                                   'Actions'
-                                            //                                 ];
-                                            //                               },
-                                            //                             ),
-                                            //                           ].map((_inventoryDetailList) {
-                                            //                             return TableViewRow(
-                                            //                                 onTap: () => {
-                                            //                                       print('ZERO = ${_inventoryDetailList[0]}')
-                                            //                                     },
-                                            //                                 height: 25,
-                                            //                                 cells: _inventoryDetailList.map((value) {
-                                            //                                   return TableViewCell(
-                                            //                                     //key: ,
-                                            //                                     child: (value == 'Actions')
-                                            //                                         ? Wrap(children: [
-                                            //                                             TableActionButton(
-                                            //                                               color: Colors.red,
-                                            //                                               icon: Icons.delete_outline,
-                                            //                                               message: 'Remove',
-                                            //                                               onPress: () {
-                                            //                                                 // controller.showNewPermitListDetails(
-                                            //                                                 //     controller.permitId.value);
-                                            //                                               },
-                                            //                                             ),
-                                            //                                           ])
-                                            //                                         : Text(value.toString()),
-                                            //                                   );
-                                            //                                 }).toList());
-                                            //                           }).toList(),
-                                            //                         ),
-                                            //                       ),
-                                            //                     ),
-                                            //                   ]),
-                                            //             ),
-                                            //           ),
-                                            //         ])
-                                            //       ]),
-                                            //     ]),
-                                            //   ),
                                           ],
                                         ),
                                       ],
@@ -1790,7 +1666,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
               position == 0
                   ? pickDateTime_web(context, 0)
                   : pickDateTime_web(context, 1);
-              // : null;
             },
             controller: position == 0
                 ? controller.startDateTimeCtrlr
@@ -1887,7 +1762,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime? dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
-    //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
@@ -2367,8 +2241,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
   }
 
   Widget _buildWorkPermitCommentTextField_web(BuildContext context) {
-    return Column(//
-        children: [
+    return Column(children: [
       // Align(
       //   alignment: Alignment.centerLeft,
       //   child: Padding(

@@ -7,15 +7,19 @@ import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 import '../utils/responsive.dart';
 
-///
-class FileUploadWidgetWithDropzone extends StatelessWidget {
-  ///
+class FileUploadWidgetWithDropzone extends StatefulWidget {
   FileUploadWidgetWithDropzone({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<FileUploadWidgetWithDropzone> createState() => _FileUploadWidgetWithDropzoneState();
+}
+
+class _FileUploadWidgetWithDropzoneState extends State<FileUploadWidgetWithDropzone> {
   ///
   final FileUploadController controller = Get.find<FileUploadController>();
+
   late DropzoneViewController dzvcontroller;
 
   ///
@@ -194,6 +198,4 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
                 ),
     );
   }
-
-  ///
 }

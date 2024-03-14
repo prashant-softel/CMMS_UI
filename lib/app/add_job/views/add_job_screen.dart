@@ -15,7 +15,7 @@ class AddJobScreen extends GetView<AddJobController> {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: Responsive.isMobile(context)
+        appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
                 title: Text(
                   "Add Job",
