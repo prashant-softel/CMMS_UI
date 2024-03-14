@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
@@ -21,6 +22,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Column(
               children: [
+                HeaderWidgetMobile(),
+                Dimens.boxHeight10,
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -107,6 +110,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           child: Center(
                                             child: Text(
                                               status,
+                                              overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                               ),
@@ -144,6 +148,14 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                 ]),
                                 Row(
                                   children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Working Area Name: ',
+                                        style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                        ),
+                                      ),
+                                    ),
                                     Expanded(
                                       child: Text(
                                         '${newPermitListModel?.workingAreaName ?? ''}',
@@ -207,6 +219,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
                                       Expanded(
                                         child: Text(newPermitListModel
                                                 ?.workingAreaName ??
@@ -325,7 +338,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
+              var _newPermitListId = newPermitListModel?.permitId ?? 0;
+              controller.editNewPermit(permitId: _newPermitListId);
             },
           ),
         ),
