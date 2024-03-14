@@ -5,7 +5,7 @@ import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_mobile.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
@@ -204,9 +204,10 @@ class NewPermitMobile extends GetView<NewPermitController> {
                         () => controller.isToggleOn == true
                             ? Container(
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CustomAppBar(
-                                      title: "Loto Equipment List".tr,
+                                    CustomRichTextMobile(
+                                      title: "Select Loto Equipment List".tr,
                                     ),
                                     Dimens.boxHeight10,
                                     CustomMultiSelectDialogField(
@@ -233,7 +234,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                             'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
                                       },
                                     ),
-                                    Dimens.boxHeight10,
+                                    // Dimens.boxHeight10,
                                     SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: SizedBox(
@@ -385,7 +386,10 @@ class NewPermitMobile extends GetView<NewPermitController> {
                         ),
                       ),
                       Dimens.boxHeight15,
-                      // FileUploadWidgetWithDropzone(),
+                      FileUploadWidgetWithDropzone(),
+                      Dimens.boxHeight15,
+                      FileUploadDetailsWidgetMobile(),
+                      Dimens.boxHeight15,
                       CustomRichTextMobile(title: 'Date and Time: '),
                       Dimens.boxHeight2,
                       _buildDateTimeField_mobile(context),
