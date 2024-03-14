@@ -26,6 +26,7 @@ class PmTaskListModel {
   int? permit_id;
   String? permit_code;
   int? status;
+  int? ptwstat;
   String? status_short;
   PmTaskListModel(
       {this.assigned_to_id,
@@ -43,6 +44,7 @@ class PmTaskListModel {
       this.permit_id,
       this.name,
       this.status,
+      this.ptwstat,
       this.status_short,
       this.task_code});
 
@@ -52,6 +54,7 @@ class PmTaskListModel {
         assigned_to_name: json['assigned_to_name'] ?? '',
         category_id: json['category_id'] ?? 0,
         category_name: json['category_name'] ?? '',
+        task_code: json['task_code'] ?? '',
         done_date: json['done_date'] == null
             ? json['done_date']
             : Utility.getFormatedyearMonthDay(json['done_date']),
@@ -62,6 +65,7 @@ class PmTaskListModel {
         permit_code: json['permit_code'] ?? '',
         permit_id: json['permit_id'] ?? 0,
         status: json['status'] ?? 0,
+        ptwstat: json['ptw_status'] ?? 0,
         status_short: json['status_short'] ?? '',
         frequency_id: json['frequency_id'] ?? 0,
         frequency_name: json['frequency_name'] ?? '',
@@ -77,9 +81,11 @@ class PmTaskListModel {
         "category_id": category_id,
         "category_name": category_name,
         "frequency_id": frequency_id,
+        "task_code": task_code,
         "frequency_name": frequency_name,
         "assigned_to_name": assigned_to_name,
         "permit_code": permit_code,
+        "ptw_status": ptwstat,
         "permit_id": permit_id,
         "status": status,
         "status_short": status_short,

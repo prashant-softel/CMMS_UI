@@ -170,6 +170,7 @@ class JobListController extends GetxController {
             ? true
             : false,
         isLoading: true,
+        isExport: isExport
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {
@@ -234,116 +235,116 @@ class JobListController extends GetxController {
     return formattedDateTimeString;
   }
 
-  Future<void> exportToExcelWeb() async {
-    exportToExcel();
-    downloadExcelFileWeb();
-  }
+  // Future<void> exportToExcelWeb() async {
+  //   exportToExcel();
+  //   downloadExcelFileWeb();
+  // }
 
-  Future<void> exportToExcel() async {
-    final sheetName = 'Job Data';
-    excel.rename(sheetName, sheetName);
+  // Future<void> exportToExcel() async {
+  //   final sheetName = 'Job Data';
+  //   excel.rename(sheetName, sheetName);
 
-    excel.updateCell(sheetName, CellIndex.indexByString('A1'), 'Id');
-    excel.updateCell(sheetName, CellIndex.indexByString('B1'), 'Facility');
-    excel.updateCell(sheetName, CellIndex.indexByString('C1'), 'Job Date');
-    excel.updateCell(
-        sheetName, CellIndex.indexByString('D1'), 'Equipment Category');
-    excel.updateCell(
-        sheetName, CellIndex.indexByString('E1'), 'Work Area / Equipment');
-    excel.updateCell(sheetName, CellIndex.indexByString('F1'), 'Description');
-    excel.updateCell(sheetName, CellIndex.indexByString('G1'), 'Job Details');
-    excel.updateCell(sheetName, CellIndex.indexByString('H1'), 'Work Type');
-    excel.updateCell(sheetName, CellIndex.indexByString('I1'), 'Raised By');
-    excel.updateCell(
-        sheetName, CellIndex.indexByString('J1'), 'Breakdown Time');
-    excel.updateCell(
-        sheetName, CellIndex.indexByString('K1'), 'Breakdown Type');
-    excel.updateCell(sheetName, CellIndex.indexByString('L1'), 'Permit ID');
-    excel.updateCell(sheetName, CellIndex.indexByString('M1'), 'Assigned To');
-    excel.updateCell(sheetName, CellIndex.indexByString('N1'), 'Status');
-    // Add the data to the sheet
-    for (var i = 0; i < jobList.length; i++) {
-      final job = jobList[i];
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 1),
-          job?.id ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1),
-          job?.facilityName ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1),
-          job?.jobDate ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1),
-          job?.equipmentCat ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 1),
-          job?.workingArea ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: i + 1),
-          job?.description ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: i + 1),
-          job?.name ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 7, rowIndex: i + 1),
-          job?.workType ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 8, rowIndex: i + 1),
-          job?.raisedByName ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 9, rowIndex: i + 1),
-          job?.breakdownTime ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: i + 1),
-          job?.breakdownType ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 11, rowIndex: i + 1),
-          job?.permitId ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 12, rowIndex: i + 1),
-          job?.assignedToName ?? '');
-      excel.updateCell(
-          sheetName,
-          CellIndex.indexByColumnRow(columnIndex: 13, rowIndex: i + 1),
-          job?.status ?? '');
-    }
-    // downloadExcelFileWeb();
-  }
+  //   excel.updateCell(sheetName, CellIndex.indexByString('A1'), 'Id');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('B1'), 'Facility');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('C1'), 'Job Date');
+  //   excel.updateCell(
+  //       sheetName, CellIndex.indexByString('D1'), 'Equipment Category');
+  //   excel.updateCell(
+  //       sheetName, CellIndex.indexByString('E1'), 'Work Area / Equipment');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('F1'), 'Description');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('G1'), 'Job Details');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('H1'), 'Work Type');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('I1'), 'Raised By');
+  //   excel.updateCell(
+  //       sheetName, CellIndex.indexByString('J1'), 'Breakdown Time');
+  //   excel.updateCell(
+  //       sheetName, CellIndex.indexByString('K1'), 'Breakdown Type');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('L1'), 'Permit ID');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('M1'), 'Assigned To');
+  //   excel.updateCell(sheetName, CellIndex.indexByString('N1'), 'Status');
+  //   // Add the data to the sheet
+  //   for (var i = 0; i < jobList.length; i++) {
+  //     final job = jobList[i];
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: i + 1),
+  //         job?.id ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: i + 1),
+  //         job?.facilityName ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 2, rowIndex: i + 1),
+  //         job?.jobDate ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: i + 1),
+  //         job?.equipmentCat ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: i + 1),
+  //         job?.workingArea ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: i + 1),
+  //         job?.description ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: i + 1),
+  //         job?.name ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 7, rowIndex: i + 1),
+  //         job?.workType ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 8, rowIndex: i + 1),
+  //         job?.raisedByName ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 9, rowIndex: i + 1),
+  //         job?.breakdownTime ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 10, rowIndex: i + 1),
+  //         job?.breakdownType ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 11, rowIndex: i + 1),
+  //         job?.permitId ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 12, rowIndex: i + 1),
+  //         job?.assignedToName ?? '');
+  //     excel.updateCell(
+  //         sheetName,
+  //         CellIndex.indexByColumnRow(columnIndex: 13, rowIndex: i + 1),
+  //         job?.status ?? '');
+  //   }
+  //   // downloadExcelFileWeb();
+  // }
 
-  void downloadExcelFileWeb() async {
-    try {
-// Convert the Excel data to bytes
-      final excelBytes = excel.encode();
+//   void downloadExcelFileWeb() async {
+//     try {
+// // Convert the Excel data to bytes
+//       final excelBytes = excel.encode();
 
-// Write the data to a file (mobile implementation)
-      final file = File('Job_Data_Export.xlsx');
-      await file.writeAsBytes(excelBytes!);
+// // Write the data to a file (mobile implementation)
+//       final file = File('Job_Data_Export.xlsx');
+//       await file.writeAsBytes(excelBytes!);
 
-      // Share the file on mobile
-      final filePath = file.path;
+//       // Share the file on mobile
+//       final filePath = file.path;
 
-      await Share.shareFiles(
-        [filePath],
-        text: 'Please Check exported data.',
-      );
-    } catch (e) {
-      // Utility.showDialog(e.toString());
-    }
-  }
+//       await Share.shareFiles(
+//         [filePath],
+//         text: 'Please Check exported data.',
+//       );
+//     } catch (e) {
+//       // Utility.showDialog(e.toString());
+//     }
+//   }
 
   onBlockChanged(dropdownList, selectedValue) {
     int blockIndex = blockList.indexWhere((x) => x?.name == selectedValue);

@@ -19,6 +19,7 @@ class JobCardModel {
     this.jobId,
     this.permit_id,
     this.permit_no,
+    this.statusShort,
     this.currentStatus,
     this.description,
     this.job_assinged_to,
@@ -34,6 +35,7 @@ class JobCardModel {
   int? jobId;
   int? permit_id;
   String? permit_no;
+  String? statusShort;
   int? currentStatus;
   String? description;
   String? job_assinged_to;
@@ -47,6 +49,7 @@ class JobCardModel {
         jobCardNo: json["jobCardNo"],
         jobId: json["jobid"],
         permit_id: json["permit_id"],
+        statusShort: json["status_short"],
         permit_no: json["permit_no"],
         id: json["id"],
         job_assinged_to: json["job_assinged_to"],
@@ -71,6 +74,7 @@ class JobCardModel {
         "jC_Approved_By_Name": permit_id,
         "permit_no": permit_no,
         "id": id,
+        "status_short": statusShort,
         "job_assinged_to": job_assinged_to,
         "current_status": currentStatus,
         "jC_Closed_by_Name": job_card_date,

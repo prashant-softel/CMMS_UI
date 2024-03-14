@@ -24,6 +24,7 @@ class FrequencyListController extends GetxController {
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<FrequencyModel?>? frequencyList = <FrequencyModel?>[].obs;
@@ -240,6 +241,10 @@ class FrequencyListController extends GetxController {
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
+  }
+
+  void toggleContainer() {
+    isContainerVisible.toggle();
   }
 
   // void isDeleteDialog({String? checklist_id, String? checklist}) {

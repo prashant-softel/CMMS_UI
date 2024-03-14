@@ -2,7 +2,9 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -24,6 +26,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
           width: Get.width,
           height: Get.height,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HeaderWidget(),
               Container(
@@ -68,6 +71,22 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                   ],
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(left: 10, top: 10),
+                child: ElevatedButton(
+                  style: Styles.navyBlueElevatedButtonStyle,
+                  onPressed: () {
+                    controller.toggleContainer();
+                  },
+                  child: Obx(() {
+                    return Text(
+                      controller.isContainerVisible.value
+                          ? 'Close Create Frequency'
+                          : 'Open Create Frequency',
+                    );
+                  }),
+                ),
+              ),
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,71 +96,73 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     //             .length >
                     //         0
                     //     ?
-                    Container(
-                      width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 30, top: 30),
-                      height: Get.height / 2.25,
-                      child: Card(
-                        color: Color.fromARGB(255, 251, 252, 253),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          children: [
-                            // Text(
-                            //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, right: 10, top: 10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Create FrequencyList",
-                                      style: Styles.blackBold16,
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Visibility(
-                                      visible: controller.isSuccess.value,
-                                      child: Center(
-                                        child: Wrap(
-                                          children: [
-                                            Text(
-                                              controller.selectedItem == null
-                                                  ? "CheckList added Successfully in the List."
-                                                  : "CheckList updated Successfully in the List.",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Color.fromARGB(
-                                                      255, 24, 243, 123)),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                          ],
+                    Visibility(
+                      visible: controller.isContainerVisible.value,
+                      child: Container(
+                        width: (Get.width * .3),
+                        margin: EdgeInsets.only(left: 15, top: 20),
+                        height: Get.height / 2.9,
+                        child: Card(
+                          color: Color.fromARGB(255, 251, 252, 253),
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            children: [
+                              // Text(
+                              //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 10, top: 10),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Create Frequency",
+                                        style: Styles.blackBold16,
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Visibility(
+                                        visible: controller.isSuccess.value,
+                                        child: Center(
+                                          child: Wrap(
+                                            children: [
+                                              Text(
+                                                controller.selectedItem == null
+                                                    ? "CheckList added Successfully in the List."
+                                                    : "CheckList updated Successfully in the List.",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Color.fromARGB(
+                                                        255, 24, 243, 123)),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      // mainAxisAlignment:
-                                      // MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child:
-                                                CustomRichText(title: 'Name:')),
-                                        // SizedBox(
-                                        //   width: 70,
-                                        // ),
-                                        Expanded(
-                                          child: Container(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Name:')),
+                                          // SizedBox(
+                                          //   width: 70,
+                                          // ),
+                                          Container(
                                             width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2) -
-                                                30,
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
                                             decoration: BoxDecoration(
                                               boxShadow: [
                                                 BoxShadow(
@@ -165,113 +186,116 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                             ),
-                                            child: Obx(
-                                              () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
-                                                ),
-                                                controller: controller
-                                                    .checklistNumberCtrlr,
-                                                focusNode: controller.nameFocus,
-                                                scrollController:
-                                                    controller.nameScroll,
-                                                keyboardType:
-                                                    TextInputType.multiline,
-                                                maxLines: 1,
-                                                autofocus: false,
-                                                decoration: InputDecoration(
-                                                  fillColor:
-                                                      ColorValues.whiteColor,
-                                                  filled: true,
-                                                  contentPadding:
-                                                      Dimens.edgeInsets05_10,
-                                                  border: InputBorder.none,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedErrorBorder: controller
-                                                          .isTitleInvalid.value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isTitleInvalid.value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isTitleInvalid.value
-                                                      ? "Required field"
-                                                      : null,
-                                                ),
-                                                onChanged: (value) {
-                                                  if (value.trim().length > 1) {
-                                                    controller.isTitleInvalid
-                                                        .value = false;
-                                                  } else {
-                                                    controller.isTitleInvalid
-                                                        .value = true;
-                                                  }
-                                                },
+                                            child: TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                               ),
+                                              controller: controller
+                                                  .checklistNumberCtrlr,
+                                              focusNode: controller.nameFocus,
+                                              scrollController:
+                                                  controller.nameScroll,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              maxLines: 1,
+                                              autofocus: false,
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding:
+                                                    Dimens.edgeInsets05_10,
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isTitleInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isTitleInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isTitleInvalid.value
+                                                    ? "Required field"
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller.isTitleInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller.isTitleInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      // mainAxisAlignment:
-                                      // MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            "Days"
-                                            ": ",
-                                            style: Styles.black16,
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: CustomRichText(
+                                              title: "Days:",
+                                            ),
                                           ),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 60,
-                                        // ),
-                                        Expanded(
-                                          child: Container(
+                                          // SizedBox(
+                                          //   width: 60,
+                                          // ),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
                                             decoration: BoxDecoration(
                                               boxShadow: [
                                                 BoxShadow(
@@ -295,158 +319,158 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                             ),
-                                            width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2) -
-                                                30,
-                                            child: Obx(
-                                              () => TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
-                                                ),
-                                                controller:
-                                                    controller.manpowerCtrlr,
-                                                keyboardType:
-                                                    TextInputType.multiline,
-                                                maxLines: 1,
-                                                autofocus: false,
-                                                decoration: InputDecoration(
-                                                  fillColor:
-                                                      ColorValues.whiteColor,
-                                                  filled: true,
-                                                  contentPadding:
-                                                      Dimens.edgeInsets05_10,
-                                                  border: InputBorder.none,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent),
-                                                  ),
-                                                  focusedErrorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isDescriptionInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
-                                                ),
-                                                onChanged: (value) {
-                                                  if (value.trim().length > 1) {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = false;
-                                                  } else {
-                                                    controller
-                                                        .isDescriptionInvalid
-                                                        .value = true;
-                                                  }
-                                                },
+                                            child: TextField(
+                                              style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        // ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                  ]),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    height: 40,
-                                    width: (Get.width * .1),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appRedColor,
-                                        onPressed: () {},
-                                        text: 'Cancel')),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                    height: 40,
-                                    width: (Get.width * .2) - 70,
-                                    child: controller.selectedItem == null
-                                        ? CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createChecklistNumber()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                              controller:
+                                                  controller.manpowerCtrlr,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              maxLines: 1,
+                                              autofocus: false,
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? "Required field"
+                                                    : null,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create Frequency List')
-                                        : CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              // controller
-                                              //     .updateChecklistNumber(
-                                              //         controller
-                                              //             .selectedItem?.id)
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   if (value == true)
-                                              //     controller
-                                              //         .issuccessCreatechecklist();
-                                              // });
-                                            },
-                                            text: 'Update')),
-                              ],
-                            ),
-                          ],
+                                                      .isDescriptionInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller
+                                                      .isDescriptionInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                              // inputFormatters: [
+                                              //   FilteringTextInputFormatter
+                                              //       .deny(
+                                              //     RegExp('[\'^]'),
+                                              //   )
+                                              // ],
+                                            ),
+                                          ),
+                                          // ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                      ),
+                                    ]),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      height: 40,
+                                      width: (Get.width * .1),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appRedColor,
+                                          onPressed: () {},
+                                          text: 'Cancel')),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                      height: 40,
+                                      width: (Get.width * .2) - 70,
+                                      child: controller.selectedItem == null
+                                          ? CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                controller
+                                                    .createChecklistNumber()
+                                                    .then((value) {
+                                                  print("value,$value");
+                                                  if (value == true) {
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                    controller
+                                                        .toggleContainer();
+                                                  }
+                                                });
+                                              },
+                                              text: 'Create Frequency List')
+                                          : CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                // controller
+                                                //     .updateChecklistNumber(
+                                                //         controller
+                                                //             .selectedItem?.id)
+                                                //     .then((value) {
+                                                //   print("value,$value");
+                                                //   if (value == true)
+                                                //     controller
+                                                //         .issuccessCreatechecklist();
+                                                // });
+                                              },
+                                              text: 'Update')),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -459,7 +483,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 10, top: 30),
+                        margin: EdgeInsets.only(left: 10, top: 20),
                         height: Get.height,
                         child: Card(
                           color: Color.fromARGB(255, 251, 252, 253),
@@ -527,9 +551,6 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                   //   ),
                                   // )
                                 ],
-                              ),
-                              SizedBox(
-                                height: 20,
                               ),
                               controller.frequencyList!.isEmpty
                                   ? Expanded(
