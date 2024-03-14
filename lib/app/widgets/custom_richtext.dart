@@ -27,3 +27,37 @@ class CustomRichText extends StatelessWidget {
     );
   }
 }
+
+class CustomRichTextMobile extends StatelessWidget {
+  String title;
+  int? maxline;
+
+  CustomRichTextMobile({
+    super.key,
+    required this.title,
+    this.maxline,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      maxLines: maxline,
+      text: TextSpan(
+          text: title,
+          style: TextStyle(
+            color: ColorValues.blackColor,
+            fontSize: Dimens.fourteen,
+            fontFamily: 'Poppins',
+          ),
+          children: [
+            TextSpan(
+              text: '*',
+              style: TextStyle(
+                color: ColorValues.orangeColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ]),
+    );
+  }
+}
