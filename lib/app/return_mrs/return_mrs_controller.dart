@@ -75,18 +75,17 @@ class ReturnMrsListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getReturnMrsList(facilityId, true);
+        getReturnMrsList(facilityId, true, false);
       });
     });
     super.onInit();
   }
 
-  Future<void> getReturnMrsList(int facilityId, bool isLoading) async {
+  Future<void> getReturnMrsList(
+      int facilityId, bool isLoading, bool isExport) async {
     mrsList.value = <ReturnMrsListModel>[];
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
-      facilityId: facilityId,
-      isLoading: isLoading,
-    );
+        facilityId: facilityId, isLoading: isLoading, isExport: isExport);
 
     if (_mrsList != null) {
       mrsList.value = _mrsList;
@@ -135,12 +134,12 @@ class ReturnMrsListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.activity
+            (item?.activity?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.whereUsedType
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item?.whereUsedType?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.whereUsedTypeId
                     ?.toString()
@@ -151,8 +150,11 @@ class ReturnMrsListController extends GetxController {
     mrsList.value = filteredList;
   }
 
-
   void clearStoreData() {
     returnmrsListPresenter.clearValue();
+  }
+
+  void export() {
+    getReturnMrsList(facilityId, true, true);
   }
 }

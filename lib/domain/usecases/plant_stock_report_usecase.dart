@@ -8,12 +8,13 @@ class PlantStockReportUsecase {
   PlantStockReportUsecase(this._repository);
   Future<List<PlantStockListModel?>?> getPlantStockList(
           {int? facilityId,
+          bool? isExport,
           bool? isLoading,
           dynamic endDate,
           dynamic startDate,
           List<int>? selectedAssetsNameIdList}) async =>
       await _repository.getPlantStockList(
-          facilityId, isLoading, startDate, endDate, selectedAssetsNameIdList);
+          facilityId, isLoading,isExport, startDate, endDate, selectedAssetsNameIdList);
   Future<List<GetAssetDataModel?>?> getAssetList({
     String? auth,
     int? facilityId,

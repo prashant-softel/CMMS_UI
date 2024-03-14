@@ -6,6 +6,9 @@ List<GoodsOrdersListModel> goodOrderListModelFromJson(String str) =>
     List<GoodsOrdersListModel>.from(
         json.decode(str).map(GoodsOrdersListModel.fromJson));
 
+String goodorderListModelToJson(List<GoodsOrdersListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class GoodsOrdersListModel {
   int? id;
   String? challan_no;
@@ -113,42 +116,40 @@ class GoodsOrdersListModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['challan_no'] = this.challan_no;
-    data['spare_status'] = this.spare_status;
-    data['remarks'] = this.remarks;
-    data['orderflag'] = this.orderflag;
-    data['asset_name'] = this.asset_name;
-    data['asset_type_ID'] = this.asset_type_ID;
-    data['purchaseID'] = this.purchaseID;
-    data['assetItemID'] = this.assetItemID;
-    data['serial_number'] = this.serial_number;
-    data['location_ID'] = this.location_ID;
-    data['cost'] = this.cost;
-    data['currency'] = this.currency;
+  Map<String, dynamic> toJson() => {
+        // final Map<String, dynamic> data = new Map<String, dynamic>();
+        'id': id,
+        'challan_no': challan_no,
+        'spare_status': spare_status,
+        'remarks': remarks,
+        'orderflag': orderflag,
+        'asset_name': asset_name,
+        'asset_type_ID': asset_type_ID,
+        'purchaseID': purchaseID,
+        'assetItemID': assetItemID,
+        'serial_number': serial_number,
+        'location_ID': location_ID,
+        'cost': cost,
+        'currency': currency,
 
-    data['ordered_qty'] = this.ordered_qty;
-    data['rejectedRemark'] = this.rejectedRemark;
-    data['facility_id'] = this.facility_id;
-    data['purchaseDate'] = this.purchaseDate;
-    data['vendorID'] = this.vendorID;
-    data['status'] = this.status;
-    data['asset_code'] = this.asset_code;
-    data['asset_type'] = this.asset_type;
-    data['cat_name'] = this.cat_name;
-    data['received_qty'] = this.received_qty;
-    data['damaged_qty'] = this.damaged_qty;
-    data['accepted_qty'] = this.accepted_qty;
-    data['received_on'] = this.received_on;
-    data['approvedOn'] = this.approvedOn;
-    data['generatedBy'] = this.generatedBy;
-    data['receivedBy'] = this.receivedBy;
-    data['approvedBy'] = this.approvedBy;
-    data['vendor_name'] = this.vendor_name;
-    data['status_short'] = this.status_short;
-
-    return data;
-  }
+        'ordered_qty': ordered_qty,
+        'rejectedRemark': rejectedRemark,
+        'facility_id': facility_id,
+        'purchaseDate': purchaseDate,
+        'vendorID': vendorID,
+        'status': status,
+        'asset_code': asset_code,
+        'asset_type': asset_type,
+        'cat_name': cat_name,
+        'received_qty': received_qty,
+        'damaged_qty': damaged_qty,
+        'accepted_qty': accepted_qty,
+        'received_on': received_on,
+        'approvedOn': approvedOn,
+        'generatedBy': generatedBy,
+        'receivedBy': receivedBy,
+        'approvedBy': approvedBy,
+        'vendor_name': vendor_name,
+        'status_short': status_short,
+      };
 }

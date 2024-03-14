@@ -1285,6 +1285,7 @@ class Repository {
 
   Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
     required int? facility_id,
+    bool? isExport,
     String? start_date,
     required String end_date,
     required bool isLoading,
@@ -1310,6 +1311,58 @@ class Repository {
                 .map<GoodsOrdersListModel>((m) =>
                     GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = goodorderListModelToJson(_goodOrderModelList);
+
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'facility_id',
+              'facility_name',
+              'vendor_id',
+              'vendor_name',
+              'asset_type_id',
+              'accepted_qty',
+              'amount',
+              'received_at',
+              'challan_date',
+              'challan_no',
+              'purchase_date',
+              'cost',
+              'currency',
+              'generated_by',
+              'short_status',
+              'long_status'
+            ],
+            ...jsonDataList
+                .map((goodorderjson) => [
+                      goodorderjson['id'],
+                      goodorderjson['facility_id'],
+                      goodorderjson['facilityName'],
+                      goodorderjson['vendorID'],
+                      goodorderjson['vendor_name'],
+                      goodorderjson['asset_type_ID'],
+                      goodorderjson['accepted_qty'],
+                      goodorderjson['amount'],
+                      goodorderjson['receivedAt'],
+                      goodorderjson['challan_date'],
+                      goodorderjson['challan_no'],
+                      goodorderjson['purchaseDate'],
+                      goodorderjson['cost'],
+                      goodorderjson['currency'],
+                      goodorderjson['generatedBy'],
+                      goodorderjson['status_short'],
+                      goodorderjson['status_long'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> goodorderData = {
+            'Sheet1': data,
+          };
+          exportToExcel(goodorderData, 'goodorder.xlsx');
+        }
 
         return _goodOrderModelList.reversed.toList();
       } //
@@ -1370,6 +1423,7 @@ class Repository {
 
   Future<List<GetRequestOrderListModel>> getRequestOrderList({
     required int? facility_id,
+    bool? isExport,
     String? start_date,
     required String end_date,
     required bool isLoading,
@@ -1396,6 +1450,44 @@ class Repository {
                     GetRequestOrderListModel.fromJson(
                         Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = roListModelToJson(_goodOrderModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'facility_id',
+              'facility_name',
+              'ro_id',
+              'generated_by',
+              'generated_at',
+              'cost',
+              'no_of_masters',
+              'no_of_items',
+              'short_status',
+              'long_status',
+              'comment',
+            ],
+            ...jsonDataList
+                .map((rolistjson) => [
+                      rolistjson['facilityID'],
+                      rolistjson['facilityName'],
+                      rolistjson['request_order_id'],
+                      rolistjson['generatedBy'],
+                      rolistjson['generatedAt'],
+                      rolistjson['cost'],
+                      rolistjson['number_of_masters'],
+                      rolistjson['number_of_item_count'],
+                      rolistjson['status_short'],
+                      rolistjson['status_long'],
+                      rolistjson['comment']
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> rolistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(rolistData, 'rolist.xlsx');
+        }
 
         return _goodOrderModelList.reversed.toList();
       } //
@@ -3127,6 +3219,7 @@ class Repository {
 
   Future<List<IncidentReportListModel>> getIncidentReportList({
     required int? facility_id,
+    bool? isExport,
     String? start_date,
     required String end_date,
     required bool isLoading,
@@ -3145,8 +3238,58 @@ class Repository {
       print('IncidentReportList: ${res.data}');
 
       if (!res.hasError) {
-        var incidentReportList = incidentReportListModelFromJson(res.data);
-        return incidentReportList.reversed.toList();
+        // var incidentReportList = incidentReportListModelFromJson(res.data);
+        // return incidentReportList.reversed.toList();
+        final jsonIrListModelModels = jsonDecode(res.data);
+
+        final List<IncidentReportListModel> _irListModelList =
+            jsonIrListModelModels
+                .map<IncidentReportListModel>((m) =>
+                    IncidentReportListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = incidentReportListModelToJson(_irListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'title',
+              'block_name',
+              'equipment_name',
+              'facility_name',
+              'type_of_job',
+              'incident_datetime',
+              'approved_by',
+              'approved_at',
+              'reported_by',
+              'reported_at',
+              'short_status',
+            ],
+            ...jsonDataList
+                .map((irlistjson) => [
+                      irlistjson['id'],
+                      irlistjson['title'],
+                      irlistjson['block_name'],
+                      irlistjson['equipment_name'],
+                      irlistjson['facility_name'],
+                      irlistjson['type_of_job'],
+                      irlistjson['incident_datetime'],
+                      irlistjson['approved_by'],
+                      irlistjson['approved_at'],
+                      irlistjson['reported_by_name'],
+                      irlistjson['reported_at'],
+                      irlistjson['status_short'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> irlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(irlistData, 'irlist.xlsx');
+        }
+        return _irListModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
@@ -8652,7 +8795,7 @@ class Repository {
   }
 
   Future<List<MrsListModel?>?> getMrsList(int? facilityId, bool? isLoading,
-      dynamic startDate, dynamic endDate) async {
+      dynamic startDate, dynamic endDate, bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -8671,6 +8814,50 @@ class Repository {
             .map<MrsListModel>(
                 (m) => MrsListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
+        String jsonData = mrslistModelToJson(_MrsListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'requested_by_id',
+              'requested_by',
+              'requested_date',
+              'issued_date',
+              'issued_by',
+              'activity',
+              'approved_date',
+              'approved_status',
+              'approved_cmnt',
+              'where_used_type',
+              'where_used_ref_id',
+              'remarks',
+              'short_status',
+              'long_status'
+            ],
+            ...jsonDataList
+                .map((mrslistjson) => [
+                      mrslistjson['id'],
+                      mrslistjson['requested_by_emp_ID'],
+                      mrslistjson['requested_by_name'],
+                      mrslistjson['requestd_date'],
+                      mrslistjson['issued_date'],
+                      mrslistjson['issued_name'],
+                      mrslistjson['activity'],
+                      mrslistjson['approval_date'],
+                      mrslistjson['approval_status'],
+                      mrslistjson['approval_comment'],
+                      mrslistjson['whereUsedTypeName'],
+                      mrslistjson['whereUsedRefID'],
+                      mrslistjson['remarks'],
+                      mrslistjson['status_short'],
+                      mrslistjson['status_long'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> mrslistData = {'Sheet1': data};
+          exportToExcel(mrslistData, 'mrslist.xlsx');
+        }
 
         return _MrsListModelList.reversed.toList();
       } else {
@@ -8686,6 +8873,7 @@ class Repository {
   Future<List<PlantStockListModel?>?> getPlantStockList(
       int? facilityId,
       bool? isLoading,
+      bool? isExport,
       dynamic startDate,
       dynamic endDate,
       List<int>? selectedAssetsNameIdList) async {
@@ -8709,6 +8897,42 @@ class Repository {
                 .map<PlantStockListModel>((m) =>
                     PlantStockListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsondata = plantstockListModelToJson(_plantStockListModels);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsondata);
+          List<List<dynamic>> data = [
+            [
+              'facility_id',
+              'facility_name',
+              'asset_id',
+              'asset_name',
+              'asset_code',
+              'asset_type_id',
+              'asset_type',
+              'opening',
+              'inward',
+              'outward',
+              'balance',
+            ],
+            ...jsonDataList.map((plantstockjson) => [
+                  plantstockjson['facilityID'],
+                  plantstockjson['facilityName'],
+                  plantstockjson['assetItemID'],
+                  plantstockjson['asset_name'],
+                  plantstockjson['asset_code'],
+                  plantstockjson['asset_type_ID'],
+                  plantstockjson['asset_type'],
+                  plantstockjson['opening'],
+                  plantstockjson['inward'],
+                  plantstockjson['outward'],
+                  plantstockjson['balance'],
+                ])
+          ];
+          Map<String, List<List<dynamic>>> plantstocklistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(plantstocklistData, 'plantstocklist.xlsx');
+        }
 
         return _plantStockListModels;
       } else {
@@ -9499,9 +9723,7 @@ class Repository {
   }
 
   Future<List<ReturnMrsListModel?>?> getReturnMrsList(
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+      int? facilityId, bool? isLoading, bool? isExport) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -9519,6 +9741,53 @@ class Repository {
                 .map<ReturnMrsListModel>((m) =>
                     ReturnMrsListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = returnmrsListModelToJson(_ReturnMrsListModelList);
+
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'requested_by_id',
+              'requested_date',
+              'requested_by',
+              'issued_date',
+              'issued_name',
+              'approver_name',
+              'approved_date',
+              'approver_cmnt',
+              'activity',
+              'remarks',
+              'whereused_ref_id',
+              'where_used_name',
+              'is_splitted',
+              'short_status',
+              'long_status',
+            ],
+            ...jsonDataList
+                .map((mrsrlistjson) => [
+                      mrsrlistjson['id'],
+                      mrsrlistjson['requested_by_emp_ID'],
+                      mrsrlistjson['requestd_date'],
+                      mrsrlistjson['requested_by_name'],
+                      mrsrlistjson['issued_date'],
+                      mrsrlistjson['issued_name'],
+                      mrsrlistjson['approver_name'],
+                      mrsrlistjson['approval_date'],
+                      mrsrlistjson['approval_comment'],
+                      mrsrlistjson['activity'],
+                      mrsrlistjson['remarks'],
+                      mrsrlistjson['whereUsedRefID'],
+                      mrsrlistjson['whereUsedTypeName'],
+                      mrsrlistjson['is_splited'],
+                      mrsrlistjson['status_short'],
+                      mrsrlistjson['status_long'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> mrsretData = {'Sheet1': data};
+          exportToExcel(mrsretData, 'mrsreturn.xlsx');
+        }
 
         return _ReturnMrsListModelList.reversed.toList();
       } else {
@@ -10320,8 +10589,12 @@ class Repository {
     }
   }
 
-  Future<List<AuditPlanListModel>?> getAuditPlanList(int? facilityId,
-      bool? isLoading, dynamic startDate, dynamic endDate) async {
+  Future<List<AuditPlanListModel>?> getAuditPlanList(
+      int? facilityId,
+      bool? isLoading,
+      bool? isExport,
+      dynamic startDate,
+      dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAuditPlanList(
@@ -10339,6 +10612,50 @@ class Repository {
                 .map<AuditPlanListModel>((m) =>
                     AuditPlanListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = auditplanListModelToJson(_AuditPlanListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'audit_plan',
+              'facility_name',
+              'auditee_name',
+              'auditor_name',
+              'frequency',
+              'frequency_name',
+              'short_status',
+              'freq_applicable',
+              'checklist_id',
+              'checklist_name',
+              'description',
+              'schedule_date',
+              'created_at',
+            ],
+            ...jsonDataList
+                .map((auditlistjson) => [
+                      auditlistjson['id'],
+                      auditlistjson['plan_number'],
+                      auditlistjson['facility_name'],
+                      auditlistjson['auditee_Emp_Name'],
+                      auditlistjson['auditor_Emp_Name'],
+                      auditlistjson['frequency'],
+                      auditlistjson['frequency_name'],
+                      auditlistjson['short_status'],
+                      auditlistjson['frequencyApplicable'],
+                      auditlistjson['checklist_id'],
+                      auditlistjson['checklist_name'],
+                      auditlistjson['description'],
+                      auditlistjson['schedule_Date'],
+                      auditlistjson['created_at'],
+                    ])
+                .toList()
+          ];
+          Map<String, List<List<dynamic>>> auditlistData = {
+            'Sheet1': data,
+          };
+          exportToExcel(auditlistData, "auditlist.xlsx");
+        }
         print({"object", _AuditPlanListModelList});
         return _AuditPlanListModelList.reversed.toList();
       } else {
@@ -10940,13 +11257,11 @@ class Repository {
     }
   }
 
-  Future<List<VegTaskListModel>> getVegTaskList({
-    required int? facility_id,
-    required bool isLoading,
-    bool? isExport
-    // String? start_date,
-    // required String end_date,
-  }) async {
+  Future<List<VegTaskListModel>> getVegTaskList(
+      {required int? facility_id, required bool isLoading, bool? isExport
+      // String? start_date,
+      // required String end_date,
+      }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -10961,8 +11276,46 @@ class Repository {
       print('VegTaskList: ${res.data}');
 
       if (!res.hasError) {
-        var vegTaskList = VegTaskListModelFromJson(res.data);
-        return vegTaskList.reversed.toList();
+        // var vegTaskList = VegTaskListModelFromJson(res.data);
+        // return vegTaskList.reversed.toList();
+        final jsonvegTaskListModelModels = jsonDecode(res.data);
+
+        final List<VegTaskListModel> _VegTaskListModelList =
+            jsonvegTaskListModelModels
+                .map<VegTaskListModel>((m) =>
+                    VegTaskListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = VegTaskListModelToJson(_VegTaskListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'title',
+              'plan_id',
+              'frequency',
+              'no_of_days',
+              'start_date',
+              'done_date',
+              'short_status',
+            ],
+            ...jsonDataList
+                .map((vegexejson) => [
+                      vegexejson['id'],
+                      vegexejson['title'],
+                      vegexejson['planId'],
+                      vegexejson['frequency'],
+                      vegexejson['noOfDays'],
+                      vegexejson['startDate'],
+                      vegexejson['doneDate'],
+                      vegexejson['status_short'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> vegexelistData = {'Sheet1': data};
+          exportToExcel(vegexelistData, "vegexe.xlsx");
+        }
+        return _VegTaskListModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getVegTaskList');

@@ -3,6 +3,9 @@ import 'dart:convert';
 List<MrsListModel> MrsModelFromJson(String str) => List<MrsListModel>.from(
     json.decode(str).map((x) => MrsListModel.fromJson(x)));
 
+String mrslistModelToJson(List<MrsListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class MrsListModel {
   int? id;
   int? requested_by_emp_ID;

@@ -171,7 +171,7 @@ class IncidentReportListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getIncidentReportList(
-            facilityId, formattedFromdate, formattedTodate, false);
+            facilityId, formattedFromdate, formattedTodate, false, false);
       });
     });
 
@@ -227,25 +227,15 @@ class IncidentReportListController extends GetxController {
     }
     List<IncidentReportListModel?> filteredList = filteredData
         .where((item) =>
-            (item?.id
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item?.title
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.title?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.description
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.block_name
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.block_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.equipment_name
                     ?.toString()
@@ -267,16 +257,8 @@ class IncidentReportListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.reported_at
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false) ||
-            (item?.status
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false))
+            (item?.reported_at?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
     incidentReportList.value = filteredList;
     // incidentReportList.value = filteredData
@@ -287,11 +269,12 @@ class IncidentReportListController extends GetxController {
   }
 
   Future<void> getIncidentReportList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+      dynamic endDate, bool isLoading, bool isExport) async {
     incidentReportList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading,
+        isExport: isExport,
         start_date: formattedFromdate1, //startDate,
         end_date: formattedTodate1, //endDate,
         facility_id: facilityId);
@@ -341,7 +324,7 @@ class IncidentReportListController extends GetxController {
 
   void getIncidentReportListByDate() {
     getIncidentReportList(
-        facilityId, formattedFromdate, formattedTodate, false);
+        facilityId, formattedFromdate, formattedTodate, false, false);
   }
 
   Future<void> viewIncidentReport({int? id}) async {
@@ -356,5 +339,10 @@ class IncidentReportListController extends GetxController {
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
+  }
+
+  void export() {
+    getIncidentReportList(
+        facilityId, formattedFromdate, formattedTodate, true, true);
   }
 }

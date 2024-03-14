@@ -4,6 +4,9 @@ List<ReturnMrsListModel> MrsModelFromJson(String str) =>
     List<ReturnMrsListModel>.from(
         json.decode(str).map((x) => ReturnMrsListModel.fromJson(x)));
 
+String returnmrsListModelToJson(List<ReturnMrsListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class ReturnMrsListModel {
   int? id;
   int? requested_by_emp_ID;

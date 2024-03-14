@@ -8,9 +8,10 @@ class MrsListUsecase {
   Future<List<MrsListModel?>?> getMrsList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
-      await _repository.getMrsList(facilityId, isLoading, startDate, endDate);
+      await _repository.getMrsList(facilityId, isLoading, startDate, endDate, isExport);
   void clearValue() async => _repository.clearData(LocalKeys.mrsId);
   void clearpmTaskValue() async => _repository.clearData(LocalKeys.pmTaskModel);
   void clearStoreTaskData() async => _repository.clearData(LocalKeys.pmTaskId);

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
-import '../Mrs_list_controller.dart';
+import '../mrs_list_controller.dart';
 
 class MrsListScreen extends GetView<MrsListController> {
   MrsListScreen({super.key});

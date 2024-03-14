@@ -4,6 +4,9 @@ List<AuditPlanListModel> auditModelFromJson(String str) =>
     List<AuditPlanListModel>.from(
         json.decode(str).map((x) => AuditPlanListModel.fromJson(x)));
 
+String auditplanListModelToJson(List<AuditPlanListModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class AuditPlanListModel {
   int? id;
   String? plan_number;

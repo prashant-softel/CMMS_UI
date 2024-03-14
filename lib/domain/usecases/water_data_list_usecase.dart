@@ -12,7 +12,7 @@ class WaterDataListUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getAuditPlanList(
-          facilityId, isLoading, startDate, endDate);
+          facilityId, isLoading, startDate, endDate,false);
   void saveValue({String? type}) async =>
       repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>

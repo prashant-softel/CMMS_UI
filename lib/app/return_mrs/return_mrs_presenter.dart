@@ -8,10 +8,12 @@ class ReturnMrsListPresenter {
   Future<List<ReturnMrsListModel?>?> getReturnMrsList({
     int? facilityId,
     bool? isLoading,
+    bool? isExport
   }) async =>
       await returnmrsListUsecase.getReturnMrsList(
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
+        isExport: isExport
       );
   void clearValue() async => returnmrsListUsecase.clearValue();
 }

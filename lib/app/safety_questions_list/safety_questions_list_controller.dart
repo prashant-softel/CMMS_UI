@@ -38,9 +38,13 @@ class SafetyQuestionsListController extends GetxController {
   void updateChecklistType(String value) {
     updateType.value = value;
   }
+  void toggleContainer() {
+    isContainerVisible.toggle();
+  }
 
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isFormInvalid = false.obs;
 
   var titleCtrlr = TextEditingController();

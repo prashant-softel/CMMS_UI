@@ -7,6 +7,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -264,6 +265,17 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                         //       onPressed: () {},
                                         //       text: 'PDF'),
                                         // ),
+                                        Container(
+                                          height: 35,
+                                          margin: EdgeInsets.only(left: 10),
+                                          child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appLightBlueColor,
+                                              onPressed: () {
+                                                controller.export();
+                                              },
+                                              text: 'Excel'),
+                                        ),
                                         Spacer(),
                                         Container(
                                           width: 300,

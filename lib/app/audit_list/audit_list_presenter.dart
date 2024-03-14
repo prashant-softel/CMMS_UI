@@ -8,11 +8,13 @@ class AuditListScreenPresenter {
   Future<List<AuditPlanListModel>?> getAuditPlanList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
       await auditListUsecase.getAuditPlanList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          isExport: isExport,
           endDate: endDate,
           startDate: startDate);
   void saveValue({String? type}) async {

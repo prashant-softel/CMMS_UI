@@ -8,7 +8,8 @@ class ReturnMrsListUsecase {
   Future<List<ReturnMrsListModel?>?> getReturnMrsList({
     int? facilityId,
     bool? isLoading,
+    bool? isExport
   }) async =>
-      await _repository.getReturnMrsList(facilityId, isLoading);
+      await _repository.getReturnMrsList(facilityId, isLoading, isExport);
   void clearValue() async => _repository.clearData(LocalKeys.mrsId);
 }

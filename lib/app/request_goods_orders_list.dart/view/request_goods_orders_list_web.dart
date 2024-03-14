@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
@@ -259,6 +260,17 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                       //       onPressed: () {},
                                       //       text: 'PDF'),
                                       // ),
+                                      Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            onPressed: () {
+                                              controller.export();
+                                            },
+                                            text: 'Excel'),
+                                      ),
                                       Spacer(),
                                       Container(
                                         width: 300,
