@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -27,23 +28,13 @@ class NewPermitMobile extends GetView<NewPermitController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Dimens.boxHeight5,
+            HeaderWidgetMobile(),
             Container(
-              margin: EdgeInsets.only(left: 30, top: 15),
+              margin: EdgeInsets.only(left: 30, top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    width: Get.width * .8,
-                    height: 40,
-                    child: DropdownWebWidget(
-                      controller: controller,
-                      dropdownList: controller.facilityList,
-                      isValueSelected: controller.isFacilitySelected.value,
-                      selectedValue: controller.selectedFacility.value,
-                      onValueChanged: controller.onValueChanged,
-                    ),
-                  ),
                   Text(
                     "Request a Permit to Work",
                     style: Styles.blackBold18,

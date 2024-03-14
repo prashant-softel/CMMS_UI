@@ -1,3 +1,4 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -5,38 +6,23 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../../domain/models/inventory_category_model.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class EquipmentCategoriesWidget extends StatelessWidget {
+class EquipmentCategoriesWidget extends StatefulWidget {
   EquipmentCategoriesWidget({super.key});
+  @override
+  State<EquipmentCategoriesWidget> createState() => _EquipmentCategoriesWidgetState();
+}
 
-  ///
+class _EquipmentCategoriesWidgetState extends State<EquipmentCategoriesWidget> {
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
-    return Column(//
+    return Column(
+      crossAxisAlignment : CrossAxisAlignment.start,
         children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: RichText(
-          text: TextSpan(
-              text: 'Equipment Categories: ',
-              style: Styles.blackBold16,
-              children: [
-                TextSpan(
-                  text: '*',
-                  style: TextStyle(
-                    color: ColorValues.orangeColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ]),
-        ),
-      ),
-      Dimens.boxHeight5,
+      CustomRichTextMobile(title: 'Equipment Categories: '),
+      Dimens.boxHeight2,
       Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -98,7 +84,7 @@ class EquipmentCategoriesWidget extends StatelessWidget {
           ),
         ),
       ),
-      Dimens.boxHeight20,
+      Dimens.boxHeight15,
     ]);
   }
 }

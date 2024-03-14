@@ -1,43 +1,27 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class WorkAreaWidget extends StatelessWidget {
+class WorkAreaWidget extends StatefulWidget {
   WorkAreaWidget({super.key});
+  @override
+  State<WorkAreaWidget> createState() => _WorkAreaWidgetState();
+}
 
-  ///
+class _WorkAreaWidgetState extends State<WorkAreaWidget> {
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
-    return //
-        Obx(
-      () => //
-          Column(//
-              children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: RichText(
-            text: TextSpan(
-                text: 'Work Area / Equipments: ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-          ),
-        ),
-        Dimens.boxHeight5,
+    return Obx(
+      () => Column(
+        crossAxisAlignment : CrossAxisAlignment.start,
+        children: [
+        CustomRichTextMobile(title: 'Equipment Categories: '),
+        Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -91,7 +75,7 @@ class WorkAreaWidget extends StatelessWidget {
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),
-        Dimens.boxHeight20,
+        Dimens.boxHeight15,
       ]),
     );
   }
