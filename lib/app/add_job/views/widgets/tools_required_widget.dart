@@ -1,14 +1,19 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 import '../../../theme/color_values.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class ToolsRequiredWidget extends StatelessWidget {
+class ToolsRequiredWidget extends StatefulWidget {
   ToolsRequiredWidget({super.key});
 
+  @override
+  State<ToolsRequiredWidget> createState() => _ToolsRequiredWidgetState();
+}
+
+class _ToolsRequiredWidgetState extends State<ToolsRequiredWidget> {
   ///
   var controller = Get.find<AddJobController>();
 
@@ -16,27 +21,12 @@ class ToolsRequiredWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => //
-          Column(//
+      () => 
+          Column(
+            crossAxisAlignment : CrossAxisAlignment.start,
               children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: RichText(
-            text: TextSpan(
-                text: 'Tools Required For Work Type: ',
-                style: Styles.blackBold16,
-                children: [
-                  // TextSpan(
-                  //   text: '*',
-                  //   style: TextStyle(
-                  //     color: ColorValues.orangeColor,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                ]),
-          ),
-        ),
-        Dimens.boxHeight5,
+       CustomRichTextMobile(title: 'Tools Required For Work Type: '),
+        Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -93,7 +83,7 @@ class ToolsRequiredWidget extends StatelessWidget {
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),
-        Dimens.boxHeight20,
+        Dimens.boxHeight15,
       ]),
     );
   }

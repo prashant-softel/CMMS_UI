@@ -118,15 +118,15 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          _showPopupMenu(context);
-                                        },
-                                        child: Image.asset(
-                                          'assets/files/menu_vertical.png',
-                                          width: 40,
-                                        ),
-                                      ),
+                                      // GestureDetector(
+                                      //   onTap: () {
+                                      //     _showPopupMenu(context);
+                                      //   },
+                                      //   child: Image.asset(
+                                      //     'assets/files/menu_vertical.png',
+                                      //     width: 40,
+                                      //   ),
+                                      // ),
                                     ]),
                                 Row(children: [
                                   Expanded(
@@ -290,126 +290,126 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
     );
   }
 
-  void _showPopupMenu(BuildContext context) {
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
+  // void _showPopupMenu(BuildContext context) {
+  //   final RenderBox overlay =
+  //       Overlay.of(context).context.findRenderObject() as RenderBox;
 
-    final RelativeRect position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        Offset(360, 360),
-        Offset(130, 130),
-      ),
-      Offset.zero & overlay.size,
-    );
+  //   final RelativeRect position = RelativeRect.fromRect(
+  //     Rect.fromPoints(
+  //       Offset(360, 360),
+  //       Offset(130, 130),
+  //     ),
+  //     Offset.zero & overlay.size,
+  //   );
 
-    showMenu(
-      context: context,
-      position: position,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      items: <PopupMenuEntry>[
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.editColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "VIEW",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              var _newPermitListId = newPermitListModel?.permitId ?? 0;
-              controller.editNewPermit(permitId: _newPermitListId);
-            },
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.appDarkBlueColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "Extend",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.cancelColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.close,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "CLOSE",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-      ],
-    );
-  }
+  //   showMenu(
+  //     context: context,
+  //     position: position,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.circular(10.0),
+  //     ),
+  //     items: <PopupMenuEntry>[
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.editColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.remove_red_eye_outlined,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "VIEW",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             var _newPermitListId = newPermitListModel?.permitId ?? 0;
+  //             controller.editNewPermit(permitId: _newPermitListId);
+  //           },
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.appDarkBlueColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.access_time,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "Extend",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             Navigator.pop(context);
+  //           },
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.cancelColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.close,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "CLOSE",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             Navigator.pop(context);
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }
