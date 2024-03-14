@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
@@ -19,10 +20,7 @@ class CreatePermitScreen extends GetView<NewPermitController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
-                // title: HeaderWidgetMobile(),
-                title: Text("Permit to Work"),
-                // centerTitle: true,
-                // elevation: 0,
+                title: HeadingProfileAppBar(title: "Permit to Work"),
               )
             : null,
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))

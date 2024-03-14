@@ -84,7 +84,10 @@ class ViewSOPDialog extends GetView {
                         SizedBox(
                           height: 10,
                         ),
-                        Text('Click on Icon to View Document !!'),
+                        Responsive.isDesktop(context)
+                            ? Text('Click on Icon to View Document !!')
+                            : Text("Click to View"),
+                        Dimens.boxHeight5,
                         // Text.rich(
                         //   TextSpan(
                         //     text: 'Click here to view Document ',
@@ -148,7 +151,9 @@ class ViewSOPDialog extends GetView {
                                     },
                                   ),
                                   Text(
-                                      'I have read and accept\nterms and conditions')
+                                    'I have read and accept\nterms and conditions',
+                                    style: TextStyle(fontSize: 13),
+                                  )
                                 ],
                               )
                       ],

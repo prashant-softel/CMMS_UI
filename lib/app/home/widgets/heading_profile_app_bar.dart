@@ -8,11 +8,12 @@ import '../../navigators/app_pages.dart';
 
 class HeadingProfileAppBar extends GetView<HomeController> {
   HeadingProfileAppBar({
+    required this.title,
     super.key,
   });
 
   final HomeController controller = Get.find<HomeController>();
-
+  String title;
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -20,6 +21,8 @@ class HeadingProfileAppBar extends GetView<HomeController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Text(title),
+            Spacer(),
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
