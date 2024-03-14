@@ -23,40 +23,38 @@ class HomeScreen extends GetView<HomeController> {
       drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
           ? HomeDrawerMobile() //ResponsiveSideMenu()
           : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 450),
-              margin: EdgeInsets.only(
-                left: Responsive.isDesktop(context)
-                    ? controller.menuButton.value
-                        ? 250.0
-                        : 70.0
-                    : 0,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        (Responsive.isDesktop(context))
-                            ? Expanded(child: DashBoardHomeWeb())
-                            : Dimens.box0
-                      ],
-                    ),
-                  )
-                ],
-              ),
+      body: Stack(
+        children: [
+          AnimatedContainer(
+            duration: Duration(milliseconds: 450),
+            margin: EdgeInsets.only(
+              left: Responsive.isDesktop(context)
+                  ? controller.menuButton.value
+                      ? 250.0
+                      : 70.0
+                  : 0,
             ),
-            Responsive.isDesktop(context)
-                ? AnimatedPositioned(
-                    duration: Duration(milliseconds: 450),
-                    child: HomeDrawer(),
-                  )
-                : Dimens.box0
-          ],
-        ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      (Responsive.isDesktop(context))
+                          ? Expanded(child: DashBoardHomeWeb())
+                          : Dimens.box0
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Responsive.isDesktop(context)
+              ? AnimatedPositioned(
+                  duration: Duration(milliseconds: 450),
+                  child: HomeDrawer(),
+                )
+              : Dimens.box0
+        ],
       ),
     );
   }

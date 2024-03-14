@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit/view/new_permit_mobile.dart';
 import 'package:cmms/app/new_permit/view/new_permit_web.dart';
@@ -16,50 +18,55 @@ class CreatePermitScreen extends GetView<NewPermitController> {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: Responsive.isMobile(context)
+        appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
-                title: HeaderWidget(),
-                automaticallyImplyLeading: false,
+                title: HeaderWidgetMobile(),
+                centerTitle: true,
                 elevation: 0,
-                toolbarHeight: 60,
               )
             : null,
-        body: Obx(
-          () => Stack(
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                    left: homecontroller.menuButton.value ? 250.0 : 70.0),
-                    width: Get.width,
-                  height: Get.height,
-                child: Row(
-                  children: [(Responsive.isMobile(context) ||
-                              Responsive.isTablet(context))
-                          ? Dimens.box0
-                          : Container(),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            if (Responsive.isMobile(context))
-                              Expanded(
-                                child: NewPermitMobile(),
-                              ),
-                            if (Responsive.isDesktop(context))
-                              Expanded(
-                                child: NewPermitWeb(),
-                              )
-                          ],
-                        ),
-                      ),],
-                ),
+        drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+            ? HomeDrawerMobile() //ResponsiveSideMenu()
+            : null,
+        body: Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                left: Responsive.isDesktop(context)
+                    ? homecontroller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
               ),
-              AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                child: HomeDrawer(),
-              )
-            ],
-          ),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        if (Responsive.isMobile(context))
+                          Expanded(
+                            child: NewPermitMobile(),
+                          ),
+                        if (Responsive.isDesktop(context))
+                          Expanded(
+                            child: NewPermitWeb(),
+                          )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Responsive.isDesktop(context)
+                ? AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  )
+                : Dimens.box0
+          ],
         ),
       ),
     );

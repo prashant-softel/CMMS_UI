@@ -1,10 +1,7 @@
-import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
-
 import 'package:cmms/app/add_job/views/mobile/add_job_content_mobile.dart';
 import 'package:cmms/app/add_job/views/web/add_job_content_web.dart';
 import '../add_job_controller.dart';
@@ -20,49 +17,55 @@ class AddJobScreen extends GetView<AddJobController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context)
             ? AppBar(
+                title: Text(
+                  "Add Job",
+                  style: Styles.blackBold14,
+                ),
                 centerTitle: true,
                 elevation: 0,
               )
             : null,
-        drawer: //
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? HomeDrawer()
-                : null,
-        body: Obx(
-          () => Stack(
-            children: [
-              AnimatedContainer(
-                  duration: Duration(milliseconds: 450),
-                  margin: EdgeInsets.only(
-                      left: homecontroller.menuButton.value ? 250.0 : 70.0),
-                  width: Get.width,
-                  height: Get.height,
-                  child: Row(
-                    children: [
-                      (Responsive.isMobile(context) ||
-                              Responsive.isTablet(context))
-                          ? Dimens.box0
-                          : Container(),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            if (Responsive.isMobile(context))
-                              Expanded(
-                                child: AddJobContentMobile(),
-                              ),
-                            if (Responsive.isDesktop(context))
-                              Expanded(
-                                child: AddJobContentWeb(),
-                              )
-                          ],
-                        ),
+         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+          ? HomeDrawerMobile() //ResponsiveSideMenu()
+          : null,
+        body: Stack(
+          children: [
+            AnimatedContainer(
+                duration: Duration(milliseconds: 450),
+                margin: EdgeInsets.only(
+                  left: Responsive.isDesktop(context)
+                      ? homecontroller.menuButton.value
+                          ? 250.0
+                          : 70.0
+                      : 0,
+                ),
+                width: Get.width,
+                height: Get.height,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (Responsive.isMobile(context))
+                            Expanded(
+                              child: AddJobContentMobile(),
+                            ),
+                          if (Responsive.isDesktop(context))
+                            Expanded(
+                              child: AddJobContentWeb(),
+                            )
+                        ],
                       ),
-                    ],
-                  )),
-              AnimatedPositioned(
-                  child: HomeDrawer(), duration: Duration(milliseconds: 450))
-            ],
-          ),
+                    ),
+                  ],
+                )),
+            Responsive.isDesktop(context)
+                ? AnimatedPositioned(
+                    duration: Duration(milliseconds: 450),
+                    child: HomeDrawer(),
+                  )
+                : Dimens.box0
+          ],
         ),
       ),
     );
