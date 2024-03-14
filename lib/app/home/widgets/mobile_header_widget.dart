@@ -18,12 +18,12 @@ class HeaderWidgetMobile extends GetView<HomeController> {
           color: ColorValues.whiteColor,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(
               () => Container(
-                width: Get.width * .5,
-                height: 35,
+                width: Get.width * .8,
+                height: 45,
                 child: DropdownWebWidget(
                   controller: controller,
                   dropdownList: controller.facilityList,
