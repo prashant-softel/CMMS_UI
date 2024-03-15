@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
-import 'dart:html' as html;
+// import 'dart:html' as html;
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class ObservationPMTaskViewDialog extends GetView {
@@ -252,14 +252,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 icon: Icons.remove_red_eye,
                                                 message: "View",
                                                 onPress: () {
-                                                  String imageUrl =
-                                                      "assets/files/logo.png";
-                                                  String imagePath = html.window
-                                                          .location.origin +
-                                                      '/' +
-                                                      imageUrl;
-                                                  html.window.open(
-                                                      imagePath, '_blank');
+                                                  // String imageUrl =
+                                                  //     "assets/files/logo.png";
+                                                  // String imagePath = html.window
+                                                  //         .location.origin +
+                                                  //     '/' +
+                                                  //     imageUrl;
+                                                  // html.window.open(
+                                                  //     imagePath, '_blank');
                                                 },
                                               ),
                                             ),

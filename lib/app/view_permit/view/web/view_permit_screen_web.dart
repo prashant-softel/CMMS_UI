@@ -1,5 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -1777,14 +1777,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  String pdfUrl =
-                                                      "assets/files/ptwsop.pdf";
-                                                  String pdfPath = html.window
-                                                          .location.origin +
-                                                      '/' +
-                                                      pdfUrl;
-                                                  html.window
-                                                      .open(pdfPath, '_blank');
+                                                  // String pdfUrl =
+                                                  //     "assets/files/ptwsop.pdf";
+                                                  // String pdfPath = html.window
+                                                  //         .location.origin +
+                                                  //     '/' +
+                                                  //     pdfUrl;
+                                                  // html.window
+                                                  //     .open(pdfPath, '_blank');
                                                 },
                                                 child: Image.asset(
                                                   'assets/files/pdf2.png',
