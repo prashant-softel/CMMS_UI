@@ -937,9 +937,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Obx(
             () => Container(
               padding: Dimens.edgeInsets05_0_5_0,
@@ -1015,9 +1012,6 @@ class NewPermitMobile extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: 100,
@@ -1063,13 +1057,9 @@ class NewPermitMobile extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Obx(
             () => Container(
               padding: Dimens.edgeInsets05_0_5_0,
-              // height: double.infinity,
               width: double.infinity,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

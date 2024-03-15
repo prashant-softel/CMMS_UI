@@ -13,17 +13,12 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:data_table_2/data_table_2.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class NewPermitWeb extends GetView<NewPermitController> {
   NewPermitWeb({Key? key}) : super(key: key);
-  bool valuefirst = false;
   final NewPermitController _controller = Get.find();
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
@@ -1901,205 +1896,205 @@ class NewPermitWeb extends GetView<NewPermitController> {
     ]);
   }
 
-  Widget _buildTitleTextField_web(BuildContext context) {
-    return Column(//
-        children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text:
-      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-      //         TextSpan(
-      //           text: '*',
-      //           style: TextStyle(
-      //             color: ColorValues.orangeColor,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ]),
-      //     ),
-      //   ),
-      // ),
+  // Widget _buildTitleTextField_web(BuildContext context) {
+  //   return Column(//
+  //       children: [
+  //     // Align(
+  //     //   alignment: Alignment.centerLeft,
+  //     //   child: Padding(
+  //     //     padding: const EdgeInsets.only(left: 10),
+  //     //     child: RichText(
+  //     //       text:
+  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+  //     //         TextSpan(
+  //     //           text: '*',
+  //     //           style: TextStyle(
+  //     //             color: ColorValues.orangeColor,
+  //     //             fontWeight: FontWeight.bold,
+  //     //           ),
+  //     //         ),
+  //     //       ]),
+  //     //     ),
+  //     //   ),
+  //     // ),
 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.75
-        //     : MediaQuery.of(context).size.width / 1.1,
-        // margin: EdgeInsets.all(20),
-        margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            controller: controller.titleTextCtrlr,
-            keyboardType: TextInputType.multiline,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              focusedErrorBorder: controller.isTitleTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isTitleTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText:
-                  controller.isTitleTextInvalid.value ? "Required field" : null,
-            ),
-            onChanged: (value) {
-              if (value.trim().length > 3) {
-                controller.isTitleTextInvalid.value = false;
-              } else {
-                controller.isTitleTextInvalid.value = true;
-              }
-            },
-          ),
-        ),
-      ),
-    ]);
-  }
+  //     Container(
+  //       height: MediaQuery.of(context).size.height * 0.050,
+  //       // width: Responsive.isDesktop(context)
+  //       //     ? MediaQuery.of(context).size.width / 1.75
+  //       //     : MediaQuery.of(context).size.width / 1.1,
+  //       // margin: EdgeInsets.all(20),
+  //       margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
+  //       decoration: BoxDecoration(
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black26,
+  //             offset: const Offset(
+  //               5.0,
+  //               5.0,
+  //             ),
+  //             blurRadius: 5.0,
+  //             spreadRadius: 1.0,
+  //           ),
+  //           BoxShadow(
+  //             color: ColorValues.whiteColor,
+  //             offset: const Offset(0.0, 0.0),
+  //             blurRadius: 0.0,
+  //             spreadRadius: 0.0,
+  //           ),
+  //         ],
+  //         color: ColorValues.whiteColor,
+  //         borderRadius: BorderRadius.circular(5),
+  //       ),
+  //       child: SizedBox(
+  //         width: MediaQuery.of(context).size.width / 1,
+  //         child: TextField(
+  //           style: GoogleFonts.lato(
+  //             textStyle:
+  //                 TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+  //           ),
+  //           controller: controller.titleTextCtrlr,
+  //           keyboardType: TextInputType.multiline,
+  //           autofocus: false,
+  //           decoration: InputDecoration(
+  //             fillColor: ColorValues.whiteColor,
+  //             filled: true,
+  //             contentPadding: Dimens.edgeInsets05_10,
+  //             border: InputBorder.none,
+  //             enabledBorder: InputBorder.none,
+  //             focusedBorder: InputBorder.none,
+  //             focusedErrorBorder: controller.isTitleTextInvalid.value
+  //                 ? OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(5),
+  //                     borderSide: BorderSide(
+  //                       color: ColorValues.redColorDark,
+  //                     ),
+  //                   )
+  //                 : InputBorder.none,
+  //             errorBorder: controller.isTitleTextInvalid.value
+  //                 ? OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(5),
+  //                     borderSide: BorderSide(
+  //                       color: ColorValues.redColorDark,
+  //                     ),
+  //                   )
+  //                 : null,
+  //             errorText:
+  //                 controller.isTitleTextInvalid.value ? "Required field" : null,
+  //           ),
+  //           onChanged: (value) {
+  //             if (value.trim().length > 3) {
+  //               controller.isTitleTextInvalid.value = false;
+  //             } else {
+  //               controller.isTitleTextInvalid.value = true;
+  //             }
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   ]);
+  // }
 
-  Widget _buildWorkPermitReferenceTextField_web(BuildContext context) {
-    return Column(//
-        children: [
-      // Align(
-      //   alignment: Alignment.centerLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 10),
-      //     child: RichText(
-      //       text:
-      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
-      //         TextSpan(
-      //           text: '*',
-      //           style: TextStyle(
-      //             color: ColorValues.orangeColor,
-      //             fontWeight: FontWeight.bold,
-      //           ),
-      //         ),
-      //       ]),
-      //     ),
-      //   ),
-      // ),
+  // Widget _buildWorkPermitReferenceTextField_web(BuildContext context) {
+  //   return Column(//
+  //       children: [
+  //     // Align(
+  //     //   alignment: Alignment.centerLeft,
+  //     //   child: Padding(
+  //     //     padding: const EdgeInsets.only(left: 10),
+  //     //     child: RichText(
+  //     //       text:
+  //     //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+  //     //         TextSpan(
+  //     //           text: '*',
+  //     //           style: TextStyle(
+  //     //             color: ColorValues.orangeColor,
+  //     //             fontWeight: FontWeight.bold,
+  //     //           ),
+  //     //         ),
+  //     //       ]),
+  //     //     ),
+  //     //   ),
+  //     // ),
 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        // width: Responsive.isDesktop(context)
-        //     ? MediaQuery.of(context).size.width / 1.75
-        //     : MediaQuery.of(context).size.width / 1.1,
-        //  margin: EdgeInsets.all(20),
-        margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
-              ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            controller: controller.workPermitNumberTextCtrlr,
-            keyboardType: TextInputType.multiline,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isWorPermitNumberTextInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText: controller.isWorPermitNumberTextInvalid.value
-                  ? "Required field"
-                  : null,
-            ),
-            onChanged: (value) {
-              if (value.trim().length > 3) {
-                controller.isWorPermitNumberTextInvalid.value = false;
-              } else {
-                controller.isWorPermitNumberTextInvalid.value = true;
-              }
-            },
-          ),
-        ),
-      ),
-      Dimens.boxHeight10,
-    ]);
-  }
+  //     Container(
+  //       height: MediaQuery.of(context).size.height * 0.050,
+  //       // width: Responsive.isDesktop(context)
+  //       //     ? MediaQuery.of(context).size.width / 1.75
+  //       //     : MediaQuery.of(context).size.width / 1.1,
+  //       //  margin: EdgeInsets.all(20),
+  //       margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
+  //       decoration: BoxDecoration(
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black26,
+  //             offset: const Offset(
+  //               5.0,
+  //               5.0,
+  //             ),
+  //             blurRadius: 5.0,
+  //             spreadRadius: 1.0,
+  //           ),
+  //           BoxShadow(
+  //             color: ColorValues.whiteColor,
+  //             offset: const Offset(0.0, 0.0),
+  //             blurRadius: 0.0,
+  //             spreadRadius: 0.0,
+  //           ),
+  //         ],
+  //         color: ColorValues.whiteColor,
+  //         borderRadius: BorderRadius.circular(5),
+  //       ),
+  //       child: SizedBox(
+  //         width: MediaQuery.of(context).size.width / 1,
+  //         child: TextField(
+  //           style: GoogleFonts.lato(
+  //             textStyle:
+  //                 TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+  //           ),
+  //           controller: controller.workPermitNumberTextCtrlr,
+  //           keyboardType: TextInputType.multiline,
+  //           autofocus: false,
+  //           decoration: InputDecoration(
+  //             fillColor: ColorValues.whiteColor,
+  //             filled: true,
+  //             contentPadding: Dimens.edgeInsets05_10,
+  //             border: InputBorder.none,
+  //             enabledBorder: InputBorder.none,
+  //             focusedBorder: InputBorder.none,
+  //             focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
+  //                 ? OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(5),
+  //                     borderSide: BorderSide(
+  //                       color: ColorValues.redColorDark,
+  //                     ),
+  //                   )
+  //                 : InputBorder.none,
+  //             errorBorder: controller.isWorPermitNumberTextInvalid.value
+  //                 ? OutlineInputBorder(
+  //                     borderRadius: BorderRadius.circular(5),
+  //                     borderSide: BorderSide(
+  //                       color: ColorValues.redColorDark,
+  //                     ),
+  //                   )
+  //                 : null,
+  //             errorText: controller.isWorPermitNumberTextInvalid.value
+  //                 ? "Required field"
+  //                 : null,
+  //           ),
+  //           onChanged: (value) {
+  //             if (value.trim().length > 3) {
+  //               controller.isWorPermitNumberTextInvalid.value = false;
+  //             } else {
+  //               controller.isWorPermitNumberTextInvalid.value = true;
+  //             }
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //     Dimens.boxHeight10,
+  //   ]);
+  // }
 
   Widget _buildDateTimeField_web(
     BuildContext context,
@@ -2357,9 +2352,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Obx(
             () => Container(
               padding: Dimens.edgeInsets05_0_5_0,
@@ -2411,9 +2403,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-          var width = MediaQuery.of(context).size.width;
-
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: Responsive.isDesktop(context) ? 100 : 120,
