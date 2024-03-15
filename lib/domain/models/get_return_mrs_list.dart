@@ -23,6 +23,7 @@ class ReturnMrsListModel {
   String? activity;
   int? whereUsedType;
   int? whereUsedTypeId;
+  int? issplitted;
   String? remarks;
   List<CmmsItems>? cmmrsItems;
 
@@ -42,6 +43,7 @@ class ReturnMrsListModel {
       this.status_short,
       this.whereUsedType,
       this.whereUsedTypeId,
+      this.issplitted,
       this.remarks,
       this.status_long});
 
@@ -63,7 +65,8 @@ class ReturnMrsListModel {
       requested_by_name: parsedJson['requested_by_name'],
       returnDate: parsedJson['returnDate'],
       status_short: parsedJson['status_short'],
-      whereUsedTypeId: parsedJson['whereUsedTypeId'],
+      whereUsedTypeId: parsedJson['whereUsedRefID'],
+      issplitted: parsedJson['is_splited'],
       cmmrsItems: cmmrsItems,
       status: parsedJson['status'],
       whereUsedType: parsedJson['whereUsedType'],
@@ -83,7 +86,8 @@ class ReturnMrsListModel {
         "requested_by_name": requested_by_name,
         "returnDate": returnDate,
         "status_short": status_short,
-        "whereUsedTypeId": whereUsedTypeId,
+        "whereUsedRefID": whereUsedTypeId,
+        "is_splited": issplitted,
         "status": status,
         "whereUsedType": whereUsedType,
         "remarks": remarks,

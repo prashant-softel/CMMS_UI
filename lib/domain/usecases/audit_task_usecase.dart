@@ -8,9 +8,10 @@ class AuditTaskUsecase {
   Future<List<PmTaskListModel?>?> getAuditTaskList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getAuditTaskList(
-          facilityId, isLoading, startDate, endDate);
+          facilityId, isLoading,isExport, startDate, endDate);
   void clearValue() async => repository.clearData(LocalKeys.auditTaskId);
 }

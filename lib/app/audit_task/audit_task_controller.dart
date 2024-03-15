@@ -105,7 +105,7 @@ class AuditTaskController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         getAuditTaskList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
+            facilityId, formattedTodate1, formattedFromdate1, false,false);
       });
       // isDataLoading.value = false;
 
@@ -130,12 +130,13 @@ class AuditTaskController extends GetxController {
   }
 
   Future<void> getAuditTaskList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+      dynamic endDate, bool isLoading, bool isExport) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await auditTaskPresenter.getAuditTaskList(
         facilityId: facilityId,
         isLoading: isLoading,
+        isExport: isExport,
         startDate: startDate,
         endDate: endDate);
     if (_pmTaskList != null) {
@@ -145,10 +146,13 @@ class AuditTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false,false);
   }
 
   void clearStoreData() {
     auditTaskPresenter.clearValue();
+  }
+  void export() {
+    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false, true);
   }
 }

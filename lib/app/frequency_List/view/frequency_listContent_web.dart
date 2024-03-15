@@ -450,7 +450,7 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                   }
                                                 });
                                               },
-                                              text: 'Create Frequency List')
+                                              text: 'Create Frequency')
                                           : CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
@@ -500,9 +500,6 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                   "Frequency List",
                                   style: Styles.blackBold16,
                                 ),
-                              ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
                               ),
                               Row(
                                 children: [
@@ -554,220 +551,134 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                               ),
                               controller.frequencyList!.isEmpty
                                   ? Expanded(
-                                      child: ScrollableTableView(
-                                        columns: [
-                                          "Id",
-                                          "Name ",
-                                          "Days",
-                                          "Status ",
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            label: column,
-                                            minWidth: Get.width * 0.16,
-                                          );
-                                        }).toList(),
-                                        rows: [
-                                          ...List.generate(
+                                      child: Obx(
+                                        () => DataTable2(
+                                          key: UniqueKey(),
+                                          dataRowHeight: 50,
+                                          columnSpacing: 10,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  "Id",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Name",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Days",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: List.generate(
                                             controller.frequencyList?.length ??
                                                 0,
                                             (index) {
-                                              return [
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                              ];
-                                            },
-                                          ),
-                                        ].map((record) {
-                                          return TableViewRow(
-                                            height: 60,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text(value),
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(Text('')),
+                                                  DataCell(Text('')),
+                                                  DataCell(Text('')),
+                                                  DataCell(Text('')),
+                                                ],
                                               );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
+                                            },
+                                          ).toList(),
+                                        ),
                                       ),
                                     )
                                   : Expanded(
-                                      child: ScrollableTableView(
-                                        paginationController:
-                                            controller.paginationController,
-                                        columns: [
-                                          "Id",
-                                          "Name",
-                                          "Days",
-                                          "Status"
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.12,
-                                            label: column,
-                                          );
-                                        }).toList(),
-                                        rows: //
-                                            [
-                                          ...List.generate(
+                                      child: Obx(
+                                        () => DataTable2(
+                                          key: UniqueKey(),
+                                          dataRowHeight: 50,
+                                          columnSpacing: 10,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  "Id",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Name",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Days",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 100,
+                                                label: Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: List.generate(
                                             controller.frequencyList?.length ??
                                                 0,
                                             (index) {
                                               var frequencyListModelListDetails =
                                                   controller
                                                       .frequencyList?[index];
-                                              return [
-                                                '${frequencyListModelListDetails?.id}',
-                                                '${frequencyListModelListDetails?.name}',
-                                                '${frequencyListModelListDetails?.days}',
-                                                '${frequencyListModelListDetails?.status}',
-                                              ];
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(Text(
+                                                      '${frequencyListModelListDetails?.id}')),
+                                                  DataCell(Text(
+                                                      '${frequencyListModelListDetails?.name}')),
+                                                  DataCell(Text(
+                                                      '${frequencyListModelListDetails?.days}')),
+                                                  DataCell(Text(
+                                                      '${frequencyListModelListDetails?.status}')),
+                                                ],
+                                              );
                                             },
-                                          ),
-                                        ].map((_preventiveCheckList) {
-                                          return TableViewRow(
-                                              height: 45,
-                                              cells: _preventiveCheckList
-                                                  .map((value) {
-                                                return TableViewCell(
-                                                    child: (value == 'No')
-                                                        ? CustomSwitchTroggle(
-                                                            value: value == 'No'
-                                                                ? true
-                                                                : false,
-                                                            onChanged:
-                                                                (value) {},
-                                                          )
-                                                        : (value == "Action")
-                                                            ? Wrap(children: [
-                                                                varUserAccessModel
-                                                                            .value
-                                                                            .access_list!
-                                                                            .where((e) =>
-                                                                                e.feature_id == 5 &&
-                                                                                e.edit == 0)
-                                                                            .length >
-                                                                        0
-                                                                    ? TableActionButton(
-                                                                        color: ColorValues
-                                                                            .appLightBlueColor,
-                                                                        icon: Icons
-                                                                            .edit,
-                                                                        message:
-                                                                            'Edit',
-                                                                        onPress:
-                                                                            () {
-                                                                          controller.selectedItem = controller.frequencyList!.firstWhere((element) =>
-                                                                              "${element?.id}" ==
-                                                                              _preventiveCheckList[0]);
-
-                                                                          // controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
-                                                                          // controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
-                                                                          // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                          // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                          // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                          // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                          // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
-                                                                        },
-                                                                      )
-                                                                    : Container(),
-                                                                varUserAccessModel
-                                                                            .value
-                                                                            .access_list!
-                                                                            .where((e) =>
-                                                                                e.feature_id == 5 &&
-                                                                                e.delete == 0)
-                                                                            .length >
-                                                                        0
-                                                                    ? TableActionButton(
-                                                                        color: ColorValues
-                                                                            .appRedColor,
-                                                                        icon: Icons
-                                                                            .delete,
-                                                                        message:
-                                                                            'Delete',
-                                                                        onPress:
-                                                                            () {
-                                                                          print(
-                                                                              _preventiveCheckList[0]);
-                                                                          // controller.isDeleteDialog(checklist_id: _preventiveCheckList[0], checklist: _preventiveCheckList[1]);
-                                                                        },
-                                                                      )
-                                                                    : Container()
-                                                              ])
-                                                            : Text(
-                                                                value,
-                                                              ));
-                                              }).toList());
-                                        }).toList(),
+                                          ).toList(),
+                                        ),
                                       ),
                                     ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: ValueListenableBuilder(
-                                    valueListenable:
-                                        controller.paginationController,
-                                    builder: (context, value, child) {
-                                      return Row(children: [
-                                        Text(
-                                            "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                        Row(children: [
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .previous();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_back_ios_new_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .next();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                        ]),
-                                      ]);
-                                    }),
-                              ),
                             ],
                           ),
                         ),

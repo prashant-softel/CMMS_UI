@@ -27,7 +27,9 @@ class PmTaskListModel {
   String? permit_code;
   int? status;
   int? ptwstat;
-  String? status_short;
+  dynamic? status_short;
+  int? ptw_tbt_done;
+  String? ptw_shortstatus;
   PmTaskListModel(
       {this.assigned_to_id,
       this.assigned_to_name,
@@ -46,6 +48,8 @@ class PmTaskListModel {
       this.status,
       this.ptwstat,
       this.status_short,
+      this.ptw_tbt_done,
+      this.ptw_shortstatus,
       this.task_code});
 
   factory PmTaskListModel.fromJson(Map<String, dynamic> json) =>
@@ -74,11 +78,14 @@ class PmTaskListModel {
             ? json['last_done_date']
             : Utility.getFormatedyearMonthDay(json['last_done_date']),
         name: json['plan_title'] ?? '',
+        ptw_shortstatus: json['status_short_ptw'] ?? '',
+        ptw_tbt_done: json['ptw_tbt_done'] ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "category_id": category_id,
+        "facility_id": facility_id,
         "category_name": category_name,
         "frequency_id": frequency_id,
         "task_code": task_code,
@@ -88,6 +95,8 @@ class PmTaskListModel {
         "ptw_status": ptwstat,
         "permit_id": permit_id,
         "status": status,
+        "status_short_ptw": ptw_shortstatus,
+        "ptw_tbt_done": ptw_tbt_done,
         "status_short": status_short,
         "last_done_date": last_done_date,
         "plan_title": name,
