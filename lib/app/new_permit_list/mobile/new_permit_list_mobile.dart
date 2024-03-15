@@ -141,7 +141,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     child: Text(
                                       '${newPermitListModel?.permitTypeName ?? 'Unassigned'}',
                                       style: const TextStyle(
-                                        color: ColorValues.blackColor,
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorValues.navyBlueColor,
                                       ),
                                     ),
                                   ),
@@ -161,8 +162,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                         '${newPermitListModel?.workingAreaName ?? ''}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromARGB(255, 239, 87, 27),
+                                          color: ColorValues.navyBlueColor,
                                         ),
                                       ),
                                     )
@@ -174,14 +174,17 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                       child: Text(
                                         'Description: ',
                                         style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                          color: ColorValues.blackColor,
                                         ),
                                       ),
                                     ),
                                     Expanded(
                                       child: Text(
                                         newPermitListModel?.description ?? '',
-                                        style: const TextStyle(),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorValues.navyBlueColor,
+                                        ),
                                       ),
                                     )
                                   ],
@@ -192,7 +195,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                       child: Text(
                                         'Equipment: ',
                                         style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                          color: ColorValues.blackColor,
                                         ),
                                       ),
                                     ),
@@ -203,6 +206,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                             '',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
+                                          color: ColorValues.navyBlueColor,
                                         ),
                                       ),
                                     )
@@ -212,18 +216,23 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'Work Area Name: ',
-                                        style: TextStyle(
-                                          color: Colors.blue.shade900,
-                                          fontWeight: FontWeight.w600,
+                                      Expanded(
+                                        child: Text(
+                                          'Work Area Name: ',
+                                          style: const TextStyle(
+                                            color: ColorValues.blackColor,
+                                          ),
                                         ),
                                       ),
-                                      Dimens.boxWidth10,
                                       Expanded(
-                                        child: Text(newPermitListModel
-                                                ?.workingAreaName ??
-                                            ''),
+                                        child: Text(
+                                          newPermitListModel?.workingAreaName ??
+                                              '',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorValues.navyBlueColor,
+                                          ),
+                                        ),
                                       ),
                                     ]),
                                 Row(
@@ -231,7 +240,9 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                     Expanded(
                                       child: Text(
                                         'Approved Time: ',
-                                        style: TextStyle(color: Colors.grey),
+                                        style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                        ),
                                       ),
                                     ),
                                     Flexible(
@@ -242,7 +253,10 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                 .format(newPermitListModel!
                                                     .approvedDatetime!)
                                             : '',
-                                        style: TextStyle(color: Colors.grey),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorValues.navyBlueColor,
+                                        ),
                                       ),
                                     ),
                                   ],

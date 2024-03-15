@@ -1,4 +1,6 @@
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
+import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
@@ -18,9 +20,11 @@ class JobListScreen extends GetView<JobListController> {
       child: Scaffold(
         appBar: (Responsive.isMobile(context) || Responsive.isDesktop(context))
             ? AppBar(
-                title: Text('Job List'),
-                centerTitle: true,
-                elevation: 0,
+                title: HeadingProfileAppBar(
+                  title: "Job List",
+                ),
+
+                // centerTitle: true,
               )
             : null,
         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
@@ -50,9 +54,7 @@ class JobListScreen extends GetView<JobListController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: JobListContentMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(
