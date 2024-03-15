@@ -9,6 +9,7 @@ import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 import 'package:cmms/app/add_job/views/widgets/work_type_widget.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/save_job_button_widget.dart';
@@ -20,9 +21,22 @@ class AddJobContentMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return //
         SingleChildScrollView(
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Dimens.boxHeight10,
         HeaderWidgetMobile(),
-        Dimens.boxHeight15,
+        Dimens.boxHeight10,
+        Container(
+          margin: EdgeInsets.only(left: 30, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Add Job",
+                style: Styles.blackBold18,
+              ),
+            ],
+          ),
+        ),
         Card(
           color: Colors.lightBlue.shade50,
           elevation: 10,

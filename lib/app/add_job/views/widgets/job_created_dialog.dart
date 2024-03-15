@@ -23,7 +23,7 @@ class JobCreatedDialog extends GetView<AddJobController> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
+      insetPadding: Dimens.edgeInsets00_04_04_04,
       contentPadding: EdgeInsets.zero,
       title: Text(
         'Job Saved',
@@ -32,7 +32,7 @@ class JobCreatedDialog extends GetView<AddJobController> {
       content: Builder(builder: (context) {
         return Container(
           padding: Dimens.edgeInsets05_0_5_0,
-          height: Get.height / 6,
+          height: Get.height / 5,
           width: double.infinity,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch, //
@@ -41,18 +41,20 @@ class JobCreatedDialog extends GetView<AddJobController> {
                   color: ColorValues.greyLightColour,
                   thickness: 1,
                 ),
-                Dimens.boxHeight20,
-                Center(child: Text(message ?? '')),
-                Dimens.boxHeight25,
+                Dimens.boxHeight10,
+                Text(
+                  message ?? '',
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Dimens.boxHeight10,
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //
                     children: [
                       ElevatedButton(
-                        style: Styles.greenElevatedButtonStyle,
+                        style: Styles.navyBlueElevatedButtonStyle,
                         onPressed: () => controller.goToJobListScreen(),
                         child: const Text('Job List'),
                       ),
-                      Dimens.boxWidth10,
                       ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
                         onPressed: () {
@@ -60,9 +62,8 @@ class JobCreatedDialog extends GetView<AddJobController> {
                         },
                         child: const Text('View Job'),
                       ),
-                      Dimens.boxWidth10,
                       ElevatedButton(
-                        style: Styles.redElevatedButtonStyle,
+                        style: Styles.greenElevatedButtonStyle,
                         onPressed: () => controller.goToAddJobScreen(),
                         child: const Text('Add New Job'),
                       ),
