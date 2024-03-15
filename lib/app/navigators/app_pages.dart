@@ -139,6 +139,8 @@ import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_mis_plan/view/view_mis_plan_screen.dart';
 import 'package:cmms/app/view_mis_plan/view_mis_plan_binding.dart';
+import 'package:cmms/app/view_permit/new_view_permit_binding.dart';
+import 'package:cmms/app/view_permit/view/view_permit_screen.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
@@ -182,7 +184,7 @@ import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_screen.da
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_binding.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
-import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
+import 'package:cmms/app/view_permit/view/web/anas_view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
 import 'package:cmms/app/new_permit/anas_new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/anas_new_permit_screen.dart';
@@ -554,10 +556,15 @@ class AppPages {
         page: WarrantyClaimListScreen.new,
         binding: WarrantyClaimBinding()),
 
+    // GetPage<dynamic>(
+    //     name: _Paths.viewPermitWebScreen,
+    //     page: ViewPermitWebScreen.new,
+    //     binding: ViewPermitBinding()),
+        
     GetPage<dynamic>(
-        name: _Paths.viewPermitWebScreen,
-        page: ViewPermitWebScreen.new,
-        binding: ViewPermitBinding()),
+        name: _Paths.viewPermitScreen,
+        page: ViewPermitScreen.new,
+        binding: NewViewPermitBinding()),
 
     GetPage<dynamic>(
         name: _Paths.masterDashboard,

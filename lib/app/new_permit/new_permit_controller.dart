@@ -1730,7 +1730,7 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
+    Get.toNamed(Routes.viewPermitScreen, arguments: {"permitId": permitId});
   }
 
   Future<void> viewJobDetails() async {

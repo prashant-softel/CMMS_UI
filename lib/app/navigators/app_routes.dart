@@ -57,6 +57,7 @@ abstract class Routes {
   static const pmExecution = _Paths.pmExecution;
   static const pmExecutionView = _Paths.pmExecutionView;
   static const viewPermitWebScreen = _Paths.viewPermitWebScreen;
+  static const viewPermitScreen = _Paths.viewPermitScreen;
   static const permitTypeScreen = _Paths.permitTypeScreen;
   static const masterDashboard = _Paths.masterDashboard;
   static const pmTaskView = _Paths.pmTaskView;
@@ -267,6 +268,7 @@ abstract class _Paths {
   static const pmExecution = '/pm-execution-screen';
   static const pmExecutionView = '/pm-execution-view-screen';
   static const viewPermitWebScreen = '/view-permit-web-screen';
+  static const viewPermitScreen = '/view-permit';
   static const permitTypeScreen = '/permit-type-screen';
   static const masterDashboard = '/master-dashboard';
   static const pmTaskView = '/pm-task-view-screen';
