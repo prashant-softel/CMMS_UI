@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/heading_profile_app_bar.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,17 +18,14 @@ class AddJobScreen extends GetView<AddJobController> {
       child: Scaffold(
         appBar: Responsive.isMobile(context) || Responsive.isTablet(context)
             ? AppBar(
-                title: Text(
-                  "Add Job",
-                  style: Styles.blackBold14,
+                title: HeadingProfileAppBar(
+                  title: "Add Job",
                 ),
-                centerTitle: true,
-                elevation: 0,
               )
             : null,
-         drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? HomeDrawerMobile() //ResponsiveSideMenu()
-          : null,
+        drawer: (Responsive.isMobile(context) || Responsive.isTablet(context))
+            ? HomeDrawerMobile() //ResponsiveSideMenu()
+            : null,
         body: Stack(
           children: [
             AnimatedContainer(
