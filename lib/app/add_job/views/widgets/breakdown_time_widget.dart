@@ -1,34 +1,27 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class BreakdownTimeWidget extends StatelessWidget {
+class BreakdownTimeWidget extends StatefulWidget {
   BreakdownTimeWidget({super.key});
+  @override
+  State<BreakdownTimeWidget> createState() => _BreakdownTimeWidgetState();
+}
 
-  ///
+class _BreakdownTimeWidgetState extends State<BreakdownTimeWidget> {
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
-    return Column(//
+    return Column(
+      crossAxisAlignment : CrossAxisAlignment.start,
         children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: RichText(
-          text: TextSpan(
-              text: 'Breakdown Time: ',
-              style: Styles.blackBold16,
-              children: []),
-        ),
-      ),
-      Dimens.boxHeight5,
+      CustomRichTextMobile(title: 'Breakdown TIme: '),
+      Dimens.boxHeight2,
       Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -79,11 +72,10 @@ class BreakdownTimeWidget extends StatelessWidget {
           onChanged: (value) {},
         ),
       ),
-      Dimens.boxHeight20,
+      Dimens.boxHeight15,
     ]);
   }
 
-  ///
   Future pickDateTime(BuildContext context) async {
     var dateTime = controller.selectedBreakdownTime.value;
     final date = await pickDate(context);
@@ -148,6 +140,4 @@ class BreakdownTimeWidget extends StatelessWidget {
 
     return newTime;
   }
-
-  ///
 }

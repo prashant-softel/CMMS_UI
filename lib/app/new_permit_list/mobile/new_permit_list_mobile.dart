@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
@@ -21,6 +22,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Column(
               children: [
+                HeaderWidgetMobile(),
+                Dimens.boxHeight10,
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -107,6 +110,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           child: Center(
                                             child: Text(
                                               status,
+                                              overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                               ),
@@ -114,15 +118,15 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           ),
                                         ),
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          _showPopupMenu(context);
-                                        },
-                                        child: Image.asset(
-                                          'assets/files/menu_vertical.png',
-                                          width: 40,
-                                        ),
-                                      ),
+                                      // GestureDetector(
+                                      //   onTap: () {
+                                      //     _showPopupMenu(context);
+                                      //   },
+                                      //   child: Image.asset(
+                                      //     'assets/files/menu_vertical.png',
+                                      //     width: 40,
+                                      //   ),
+                                      // ),
                                     ]),
                                 Row(children: [
                                   Expanded(
@@ -144,6 +148,14 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                 ]),
                                 Row(
                                   children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Working Area Name: ',
+                                        style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                        ),
+                                      ),
+                                    ),
                                     Expanded(
                                       child: Text(
                                         '${newPermitListModel?.workingAreaName ?? ''}',
@@ -207,6 +219,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                      Dimens.boxWidth10,
                                       Expanded(
                                         child: Text(newPermitListModel
                                                 ?.workingAreaName ??
@@ -277,125 +290,126 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
     );
   }
 
-  void _showPopupMenu(BuildContext context) {
-    final RenderBox overlay =
-        Overlay.of(context).context.findRenderObject() as RenderBox;
+  // void _showPopupMenu(BuildContext context) {
+  //   final RenderBox overlay =
+  //       Overlay.of(context).context.findRenderObject() as RenderBox;
 
-    final RelativeRect position = RelativeRect.fromRect(
-      Rect.fromPoints(
-        Offset(360, 360),
-        Offset(130, 130),
-      ),
-      Offset.zero & overlay.size,
-    );
+  //   final RelativeRect position = RelativeRect.fromRect(
+  //     Rect.fromPoints(
+  //       Offset(360, 360),
+  //       Offset(130, 130),
+  //     ),
+  //     Offset.zero & overlay.size,
+  //   );
 
-    showMenu(
-      context: context,
-      position: position,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      items: <PopupMenuEntry>[
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.editColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "VIEW",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.appDarkBlueColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "Extend",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            title: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorValues.cancelColor,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 5,
-              ),
-              child: Center(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.close,
-                    ),
-                    Dimens.boxWidth10,
-                    Text(
-                      "CLOSE",
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-      ],
-    );
-  }
+  //   showMenu(
+  //     context: context,
+  //     position: position,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.circular(10.0),
+  //     ),
+  //     items: <PopupMenuEntry>[
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.editColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.remove_red_eye_outlined,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "VIEW",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             var _newPermitListId = newPermitListModel?.permitId ?? 0;
+  //             controller.editNewPermit(permitId: _newPermitListId);
+  //           },
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.appDarkBlueColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.access_time,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "Extend",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             Navigator.pop(context);
+  //           },
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         child: ListTile(
+  //           title: Container(
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: ColorValues.cancelColor,
+  //             ),
+  //             padding: const EdgeInsets.symmetric(
+  //               horizontal: 10,
+  //               vertical: 5,
+  //             ),
+  //             child: Center(
+  //               child: Row(
+  //                 children: [
+  //                   Icon(
+  //                     Icons.close,
+  //                   ),
+  //                   Dimens.boxWidth10,
+  //                   Text(
+  //                     "CLOSE",
+  //                     style: const TextStyle(
+  //                       color: Colors.white,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //           onTap: () {
+  //             Navigator.pop(context);
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

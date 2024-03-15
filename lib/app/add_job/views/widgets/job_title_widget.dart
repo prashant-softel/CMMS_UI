@@ -1,44 +1,28 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class JobTitleWidget extends StatelessWidget {
+class JobTitleWidget extends StatefulWidget {
   JobTitleWidget({super.key});
+  @override
+  State<JobTitleWidget> createState() => _JobTitleWidgetState();
+}
 
-  ///
+class _JobTitleWidgetState extends State<JobTitleWidget> {
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
-    return //
-        Obx(
-      () => //
-          Column(//
-              children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: RichText(
-            text: TextSpan(
-                text: 'Job Title: ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-          ),
-        ),
-        Dimens.boxHeight5,
+    return Obx(
+      () => Column(
+        crossAxisAlignment : CrossAxisAlignment.start,
+        children: [
+        CustomRichTextMobile(title: 'Job Title: '),
+        Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -109,7 +93,7 @@ class JobTitleWidget extends StatelessWidget {
             },
           ),
         ),
-        Dimens.boxHeight20,
+        Dimens.boxHeight15,
       ]),
     );
   }

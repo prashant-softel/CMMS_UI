@@ -1,3 +1,4 @@
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -6,38 +7,22 @@ import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class WorkTypeWidget extends StatelessWidget {
+class WorkTypeWidget extends StatefulWidget {
   WorkTypeWidget({super.key});
+  @override
+  State<WorkTypeWidget> createState() => _WorkTypeWidgetState();
+}
 
-  ///
+class _WorkTypeWidgetState extends State<WorkTypeWidget> {
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
-    return //
-        Obx(
-      () => //
-          Column(//
-              children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: RichText(
-            text: TextSpan(
-                text: 'Work Type: ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-          ),
-        ),
-        Dimens.boxHeight5,
+    return Obx(
+      () => Column(
+        crossAxisAlignment : CrossAxisAlignment.start,
+        children: [
+        CustomRichTextMobile(title: 'Work Type: '),
+        Dimens.boxHeight2,
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           decoration: BoxDecoration(
@@ -94,7 +79,7 @@ class WorkTypeWidget extends StatelessWidget {
             chipDisplay: MultiSelectChipDisplay(),
           ),
         ),
-        Dimens.boxHeight20,
+        Dimens.boxHeight15,
       ]),
     );
   }

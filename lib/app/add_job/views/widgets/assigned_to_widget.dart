@@ -1,42 +1,29 @@
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
-class AssignedToWidget extends StatelessWidget {
+class AssignedToWidget extends StatefulWidget {
   AssignedToWidget({super.key});
+  @override
+  State<AssignedToWidget> createState() => _AssignedToWidgetState();
+}
 
+class _AssignedToWidgetState extends State<AssignedToWidget> {
   ///
   var controller = Get.find<AddJobController>();
-
-  ///
   @override
   Widget build(BuildContext context) {
     return //
         Obx(
-      () => Column(//
+      () => Column(
+        crossAxisAlignment : CrossAxisAlignment.start,
           children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: RichText(
-            text: TextSpan(
-                text: 'Assigned To: ',
-                style: Styles.blackBold16,
-                children: [
-                  // TextSpan(
-                  //   text: '*',
-                  //   style: TextStyle(
-                  //     color: ColorValues.orangeColor,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
-                ]),
-          ),
-        ),
-        Dimens.boxHeight5,
+        CustomRichTextMobile(title: 'Assigned To: '),
+        Dimens.boxHeight2,
         DropdownWebWidget(
           boxShadow: [
             BoxShadow(
@@ -61,7 +48,7 @@ class AssignedToWidget extends StatelessWidget {
           selectedValue: controller.selectedAssignedTo.value,
           onValueChanged: controller.onDropdownValueChanged,
         ),
-        Dimens.boxHeight20,
+        Dimens.boxHeight15,
       ]),
     );
   }

@@ -40,23 +40,23 @@ class FileUploadDetailsWidgetMobile extends StatelessWidget {
                         isExpanded ? Get.height * 0.5 : Get.height * 0.2;
                   },
                   children: [
-                    ListTile(
-                      leading: Text('Event'),
-                      title: DropdownButton<FileUploadEvents>(
-                        isExpanded: true,
-                        value: _fileUploadController.selectedEvent.value,
-                        onChanged: (FileUploadEvents? newValue) {
-                          _fileUploadController.setSelectedEvent(
-                              newValue ?? FileUploadEvents.BEFORE);
-                        },
-                        items: FileUploadEvents.values.map((event) {
-                          return DropdownMenuItem<FileUploadEvents>(
-                            value: event,
-                            child: Text(event.toString().split('.').last),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+                    // ListTile(
+                    //   leading: Text('Event'),
+                    //   title: DropdownButton<FileUploadEvents>(
+                    //     isExpanded: true,
+                    //     value: _fileUploadController.selectedEvent.value,
+                    //     onChanged: (FileUploadEvents? newValue) {
+                    //       _fileUploadController.setSelectedEvent(
+                    //           newValue ?? FileUploadEvents.BEFORE);
+                    //     },
+                    //     items: FileUploadEvents.values.map((event) {
+                    //       return DropdownMenuItem<FileUploadEvents>(
+                    //         value: event,
+                    //         child: Text(event.toString().split('.').last),
+                    //       );
+                    //     }).toList(),
+                    //   ),
+                    // ),
                     ListTile(
                       leading: Text('Description'),
                       title: TextFormField(
@@ -129,7 +129,12 @@ class FileUploadDetailsWidgetMobile extends StatelessWidget {
                     ),
                     ListTile(
                       leading: Text('Status'),
-                      title: Text('-'),
+                      title: Text(
+                        '${(_fileUploadController.progresses.value.length > pickedFileIndex ? "Done" : 'Pending')}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                     ListTile(
                       leading: Text('Remove'),
