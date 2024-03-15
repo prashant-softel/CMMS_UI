@@ -8,8 +8,7 @@ import 'package:cmms/domain/usecases/home_usecase.dart';
 import 'package:cmms/domain/usecases/job_list_usecase.dart';
 import 'package:get/get.dart';
 
-
-class ViewPermitBinding extends Bindings {
+class NewViewPermitBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(

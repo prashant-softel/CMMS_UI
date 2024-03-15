@@ -383,7 +383,7 @@ class NewPermitListController extends GetxController {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
-    Get.toNamed(Routes.viewPermitWebScreen,
+    Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "types": 1});
   }
 
@@ -391,7 +391,7 @@ class NewPermitListController extends GetxController {
     clearStoreData();
     clearTypeStoreData();
     clearisCheckedtoreData();
-    Get.toNamed(Routes.viewPermitWebScreen,
+    Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "types": 0});
   }
 
@@ -401,7 +401,7 @@ class NewPermitListController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.viewPermitWebScreen,
+    Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "types": 0});
   }
 
@@ -411,7 +411,7 @@ class NewPermitListController extends GetxController {
     clearisCheckedtoreData();
     clearjobmodelValue();
     clearpmTaskValue();
-    Get.toNamed(Routes.viewPermitWebScreen,
+    Get.toNamed(Routes.viewPermitScreen,
         arguments: {"permitId": permitId, "types": 0});
   }
 
