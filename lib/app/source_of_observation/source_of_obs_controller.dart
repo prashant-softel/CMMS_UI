@@ -22,6 +22,7 @@ class SourceOfObsController extends GetxController {
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
+  RxBool isContainerVisible = false.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxBool isCheckedRequire = false.obs;
@@ -38,7 +39,9 @@ class SourceOfObsController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-
+void toggleContainer() {
+    isContainerVisible.toggle();
+  }
 
   ModuleListModel? moduleListModel;
   var isToggleOn = false.obs;
@@ -78,6 +81,11 @@ class SourceOfObsController extends GetxController {
   Rx<bool> isSelectedfrequency = true.obs;
   var modulelistNumberCtrlr = TextEditingController();
   var featureCtrlr = TextEditingController();
+  Rx<bool> isTitleInvalid = false.obs;
+  FocusNode rdescFocus = FocusNode();
+  ScrollController rdescScroll = ScrollController();
+  FocusNode rnameFocus = FocusNode();
+  ScrollController rnameScroll = ScrollController();
   ModuleListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
@@ -87,6 +95,16 @@ class SourceOfObsController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getModuleList(facilityId, type, true);
+      });
+      rnameFocus.addListener(() {
+        if (!rnameFocus.hasFocus) {
+          rnameScroll.jumpTo(0.0);
+        }
+      });
+      rdescFocus.addListener(() {
+        if (!rdescFocus.hasFocus) {
+          rdescScroll.jumpTo(0.0);
+        }
       });
     });
     super.onInit();
