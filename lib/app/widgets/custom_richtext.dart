@@ -1,9 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 
-class CustomRichText extends StatelessWidget {
-  String title;
-  int? maxline;
+class CustomRichText extends StatefulWidget {
+  final String title;
+  final int? maxline;
 
   CustomRichText({
     super.key,
@@ -12,10 +12,15 @@ class CustomRichText extends StatelessWidget {
   });
 
   @override
+  State<CustomRichText> createState() => _CustomRichTextState();
+}
+
+class _CustomRichTextState extends State<CustomRichText> {
+  @override
   Widget build(BuildContext context) {
     return RichText(
-      maxLines: maxline,
-      text: TextSpan(text: title, style: Styles.blackBold16, children: [
+      maxLines: widget.maxline,
+      text: TextSpan(text: widget.title, style: Styles.blackBold16, children: [
         TextSpan(
           text: '*',
           style: TextStyle(
@@ -28,9 +33,9 @@ class CustomRichText extends StatelessWidget {
   }
 }
 
-class CustomRichTextMobile extends StatelessWidget {
-  String title;
-  int? maxline;
+class CustomRichTextMobile extends StatefulWidget {
+  final String title;
+  final int? maxline;
 
   CustomRichTextMobile({
     super.key,
@@ -39,11 +44,16 @@ class CustomRichTextMobile extends StatelessWidget {
   });
 
   @override
+  State<CustomRichTextMobile> createState() => _CustomRichTextMobileState();
+}
+
+class _CustomRichTextMobileState extends State<CustomRichTextMobile> {
+  @override
   Widget build(BuildContext context) {
     return RichText(
-      maxLines: maxline,
+      maxLines: widget.maxline,
       text: TextSpan(
-          text: title,
+          text: widget.title,
           style: TextStyle(
             color: ColorValues.blackColor,
             fontSize: Dimens.fourteen,
