@@ -183,8 +183,6 @@ import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_binding.d
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_screen.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_binding.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_screen.dart';
-import 'package:cmms/app/view_permit/view_permit_binding.dart';
-import 'package:cmms/app/view_permit/view/web/anas_view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
 import 'package:cmms/app/new_permit/anas_new_permit_binding.dart';
 import 'package:cmms/app/new_permit/view/anas_new_permit_screen.dart';

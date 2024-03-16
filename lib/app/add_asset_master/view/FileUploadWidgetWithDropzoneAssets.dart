@@ -10,15 +10,22 @@ import '../../utils/responsive.dart';
 import '../add_asset_master_controller.dart';
 
 ///
-class FileUploadWidgetWithDropzoneAssets extends StatelessWidget {
+class FileUploadWidgetWithDropzoneAssets extends StatefulWidget {
   ///
   FileUploadWidgetWithDropzoneAssets({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<FileUploadWidgetWithDropzoneAssets> createState() => _FileUploadWidgetWithDropzoneAssetsState();
+}
+
+class _FileUploadWidgetWithDropzoneAssetsState extends State<FileUploadWidgetWithDropzoneAssets> {
   ///
   final FileUploadController controller = Get.find<FileUploadController>();
+
   final AddAssetMasterController controllerAssets = Get.find<AddAssetMasterController>();
+
   late DropzoneViewController dzvcontroller;
 
   ///
@@ -206,6 +213,4 @@ class FileUploadWidgetWithDropzoneAssets extends StatelessWidget {
                 ),
     );
   }
-
-  ///
 }
