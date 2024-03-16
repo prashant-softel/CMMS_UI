@@ -24,8 +24,11 @@ class ModuleCleaningListPlanModel {
   int? approvedById;
   dynamic approvedBy;
   String? approvedAt;
+  String? startDate;
+  String? assigned_to;
   dynamic deletedBy;
   int? status;
+  int? assigned_id;
   String? status_short;
   dynamic status_long;
   dynamic schedules;
@@ -42,6 +45,9 @@ class ModuleCleaningListPlanModel {
     this.createdById,
     this.createdBy,
     this.createdAt,
+    this.startDate,
+    this.assigned_to,
+    this.assigned_id,
     this.approvedById,
     this.approvedBy,
     this.approvedAt,
@@ -66,6 +72,9 @@ class ModuleCleaningListPlanModel {
       createdById: json['createdById'],
       createdBy: json['createdBy'],
       createdAt: Utility.getFormatedyearMonthDay(json['createdAt']),
+      startDate: Utility.getFormatedyearMonthDay(json['startDate']),
+      assigned_id: json['assignedToId'],
+      assigned_to: json['assignedTo'],
       approvedById: json['approvedById'],
       approvedBy: json['approvedBy'] ?? "",
       approvedAt: Utility.getFormatedyearMonthDay(json['approvedAt']),
@@ -89,6 +98,10 @@ class ModuleCleaningListPlanModel {
     data['noOfCleaningDays'] = this.noOfCleaningDays;
     data['createdById'] = this.createdById;
     data['createdBy'] = this.createdBy;
+    data['assignedToId'] = this.assigned_id;
+    data['assignedTo'] = this.assigned_to;
+    data['assignedTo'] = this.assigned_to;
+    data['startDate'] = this.startDate;
     data['createdAt'] = this.createdAt;
     data['approvedById'] = this.approvedById;
     data['approvedBy'] = this.approvedBy;

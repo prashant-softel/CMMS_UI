@@ -15,9 +15,11 @@ class MrsListModel {
   String? approval_date;
   int? approval_status;
   dynamic approval_comment;
+  dynamic remarks;
   dynamic requested_by_name;
   int? status;
   String? status_short;
+  String? status_long;
   String? activity;
   String? whereUsedType;
   int? whereUsedTypeId;
@@ -26,6 +28,7 @@ class MrsListModel {
   MrsListModel(
       {this.activity,
       this.approval_comment,
+      this.remarks,
       this.approval_date,
       this.approval_status,
       this.approver_name,
@@ -37,6 +40,7 @@ class MrsListModel {
       this.returnDate,
       this.status,
       this.status_short,
+      this.status_long,
       this.whereUsedType,
       this.whereUsedTypeId});
 
@@ -49,6 +53,7 @@ class MrsListModel {
     return MrsListModel(
       activity: parsedJson['activity'],
       approval_comment: parsedJson['approval_comment'],
+      remarks: parsedJson['remarks'],
       approval_date: parsedJson['approval_date'],
       approval_status: parsedJson['approval_status'],
       approver_name: parsedJson['approver_name'],
@@ -58,6 +63,7 @@ class MrsListModel {
       requested_by_name: parsedJson['requested_by_name'],
       returnDate: parsedJson['returnDate'],
       status_short: parsedJson['status_short'],
+      status_long: parsedJson['status_long'],
       whereUsedTypeId: parsedJson['whereUsedRefID'],
       cmmrsItems: cmmrsItems,
       status: parsedJson['status'],
@@ -67,6 +73,7 @@ class MrsListModel {
   Map<String, dynamic> toJson() => {
         "activity": activity,
         "approval_comment": approval_comment,
+        "remarks": remarks,
         "approval_date": approval_date,
         "approval_status": approval_status,
         "approver_name": approver_name,
@@ -76,6 +83,7 @@ class MrsListModel {
         "requested_by_name": requested_by_name,
         "returnDate": returnDate,
         "status_short": status_short,
+        "status_long": status_long,
         "whereUsedRefID": whereUsedTypeId,
         "status": status,
         "whereUsedTypeName": whereUsedType,

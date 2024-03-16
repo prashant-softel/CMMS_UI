@@ -6604,8 +6604,12 @@ class Repository {
     }
   }
 
-  Future<List<PmTaskListModel?>?> getAuditTaskList(int? facilityId,
-      bool? isLoading, dynamic startDate, dynamic endDate) async {
+  Future<List<PmTaskListModel?>?> getAuditTaskList(
+      int? facilityId,
+      bool? isLoading,
+      bool? isExport,
+      dynamic startDate,
+      dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAuditTaskList(
@@ -6623,6 +6627,56 @@ class Repository {
                 .map<PmTaskListModel>((m) =>
                     PmTaskListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = mTaskListModelToJson(_PmTaskListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'audittask_id',
+              'facility_id',
+              'audit_title',
+              'task_code',
+              'last_done_date',
+              'due_date',
+              'done_date',
+              'freq_id',
+              'freq_name',
+              'cat_id',
+              'cat_name',
+              'assigned_to_id',
+              'assigned_to_name',
+              'permit_id',
+              'permit_code',
+              'short_status',
+              'ptw_tbt_done',
+              'ptw_short_status',
+            ],
+            ...jsonDataList
+                .map((audittaskjson) => [
+                      audittaskjson['id'],
+                      audittaskjson['facility_id'],
+                      audittaskjson['plan_title'],
+                      audittaskjson['task_code'],
+                      audittaskjson['last_done_date'],
+                      audittaskjson['due_date'],
+                      audittaskjson['done_date'],
+                      audittaskjson['frequency_id'],
+                      audittaskjson['frequency_name'],
+                      audittaskjson['category_id'],
+                      audittaskjson['category_name'],
+                      audittaskjson['assigned_to_id'],
+                      audittaskjson['assigned_to_name'],
+                      audittaskjson['permit_id'],
+                      audittaskjson['permit_code'],
+                      audittaskjson['status_short'],
+                      audittaskjson['ptw_tbt_done'],
+                      audittaskjson['status_short_ptw'],
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> userdata = {'Sheet1': data};
+          exportToExcel(userdata, 'Audittask.xlsx');
+        }
         // print({"object", _PmTaskListModelList});
         return _PmTaskListModelList.reversed.toList();
       } else {

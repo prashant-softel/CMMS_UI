@@ -170,6 +170,7 @@ class JobListController extends GetxController {
             ? true
             : false,
         isLoading: true,
+        isExport: isExport
       );
 
       if (_jobList != null && _jobList.isNotEmpty) {

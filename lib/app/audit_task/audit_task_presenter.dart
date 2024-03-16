@@ -8,11 +8,13 @@ class AuditTaskPresenter {
   Future<List<PmTaskListModel?>?> getAuditTaskList(
           {int? facilityId,
           bool? isLoading,
+          bool? isExport,
           dynamic endDate,
           dynamic startDate}) async =>
       await auditTaskUsecase.getAuditTaskList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          isExport: isExport,
           endDate: endDate,
           startDate: startDate);
   void clearValue() async => auditTaskUsecase.clearValue();

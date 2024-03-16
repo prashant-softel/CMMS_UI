@@ -23,10 +23,13 @@ class GoodsOrdersListModel {
   dynamic serial_number;
   int? location_ID;
   dynamic cost;
+  dynamic amount;
   dynamic ordered_qty;
   String? rejectedRemark;
   int? facility_id;
+  String? facility_name;
   String? purchaseDate;
+  String? challandate;
   int? vendorID;
   int? status;
   String? asset_code;
@@ -42,6 +45,7 @@ class GoodsOrdersListModel {
   String? approvedBy;
   dynamic vendor_name;
   String? status_short;
+  String? status_long;
 
   GoodsOrdersListModel({
     this.id,
@@ -57,10 +61,13 @@ class GoodsOrdersListModel {
     this.serial_number,
     this.location_ID,
     this.cost,
+    this.amount,
     this.ordered_qty,
     this.rejectedRemark,
     this.facility_id,
+    this.facility_name,
     this.purchaseDate,
+    this.challandate,
     this.vendorID,
     this.status,
     this.asset_code,
@@ -76,6 +83,7 @@ class GoodsOrdersListModel {
     this.approvedBy,
     this.vendor_name,
     this.status_short,
+    this.status_long,
   });
 
   // Factory method to create a GoodsOrdersListModel instance from JSON
@@ -94,9 +102,11 @@ class GoodsOrdersListModel {
       serial_number: json['serial_number'],
       location_ID: json['location_ID'],
       cost: json['cost'],
+      amount: json['amount'],
       ordered_qty: json['ordered_qty'],
       rejectedRemark: json['rejectedRemark'],
       facility_id: json['facility_id'],
+      facility_name: json['facilityName'],
       purchaseDate: Utility.getFormatedyearMonthDay(json['purchaseDate']),
       vendorID: json['vendorID'],
       status: json['status'],
@@ -106,13 +116,15 @@ class GoodsOrdersListModel {
       received_qty: json['received_qty'],
       damaged_qty: json['damaged_qty'],
       accepted_qty: json['accepted_qty'],
-      received_on: json['received_on'],
+      received_on: json['receivedAt'],
       approvedOn: json['approvedOn'],
       generatedBy: json['generatedBy'],
       receivedBy: json['receivedBy'],
       approvedBy: json['approvedBy'],
       vendor_name: json['vendor_name'],
       status_short: json['status_short'],
+      status_long: json['status_long'],
+      challandate: json['challan_date'],
     );
   }
 
@@ -131,10 +143,11 @@ class GoodsOrdersListModel {
         'location_ID': location_ID,
         'cost': cost,
         'currency': currency,
-
+        'amount': amount,
         'ordered_qty': ordered_qty,
         'rejectedRemark': rejectedRemark,
         'facility_id': facility_id,
+        'facilityName': facility_name,
         'purchaseDate': purchaseDate,
         'vendorID': vendorID,
         'status': status,
@@ -144,12 +157,14 @@ class GoodsOrdersListModel {
         'received_qty': received_qty,
         'damaged_qty': damaged_qty,
         'accepted_qty': accepted_qty,
-        'received_on': received_on,
+        'receivedAt': received_on,
         'approvedOn': approvedOn,
         'generatedBy': generatedBy,
         'receivedBy': receivedBy,
         'approvedBy': approvedBy,
         'vendor_name': vendor_name,
         'status_short': status_short,
+        'status_long': status_long,
+        'challan_date': challandate,
       };
 }
