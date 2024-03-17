@@ -704,6 +704,9 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                               .selectedItem
                                                               ?.featureName ??
                                                           '';
+                                                      controller
+                                                          .isContainerVisible
+                                                          .value = true;
                                                     },
                                                   ),
                                                   SizedBox(

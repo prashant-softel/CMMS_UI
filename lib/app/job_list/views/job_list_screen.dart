@@ -18,7 +18,7 @@ class JobListScreen extends GetView<JobListController> {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: (Responsive.isMobile(context) || Responsive.isDesktop(context))
+        appBar: (Responsive.isMobile(context) || Responsive.isTablet(context))
             ? AppBar(
                 title: HeadingProfileAppBar(
                   title: "Job List",

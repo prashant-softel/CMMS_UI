@@ -126,8 +126,8 @@ class SafetyQuestionsListContentWeb
                                           children: [
                                             Text(
                                               controller.selectedItem == null
-                                                  ? "JOB type added Successfully in the List."
-                                                  : "JOB type updated Successfully in the List.",
+                                                  ? "permit type added Successfully in the List."
+                                                  : "permit type updated Successfully in the List.",
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Color.fromARGB(
@@ -890,7 +890,7 @@ class SafetyQuestionsListContentWeb
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Required",
+                                            "Required SOP/JSA",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -959,7 +959,7 @@ class SafetyQuestionsListContentWeb
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Required",
+                                            "Required SOP/JSA",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),

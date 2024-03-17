@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -100,9 +101,9 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                     //         0
                     //     ?
                     Visibility(
-                      // visible: controller.isContainerVisible.value,
+                      visible: controller.isContainerVisible.value,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.32,
+                        width: MediaQuery.of(context).size.width * 0.31,
                         margin: EdgeInsets.only(left: 15, top: 20),
                         height: Get.height / 2.3,
                         child: Card(
@@ -525,9 +526,6 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                   style: Styles.blackBold16,
                                 ),
                               ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
-                              ),
                               Row(
                                 children: [
                                   // Container(
@@ -576,169 +574,171 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                   // )
                                 ],
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
                               controller.moduleList!.isEmpty
                                   ? Expanded(
-                                      child: ScrollableTableView(
+                                      child: DataTable2(
+                                        key: UniqueKey(),
+                                        dataRowHeight: 50,
+                                        columnSpacing: 10,
+                                        border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234)),
                                         columns: [
-                                          "Id",
-                                          "Observation Name ",
-                                          "Description ",
-                                          "Action"
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            label: column,
-                                            minWidth: Get.width * 0.16,
-                                          );
-                                        }).toList(),
-                                        rows: [
-                                          ...List.generate(
-                                            controller.moduleList?.length ?? 0,
-                                            (index) {
-                                              return [
-                                                '',
-                                                '',
-                                                // '',
-
-                                                '',
-                                              ];
-                                            },
-                                          ),
-                                        ].map((record) {
-                                          return TableViewRow(
-                                            height: 60,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
+                                          DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Id",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                          DataColumn2(
+                                              // fixedWidth: 700,
+                                              label: Text(
+                                            "Observation name",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 100,
+                                              label: Text(
+                                            "Action",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                        ],
+                                        rows: List.generate(
+                                          controller.moduleList?.length ?? 0,
+                                          (index) {
+                                            return DataRow(cells: [
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                              DataCell(Text('')),
+                                            ]);
+                                          },
+                                        ),
                                       ),
                                     )
                                   : Expanded(
-                                      child: ScrollableTableView(
-                                        paginationController:
-                                            controller.paginationController,
+                                      child: DataTable2(
+                                        key: UniqueKey(),
+                                        dataRowHeight: 50,
+                                        columnSpacing: 10,
+                                        border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234)),
                                         columns: [
-                                          "Id",
-                                          "Observation Name ",
-                                          "Description ",
-                                          // "Menu Image ",
-
-                                          "Action"
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.12,
-                                            label: column,
-                                          );
-                                        }).toList(),
-                                        rows: //
-                                            [
-                                          ...List.generate(
-                                            controller.moduleList?.length ?? 0,
-                                            (index) {
-                                              var moduleListDetails =
-                                                  controller.moduleList?[index];
-                                              return [
-                                                '${moduleListDetails?.id}',
-                                                '${moduleListDetails?.name}',
-                                                // "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
-                                                '${moduleListDetails?.featureName}',
-                                                // '${moduleListDetails?.menuImage}',
-                                                "Action"
-                                              ];
-                                            },
-                                          ),
-                                        ].map((_moduleList) {
-                                          return TableViewRow(
-                                              height: 45,
-                                              cells: _moduleList.map((value) {
-                                                return TableViewCell(
-                                                    child: (value == 'No')
-                                                        ? CustomSwitchTroggle(
-                                                            value: value == 'No'
-                                                                ? true
-                                                                : false,
-                                                            onChanged:
-                                                                (value) {},
-                                                          )
-                                                        : (value == "Action")
-                                                            ? Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                    // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                    //     0
-                                                                    //     ?
-                                                                    TableActionButton(
-                                                                      color: ColorValues
-                                                                          .editColor,
-                                                                      icon: Icons
-                                                                          .edit,
-                                                                      message:
-                                                                          'Edit',
-                                                                      onPress:
-                                                                          () {
-                                                                        controller.selectedItem = controller.moduleList!.firstWhere((element) =>
-                                                                            "${element?.id}" ==
-                                                                            _moduleList[0]);
-
-                                                                        controller
-                                                                            .modulelistNumberCtrlr
-                                                                            .text = controller
-                                                                                .selectedItem?.name ??
-                                                                            '';
-                                                                        controller
-                                                                            .featureCtrlr
-                                                                            .text = controller
-                                                                                .selectedItem?.featureName ??
-                                                                            '';
-
-                                                                        // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
-                                                                        // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";
-                                                                        // // controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
-                                                                        // // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                        // controller.selectedEquipmentId = controller.selectedItem?.add ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.edit ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.delete ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.view ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.approve ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.issue ?? 0;
-                                                                        // controller.selectedfrequencyId = controller.selectedItem?.selfView ?? 0;
-                                                                      },
-                                                                    ),
-                                                                    //     : Container(),
-                                                                    // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
-                                                                    //     0
-                                                                    //     ?
-                                                                    TableActionButton(
-                                                                      color: ColorValues
-                                                                          .deleteColor,
-                                                                      icon: Icons
-                                                                          .delete,
-                                                                      message:
-                                                                          'Delete',
-                                                                      onPress:
-                                                                          () {
-                                                                        print(_moduleList[
-                                                                            0]);
-                                                                        controller.isDeleteDialog(
-                                                                            module_id:
-                                                                                _moduleList[0],
-                                                                            module: _moduleList[1]);
-                                                                      },
-                                                                    )
-                                                                    // : Container()
-                                                                  ])
-                                                            : Text(
-                                                                value,
-                                                              ));
-                                              }).toList());
-                                        }).toList(),
+                                          DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Id",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                          DataColumn2(
+                                              // fixedWidth: 700,
+                                              label: Text(
+                                            "Observation name",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              fixedWidth: 200,
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                        ],
+                                        rows: List.generate(
+                                          controller.moduleList?.length ?? 0,
+                                          (index) {
+                                            var moduleListDetails =
+                                                controller.moduleList?[index];
+                                            return DataRow(cells: [
+                                              DataCell(Text(
+                                                  '${moduleListDetails?.id}')),
+                                              DataCell(Text(
+                                                  '${moduleListDetails?.name}')),
+                                              DataCell(Text(
+                                                  '${moduleListDetails?.featureName}')),
+                                              DataCell(Row(
+                                                children: [
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.editColor,
+                                                    icon: Icons.edit,
+                                                    message: 'Edit',
+                                                    onPress: () {
+                                                      controller.selectedItem = controller
+                                                          .moduleList!
+                                                          .firstWhere((element) =>
+                                                              "${element?.id}" ==
+                                                              '${moduleListDetails?.id}');
+                                                      controller
+                                                          .modulelistNumberCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.name ??
+                                                          '';
+                                                      controller.featureCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.featureName ??
+                                                          '';
+                                                      controller
+                                                          .isContainerVisible
+                                                          .value = true;
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                      width:
+                                                          8), // Add space between buttons
+                                                  TableActionButton(
+                                                    color:
+                                                        ColorValues.deleteColor,
+                                                    icon: Icons.delete,
+                                                    message: 'Delete',
+                                                    onPress: () {
+                                                      print(
+                                                          '${moduleListDetails?.id}');
+                                                      controller.isDeleteDialog(
+                                                          module_id:
+                                                              '${moduleListDetails?.id}',
+                                                          module:
+                                                              '${moduleListDetails?.name}');
+                                                    },
+                                                  ),
+                                                ],
+                                              )),
+                                            ]);
+                                          },
+                                        ),
                                       ),
                                     ),
                             ],
