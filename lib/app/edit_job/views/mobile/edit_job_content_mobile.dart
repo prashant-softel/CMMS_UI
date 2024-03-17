@@ -1,3 +1,6 @@
+import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/assigned_to_widget.dart';
@@ -16,44 +19,71 @@ class EditJobContentMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return //
-        SingleChildScrollView(
-      child: //
-          Column(
-              //
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Dimens.boxHeight10,
+        HeaderWidgetMobile(),
+
+        Container(
+          margin: EdgeInsets.only(left: 30, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Edit Job",
+                style: Styles.blackBold18,
+              ),
+            ],
+          ),
+        ),
+        Card(
+          color: Colors.lightBlue.shade50,
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 15),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
               children: [
-            /// SELECT BLOCK DropDown
-            BlockWidget(),
+                BlockWidget(),
 
-            ///MULTISELECT CONTROL Equipment Categories
-            EquipmentCategoriesWidget(),
+                ///MULTISELECT CONTROL Equipment Categories
+                EquipmentCategoriesWidget(),
 
-            /// WORK AREA (= EQUIPMENTS) DropDown
-            WorkAreaWidget(),
+                /// WORK AREA (= EQUIPMENTS) DropDown
+                WorkAreaWidget(),
 
-            /// WORK TYPE  DropDown
-            WorkTypeWidget(),
+                /// WORK TYPE  DropDown
+                WorkTypeWidget(),
 
-            /// TOOLS REQUIRED DropDown
-            ToolsRequiredWidget(),
+                /// TOOLS REQUIRED DropDown
+                ToolsRequiredWidget(),
 
-            /// ASSIGNED To DropDown
-            AssignedToWidget(),
+                /// ASSIGNED To DropDown
+                AssignedToWidget(),
 
-            /// JOB TITLE
-            JobTitleWidget(),
+                /// JOB TITLE
+                JobTitleWidget(),
 
-            /// JOB DESCRIPTION
-            JobDescriptionWidget(),
+                /// JOB DESCRIPTION
+                JobDescriptionWidget(),
 
-            /// BREAKDOWN TIME
-            BreakdownTimeWidget(),
+                /// BREAKDOWN TIME
+                BreakdownTimeWidget(),
 
-            /// SAVE BUTTON
-            UpdateJobButtonWidget(),
+                /// SAVE BUTTON
+                UpdateJobButtonWidget(),
+              ],
+            ),
+          ),
+        ),
 
-            ///
-          ]),
+        /// SELECT BLOCK DropDown
+
+        ///
+      ]),
     );
   }
 }
