@@ -88,17 +88,18 @@ Widget _content(context, controller) {
                                               : '',
                                         ),
                                         JobDetailField(
-                                          title: 'Assigned To',
-                                          value: controller.jobDetailsModel
-                                                  .value?.assignedName ??
-                                              "",
-                                        ),
-                                        JobDetailField(
                                           title: 'Job Title',
                                           value: controller.jobDetailsModel
                                                   .value?.jobTitle ??
                                               '',
                                         ),
+                                        JobDetailField(
+                                          title: 'Assigned To',
+                                          value: controller.jobDetailsModel
+                                                  .value?.assignedName ??
+                                              "",
+                                        ),
+
                                         JobDetailField(
                                           title: 'Plant name',
                                           value: controller.jobDetailsModel
@@ -120,6 +121,19 @@ Widget _content(context, controller) {
                                                   .toList()
                                               : [],
                                         ),
+                                        JobDetailMultiValueField(
+                                          title: 'Work Type',
+                                          values: (controller.jobDetailsModel
+                                                      .value?.workType !=
+                                                  null)
+                                              ? controller.jobDetailsModel.value
+                                                  ?.workType
+                                                  ?.map<String>((item) => item
+                                                      .equipmentCatName
+                                                      .toString())
+                                                  .toList()
+                                              : [],
+                                        ),
                                         JobDetailField(
                                           title: 'Breakdown Time',
                                           value: controller.jobDetailsModel
@@ -134,16 +148,22 @@ Widget _content(context, controller) {
                                         //       '',
                                         // ),
                                         JobDetailField(
-                                          title: 'Permit ID',
-                                          value: (controller.jobDetailsModel
-                                                      .value?.currentPtwId !=
-                                                  null)
-                                              ? controller.jobDetailsModel.value
-                                                      ?.currentPtwId
-                                                      .toString() ??
-                                                  ''
-                                              : '',
+                                          title: 'Job Description',
+                                          value: controller.jobDetailsModel
+                                                  .value?.jobDescription ??
+                                              '',
                                         ),
+                                        // JobDetailField(
+                                        //   title: 'Permit ID',
+                                        //   value: (controller.jobDetailsModel
+                                        //               .value?.currentPtwId !=
+                                        //           null)
+                                        //       ? controller.jobDetailsModel.value
+                                        //               ?.currentPtwId
+                                        //               .toString() ??
+                                        //           ''
+                                        //       : '',
+                                        // ),
                                         JobDetailField(
                                           title: 'Standard Action',
                                           value: controller.jobDetailsModel
@@ -163,30 +183,25 @@ Widget _content(context, controller) {
                                               CrossAxisAlignment.start,
                                           //
                                           children: [
-                                        JobDetailField(
-                                          title: 'Current Status',
-                                          value: controller.jobDetailsModel
-                                                  .value.latestJCStatus ??
-                                              "",
-                                          // value: '', //
-                                          // value: JobStatusData
-                                          //     .getStatusStringFromInt(controller
-                                          //     .jobDetailsModel
-                                          //     .value
-                                          //     ?.status),
-                                        ),
+                                        // JobDetailField(
+                                        //   title: 'Current Status',
+                                        //   value: controller.jobDetailsModel
+                                        //           .value.latestJCStatus ??
+                                        //       "",
+                                        //   // value: '', //
+                                        //   // value: JobStatusData
+                                        //   //     .getStatusStringFromInt(controller
+                                        //   //     .jobDetailsModel
+                                        //   //     .value
+                                        //   //     ?.status),
+                                        // ),
                                         JobDetailField(
                                           title: 'Raised By',
                                           value: controller.jobDetailsModel
                                                   .value?.createdByName ??
                                               "",
                                         ),
-                                        JobDetailField(
-                                          title: 'Job Description',
-                                          value: controller.jobDetailsModel
-                                                  .value?.jobDescription ??
-                                              '',
-                                        ),
+
                                         JobDetailField(
                                           title: 'Block Name',
                                           value: controller.jobDetailsModel
@@ -206,6 +221,7 @@ Widget _content(context, controller) {
                                                   .toList()
                                               : [],
                                         ),
+
                                         // JobDetailMultiValueField(
                                         //   title: 'Work Type',
                                         //   values: (controller.jobDetailsModel
@@ -239,105 +255,41 @@ Widget _content(context, controller) {
                                 ),
                               ]),
                           Spacer(),
-                          Wrap(
-                              // mainAxisAlignment: MainAxisAlignment.center, //
-                              children: [
-                                // if (controller.jobDetailsModel.value?.status !=
-                                //     null &&
-                                //     JobStatusData.getStatusStringFromInt(
-                                //         controller.jobDetailsModel.value
-                                //             ?.status) ==
-                                //         AppConstants.kJobStatusCreated)
-                                CustomElevatedButton(
-                                  onPressed: () => controller.goToEditJobScreen(
-                                      controller.jobDetailsModel.value?.id),
-                                  text: 'Assign',
-                                ),
-
-                                if ((controller.jobDetailsModel.value
-                                            ?.assignedId ??
-                                        0) >
-                                    0) ...[
-                                  //check if status is "ASSIGNED"
-                                  // if (controller
-                                  //     .jobDetailsModel.value?.status !=
-                                  //     null &&
-                                  //     JobStatusData.getStatusStringFromInt(
-                                  //         controller.jobDetailsModel.value
-                                  //             ?.status) ==
-                                  //         AppConstants.kJobStatusAssigned)
-                                  CustomElevatedButton(
-                                    onPressed: () =>
-                                        controller.goToEditJobScreen(controller
-                                            .jobDetailsModel.value?.id),
-                                    text: 'Re-Assign',
-                                    icon: Icons.edit,
-                                  ),
-                                ],
-                                Dimens.boxWidth10,
-                                //check if status is "ASSIGNED"
-                                // if (controller.jobDetailsModel.value?.status !=
-                                //     null &&
-                                //     JobStatusData.getStatusStringFromInt(
-                                //         controller.jobDetailsModel.value
-                                //             ?.status) ==
-                                //         AppConstants.kJobStatusAssigned)
-                                CustomElevatedButton(
-                                  text: "Link to Existing Permit",
-                                  icon: Icons.link,
-                                  onPressed: () =>
-                                      controller.showPermitsDialog(),
-                                  backgroundColor: ColorValues.appYellowColor,
-                                ),
-                                Dimens.boxWidth10,
-                                //check if status is "ASSIGNED"
-                                // if (JobStatusData.getStatusStringFromInt(
-                                //     controller
-                                //         .jobDetailsModel.value?.status) ==
-                                //     AppConstants.kJobStatusAssigned)
-                                CustomElevatedButton(
-                                  text: "Create New Permit",
-                                  icon: Icons.add,
-                                  onPressed: () => controller.createNewPermit(),
-                                  backgroundColor:
-                                      ColorValues.appLightBlueColor,
-                                ), //check if status is "LINKED TO PERMIT"
-                                // if (JobStatusData.getStatusStringFromInt(
-                                //     controller
-                                //         .jobDetailsModel.value?.status) ==
-                                //     AppConstants.kJobStatusLinkedToPermit)
-                                CustomElevatedButton(
-                                  text: "Job Card",
-                                  icon: Icons.add,
-                                  onPressed: () =>
-                                      controller.goToJobCardScreen(),
-                                  backgroundColor: ColorValues.appPurpleColor,
-                                ),
-                              ]),
+                          Wrap(children: [
+                            if (controller.jobDetailsModel.value?.status == 101)
+                              CustomElevatedButton(
+                                onPressed: () => controller.goToEditJobScreen(
+                                    controller.jobDetailsModel.value?.id),
+                                text: 'Assign',
+                              ),
+                            if ((controller.jobDetailsModel.value?.assignedId ??
+                                    0) >
+                                0) ...[
+                              CustomElevatedButton(
+                                onPressed: () => controller.goToEditJobScreen(
+                                    controller.jobDetailsModel.value?.id),
+                                text: 'Re-Assign',
+                                icon: Icons.edit,
+                              ),
+                            ],
+                            Dimens.boxWidth10,
+                            if (controller.jobDetailsModel.value
+                                        ?.latestJCStatus ==
+                                    155 ||
+                                controller.jobDetailsModel.value?.status == 102)
+                              CustomElevatedButton(
+                                text: "Create New Permit",
+                                icon: Icons.add,
+                                onPressed: () => controller.createNewPermit(),
+                                backgroundColor: ColorValues.appLightBlueColor,
+                              ),
+                          ]),
                         ]),
                   )
                 : Dimens.box0,
           ),
         ),
       ),
-
-      /// ASSOCIATED PERMITS TABLE
-      (Responsive.isMobile(context) || Responsive.isTablet(context))
-          ? Padding(
-              padding: Dimens.edgeInsets10_0_10_0,
-              child: Column(children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Permits',
-                  ),
-                ),
-                for (var associatedPermit
-                    in controller.associatedPermitList ?? [])
-                  PTWCardWidget(associatedPermit: associatedPermit),
-              ]),
-            )
-          : Container(),
     ]),
   );
 }

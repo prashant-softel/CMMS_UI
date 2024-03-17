@@ -26,7 +26,7 @@ class JobDetailField extends StatelessWidget {
                     '$title: ',
                     style: (Responsive.isMobile(context) ||
                             Responsive.isTablet(context))
-                        ? Styles.appDarkGrey10
+                        ? Styles.appDarkGrey12
                         : Styles.appDarkGrey12,
                   ),
                   if (title == "Current Status") ...[
