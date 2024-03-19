@@ -292,6 +292,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -397,6 +399,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -701,6 +705,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -800,6 +806,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),

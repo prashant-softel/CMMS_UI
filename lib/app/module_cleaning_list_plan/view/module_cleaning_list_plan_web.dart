@@ -167,11 +167,19 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                               right: 8,
                                               left: 8),
                                           decoration: BoxDecoration(
-                                            color:
-                                                ColorValues.appLightBlueColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
+                                              color:
+                                                  ColorValues.appLightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset:
+                                                      const Offset(4.0, 2.0),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ]),
                                           child: Text(
                                             'Column Visibility',
                                             style: TextStyle(
@@ -244,6 +252,14 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                       //       text: 'PDF'),
                                       // ),
                                       Container(
+                                        decoration: BoxDecoration(boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(2.0, 1.0),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          )
+                                        ]),
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(

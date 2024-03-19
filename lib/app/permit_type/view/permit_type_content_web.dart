@@ -769,6 +769,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                                       ?.id)!;
                                                       print(
                                                           "${controller.selectedFacility.value}");
+                                                          controller
+                                                          .isContainerVisible
+                                                          .value = true;
                                                     },
                                                   ),
                                                   TableActionButton(
