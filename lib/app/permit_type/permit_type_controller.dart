@@ -318,10 +318,12 @@ class PermitTypeController extends GetxController {
 
   Future<bool> updatePermitType(checklistId) async {
     String _name = titleCtrlr.text.trim();
+    String _description= descriptionCtrlr.text.trim();
     // selectedFacility.value =
     TypePermitModel createChecklist = TypePermitModel(
       name: _name,
       id: checklistId,
+      description: _description
     );
     var checklistJsonString =
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);

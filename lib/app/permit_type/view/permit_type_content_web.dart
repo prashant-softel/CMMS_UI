@@ -745,6 +745,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                     icon: Icons.edit,
                                                     message: 'Edit',
                                                     onPress: () {
+                                                      controller
+                                                          .toggleContainer();
                                                       controller.selectedItem = controller
                                                           .typePermitList
                                                           .firstWhere((element) =>
@@ -759,6 +761,11 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                               .selectedItem
                                                               ?.name ??
                                                           '';
+                                                          controller.descriptionCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.description ??
+                                                          '';
                                                       controller
                                                               .selectedFacility
                                                               .value =
@@ -769,9 +776,6 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                                       ?.id)!;
                                                       print(
                                                           "${controller.selectedFacility.value}");
-                                                          controller
-                                                          .isContainerVisible
-                                                          .value = true;
                                                     },
                                                   ),
                                                   TableActionButton(

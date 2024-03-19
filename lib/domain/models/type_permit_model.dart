@@ -17,5 +17,5 @@ class TypePermitModel {
   String? description;
 
   Map<String, dynamic> toJson() =>
-      {'id': id, 'name': name, 'description': description};
+      {'id': id, 'title': name, 'description': description};
 }
