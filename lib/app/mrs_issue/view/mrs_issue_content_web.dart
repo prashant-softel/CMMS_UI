@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class MrsIssueContentWeb extends GetView<MrsIssueController> {
@@ -47,14 +48,14 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                     color: ColorValues.greyLightColor,
                   ),
                   InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
                   InkWell(
                     onTap: () {
                       final _flutterSecureStorage =
@@ -389,13 +390,55 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                               5),
                                                     ),
                                                     child: LoginCustomTextfield(
-                                                      textController: controller
-                                                              .mrsDetailsModel
-                                                              .value!
-                                                              .cmmrsItems![index]
-                                                              .issued_qty_controller
-                                                          as TextEditingController,
-                                                    )),
+                                                        textController: controller
+                                                                .mrsDetailsModel
+                                                                .value!
+                                                                .cmmrsItems![index]
+                                                                .issued_qty_controller
+                                                            as TextEditingController,
+                                                        onChanged: (text) {
+                                                          try {
+                                                            // Validate input using a regular expression
+                                                            if (!RegExp(
+                                                                    r'^[0-9]+(?:\.[0-9]+)?$')
+                                                                .hasMatch(
+                                                                    text)) {
+                                                              // Input is not a valid double
+                                                              Fluttertoast
+                                                                  .showToast(
+                                                                msg:
+                                                                    'Enter valid quantity in numbers',
+                                                                fontSize: 16.0,
+                                                              );
+                                                              return; // Exit early
+                                                            }
+
+                                                            double parsedValue =
+                                                                double.parse(
+                                                                    text);
+                                                            double
+                                                                requestedQty =
+                                                                controller
+                                                                    .mrsDetailsModel
+                                                                    .value!
+                                                                    .cmmrsItems![
+                                                                        index]
+                                                                    .requested_qty!;
+
+                                                            if (parsedValue >
+                                                                requestedQty) {
+                                                              Fluttertoast
+                                                                  .showToast(
+                                                                msg:
+                                                                    'Enter qty below the requested qty',
+                                                                fontSize: 16.0,
+                                                              );
+                                                            }
+                                                          } catch (e) {
+                                                            // Handle the case where parsing fails
+                                                            print('Error: $e');
+                                                          }
+                                                        })),
                                               ),
                                             ),
                                           ])),
