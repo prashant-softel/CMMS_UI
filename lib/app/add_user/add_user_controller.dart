@@ -727,8 +727,12 @@ class AddUserController extends GetxController {
     String _joiningdate = joingdateCtrlr.text.trim();
     for (int id in selectedresIdsList) {
       DesignationModel? selectedItem =
-          responsList.firstWhere((item) => item?.id == id);
-      newselectedResNameList.add(selectedItem!);
+          responsList.firstWhereOrNull((item) => item?.id == id);
+      if (selectedItem != null) {
+        newselectedResNameList.add(selectedItem);
+      } else {
+        print('DesignationModel with ID $id not found.');
+      }
     }
 
     // Display the copied list
