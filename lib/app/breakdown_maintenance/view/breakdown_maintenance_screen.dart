@@ -72,7 +72,7 @@ class BreakdownMaintenanceScreen
                                   child: Row(
                                     children: [
                                       Text(
-                                        "BreakDown Maintenance",
+                                        "Breakdown Maintenance",
                                         style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 159, 156, 156),
