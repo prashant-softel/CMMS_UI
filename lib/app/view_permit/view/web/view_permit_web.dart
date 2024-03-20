@@ -990,8 +990,25 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 10, right: 10, top: 10),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Permit Type: ',
+                                                    style: Styles.blue700,
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  Text(
+                                                    '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10, top: 10),
                                               child: Text(
-                                                'Permit Type Checklist',
+                                                'Permit Checkpoints',
                                                 style: Styles.blue700,
                                               ),
                                             ),
@@ -1060,7 +1077,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Tool Box Talk",
+                                        "SOP / JSA",
                                         style: Styles.blue700,
                                       ),
                                       Dimens.boxHeight10,
@@ -1112,7 +1129,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   SizedBox(
                                                     width: 90,
                                                   ),
-                                                  Text('JSA: '),
                                                   // Text(
                                                   //   'Breakdown Maintenance - Demo Plant',
                                                   //   style: TextStyle(
@@ -1130,9 +1146,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   //       (value) {},
                                                   // )
                                                 ],
-                                              ),
-                                              SizedBox(
-                                                height: 30,
                                               ),
                                               Row(
                                                 mainAxisAlignment:
@@ -2639,13 +2652,13 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                 // Dimens.boxWidth5,
 
                 ///Extend Permit Button
+
                 controller.viewPermitDetailsModel.value?.isExpired == 1 ||
                         controller.viewPermitDetailsModel.value?.requester_id ==
                                 varUserAccessModel.value.user_id &&
                             controller
                                     .viewPermitDetailsModel.value?.ptwStatus ==
-                                PermitStatusConstants.PTW_APPROVE //125
-                            &&
+                                PermitStatusConstants.PTW_APPROVE &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
                                         e.feature_id ==
@@ -2654,9 +2667,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         e.edit ==
                                             UserAccessConstants.kHaveEditAccess)
                                     .length >
-                                0
-                    //          ||
-                    // controller.viewPermitDetailsModel.value?.ptwStatus == 135
+                                0 &&
+                            controller
+                                .isOneHour(controller.validTillTimeCtrlr.text)
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
@@ -2666,7 +2679,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               text: "Extend Permit",
                               icon: Icons.expand_outlined,
                               onPressed: () {
-                                // controller
                                 Get.dialog(PermitExtendDialog(
                                   permitId:
                                       '${controller.viewPermitDetailsModel.value?.permitNo}',

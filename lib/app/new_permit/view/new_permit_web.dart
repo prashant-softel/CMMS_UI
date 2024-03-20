@@ -1603,108 +1603,63 @@ class NewPermitWeb extends GetView<NewPermitController> {
     BuildContext context,
     int position,
   ) {
-    return Column(//
-        children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
-      Dimens.boxHeight5,
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.050,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
               ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ), //BoxShadow
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 5
-              : MediaQuery.of(context).size.width / 1.0,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            onTap: () {
-              position == 0
-                  ? pickDateTime_web(context, 0)
-                  : pickDateTime_web(context, 1);
-            },
-            controller: position == 0
-                ? controller.startDateTimeCtrlr
-                : controller.validTillTimeCtrlr,
-
-            // :null,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              // focusedErrorBorder:
-              // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : InputBorder.none,
-              // errorBorder:
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : null,
-              // errorText: controller.isJobTitleInvalid.value
-              //     ? "Required field"
-              //     : null,
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 5
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+              onTap: () {
+                position == 0
+                    ? pickDateTime_web(context, 0)
+                    : pickDateTime_web(context, 1);
+              },
+              controller: position == 0
+                  ? controller.startDateTimeCtrlr
+                  : controller.validTillTimeCtrlr,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
             ),
           ),
         ),
-      ),
-      Dimens.boxHeight20,
-    ]);
+        Dimens.boxHeight20,
+      ],
+    );
   }
 
 //Start Date and valid Till
@@ -1757,10 +1712,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime? dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
+    // final currentDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
+      firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 5),
     );
 
@@ -1773,7 +1729,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
