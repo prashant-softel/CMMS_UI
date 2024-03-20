@@ -364,7 +364,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Secandory E-mail: '),
+                                                    title: 'Secondary E-mail: '),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                     decoration: BoxDecoration(
