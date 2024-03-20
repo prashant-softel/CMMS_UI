@@ -573,7 +573,9 @@ class AddIncidentReportController extends GetxController {
         getBodyInjuredData();
       });
 
-      await getIncidentReportHistory(id: irId.value);
+      Future.delayed(Duration(seconds: 1), () {
+        getIncidentReportHistory(id: irId.value);
+      });
     } catch (e) {}
 
     typeOfJbFocusNode.addListener(() {

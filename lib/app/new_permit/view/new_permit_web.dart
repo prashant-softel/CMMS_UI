@@ -1205,19 +1205,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               padding: const EdgeInsets.only(
                                                   left: 10, right: 10),
                                               child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
                                                     children: [
                                                       Text(
                                                         'Conducted At Job-Site By:',
                                                         style:
                                                             Styles.blackBold17,
                                                       ),
-                                                      SizedBox(width: 5),
+                                                      SizedBox(width: 10),
                                                       // Text(
                                                       //   'Ramesh Singh',
                                                       //   style: Styles.black17,
@@ -1261,6 +1257,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ),
                                                       _buildDateTimeField_web(
                                                           context),
+                                                      Dimens.boxWidth20
                                                     ],
                                                   ),
                                                 ],
@@ -1605,25 +1602,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
   ) {
     return Column(//
         children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
       Dimens.boxHeight5,
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
@@ -1637,13 +1615,13 @@ class NewPermitWeb extends GetView<NewPermitController> {
               ),
               blurRadius: 5.0,
               spreadRadius: 1.0,
-            ), //BoxShadow
+            ),
             BoxShadow(
               color: ColorValues.whiteColor,
               offset: const Offset(0.0, 0.0),
               blurRadius: 0.0,
               spreadRadius: 0.0,
-            ), //BoxShadow
+            ),
           ],
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
@@ -1675,30 +1653,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,
-              // focusedErrorBorder:
-              // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : InputBorder.none,
-              // errorBorder:
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : null,
-              // errorText: controller.isJobTitleInvalid.value
-              //     ? "Required field"
-              //     : null,
             ),
           ),
         ),
@@ -1757,10 +1711,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime? dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
+    final currentDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
+      initialDate: dateTime ?? currentDate,
+      firstDate: currentDate,
       lastDate: DateTime(DateTime.now().year + 5),
     );
 
@@ -2131,8 +2086,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
             height: 30,
             child: TextField(
               style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+                textStyle: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
               onTap: () {
                 pickDateTimeTBT_web(context);
@@ -2160,7 +2114,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
           ),
         ),
       ),
-      Dimens.boxHeight20,
+      // Dimens.boxHeight20,
     ]);
   }
 
