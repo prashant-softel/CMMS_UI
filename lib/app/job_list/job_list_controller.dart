@@ -73,7 +73,7 @@ class JobListController extends GetxController {
       // Future.delayed(Duration(seconds: 1), () {
       // userId = varUserAccessModel.value.user_id ?? 0;
       // if (userId != null) {
-      getJobList(userId, true,false);
+      getJobList(userId, false, false, false);
       // }
       // });
     });
@@ -89,7 +89,7 @@ class JobListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(userId, false,false);
+    getJobList(userId, false, false, false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -150,28 +150,24 @@ class JobListController extends GetxController {
   }
 
   Future<void> getJobList(
-    int userId,
-    bool self_view,
-    bool isExport
-  ) async {
+      int userId, bool self_view, bool isLoading, bool isExport) async {
     jobList.value = <JobModel>[];
     filteredData.value = <JobModel>[];
 
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
-        facilityId: facilityId,
-        // userId: userId,
-        self_view: varUserAccessModel.value.access_list!
-                    .where((e) =>
-                        e.feature_id == UserAccessConstants.kJobFeatureId &&
-                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
-                    .length >
-                0
-            ? true
-            : false,
-        isLoading: true,
-        isExport: isExport
-      );
+          facilityId: facilityId,
+          // userId: userId,
+          self_view: varUserAccessModel.value.access_list!
+                      .where((e) =>
+                          e.feature_id == UserAccessConstants.kJobFeatureId &&
+                          e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                      .length >
+                  0
+              ? true
+              : false,
+          isLoading: isLoading,
+          isExport: isExport);
 
       if (_jobList != null && _jobList.isNotEmpty) {
         filteredData.value = _jobList;
@@ -353,15 +349,16 @@ class JobListController extends GetxController {
       isBlockSelected.value = true;
     }
     selectedBlock.value = selectedValue;
-    getJobList(userId, false,false);
+    getJobList(userId, false, false, false);
   }
 
   void clearStoreData() {
     jobListPresenter.clearValue();
   }
 
-void export() {
-    getJobList(userId, true,true);
+  void export() {
+    getJobList(userId, true, true, true);
   }
+
   ///
 }
