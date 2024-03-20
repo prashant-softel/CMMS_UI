@@ -487,15 +487,17 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           ),
                                           Dimens.boxHeight10,
                                           // Spacer(),
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'Expiry Date & Time: '),
-                                              Dimens.boxWidth10,
-                                              _buildStartValidTillDateField_web(
-                                                  context, 1),
-                                            ],
+                                          IgnorePointer(
+                                            child: Row(
+                                              children: [
+                                                CustomRichText(
+                                                    title:
+                                                        'Expiry Date & Time: '),
+                                                Dimens.boxWidth10,
+                                                _buildStartValidTillDateField_web(
+                                                    context, 1),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
