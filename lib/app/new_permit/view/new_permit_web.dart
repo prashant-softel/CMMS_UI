@@ -1205,15 +1205,19 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               padding: const EdgeInsets.only(
                                                   left: 10, right: 10),
                                               child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
                                                     children: [
                                                       Text(
                                                         'Conducted At Job-Site By:',
                                                         style:
                                                             Styles.blackBold17,
                                                       ),
-                                                      SizedBox(width: 10),
+                                                      SizedBox(width: 5),
                                                       // Text(
                                                       //   'Ramesh Singh',
                                                       //   style: Styles.black17,
@@ -1257,7 +1261,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ),
                                                       _buildDateTimeField_web(
                                                           context),
-                                                      Dimens.boxWidth20
                                                     ],
                                                   ),
                                                 ],
@@ -1600,65 +1603,63 @@ class NewPermitWeb extends GetView<NewPermitController> {
     BuildContext context,
     int position,
   ) {
-    return Column(//
-        children: [
-      Dimens.boxHeight5,
-      Container(
-        height: MediaQuery.of(context).size.height * 0.050,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.050,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
               ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 5
-              : MediaQuery.of(context).size.width / 1.0,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            onTap: () {
-              position == 0
-                  ? pickDateTime_web(context, 0)
-                  : pickDateTime_web(context, 1);
-            },
-            controller: position == 0
-                ? controller.startDateTimeCtrlr
-                : controller.validTillTimeCtrlr,
-
-            // :null,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 5
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+              onTap: () {
+                position == 0
+                    ? pickDateTime_web(context, 0)
+                    : pickDateTime_web(context, 1);
+              },
+              controller: position == 0
+                  ? controller.startDateTimeCtrlr
+                  : controller.validTillTimeCtrlr,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
             ),
           ),
         ),
-      ),
-      Dimens.boxHeight20,
-    ]);
+        Dimens.boxHeight20,
+      ],
+    );
   }
 
 //Start Date and valid Till
@@ -1711,11 +1712,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime? dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
-    final currentDate = DateTime.now();
+    // final currentDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
-      initialDate: dateTime ?? currentDate,
-      firstDate: currentDate,
+      initialDate: dateTime,
+      firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 5),
     );
 
@@ -1728,7 +1729,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
     DateTime dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
@@ -2086,7 +2086,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
             height: 30,
             child: TextField(
               style: GoogleFonts.lato(
-                textStyle: TextStyle(fontSize: 16.0, color: Colors.black),
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
               ),
               onTap: () {
                 pickDateTimeTBT_web(context);
@@ -2114,7 +2115,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
           ),
         ),
       ),
-      // Dimens.boxHeight20,
+      Dimens.boxHeight20,
     ]);
   }
 
