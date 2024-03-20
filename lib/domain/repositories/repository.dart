@@ -11699,5 +11699,25 @@ class Repository {
       return false;
     }
   }
+  Future<bool> createfreq({bool? isLoading, freqJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createfreq(
+          auth: auth,
+          isLoading: isLoading,
+          freqJsonString: freqJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
   //end
 }

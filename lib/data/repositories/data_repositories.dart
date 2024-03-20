@@ -4320,5 +4320,14 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, tool_name: tool_name);
     return response;
   }
+  Future<ResponseModel> createfreq({
+    auth,
+    freqJsonString,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createfreq(
+        auth: auth, isLoading: isLoading,freqJsonString:freqJsonString);
+    return response;
+  }
 //end
 }

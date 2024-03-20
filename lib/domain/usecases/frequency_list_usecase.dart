@@ -34,12 +34,12 @@ class FrequencylistUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
-  Future<bool> createChecklistNumber({
-    checklistJsonString,
+  Future<bool> createfreq({
+    freqJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createCheckListNumber(
-          isLoading: isLoading, checklistJsonString: checklistJsonString);
+      await repository.createfreq(
+          isLoading: isLoading, freqJsonString: freqJsonString);
   deleteCkecklist(
           {required Object checklist_id, required bool isLoading}) async =>
       await repository.deleteCkecklist(

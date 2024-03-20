@@ -7516,4 +7516,23 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  Future<ResponseModel> createfreq({
+    required String auth,
+    bool? isLoading,
+    required freqJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'CMMS/CreateFrequencyList', //Addfrequency
+      Request.post,
+      freqJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }
