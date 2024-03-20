@@ -565,7 +565,7 @@ class NewPermitController extends GetxController {
 
       ///End date Time
       validTillTimeCtrlr.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.end_datetime ?? ''}').add(Duration(hours: 8))).toString()}';
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${newPermitDetailsModel.value?.end_datetime ?? ''}')).toString()}';
 
       validTillTimeCtrlrBuffer =
           newPermitDetailsModel.value?.end_datetime ?? '';
@@ -702,7 +702,6 @@ class NewPermitController extends GetxController {
         [];
     update(["historyList"]);
   }
-
 
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);

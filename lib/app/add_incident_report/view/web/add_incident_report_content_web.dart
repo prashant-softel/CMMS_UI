@@ -3400,7 +3400,7 @@ class AddPrposedAction extends StatelessWidget {
                     DataColumn2(
                         // fixedWidth: 250,
                         label: Text(
-                      "Remark ",
+                      "O & M Remark ",
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     )),
