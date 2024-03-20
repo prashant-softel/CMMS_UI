@@ -27,5 +27,5 @@ class FrequencyModel {
       );
 
   Map<String, dynamic> toJson() =>
-      {"id": id, "name": name, "status": status, "days": days};
+      {"id": id, "name": name, "days": days};
 }

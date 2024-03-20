@@ -40,7 +40,7 @@ class FrequencyListController extends GetxController {
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
-  var checklistNumberCtrlr = TextEditingController();
+  var freqNameCtrlr = TextEditingController();
   FrequencyModel? selectedItem;
   var manpowerCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
@@ -167,8 +167,8 @@ class FrequencyListController extends GetxController {
     }
   }
 
-  Future<bool> createChecklistNumber() async {
-    if (checklistNumberCtrlr.text.trim() == '') {
+  Future<bool> createfreq() async {
+    if (freqNameCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
@@ -185,35 +185,36 @@ class FrequencyListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (checklistNumberCtrlr.text.trim() == '' ||
-        selectedEquipmentId == 0 ||
-        selectedfrequencyId == 0) {
+    if (freqNameCtrlr.text.trim() == '' || manpowerCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      String _checklistNumber = checklistNumberCtrlr.text.trim();
-      String _duration = durationCtrlr.text.trim();
-      String _manpower = manpowerCtrlr.text.trim();
+      String _checklistNumber = freqNameCtrlr.text.trim();
+      // String _duration = durationCtrlr.text.trim();
+      String _manpowerString = manpowerCtrlr.text.trim();
+      int? _manpower =
+          int.tryParse(_manpowerString); // Converting string to integer
 
-      CreateChecklist createChecklist = CreateChecklist(
-          category_id: selectedEquipmentId,
-          duration: int.tryParse(_duration) ?? 0,
-          manPower: int.tryParse(_manpower) ?? 0,
-          facility_id: facilityId,
-          frequency_id: selectedfrequencyId,
-          status: 1,
-          type: 1,
-          id: 0,
-          checklist_number: _checklistNumber);
-      var checklistJsonString = [
+      if (_manpower == null) {
+        // Handle case where string cannot be parsed into integer
+        Fluttertoast.showToast(
+            msg: "Manpower should be a valid number", fontSize: 16.0);
+        return false;
+      }
+
+      FrequencyModel createChecklist = FrequencyModel(
+        name: _checklistNumber,
+        days: _manpower,
+      );
+      var freqJsonString = [
         createChecklist.toJson()
       ]; //createCheckListToJson([createChecklist]);
 
-      print({"checklistJsonString", checklistJsonString});
-      // await frequencyListPresenter.createChecklistNumber(
-      //   checklistJsonString: checklistJsonString,
-      //   isLoading: true,
-      // );
+      print({"freqJsonString", freqJsonString});
+      await frequencyListPresenter.createfreq(
+        freqJsonString: freqJsonString,
+        isLoading: true,
+      );
       return true;
     }
     return true;
@@ -226,7 +227,7 @@ class FrequencyListController extends GetxController {
   }
 
   _cleardata() {
-    checklistNumberCtrlr.text = '';
+    freqNameCtrlr.text = '';
     durationCtrlr.text = '';
     manpowerCtrlr.text = '';
 

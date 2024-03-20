@@ -11,17 +11,17 @@ class FrequencyListPresenter {
       await frequencyUsecase.getFrequencyList(
         isLoading: isLoading ?? false,
       );
-  // Future<bool> createChecklistNumber({
-  //   checklistJsonString,
-  //   required bool isLoading,
-  // }) async {
-  //   print("presenter");
-  //   frequencyUsecase.createChecklistNumber(
-  //     checklistJsonString: checklistJsonString,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
+  Future<bool> createfreq({
+    freqJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    frequencyUsecase.createfreq(
+      freqJsonString: freqJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
   //
   // deleteCkecklist(String? checklist_id, {required bool isLoading}) async =>
   //     await frequencyUsecase.deleteCkecklist(
