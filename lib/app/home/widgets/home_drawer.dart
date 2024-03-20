@@ -22,246 +22,246 @@ class HomeDrawer extends GetView<HomeController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                    SingleChildScrollView(
-                      child: Container(
-                        height: Get.height,
-                        color: Color(0xFF363A40),
-                        child: MouseRegion(
-                          onEnter: (_) {
-                            controller.toggleExpansion();
-                          },
-                          onExit: (_) {
-                            controller.toggleExpansion();
-                          },
-                          child: ListView(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 11,
-                                  wid: 7,
-                                  title: "HERO \nFUTURE \nENERGIES",
-                                  icon:
-                                      // controller.isExpanded.value
-                                      // ? "assets/files/logodrawer.jpg"
-                                      // :
-                                      "assets/files/logodrawer.jpg",
-                                  // height: !controller.isExpanded.value ? 45 : 45,
-                                  // width: !controller.isExpanded.value ? 45 : 45,
-                                  press: () {
-                                    Get.offNamed(Routes.home);
-                                  },
-                                ),
-                                Divider(
-                                  color: Colors.grey,
-                                  thickness: 0.5,
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  title: "DashBoard",
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  icon: "assets/files/home.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.home);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  title: "Breakdown Maintenance",
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  icon: "assets/files/preventive.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.breakdown);
-                                  },
-                                ),
+                  SingleChildScrollView(
+                    child: Container(
+                      height: Get.height,
+                      color: Color(0xFF363A40),
+                      child: MouseRegion(
+                        onEnter: (_) {
+                          controller.toggleExpansion();
+                        },
+                        onExit: (_) {
+                          controller.toggleExpansion();
+                        },
+                        child: ListView(children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 11,
+                                wid: 7,
+                                title: "HERO \nFUTURE \nENERGIES",
+                                icon:
+                                    // controller.isExpanded.value
+                                    // ? "assets/files/logodrawer.jpg"
+                                    // :
+                                    "assets/files/logodrawer.jpg",
+                                // height: !controller.isExpanded.value ? 45 : 45,
+                                // width: !controller.isExpanded.value ? 45 : 45,
+                                press: () {
+                                  Get.offNamed(Routes.home);
+                                },
+                              ),
+                              Divider(
+                                color: Colors.grey,
+                                thickness: 0.5,
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                title: "DashBoard",
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                icon: "assets/files/home.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.home);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                title: "Breakdown Maintenance",
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                icon: "assets/files/preventive.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.breakdown);
+                                },
+                              ),
 
-                                // MenuItem(
-                                ////                                              isexpand: controller.isExpanded.valu
-                                ///e,
-                                //title: "Warranty claim",
-                                //   icon: "assets/files/warranty.png",
-                                //   press: () {
-                                //     Get.offAllNamed(Routes.warrantyClaimList);
-                                //     //  Navigator.push(
-                                //     //         context,
-                                //     //         MaterialPageRoute(
-                                //     //             builder: (context) => WarrantyClaimListWeb()));
-                                //   },
-                                // ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  title: "Preventive Maintenance",
-                                  fontSize: 14,
-                                  width: 40,
-                                  color: Color(0xffD2D0D0),
-                                  height: 16,
-                                  icon: "assets/files/correct.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.preventive);
-                                  },
-                                ),
+                              // MenuItem(
+                              ////                                              isexpand: controller.isExpanded.valu
+                              ///e,
+                              //title: "Warranty claim",
+                              //   icon: "assets/files/warranty.png",
+                              //   press: () {
+                              //     Get.offAllNamed(Routes.warrantyClaimList);
+                              //     //  Navigator.push(
+                              //     //         context,
+                              //     //         MaterialPageRoute(
+                              //     //             builder: (context) => WarrantyClaimListWeb()));
+                              //   },
+                              // ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                title: "Preventive Maintenance",
+                                fontSize: 14,
+                                width: 40,
+                                color: Color(0xffD2D0D0),
+                                height: 16,
+                                icon: "assets/files/correct.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.preventive);
+                                },
+                              ),
 
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  title: "Module Cleaning",
-                                  icon: "assets/files/reportins.png",
-                                  fontSize: 14,
-                                  width: 40,
-                                  color: Color(0xffD2D0D0),
-                                  height: 16,
-                                  press: () {
-                                    Get.offAllNamed(
-                                        Routes.moduleCleaningDashboard);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Vegetation Control",
-                                  icon: "assets/files/maint.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.vegetationDashboard);
-                                  },
-                                ),
-                                // MenuItem(
-                                //   isexpand:
-                                //       controller.isExpanded.value,
-                                //   title: "Assets",
-                                //   icon:
-                                //       "assets/files/maintenance.png",
-                                //   press: () {
-                                //     Get.offAllNamed(
-                                //         Routes.inventory);
-                                //   },
-                                // ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Incident Report",
-                                  icon: "assets/files/misc.png",
-                                  press: () {
-                                    Get.offAllNamed(
-                                        Routes.incidentReportDashboard);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Stock Management",
-                                  icon: "assets/files/warranty.png",
-                                  press: () {
-                                    Get.offAllNamed(
-                                        Routes.stockManagementDashboardScreen);
-                                  },
-                                ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                title: "Module Cleaning",
+                                icon: "assets/files/reportins.png",
+                                fontSize: 14,
+                                width: 40,
+                                color: Color(0xffD2D0D0),
+                                height: 16,
+                                press: () {
+                                  Get.offAllNamed(
+                                      Routes.moduleCleaningDashboard);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Vegetation Control",
+                                icon: "assets/files/maint.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.vegetationDashboard);
+                                },
+                              ),
+                              // MenuItem(
+                              //   isexpand:
+                              //       controller.isExpanded.value,
+                              //   title: "Assets",
+                              //   icon:
+                              //       "assets/files/maintenance.png",
+                              //   press: () {
+                              //     Get.offAllNamed(
+                              //         Routes.inventory);
+                              //   },
+                              // ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Incident Report",
+                                icon: "assets/files/misc.png",
+                                press: () {
+                                  Get.offAllNamed(
+                                      Routes.incidentReportDashboard);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Stock Management",
+                                icon: "assets/files/warranty.png",
+                                press: () {
+                                  Get.offAllNamed(
+                                      Routes.stockManagementDashboardScreen);
+                                },
+                              ),
 
-                                // MenuItem(
-                                //   isexpand:
-                                //       controller.isExpanded.value,
-                                //   title: "Calibration",
-                                //   icon:
-                                //       "assets/files/preventive.png",
-                                //   press: () {
-                                //     Get.offAllNamed(
-                                //         Routes.calibrationList);
-                                //   },
-                                // ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Masters",
-                                  icon: "assets/files/inventory.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.masterDashboard);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "HSE Report",
-                                  icon: "assets/files/warranty.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.misDashboard);
-                                  },
-                                ),
+                              // MenuItem(
+                              //   isexpand:
+                              //       controller.isExpanded.value,
+                              //   title: "Calibration",
+                              //   icon:
+                              //       "assets/files/preventive.png",
+                              //   press: () {
+                              //     Get.offAllNamed(
+                              //         Routes.calibrationList);
+                              //   },
+                              // ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Masters",
+                                icon: "assets/files/inventory.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.masterDashboard);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "HSE Report",
+                                icon: "assets/files/warranty.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.misDashboard);
+                                },
+                              ),
 
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Audit",
-                                  icon: "assets/files/images.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.audit);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Settings",
-                                  icon: "assets/files/setting.png",
-                                  press: () {
-                                    Get.offAllNamed(Routes.setting);
-                                  },
-                                ),
-                                MenuItem(
-                                  isexpand: controller.isExpanded.value,
-                                  menuButton: controller.menuButton.value,
-                                  fontSize: 14,
-                                  width: 40,
-                                  height: 16,
-                                  color: Color(0xffD2D0D0),
-                                  title: "Log Out",
-                                  icon: "assets/files/dashboard.png",
-                                  press: () {
-                                    _isDeleteDialog();
-                                  },
-                                ),
-                              ],
-                            ),
-                          ]),
-                        ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Audit",
+                                icon: "assets/files/images.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.audit);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Settings",
+                                icon: "assets/files/setting.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.setting);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
+                                title: "Log Out",
+                                icon: "assets/files/dashboard.png",
+                                press: () {
+                                  _isDeleteDialog();
+                                },
+                              ),
+                            ],
+                          ),
+                        ]),
                       ),
                     ),
+                  ),
                 ],
               ),
             ),
@@ -325,15 +325,15 @@ class MenuItem extends StatelessWidget {
     this.color,
   }) : super(key: key);
 
-  String? title;
-  String icon;
-  bool? isexpand;
-  bool? menuButton;
-  double? fontSize;
-  double? height;
-  double? width;
-  Color? color;
-  double? wid;
+  final String? title;
+  final String icon;
+  final bool? isexpand;
+  final bool? menuButton;
+  final double? fontSize;
+  final double? height;
+  final double? width;
+  final Color? color;
+  final double? wid;
   final VoidCallback press;
 
   @override
@@ -388,63 +388,3 @@ class MenuItem extends StatelessWidget {
     );
   }
 }
-
-// class MenuItemLogo extends StatelessWidget {
-//   MenuItemLogo({
-//     Key? key,
-//     this.title,
-//     required this.icon,
-//     required this.press,
-//     this.isexpand,
-//     this.menuButton,
-//   }) : super(key: key);
-
-//   String? title;
-//   String icon;
-//   bool? isexpand;
-//   bool? menuButton;
-//   final VoidCallback press;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(left: 10),
-//       child: Container(
-//           child: Column(
-//         children: [
-//           Dimens.boxHeight20,
-//           InkWell(
-//             mouseCursor: MaterialStateMouseCursor.clickable,
-//             onTap: press,
-//             child: Row(
-//               // mainAxisAlignment: MainAxisAlignment.center,
-//               // crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 SizedBox(
-//                   child: Image.asset(
-//                     icon,
-//                   ),
-//                 ),
-//                 Dimens.boxWidth7,
-//                 isexpand! || menuButton!
-//                     ? Expanded(
-//                         child: Text(
-//                           "HERO \nFUTURE \nENERGIES",
-//                           style: TextStyle(
-//                             color: Color(0xffD2D0D0),
-//                             fontSize: 11,
-//                             fontWeight: FontWeight.w800,
-//                           ),
-//                           overflow: TextOverflow.ellipsis,
-//                         ),
-//                       )
-//                     : Text(""),
-//               ],
-//             ),
-//           ),
-//           Dimens.boxHeight10
-//         ],
-//       )),
-//     );
-//   }
-// }

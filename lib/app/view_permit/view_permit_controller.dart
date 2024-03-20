@@ -167,8 +167,15 @@ class ViewPermitController extends GetxController {
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
   Rx<int> type = 0.obs;
+  bool isOneHour(String validTill) {
+    DateTime current = DateTime.now();
+    DateTime expiryTime = DateTime.parse(validTill);
+    if (expiryTime.difference(current).inHours >= 1) {
+      return true;
+    }
+    return false;
+  }
 
-  ///
   // var issuedAtTimeCtrlr = TextEditingController();
 
   var jobDescriptionCtrlr = TextEditingController();
