@@ -423,7 +423,9 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                       child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appRedColor,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            controller.cleardata();
+                                          },
                                           text: 'Cancel')),
                                   SizedBox(
                                     width: 10,
@@ -584,13 +586,14 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                // fixedWidth: 100,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                                  "Action",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                           ],
                                           rows: List.generate(
                                             controller.frequencyList?.length ??
@@ -645,13 +648,14 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                // fixedWidth: 100,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                                  "Action",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                           ],
                                           rows: List.generate(
                                             controller.frequencyList?.length ??
@@ -668,8 +672,67 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                       '${frequencyListModelListDetails?.name}')),
                                                   DataCell(Text(
                                                       '${frequencyListModelListDetails?.days}')),
-                                                  DataCell(Text(
-                                                      '${frequencyListModelListDetails?.status}')),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller
+                                                                  .selectedItem =
+                                                              controller
+                                                                  .frequencyList!
+                                                                  .firstWhere(
+                                                            (element) =>
+                                                                "${element!.id}" ==
+                                                                controller
+                                                                    .frequencyList![
+                                                                        index]!
+                                                                    .id
+                                                                    .toString(),
+                                                          );
+
+                                                          controller
+                                                              .freqNameCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller
+                                                              .manpowerCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.days
+                                                                  .toString() ??
+                                                              '';
+
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                        },
+                                                      ),
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .deleteColor,
+                                                        icon: Icons.delete,
+                                                        message: 'Delete',
+                                                        onPress: () {
+                                                          // controller.isDeleteDialog(
+                                                          //     business_id: controller
+                                                          //         .riskTypeList[
+                                                          //             index]
+                                                          //         .id
+                                                          //         .toString(),
+                                                          //     business: controller
+                                                          //         .riskTypeList[
+                                                          //             index]
+                                                          //         .name);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  )),
                                                 ],
                                               );
                                             },

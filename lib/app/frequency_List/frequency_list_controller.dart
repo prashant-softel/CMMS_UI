@@ -93,6 +93,25 @@ class FrequencyListController extends GetxController {
       }
     }
   }
+  cleardata() {
+    freqNameCtrlr.text = '';
+    manpowerCtrlr.text = '';
+    // selectedStateId = 0;
+    // selectedCountryId = 0;
+    // selectedCityId = 0;
+    // ownerId = 0;
+    selectedItem = null;
+    // customerId = 0;
+    // operatorId = 0;
+    // SpvId = 0;
+
+    Future.delayed(Duration(seconds: 1), () {
+      getFrequencyList(true);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+  }
 
   // Future<void> getInventoryCategoryList() async {
   //   final list = await frequencyListPresenter.getInventoryCategoryList();
