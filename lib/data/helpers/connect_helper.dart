@@ -46,6 +46,7 @@ import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/pm_plan_reject_msg_dialog.dart';
+import 'package:cmms/app/widgets/pm_task_view_dialog.dart';
 import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_cancel_permit_msg_dailog.dart';
 import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
@@ -4040,7 +4041,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20',
       Request.get,
       null,
       isLoading ?? true,
@@ -6736,6 +6737,32 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> assignToPmTask({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/AssignPMTask?task_id=$taskId&assign_to=$assignId',
+      Request.put,
+      null,
+      isLoading,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PmTaskViewDialog(
+      data: parsedJson['message'],
+      taskId: taskId,
+    ));
     return responseModel;
   }
 

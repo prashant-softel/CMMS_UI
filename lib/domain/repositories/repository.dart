@@ -10483,6 +10483,33 @@ class Repository {
     }
   }
 
+  Future<bool> assignToPmTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.assignToPmTask(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> UpdatePMTaskExecution(
       {bool? isLoading, updatePMTaskExecutionJsonString}) async {
     try {

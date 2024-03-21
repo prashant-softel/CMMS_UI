@@ -75,6 +75,16 @@ class PreventiveMaintenanceTaskViewUsecase {
   }) async =>
       await repository.ClosePMTaskExecution(
           closetoJsonString: closetoJsonString, isLoading: isLoading);
+  Future<bool> assignToPmTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await repository.assignToPmTask(
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,

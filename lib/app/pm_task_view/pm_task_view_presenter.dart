@@ -88,6 +88,18 @@ class PreventiveMaintenanceTaskViewPresenter {
     );
   }
 
+  Future<bool> assignToPmTask({
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.assignToPmTask(
+      assignId: assignId,
+      taskId: taskId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask(
     taskId,
     isLoading,

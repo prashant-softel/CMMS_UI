@@ -452,6 +452,17 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
   }
 
+  assignToPmTask({required int id}) async {
+    {
+      final response =
+          await preventiveMaintenanceTaskViewPresenter.assignToPmTask(
+        assignId: selectedAssignedToId,
+        taskId: id,
+        isLoading: true,
+      );
+    }
+  }
+
   rejectPmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
