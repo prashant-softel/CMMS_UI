@@ -555,7 +555,7 @@ abstract class Styles {
     fontSize: Dimens.ten,
   );
   static TextStyle appDarkGrey12 = TextStyle(
-    color: ColorValues.appDarkGreyColor,
+    color: ColorValues.blackColor,
     fontSize: Dimens.twelve,
   );
 
@@ -671,7 +671,7 @@ abstract class Styles {
     fontSize: Dimens.fifteen,
   );
   static TextStyle appDarkBlue12 = TextStyle(
-    color: ColorValues.appDarkBlueColor,
+    color: ColorValues.navyBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.twelve,
   );
@@ -681,7 +681,7 @@ abstract class Styles {
     fontSize: Dimens.thirteen,
   );
   static TextStyle appDarkBlue15 = TextStyle(
-    color: ColorValues.appDarkBlueColor,
+    color: ColorValues.navyBlueColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.fifteen,
   );

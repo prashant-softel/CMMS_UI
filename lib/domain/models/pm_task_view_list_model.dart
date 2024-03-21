@@ -198,11 +198,11 @@ class ChecklistObservation {
       this.failure_waightage,
       this.is_custom_check_point,
       this.is_file_required,
-      required int linked_job_id,
-      required int cp_ok,
+      int? linked_job_id,
+      int? cp_ok,
       this.observation,
       this.requirement,
-      required int type_bool,
+      int? type_bool,
       this.type_range,
       this.type_text,
       this.files,
@@ -210,9 +210,9 @@ class ChecklistObservation {
       this.min_range,
       this.observation_value_controller,
       this.type_text_value_controller}) {
-    this.linked_job_id.value = linked_job_id;
-    this.cp_ok.value = cp_ok;
-    this.type_bool.value = type_bool;
+    this.linked_job_id.value = linked_job_id!;
+    this.cp_ok.value = cp_ok!;
+    this.type_bool.value = type_bool!;
   }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
