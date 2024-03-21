@@ -86,6 +86,8 @@ class PreventiveTaskContentMobile
                                 : PmTaskListModel();
                             return GestureDetector(
                               onTap: () {
+                                controller.clearStoreData();
+                                controller.clearStoreDatatype();
                                 var _taskId =
                                     controller.pmTaskList[index]!.id ?? 0;
                                 Get.toNamed(Routes.pmTaskView,

@@ -292,8 +292,6 @@ import '../preventive_List/view/preventive_list_screen.dart';
 import '../preventive_maintanance/view/preventive_maintenance_screen.dart';
 import '../preventive_maintenance_execution/preventive_maintenance_execution_binding.dart';
 import '../preventive_maintenance_execution/view/preventive_maintenance_execution_screen.dart';
-import '../preventive_maintenance_execution_view/preventive_maintenance_execution_view_binding.dart';
-import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../request_goods_orders_list.dart/view/request_goods_orders__list_screen.dart';
@@ -542,11 +540,7 @@ class AppPages {
       page: PreventiveMaintenanceExecutionScreen.new,
       binding: PreventiveMaintenanceExecutionBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.pmExecutionView,
-      page: PreventiveMaintenanceExecutionViewScreen.new,
-      binding: PreventiveMaintenanceExecutionViewBinding(),
-    ),
+
     GetPage<dynamic>(
         name: _Paths.newWarrantyClaimList,
         page: NewWarrantyClaimWeb.new,
