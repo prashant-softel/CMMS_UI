@@ -170,7 +170,8 @@ class ViewPermitController extends GetxController {
   bool isOneHour(String validTill) {
     DateTime current = DateTime.now();
     DateTime expiryTime = DateTime.parse(validTill);
-    if (expiryTime.difference(current).inHours >= 1) {
+    Duration timeDifference = expiryTime.difference(current);
+    if (timeDifference.inHours >= 1) {
       return true;
     }
     return false;
