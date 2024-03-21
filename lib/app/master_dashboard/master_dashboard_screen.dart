@@ -559,51 +559,6 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(
-                                        builder: ((isHovered) {
-                                          return createContentTile(
-                                              title: "Modules List",
-                                              onTap: () {
-                                                controller.goToFeatureList();
-                                              });
-                                        }),
-                                      ),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Roles",
-                                            onTap: () {
-                                              controller.goToRoleTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Role Access",
-                                            onTap: () {
-                                              controller.goToRoleAccess();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Role Notifications",
-                                            onTap: () {
-                                              controller.goToRoleNotification();
-                                            });
-                                      }))),
-                                    ],
-                                  ),
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    padding: Dimens.edgeInsets15,
-                                    crossAxisSpacing: 70,
-                                    mainAxisSpacing: 6,
-                                    crossAxisCount:
-                                        Responsive.isMobile(context) ? 2 : 5,
-                                    childAspectRatio:
-                                        Responsive.isMobile(context)
-                                            ? (itemWidth / itemHeight)
-                                            : 5,
-                                    children: <Widget>[
                                       OnHover(builder: (((isHovered) {
                                         return
                                             // varUserAccessModel.value.access_list!
@@ -678,6 +633,52 @@ class MastersDashboard extends GetView<MastersController> {
                                       // }))),
                                     ],
                                   ),
+
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
+                                      OnHover(
+                                        builder: ((isHovered) {
+                                          return createContentTile(
+                                              title: "Modules List",
+                                              onTap: () {
+                                                controller.goToFeatureList();
+                                              });
+                                        }),
+                                      ),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Roles",
+                                            onTap: () {
+                                              controller.goToRoleTypeList();
+                                            });
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Role Access",
+                                            onTap: () {
+                                              controller.goToRoleAccess();
+                                            });
+                                      }))),
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Role Notifications",
+                                            onTap: () {
+                                              controller.goToRoleNotification();
+                                            });
+                                      }))),
+                                    ],
+                                  ),
                                   GridView.count(
                                     shrinkWrap: true,
                                     primary: false,
@@ -701,13 +702,6 @@ class MastersDashboard extends GetView<MastersController> {
                                       }))),
                                       OnHover(builder: (((isHovered) {
                                         return createContentTile(
-                                            title: "DSM Charges",
-                                            onTap: () {
-                                              controller.goToDsmChargesScreen();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
                                             title: "Competencies",
                                             onTap: () {
                                               controller.goToCompetencyScreen();
@@ -719,38 +713,6 @@ class MastersDashboard extends GetView<MastersController> {
                                             onTap: () {
                                               controller
                                                   .goToEscalationMatrixScreen();
-                                            });
-                                      }))),
-                                    ],
-                                  ),
-
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    padding: Dimens.edgeInsets15,
-                                    crossAxisSpacing: 70,
-                                    mainAxisSpacing: 6,
-                                    crossAxisCount:
-                                        Responsive.isMobile(context) ? 2 : 5,
-                                    childAspectRatio:
-                                        Responsive.isMobile(context)
-                                            ? (itemWidth / itemHeight)
-                                            : 5,
-                                    children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Import DSM List",
-                                            onTap: () {
-                                              controller
-                                                  .goToImportDsmListChargesScreen();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Import DSM",
-                                            onTap: () {
-                                              controller
-                                                  .goToImportDsmChargesScreen();
                                             });
                                       }))),
                                     ],
