@@ -58,6 +58,7 @@ import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/dsm_charges/dsm_charges_binding.dart';
 import 'package:cmms/app/dsm_charges/view/dsm_charges_screen.dart';
+import 'package:cmms/app/dsm_dashboard/dsm_dashboard_binding.dart';
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_binding.dart';
 import 'package:cmms/app/edit_return_mrs/view/edit_return_mrs_screen.dart';
@@ -220,6 +221,7 @@ import '../calibration_certificate/view/calibration_certificate_screen.dart';
 import '../change_password/change_password_binding.dart';
 import '../change_password/view/change_password_screen.dart';
 import '../create_observation/create_observation_binding.dart';
+import '../dsm_dashboard/dsm_dashboard_screan.dart';
 import '../employee_stock_report/employee_stock_report_binding.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
@@ -558,7 +560,7 @@ class AppPages {
     //     name: _Paths.viewPermitWebScreen,
     //     page: ViewPermitWebScreen.new,
     //     binding: ViewPermitBinding()),
-        
+
     GetPage<dynamic>(
         name: _Paths.viewPermitScreen,
         page: ViewPermitScreen.new,
@@ -1231,6 +1233,11 @@ class AppPages {
       name: _Paths.importDsmChargesScreen,
       page: ImportDsmChargesScreen.new,
       binding: ImportDsmChargesBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.dsmDashboardScreen,
+      page: DsmDashboard.new,
+      binding: DsmDashboardBinding(),
     ),
   ];
 }
