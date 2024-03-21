@@ -1674,7 +1674,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
       return;
     }
 
-    final time = await pickTime_web(context, position);
+    final time = await pickTime_web(context, position, date);
     if (time == null) {
       return;
     }
@@ -1721,27 +1721,67 @@ class NewPermitWeb extends GetView<NewPermitController> {
       firstDate: DateTime.now(),
       lastDate: DateTime(DateTime.now().year + 5),
     );
-
+    print('New Date hai: $newDate');
     if (newDate == null) return null;
 
     return newDate;
   }
 
-  Future<TimeOfDay?> pickTime_web(BuildContext context, int position) async {
+  Future<TimeOfDay?> pickTime_web(
+      BuildContext context, int position, DateTime? selectedDate) async {
     DateTime dateTime = position == 0
         ? controller.selectedBreakdownTime.value
         : controller.selectedValidTillTime.value;
     final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
+      context: context,
+      initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child!,
+        );
+      },
+    );
+    print('New Date new time : $newTime');
     if (newTime == null) {
+      return null;
+    }
+
+    final currentTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      TimeOfDay.now().hour,
+      TimeOfDay.now().minute,
+    );
+    final selected = DateTime(
+      selectedDate?.year ?? DateTime.now().year,
+      selectedDate?.month ?? DateTime.now().month,
+      selectedDate?.day ?? DateTime.now().day,
+      newTime.hour,
+      newTime.minute,
+    );
+
+    // If date is today and time is in the past, show an error message
+    print('seklected time : $selected');
+    if (currentTime.isAfter(selected)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Time"),
+            content: Text("Please select a time in the future."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
       return null;
     }
 
@@ -2485,6 +2525,14 @@ class NewPermitWeb extends GetView<NewPermitController> {
   }
 }
 
+extension DateTimeExtensions on DateTime {
+  bool get isToday {
+    final now = DateTime.now();
+    return this.year == now.year &&
+        this.month == now.month &&
+        this.day == now.day;
+  }
+}
 // import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/widgets/custom_elevated_button.dart';
 // import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
