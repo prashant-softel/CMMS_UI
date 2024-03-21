@@ -3877,6 +3877,18 @@ class DataRepository extends DomainRepository {
         ClosePMTaskExecutionJsonString: ClosePMTaskExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> assignToPmTask({
+    required String auth,
+    int? assignId,
+    int? taskId,
+    required bool isLoading,
+  }) async =>
+      await connectHelper.assignToPmTask(
+        auth: auth,
+        assignId: assignId,
+        taskId: taskId,
+        isLoading: isLoading,
+      );
   Future<ResponseModel> UpdatePMTaskExecution({
     required String auth,
     updatePMTaskExecutionJsonString,

@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../home/widgets/mobile_header_widget.dart';
 import '../preventive_list_controller.dart';
 
 class PreventiveChecklistListContentMobile
@@ -19,6 +20,9 @@ class PreventiveChecklistListContentMobile
           child: //
               Column(
             children: [
+              Dimens.boxHeight10,
+              HeaderWidgetMobile(),
+              Dimens.boxHeight10,
               Expanded(
                 child: ListView.builder(
                     //physics: const NeverScrollableScrollPhysics(),

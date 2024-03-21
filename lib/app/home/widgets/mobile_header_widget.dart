@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HeaderWidgetMobile extends GetView<HomeController> {
-  HeaderWidgetMobile({
-    super.key,
-  });
+  HeaderWidgetMobile({super.key, this.onPressed});
   final HomeController controller = Get.find<HomeController>();
-
+  void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -32,6 +30,11 @@ class HeaderWidgetMobile extends GetView<HomeController> {
                   onValueChanged: controller.onValueChanged,
                 ),
               ),
+            ),
+            IconButton(
+              icon: Icon(Icons.date_range),
+              padding: EdgeInsets.zero,
+              onPressed: onPressed,
             ),
           ],
         ),

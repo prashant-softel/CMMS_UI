@@ -38,7 +38,7 @@ class AssignToPMTaskDialog extends GetView {
             ),
             Dimens.boxWidth10,
             Text(
-              "PM378459",
+              "PMT${id}",
               style:
                   TextStyle(fontSize: 15, color: ColorValues.appDarkBlueColor),
             ),
@@ -107,26 +107,7 @@ class AssignToPMTaskDialog extends GetView {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        CustomRichText(title: 'Due date: '),
-                        Dimens.boxWidth20,
-                        _buildDueDateField_web(context),
-
-                        // CustomTextFieldForStock(
-                        //   width: MediaQuery.of(context).size.width / 4,
-                        //   numberTextField: true,
-                        //   onTap: () {
-                        //     controller.openDueTimeDatePicker =
-                        //         !controller.openDueTimeDatePicker;
-                        //     controller.update(['stock_Mangement']);
-                        //   },
-                        //   textController: controller.dueDateTimeCtrlr,
-                        // ),
-                      ],
-                    ),
                     Spacer(),
-                    SizedBox(height: 5),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       SizedBox(
                         width: 15,
@@ -144,9 +125,8 @@ class AssignToPMTaskDialog extends GetView {
                       ElevatedButton(
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
-                          // print('Incident Report Id${incidentReportId![0]}');
-                          // _controller.abandonAllExecutionButton(id: id);
                           Get.back();
+                          controller.assignToPmTask(id: id ?? 0);
                         },
                         child: const Text('Submit'),
                       ),
