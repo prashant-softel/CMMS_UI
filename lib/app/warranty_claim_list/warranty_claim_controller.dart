@@ -340,7 +340,7 @@ class WarrantyClaimController extends GetxController {
       getInventoryCategoryList();
     });
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessList();
+      getBusinessList(facilityId);
     });
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
@@ -474,9 +474,10 @@ class WarrantyClaimController extends GetxController {
     update(['inventory_list']);
   }
 
-  void getBusinessList() async {
+  void getBusinessList(int facilityId) async {
     supplierNameList.value = <BusinessListModel>[];
     final _supplierNameList = await warrantyClaimPresenter.getBusinessList(
+      facilityId:facilityId,
       isLoading: true,
       //  categoryIds: categoryIds,
       businessType: 5,

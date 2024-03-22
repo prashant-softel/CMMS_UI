@@ -9,10 +9,12 @@ class PurchaseGoodsorderViewUsecase {
   PurchaseGoodsorderViewUsecase(this._repository);
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
+    required int facilityId,
     required int requestID,
   }) async =>
       await _repository.getRoDetailsByID(
         requestID: requestID,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
   Future<List<GetAssetDataModel?>?> getAssetList({
@@ -58,11 +60,13 @@ class PurchaseGoodsorderViewUsecase {
   Future<List<HistoryModel>?> getRoHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getRoHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   void saveValue({String? roId}) async =>

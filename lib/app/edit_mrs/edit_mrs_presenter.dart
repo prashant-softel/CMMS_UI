@@ -25,10 +25,12 @@ class EditMrsPresenter {
 
   Future<MrsDetailsModel?> getMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await editmrsUsecase.getMrsDetails(
         mrsId: mrsId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? mrsId}) async {

@@ -8,9 +8,10 @@ class IncidentRiskTypeUsecase {
   Repository repository;
 
   Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
-      {required bool isLoading}) async {
+      {required bool isLoading,required int facilityId}) async {
     return repository.getIncidentRiskType(
       isLoading: isLoading,
+      facilityId: facilityId
     );
   }
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
@@ -11,6 +13,11 @@ class ViewPmPlanController extends GetxController {
   ViewPmPlanController(
     this.viewPmPlanPresenter,
   );
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
+
   ViewPmPlanPresenter viewPmPlanPresenter;
   final HomeController homecontroller = Get.find();
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
@@ -20,12 +27,22 @@ class ViewPmPlanController extends GetxController {
 
   @override
   void onInit() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        // getPmPlanDetails(
+        //     pmPlanId: pmPlanId.value, isloading: true, facilityId: facilityId);
+      }
+    });
     try {
       await setPMPlanId();
       if (pmPlanId != 0) {
         print({"fghvjbggjhjgk", pmPlanId});
 
-        await getPmPlanDetails(pmPlanId: pmPlanId.value, isloading: true);
+        await getPmPlanDetails(
+            pmPlanId: pmPlanId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -59,9 +76,10 @@ class ViewPmPlanController extends GetxController {
     }
   }
 
-  Future<void> getPmPlanDetails({int? pmPlanId, bool? isloading}) async {
+  Future<void> getPmPlanDetails(
+      {int? pmPlanId, bool? isloading, required int facilityId}) async {
     final _pmPlanDetailsModel = await viewPmPlanPresenter.getPmPlanDetails(
-        pmPlanId: pmPlanId, isLoading: isloading);
+        facilityId: facilityId, pmPlanId: pmPlanId, isLoading: isloading);
 
     if (_pmPlanDetailsModel != null) {
       pmPlanDetailsModel.value = _pmPlanDetailsModel;

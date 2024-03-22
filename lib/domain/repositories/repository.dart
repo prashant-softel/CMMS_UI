@@ -1654,6 +1654,7 @@ class Repository {
     // required String categoryIds,
     int? blockId,
     String? categoryIds,
+    required int facilityId,
     required bool isLoading,
   }) async {
     try {
@@ -1664,6 +1665,7 @@ class Repository {
         // categoryIds: categoryIds ?? "",
         // businessType: businessType,
         isLoading: isLoading,
+        facilityId:facilityId,
         auth: auth,
       );
       if (!res.hasError) {
@@ -1735,6 +1737,7 @@ class Repository {
 
   Future<NewPermitDetailModel?> getViewPermitDetail({
     bool? isLoading,
+    required int facilityId,
     int? permitId,
   }) async {
     try {
@@ -1742,6 +1745,7 @@ class Repository {
       final res = await _dataRepository.getViewPermitDetail(
         auth: auth,
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1804,6 +1808,7 @@ class Repository {
   ///MC Execution Details
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,
+    required int facilityId,
     int? executionId,
   }) async {
     try {
@@ -1811,6 +1816,7 @@ class Repository {
       final res = await _dataRepository.getMCExecutionDetail(
         auth: auth,
         executionId: executionId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1838,6 +1844,7 @@ class Repository {
 
   Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
+    required int facilityId,
     int? planId,
   }) async {
     try {
@@ -1845,6 +1852,7 @@ class Repository {
       final res = await _dataRepository.getMcPlanDetail(
         auth: auth,
         planId: planId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1941,6 +1949,7 @@ class Repository {
 
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
+    required int facilityId,
     int? requestID,
   }) async {
     try {
@@ -1948,6 +1957,7 @@ class Repository {
       final res = await _dataRepository.getRoDetailsByID(
         auth: auth,
         requestID: requestID,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -2688,6 +2698,7 @@ class Repository {
 
   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
     String auth,
+    int facilityId,
     int? id,
     bool? isLoading,
   ) async {
@@ -2700,6 +2711,7 @@ class Repository {
         // blockId: blockId,
         // categoryIds: categoryIds,
         id: id,
+        facilityId:facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -3098,6 +3110,7 @@ class Repository {
   ///Permit Cancel Condition List
   Future<List<PermitCancelListModel>> getPermitConditionList({
     required int? isCancle,
+    required int facilityId,
     required bool isLoading,
   }) async {
     try {
@@ -3106,6 +3119,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getPermitConditionList(
         isCancle: isCancle,
+        facilityId:facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -3334,6 +3348,7 @@ class Repository {
   // get mc task eqp data
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required int? taskId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     try {
@@ -3342,6 +3357,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getMCTaskEquipmentList(
         taskId: taskId,
+        facilityId:facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -4872,6 +4888,7 @@ class Repository {
 
   Future<List<JobDetailsModel>> getJobDetails(
     String? auth,
+    int facilityId,
     int jobId,
     int? userId,
     bool? isLoading,
@@ -4882,6 +4899,7 @@ class Repository {
       final res = await _dataRepository.getJobDetails(
         auth: auth,
         jobId: jobId,
+        facilityId:facilityId,
         userId: userId,
         isLoading: isLoading,
       );
@@ -4905,6 +4923,7 @@ class Repository {
 
   Future<List<JobAssociatedModel>> getjobDetailsModel(
     String? auth,
+    int facilityId,
     int jobId,
     int? userId,
     bool? isLoading,
@@ -4915,6 +4934,7 @@ class Repository {
       final res = await _dataRepository.getjobDetailsModel(
         auth: auth,
         jobId: jobId,
+        facilityId:facilityId,
         userId: userId,
         isLoading: isLoading,
       );
@@ -5729,6 +5749,7 @@ class Repository {
 
   Future<PermitDetailsModel?> getPermitDetails(
     int? permitId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -5736,6 +5757,7 @@ class Repository {
       final res = await _dataRepository.getPermitDetails(
         auth: auth,
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 
@@ -5757,6 +5779,7 @@ class Repository {
 
   Future<List<HistoryModel>?> getJobCardHistory(
     int? moduleType,
+    int facilityId,
     int? jobCardId,
     bool? isLoading,
   ) async {
@@ -5765,6 +5788,7 @@ class Repository {
       final res = await _dataRepository.getJobCardHistory(
         auth: auth,
         moduleType: moduleType,
+        facilityId:facilityId,
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
@@ -5793,6 +5817,7 @@ class Repository {
   ///Permit History
   Future<List<HistoryModel>?> getPermitHistory(
     int? moduleType,
+    int facilityId,
     int? permitId,
     bool? isLoading,
   ) async {
@@ -5801,6 +5826,7 @@ class Repository {
       final res = await _dataRepository.getPermitHistory(
         auth: auth,
         moduleType: moduleType,
+        facilityId:facilityId,
         permitId: permitId,
         isLoading: isLoading,
       );
@@ -5953,6 +5979,7 @@ class Repository {
   Future<List<HistoryModel>?> getHistory(
     //String? auth,
     int? moduleType,
+    int facilityId,
     int? id,
     bool? isLoading,
   ) async {
@@ -5961,6 +5988,7 @@ class Repository {
       final res = await _dataRepository.getHistory(
         auth: auth,
         isLoading: isLoading,
+        facilityId:facilityId,
         moduleType: moduleType,
         id: id,
       );
@@ -5987,6 +6015,7 @@ class Repository {
   Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
     //String? auth,
     int? permitId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -5994,6 +6023,7 @@ class Repository {
       final res = await _dataRepository.getJobsLinkdToPermitList(
         auth: auth,
         isLoading: isLoading,
+        facilityId:facilityId,
         permitId: permitId,
       );
 
@@ -6021,6 +6051,7 @@ class Repository {
   Future<List<MRSListByJobIdModel>?> getMrsListByModule(
     //String? auth,
     int? jobId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -6029,6 +6060,7 @@ class Repository {
         auth: auth,
         isLoading: isLoading,
         jobId: jobId,
+        facilityId:facilityId
       );
 
       if (!res.hasError) {
@@ -6692,6 +6724,7 @@ class Repository {
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,
+    required int facilityId,
     int? permitId,
   }) async {
     try {
@@ -6699,6 +6732,7 @@ class Repository {
       final res = await _dataRepository.getNewPermitDetail(
         auth: auth,
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -6727,12 +6761,14 @@ class Repository {
   Future<PmtaskViewModel?> getPmtaskViewList(
     int? scheduleId,
     bool? isLoading,
+    int facilityId
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPmtaskViewList(
         auth: auth,
         scheduleId: scheduleId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       // print(res.data);
@@ -7858,6 +7894,7 @@ class Repository {
   Future<List<HistoryModel>?> getRoHistory(
     int? moduleType,
     int? id,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -7866,6 +7903,7 @@ class Repository {
         auth: auth,
         moduleType: moduleType,
         id: id,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       // print('Permit History: ${res.data}');
@@ -8140,6 +8178,7 @@ class Repository {
 /////
   Future<CalibrationDetailModel?> getCalibrationView(
     int? calibrationId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -8147,6 +8186,7 @@ class Repository {
       final res = await _dataRepository.getCalibrationView(
         auth: auth,
         calibrationId: calibrationId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -9240,6 +9280,7 @@ class Repository {
 
   Future<MrsDetailsModel?> getMrsDetails(
     int? mrsId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -9248,6 +9289,7 @@ class Repository {
         auth: auth,
         mrsId: mrsId,
         isLoading: isLoading,
+        facilityId: facilityId
       );
       if (!res.hasError) {
         final MrsDetailsModel _mrsDetailModel =
@@ -9267,6 +9309,7 @@ class Repository {
 
   Future<PMPlanDetail?> getPmPlanDetails(
     int? pmPlanId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -9274,6 +9317,7 @@ class Repository {
       final res = await _dataRepository.getPmPlanDetails(
         auth: auth,
         pmPlanId: pmPlanId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -9966,6 +10010,7 @@ class Repository {
 
   Future<ReturnMrsDetailsModel?> getReturnMrsDetails(
     int? mrsId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -9973,6 +10018,7 @@ class Repository {
       final res = await _dataRepository.getReturnMrsDetails(
         auth: auth,
         mrsId: mrsId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -10768,6 +10814,7 @@ class Repository {
 
   Future<AuditPlanDetailModel?> getAuditPlanDetails(
     int? auditPlanId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -10775,6 +10822,7 @@ class Repository {
       final res = await _dataRepository.getAuditPlanDetails(
         auth: auth,
         auditPlanId: auditPlanId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -11442,6 +11490,7 @@ class Repository {
     // int? blockId,
     // required String categoryIds,
     required bool isLoading,
+    required int facilityId
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -11450,6 +11499,7 @@ class Repository {
       final res = await _dataRepository.getIncidentRiskType(
         // facility_id: facility_id,
         isLoading: isLoading,
+        facilityId:facilityId,
         auth: auth,
       );
       print('Incident Risk Type List Data: ${res.data}');

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
@@ -18,18 +20,29 @@ class ViewAuditPlanController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditId = 0.obs;
   Rx<int> type = 0.obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
 
   Rx<AuditPlanDetailModel?> auditPlanDetailModel = AuditPlanDetailModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   @override
   void onInit() async {
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        getAuditPlanDetails(
+            auditPlanId: auditId.value,
+            isloading: true,
+            facilityId: facilityId);
+      });
+    });
     try {
       await setauditPlanId();
       if (auditId != 0) {
         print({"fghvjbggjhjgk", auditId});
 
-        await getAuditPlanDetails(auditPlanId: auditId.value, isloading: true);
+        await getAuditPlanDetails(auditPlanId: auditId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -59,9 +72,9 @@ class ViewAuditPlanController extends GetxController {
     }
   }
 
-  Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading}) async {
+  Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading,required int facilityId}) async {
     final _auditPlanDetailsModel = await viewAuditPlanPresenter
-        .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading);
+        .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading, facilityId:facilityId);
 
     if (_auditPlanDetailsModel != null) {
       auditPlanDetailModel.value = _auditPlanDetailsModel;

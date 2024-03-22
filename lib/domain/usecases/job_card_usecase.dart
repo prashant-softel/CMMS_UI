@@ -22,16 +22,9 @@ class JobCardUsecase {
         facilityId,
         isLoading,
       );
-  Future<List<JobCardModel?>?> jobCardList({
-    int? facilityId,
-    bool? isLoading,
-    bool? isExport
-  }) async =>
-      await repository.jobCardList(
-        facilityId,
-        isLoading,
-        isExport
-      );
+  Future<List<JobCardModel?>?> jobCardList(
+          {int? facilityId, bool? isLoading, bool? isExport}) async =>
+      await repository.jobCardList(facilityId, isLoading, isExport);
 
   ///
   Future<Map<String, dynamic>?> createJobCard({
@@ -58,10 +51,12 @@ class JobCardUsecase {
   ///
   Future<PermitDetailsModel?> getPermitDetails({
     int? permitId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getPermitDetails(
         permitId,
+        facilityId,
         isLoading,
       );
 
@@ -79,11 +74,13 @@ class JobCardUsecase {
   Future<List<HistoryModel>?> getJobCardHistory({
     moduleType,
     jobCardId,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getJobCardHistory(
         moduleType,
         jobCardId,
+        facilityId,
         isLoading,
       );
   void clearValue() async => repository.clearData(LocalKeys.jobCardId);

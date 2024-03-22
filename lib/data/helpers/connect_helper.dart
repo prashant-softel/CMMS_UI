@@ -226,11 +226,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getBusinessList({
     required bool isLoading,
+    required int facilityId,
     required String auth,
     int? businessType,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'CMMS/GetBusinessList?businessType=$businessType',
+      'CMMS/GetBusinessList?businessType=$businessType&facility_id=$facilityId',
       Request.getMultiparts,
       null,
       isLoading,
@@ -539,9 +540,12 @@ class ConnectHelper {
   ///Permit Cancel Condition List
 
   Future<ResponseModel> getPermitConditionList(
-      {required bool isLoading, required String auth, int? isCancle}) async {
+      {required bool isLoading,
+      required String auth,
+      int? isCancle,
+      required int facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitConditionList?isCancle=$isCancle',
+      'Permit/GetPermitConditionList?isCancle=$isCancle&facility_id=$facilityId',
       Request.getMultiparts,
       null,
       isLoading,
@@ -672,11 +676,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getMCTaskEquipmentList({
     required bool isLoading,
+    required int facilityId,
     required String auth,
     int? taskId,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskEquipmentList?taskId=$taskId',
+      'MC/GetMCTaskEquipmentList?taskId=$taskId&facility_id=$facilityId',
       Request.getMultiparts,
       null,
       isLoading,
@@ -701,7 +706,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facility_id=$facility_id&' +
+      'MC/GetMCTaskList?facilityId=$facility_id&' +
           startDateParam +
           endDateParam,
       Request.getMultiparts,
@@ -1903,12 +1908,13 @@ class ConnectHelper {
   Future<ResponseModel> getInventoryDetailList({
     required String auth,
     bool? isLoading,
+    required int facilityId,
     // int? facilityId,
     int? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryDetails?id=$id',
+      'Inventory/GetInventoryDetails?id=$id&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? true,
@@ -2073,12 +2079,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getJobDetails({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? jobId,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobDetails?job_id=$jobId',
+      'Job/GetJobDetails?job_id=$jobId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -2092,12 +2099,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getjobDetailsModel({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? jobId,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/GetJCListByJobId?jobId=$jobId',
+      'JC/GetJCListByJobId?jobId=$jobId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3149,11 +3157,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getNewPermitDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId',
+      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3166,11 +3175,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getViewPermitDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId',
+      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3203,11 +3213,12 @@ class ConnectHelper {
   ///MC Execution Details
   Future<ResponseModel> getMCExecutionDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? executionId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCExecutionDetails?executionId=$executionId',
+      'MC/GetMCExecutionDetails?executionId=$executionId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3221,11 +3232,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getMcPlanDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? planId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCPlanDetails?planId=$planId',
+      'MC/GetMCPlanDetails?planId=$planId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3275,11 +3287,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getRoDetailsByID({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? requestID,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      "RequestOrder/GetRODetailsByID?requestID=$requestID",
+      "RequestOrder/GetRODetailsByID?requestID=$requestID&facility_id=$facilityId",
       Request.get,
       null,
       isLoading ?? false,
@@ -3330,11 +3343,12 @@ class ConnectHelper {
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
+    required int facilityId,
     int? id,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$id&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3347,11 +3361,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getJobsLinkdToPermitList({
     String? auth,
+    required int facilityId,
     int? permitId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobListByPermitId?permitId=$permitId',
+      'Job/GetJobListByPermitId?permitId=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3365,10 +3380,11 @@ class ConnectHelper {
   Future<ResponseModel> getMrsListByModule({
     String? auth,
     int? jobId,
+    required int facilityId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/getMRSListByModule?jobId=$jobId',
+      'MRS/getMRSListByModule?jobId=$jobId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3513,12 +3529,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getJobCardHistory({
     required String? auth,
+    required int facilityId,
     int? moduleType,
     int? jobCardId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$jobCardId',
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$jobCardId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3533,12 +3550,13 @@ class ConnectHelper {
   ///Permit History
   Future<ResponseModel> getPermitHistory({
     required String? auth,
+    required int facilityId,
     int? moduleType,
     int? permitId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$permitId',
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3553,12 +3571,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getRoHistory({
     required String? auth,
+    required int facilityId,
     int? moduleType,
     int? id,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$id&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3776,11 +3795,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getPermitDetails({
     required String? auth,
+    required int facilityId,
     int? permitId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId',
+      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -4073,11 +4093,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getPmtaskViewList({
     required String? auth,
+    required int facilityId,
     int? scheduleId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?task_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?task_id=$scheduleId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -4943,11 +4964,12 @@ class ConnectHelper {
   ///
   Future<ResponseModel> getCalibrationView({
     required String? auth,
+    required int facilityId,
     int? calibrationId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Calibration/GetCalibrationDetails?id=$calibrationId',
+      'Calibration/GetCalibrationDetails?id=$calibrationId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -5795,11 +5817,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getMrsDetails({
     required String? auth,
+    required int facilityId,
     int? mrsId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/getMRSDetails?ID=$mrsId',
+      'MRS/getMRSDetails?ID=$mrsId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -5813,11 +5836,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getPmPlanDetails({
     required String? auth,
+    required int facilityId,
     int? pmPlanId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/GetPMPlanDetail?planId=$pmPlanId',
+      'PM/GetPMPlanDetail?planId=$pmPlanId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -6471,11 +6495,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getReturnMrsDetails({
     required String? auth,
+    required int facilityId,
     int? mrsId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/getReturnDataByID?ID=$mrsId',
+      'MRS/getReturnDataByID?ID=$mrsId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -6960,11 +6985,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getAuditPlanDetails({
     required String? auth,
+    required int facilityId,
     int? auditPlanId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetAuditPlanByID?id=$auditPlanId',
+      'AuditPlan/GetAuditPlanByID?id=$auditPlanId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? true,
@@ -7298,9 +7324,9 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getIncidentRiskType(
-      {required bool isLoading, required String auth, int? facility_id}) async {
+      {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetIncidentTypeList',
+      'MISMaster/GetIncidentTypeList?facility_id=$facilityId',
       Request.getMultiparts,
       null,
       isLoading,

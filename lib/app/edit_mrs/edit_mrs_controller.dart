@@ -48,7 +48,7 @@ class EditMrsController extends GetxController {
               facilityId,
             );
             if (mrsId != 0) {
-              await getMrsDetails(mrsId: mrsId.value, isloading: true);
+              await getMrsDetails(mrsId: mrsId.value, isloading: true, facilityId: facilityId);
             }
           });
         }
@@ -79,9 +79,9 @@ class EditMrsController extends GetxController {
     }
   }
 
-  Future<void> getMrsDetails({int? mrsId, bool? isloading}) async {
+  Future<void> getMrsDetails({int? mrsId, bool? isloading,required int facilityId}) async {
     final _mrsDetailsModel = await editMrsPresenter.getMrsDetails(
-        mrsId: mrsId, isLoading: isloading);
+      facilityId:facilityId,mrsId: mrsId, isLoading: isloading);
 
     if (_mrsDetailsModel != null) {
       whereUsedId = _mrsDetailsModel.whereUsedRefID ?? 0;

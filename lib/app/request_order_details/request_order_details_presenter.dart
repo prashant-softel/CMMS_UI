@@ -20,9 +20,11 @@ class GoodsOrdersReqDetailPresenter {
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
+    required int facilityId
   }) async {
     return goodsOrdersReqDetailUsecase.getRoDetailsByID(
       requestID: requestID,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

@@ -76,10 +76,12 @@ class AddModuleCleaningExecutionUsecase {
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required bool isLoading,
     required int? taskId,
+    required int facilityId
   }) async {
     return _repository.getMCTaskEquipmentList(
       isLoading: isLoading,
       taskId: taskId,
+      facilityId: facilityId
     );
   }
 
@@ -118,9 +120,11 @@ class AddModuleCleaningExecutionUsecase {
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,
     required int executionId,
+    required int facilityId,
   }) async =>
       await _repository.getMCExecutionDetail(
         executionId: executionId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

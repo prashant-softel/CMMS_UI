@@ -95,9 +95,10 @@ class AddUserPresenter {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
+    required int facilityId,
     required bool isLoading,
   }) async {
-    return addUserUsecase.getBusinessList(type: ListType, isLoading: isLoading);
+    return addUserUsecase.getBusinessList(type: ListType, isLoading: isLoading, facilityId: facilityId);
   }
 
   Future<bool> addUser({

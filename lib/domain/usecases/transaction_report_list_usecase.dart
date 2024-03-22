@@ -72,8 +72,9 @@ class TransactionReportListUsecase {
         isLoading: isLoading, facilityId: facilityId, categoryId: 0);
   }
 
-  Future<List<BusinessListModel?>?> getBusinessList() async =>
+  Future<List<BusinessListModel?>?> getBusinessList(int facilityId) async =>
       await repository.getBusinessList(
+        facilityId:facilityId,
         isLoading: true,
       );
 }

@@ -114,7 +114,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         updatePaidBy();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getBusinessList(4);
+        getBusinessList(4,facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
@@ -271,8 +271,9 @@ class ReceiveGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType) async {
+  Future<void> getBusinessList(ListType,int facilityId) async {
     final list = await receiveGoodsOrdersPresenter.getBusinessList(
+      facilityId:facilityId,
       ListType: ListType,
       isLoading: true,
     );

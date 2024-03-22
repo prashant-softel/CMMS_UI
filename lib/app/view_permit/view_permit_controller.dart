@@ -185,7 +185,7 @@ class ViewPermitController extends GetxController {
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
 
   //block
-  int facilityId = 0;
+  int facilityId = 1779;
   StreamSubscription<int>? facilityIdStreamSubscription;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<bool> isBlockSelected = true.obs;
@@ -472,14 +472,19 @@ class ViewPermitController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
+        getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
+        // Future.delayed(Duration(seconds: 1), () {
+
+        // });
       });
-      await getViewPermitDetail(permitId: permitId.value);
+      await getViewPermitDetail(
+          permitId: permitId.value, facilityId: facilityId);
       await getSafetyMeasureList();
-      await getPermitHistory(permitId: permitId.value);
-      await getPermitConditionList(isCancle: isCancle!);
+      await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
+      await getPermitConditionList(isCancle: isCancle!, facilityId: facilityId);
       await getPermitCloseConditionList(isClose: isClose!);
       await getPermitExtendConditionList(isExtend: isExtend!);
       await getEmployeeList();
@@ -791,7 +796,8 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> getPermitHistory({required int permitId}) async {
+  Future<void> getPermitHistory(
+      {required int permitId, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
     // int tempModuleType = 21;
@@ -800,6 +806,7 @@ class ViewPermitController extends GetxController {
           // tempModuleType,
           // tempJobCardId,
           moduleType,
+          facilityId,
           permitId,
           true,
         ) ??
@@ -807,12 +814,13 @@ class ViewPermitController extends GetxController {
     update(["historyList"]);
   }
 
-  Future<void> getViewPermitDetail({required int permitId}) async {
+  Future<void> getViewPermitDetail(
+      {required int permitId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     viewPermitDetailsList?.value = <NewPermitDetailModel>[];
 
-    final _viewPermitDetails =
-        await viewPermitPresenter.getViewPermitDetail(permitId: permitId);
+    final _viewPermitDetails = await viewPermitPresenter.getViewPermitDetail(
+        permitId: permitId, facilityId: facilityId);
     print('New Permit Detail:$_viewPermitDetails');
 
     if (_viewPermitDetails != null) {
@@ -853,10 +861,12 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> getPermitConditionList({required int isCancle}) async {
+  Future<void> getPermitConditionList(
+      {required int isCancle, required int facilityId}) async {
     permitCancelConditionList!.value = <PermitCancelListModel>[];
     final _permitCancelConditionList =
         await viewPermitPresenter.getPermitConditionList(
+      facilityId: facilityId,
       isLoading: true,
       // categoryIds: categoryIds,
       isCancle: 1,
@@ -936,11 +946,11 @@ class ViewPermitController extends GetxController {
     update(['safety_measure_list']);
   }
 
-  Future<void> getInventoryDetailList() async {
+  Future<void> getInventoryDetailList(int facilityId) async {
     inventoryDetailList!.value = <InventoryDetailModel>[];
 
     final list = await viewPermitPresenter.getInventoryDetailList(
-        isLoading: true, id: 14430);
+        isLoading: true, id: 14430, facilityId: facilityId);
     print('InventoryDetail List:$inventoryDetailList');
     if (list != null) {
       // selectedSupplierNameList.clear();

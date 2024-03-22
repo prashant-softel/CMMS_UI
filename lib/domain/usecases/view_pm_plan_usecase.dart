@@ -25,10 +25,12 @@ class ViewPmPlanUsecase {
       );
   Future<PMPlanDetail?> getPmPlanDetails({
     int? pmPlanId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getPmPlanDetails(
         pmPlanId,
+        facilityId,
         isLoading,
       );
   void saveValue({String? pmPlanId}) async =>

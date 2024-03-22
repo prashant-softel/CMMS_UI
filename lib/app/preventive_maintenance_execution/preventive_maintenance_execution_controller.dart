@@ -34,6 +34,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var isToggleOn = false.obs;
   var isToggleokOn = false.obs;
   var isToggleBoolOn = false.obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   Rx<List<List<Map<String, String>>>> rowItemobs =
@@ -79,12 +83,23 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   List<dynamic> fileIds = [];
   @override
   void onInit() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        getPmtaskViewList(
+            scheduleId: scheduleId.value,
+            isloading: true,
+            facilityId: facilityId);
+      }
+    });
     try {
       token = await repository.getSecuredValue(LocalKeys.authToken);
 
       await setScheduleId();
       if (scheduleId != 0) {
-        await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+        await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true, facilityId: facilityId);
 
         getHistory();
       }
@@ -166,9 +181,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     print(isTouchable.value);
   }
 
-  Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
+  Future<void> getPmtaskViewList({int? scheduleId, bool? isloading, required int facilityId}) async {
     final _permitDetails = await preventiveMaintenanceExecutionPresenter
-        .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
+        .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading, facilityId: facilityId);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       _permitDetails.schedules?.forEach((element) {

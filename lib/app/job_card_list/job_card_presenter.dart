@@ -57,10 +57,12 @@ class JobCardPresenter {
   ///
   Future<PermitDetailsModel?> getPermitDetails({
     int? permitId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await jobCardDetailsUsecase.getPermitDetails(
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 

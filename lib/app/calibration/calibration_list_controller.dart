@@ -62,7 +62,7 @@ class CalibrationListController extends GetxController {
       });
     });
     Future.delayed(Duration(seconds: 1), () {
-      getVenderNameList();
+      getVenderNameList(facilityId);
     });
     super.onInit();
   }
@@ -89,9 +89,10 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  void getVenderNameList() async {
+  void getVenderNameList(int facilityId) async {
     venderNameList.value = <BusinessListModel>[];
     final _venderNameList = await calibrationListPresenter.getVenderNameList(
+      facilityId:facilityId,
       isLoading: true,
       businessType: 4,
     );

@@ -19,12 +19,14 @@ class AddEscalationMatrixUsecase {
 
    Future<List<HistoryModel>?> getIncidentReportHistory({
     moduleType,
+    facilityId,
     id,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
 

@@ -18,11 +18,13 @@ class ViewIncidentReportUsecase {
   Future<List<HistoryModel>?> getIncidentReportHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
 

@@ -74,11 +74,17 @@ class CreatePmPlanController extends GetxController {
     try {
       await setPmPlanId();
       if (pmPlanId.value != 0) {
-        await getPmPlanDetails(pmPlanId: pmPlanId.value, isloading: true);
+        await getPmPlanDetails(
+            pmPlanId: pmPlanId.value, isloading: true, facilityId: facilityId);
       }
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        //   Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
+          getPmPlanDetails(
+              pmPlanId: pmPlanId.value,
+              isloading: true,
+              facilityId: facilityId);
+        });
 
         Future.delayed(Duration(seconds: 1), () {
           getInventoryCategoryList();
@@ -116,9 +122,10 @@ class CreatePmPlanController extends GetxController {
     }
   }
 
-  Future<void> getPmPlanDetails({int? pmPlanId, bool? isloading}) async {
+  Future<void> getPmPlanDetails(
+      {int? pmPlanId, bool? isloading, required int facilityId}) async {
     final _pmPlanDetailsModel = await createPmPlanPresenter.getPmPlanDetails(
-        pmPlanId: pmPlanId, isLoading: isloading);
+        facilityId: facilityId, pmPlanId: pmPlanId, isLoading: isloading);
 
     if (_pmPlanDetailsModel != null) {
       selectedInventoryNameIdList.value = [];

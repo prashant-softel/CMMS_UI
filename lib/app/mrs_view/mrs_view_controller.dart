@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/mrs_view/mrs_view_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
@@ -11,6 +13,10 @@ class MrsViewController extends GetxController {
   );
   MrsViewPresenter mrsViewPresenter;
   final HomeController homecontroller = Get.find();
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
 
   Rx<int> mrsId = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
@@ -19,10 +25,22 @@ class MrsViewController extends GetxController {
   ///
   @override
   void onInit() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+      }
+      Future.delayed(Duration(seconds: 1), () {
+        getMrsDetails(
+            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+      });
+    });
     try {
       await setMrsId();
       if (mrsId != 0) {
-        await getMrsDetails(mrsId: mrsId.value, isloading: true);
+        await getMrsDetails(
+            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -46,9 +64,10 @@ class MrsViewController extends GetxController {
     }
   }
 
-  Future<void> getMrsDetails({int? mrsId, bool? isloading}) async {
+  Future<void> getMrsDetails(
+      {int? mrsId, bool? isloading, required int facilityId}) async {
     final _mrsDetailsModel = await mrsViewPresenter.getMrsDetails(
-        mrsId: mrsId, isLoading: isloading);
+        facilityId: facilityId, mrsId: mrsId, isLoading: isloading);
 
     if (_mrsDetailsModel != null) {
       mrsDetailsModel.value = _mrsDetailsModel;

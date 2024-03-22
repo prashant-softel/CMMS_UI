@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,8 @@ class JobDetailsController extends GetxController {
 
   // Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
   Rx<JobModel?> statusJobmodel = JobModel().obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
@@ -90,12 +94,22 @@ class JobDetailsController extends GetxController {
 
   @override
   void onReady() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+      }
+      Future.delayed(Duration(seconds: 1), () {
+        getJobDetails(jobId.value, facilityId);
+      });
+    });
     try {
       await setJobId();
-      getJobDetails(jobId.value);
+      getJobDetails(jobId.value, facilityId);
 
-      getjobDetailsModel(jobId.value);
-      getMrsListByModule(jobId: jobId.value);
+      getjobDetailsModel(jobId.value, facilityId);
+      getMrsListByModule(jobId: jobId.value, facilityId: facilityId);
 
       isDataLoading.value = false;
       textControllers =
@@ -154,11 +168,11 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  void getJobDetails(int? jobId) async {
+  void getJobDetails(int? jobId, int facilityId) async {
     try {
       jobDetailsList?.value = <JobDetailsModel>[];
       final _jobDetailsList = await jobDetailsPresenter.getJobDetails(
-          jobId: jobId, isLoading: false);
+          facilityId: facilityId, jobId: jobId, isLoading: false);
 
       if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
         jobDetailsModel.value = _jobDetailsList[0];
@@ -171,11 +185,12 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  void getjobDetailsModel(int? jobId) async {
+  void getjobDetailsModel(int? jobId, int facilityId) async {
     try {
       jobAssociatedModelsList?.value = <JobAssociatedModel>[];
-      final _jobAssociatedModelsList = await jobDetailsPresenter
-          .getjobDetailsModel(jobId: jobId, isLoading: false);
+      final _jobAssociatedModelsList =
+          await jobDetailsPresenter.getjobDetailsModel(
+              jobId: jobId, isLoading: false, facilityId: facilityId);
 
       if (_jobAssociatedModelsList != null &&
           _jobAssociatedModelsList.isNotEmpty) {
@@ -189,7 +204,8 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  Future<void> getMrsListByModule({required int jobId}) async {
+  Future<void> getMrsListByModule(
+      {required int jobId, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     // int moduleType = 81;
     // // int tempModuleType = 21;
@@ -197,6 +213,7 @@ class JobDetailsController extends GetxController {
     //
     listMrsByJobId?.value = await jobDetailsPresenter.getMrsListByModule(
           jobId,
+          facilityId,
           false,
         ) ??
         [];
@@ -275,7 +292,7 @@ class JobDetailsController extends GetxController {
     // close pop-up
     Get.back();
     // reload screen
-    getJobDetails(jobId.value);
+    getJobDetails(jobId.value, facilityId);
   }
 
   onPermitSelected(NewPermitModel? newPermitModel) {

@@ -81,7 +81,7 @@ class ApproveJcJobDialog extends GetView<JobCardDetailsController> {
                                   isLoading: true,
                                 ) ??
                                 [];
-                            controller.getHistory();
+                            controller.getHistory(controller.facilityId);
                             controller.createPlantDetailsTableData();
 
                             controller.createJobDetailsTableData();

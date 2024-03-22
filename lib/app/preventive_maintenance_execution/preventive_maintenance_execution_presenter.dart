@@ -11,11 +11,13 @@ class PreventiveMaintenanceExecutionPresenter {
 
   Future<PmtaskViewModel?> getPmtaskViewList({
     int? scheduleId,
+    required int facilityId,
     bool? isloading,
   }) async =>
       await preventiveMaintenanceExecutionUsecase.getPmtaskViewList(
         scheduleId: scheduleId,
         isLoading: isloading,
+        facilityId: facilityId
       );
   Future<List<dynamic>> updatePmExecution({
     pmExecutionJsonString,

@@ -43,11 +43,13 @@ class ViewWarrantyClaimUsecase {
   Future<List<HistoryModel>?> getWarrantyClaimHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
 

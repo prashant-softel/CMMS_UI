@@ -95,7 +95,7 @@ class ModuleCleaningPlanningController extends GetxController {
       });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getMcPlanDetail(planId: id.value);
+          getMcPlanDetail(planId: id.value, facilityId: facilityId);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
@@ -260,12 +260,12 @@ class ModuleCleaningPlanningController extends GetxController {
     print('update MC   data: $updateMcModelJsonString');
   }
 
-  Future<void> getMcPlanDetail({required int planId}) async {
+  Future<void> getMcPlanDetail({required int planId,required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
     final _mcPlanDetails = await moduleCleaningPlanningPresenter
-        .getMcPlanDetail(planId: planId, isLoading: true);
+        .getMcPlanDetail(planId: planId,facilityId:facilityId, isLoading: true);
     print('MC plan Detail:$_mcPlanDetails');
 
     if (_mcPlanDetails != null) {

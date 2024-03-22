@@ -83,12 +83,21 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isFacilitySelected.value = true;
         getAssignedToList(facilityId);
       }
+      Future.delayed(Duration(seconds: 1), () {
+        getPmtaskViewList(
+            scheduleId: scheduleId.value,
+            isloading: true,
+            facilityId: facilityId);
+      });
     });
     try {
       await setScheduleId();
 
       if (scheduleId != 0) {
-        await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+        await getPmtaskViewList(
+            scheduleId: scheduleId.value,
+            isloading: true,
+            facilityId: facilityId);
         getHistory();
         getMrsListByModuleTask(taskId: scheduleId.value);
       }
@@ -167,10 +176,14 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     }
   }
 
-  Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
+  Future<void> getPmtaskViewList(
+      {int? scheduleId, bool? isloading, required int facilityId}) async {
 //scheduleId = 5326;
-    final _permitDetails = await preventiveMaintenanceTaskViewPresenter
-        .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
+    final _permitDetails =
+        await preventiveMaintenanceTaskViewPresenter.getPmtaskViewList(
+            scheduleId: scheduleId,
+            isloading: isloading,
+            facilityId: facilityId);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       scheduleCheckPoint!.value = _permitDetails.schedules ?? [];
@@ -320,7 +333,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                             if (scheduleId != 0) {
                               await getPmtaskViewList(
                                   scheduleId: scheduleId.value,
-                                  isloading: true);
+                                  isloading: true,
+                                  facilityId: facilityId);
                               getHistory();
                               getMrsListByModuleTask(taskId: scheduleId.value);
                             }

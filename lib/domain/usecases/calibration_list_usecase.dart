@@ -9,10 +9,12 @@ class CalibrationListUsecase {
   CalibrationListUsecase(this._repository);
   Future<List<BusinessListModel>> getVenderNameList({
     required bool isLoading,
+    required int facilityId,
     required int? businessType,
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
+      facilityId:facilityId,
       businessType: businessType,
     );
   }

@@ -39,11 +39,13 @@ class AddIncidentReportUsecase {
   Future<List<HistoryModel>?> getIncidentReportHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
 
@@ -77,11 +79,13 @@ class AddIncidentReportUsecase {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int? businessType,
+    required int facilityId,
     required bool isLoading,
   }) async =>
       await _repository.getBusinessList(
         businessType: businessType,
         isLoading: isLoading,
+        facilityId: facilityId
       );
 
   Future<List<EmployeeListModel>>

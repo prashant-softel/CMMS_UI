@@ -54,7 +54,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
         if (roId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
-            getRoDetailsByID(requestID: roId.value);
+            getRoDetailsByID(requestID: roId.value, facilityId: facilityId);
             getRoHistory(id: roId.value);
           });
         }
@@ -144,11 +144,11 @@ class GoodsOrdersReqDetailController extends GetxController {
     ]);
   }
 
-  Future<void> getRoDetailsByID({required int requestID}) async {
+  Future<void> getRoDetailsByID({required int requestID,required int facilityId}) async {
     getPurchaseDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
 
     final _getPurchaseDetailsById = await goodsOrdersReqDetailPresenter
-        .getRoDetailsByID(requestID: requestID);
+        .getRoDetailsByID(requestID: requestID, facilityId: facilityId);
     // print('Edit gosods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {

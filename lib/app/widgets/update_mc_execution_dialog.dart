@@ -100,7 +100,7 @@ class UpdateMCExecutionDialog extends GetView {
                     if (mcExecutionId![0] != null) {
                       Future.delayed(Duration(seconds: 1), () {
                         controller.getMCExecutionDetail(
-                            executionId: controller.data['id']!);
+                            executionId: controller.data['id']!, facilityId:controller.facilityId);
                       });
                     }
 

@@ -13,6 +13,7 @@ class JobDetailsUsecase {
 
   Future<List<JobDetailsModel?>?> getJobDetails({
     required String auth,
+    required int facilityId,
     required int jobId,
     int? userId,
     bool? isLoading,
@@ -20,11 +21,13 @@ class JobDetailsUsecase {
       await repository.getJobDetails(
         auth,
         jobId,
+        facilityId,
         userId,
         isLoading,
       );
   Future<List<JobAssociatedModel?>?> getjobDetailsModel({
     required String auth,
+    required int facilityId,
     required int jobId,
     int? userId,
     bool? isLoading,
@@ -32,6 +35,7 @@ class JobDetailsUsecase {
       await repository.getjobDetailsModel(
         auth,
         jobId,
+        facilityId,
         userId,
         isLoading,
       );
@@ -50,10 +54,12 @@ class JobDetailsUsecase {
 
   Future<List<MRSListByJobIdModel>?> getMrsListByModule({
     jobId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getMrsListByModule(
         jobId,
+        facilityId,
         isLoading,
       );
 
