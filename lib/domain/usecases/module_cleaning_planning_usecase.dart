@@ -101,14 +101,17 @@ class ModuleCleaningPlanningUsecase {
   }) async =>
       await repository.getPmPlanDetails(
         pmPlanId,
+        facilityId!,
         isLoading,
       );
   Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
     required int planId,
+    required int facilityId,
   }) async =>
       await repository.getMcPlanDetail(
         planId: planId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
   void saveValueMcId({String? mcid}) async =>

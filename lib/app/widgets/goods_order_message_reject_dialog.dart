@@ -101,7 +101,7 @@ class GoodsOrderMessageRejectDialog extends GetView {
                         controller.getUnitCurrencyList();
                       });
                       Future.delayed(Duration(seconds: 1), () {
-                        controller.getBusinessList(4);
+                        controller.getBusinessList(4,controller.facilityId);
                       });
                       Future.delayed(Duration(seconds: 1), () {
                         controller.getAssetList(controller.facilityId);

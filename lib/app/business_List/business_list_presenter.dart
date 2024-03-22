@@ -50,10 +50,12 @@ class BusinessListPresenter {
     int? blockId,
     // int? type,
     int? businessType,
+    required int facilityId,
     String? categoryIds,
     bool? isLoading,
   }) async =>
       await businessUsecase.getBusinessList(
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
         businessType: businessType,
       );

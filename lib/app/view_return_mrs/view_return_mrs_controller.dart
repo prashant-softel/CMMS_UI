@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_return_mrs/view_return_mrs_presenter.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,10 @@ class MrsReturnViewController extends GetxController {
   MrsReturnViewController(
     this.mrsReturnViewPresenter,
   );
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
   MrsReturnViewPresenter mrsReturnViewPresenter;
   final HomeController homecontroller = Get.find();
   Rx<int> mrsId = 0.obs;
@@ -19,10 +25,19 @@ class MrsReturnViewController extends GetxController {
 
   @override
   void onInit() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        getReturnMrsDetails(
+            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+      }
+    });
     try {
       await setMrsId();
       if (mrsId != 0) {
-        await getReturnMrsDetails(mrsId: mrsId.value, isloading: true);
+        await getReturnMrsDetails(mrsId: mrsId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -46,9 +61,9 @@ class MrsReturnViewController extends GetxController {
     }
   }
 
-  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading}) async {
+  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading,required int facilityId}) async {
     final _returnMrsrsDetailsModel = await mrsReturnViewPresenter
-        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading);
+        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading,facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;

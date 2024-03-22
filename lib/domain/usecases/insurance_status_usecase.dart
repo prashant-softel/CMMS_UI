@@ -38,10 +38,12 @@ class InsuranceStatusUsecase {
   }
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
+    required int facilityId,
     bool isLoading = true,
   }) async =>
       await repository.getBusinessList(
         businessType: type,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 

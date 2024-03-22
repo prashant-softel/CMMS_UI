@@ -36,19 +36,23 @@ class CreateGrievanceUsecase {
   Future<List<HistoryModel>?> getRoHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getRoHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
+    required int facilityId,
     required int requestID,
   }) async =>
       await repository.getRoDetailsByID(
         requestID: requestID,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
   void saveValue({String? roId}) async =>

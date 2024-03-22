@@ -24,10 +24,12 @@ class EditMrsReturnPresenter {
 
   Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await editmrsReturnUsecase.getReturnMrsDetails(
         mrsId: mrsId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 }

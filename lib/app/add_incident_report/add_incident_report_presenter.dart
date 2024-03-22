@@ -33,11 +33,13 @@ class AddIncidentReportPresenter {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     int? businessType,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await incidentReportUsecase.getBusinessList(
         isLoading: isLoading ?? false,
         businessType: businessType,
+        facilityId: facilityId
       );
   Future<List<BodyInjuredModel?>?> getBodyInjuredData({
     bool? isLoading,

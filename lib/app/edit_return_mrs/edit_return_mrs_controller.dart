@@ -41,7 +41,7 @@ class EditMrsReturnController extends GetxController {
   void onInit() async {
     mrsId = Get.arguments;
     if (mrsId != 0) {
-      await getReturnMrsDetails(mrsId: mrsId, isloading: true);
+      await getReturnMrsDetails(mrsId: mrsId, isloading: true, facilityId: facilityId);
     }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -49,14 +49,16 @@ class EditMrsReturnController extends GetxController {
         getCmmsItemList(
           facilityId,
         );
+        getReturnMrsDetails(
+            mrsId: mrsId, isloading: true, facilityId: facilityId);
       });
     });
     super.onInit();
   }
 
-  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading}) async {
+  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading,required int facilityId}) async {
     final _returnMrsrsDetailsModel = await editmrsReturnPresenter
-        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading);
+        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
       rowItem.value = [];

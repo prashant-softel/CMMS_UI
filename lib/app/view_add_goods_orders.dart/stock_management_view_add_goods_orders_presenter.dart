@@ -73,10 +73,11 @@ class ViewAddGoodsOrdersPresenter {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
+    required int facilityId,
     required bool isLoading,
   }) async {
     return viewAddGoodsOrdersUsecase.getBusinessList(
-        type: ListType, isLoading: isLoading);
+        type: ListType, isLoading: isLoading, facilityId: facilityId);
   }
 
   Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({

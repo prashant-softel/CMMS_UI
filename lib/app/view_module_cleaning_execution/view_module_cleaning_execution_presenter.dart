@@ -31,11 +31,13 @@ class ViewModuleCleaningExecutionPresenter {
 
   Future<List<GetMCTaskEquipmentList>> getMCTaskEquipmentList({
     required bool isLoading,
+    required int facilityId,
     required int? taskId,
   }) async {
     return viewModuleCleaningExecutionUsecase.getMCTaskEquipmentList(
       isLoading: isLoading,
       taskId: taskId,
+      facilityId: facilityId
     );
   }
 
@@ -52,9 +54,11 @@ class ViewModuleCleaningExecutionPresenter {
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,
     required int executionId,
+    required int facilityId,
   }) async {
     return viewModuleCleaningExecutionUsecase.getMCExecutionDetail(
       executionId: executionId,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

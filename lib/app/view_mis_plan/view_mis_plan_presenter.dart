@@ -27,10 +27,12 @@ class ViewMisPlanPresenter {
 
   Future<AuditPlanDetailModel?> getAuditPlanDetails({
     int? auditPlanId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await viewMisPlanUsecase.getAuditPlanDetails(
         auditPlanId: auditPlanId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? auditId}) async {

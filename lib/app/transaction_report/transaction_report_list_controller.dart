@@ -390,7 +390,7 @@ class TransactionReportListController extends GetxController {
   Future<void> getBusinessList() async {
     businessNameList?.value = <BusinessListModel>[];
     final _businessNameList =
-        await transactionReportListPresenter.getBusinessList();
+        await transactionReportListPresenter.getBusinessList(facilityId);
 
     if (_businessNameList != null) {
       businessNameList!.value = _businessNameList;

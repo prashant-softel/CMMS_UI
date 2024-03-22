@@ -13,8 +13,9 @@ class IncidentRiskTypePresenter {
 
   Future<List<IncidentRiskTypeModell>> getIncidentRiskType({
     required bool isLoading,
+    required int facilityId
   }) async {
-    return incidentRiskTypeUsecase.getIncidentRiskType(isLoading: isLoading);
+    return incidentRiskTypeUsecase.getIncidentRiskType(isLoading: isLoading, facilityId: facilityId);
   }
 
   Future<bool> createIncidentRiskType({

@@ -10,9 +10,11 @@ class ViewMcPlaningPresenter {
   Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
     required int planId,
+    required int facilityId,
   }) async {
     return viewMcPlaningUsecase.getMcPlanDetail(
       planId: planId,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

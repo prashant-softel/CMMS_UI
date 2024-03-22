@@ -11,12 +11,10 @@ class AuditTaskViewUsecase {
   AuditTaskViewUsecase(this.repository);
   Future<PmtaskViewModel?> getPmtaskViewList({
     int? scheduleId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getPmtaskViewList(
-        scheduleId,
-        isLoading,
-      );
+      await repository.getPmtaskViewList(scheduleId, isLoading, facilityId);
   Future<List<NewPermitModel?>?> getPermitList({
     int? facilityId,
     bool? selfView,
@@ -78,11 +76,13 @@ class AuditTaskViewUsecase {
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask({

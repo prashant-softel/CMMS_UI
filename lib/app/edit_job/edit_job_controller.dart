@@ -115,10 +115,13 @@ class EditJobController extends GetxController {
       await setJobId();
       //
       if (jobID.value != 0) {
-        getJobDetails(jobID.value);
+        getJobDetails(jobID.value, facilityId);
       }
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         selectedFacilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getJobDetails(jobID.value, facilityId);
+        });
 
         // await getFacilityList();
         Future.delayed(Duration(seconds: 1), () {
@@ -165,10 +168,10 @@ class EditJobController extends GetxController {
     }
   }
 
-  Future<void> getJobDetails(int _jobId) async {
+  Future<void> getJobDetails(int _jobId,int facilityId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
     final _jobDetailsList =
-        await jobDetailsPresenter.getJobDetails(jobId: _jobId);
+        await jobDetailsPresenter.getJobDetails(jobId: _jobId,facilityId: facilityId);
 
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];

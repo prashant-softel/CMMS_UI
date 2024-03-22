@@ -30,11 +30,13 @@ class ViewAddGoodsOrdersUsecase {
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   Future<Map<String, dynamic>> goodsOrderRejectButton({
@@ -65,10 +67,12 @@ class ViewAddGoodsOrdersUsecase {
   //     );
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
+    required int facilityId,
     bool isLoading = true,
   }) async =>
       await _repository.getBusinessList(
         businessType: type,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({

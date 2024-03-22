@@ -11,9 +11,11 @@ class ViewMcPlaningUsecase {
   Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
     required int planId,
+    required int facilityId,
   }) async =>
       await repository.getMcPlanDetail(
         planId: planId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
   Future<Map<String, dynamic>> mcPlanApprovedButton({
@@ -27,11 +29,13 @@ class ViewMcPlaningUsecase {
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   Future<List<EquipmentListModel>> getEquipmentModelList({

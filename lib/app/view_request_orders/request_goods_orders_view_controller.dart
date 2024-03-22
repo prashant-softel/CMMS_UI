@@ -196,7 +196,7 @@ class PurchaseGoodsorderViewController extends GetxController {
     getPurchaseDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
 
     final _getPurchaseDetailsById = await purchaseGoodsorderViewPresenter
-        .getRoDetailsByID(requestID: requestID);
+        .getRoDetailsByID(requestID: requestID, facilityId: facilityId);
     // print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {

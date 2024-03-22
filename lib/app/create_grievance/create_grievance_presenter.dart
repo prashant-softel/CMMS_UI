@@ -20,9 +20,11 @@ class CreateGrievancePresenter {
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
+    required int facilityId
   }) async {
     return createGrievanceUsecase.getRoDetailsByID(
       requestID: requestID,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

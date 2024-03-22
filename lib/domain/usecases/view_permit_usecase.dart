@@ -34,12 +34,14 @@ class ViewPermitUsecase {
 
   Future<List<HistoryModel>?> getPermitHistory({
     moduleType,
+    facilityId,
     permitId,
     bool? isLoading,
   }) async =>
       await repository.getPermitHistory(
         moduleType,
         permitId,
+        facilityId,
         isLoading,
       );
 
@@ -209,11 +211,11 @@ class ViewPermitUsecase {
   }
 
   Future<List<PermitCancelListModel>> getPermitConditionList(
-      {required bool isLoading, required int? isCancle}) async {
+      {required bool isLoading,
+      required int? isCancle,
+      required int facilityId}) async {
     return repository.getPermitConditionList(
-      isLoading: isLoading,
-      isCancle: isCancle,
-    );
+        isLoading: isLoading, isCancle: isCancle, facilityId: facilityId);
   }
 
   Future<List<PermitCancelListModel>> getPermitCloseConditionList(
@@ -234,10 +236,12 @@ class ViewPermitUsecase {
 
   Future<NewPermitDetailModel?> getViewPermitDetail({
     bool? isLoading,
+    required int facilityId,
     required int permitId,
   }) async =>
       await repository.getViewPermitDetail(
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -283,11 +287,13 @@ class ViewPermitUsecase {
 
   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     required String auth,
+    required int facilityId,
     int? id,
     bool? isLoading,
   }) async =>
       await repository.getInventoryDetailList(
         auth,
+        facilityId,
         id,
         isLoading,
       );

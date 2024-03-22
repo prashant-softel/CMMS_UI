@@ -78,6 +78,6 @@ class TransactionReportListPresenter {
     );
   }
 
-  Future<List<BusinessListModel?>?> getBusinessList() async =>
-      await transactionReportListUsecase.getBusinessList();
+  Future<List<BusinessListModel?>?> getBusinessList(int facilityId) async =>
+      await transactionReportListUsecase.getBusinessList(facilityId);
 }

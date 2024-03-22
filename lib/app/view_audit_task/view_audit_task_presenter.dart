@@ -28,11 +28,13 @@ class ViewAuditTaskPresenter {
 
   Future<AuditPlanDetailModel?> getAuditPlanDetails({
     int? auditPlanId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await viewAuditTaskUsecase.getAuditPlanDetails(
         auditPlanId: auditPlanId,
         isLoading: isLoading,
+        facilityId: facilityId
       );
   void saveValue({String? auditTaskId}) async {
     return viewAuditTaskUsecase.saveValue(auditTaskId: auditTaskId);

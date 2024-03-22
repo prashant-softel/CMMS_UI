@@ -12,6 +12,7 @@ class JobDetailsPresenter {
   ///
   Future<List<JobDetailsModel?>?> getJobDetails({
     String? auth,
+    required int facilityId,
     int? jobId,
     int? userId,
     bool? isLoading,
@@ -19,11 +20,13 @@ class JobDetailsPresenter {
       await jobDetailsUsecase.getJobDetails(
         auth: auth ?? "",
         jobId: jobId ?? 0,
+        facilityId:facilityId,
         userId: userId,
         isLoading: isLoading,
       );
   Future<List<JobAssociatedModel?>?> getjobDetailsModel({
     String? auth,
+    required int facilityId,
     int? jobId,
     int? userId,
     bool? isLoading,
@@ -32,6 +35,7 @@ class JobDetailsPresenter {
         auth: auth ?? "",
         jobId: jobId ?? 0,
         userId: userId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 
@@ -49,10 +53,12 @@ class JobDetailsPresenter {
 
   Future<List<MRSListByJobIdModel>?> getMrsListByModule(
     jobId,
+    int facilityId,
     isLoading,
   ) async =>
       await jobDetailsUsecase.getMrsListByModule(
         jobId: jobId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 

@@ -8,20 +8,24 @@ class CalibrationViewUsecase {
   CalibrationViewUsecase(this.repository);
   Future<CalibrationDetailModel?> getCalibrationView({
     int? calibrationId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getCalibrationView(
         calibrationId,
+        facilityId,
         isLoading,
       );
   Future<List<HistoryModel>?> getHistory({
     moduleType,
+    facilityId,
     calibrationId,
     bool? isLoading,
   }) async =>
       await repository.getHistory(
         moduleType,
         calibrationId,
+        facilityId,
         isLoading,
       );
 }

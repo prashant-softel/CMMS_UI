@@ -92,11 +92,13 @@ class NewPermitUsecase {
 
   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     required String auth,
+    required int facilityId,
     int? id,
     bool? isLoading,
   }) async =>
       await repository.getInventoryDetailList(
         auth,
+        facilityId,
         id,
         isLoading,
       );
@@ -190,11 +192,13 @@ class NewPermitUsecase {
   Future<List<HistoryModel>?> getPermitHistory({
     moduleType,
     permitId,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getPermitHistory(
         moduleType,
         permitId,
+        facilityId,
         isLoading,
       );
 
@@ -235,10 +239,12 @@ class NewPermitUsecase {
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,
+    required int facilityId,
     required int permitId,
   }) async =>
       await repository.getNewPermitDetail(
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 

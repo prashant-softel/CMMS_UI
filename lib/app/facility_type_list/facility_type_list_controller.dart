@@ -143,13 +143,13 @@ class FacilityTypeListController extends GetxController {
 
       // Check if the business lists are already fetched
       if (ownerList.isEmpty) {
-        await getBusinessList(1);
+        await getBusinessList(1,facilityId);
       }
       if (customerList.isEmpty) {
-        await getBusinessList(2);
+        await getBusinessList(2,facilityId);
       }
       if (operatorList.isEmpty) {
-        await getBusinessList(3);
+        await getBusinessList(3, facilityId);
       }
       if (SpvList.isEmpty) {
         await getSpvList();
@@ -376,8 +376,9 @@ class FacilityTypeListController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType) async {
+  Future<void> getBusinessList(ListType,int facilityId) async {
     final list = await facilityTypeListPresenter.getBusinessList(
+      facilityId:facilityId,
       ListType: ListType,
       isLoading: true,
     );

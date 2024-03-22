@@ -7,10 +7,12 @@ class MrsReturnViewPresenter {
   MrsReturnViewUsecase mrsReturnViewUsecase;
   Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await mrsReturnViewUsecase.getReturnMrsDetails(
         mrsId: mrsId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? mrsId}) async {

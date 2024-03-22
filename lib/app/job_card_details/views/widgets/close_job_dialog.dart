@@ -78,7 +78,7 @@ class closeJobDialog extends GetView<JobCardDetailsController> {
                                   isLoading: true,
                                 ) ??
                                 [];
-                            controller.getHistory();
+                            controller.getHistory(controller.facilityId);
                             controller.createPlantDetailsTableData();
 
                             controller.createJobDetailsTableData();

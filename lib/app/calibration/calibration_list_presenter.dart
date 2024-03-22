@@ -8,11 +8,13 @@ class CalibrationListPresenter {
   CalibrationListUsecase calibrationListUsecase;
   Future<List<BusinessListModel>> getVenderNameList({
     required bool isLoading,
+    required int facilityId,
     required int? businessType,
     int? blockId,
   }) async {
     return calibrationListUsecase.getVenderNameList(
       isLoading: isLoading,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }

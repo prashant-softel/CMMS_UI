@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -21,6 +23,9 @@ class JobCardDetailsController extends GetxController {
   JobCardDetailsController(
     this.jobCardDetailsPresenter,
   );
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isFacilitySelected = true.obs;
+  final HomeController homeController = Get.find();
   JobCardDetailsPresenter jobCardDetailsPresenter;
 
   ///
@@ -92,8 +97,17 @@ class JobCardDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        getHistory(facilityId);
+      }
+    });
     // print({"madfhuiwef", jobCardId});
     try {
+
       Get.put(FileUploadController());
 
       // final _flutterSecureStorage = const FlutterSecureStorage();
@@ -110,7 +124,7 @@ class JobCardDetailsController extends GetxController {
             ) ??
             [];
       }
-      getHistory();
+      getHistory(facilityId);
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
@@ -165,7 +179,7 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  Future<void> getHistory() async {
+  Future<void> getHistory(int facilityId) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 4;
     // int tempModuleType = 21;
@@ -177,6 +191,7 @@ class JobCardDetailsController extends GetxController {
           moduleType,
           jobCardId.value,
           true,
+          facilityId
         ) ??
         [];
     update(["historyList"]);
@@ -405,7 +420,7 @@ class JobCardDetailsController extends GetxController {
     }
 
     /// Get History
-    getHistory();
+    getHistory(facilityId);
   }
 
   Future<void> startJobCard(int jcCard) async {
@@ -426,12 +441,12 @@ class JobCardDetailsController extends GetxController {
               isLoading: true,
             ) ??
             [];
-        getHistory();
+        getHistory(facilityId);
       }
     }
 
     /// Get History
-    getHistory();
+    getHistory(facilityId);
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
@@ -449,9 +464,9 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  void getPermitDetails() async {
+  void getPermitDetails(int facilityId) async {
     final _permitDetails =
-        await jobCardDetailsPresenter.getPermitDetails(permitId: permitId);
+        await jobCardDetailsPresenter.getPermitDetails(permitId: permitId,facilityId:facilityId);
 
     isolationAssetsCategoryList.value = _permitDetails?.lstIsolation ?? [];
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
@@ -593,7 +608,7 @@ class JobCardDetailsController extends GetxController {
                 isLoading: true,
               ) ??
               [];
-          getHistory();
+          getHistory(facilityId);
           createPlantDetailsTableData();
 
           createJobDetailsTableData();
@@ -660,7 +675,7 @@ class JobCardDetailsController extends GetxController {
                 isLoading: true,
               ) ??
               [];
-          getHistory();
+          getHistory(facilityId);
           createPlantDetailsTableData();
 
           createJobDetailsTableData();

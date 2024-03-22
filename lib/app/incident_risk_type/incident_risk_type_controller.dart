@@ -133,7 +133,7 @@ class IncidentRiskTypeController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentRiskType();
+        getIncidentRiskType(facilityId);
       });
     });
     irnameFocus.addListener(() {
@@ -145,10 +145,11 @@ class IncidentRiskTypeController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getIncidentRiskType() async {
+  Future<void> getIncidentRiskType(int facilityId) async {
     incidentrisktypeList.value = <IncidentRiskTypeModell>[];
     BufferincidentrisktypeList.value = <IncidentRiskTypeModell>[];
     final _irisktypeList = await incidentrisktypepresenter.getIncidentRiskType(
+      facilityId:facilityId,
       isLoading: true,
     );
     for (var facilityType_list in _irisktypeList) {
@@ -227,7 +228,7 @@ class IncidentRiskTypeController extends GetxController {
     // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
-      getIncidentRiskType();
+      getIncidentRiskType(facilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -290,7 +291,7 @@ class IncidentRiskTypeController extends GetxController {
                 onPressed: () {
                   deleteIncidentRiskType(risktype_id).then((value) {
                     Get.back();
-                    getIncidentRiskType();
+                    getIncidentRiskType(facilityId);
                   });
                 },
                 child: Text('YES'),

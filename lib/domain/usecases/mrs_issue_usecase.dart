@@ -7,10 +7,12 @@ class MrsIssueUsecase {
   Repository repository;
   Future<MrsDetailsModel?> getMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getMrsDetails(
         mrsId,
+        facilityId,
         isLoading,
       );
   Future<bool> issueMrs({

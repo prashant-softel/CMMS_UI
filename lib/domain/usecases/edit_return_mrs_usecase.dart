@@ -23,10 +23,12 @@ class EditMrsReturnUsecase {
       );
   Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await repository.getReturnMrsDetails(
         mrsId,
+        facilityId,
         isLoading,
       );
 }

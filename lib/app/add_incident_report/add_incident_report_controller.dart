@@ -564,7 +564,7 @@ class AddIncidentReportController extends GetxController {
         getRiskTypeList();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getBusinessList();
+        getBusinessList(facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         addOneMoreData();
@@ -999,9 +999,10 @@ class AddIncidentReportController extends GetxController {
     update(['incidentInvestigationVerificationDoneBy_list']);
   }
 
-  void getBusinessList() async {
+  void getBusinessList(int facilityId) async {
     businessList.value = <BusinessListModel>[];
     final _businessList = await incidentReportPresenter.getBusinessList(
+      facilityId:facilityId,
       isLoading: true,
       // categoryIds: categoryIds,
       businessType: 2,

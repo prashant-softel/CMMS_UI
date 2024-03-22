@@ -56,10 +56,12 @@ class JobCardDetailsPresenter {
   ///
   Future<PermitDetailsModel?> getPermitDetails({
     int? permitId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await jobCardDetailsUsecase.getPermitDetails(
         permitId: permitId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 
@@ -93,11 +95,13 @@ class JobCardDetailsPresenter {
   Future<List<HistoryModel>?> getJobCardHistory(
     moduleType,
     jobCardId,
+    facilityId,
     isLoading,
   ) async =>
       await jobCardDetailsUsecase.getJobCardHistory(
         moduleType: moduleType,
         jobCardId: jobCardId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 

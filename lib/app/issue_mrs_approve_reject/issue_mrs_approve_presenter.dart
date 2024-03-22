@@ -7,10 +7,12 @@ class IssueMrsApprovePresenter {
   IssueMrsApproveUsecase issuemrsApproveUsecase;
   Future<MrsDetailsModel?> getMrsDetails({
     int? mrsId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await issuemrsApproveUsecase.getMrsDetails(
         mrsId: mrsId,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   Future<bool> approveIssueMrs({

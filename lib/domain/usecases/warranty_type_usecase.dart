@@ -51,10 +51,12 @@ class WarrantyTypeUsecase {
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
+    required int facilityId,
     required int? businessType,
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
+      facilityId:facilityId,
       businessType: businessType,
     );
   }

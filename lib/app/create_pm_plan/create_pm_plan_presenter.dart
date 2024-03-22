@@ -71,11 +71,13 @@ class CreatePmPlanPresenter {
       );
   Future<PMPlanDetail?> getPmPlanDetails({
     int? pmPlanId,
+    required int facilityId,
     bool? isLoading,
   }) async =>
       await createPmPlanUsecase.getPmPlanDetails(
         pmPlanId: pmPlanId,
         isLoading: isLoading,
+        facilityId: facilityId
       );
   void saveValue({String? pmPlanId}) async {
     return createPmPlanUsecase.saveValue(pmPlanId: pmPlanId);

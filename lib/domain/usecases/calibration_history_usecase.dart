@@ -9,11 +9,13 @@ class CalibrationHistoryUsecase {
   Future<List<HistoryModel>?> getJobCardHistory({
     moduleType,
     Id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await repository.getJobCardHistory(
         moduleType,
         Id,
+        facilityId,
         isLoading,
       );
 }

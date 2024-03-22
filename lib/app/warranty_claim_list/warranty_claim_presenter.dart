@@ -57,10 +57,12 @@ class WarrantyClaimPresenter {
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
+    required int facilityId,
     required int? businessType,
   }) async {
     return warrantyClaimUsecase.getBusinessList(
       isLoading: isLoading,
+      facilityId:facilityId,
       businessType: businessType,
     );
   }

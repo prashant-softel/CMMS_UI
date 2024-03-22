@@ -63,9 +63,11 @@ class EditWarrantyClaimUsecase {
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
     required int? businessType,
+    required int facilityId
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
+      facilityId:facilityId,
       businessType: businessType,
     );
   }

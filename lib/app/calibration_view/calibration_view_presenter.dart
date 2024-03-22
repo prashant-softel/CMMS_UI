@@ -8,10 +8,12 @@ class CalibrationViewPresenter {
   CalibrationViewUsecase calibrationViewUsecase;
   Future<CalibrationDetailModel?> getCalibrationView({
     int? calibrationId,
+    required int facilityId,
     bool? isloading,
   }) async =>
       await calibrationViewUsecase.getCalibrationView(
         calibrationId: calibrationId,
+        facilityId:facilityId,
         isLoading: isloading,
       );
   Future<List<HistoryModel>?> getHistory(

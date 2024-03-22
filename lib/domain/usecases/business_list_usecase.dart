@@ -68,6 +68,7 @@ class BusinessListUsecase {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int? businessType,
+    required int facilityId,
     // int? blockId,
     // required String categoryIds,
     // int? blockId,
@@ -79,6 +80,7 @@ class BusinessListUsecase {
         // categoryIds,
         businessType: businessType,
         isLoading : isLoading,
+        facilityId: facilityId
       );
   Future<List<FrequencyModel?>?> getFrequencyList({
     bool? isLoading,

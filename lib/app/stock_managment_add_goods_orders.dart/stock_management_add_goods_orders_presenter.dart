@@ -38,9 +38,11 @@ class StockManagementAddGoodsOrdersPresenter {
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
+    required int facilityId,
     required bool isLoading,
   }) async {
     return stockManagementAddGoodsOrdersUsecase.getBusinessList(
+      facilityId:facilityId,
         type: ListType, isLoading: isLoading);
   }
 
@@ -128,9 +130,11 @@ class StockManagementAddGoodsOrdersPresenter {
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
+    required int facilityId
   }) async {
     return stockManagementAddGoodsOrdersUsecase.getRoDetailsByID(
       requestID: requestID,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

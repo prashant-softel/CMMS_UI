@@ -190,7 +190,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         updatePaidBy();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getBusinessList(4);
+        getBusinessList(4, facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         //  getAssetList(facilityId);
@@ -390,9 +390,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType) async {
+  Future<void> getBusinessList(ListType,int facilityId) async {
     final list = await stockManagementAddGoodsOrdersPresenter.getBusinessList(
       ListType: ListType,
+      facilityId:facilityId,
       isLoading: true,
     );
     if (list!.length > 0) {
@@ -431,11 +432,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     addRowItem();
   }
 
-  Future<void> getRoDetailsByID({required int requestID}) async {
+  Future<void> getRoDetailsByID({required int requestID, required int facilityId}) async {
     goDetailsList?.value = [];
 
     final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
-        .getRoDetailsByID(requestID: requestID);
+        .getRoDetailsByID(requestID: requestID, facilityId: facilityId);
     // print('Edit goods order  Detail:$_getRoDetailsById');
 
     if (_getRoDetailsById != null) {
@@ -505,7 +506,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           selectedReqOrder.value = goodsOrdersList[reqOrderIndex]?.name ?? "";
           selectedReqOrderId =
               int.tryParse(goodsOrdersList[reqOrderIndex]?.name ?? "") ?? 0;
-          getRoDetailsByID(requestID: selectedReqOrderId);
+          getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
         }
         break;
       case RxList<BusinessTypeModel>:
@@ -698,7 +699,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     selectedReqOrderId = int.tryParse(goodsOrdersList[0]?.name ?? "") ?? 0;
     selectedReqOrder.value = goodsOrdersList[0]?.name ?? "";
 
-    getRoDetailsByID(requestID: selectedReqOrderId);
+    getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
 
     update(['requ']);
   }

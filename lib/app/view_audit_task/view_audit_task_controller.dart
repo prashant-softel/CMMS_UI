@@ -58,9 +58,9 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
-  Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading}) async {
+  Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading,required int facilityId}) async {
     final _auditPlanDetailsModel = await viewAuditTaskPresenter
-        .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading);
+        .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading, facilityId: facilityId);
 
     if (_auditPlanDetailsModel != null) {
       auditPlanDetailModel.value = _auditPlanDetailsModel;

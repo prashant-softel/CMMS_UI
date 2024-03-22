@@ -36,11 +36,13 @@ class ViewPermitPresenter {
 
   Future<List<HistoryModel>?> getPermitHistory(
     moduleType,
+    facilityId,
     permitId,
     isLoading,
   ) async =>
       await viewPermitUsecase.getPermitHistory(
         moduleType: moduleType,
+        facilityId:facilityId,
         permitId: permitId,
         isLoading: isLoading,
       );
@@ -223,11 +225,13 @@ class ViewPermitPresenter {
 
   Future<List<PermitCancelListModel>> getPermitConditionList({
     required bool isLoading,
+    required int facilityId,
     required int? isCancle,
   }) async {
     return viewPermitUsecase.getPermitConditionList(
       isLoading: isLoading,
       isCancle: isCancle,
+      facilityId: facilityId
     );
   }
 
@@ -313,6 +317,7 @@ class ViewPermitPresenter {
 
   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     String? auth,
+    required int facilityId,
     // int? facilityId,
     int? id,
     bool? isLoading,
@@ -322,15 +327,18 @@ class ViewPermitPresenter {
         // facilityId: 45,
         // facilityId: facilityId ?? 0,
         id: id,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
   Future<NewPermitDetailModel?> getViewPermitDetail({
     bool? isLoading,
+    required int facilityId,
     required int permitId,
   }) async {
     return viewPermitUsecase.getViewPermitDetail(
       permitId: permitId,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

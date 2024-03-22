@@ -12,11 +12,13 @@ class PreventiveMaintenanceTaskViewPresenter {
   PreventiveMaintenanceTaskViewUsecase preventiveMaintenanceTaskViewUsecase;
   Future<PmtaskViewModel?> getPmtaskViewList({
     int? scheduleId,
+    required int facilityId,
     bool? isloading,
   }) async =>
       await preventiveMaintenanceTaskViewUsecase.getPmtaskViewList(
         scheduleId: scheduleId,
         isLoading: isloading,
+        facilityId: facilityId
       );
   Future<List<NewPermitModel?>?> getPermitList({
     int? facilityId,

@@ -33,21 +33,25 @@ class StockManagementAddGoodsOrdersUsecase {
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
+    facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getHistory(
         moduleType,
         id,
+        facilityId,
         isLoading,
       );
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
+    required int facilityId,
     bool isLoading = true,
   }) async =>
       await _repository.getBusinessList(
         businessType: type,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   // Future<List<GetAssetDataModel?>?> getAssetList({
@@ -121,10 +125,12 @@ class StockManagementAddGoodsOrdersUsecase {
 
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
+    required int facilityId,
     required int requestID,
   }) async =>
       await _repository.getRoDetailsByID(
         requestID: requestID,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 }

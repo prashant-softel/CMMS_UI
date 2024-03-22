@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/designation_model.dart';
@@ -36,6 +39,10 @@ class AddUserController extends GetxController {
   AddUserController(
     this.addUserPresenter,
   );
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
   AddUserPresenter addUserPresenter;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
   Rx<String> selectedCountry = ''.obs;
@@ -143,6 +150,13 @@ class AddUserController extends GetxController {
   ///
   void onInit() async {
     try {
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+        }
+      });
       await setUserId();
       Future.delayed(Duration(seconds: 1), () {
         getBloodList();
@@ -157,7 +171,7 @@ class AddUserController extends GetxController {
         getFacilityList();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getBusinessList(0);
+        getBusinessList(0, facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         getResponsibilityList(true);
@@ -267,8 +281,9 @@ class AddUserController extends GetxController {
     facility_map[emp_id] = selectedfacilityNameIdList;
   }
 
-  Future<void> getBusinessList(ListType) async {
+  Future<void> getBusinessList(ListType,int facilityId) async {
     final list = await addUserPresenter.getBusinessList(
+      facilityId:facilityId,
       ListType: ListType,
       isLoading: true,
     );
