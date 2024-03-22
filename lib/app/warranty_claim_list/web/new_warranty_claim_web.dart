@@ -19,13 +19,11 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
   NewWarrantyClaimWeb({super.key});
-
-  bool valuefirst = false;
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
-
+  // bool valuefirst = false;
   // final controller = Get.find<HomeController>();
-  final WarrantyClaimController controller = Get.find();
+  // final WarrantyClaimController controller = Get.find();
   final HomeController homecontroller = Get.find();
 
   @override

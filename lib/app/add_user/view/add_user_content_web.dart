@@ -78,20 +78,21 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                               onTap: () {
                                 final _flutterSecureStorage =
                                     const FlutterSecureStorage();
-            
+
                                 _flutterSecureStorage.delete(key: "userId");
-            
+
                                 Get.offNamed(Routes.masterDashboard);
                               },
-                              child: Text(" / MASTER", style: Styles.greyLight14),
+                              child:
+                                  Text(" / MASTER", style: Styles.greyLight14),
                             ),
                             InkWell(
                                 onTap: () {
                                   final _flutterSecureStorage =
                                       const FlutterSecureStorage();
-            
+
                                   _flutterSecureStorage.delete(key: "userId");
-            
+
                                   Get.offNamed(Routes.userList);
                                 },
                                 child: Text(" / USER LIST",
@@ -131,10 +132,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           onPressed: () {
                                             final _flutterSecureStorage =
                                                 const FlutterSecureStorage();
-            
+
                                             _flutterSecureStorage.delete(
                                                 key: "userId");
-            
+
                                             Get.offNamed(Routes.userList);
                                           },
                                           color: ColorValues.addNewColor,
@@ -169,7 +170,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(100),
+                                                                  .circular(
+                                                                      100),
                                                           child: Image.memory(
                                                             controller
                                                                 .selectedImageBytes
@@ -192,8 +194,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                               .appLightGreyColor,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                100),
+                                                            BorderRadius
+                                                                .circular(100),
                                                       ),
                                                       child: Column(
                                                         mainAxisAlignment:
@@ -203,11 +205,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           Icon(
                                                             Icons.image,
                                                             size: 70,
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                215,
-                                                                192,
-                                                                141),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    215,
+                                                                    192,
+                                                                    141),
                                                           ),
                                                           Dimens.boxHeight10,
                                                           Text("Upload Photo",
@@ -237,8 +240,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                               .appDarkBlueColor,
                                                         ),
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                50),
+                                                            BorderRadius
+                                                                .circular(50),
                                                       ),
                                                       child: Center(
                                                         child: Icon(
@@ -298,18 +301,20 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       inputFormatters: [
                                                         FilteringTextInputFormatter
-                                                            .deny(RegExp(r'\s')),
+                                                            .deny(
+                                                                RegExp(r'\s')),
                                                       ],
                                                       ishint: 'Enter Email ID',
-                                                      textController:
-                                                          controller.loginIdCtrlr,
+                                                      textController: controller
+                                                          .loginIdCtrlr,
                                                     )),
                                               ],
                                             ),
@@ -349,12 +354,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
-                                                      ishint: 'Enter First Name',
+                                                      ishint:
+                                                          'Enter First Name',
                                                       textController: controller
                                                           .firstNameCtrlr,
                                                     )),
@@ -364,7 +371,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Secondary E-mail: '),
+                                                    title:
+                                                        'Secondary E-mail: '),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                     decoration: BoxDecoration(
@@ -396,14 +404,16 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       inputFormatters: [
                                                         FilteringTextInputFormatter
-                                                            .deny(RegExp(r'\s')),
+                                                            .deny(
+                                                                RegExp(r'\s')),
                                                       ],
                                                       ishint: 'Enter Email ID',
                                                       textController: controller
@@ -414,12 +424,14 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Dimens.boxHeight8,
                                             Row(
                                               children: [
-                                                CustomRichText(title: 'Gender: '),
+                                                CustomRichText(
+                                                    title: 'Gender: '),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(6),
+                                                        BorderRadius.circular(
+                                                            6),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -449,8 +461,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .isSelectedGender.value,
                                                     selectedValue: controller
                                                         .selectedGender.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                   //   DropdownButtonHideUnderline(
                                                   //     child: DropdownButton<String>(
@@ -526,10 +538,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       keyboardType:
                                                           TextInputType.number,
@@ -579,11 +592,12 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     dropdownList:
                                                         controller.countryList,
                                                     isValueSelected: controller
-                                                        .isSelectedCountry.value,
+                                                        .isSelectedCountry
+                                                        .value,
                                                     selectedValue: controller
                                                         .selectedCountry.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -625,8 +639,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .isSelectedCity.value,
                                                     selectedValue: controller
                                                         .selectedCity.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -668,8 +682,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .isSelectedRole.value,
                                                     selectedValue: controller
                                                         .selectedRole.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -714,8 +728,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     selectedValue: controller
                                                         .selectedIBusinessList
                                                         .value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -723,7 +737,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                           ],
                                         ),
                                         Spacer(),
-            
+
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -763,10 +777,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       widget: MouseRegion(
                                                         onEnter: (_) {
@@ -794,7 +809,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                       .visibility
                                                                   : Icons
                                                                       .visibility_off,
-                                                              color: Colors.grey),
+                                                              color:
+                                                                  Colors.grey),
                                                           onPressed: () {
                                                             controller
                                                                 .togglePasswordVisibility();
@@ -849,10 +865,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       ishint: 'Enter Last Name',
                                                       textController: controller
@@ -869,7 +886,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -901,10 +919,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       .2),
                                                   child: LoginCustomTextfield(
                                                     ishint: 'select DOB',
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        5,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
                                                     widget: Icon(
                                                       Icons.calendar_month,
                                                       color: ColorValues
@@ -960,10 +979,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       inputFormatters: [
                                                         FilteringTextInputFormatter
@@ -979,8 +999,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                 .openDoJDatePicker =
                                                             !controller
                                                                 .openDoJDatePicker;
-                                                        controller.update(
-                                                            ['stock_Mangement']);
+                                                        controller.update([
+                                                          'stock_Mangement'
+                                                        ]);
                                                       },
                                                       widget: Icon(
                                                         Icons.calendar_month,
@@ -1026,10 +1047,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         ),
                                                       ],
                                                     ),
-                                                    width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: LoginCustomTextfield(
                                                       keyboardType:
                                                           TextInputType.number,
@@ -1047,7 +1069,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Dimens.boxHeight8,
                                             Row(
                                               children: [
-                                                CustomRichText(title: 'State: '),
+                                                CustomRichText(
+                                                    title: 'State: '),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   width: (MediaQuery.of(context)
@@ -1081,20 +1104,22 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .isSelectedState.value,
                                                     selectedValue: controller
                                                         .selectedState.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                             Dimens.boxHeight8,
                                             Row(children: [
-                                              CustomRichText(title: 'Zip Code: '),
+                                              CustomRichText(
+                                                  title: 'Zip Code: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
+                                                        BorderRadius.circular(
+                                                            10),
                                                     border: Border.all(
                                                       color: Color.fromARGB(
                                                           255, 227, 224, 224),
@@ -1174,8 +1199,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                         .isSelectedBlood.value,
                                                     selectedValue: controller
                                                         .selectedBlood.value,
-                                                    onValueChanged:
-                                                        controller.onValueChanged,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               ],
@@ -1230,26 +1255,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           height: 45,
                                                           decoration:
                                                               BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius.only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            40),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            40)),
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                245,
-                                                                248,
-                                                                250),
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        40),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        40)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    245,
+                                                                    248,
+                                                                    250),
                                                           ),
                                                           child: TabBar(
-                                                            labelPadding:
-                                                                EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            10.0),
+                                                            labelPadding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        10.0),
                                                             labelColor:
                                                                 Colors.black,
                                                             indicator:
@@ -1261,7 +1285,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                   topRight: Radius
                                                                       .circular(
                                                                           40)),
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               boxShadow: [
                                                                 BoxShadow(
                                                                   color: Colors
@@ -1271,7 +1296,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                     1.0,
                                                                     1.0,
                                                                   ),
-                                                                  blurRadius: 5.0,
+                                                                  blurRadius:
+                                                                      5.0,
                                                                 ),
                                                                 BoxShadow(
                                                                   color: ColorValues
@@ -1280,7 +1306,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                       const Offset(
                                                                           0.0,
                                                                           0.0),
-                                                                  blurRadius: 0.0,
+                                                                  blurRadius:
+                                                                      0.0,
                                                                   spreadRadius:
                                                                       0.0,
                                                                 ),
@@ -1340,24 +1367,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           ),
                                                         ),
                                                         Container(
-                                                          height: Get.height + 50,
-            
+                                                          height:
+                                                              Get.height + 50,
+
                                                           //  height: 500,
                                                           decoration:
                                                               BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius.only(
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            40),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            40)),
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                245,
-                                                                248,
-                                                                250),
+                                                            borderRadius: BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        40),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        40)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    245,
+                                                                    248,
+                                                                    250),
                                                           ),
                                                           child: TabBarView(
                                                               children: [
@@ -1370,8 +1398,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                             height: Get.height,
                                                                             margin: Dimens.edgeInsets15,
                                                                             decoration: BoxDecoration(
-                                                                              border:
-                                                                                  Border.all(
+                                                                              border: Border.all(
                                                                                 color: ColorValues.lightGreyColorWithOpacity35,
                                                                                 width: 1,
                                                                               ),
@@ -1385,12 +1412,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                               ],
                                                                             ),
                                                                             child: Container(
-                                                                              width:
-                                                                                  Get.width,
-                                                                              height:
-                                                                                  Get.height,
-                                                                              child:
-                                                                                  Column(
+                                                                              width: Get.width,
+                                                                              height: Get.height,
+                                                                              child: Column(
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                                                 children: [
                                                                                   SizedBox(
@@ -1400,7 +1424,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                       icon: Icons.add,
                                                                                       onPressed: () {
                                                                                         Get.dialog<void>(controller.AddfacilityListAlertBox());
-            
+
                                                                                         //     void>(
                                                                                         // AddfacilityListAlertBox());
                                                                                       },
@@ -1428,7 +1452,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                   controller.filteredfacilityNameList.length,
                                                                                                   (index) {
                                                                                                     var facilityNameDetails = controller.filteredfacilityNameList[index];
-            
+
                                                                                                     return [
                                                                                                       '${facilityNameDetails?.id ?? ''}',
                                                                                                       '${facilityNameDetails?.name ?? ''}',
@@ -1498,7 +1522,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                             label: column,
                                                                                             // width:
                                                                                             //     115, // Set the width of the column to 100
-            
+
                                                                                             minWidth: Get.width * 0.085,
                                                                                           );
                                                                                         }).toList(),
@@ -1525,7 +1549,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                               //     onChanged: (val) {
                                                                                                               //       controller.accesslevel.firstWhere((e) => e?.feature_name == getAccesslevelDetails?.feature_name);
                                                                                                               //       controller.isCheckedmodule.value = val!;
-            
+
                                                                                                               //       controller.update();
                                                                                                               //     }),
                                                                                                               Dimens.boxWidth5,
@@ -1720,9 +1744,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(bottom: 40, top: 30),
+                                    margin:
+                                        EdgeInsets.only(bottom: 40, top: 30),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         controller.userId.value == 0
                                             ? Container(
@@ -1747,6 +1773,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     controller
                                                         .updateUser()
                                                         .then((value) {
+                                                      Get.toNamed(
+                                                          Routes.userList);
                                                       if (value == true) {
                                                         // controller.userId.value = 0;
                                                         controller
@@ -1762,15 +1790,16 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                         Container(
                                           height: 35,
                                           child: CustomElevatedButton(
-                                            backgroundColor: ColorValues.redColor,
+                                            backgroundColor:
+                                                ColorValues.redColor,
                                             text: "Cancel",
                                             onPressed: () {
                                               final _flutterSecureStorage =
                                                   const FlutterSecureStorage();
-            
+
                                               _flutterSecureStorage.delete(
                                                   key: "userId");
-            
+
                                               Get.back();
                                             },
                                           ),
@@ -1792,8 +1821,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                       top: 260,
                       child: DatePickerWidget(
                         minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(
-                            DateTime.now().year, 13, 0), // last date of this year
+                        maxDate: DateTime(DateTime.now().year, 13,
+                            0), // last date of this year
                         controller: DateRangePickerController(),
                         selectionChanges: (p0) {
                           print('po valu ${p0.value.toString()}');
@@ -1811,8 +1840,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                       top: 300,
                       child: DatePickerWidget(
                         minDate: DateTime(DateTime.now().year),
-                        maxDate: DateTime(
-                            DateTime.now().year, 13, 0), // last date of this year
+                        maxDate: DateTime(DateTime.now().year, 13,
+                            0), // last date of this year
                         controller: DateRangePickerController(),
                         selectionChanges: (p0) {
                           print('po valu ${p0.value.toString()}');

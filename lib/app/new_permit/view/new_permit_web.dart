@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -126,51 +127,74 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   children: [
                                     Expanded(
                                       child: Container(
-                                        constraints:
-                                            BoxConstraints(maxWidth: 100),
+                                        width: Get.width * 0.7,
+                                        height: Get.height * 0.2,
                                         margin: EdgeInsets.symmetric(
                                             horizontal: 50, vertical: 20),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors
-                                                  .black), // Adjust color as needed
-                                        ),
-                                        child: DataTable(
+                                        // decoration: BoxDecoration(
+                                        //   border:
+                                        //       Border.all(color: Colors.black),
+                                        // ),
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Colors.black,
+                                          ),
                                           columns: [
-                                            DataColumn(
+                                            DataColumn2(
                                                 label: Text('PM Task ID')),
-                                            DataColumn(
+                                            DataColumn2(
                                                 label: Text('Plan Title')),
-                                            DataColumn(
+                                            DataColumn2(
                                                 label:
                                                     Text('Equipment Category')),
-                                            DataColumn(
+                                            DataColumn2(
                                                 label: Text('Frequency')),
-                                            DataColumn(
+                                            DataColumn2(
                                                 label: Text('Assigned To')),
                                           ],
                                           rows: [
-                                            DataRow(cells: [
-                                              DataCell(Text(
-                                                '${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
-                                                style: TextStyle(
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationStyle:
-                                                      TextDecorationStyle.solid,
-                                                  color: Color.fromARGB(
-                                                      255, 5, 92, 163),
+                                            DataRow(
+                                              cells: [
+                                                DataCell(
+                                                  Text(
+                                                    '${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                    style: TextStyle(
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                      decorationStyle:
+                                                          TextDecorationStyle
+                                                              .solid,
+                                                      color: Color.fromARGB(
+                                                          255, 5, 92, 163),
+                                                    ),
+                                                  ),
                                                 ),
-                                              )),
-                                              DataCell(Text(
-                                                  '${controller.pmtaskViewModel?.plan_title}')),
-                                              DataCell(Text(
-                                                  '${controller.pmtaskViewModel?.category_name}')),
-                                              DataCell(Text(
-                                                  '${controller.pmtaskViewModel?.frequency_name}')),
-                                              DataCell(Text(
-                                                  '${controller.pmtaskViewModel?.assigned_to_name}')),
-                                            ]),
+                                                DataCell(
+                                                  Text(
+                                                      '${controller.pmtaskViewModel?.plan_title}',
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                      '${controller.pmtaskViewModel?.category_name}',
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                      '${controller.pmtaskViewModel?.frequency_name}',
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                      '${controller.pmtaskViewModel?.assigned_to_name}',
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -180,34 +204,47 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               : Dimens.box0,
                           controller.jobModel?.id != null
                               ? Container(
+                                  // alignment: Alignment.centerLeft,
+                                  width: Get.width * .8,
+                                  height: Get.height * .2,
                                   margin: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 10),
                                   padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
-                                  ),
-                                  child: DataTable(
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(color: Colors.black),
+                                  // ),
+                                  child: DataTable2(
+                                    border: TableBorder.all(
+                                      color: Colors.black,
+                                    ),
                                     columnSpacing: 11,
                                     columns: [
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .05,
                                           label: Text('Job ID',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .2,
                                           label: Text('Job Title',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Equipment Category',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Block',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Equipment Name',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Breakdown Time',
                                               overflow: TextOverflow.ellipsis)),
-                                      DataColumn(
+                                      DataColumn2(
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Assigned To',
                                               overflow: TextOverflow.ellipsis)),
                                     ],
@@ -480,6 +517,90 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                   selectedOptionsList),
                                                           print(
                                                               'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                        },
+                                                      ),
+                                                    ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight10,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Equipment Name: '),
+                                              Dimens.boxWidth10,
+                                              controller.permitId.value > 0
+                                                  ? SizedBox(
+                                                      width: 250,
+                                                      height: 50,
+                                                      child:
+                                                          CustomMultiSelectDialogField(
+                                                        // buttonText:
+                                                        //     'Select Equipment Name',
+                                                        title: 'Equipment Name',
+                                                        initialValue: (controller
+                                                                .selectedEquipmentNameList
+                                                                .isNotEmpty)
+                                                            ? controller
+                                                                .selectedEquipmentNameIdList
+                                                            : [],
+                                                        items: controller
+                                                            .equipmentNameList
+                                                            .map(
+                                                              (equipmentName) =>
+                                                                  MultiSelectItem(
+                                                                equipmentName
+                                                                    ?.id,
+                                                                equipmentName
+                                                                        ?.name ??
+                                                                    '',
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onConfirm:
+                                                            (selectedOptionsList) =>
+                                                                {
+                                                          controller
+                                                              .equipmentNameSelected(
+                                                                  selectedOptionsList),
+                                                          print(
+                                                              'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
+                                                        },
+                                                      ),
+                                                    )
+                                                  : SizedBox(
+                                                      width: Get.width * .2,
+                                                      child:
+                                                          CustomMultiSelectDialogField(
+                                                        buttonText:
+                                                            'Select Equipment Name',
+                                                        title: 'Please Select',
+                                                        initialValue: (controller
+                                                                .selectedEquipmentNameList
+                                                                .isNotEmpty)
+                                                            ? controller
+                                                                .selectedEquipmentNameIdList
+                                                            : [],
+                                                        items: controller
+                                                            .equipmentNameList
+                                                            .map(
+                                                              (equipmentName) =>
+                                                                  MultiSelectItem(
+                                                                equipmentName
+                                                                    ?.id,
+                                                                equipmentName
+                                                                        ?.name ??
+                                                                    '',
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onConfirm:
+                                                            (selectedOptionsList) =>
+                                                                {
+                                                          controller
+                                                              .equipmentNameSelected(
+                                                                  selectedOptionsList),
+                                                          print(
+                                                              'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
                                                         },
                                                       ),
                                                     ),
