@@ -422,7 +422,7 @@ class NewPermitController extends GetxController {
       //  Future.delayed(Duration(seconds: 1), () {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
-
+        print('FacilityIdsss$facilityId');
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
@@ -442,8 +442,10 @@ class NewPermitController extends GetxController {
       });
 
       if (permitId.value > 0) {
-        await getNewPermitDetail(intPermitId: permitId.value, facilityId: facilityId);
-        await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
+        await getNewPermitDetail(
+            intPermitId: permitId.value, facilityId: facilityId);
+        await getPermitHistory(
+            permitId: permitId.value, facilityId: facilityId);
       }
 
       // await getPermitIssuerList();
@@ -540,12 +542,13 @@ class NewPermitController extends GetxController {
     //  }
   }
 
-  Future<void> getNewPermitDetail({required int intPermitId,required int facilityId}) async {
+  Future<void> getNewPermitDetail(
+      {required int intPermitId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     newPermitDetailsList?.value = <NewPermitDetailModel>[];
 
-    final _newPermitDetails =
-        await permitPresenter.getNewPermitDetail(permitId: intPermitId, facilityId: facilityId);
+    final _newPermitDetails = await permitPresenter.getNewPermitDetail(
+        permitId: intPermitId, facilityId: facilityId);
     print('New Permit Detail:$_newPermitDetails');
 
     if (_newPermitDetails != null) {
@@ -613,7 +616,7 @@ class NewPermitController extends GetxController {
     inventoryDetailList!.value = <InventoryDetailModel>[];
 
     final list = await permitPresenter.getInventoryDetailList(
-        isLoading: true, id: 14430,facilityId:facilityId);
+        isLoading: true, id: 14430, facilityId: facilityId);
     if (list != null) {
       // selectedSupplierNameList.clear();
       // supplierNameList.clear();
@@ -687,7 +690,8 @@ class NewPermitController extends GetxController {
   //   employee_map[emp_id] = selectedEmployeeNameIdList;
   // }
 
-  Future<void> getPermitHistory({required int permitId,required int facilityId}) async {
+  Future<void> getPermitHistory(
+      {required int permitId, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
     // int tempModuleType = 21;

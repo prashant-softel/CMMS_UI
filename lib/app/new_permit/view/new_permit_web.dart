@@ -1297,256 +1297,264 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               ),
                             ),
                           ),
-                          Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              margin: EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.grey.withOpacity(.3)),
-                              ),
-                              child: Container(
-                                // color: ColorValues.appBlueBackgroundColor,
-                                // padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomAppBar(
-                                      title:
-                                          "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
-                                    ),
-                                    // Text(
-                                    //   "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
-                                    //   style: Styles.blue700,
-                                    // ),
-                                    Dimens.boxHeight10,
-                                    Wrap(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        'Conducted At Job-Site By:',
-                                                        style:
-                                                            Styles.blackBold17,
-                                                      ),
-                                                      SizedBox(width: 5),
-                                                      // Text(
-                                                      //   'Ramesh Singh',
-                                                      //   style: Styles.black17,
-                                                      // ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            7,
-                                                        child: Obx(
-                                                          () =>
-                                                              DropdownWebWidget(
-                                                            dropdownList: controller
-                                                                .employeeNameList,
-                                                            isValueSelected:
-                                                                controller
-                                                                    .isemployeeNameListSelected
-                                                                    .value,
-                                                            selectedValue:
-                                                                controller
-                                                                    .selectedEmployeeNamesList
-                                                                    .value,
-                                                            onValueChanged:
-                                                                controller
-                                                                    .onValueTbtConductedChanged,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Spacer(),
-                                                  Row(
-                                                    // crossAxisAlignment:
-                                                    //     CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        'Date & Time: ',
-                                                        style:
-                                                            Styles.blackBold17,
-                                                      ),
-                                                      _buildDateTimeField_web(
-                                                          context),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
 
-                                            ///TBT Training Attended By
-                                            // controller.permitId.value <=
-                                            //         0
-                                            //     ?
-                                            Container(
-                                              margin: Dimens.edgeInsets20,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                        .withOpacity(.3)),
-                                              ),
-                                              constraints: BoxConstraints(
-                                                maxWidth: 1100,
-                                              ),
-                                              child: Column(
+                          controller.newPermitDetailsModel.value?.permitNo ==
+                                      null ||
+                                  controller.newPermitDetailsModel.value
+                                          ?.ptwStatus ==
+                                      121
+                              ? Dimens.box0
+                              : Center(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    margin: EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.withOpacity(.3)),
+                                    ),
+                                    child: Container(
+                                      // color: ColorValues.appBlueBackgroundColor,
+                                      // padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomAppBar(
+                                            title:
+                                                "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                          ),
+                                          // Text(
+                                          //   "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                          //   style: Styles.blue700,
+                                          // ),
+                                          Dimens.boxHeight10,
+                                          Wrap(
+                                            children: [
+                                              Column(
                                                 children: [
-                                                  Obx(
-                                                    () => CustomAppBar(
-                                                      title:
-                                                          'TBT Training Attended By'
-                                                              .tr,
-                                                      action: Row(
-                                                        children: [
-                                                          CustomRichText(
-                                                              title:
-                                                                  "Add Employee"),
-                                                          Dimens.boxWidth10,
-                                                          SizedBox(
-                                                            width: 220,
-                                                            height: 50,
-                                                            child:
-                                                                CustomMultiSelectDialogField(
-                                                              buttonText:
-                                                                  'Add Employee',
-                                                              title:
-                                                                  'Select Employee',
-                                                              initialValue: (controller
-                                                                      .selectedEmployeeNameList
-                                                                      .isNotEmpty)
-                                                                  ? controller
-                                                                      .selectedEmployeeNameIdList
-                                                                  : [],
-                                                              items: controller
-                                                                  .employeeNameList
-                                                                  .map(
-                                                                    (employeeName) =>
-                                                                        MultiSelectItem(
-                                                                      employeeName
-                                                                          ?.id,
-                                                                      employeeName
-                                                                              ?.name ??
-                                                                          '',
-                                                                    ),
-                                                                  )
-                                                                  .toList(),
-                                                              onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .employeeNameSelected(
-                                                                        selectedOptionsList),
-                                                                print(
-                                                                    'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
-                                                              },
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              'Conducted At Job-Site By:',
+                                                              style: Styles
+                                                                  .blackBold17,
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                2,
-                                                            child: Container(
-                                                              constraints:
-                                                                  BoxConstraints(
-                                                                      minHeight:
-                                                                          90),
-                                                              child:
-                                                                  SingleChildScrollView(
-                                                                child:
-                                                                    DataTable(
-                                                                  columns: [
-                                                                    DataColumn(
-                                                                        label: Text(
-                                                                            "Employee Name")),
-                                                                    DataColumn(
-                                                                        label: Text(
-                                                                            "Contact No")),
-                                                                    DataColumn(
-                                                                        label: Text(
-                                                                            "Responsibility")),
-                                                                    DataColumn(
-                                                                        label: Text(
-                                                                            "Responsibility")),
-                                                                  ],
-                                                                  rows: List<
-                                                                      DataRow>.generate(
-                                                                    controller
-                                                                        .filteredEmployeeNameList
-                                                                        .length,
-                                                                    (index) {
-                                                                      var employeeNameDetails =
-                                                                          controller
-                                                                              .filteredEmployeeNameList[index];
-                                                                      return DataRow(
-                                                                          cells: [
-                                                                            DataCell(Text('${employeeNameDetails?.name ?? ''}')),
-                                                                            DataCell(Text('${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                                            DataCell(Text('${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
-                                                                            DataCell(
-                                                                              Wrap(
-                                                                                children: [
-                                                                                  TableActionButton(
-                                                                                    color: Colors.red,
-                                                                                    icon: Icons.delete_outline,
-                                                                                    message: 'Remove',
-                                                                                    onPress: () {
-                                                                                      // Call the removeItem method of the controller
-                                                                                      _removeRow(index);
-                                                                                      print("index");
-                                                                                    },
-                                                                                  )
-                                                                                ],
-                                                                              ),
-                                                                            )
-                                                                          ]);
-                                                                    },
-                                                                  ),
+                                                            SizedBox(width: 5),
+                                                            // Text(
+                                                            //   'Ramesh Singh',
+                                                            //   style: Styles.black17,
+                                                            // ),
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  7,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .employeeNameList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isemployeeNameListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedEmployeeNamesList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueTbtConductedChanged,
                                                                 ),
                                                               ),
                                                             ),
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                        Row(
+                                                          // crossAxisAlignment:
+                                                          //     CrossAxisAlignment.end,
+                                                          children: [
+                                                            Text(
+                                                              'Date & Time: ',
+                                                              style: Styles
+                                                                  .blackBold17,
+                                                            ),
+                                                            _buildDateTimeField_web(
+                                                                context),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                  ///TBT Training Attended By
+                                                  // controller.permitId.value <=
+                                                  //         0
+                                                  //     ?
+                                                  Container(
+                                                    margin: Dimens.edgeInsets20,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(.3)),
+                                                    ),
+                                                    constraints: BoxConstraints(
+                                                      maxWidth: 1100,
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        Obx(
+                                                          () => CustomAppBar(
+                                                            title:
+                                                                'TBT Training Attended By'
+                                                                    .tr,
+                                                            action: Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        "Add Employee"),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                SizedBox(
+                                                                  width: 220,
+                                                                  height: 50,
+                                                                  child:
+                                                                      CustomMultiSelectDialogField(
+                                                                    buttonText:
+                                                                        'Add Employee',
+                                                                    title:
+                                                                        'Select Employee',
+                                                                    initialValue: (controller
+                                                                            .selectedEmployeeNameList
+                                                                            .isNotEmpty)
+                                                                        ? controller
+                                                                            .selectedEmployeeNameIdList
+                                                                        : [],
+                                                                    items: controller
+                                                                        .employeeNameList
+                                                                        .map(
+                                                                          (employeeName) =>
+                                                                              MultiSelectItem(
+                                                                            employeeName?.id,
+                                                                            employeeName?.name ??
+                                                                                '',
+                                                                          ),
+                                                                        )
+                                                                        .toList(),
+                                                                    onConfirm:
+                                                                        (selectedOptionsList) =>
+                                                                            {
+                                                                      controller
+                                                                          .employeeNameSelected(
+                                                                              selectedOptionsList),
+                                                                      print(
+                                                                          'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Wrap(
+                                                          children: [
+                                                            Column(
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      2,
+                                                                  child:
+                                                                      Container(
+                                                                    constraints:
+                                                                        BoxConstraints(
+                                                                            minHeight:
+                                                                                90),
+                                                                    child:
+                                                                        SingleChildScrollView(
+                                                                      child:
+                                                                          DataTable(
+                                                                        columns: [
+                                                                          DataColumn(
+                                                                              label: Text("Employee Name")),
+                                                                          DataColumn(
+                                                                              label: Text("Contact No")),
+                                                                          DataColumn(
+                                                                              label: Text("Responsibility")),
+                                                                          DataColumn(
+                                                                              label: Text("Responsibility")),
+                                                                        ],
+                                                                        rows: List<
+                                                                            DataRow>.generate(
+                                                                          controller
+                                                                              .filteredEmployeeNameList
+                                                                              .length,
+                                                                          (index) {
+                                                                            var employeeNameDetails =
+                                                                                controller.filteredEmployeeNameList[index];
+                                                                            return DataRow(cells: [
+                                                                              DataCell(Text('${employeeNameDetails?.name ?? ''}')),
+                                                                              DataCell(Text('${employeeNameDetails?.mobileNumber ?? ''}')),
+                                                                              DataCell(Text('${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
+                                                                              DataCell(
+                                                                                Wrap(
+                                                                                  children: [
+                                                                                    TableActionButton(
+                                                                                      color: Colors.red,
+                                                                                      icon: Icons.delete_outline,
+                                                                                      message: 'Remove',
+                                                                                      onPress: () {
+                                                                                        // Call the removeItem method of the controller
+                                                                                        _removeRow(index);
+                                                                                        print("index");
+                                                                                      },
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            ]);
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
                           Center(
                             child: Padding(
                               padding:
@@ -1634,7 +1642,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               child: CustomElevatedButton(
                                                   backgroundColor:
                                                       ColorValues.appGreenColor,
-                                                  text: "Submit For Approval",
+                                                  text: "Submit For Approval1",
                                                   onPressed: () {
                                                     controller.isCheckedJSA
                                                                     .value ==
@@ -2219,7 +2227,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
   ) {
     return Column(//
         children: [
-      Dimens.boxHeight5,
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Container(
@@ -2278,7 +2285,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
           ),
         ),
       ),
-      Dimens.boxHeight20,
     ]);
   }
 

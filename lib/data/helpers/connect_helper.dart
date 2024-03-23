@@ -3163,7 +3163,7 @@ class ConnectHelper {
     int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=$facilityId',
+      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=1779',
       Request.get,
       null,
       isLoading ?? false,
@@ -7569,6 +7569,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> createfreq({
     required String auth,
     bool? isLoading,
