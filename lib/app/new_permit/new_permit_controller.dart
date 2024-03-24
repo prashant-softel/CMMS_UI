@@ -1254,6 +1254,7 @@ class NewPermitController extends GetxController {
           is_isolation_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
+          lotoOtherDetails: [],
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
           TBT_Done_by: selectedTbtConductedId,

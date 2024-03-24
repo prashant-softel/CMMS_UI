@@ -51,6 +51,8 @@ class NewPermitDetailModel {
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
+  List<LotoOtherDetails>? lotoOtherDetails;
+
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
 
@@ -58,7 +60,7 @@ class NewPermitDetailModel {
   CancelDetails? cancelDetails;
   CloseDetails? closeDetails;
   String? physical_iso_remark;
-
+  bool? is_TBT_Expire;
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
@@ -112,12 +114,14 @@ class NewPermitDetailModel {
     this.employee_list,
     this.lstIsolation,
     this.loto_list,
+    this.lotoOtherDetails,
     this.lstCategory,
     this.lstAssociatedJobs,
     this.lstAssociatedPM,
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
+    this.is_TBT_Expire,
     this.physical_iso_remark,
   });
 
@@ -190,6 +194,10 @@ class NewPermitDetailModel {
             ? List<LotoLists>.from(
                 json["loto_list"]?.map((x) => LotoLists.fromJson(x)))
             : [],
+        lotoOtherDetails: json["lotoOtherDetails"] != null
+            ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
+                ?.map((x) => LotoOtherDetails.fromJson(x)))
+            : [],
         lstCategory: json["lstCategory"] != null
             ? List<ListCategory>.from(
                 json["lstCategory"].map((x) => ListCategory.fromJson(x)))
@@ -206,17 +214,7 @@ class NewPermitDetailModel {
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
         physical_iso_remark: json['physical_iso_remark'],
-
-        // approver_id: json["approver_id"],
-        // issuer_id: json["issuer_id"],
-        // sop_type_id: json["sop_type_id"],
-        // user_id: json["user_id"],
-        // is_isolation_required: json["is_isolation_required"],
-
-        // block_ids:json["block_ids"]!=null? List<int>.from(json["block_ids"].map((x) => x)):[],
-        // isolated_category_ids:json["isolated_category_ids"]!=null?
-        //     List<int>.from(json["isolated_category_ids"].map((x) => x)):[],
-        // category_ids:json["category_ids"]!=null? List<int>.from(json["category_ids"].map((x) => x)):[],
+        is_TBT_Expire: json['is_TBT_Expire'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -265,6 +263,8 @@ class NewPermitDetailModel {
         "lstIsolation": List<dynamic>.from(lstIsolation!.map((x) => x)),
         "lstCategory": List<dynamic>.from(lstCategory!.map((x) => x)),
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
+        "lotoOtherDetails":
+            List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
 
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
@@ -274,6 +274,7 @@ class NewPermitDetailModel {
         "cancelDetails": cancelDetails,
         "closeDetails": closeDetails,
         "physical_iso_remark": physical_iso_remark,
+        "is_TBT_Expire": is_TBT_Expire,
 
         // "approver_id": approver_id,
         // "issuer_id": issuer_id,
@@ -304,6 +305,30 @@ class LotoLists {
 
   Map<String, dynamic> toJson() =>
       {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
+}
+
+class LotoOtherDetails {
+  LotoOtherDetails({
+    this.employee_name,
+    this.contact_number,
+    this.responsibility,
+  });
+
+  int? contact_number;
+  String? employee_name;
+  String? responsibility;
+
+  factory LotoOtherDetails.fromJson(Map<String, dynamic> json) =>
+      LotoOtherDetails(
+          employee_name: json["employee_name"],
+          contact_number: json["contact_number"],
+          responsibility: json['responsibility']);
+
+  Map<String, dynamic> toJson() => {
+        "employee_name": employee_name,
+        "contact_number": contact_number,
+        "responsibility": responsibility
+      };
 }
 
 class ListEmployees {

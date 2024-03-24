@@ -27,6 +27,8 @@ class CreatePermitModel {
   String? description;
   String? title;
   List<LotoList>? Loto_list;
+  List<LotoOtherDetails>? lotoOtherDetails;
+
   List<Employeelist?>? employee_list;
   List<Safetyquestionlist>? safety_question_list;
   List<int?>? block_ids;
@@ -40,6 +42,7 @@ class CreatePermitModel {
   CreatePermitModel({
     this.permit_id,
     this.Loto_list,
+    this.lotoOtherDetails,
     this.approver_id,
     this.blockId,
     this.block_ids,
@@ -73,6 +76,10 @@ class CreatePermitModel {
         permit_id: json['permit_id'],
         approver_id: json["approver_id"],
         issuer_id: json["issuer_id"],
+        lotoOtherDetails: json["lotoOtherDetails"] != null
+            ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
+                ?.map((x) => LotoOtherDetails.fromJson(x)))
+            : [],
         facility_id: json["facility_id"],
         blockId: json["blockId"],
         job_type_id: json["job_type_id"],
@@ -137,6 +144,8 @@ class CreatePermitModel {
         "is_isolation_required": is_isolation_required,
         "resubmit": resubmit,
         "Loto_list": List<dynamic>.from(Loto_list!.map((x) => x.toJson())),
+        "lotoOtherDetails":
+            List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),
         "safety_question_list":
             List<dynamic>.from(safety_question_list!.map((x) => x)),
@@ -146,7 +155,7 @@ class CreatePermitModel {
         "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
         "TBT_Done_by": TBT_Done_by,
-        "PHYSICAL_ISO_REMARK": PHYSICAL_ISO_REMARK
+        "PHYSICAL_ISO_REMARK": PHYSICAL_ISO_REMARK,
       };
 }
 
@@ -167,6 +176,30 @@ class LotoList {
   Map<String, dynamic> toJson() => {
         "Loto_Key": Loto_Key,
         "Loto_id": Loto_id,
+      };
+}
+
+class LotoOtherDetails {
+  LotoOtherDetails({
+    this.employee_name,
+    this.contact_number,
+    this.responsibility,
+  });
+
+  int? contact_number;
+  String? employee_name;
+  String? responsibility;
+
+  factory LotoOtherDetails.fromJson(Map<String, dynamic> json) =>
+      LotoOtherDetails(
+          employee_name: json["employee_name"],
+          contact_number: json["contact_number"],
+          responsibility: json['responsibility']);
+
+  Map<String, dynamic> toJson() => {
+        "employee_name": employee_name,
+        "contact_number": contact_number,
+        "responsibility": responsibility
       };
 }
 
