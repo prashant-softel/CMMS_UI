@@ -1334,13 +1334,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     required int facilityId,
     int? jobId,
-    // int? userId,
+    int? userId,
     bool? isLoading,
   }) async =>
       await connectHelper.getJobDetails(
         auth: auth,
         jobId: jobId ?? 0,
-        // userId: userId,
+        userId: userId,
         facilityId: facilityId,
         isLoading: isLoading,
       );
