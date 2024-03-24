@@ -244,7 +244,7 @@ class ViewIncidentReportController extends GetxController {
         getuserAccessData();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportHistory(id: irId.value);
+        getIncidentReportHistory(id: irId.value, facilityId:facilityId);
       });
     } catch (e) {}
 
@@ -441,7 +441,7 @@ class ViewIncidentReportController extends GetxController {
   //   print('Incident Report Reject Button Data:${id}');
   // }
 
-  Future<void> getIncidentReportHistory({required int id}) async {
+  Future<void> getIncidentReportHistory({required int id,required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 131;
     // int tempModuleType = 21;
@@ -453,6 +453,7 @@ class ViewIncidentReportController extends GetxController {
               // tempJobCardId,
               moduleType,
               id,
+              facilityId,
               true,
             ) ??
             [];

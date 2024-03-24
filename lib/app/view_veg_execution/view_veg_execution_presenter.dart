@@ -8,10 +8,12 @@ class ViewVegExecutionPresenter {
 
    Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
+    required int facilityId,
     required int executionId,
   }) async {
     return viewVegExecutionUsecase.getVegExecutionDetail(
       executionId: executionId,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

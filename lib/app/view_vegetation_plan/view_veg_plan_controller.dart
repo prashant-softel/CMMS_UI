@@ -72,7 +72,7 @@ class ViewVegPlanController extends GetxController {
       });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getVegPlanDetail(planId: id.value);
+          getVegPlanDetail(planId: id.value, facilityId: facilityId);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
@@ -123,8 +123,8 @@ class ViewVegPlanController extends GetxController {
   //   update(["historyList"]);
   // }
 
-  Future<void> getVegPlanDetail({required int planId}) async {
-    final _vegPlanDetail = await viewVegPlanPresenter.getVegPlanDetail(
+  Future<void> getVegPlanDetail({required int planId,required int facilityId}) async {
+    final _vegPlanDetail = await viewVegPlanPresenter.getVegPlanDetail(facilityId:facilityId,
         planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetail');
 

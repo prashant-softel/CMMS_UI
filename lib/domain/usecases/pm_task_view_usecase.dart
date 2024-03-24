@@ -17,7 +17,7 @@ class PreventiveMaintenanceTaskViewUsecase {
       await repository.getPmtaskViewList(
         scheduleId,
         isLoading,
-        facilityId
+        facilityId,
       );
   Future<List<NewPermitModel?>?> getPermitList({
     int? facilityId,
@@ -95,8 +95,8 @@ class PreventiveMaintenanceTaskViewUsecase {
   }) async =>
       await repository.getHistory(
         moduleType,
-        facilityId,
         id,
+        facilityId,
         isLoading,
       );
   Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask({

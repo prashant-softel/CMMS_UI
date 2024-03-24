@@ -12,10 +12,12 @@ class ViewVegExecutionUsecase {
 
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
+    required int facilityId,
     required int executionId,
   }) async =>
       await repository.getVegExecutionDetail(
         executionId: executionId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );  
 

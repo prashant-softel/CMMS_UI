@@ -427,6 +427,10 @@ class NewPermitController extends GetxController {
           getBlocksList(facilityId);
         });
         Future.delayed(Duration(seconds: 1), () {
+          getNewPermitDetail(
+              intPermitId: permitId.value, facilityId: facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
         getInventoryCategoryList();

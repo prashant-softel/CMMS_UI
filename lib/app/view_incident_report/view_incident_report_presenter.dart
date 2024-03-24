@@ -28,11 +28,13 @@ class ViewIncidentReportPresenter {
   Future<List<HistoryModel>?> getIncidentReportHistory(
     moduleType,
     id,
+    facilityId,
     isLoading,
   ) async =>
       await viewIncidentReportUsecase.getIncidentReportHistory(
         moduleType: moduleType,
         id: id,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
 

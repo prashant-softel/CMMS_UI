@@ -107,11 +107,11 @@ class viewModuleCleaningExecutionController extends GetxController {
       // print('View MC Execution_Id:$id');
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getFacilityList();
-        // });
+        Future.delayed(Duration(seconds: 1), () {
+          getMCExecutionHistory(id: mcid.value, facilityId: facilityId);
+        });
       });
-      await getMCExecutionHistory(id: mcid.value);
+      await getMCExecutionHistory(id: mcid.value, facilityId: facilityId);
       Future.delayed(Duration(seconds: 1), () {
         getMCTaskEquipmentList(facilityId, true, facilityId);
       });
@@ -119,7 +119,7 @@ class viewModuleCleaningExecutionController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getMCExecutionDetail(executionId: mcid.value, facilityId: facilityId);
       });
-    
+
       super.onInit();
     } catch (e) {
       print(e);
@@ -151,7 +151,8 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getMCExecutionDetail({required int executionId,required int facilityId}) async {
+  Future<void> getMCExecutionDetail(
+      {required int executionId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
 
@@ -170,11 +171,13 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getMCTaskEquipmentList(int taskId, bool isLoading,int facilityId) async {
+  Future<void> getMCTaskEquipmentList(
+      int taskId, bool isLoading, int facilityId) async {
     equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
-    final list = await viewModuleCleaningExecutionPresenter
-        .getMCTaskEquipmentList(isLoading: isLoading, taskId: mcid.value,facilityId:facilityId);
+    final list =
+        await viewModuleCleaningExecutionPresenter.getMCTaskEquipmentList(
+            isLoading: isLoading, taskId: mcid.value, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
@@ -241,7 +244,8 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getMCExecutionHistory({required int id}) async {
+  Future<void> getMCExecutionHistory(
+      {required int id, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 82;
     // int tempModuleType = 21;
@@ -253,6 +257,7 @@ class viewModuleCleaningExecutionController extends GetxController {
               // tempJobCardId,
               moduleType,
               id,
+              facilityId,
               true,
             ) ??
             [];

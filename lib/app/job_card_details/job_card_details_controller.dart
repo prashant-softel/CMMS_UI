@@ -464,7 +464,7 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  void getPermitDetails(int facilityId) async {
+  void getPermitDetails(int facilityId, int? permitId) async {
     final _permitDetails =
         await jobCardDetailsPresenter.getPermitDetails(permitId: permitId,facilityId:facilityId);
 

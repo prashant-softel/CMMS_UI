@@ -30,14 +30,17 @@ class MrsReturnViewController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         isFacilitySelected.value = true;
+      }
+      Future.delayed(Duration(seconds: 1), () {
         getReturnMrsDetails(
             mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      }
+      });
     });
     try {
       await setMrsId();
       if (mrsId != 0) {
-        await getReturnMrsDetails(mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+        await getReturnMrsDetails(
+            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -61,9 +64,11 @@ class MrsReturnViewController extends GetxController {
     }
   }
 
-  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading,required int facilityId}) async {
-    final _returnMrsrsDetailsModel = await mrsReturnViewPresenter
-        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading,facilityId: facilityId);
+  Future<void> getReturnMrsDetails(
+      {int? mrsId, bool? isloading, required int facilityId}) async {
+    final _returnMrsrsDetailsModel =
+        await mrsReturnViewPresenter.getReturnMrsDetails(
+            mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;

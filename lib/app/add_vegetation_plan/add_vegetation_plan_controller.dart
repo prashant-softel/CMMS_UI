@@ -86,7 +86,7 @@ class AddVegetationPlanController extends GetxController {
       });
       if (vegPlanId != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getVegPlanDetail(planId: vegPlanId.value);
+          getVegPlanDetail(planId: vegPlanId.value, facilityId: facilityId);
         });
       }
       Future.delayed(Duration(seconds: 1), () {
@@ -220,11 +220,11 @@ class AddVegetationPlanController extends GetxController {
   //   // print('update Veg   data: $updateMcModelJsonString');
   // }
 
-  Future<void> getVegPlanDetail({required int planId}) async {
+  Future<void> getVegPlanDetail({required int planId,required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
+    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(facilityId:facilityId,
         planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetails');
 
