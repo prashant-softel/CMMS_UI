@@ -109,7 +109,6 @@ class BusinessListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    
     getCountryList();
 
     // getCityList();
@@ -117,6 +116,7 @@ class BusinessListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getBusinessTypeList();
+        getBusinessList(0, true, facilityId);
       });
     });
     cnameFocus.addListener(() {
@@ -222,7 +222,7 @@ class BusinessListController extends GetxController {
     // }
     selectedBusinessType.value = businessCategoryList[0]?.name!;
     selectedBusinessTypeId = businessCategoryList[0]?.id!;
-    getBusinessList(selectedBusinessTypeId, true, facilityId);
+    getBusinessList(0, true, facilityId);
   }
 
   Future<void> getCountryList() async {
@@ -360,11 +360,13 @@ class BusinessListController extends GetxController {
     return selectedBusinessType.value;
   }
 
-  Future<void> getBusinessList(selectedBusinessTypeId, bool isLoading,int facilityId) async {
+  Future<void> getBusinessList(
+      selectedBusinessTypeId, bool isLoading, int facilityId) async {
     moduleList?.value = <BusinessListModel>[];
     final _moduleList = await businessListPresenter.getBusinessList(
-      facilityId:facilityId,
-        businessType: selectedBusinessTypeId, isLoading: isLoading);
+        facilityId: facilityId,
+        businessType: selectedBusinessTypeId,
+        isLoading: isLoading);
 
     if (_moduleList != null) {
       moduleList!.value = _moduleList;

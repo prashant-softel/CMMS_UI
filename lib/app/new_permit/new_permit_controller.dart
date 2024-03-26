@@ -426,10 +426,10 @@ class NewPermitController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
-        Future.delayed(Duration(seconds: 1), () {
-          getNewPermitDetail(
-              intPermitId: permitId.value, facilityId: facilityId);
-        });
+        // Future.delayed(Duration(seconds: 1), () {
+        //   getNewPermitDetail(
+        //       intPermitId: permitId.value, facilityId: facilityId);
+        // });
         Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
