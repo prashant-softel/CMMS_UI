@@ -51,6 +51,8 @@ class NewPermitController extends GetxController {
   var isHovered = false.obs;
 
   var isToggleOn = false.obs;
+  var isTBTTrainingAttendedByOtherPersonOn = false.obs;
+
   var isToggleOn1 = false.obs;
   var isToggleOn2 = false.obs;
   var isToggleOn3 = false.obs;
@@ -66,6 +68,12 @@ class NewPermitController extends GetxController {
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
+  }
+
+  void toggleTBTTrainingAttendedByOtherPersonOn() {
+    isTBTTrainingAttendedByOtherPersonOn.value =
+        !isTBTTrainingAttendedByOtherPersonOn.value;
+    isTBTTrainingAttendedByOtherPersonOn.value == true ? addRowItem() : false;
   }
 
   ///Checkbox
