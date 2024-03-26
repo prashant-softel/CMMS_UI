@@ -389,15 +389,9 @@ class NewPermitController extends GetxController {
 
   void addRowItem() {
     rowTBTTrainingOtherPersonItem.add([
-      {
-        "key": "Drop_down",
-        "value": 'Please Select',
-        "assetMasterItemID": '',
-        "id": ''
-      },
-      {'key': "Cost", "value": ''},
-      {'key': "Order", "value": ''},
-      {'key': "Comment", "value": ''},
+      {'key': "Employee Name", "value": ''},
+      {'key': "Contact Number", "value": ''},
+      {'key': "Responsibility", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
