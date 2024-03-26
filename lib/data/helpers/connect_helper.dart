@@ -2086,7 +2086,7 @@ class ConnectHelper {
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobDetails?job_id=$jobId&facility_id=$facilityId',
+      'Job/GetJobDetails?job_id=$facilityId&facility_id=$jobId',
       Request.get,
       null,
       isLoading ?? false,

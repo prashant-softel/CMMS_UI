@@ -19,6 +19,12 @@ class ModuleCleaningPlanningController extends GetxController {
   );
   ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
   final HomeController homecontroller = Get.find();
+  var startDateTimeCtrlr = TextEditingController();
+  var validTillTimeCtrlr = TextEditingController();
+  Rx<DateTime> selectedmcstarttime = DateTime.now().obs;
+  Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
+  var validTillTimeCtrlrBuffer;
+  var startDateTimeCtrlrBuffer;
 
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
