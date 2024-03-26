@@ -52,7 +52,7 @@ class NewPermitDetailModel {
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
-  List<LotoOtherDetails>? lotoOtherDetails;
+  List<LotoOtherDetail>? lotoOtherDetails;
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
@@ -197,8 +197,8 @@ class NewPermitDetailModel {
                 json["loto_list"]?.map((x) => LotoLists.fromJson(x)))
             : [],
         lotoOtherDetails: json["lotoOtherDetails"] != null
-            ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
-                ?.map((x) => LotoOtherDetails.fromJson(x)))
+            ? List<LotoOtherDetail>.from(json["lotoOtherDetails"]
+                ?.map((x) => LotoOtherDetail.fromJson(x)))
             : [],
         lstCategory: json["lstCategory"] != null
             ? List<ListCategory>.from(
@@ -315,8 +315,8 @@ class LotoLists {
       {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
 }
 
-class LotoOtherDetails {
-  LotoOtherDetails({
+class LotoOtherDetail {
+  LotoOtherDetail({
     this.employee_name,
     this.contact_number,
     this.responsibility,
@@ -326,8 +326,8 @@ class LotoOtherDetails {
   String? employee_name;
   String? responsibility;
 
-  factory LotoOtherDetails.fromJson(Map<String, dynamic> json) =>
-      LotoOtherDetails(
+  factory LotoOtherDetail.fromJson(Map<String, dynamic> json) =>
+      LotoOtherDetail(
           employee_name: json["employee_name"],
           contact_number: json["contact_number"],
           responsibility: json['responsibility']);
