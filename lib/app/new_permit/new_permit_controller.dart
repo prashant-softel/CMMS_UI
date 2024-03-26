@@ -33,6 +33,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/job_details_model.dart';
+import 'package:cmms/domain/models/create_permit_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
@@ -1564,10 +1565,33 @@ class NewPermitController extends GetxController {
           .map((element) => element?.responsibility?.map((e) => e.name));
 
       List<Employeelist> employee_map_list = [];
+
       filteredEmployeeNameList.forEach((e) {
         employee_map_list.add(
             Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
+
+      List<LotoOtherDetails> proposedActionItems = [];
+      rowTBTTrainingOtherPersonItem.forEach((element) {
+        LotoOtherDetails item = LotoOtherDetails(
+          employee_name: element[0]["value"] ?? '0',
+          contact_number: int.tryParse('${element[1]["value"] ?? '0'}'),
+          responsibility: element[2]["value"] ?? '0',
+          // target_date: element[2]["value"] ?? '0',
+        );
+
+        proposedActionItems.add(item);
+      });
+      // List<LotoOtherDetails> rowItemLotoOtherDetails = [];
+      // rowItemLotoOtherDetails.forEach((element) {
+      //   LotoOtherDetails item = LotoOtherDetails(
+      //     employee_name: element[0]["value"] ?? '0',
+      //     contact_number: int.tryParse(element[1]["value"] ?? '0'),
+      //     responsibility: element[2]["value"] ?? '0',
+      //   );
+      //   rowItemLotoOtherDetails.add(item);
+      //   print('Create req  order  data: $item');
+      // });
 
       late List<LotoList> loto_map_list = [];
 
