@@ -445,6 +445,12 @@ class NewPermitController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
         });
+        if (permitId.value > 0) {
+         getNewPermitDetail(
+            intPermitId: permitId.value, facilityId: facilityId);
+         getPermitHistory(
+            permitId: permitId.value, facilityId: facilityId);
+      }
         // Future.delayed(Duration(seconds: 1), () {
         //   getNewPermitDetail(
         //       intPermitId: permitId.value, facilityId: facilityId);
@@ -464,12 +470,7 @@ class NewPermitController extends GetxController {
         }
       });
 
-      if (permitId.value > 0) {
-        await getNewPermitDetail(
-            intPermitId: permitId.value, facilityId: facilityId);
-        await getPermitHistory(
-            permitId: permitId.value, facilityId: facilityId);
-      }
+      
 
       // await getPermitIssuerList();
       // await getPermitApproverList();
