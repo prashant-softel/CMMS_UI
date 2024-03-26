@@ -37,7 +37,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -126,7 +127,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             child: Wrap(
                                               children: [
                                                 Text(
-                                                  controller.selectedItem == null
+                                                  controller.selectedItem ==
+                                                          null
                                                       ? "Businesslist Create Successfully in the List."
                                                       : "Businesslist updated Successfully in the List.",
                                                   style: TextStyle(
@@ -141,7 +143,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                           ),
                                         ),
-      
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -162,7 +164,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -191,7 +194,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .isSelectedBusinessType
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedBusinessType
+                                                          .selectedbtype
                                                           .value,
                                                       onValueChanged: controller
                                                           .onValueChanged,
@@ -201,7 +204,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-      
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -227,7 +230,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -241,7 +245,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               child: TextField(
                                                 controller: controller
                                                     .businesslistNumberCtrlr,
-                                                focusNode: controller.cnameFocus,
+                                                focusNode:
+                                                    controller.cnameFocus,
                                                 scrollController:
                                                     controller.cnameScroll,
                                                 keyboardType:
@@ -262,7 +267,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   enabledBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -270,7 +276,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   focusedBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -281,7 +288,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -293,7 +301,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -323,7 +332,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -352,7 +361,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -364,8 +374,10 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                controller: controller.emailCtrlr,
-                                                focusNode: controller.emailFocus,
+                                                controller:
+                                                    controller.emailCtrlr,
+                                                focusNode:
+                                                    controller.emailFocus,
                                                 scrollController:
                                                     controller.emailScroll,
                                                 keyboardType:
@@ -386,7 +398,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   enabledBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -394,7 +407,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   focusedBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -405,7 +419,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -417,7 +432,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -469,7 +485,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -481,8 +498,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                controller:
-                                                    controller.contactpersonCtrlr,
+                                                controller: controller
+                                                    .contactpersonCtrlr,
                                                 focusNode:
                                                     controller.contactpFocus,
                                                 scrollController:
@@ -505,7 +522,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   enabledBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -513,7 +531,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   focusedBorder:
                                                       OutlineInputBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent),
@@ -524,7 +543,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -536,7 +556,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -560,7 +581,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -590,7 +611,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -602,8 +624,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                controller:
-                                                    controller.contactnumberCtrlr,
+                                                controller: controller
+                                                    .contactnumberCtrlr,
                                                 focusNode:
                                                     controller.contactnoFocus,
                                                 scrollController:
@@ -648,7 +670,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -660,7 +683,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -726,7 +750,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -778,31 +803,36 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isWebsiteInvalid.value
+                                                          .isWebsiteInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isWebsiteInvalid.value
+                                                          .isWebsiteInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isWebsiteInvalid.value
+                                                          .isWebsiteInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -850,7 +880,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -902,31 +933,36 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isLocationInvalid.value
+                                                          .isLocationInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isLocationInvalid.value
+                                                          .isLocationInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isLocationInvalid.value
+                                                          .isLocationInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -943,7 +979,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -973,7 +1009,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1025,31 +1062,36 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isAddressInvalid.value
+                                                          .isAddressInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -1066,7 +1108,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -1095,7 +1137,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1139,8 +1182,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child:
-                                                  CustomRichText(title: 'State '),
+                                              child: CustomRichText(
+                                                  title: 'State '),
                                             ),
                                             Container(
                                               height: MediaQuery.of(context)
@@ -1159,7 +1202,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1184,7 +1228,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   dropdownList:
                                                       controller.stateList,
                                                   isValueSelected: controller
-                                                      .isSelectedStateType.value,
+                                                      .isSelectedStateType
+                                                      .value,
                                                   selectedValue: controller
                                                       .selectedState.value,
                                                   onValueChanged:
@@ -1202,8 +1247,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child:
-                                                  CustomRichText(title: 'City '),
+                                              child: CustomRichText(
+                                                  title: 'City '),
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
@@ -1218,7 +1263,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1235,18 +1281,19 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   .18),
                                               child: DropdownWebWidget(
                                                 controller: controller,
-                                                dropdownList: controller.cityList,
+                                                dropdownList:
+                                                    controller.cityList,
                                                 isValueSelected: controller
                                                     .isSelectedCityType.value,
-                                                selectedValue:
-                                                    controller.selectedCity.value,
+                                                selectedValue: controller
+                                                    .selectedCity.value,
                                                 onValueChanged:
                                                     controller.onValueChanged,
                                               ),
                                             ),
                                           ],
                                         ),
-      
+
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -1276,7 +1323,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -1332,7 +1380,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -1344,7 +1393,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -1370,7 +1420,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                         ),
                                       ]),
                                 ),
-      
+
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -1396,8 +1446,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                         // print("$controller.selectedItem");
                                         child: controller.selectedItem == null
                                             ? CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appDarkBlueColor,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
                                                 onPressed: () {
                                                   controller
                                                       .createBusinessListNumber()
@@ -1411,23 +1461,26 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 },
                                                 text: 'Create Business ')
                                             : CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appDarkBlueColor,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
                                                 onPressed: () {
                                                   controller
                                                       .updateBusinesslistNumber(
                                                           controller
                                                               .selectedItem?.id,
-                                                          controller.selectedItem
+                                                          controller
+                                                              .selectedItem
                                                               ?.status,
-                                                          controller.selectedItem
+                                                          controller
+                                                              .selectedItem
                                                               ?.addedAt)
                                                       .then((value) {
                                                     print("value,$value");
                                                     if (value == true)
                                                       controller
                                                           .issuccessCreatebusinesslist();
-                                                    controller.toggleContainer();
+                                                    controller
+                                                        .toggleContainer();
                                                   });
                                                 },
                                                 text: 'Update')),
@@ -1477,20 +1530,22 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding:
-                                              EdgeInsets.fromLTRB(10, 10, 10, 12),
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              10, 10, 10, 12),
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -1499,11 +1554,11 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
@@ -1580,15 +1635,16 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                       controller.moduleList?.length ?? 0,
                                       (index) => DataRow(cells: [
                                         DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(
-                                            controller.moduleList?[index]?.name ??
-                                                '')),
+                                        DataCell(Text(controller
+                                                .moduleList?[index]?.name ??
+                                            '')),
                                         DataCell(Text(controller
                                                 .moduleList?[index]
                                                 ?.contactPerson ??
                                             '')),
                                         DataCell(Text(controller
-                                                .moduleList?[index]?.contactnumber
+                                                .moduleList?[index]
+                                                ?.contactnumber
                                                 .toString() ??
                                             '')),
                                         DataCell(Text(controller
@@ -1616,7 +1672,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                       index]
                                                                   ?.id
                                                                   .toString());
-      
+
                                                   controller
                                                       .businesslistNumberCtrlr
                                                       .text = controller
@@ -1640,22 +1696,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                       controller.selectedItem
                                                               ?.website ??
                                                           '';
-                                                  controller.locationCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.location ??
-                                                          '';
+                                                  controller.locationCtrlr
+                                                      .text = controller
+                                                          .selectedItem
+                                                          ?.location ??
+                                                      '';
                                                   controller.addressCtrlr.text =
                                                       controller.selectedItem
                                                               ?.address ??
                                                           '';
-                                                  controller.selectedCity.value =
-                                                      controller.selectedItem
-                                                              ?.city ??
-                                                          '';
-                                                  controller.selectedState.value =
-                                                      controller.selectedItem
-                                                              ?.state ??
-                                                          '';
+                                                  controller.selectedCity
+                                                      .value = controller
+                                                          .selectedItem?.city ??
+                                                      '';
+                                                  controller.selectedState
+                                                      .value = controller
+                                                          .selectedItem
+                                                          ?.state ??
+                                                      '';
                                                   controller.selectedCountry
                                                       .value = controller
                                                           .selectedItem
