@@ -1165,7 +1165,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           // "https://www.w3.org/1999/xhtml/"
                                                           // String baseUrl =
                                                           //     'http://65.0.20.19/CMMS_API/';
-                                                          String baseUrl = 'http://172.20.43.18:82/';
+                                                          String baseUrl =
+                                                              'http://172.20.43.18:82/';
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1197,7 +1198,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       onPressed: () async {
                                                         // String baseUrl =
                                                         //     'http://65.0.20.19/CMMS_API/';
-                                                        String baseUrl = 'http://172.20.43.18:82/';
+                                                        String baseUrl =
+                                                            'http://172.20.43.18:82/';
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =
@@ -2043,33 +2045,36 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     '',
                                               )),
                                               DataCell(
-                                                Text("View Image"),
-                                                // Wrap(
-                                                //   children: [
-                                                //     TableActionButton(
-                                                //       color: ColorValues
-                                                //           .appDarkBlueColor,
-                                                //       icon: Icons.visibility,
-                                                //       message: 'View Permit',
-                                                //       onPress: () async {
-                                                //         String baseUrl =
-                                                //             "http://65.0.20.19/CMMS_API/";
-                                                //         String fileName =
-                                                //             fileItem.fileName ??
-                                                //                 "";
-                                                //         String fullUrl =
-                                                //             baseUrl + fileName;
-                                                //         if (await canLaunch(
-                                                //             fullUrl)) {
-                                                //           await launch(fullUrl);
-                                                //         } else {
-                                                //           throw 'Could not launch $fullUrl';
-                                                //         }
-                                                //         // String baseUrl = 'http://172.20.43.9:83/';
-                                                //       },
-                                                //     )
-                                                //   ],
-                                                // ),
+                                                // Text("View Image"),
+                                                Wrap(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      icon: Icons.visibility,
+                                                      message: 'View Permit',
+                                                      onPress: () async {
+                                                        String baseUrl =
+                                                            "http://65.0.20.19/CMMS_API/";
+                                                        String fileName =
+                                                            controller
+                                                                    .file_list![
+                                                                        index]
+                                                                    ?.fileName ??
+                                                                "";
+                                                        String fullUrl =
+                                                            baseUrl + fileName;
+                                                        if (await canLaunch(
+                                                            fullUrl)) {
+                                                          await launch(fullUrl);
+                                                        } else {
+                                                          throw 'Could not launch $fullUrl';
+                                                        }
+                                                        // String baseUrl = 'http://172.20.43.9:83/';
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),

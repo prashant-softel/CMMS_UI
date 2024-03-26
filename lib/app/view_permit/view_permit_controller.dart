@@ -851,14 +851,16 @@ class ViewPermitController extends GetxController {
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
       print("File List:");
-file_list?.forEach((fileItem) {
-  print("ID: ${fileItem!.id}");
-  print("File Name: ${fileItem.fileName}");
-  print("File Category: ${fileItem.fileCategory}");
-  print("File Size: ${fileItem.fileSize}");
-  print("Status: ${fileItem.status}");
-  print("PTW Files: ${fileItem.ptwFiles}");
-},);
+      file_list?.forEach(
+        (fileItem) {
+          print("ID: ${fileItem!.id}");
+          print("File Name: ${fileItem.fileName}");
+          print("File Category: ${fileItem.fileCategory}");
+          print("File Size: ${fileItem.fileSize}");
+          print("Status: ${fileItem.status}");
+          print("PTW Files: ${fileItem.ptwFiles}");
+        },
+      );
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
       listCancelCondition?.value =
