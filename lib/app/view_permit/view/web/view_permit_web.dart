@@ -9,8 +9,6 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
-import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
-import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_dialog.dart';
@@ -1976,57 +1974,114 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
 
                               ///File Upload
                               Container(
-                                margin: EdgeInsets.all(20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "All Files Upload",
-                                      style: Styles.blue700,
+                                margin: Dimens.edgeInsets20,
+                                height:
+                                    ((controller.file_list?.length ?? 0) * 40) +
+                                        130,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        ColorValues.lightGreyColorWithOpacity35,
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorValues.appBlueBackgroundColor,
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
                                     ),
-                                    Dimens.boxHeight10,
-                                    Wrap(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.5,
-                                              child: Container(
-                                                height: Get.height * 0.2,
-                                                width: Get.width,
-                                                child: Row(
-                                                    //
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child:
-                                                            FileUploadWidgetWithDropzone(),
-                                                      ),
-                                                      Dimens.boxWidth10,
-                                                      Expanded(
-                                                          flex: 8,
-                                                          child:
-                                                              FileUploadDetailsWidgetWeb2()),
-                                                    ]),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'All Files Uploaded',
+                                            style: Styles.blue700,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: DataTable2(
+                                        border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234),
+                                        ),
+                                        columns: [
+                                          DataColumn(
+                                            label: Text(
+                                              "File Name",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                          ],
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "View Image",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        rows: List<DataRow>.generate(
+                                          controller.file_list?.length ?? 0,
+                                          (index) => DataRow(
+                                            cells: [
+                                              DataCell(Text(
+                                                controller.file_list![index]
+                                                        ?.fileName
+                                                        .toString() ??
+                                                    '',
+                                              )),
+                                              DataCell(
+                                                Text("View Image"),
+                                                // Wrap(
+                                                //   children: [
+                                                //     TableActionButton(
+                                                //       color: ColorValues
+                                                //           .appDarkBlueColor,
+                                                //       icon: Icons.visibility,
+                                                //       message: 'View Permit',
+                                                //       onPress: () async {
+                                                //         String baseUrl =
+                                                //             "http://65.0.20.19/CMMS_API/";
+                                                //         String fileName =
+                                                //             fileItem.fileName ??
+                                                //                 "";
+                                                //         String fullUrl =
+                                                //             baseUrl + fileName;
+                                                //         if (await canLaunch(
+                                                //             fullUrl)) {
+                                                //           await launch(fullUrl);
+                                                //         } else {
+                                                //           throw 'Could not launch $fullUrl';
+                                                //         }
+                                                //         // String baseUrl = 'http://172.20.43.9:83/';
+                                                //       },
+                                                //     )
+                                                //   ],
+                                                // ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-
                               SizedBox(
                                 height: 10,
                               ),
-
                               //Permit History
                               controller.historyList!.isEmpty
                                   ? Dimens.box0
