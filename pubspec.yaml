@@ -68,6 +68,7 @@ dependencies:
   semicircle_indicator: ^1.1.1
   pie_chart: ^5.4.0
   csv: ^5.1.1
+  path: ^1.8.3
 
 dev_dependencies:
   hive_generator:

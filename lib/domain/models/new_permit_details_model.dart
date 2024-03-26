@@ -48,6 +48,7 @@ class NewPermitDetailModel {
   String? current_status_short;
   List<ListSafetyQuestion>? safety_question_list;
   List<ListEmployees?>? employee_list;
+  List<FileList>? file_list;
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
@@ -123,6 +124,7 @@ class NewPermitDetailModel {
     this.closeDetails,
     this.is_TBT_Expire,
     this.physical_iso_remark,
+    this.file_list,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -210,6 +212,10 @@ class NewPermitDetailModel {
             ? List<ListAssociatedPm>.from(json["lstAssociatedPM"]
                 .map((x) => ListAssociatedPm.fromJson(x)))
             : [],
+        file_list: json["file_list"] != null
+            ? List<FileList>.from(
+                json["file_list"].map((x) => FileList.fromJson(x)))
+            : [],
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
@@ -265,6 +271,8 @@ class NewPermitDetailModel {
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
         "lotoOtherDetails":
             List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
+        "file_list":
+            List<dynamic>.from(file_list!.map((x) => x.toJson())),
 
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
@@ -376,13 +384,14 @@ class ListSafetyQuestion {
 }
 
 class FileList {
-  FileList(
-      {this.id,
-      this.fileName,
-      this.fileCategory,
-      this.fileSize,
-      this.status,
-      this.ptwFiles});
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.ptwFiles,
+  });
 
   int? id;
   String? fileName;
@@ -392,12 +401,13 @@ class FileList {
   String? ptwFiles;
 
   factory FileList.fromJson(Map<String, dynamic> json) => FileList(
-      id: json["id"],
-      fileName: json["fileName"],
-      fileCategory: json['fileCategory'],
-      fileSize: json['fileSize'],
-      status: json['status'],
-      ptwFiles: json['ptwFiles'] ?? '');
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        ptwFiles: json['ptwFiles'] ?? '',
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -405,7 +415,7 @@ class FileList {
         "fileCategory": fileCategory,
         "fileSize": fileSize,
         "status": status,
-        "ptwFiles": ptwFiles
+        "ptwFiles": ptwFiles,
       };
 }
 

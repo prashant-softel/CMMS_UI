@@ -35,6 +35,7 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
@@ -209,6 +210,7 @@ class ViewPermitController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   int selectedInventoryCategoryId = 0;
+  RxList<FileList?>? file_list = <FileList>[].obs;
 
   //Equipment Isolation
   RxList<int> selectedEquipmentIsolationIdList = <int>[].obs;
@@ -847,6 +849,16 @@ class ViewPermitController extends GetxController {
           viewPermitDetailsModel.value?.lstAssociatedPM ?? [];
       print({"12233", listAssociatedPm});
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
+      file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
+      print("File List:");
+file_list?.forEach((fileItem) {
+  print("ID: ${fileItem!.id}");
+  print("File Name: ${fileItem.fileName}");
+  print("File Category: ${fileItem.fileCategory}");
+  print("File Size: ${fileItem.fileSize}");
+  print("Status: ${fileItem.status}");
+  print("PTW Files: ${fileItem.ptwFiles}");
+},);
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
       listCancelCondition?.value =
