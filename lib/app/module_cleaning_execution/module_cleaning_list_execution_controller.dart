@@ -105,7 +105,7 @@ class ModuleCleaningListExecutionController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
+      Future.delayed(Duration(seconds: 1), () async {
         await getMCTaskList(
             facilityId, formattedTodate1, formattedFromdate1, false, false);
       });

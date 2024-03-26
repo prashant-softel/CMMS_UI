@@ -89,6 +89,9 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
             isloading: true,
             facilityId: facilityId);
       });
+      Future.delayed(Duration(milliseconds: 1000), () {
+        getHistory(facilityId);
+      });
     });
     try {
       await setScheduleId();
@@ -98,7 +101,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
             scheduleId: scheduleId.value,
             isloading: true,
             facilityId: facilityId);
-        getHistory();
+        getHistory(facilityId);
         getMrsListByModuleTask(taskId: scheduleId.value);
       }
       // textControllers =
@@ -148,7 +151,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     // update(["taskLinkdToPermitList"]);
   }
 
-  Future<void> getHistory() async {
+  Future<void> getHistory(int facilityId) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 27;
     //
@@ -158,6 +161,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
               // tempJobCardId,
               moduleType,
               scheduleId.value,
+              facilityId,
               true,
             ) ??
             [];
@@ -335,7 +339,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                                   scheduleId: scheduleId.value,
                                   isloading: true,
                                   facilityId: facilityId);
-                              getHistory();
+                              getHistory(facilityId);
                               getMrsListByModuleTask(taskId: scheduleId.value);
                             }
                             // textControllers =

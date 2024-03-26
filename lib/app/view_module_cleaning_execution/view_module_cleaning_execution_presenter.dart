@@ -11,11 +11,13 @@ class ViewModuleCleaningExecutionPresenter {
   Future<List<HistoryModel>?> getMCExecutionHistory(
     moduleType,
     id,
+    facilityId,
     isLoading,
   ) async =>
       await viewModuleCleaningExecutionUsecase.getMCExecutionHistory(
         moduleType: moduleType,
         id: id,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 

@@ -473,9 +473,10 @@ class ViewPermitController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-        getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
         Future.delayed(Duration(seconds: 1), () {
           getBlocksList(facilityId);
+          getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
+          getPermitHistory(permitId: permitId.value, facilityId: facilityId);
         });
         // Future.delayed(Duration(seconds: 1), () {
 
@@ -807,8 +808,8 @@ class ViewPermitController extends GetxController {
           // tempModuleType,
           // tempJobCardId,
           moduleType,
-          facilityId,
           permitId,
+          facilityId,
           true,
         ) ??
         [];

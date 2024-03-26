@@ -707,7 +707,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facilityId=$facility_id&' +
+      'MC/GetMCTaskList?facility_id=$facility_id&' +
           startDateParam +
           endDateParam,
       Request.getMultiparts,
@@ -3163,7 +3163,7 @@ class ConnectHelper {
     int? permitId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=1779',
+      'Permit/GetPermitDetails?permit_id=$permitId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3344,8 +3344,8 @@ class ConnectHelper {
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
-    required int facilityId,
     int? id,
+    required int facilityId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -4094,8 +4094,8 @@ class ConnectHelper {
 
   Future<ResponseModel> getPmtaskViewList({
     required String? auth,
-    required int facilityId,
     int? scheduleId,
+    required int facilityId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
@@ -7165,11 +7165,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getVegPlanDetail({
     required bool isLoading,
+    required int facilityId,
     required String auth,
     int? plan_id,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegetationPlanDetails?planId=$plan_id',
+      'Vegetation/GetVegetationPlanDetails?planId=$plan_id&facility_id=$facilityId',
       Request.getMultiparts,
       null,
       isLoading,
@@ -7314,11 +7315,12 @@ class ConnectHelper {
 
   Future<ResponseModel> getVegExecutionDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? executionId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/GetVegExecutionDetails?executionId=$executionId',
+      'Vegetation/GetVegExecutionDetails?executionId=$executionId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,

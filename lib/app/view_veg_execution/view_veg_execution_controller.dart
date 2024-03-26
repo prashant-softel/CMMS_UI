@@ -88,7 +88,7 @@ class ViewVegExecutionController extends GetxController {
       });
 
       Future.delayed(Duration(seconds: 1), () {
-        getVegExecutionDetail(executionId: vegid.value);
+        getVegExecutionDetail(executionId: vegid.value, facilityId: facilityId);
       });
           super.onInit();
     } catch (e) {
@@ -121,12 +121,12 @@ class ViewVegExecutionController extends GetxController {
     }
   }
 
-    Future<void> getVegExecutionDetail({required int executionId}) async {
+    Future<void> getVegExecutionDetail({required int executionId,required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     vegExecutionDetailsList?.value = <VegExecutionDetailsModel>[];
 
     final _vegExecutionDetails = await viewVegExecutionPresenter
-        .getVegExecutionDetail(executionId: executionId);
+        .getVegExecutionDetail(executionId: executionId, facilityId: facilityId);
     print('View Vegetation Execution Detail:$_vegExecutionDetails');
 
     if (_vegExecutionDetails != null) {

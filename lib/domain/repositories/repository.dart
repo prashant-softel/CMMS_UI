@@ -5979,8 +5979,8 @@ class Repository {
   Future<List<HistoryModel>?> getHistory(
     //String? auth,
     int? moduleType,
-    int facilityId,
     int? id,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -5988,9 +5988,9 @@ class Repository {
       final res = await _dataRepository.getHistory(
         auth: auth,
         isLoading: isLoading,
-        facilityId:facilityId,
         moduleType: moduleType,
         id: id,
+        facilityId:facilityId,
       );
 
       if (!res.hasError) {
@@ -11208,6 +11208,7 @@ class Repository {
 
   Future<VegPlanDetailModel?> getVegPlanDetail({
     bool? isLoading,
+    required int facilityId,
     int? planId,
   }) async {
     try {
@@ -11215,6 +11216,7 @@ class Repository {
       final res = await _dataRepository.getVegPlanDetail(
         auth: auth,
         planId: planId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -11458,12 +11460,14 @@ class Repository {
 
   Future<VegExecutionDetailsModel?> getVegExecutionDetail({
     bool? isLoading,
+    required int facilityId,
     int? executionId,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getVegExecutionDetail(
         auth: auth,
+        facilityId:facilityId,
         executionId: executionId,
         isLoading: isLoading ?? false,
       );

@@ -10,9 +10,11 @@ class ViewVegPlanPresenter {
   Future<VegPlanDetailModel?> getVegPlanDetail({
     bool? isLoading,
     required int planId,
+    required int facilityId,
   }) async {
     return viewVegPlanUsecase.getVegPlanDetail(
       planId: planId,
+      facilityId:facilityId,
       isLoading: isLoading ?? false,
     );
   }

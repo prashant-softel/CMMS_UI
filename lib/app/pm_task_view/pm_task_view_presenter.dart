@@ -17,8 +17,8 @@ class PreventiveMaintenanceTaskViewPresenter {
   }) async =>
       await preventiveMaintenanceTaskViewUsecase.getPmtaskViewList(
         scheduleId: scheduleId,
+        facilityId: facilityId,
         isLoading: isloading,
-        facilityId: facilityId
       );
   Future<List<NewPermitModel?>?> getPermitList({
     int? facilityId,
@@ -113,11 +113,13 @@ class PreventiveMaintenanceTaskViewPresenter {
   Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
+    facilityId,
     isLoading,
   ) async =>
       await preventiveMaintenanceTaskViewUsecase.getHistory(
         moduleType: moduleType,
         id: id,
+        facilityId:facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? pmTaskId}) async {

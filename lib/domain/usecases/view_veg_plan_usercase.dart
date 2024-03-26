@@ -9,9 +9,11 @@ class ViewVegPlanUsecase {
   Future<VegPlanDetailModel?> getVegPlanDetail({
     bool? isLoading,
     required int planId,
+    required int facilityId,
   }) async =>
       await repository.getVegPlanDetail(
         planId: planId,
+        facilityId:facilityId,
         isLoading: isLoading ?? false,
       );
   Future<Map<String, dynamic>> vegPlanApprovedButton({

@@ -138,11 +138,10 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getBusinessList(
-      isLoading: isLoading,
-      auth: auth,
-      businessType: businessType,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        auth: auth,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<ResponseModel> getBodyInjuredData({
@@ -396,11 +395,10 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getPermitConditionList(
-      isLoading: isLoading,
-      auth: auth,
-      isCancle: isCancle,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        auth: auth,
+        isCancle: isCancle,
+        facilityId: facilityId);
   }
 
   @override
@@ -501,11 +499,10 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getMCTaskEquipmentList(
-      isLoading: isLoading,
-      auth: auth,
-      taskId: taskId,
-      facilityId: facilityId
-    );
+        isLoading: isLoading,
+        auth: auth,
+        taskId: taskId,
+        facilityId: facilityId);
   }
 
   ///Module Cleaning Task List
@@ -1154,7 +1151,7 @@ class DataRepository extends DomainRepository {
         // facilityId: facilityId ?? 0,
         // userId: userId,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1344,7 +1341,7 @@ class DataRepository extends DomainRepository {
         auth: auth,
         jobId: jobId ?? 0,
         userId: userId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -1359,7 +1356,7 @@ class DataRepository extends DomainRepository {
         auth: auth,
         jobId: jobId ?? 0,
         userId: userId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -1742,7 +1739,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getNewPermitDetail(
         auth: auth,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1755,7 +1752,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getViewPermitDetail(
         auth: auth,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1779,7 +1776,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getMCExecutionDetail(
         auth: auth,
         executionId: executionId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1792,7 +1789,7 @@ class DataRepository extends DomainRepository {
       await connectHelper.getMcPlanDetail(
         auth: auth,
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1825,7 +1822,7 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.getRoDetailsByID(
         auth: auth,
-        facilityId:facilityId,
+        facilityId: facilityId,
         requestID: requestID,
         isLoading: isLoading ?? false,
       );
@@ -1854,16 +1851,16 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getHistory({
     String? auth,
-    required int facilityId,
     int? moduleType,
     int? id,
+    required int facilityId,
     bool? isLoading,
   }) async {
     return await connectHelper.getHistory(
       auth: auth,
       moduleType: moduleType,
-      facilityId:facilityId,
       id: id,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -1877,7 +1874,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getJobsLinkdToPermitList(
       auth: auth,
       permitId: permitId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -1889,11 +1886,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     return await connectHelper.getMrsListByModule(
-      auth: auth,
-      jobId: jobId,
-      isLoading: isLoading,
-      facilityId: facilityId
-    );
+        auth: auth, jobId: jobId, isLoading: isLoading, facilityId: facilityId);
   }
 
   Future<ResponseModel> getMrsListByModuleTask({
@@ -1937,7 +1930,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getPermitDetails(
       auth: auth,
       permitId: permitId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -1952,7 +1945,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getJobCardHistory(
       auth: auth,
       moduleType: moduleType,
-      facilityId:facilityId,
+      facilityId: facilityId,
       jobCardId: jobCardId,
       isLoading: isLoading,
     );
@@ -1969,7 +1962,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getPermitHistory(
       auth: auth,
       moduleType: moduleType,
-      facilityId:facilityId,
+      facilityId: facilityId,
       permitId: permitId,
       isLoading: isLoading,
     );
@@ -1986,7 +1979,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
       moduleType: moduleType,
       id: id,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -2369,8 +2362,8 @@ class DataRepository extends DomainRepository {
   }) async {
     return await connectHelper.getPmtaskViewList(
       auth: auth,
-      facilityId: facilityId,
       scheduleId: scheduleId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -2866,7 +2859,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getCalibrationView(
       auth: auth,
       calibrationId: calibrationId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -3386,11 +3379,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async {
     return await connectHelper.getMrsDetails(
-      auth: auth,
-      mrsId: mrsId,
-      isLoading: isLoading,
-      facilityId: facilityId
-    );
+        auth: auth, mrsId: mrsId, isLoading: isLoading, facilityId: facilityId);
   }
 
   Future<ResponseModel> getPmPlanDetails({
@@ -3402,7 +3391,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getPmPlanDetails(
       auth: auth,
       pmPlanId: pmPlanId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -3416,7 +3405,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getAuditPlanDetails(
       auth: auth,
       auditPlanId: auditPlanId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -3778,7 +3767,7 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getReturnMrsDetails(
       auth: auth,
       mrsId: mrsId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
@@ -4158,12 +4147,14 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getVegPlanDetail({
     required String auth,
+    required int facilityId,
     bool? isLoading,
     int? planId,
   }) async =>
       await connectHelper.getVegPlanDetail(
         auth: auth,
         plan_id: planId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -4237,12 +4228,14 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> getVegExecutionDetail({
+    required int facilityId,
     required String auth,
     bool? isLoading,
     int? executionId,
   }) async =>
       await connectHelper.getVegExecutionDetail(
         auth: auth,
+        facilityId: facilityId,
         executionId: executionId,
         isLoading: isLoading ?? false,
       );
@@ -4264,7 +4257,7 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getIncidentRiskType(
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading,
       auth: auth,
     );
@@ -4382,13 +4375,14 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, tool_name: tool_name);
     return response;
   }
+
   Future<ResponseModel> createfreq({
     auth,
     freqJsonString,
     bool? isLoading,
   }) async {
     var response = await connectHelper.createfreq(
-        auth: auth, isLoading: isLoading,freqJsonString:freqJsonString);
+        auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
     return response;
   }
 //end
