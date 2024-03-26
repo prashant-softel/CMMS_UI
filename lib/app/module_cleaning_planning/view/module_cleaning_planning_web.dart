@@ -205,112 +205,10 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                 'Start date:'),
                                                         Dimens.boxWidth10,
 
-                                                        Container(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.040,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ), //BoxShadow
-                                                              BoxShadow(
-                                                                color: ColorValues
-                                                                    .whiteColor,
-                                                                offset:
-                                                                    const Offset(
-                                                                        0.0,
-                                                                        0.0),
-                                                                blurRadius: 0.0,
-                                                                spreadRadius:
-                                                                    0.0,
-                                                              ), //BoxShadow
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
+                                                        _buildStartValidTillDateField_web(
+                                                            context,
+                                                            0,
                                                           ),
-                                                          child: TextField(
-                                                            style: GoogleFonts
-                                                                .lato(
-                                                              textStyle: TextStyle(
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  height: 1.0,
-                                                                  color: Colors
-                                                                      .black),
-                                                            ),
-                                                            onTap: () {
-                                                              controller
-                                                                  .pickDateTime(
-                                                                      context);
-                                                            },
-                                                            controller:
-                                                                controller
-                                                                    .startDateTc,
-                                                            autofocus: false,
-                                                            readOnly: true,
-                                                            decoration:
-                                                                InputDecoration(
-                                                              fillColor:
-                                                                  ColorValues
-                                                                      .whiteColor,
-                                                              filled: true,
-                                                              contentPadding:
-                                                                  EdgeInsets
-                                                                      .fromLTRB(
-                                                                          5.0,
-                                                                          10.0,
-                                                                          5.0,
-                                                                          10.0),
-                                                              border:
-                                                                  InputBorder
-                                                                      .none,
-                                                              enabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                            ),
-                                                            onChanged:
-                                                                (value) {},
-                                                          ),
-                                                        ),
 
                                                         // CustomTextFieldForStock(
                                                         //   width: MediaQuery.of(
@@ -821,5 +719,195 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
         );
       },
     );
+  }
+
+  Widget _buildStartValidTillDateField_web(
+    BuildContext context,
+    int position,
+  ) {
+    final ModuleCleaningPlanningController controller = Get.find();
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.050,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ),
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 5
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+              onTap: () {
+                position == 0
+                    ? pickDateTime_web(context, 0)
+                    : pickDateTime_web(context, 1);
+              },
+              controller: position == 0
+                  ? controller.startDateTimeCtrlr
+                  : controller.validTillTimeCtrlr,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
+            ),
+          ),
+        ),
+        Dimens.boxHeight20,
+      ],
+    );
+  }
+
+  Future pickDateTime_web(BuildContext context, int position) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    var dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    final date = await pickDate_web(context, position);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime_web(context, position, date);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value = dateTime;
+    position == 0
+        ? controller.startDateTimeCtrlr
+        : controller.validTillTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: position == 0
+              ? controller.startDateTimeCtrlr.text.length
+              : controller.validTillTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    controller.validTillTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime.add(Duration(hours: 8)));
+    controller.validTillTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .format(dateTime.add(Duration(hours: 8)));
+    controller.startDateTimeCtrlrBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+  }
+
+  Future<DateTime?> pickDate_web(BuildContext context, int position) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    DateTime? dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    // final currentDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+    print('New Date is: $newDate');
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime_web(
+      BuildContext context, int position, DateTime? selectedDate) async {
+    final ModuleCleaningPlanningController controller = Get.find();
+    DateTime dateTime = position == 0
+        ? controller.selectedmcstarttime.value
+        : controller.selectedValidTillTime.value;
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child!,
+        );
+      },
+    );
+    print('New Date new time : $newTime');
+    if (newTime == null) {
+      return null;
+    }
+
+    final currentTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+      TimeOfDay.now().hour,
+      TimeOfDay.now().minute,
+    );
+    final selected = DateTime(
+      selectedDate?.year ?? DateTime.now().year,
+      selectedDate?.month ?? DateTime.now().month,
+      selectedDate?.day ?? DateTime.now().day,
+      newTime.hour,
+      newTime.minute,
+    );
+
+    // If date is today and time is in the past, show an error message
+    print('selected time : $selected');
+    if (currentTime.isAfter(selected)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Time"),
+            content: Text("Please select a time in the future."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return null;
+    }
+
+    return newTime;
   }
 }
