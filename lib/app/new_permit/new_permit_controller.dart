@@ -265,6 +265,8 @@ class NewPermitController extends GetxController {
 
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
+  RxList<List<Map<String, String>>> rowTBTTrainingOtherPersonItem =
+      <List<Map<String, String>>>[].obs;
 
   RxList<int> selectedEmployeeNameIds = <int>[].obs;
 
@@ -384,6 +386,21 @@ class NewPermitController extends GetxController {
   RxString fileName = "".obs;
   Uint8List? fileBytes;
   int type = 0;
+
+  void addRowItem() {
+    rowTBTTrainingOtherPersonItem.add([
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+        "assetMasterItemID": '',
+        "id": ''
+      },
+      {'key': "Cost", "value": ''},
+      {'key': "Order", "value": ''},
+      {'key': "Comment", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
+  }
 
   ///
   @override

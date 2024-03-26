@@ -1,9 +1,11 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -1298,13 +1300,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             ),
                           ),
 
-                          controller.newPermitDetailsModel.value?.permitNo ==
-                                      null ||
-                                  controller.newPermitDetailsModel.value
-                                          ?.ptwStatus ==
-                                      121
-                              ? Dimens.box0
-                              : Center(
+                          controller.newPermitDetailsModel.value?.ptwStatus ==
+                                  121
+                              ? Center(
                                   child: Container(
                                     width:
                                         MediaQuery.of(context).size.width / 1.2,
@@ -1546,6 +1544,289 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ],
                                                     ),
                                                   ),
+                                                  Container(
+                                                    margin: Dimens.edgeInsets20,
+                                                    //  height: 300,
+                                                    height: ((controller
+                                                                .rowTBTTrainingOtherPersonItem
+                                                                .value
+                                                                .length) *
+                                                            90) +
+                                                        170,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .lightGreyColorWithOpacity35,
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .appBlueBackgroundColor,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: Column(children: [
+                                                      // Column(
+                                                      //     children: []..addAll(controller.rowTBTTrainingOtherPersonItem.value.map((e) {
+                                                      //         return Text(jsonEncode(e));
+                                                      //       }))),
+                                                      // Text(jsonEncode(controller.dropdownMapperData)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              "TBT Training Attended By Other Person ",
+                                                              style: Styles
+                                                                  .blue700,
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                controller
+                                                                    .addRowItem();
+                                                              },
+                                                              child: Container(
+                                                                height: 25,
+                                                                width: 70,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: ColorValues
+                                                                      .addNewColor,
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: ColorValues
+                                                                        .lightGreyColorWithOpacity35,
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5)),
+                                                                ),
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    " + Add ",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w100,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: DataTable2(
+                                                          // minWidth: 2000,
+                                                          dataRowHeight: 105,
+                                                          columnSpacing: 10,
+                                                          border:
+                                                              TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                          columns: [
+                                                            DataColumn2(
+                                                                // fixedWidth: 500,
+                                                                label: Text(
+                                                              "Assets Code",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )),
+                                                            DataColumn2(
+                                                                fixedWidth: 150,
+                                                                label: Text(
+                                                                  "Cost",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                            DataColumn2(
+                                                                fixedWidth: 150,
+                                                                label: Text(
+                                                                  "Requested Qty",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                            DataColumn2(
+                                                                fixedWidth: 350,
+                                                                label: Text(
+                                                                  "Comment",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                            DataColumn2(
+                                                                fixedWidth: 70,
+                                                                label: Text(
+                                                                  "Action",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                          ],
+                                                          rows: controller
+                                                              .rowTBTTrainingOtherPersonItem
+                                                              .value
+                                                              .map((record) {
+                                                            return DataRow(
+                                                              // height: 130,
+                                                              cells: record.map(
+                                                                  (mapData) {
+                                                                return DataCell(
+                                                                  (mapData['key'] ==
+                                                                          "Drop_down")
+                                                                      ? Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .only(
+                                                                              left: 10,
+                                                                              right: 10,
+                                                                              top: 10),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              DropdownWebStock(
+                                                                                width: MediaQuery.of(context).size.width / 4,
+                                                                                dropdownList: [],
+                                                                                onValueChanged: (p0, p1) {},
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      : (mapData['key'] == "Order") ||
+                                                                              (mapData['key'] == "Cost")
+                                                                          ? Padding(
+                                                                              padding: EdgeInsets.only(top: 10),
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Container(
+                                                                                      decoration: BoxDecoration(
+                                                                                        boxShadow: [
+                                                                                          BoxShadow(
+                                                                                            color: Colors.black26,
+                                                                                            offset: const Offset(
+                                                                                              5.0,
+                                                                                              5.0,
+                                                                                            ),
+                                                                                            blurRadius: 5.0,
+                                                                                            spreadRadius: 1.0,
+                                                                                          ),
+                                                                                        ],
+                                                                                        color: ColorValues.whiteColor,
+                                                                                        borderRadius: BorderRadius.circular(5),
+                                                                                      ),
+                                                                                      child: LoginCustomTextfield(
+                                                                                        keyboardType: TextInputType.number,
+                                                                                        maxLine: 1,
+                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                        onChanged: (txt) {
+                                                                                          mapData["value"] = txt;
+                                                                                        },
+                                                                                      )),
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          : (mapData['key'] == "Action ")
+                                                                              ? Padding(
+                                                                                  padding: EdgeInsets.only(top: 10),
+                                                                                  child: Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                    children: [
+                                                                                      TableActionButton(
+                                                                                        color: ColorValues.appRedColor,
+                                                                                        icon: Icons.delete,
+                                                                                        label: '',
+                                                                                        message: '',
+                                                                                        onPress: () {
+                                                                                          controller.rowTBTTrainingOtherPersonItem.remove(record);
+                                                                                        },
+                                                                                      )
+                                                                                    ],
+                                                                                  ),
+                                                                                )
+                                                                              : (mapData['key'] == "Comment")
+                                                                                  ? Padding(
+                                                                                      padding: const EdgeInsets.only(top: 10),
+                                                                                      child: Column(
+                                                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Container(
+                                                                                              decoration: BoxDecoration(
+                                                                                                boxShadow: [
+                                                                                                  BoxShadow(
+                                                                                                    color: Colors.black26,
+                                                                                                    offset: const Offset(
+                                                                                                      5.0,
+                                                                                                      5.0,
+                                                                                                    ),
+                                                                                                    blurRadius: 5.0,
+                                                                                                    spreadRadius: 1.0,
+                                                                                                  ),
+                                                                                                ],
+                                                                                                color: ColorValues.whiteColor,
+                                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                              ),
+                                                                                              child: LoginCustomTextfield(
+                                                                                                maxLine: 1,
+                                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                onChanged: (txt) {
+                                                                                                  mapData["value"] = txt;
+                                                                                                },
+                                                                                              )),
+                                                                                        ],
+                                                                                      ),
+                                                                                    )
+                                                                                  : Text(mapData['key'] ?? ''),
+                                                                );
+                                                              }).toList(),
+                                                            );
+                                                          }).toList(),
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                  ),
                                                 ],
                                               ),
                                             ],
@@ -1554,7 +1835,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       ),
                                     ),
                                   ),
-                                ),
+                                )
+                              : Dimens.box0,
                           Center(
                             child: Padding(
                               padding:
@@ -1642,7 +1924,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               child: CustomElevatedButton(
                                                   backgroundColor:
                                                       ColorValues.appGreenColor,
-                                                  text: "Submit For Approval1",
+                                                  text: "Submit For Approval",
                                                   onPressed: () {
                                                     controller.isCheckedJSA
                                                                     .value ==
