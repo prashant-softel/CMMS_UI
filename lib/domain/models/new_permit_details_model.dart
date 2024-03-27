@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/domain/models/create_permit_model.dart';
+
 NewPermitDetailModel newPermitDetailModelFromJson(String str) =>
     NewPermitDetailModel.fromJson(json.decode(str));
 
@@ -52,7 +54,7 @@ class NewPermitDetailModel {
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
-  List<LotoOtherDetail>? lotoOtherDetails;
+  List<LotoOtherDetails>? lotoOtherDetails;
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
@@ -197,8 +199,8 @@ class NewPermitDetailModel {
                 json["loto_list"]?.map((x) => LotoLists.fromJson(x)))
             : [],
         lotoOtherDetails: json["lotoOtherDetails"] != null
-            ? List<LotoOtherDetail>.from(json["lotoOtherDetails"]
-                ?.map((x) => LotoOtherDetail.fromJson(x)))
+            ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
+                ?.map((x) => LotoOtherDetails.fromJson(x)))
             : [],
         lstCategory: json["lstCategory"] != null
             ? List<ListCategory>.from(
@@ -314,29 +316,29 @@ class LotoLists {
       {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
 }
 
-class LotoOtherDetail {
-  LotoOtherDetail({
-    this.employee_name,
-    this.contact_number,
-    this.responsibility,
-  });
+// class LotoOtherDetail {
+//   LotoOtherDetail({
+//     this.employee_name,
+//     this.contact_number,
+//     this.responsibility,
+//   });
 
-  int? contact_number;
-  String? employee_name;
-  String? responsibility;
+//   int? contact_number;
+//   String? employee_name;
+//   String? responsibility;
 
-  factory LotoOtherDetail.fromJson(Map<String, dynamic> json) =>
-      LotoOtherDetail(
-          employee_name: json["employee_name"],
-          contact_number: json["contact_number"],
-          responsibility: json['responsibility']);
+//   factory LotoOtherDetail.fromJson(Map<String, dynamic> json) =>
+//       LotoOtherDetail(
+//           employee_name: json["employee_name"],
+//           contact_number: json["contact_number"],
+//           responsibility: json['responsibility']);
 
-  Map<String, dynamic> toJson() => {
-        "employee_name": employee_name,
-        "contact_number": contact_number,
-        "responsibility": responsibility
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "employee_name": employee_name,
+//         "contact_number": contact_number,
+//         "responsibility": responsibility
+//       };
+// }
 
 class ListEmployees {
   ListEmployees({

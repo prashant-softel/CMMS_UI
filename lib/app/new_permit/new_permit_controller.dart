@@ -74,7 +74,6 @@ class NewPermitController extends GetxController {
   void toggleTBTTrainingAttendedByOtherPersonOn() {
     isTBTTrainingAttendedByOtherPersonOn.value =
         !isTBTTrainingAttendedByOtherPersonOn.value;
-    isTBTTrainingAttendedByOtherPersonOn.value == true ? addRowItem() : false;
   }
 
   ///Checkbox
@@ -464,6 +463,7 @@ class NewPermitController extends GetxController {
         getFacilityLists();
         // getInventoryDetailList();
         getEmployeePermitList();
+        addRowItem();
         getJobTypePermitList();
         if (jobModel != null) {
           loadPermitDetails(jobModel);
@@ -608,14 +608,14 @@ class NewPermitController extends GetxController {
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
       rowTBTTrainingOtherPersonItem.value = [];
-      // newPermitDetailsModel.lotoOtherDetails.forEach((element) {
-      //   rowTBTTrainingOtherPersonItem.value.add([
-      //     {'key': "Employee Name", "value": '${element?.why}'},
-      //     {'key': "Contact Number", "value": '${element?.cause}'},
-      //     {'key': "Responsibility", "value": '${element?.cause}'},
-      //     {'key': "Action ", "value": ''},
-      //   ]);
-      // });
+      newPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
+        rowTBTTrainingOtherPersonItem.value.add([
+          {'key': "Employee Name", "value": '${element?.employee_name}'},
+          {'key': "Contact Number", "value": '${element?.contact_number}'},
+          {'key': "Responsibility", "value": '${element?.responsibility}'},
+          {'key': "Action ", "value": ''},
+        ]);
+      });
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
       if (selectedPermitTypeId != 0) {
