@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
 import 'package:cmms/domain/models/create_mc_plan_model.dart';
@@ -193,7 +194,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
-    String _startDateTc = startDateTc.text.trim();
+    String _startDateTc = htmlEscape.convert(startDateTimeCtrlr.text.trim());
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         planId: 0,
