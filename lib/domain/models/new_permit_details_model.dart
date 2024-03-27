@@ -48,10 +48,11 @@ class NewPermitDetailModel {
   String? current_status_short;
   List<ListSafetyQuestion>? safety_question_list;
   List<ListEmployees?>? employee_list;
+  List<FileList>? file_list;
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
-  List<LotoOtherDetails>? lotoOtherDetails;
+  List<LotoOtherDetail>? lotoOtherDetails;
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
@@ -123,6 +124,7 @@ class NewPermitDetailModel {
     this.closeDetails,
     this.is_TBT_Expire,
     this.physical_iso_remark,
+    this.file_list,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -195,8 +197,8 @@ class NewPermitDetailModel {
                 json["loto_list"]?.map((x) => LotoLists.fromJson(x)))
             : [],
         lotoOtherDetails: json["lotoOtherDetails"] != null
-            ? List<LotoOtherDetails>.from(json["lotoOtherDetails"]
-                ?.map((x) => LotoOtherDetails.fromJson(x)))
+            ? List<LotoOtherDetail>.from(json["lotoOtherDetails"]
+                ?.map((x) => LotoOtherDetail.fromJson(x)))
             : [],
         lstCategory: json["lstCategory"] != null
             ? List<ListCategory>.from(
@@ -209,6 +211,10 @@ class NewPermitDetailModel {
         lstAssociatedPM: json["lstAssociatedPM"] != null
             ? List<ListAssociatedPm>.from(json["lstAssociatedPM"]
                 .map((x) => ListAssociatedPm.fromJson(x)))
+            : [],
+        file_list: json["file_list"] != null
+            ? List<FileList>.from(
+                json["file_list"].map((x) => FileList.fromJson(x)))
             : [],
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
         cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
@@ -265,6 +271,8 @@ class NewPermitDetailModel {
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
         "lotoOtherDetails":
             List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
+        "file_list":
+            List<dynamic>.from(file_list!.map((x) => x.toJson())),
 
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
@@ -307,8 +315,8 @@ class LotoLists {
       {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
 }
 
-class LotoOtherDetails {
-  LotoOtherDetails({
+class LotoOtherDetail {
+  LotoOtherDetail({
     this.employee_name,
     this.contact_number,
     this.responsibility,
@@ -318,8 +326,8 @@ class LotoOtherDetails {
   String? employee_name;
   String? responsibility;
 
-  factory LotoOtherDetails.fromJson(Map<String, dynamic> json) =>
-      LotoOtherDetails(
+  factory LotoOtherDetail.fromJson(Map<String, dynamic> json) =>
+      LotoOtherDetail(
           employee_name: json["employee_name"],
           contact_number: json["contact_number"],
           responsibility: json['responsibility']);
@@ -376,13 +384,14 @@ class ListSafetyQuestion {
 }
 
 class FileList {
-  FileList(
-      {this.id,
-      this.fileName,
-      this.fileCategory,
-      this.fileSize,
-      this.status,
-      this.ptwFiles});
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.ptwFiles,
+  });
 
   int? id;
   String? fileName;
@@ -392,12 +401,13 @@ class FileList {
   String? ptwFiles;
 
   factory FileList.fromJson(Map<String, dynamic> json) => FileList(
-      id: json["id"],
-      fileName: json["fileName"],
-      fileCategory: json['fileCategory'],
-      fileSize: json['fileSize'],
-      status: json['status'],
-      ptwFiles: json['ptwFiles'] ?? '');
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        ptwFiles: json['ptwFiles'] ?? '',
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -405,7 +415,7 @@ class FileList {
         "fileCategory": fileCategory,
         "fileSize": fileSize,
         "status": status,
-        "ptwFiles": ptwFiles
+        "ptwFiles": ptwFiles,
       };
 }
 
