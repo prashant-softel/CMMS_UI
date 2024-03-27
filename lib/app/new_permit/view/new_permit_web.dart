@@ -1302,7 +1302,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           ),
 
                           controller.newPermitDetailsModel.value?.ptwStatus ==
-                                  121
+                                      125 &&
+                                  controller.newPermitDetailsModel.value!
+                                          .is_TBT_Expire ==
+                                      true
                               ? Center(
                                   child: Container(
                                     width:
@@ -1929,6 +1932,32 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                               ColorValues
                                                                   .appDarkBlueColor,
                                                           text: "Update",
+                                                          onPressed: () {
+                                                            controller.updateNewPermit(
+                                                                fileIds:
+                                                                    dropzoneController
+                                                                        .fileIds);
+                                                          },
+                                                        )),
+                                                  )
+                                                : Dimens.box0,
+                                            controller.newPermitDetailsModel
+                                                            .value?.ptwStatus ==
+                                                        125 &&
+                                                    controller
+                                                            .newPermitDetailsModel
+                                                            .value
+                                                            ?.is_TBT_Expire ==
+                                                        true
+                                                ? Center(
+                                                    child: Container(
+                                                        height: 45,
+                                                        child:
+                                                            CustomElevatedButton(
+                                                          backgroundColor:
+                                                              ColorValues
+                                                                  .appDarkBlueColor,
+                                                          text: "Update TBT",
                                                           onPressed: () {
                                                             controller.updateNewPermit(
                                                                 fileIds:

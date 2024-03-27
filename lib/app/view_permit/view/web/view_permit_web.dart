@@ -1165,7 +1165,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           // "https://www.w3.org/1999/xhtml/"
                                                           // String baseUrl =
                                                           //     'http://65.0.20.19/CMMS_API/';
-                                                          String baseUrl = 'http://172.20.43.18:82/';
+                                                          String baseUrl =
+                                                              'http://172.20.43.18:82/';
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1197,7 +1198,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       onPressed: () async {
                                                         // String baseUrl =
                                                         //     'http://65.0.20.19/CMMS_API/';
-                                                        String baseUrl = 'http://172.20.43.18:82/';
+                                                        String baseUrl =
+                                                            'http://172.20.43.18:82/';
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =

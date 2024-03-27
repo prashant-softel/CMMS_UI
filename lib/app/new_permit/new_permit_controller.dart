@@ -74,7 +74,6 @@ class NewPermitController extends GetxController {
   void toggleTBTTrainingAttendedByOtherPersonOn() {
     isTBTTrainingAttendedByOtherPersonOn.value =
         !isTBTTrainingAttendedByOtherPersonOn.value;
-    isTBTTrainingAttendedByOtherPersonOn.value == true ? addRowItem() : false;
   }
 
   ///Checkbox
@@ -447,11 +446,10 @@ class NewPermitController extends GetxController {
           getBlocksList(facilityId);
         });
         if (permitId.value > 0) {
-         getNewPermitDetail(
-            intPermitId: permitId.value, facilityId: facilityId);
-         getPermitHistory(
-            permitId: permitId.value, facilityId: facilityId);
-      }
+          getNewPermitDetail(
+              intPermitId: permitId.value, facilityId: facilityId);
+          getPermitHistory(permitId: permitId.value, facilityId: facilityId);
+        }
         // Future.delayed(Duration(seconds: 1), () {
         //   getNewPermitDetail(
         //       intPermitId: permitId.value, facilityId: facilityId);
@@ -465,13 +463,12 @@ class NewPermitController extends GetxController {
         getFacilityLists();
         // getInventoryDetailList();
         getEmployeePermitList();
+        addRowItem();
         getJobTypePermitList();
         if (jobModel != null) {
           loadPermitDetails(jobModel);
         }
       });
-
-      
 
       // await getPermitIssuerList();
       // await getPermitApproverList();
@@ -610,6 +607,15 @@ class NewPermitController extends GetxController {
       selectedPermitApproverLists.value =
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
+      rowTBTTrainingOtherPersonItem.value = [];
+      newPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
+        rowTBTTrainingOtherPersonItem.value.add([
+          {'key': "Employee Name", "value": '${element?.employee_name}'},
+          {'key': "Contact Number", "value": '${element?.contact_number}'},
+          {'key': "Responsibility", "value": '${element?.responsibility}'},
+          {'key': "Action ", "value": ''},
+        ]);
+      });
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
       if (selectedPermitTypeId != 0) {
@@ -1572,16 +1578,15 @@ class NewPermitController extends GetxController {
             Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
 
-      List<LotoOtherDetails> proposedActionItems = [];
+      List<LotoOtherDetails> rowTBTTrainingOtherPersonItems = [];
       rowTBTTrainingOtherPersonItem.forEach((element) {
         LotoOtherDetails item = LotoOtherDetails(
           employee_name: element[0]["value"] ?? '0',
           contact_number: int.tryParse('${element[1]["value"] ?? '0'}'),
           responsibility: element[2]["value"] ?? '0',
-          // target_date: element[2]["value"] ?? '0',
         );
 
-        proposedActionItems.add(item);
+        rowTBTTrainingOtherPersonItems.add(item);
       });
       // List<LotoOtherDetails> rowItemLotoOtherDetails = [];
       // rowItemLotoOtherDetails.forEach((element) {
@@ -1635,6 +1640,7 @@ class NewPermitController extends GetxController {
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
           resubmit: isChecked.value,
+          lotoOtherDetails: rowTBTTrainingOtherPersonItems,
           TBT_Done_by: selectedTbtConductedId,
           TBT_Done_at: tbtDateTimeCtrlrBuffer,
           PHYSICAL_ISO_REMARK: _workPermitRemark);
