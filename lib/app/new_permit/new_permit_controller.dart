@@ -465,7 +465,9 @@ class NewPermitController extends GetxController {
         getEmployeePermitList();
         addRowItem();
         getJobTypePermitList();
-        if (jobModel != null) {
+        if (pmtaskViewModel?.id != null) {
+          loadPermitDetailsWithTask(pmtaskViewModel);
+        } else if (jobModel != null) {
           loadPermitDetails(jobModel);
         }
       });
@@ -1771,6 +1773,7 @@ class NewPermitController extends GetxController {
     //uncomment once work done
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
+    print("Selected Equipment: ${selectedEquipmentCategoryIdList}");
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
     print("Selected Name Category:${jobModel.id ?? 0}");
 
@@ -1842,48 +1845,19 @@ class NewPermitController extends GetxController {
     );
   }
 
-  loadPermitDetailsWithTask(PmtaskViewModel? pmtaskViewModel) {
+  loadPermitDetailsWithTask(pmtaskViewModel) {
+    // blockNameTextCtrlr.text = pmtaskViewModel.blockName;
     titleTextCtrlr.text = pmtaskViewModel?.plan_title ?? '';
-    // selectedBlock.value = jobModel.blockName ?? '';
-    // selectedBlockId = jobModel.blockId ?? 0;
-
-    //// uncomment once work done
-    // listJobModelCategory.value = jobModel.equipmentCatList ?? [];
-    // List<int> idList =
-    //     listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
-    // List<String> nameList =
-    //     listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
-
-    // list_working_area_name.value = jobModel.workingAreaList ?? [];
-
-    //  selectedItem = nameList[0];
-    ///end uncomment
-
-    // listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
-    // List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
-    // associatePermitId = associetdPermitId[0];
-    // print("Associated Permit Id:${associatePermitId}");
-
-    // print("Selected Block Id:${selectedBlockId}");
-    //uncomment once work done
-    // selectedEquipmentCategoryIdList.value = idList;
-    // selectedJobModelEquipemntIsolationIdList.value = idList;
-    //print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
-    // print("Selected Name Category:${jobModel.id ?? 0}");
-
-    ///end uncomment
-
-    // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
-    // blockNameTextCtrlr.text = pmtaskViewModel.;
-    // assignToTextCtrlr.text = jobModel.assignedName;
-    // breakdownTimeTextCtrlr.text =
-    //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
-
-    // RxList<JobDetailsModel> jobDataList =
-    // filteredEmployeeNameList = jobModel.assignedId;
-    // filteredEmployeeNameList = jobModel.assignedName;
-    // filteredEmployeeNameList.add(EmployeeListModel(id: jobModel.assignedId,name: "${jobModel.assignedName}"));
+    List<int> idList = [];
+    if (pmtaskViewModel.category_id is List) {
+      idList = (pmtaskViewModel.category_id as List).cast<int>();
+    } else if (pmtaskViewModel.category_id is int) {
+      idList = [(pmtaskViewModel.category_id as int)];
+    }
+    print({"PM Task Id List: ", idList});
+    selectedEquipmentCategoryIdList.value = idList;
+    print("Selected Equipment : ${selectedEquipmentCategoryIdList}");
+    print("PM Task ID: ${pmtaskViewModel.id}");
   }
-
   /// class ends
 }

@@ -934,11 +934,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           (index) => DataRow(cells: [
                                             DataCell(Text(controller
                                                     .listLoto?[index]
-                                                    ?.asset_name
+                                                    ?.loto_Key
                                                     .toString() ??
                                                 '')),
                                             DataCell(Text(controller
-                                                    .listLoto?[index]?.locksrno
+                                                    .listLoto?[index]?.loto_lock_number
                                                     .toString() ??
                                                 '')),
                                           ]),
@@ -2045,33 +2045,36 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     '',
                                               )),
                                               DataCell(
-                                                Text("View Image"),
-                                                // Wrap(
-                                                //   children: [
-                                                //     TableActionButton(
-                                                //       color: ColorValues
-                                                //           .appDarkBlueColor,
-                                                //       icon: Icons.visibility,
-                                                //       message: 'View Permit',
-                                                //       onPress: () async {
-                                                //         String baseUrl =
-                                                //             "http://65.0.20.19/CMMS_API/";
-                                                //         String fileName =
-                                                //             fileItem.fileName ??
-                                                //                 "";
-                                                //         String fullUrl =
-                                                //             baseUrl + fileName;
-                                                //         if (await canLaunch(
-                                                //             fullUrl)) {
-                                                //           await launch(fullUrl);
-                                                //         } else {
-                                                //           throw 'Could not launch $fullUrl';
-                                                //         }
-                                                //         // String baseUrl = 'http://172.20.43.9:83/';
-                                                //       },
-                                                //     )
-                                                //   ],
-                                                // ),
+                                                // Text("View Image"),
+                                                Wrap(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      icon: Icons.visibility,
+                                                      message: 'View Permit',
+                                                      onPress: () async {
+                                                        String baseUrl =
+                                                            "http://65.0.20.19/CMMS_API/";
+                                                        String fileName =
+                                                            controller
+                                                                    .file_list![
+                                                                        index]
+                                                                    ?.fileName ??
+                                                                "";
+                                                        String fullUrl =
+                                                            baseUrl + fileName;
+                                                        if (await canLaunch(
+                                                            fullUrl)) {
+                                                          await launch(fullUrl);
+                                                        } else {
+                                                          throw 'Could not launch $fullUrl';
+                                                        }
+                                                        // String baseUrl = 'http://172.20.43.9:83/';
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),

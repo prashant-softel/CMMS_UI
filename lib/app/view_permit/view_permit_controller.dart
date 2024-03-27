@@ -851,14 +851,16 @@ class ViewPermitController extends GetxController {
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       file_list?.value = viewPermitDetailsModel.value?.file_list ?? [];
       print("File List:");
-file_list?.forEach((fileItem) {
-  print("ID: ${fileItem!.id}");
-  print("File Name: ${fileItem.fileName}");
-  print("File Category: ${fileItem.fileCategory}");
-  print("File Size: ${fileItem.fileSize}");
-  print("Status: ${fileItem.status}");
-  print("PTW Files: ${fileItem.ptwFiles}");
-},);
+      file_list?.forEach(
+        (fileItem) {
+          print("ID: ${fileItem!.id}");
+          print("File Name: ${fileItem.fileName}");
+          print("File Category: ${fileItem.fileCategory}");
+          print("File Size: ${fileItem.fileSize}");
+          print("Status: ${fileItem.status}");
+          print("PTW Files: ${fileItem.ptwFiles}");
+        },
+      );
       listExtendCondition?.value =
           viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
       listCancelCondition?.value =
@@ -1738,7 +1740,7 @@ file_list?.forEach((fileItem) {
         ),
         bounds: Rect.fromLTWH(370, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('${listLoto!.map((element) => element!.locksrno)}',
+    page.graphics.drawString('${listLoto!.map((element) => element!.loto_lock_number)}',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(430, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
