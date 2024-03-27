@@ -1305,7 +1305,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       125 &&
                                   controller.newPermitDetailsModel.value!
                                           .is_TBT_Expire ==
-                                      true
+                                      false
                               ? Center(
                                   child: Container(
                                     width:
@@ -1948,23 +1948,24 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             .newPermitDetailsModel
                                                             .value
                                                             ?.is_TBT_Expire ==
-                                                        true
+                                                        false
                                                 ? Center(
                                                     child: Container(
-                                                        height: 45,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .appDarkBlueColor,
-                                                          text: "Update TBT",
-                                                          onPressed: () {
-                                                            controller.updateNewPermit(
-                                                                fileIds:
-                                                                    dropzoneController
-                                                                        .fileIds);
-                                                          },
-                                                        )),
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appDarkBlueColor,
+                                                        text: "Update TBT",
+                                                        onPressed: () {
+                                                          controller.updateNewPermit(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
+                                                        },
+                                                      ),
+                                                    ),
                                                   )
                                                 : Dimens.box0,
                                             Dimens.boxWidth20,
