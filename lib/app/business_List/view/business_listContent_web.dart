@@ -194,8 +194,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .isSelectedBusinessType
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedbtype
-                                                          .value,
+                                                          .selectedbtype.value,
                                                       onValueChanged: controller
                                                           .onValueChanged,
                                                     ),
@@ -1591,6 +1590,14 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
+                                          // fixedWidth: 350,
+                                          label: Text(
+                                        "Business Type",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
                                           // fixedWidth: 100,
                                           label: Text(
                                         "Contact Person",
@@ -1638,6 +1645,16 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                         DataCell(Text(controller
                                                 .moduleList?[index]?.name ??
                                             '')),
+                                        DataCell(Text(
+                                            // Here, you should find the corresponding business type name
+                                            controller.businessCategoryList
+                                                    .firstWhere((element) =>
+                                                        element!.id ==
+                                                        controller
+                                                            .moduleList?[index]
+                                                            ?.type)!
+                                                    .name ??
+                                                '')),
                                         DataCell(Text(controller
                                                 .moduleList?[index]
                                                 ?.contactPerson ??
