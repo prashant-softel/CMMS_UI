@@ -189,7 +189,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       _permitDetails.schedules?.forEach((element) {
         rowItemclone.value.add([
           {
-            "key": "asset",
+            "key": "Asset",
             "value": '${element.name}',
             "id": '${element.assetsID}'
           },
