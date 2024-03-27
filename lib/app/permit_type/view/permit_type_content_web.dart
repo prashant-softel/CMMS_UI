@@ -595,69 +595,46 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                             controller.typePermitList.isEmpty
                                 ? Expanded(
                                     child: DataTable2(
+                                      key: UniqueKey(),
+                                      dataRowHeight: 50,
+                                      columnSpacing: 10,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
                                       columns: [
                                         DataColumn2(
+                                          fixedWidth: 100,
                                           label: Text(
-                                            "Checklist Number",
+                                            "Sr.No.",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          size: ColumnSize.S,
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Active status",
+                                            "Title",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          size: ColumnSize.S,
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Category",
+                                            "Description",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          size: ColumnSize.S,
                                         ),
                                         DataColumn2(
-                                          label: Text(
-                                            "Frequency",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "PM Manpower",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "PM Duration(in Min.)",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
+                                          fixedWidth: 100,
                                           label: Text(
                                             "Action",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          size: ColumnSize.S,
                                         ),
                                       ],
                                       rows: List.generate(

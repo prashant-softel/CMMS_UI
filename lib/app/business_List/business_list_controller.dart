@@ -38,6 +38,7 @@ class BusinessListController extends GetxController {
   Rx<bool> isZipInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   RxBool isContainerVisible = false.obs;
+  Rx<String> selectedbtype = 'Please Select'.obs;
   Rx<String?> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
   Rx<String> selectedState = ''.obs;
