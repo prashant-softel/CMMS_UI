@@ -271,8 +271,7 @@ class NewPermitDetailModel {
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
         "lotoOtherDetails":
             List<dynamic>.from(lotoOtherDetails!.map((x) => x.toJson())),
-        "file_list":
-            List<dynamic>.from(file_list!.map((x) => x.toJson())),
+        "file_list": List<dynamic>.from(file_list!.map((x) => x.toJson())),
 
         "lstAssociatedJobs":
             List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
