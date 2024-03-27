@@ -1002,7 +1002,7 @@ class AddIncidentReportController extends GetxController {
   void getBusinessList(int facilityId) async {
     businessList.value = <BusinessListModel>[];
     final _businessList = await incidentReportPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: true,
       // categoryIds: categoryIds,
       businessType: 2,
