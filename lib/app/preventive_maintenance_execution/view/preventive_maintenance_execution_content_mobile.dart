@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
 import 'package:cmms/app/preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
+import 'package:cmms/app/preventive_maintenance_execution/view/observation_update_dailog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../domain/models/pm_task_view_list_model.dart';
 import '../../widgets/custom_textfield.dart';
+import '../../widgets/observation_pm_execution_process_dialog.dart';
 
 class PreventiveMaintenanceExecutionContentMobile
     extends GetView<PreventiveMaintenanceExecutionController> {
@@ -122,223 +124,229 @@ class PreventiveMaintenanceExecutionContentMobile
                           style: Styles.blue700,
                         ),
                         ListView.builder(
-                            //physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount:
-                                controller.pmtaskViewModel.value?.schedules !=
-                                        null
-                                    ? controller.pmtaskViewModel.value
-                                        ?.schedules!.length
-                                    : 0,
-                            itemBuilder: (context, index) {
-                              final pmTaskvalueModel = (controller
-                                          .pmtaskViewModel.value?.schedules !=
-                                      null)
-                                  ? controller
-                                      .pmtaskViewModel.value?.schedules![index]
-                                  : ScheduleCheckPoint();
-                              return Card(
-                                color: Colors.lightBlue.shade50,
-                                elevation: 10,
-                                shadowColor: Colors.black87,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(children: [
-                                          Text('Asset: ',
-                                              style: Styles.appDarkGrey12),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                                '${pmTaskvalueModel?.name}'
-                                                '',
-                                                style: Styles.appDarkBlue12),
-                                          ),
-                                        ]),
-                                        Row(//
+                          shrinkWrap: true,
+                          itemCount: controller.rowItemclone.value.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              color: Colors.lightBlue.shade50,
+                              elevation: 10,
+                              shadowColor: Colors.black87,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: controller.rowItemclone.value[index]
+                                      .map<Widget>((map) {
+                                    return map['key'] == "Asset" ||
+                                            map['key'] == "Checklist"
+                                        ? Column(
                                             children: [
-                                          Text('Checklist: ',
-                                              style: Styles.appDarkGrey12),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                                pmTaskvalueModel
-                                                        ?.checklist_name ??
-                                                    '',
-                                                style: Styles.appDarkBlue12),
+                                              Row(children: [
+                                                Text('${map['key']!}: ',
+                                                    style:
+                                                        Styles.appDarkGrey12),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                      '${map['value']!}'
+                                                      '',
+                                                      style:
+                                                          Styles.appDarkBlue12),
+                                                ),
+                                              ]),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        icon:
+                                                            Icons.cyclone_sharp,
+                                                        message: "Clone",
+                                                        onPress: () {
+                                                          controller
+                                                                  .selectedItem =
+                                                              null;
+                                                          // controller.selectedItem =
+                                                          //     controller
+                                                          //         .scheduleCheckPoints
+                                                          //         .firstWhere((element) =>
+                                                          //             "${element.name}" ==
+                                                          //             record[0]['value']
+                                                          //                 .toString());
+                                                          if (controller
+                                                                  .selectedItem !=
+                                                              null) {
+                                                            // controller.selectedItem!
+                                                            //     .checklist_observation
+                                                            //     ?.forEach((element) {
+                                                            //   controller.rowItemobs.value
+                                                            //       .add([
+                                                            //     {
+                                                            //       "key": "checkpoint",
+                                                            //       "id":
+                                                            //           '${element.execution_id}',
+                                                            //       "value":
+                                                            //           '${element.check_point_name}',
+                                                            //     },
+                                                            //     {
+                                                            //       "key": "requirement",
+                                                            //       "value":
+                                                            //           '${element.requirement}'
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "weightage",
+                                                            //       "value":
+                                                            //           '${element.failure_waightage}'
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "cpok",
+                                                            //       "value":
+                                                            //           '${element.cp_ok.value}'
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "observation",
+                                                            //       "value":
+                                                            //           '${element.observation}'
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "uploadimg",
+                                                            //       "value": ''
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "type",
+                                                            //       'inpute_type':
+                                                            //           '${element.check_point_type}',
+                                                            //       "value":
+                                                            //           '${element.type_text}',
+                                                            //       "min":
+                                                            //           '${element.min_range}',
+                                                            //       "max":
+                                                            //           '${element.max_range}'
+                                                            //     },
+                                                            //     {
+                                                            //       'key': "job_created",
+                                                            //       "value":
+                                                            //           '${element.linked_job_id.value}',
+                                                            //     },
+                                                            //   ]);
+                                                            // });
+                                                            // Get.dialog(
+                                                            //     ObservationPmExecutionViewDialog());
+                                                          }
+                                                        }),
+                                                    Dimens.boxWidth20,
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: "Edit",
+                                                        onPress: () {
+                                                          controller
+                                                                  .selectedItem =
+                                                              null;
+                                                          controller.selectedItem = controller
+                                                              .scheduleCheckPoints
+                                                              .firstWhere((element) =>
+                                                                  "${element.name}" ==
+                                                                  map['value']
+                                                                      .toString());
+                                                          if (controller
+                                                                  .selectedItem !=
+                                                              null) {
+                                                            controller
+                                                                .selectedItem!
+                                                                .checklist_observation
+                                                                ?.forEach(
+                                                                    (element) {
+                                                              controller
+                                                                  .rowItemobs
+                                                                  .value
+                                                                  .add([
+                                                                {
+                                                                  "key":
+                                                                      "checkpoint",
+                                                                  "id":
+                                                                      '${element.execution_id}',
+                                                                  "value":
+                                                                      '${element.check_point_name}',
+                                                                },
+                                                                {
+                                                                  "key":
+                                                                      "requirement",
+                                                                  "value":
+                                                                      '${element.requirement}'
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "weightage",
+                                                                  "value":
+                                                                      '${element.failure_waightage}'
+                                                                },
+                                                                {
+                                                                  'key': "cpok",
+                                                                  "value":
+                                                                      '${element.cp_ok.value}'
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "observation",
+                                                                  "value":
+                                                                      '${element.observation}'
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "uploadimg",
+                                                                  "value": ''
+                                                                },
+                                                                {
+                                                                  'key': "type",
+                                                                  'inpute_type':
+                                                                      '${element.check_point_type}',
+                                                                  "value":
+                                                                      '${element.type_text}',
+                                                                  "min":
+                                                                      '${element.min_range}',
+                                                                  "max":
+                                                                      '${element.max_range}'
+                                                                },
+                                                                {
+                                                                  'key':
+                                                                      "job_created",
+                                                                  "value":
+                                                                      '${element.linked_job_id.value}',
+                                                                },
+                                                              ]);
+                                                            });
+                                                            showModalBottomSheet<
+                                                                    void>(
+                                                                // context and builder are
+                                                                // required properties in this widget
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return ObservationUpdateDialog();
+                                                                });
+                                                          }
+                                                        })
+                                                  ]),
+                                            ],
                                           )
-                                        ]),
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              TableActionButton(
-                                                  color: ColorValues
-                                                      .appDarkBlueColor,
-                                                  icon: Icons.cyclone_sharp,
-                                                  message: "Clone",
-                                                  onPress: () {
-                                                    controller.selectedItem =
-                                                        null;
-                                                    // controller.selectedItem =
-                                                    //     controller
-                                                    //         .scheduleCheckPoints
-                                                    //         .firstWhere((element) =>
-                                                    //             "${element.name}" ==
-                                                    //             record[0]['value']
-                                                    //                 .toString());
-                                                    if (controller
-                                                            .selectedItem !=
-                                                        null) {
-                                                      // controller.selectedItem!
-                                                      //     .checklist_observation
-                                                      //     ?.forEach((element) {
-                                                      //   controller.rowItemobs.value
-                                                      //       .add([
-                                                      //     {
-                                                      //       "key": "checkpoint",
-                                                      //       "id":
-                                                      //           '${element.execution_id}',
-                                                      //       "value":
-                                                      //           '${element.check_point_name}',
-                                                      //     },
-                                                      //     {
-                                                      //       "key": "requirement",
-                                                      //       "value":
-                                                      //           '${element.requirement}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "weightage",
-                                                      //       "value":
-                                                      //           '${element.failure_waightage}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "cpok",
-                                                      //       "value":
-                                                      //           '${element.cp_ok.value}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "observation",
-                                                      //       "value":
-                                                      //           '${element.observation}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "uploadimg",
-                                                      //       "value": ''
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "type",
-                                                      //       'inpute_type':
-                                                      //           '${element.check_point_type}',
-                                                      //       "value":
-                                                      //           '${element.type_text}',
-                                                      //       "min":
-                                                      //           '${element.min_range}',
-                                                      //       "max":
-                                                      //           '${element.max_range}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "job_created",
-                                                      //       "value":
-                                                      //           '${element.linked_job_id.value}',
-                                                      //     },
-                                                      //   ]);
-                                                      // });
-                                                      // Get.dialog(
-                                                      //     ObservationPmExecutionViewDialog());
-                                                    }
-                                                  }),
-                                              Dimens.boxWidth20,
-                                              TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: "Edit",
-                                                  onPress: () {
-                                                    controller.selectedItem =
-                                                        null;
-                                                    // controller.selectedItem =
-                                                    //     controller
-                                                    //         .scheduleCheckPoints
-                                                    //         .firstWhere((element) =>
-                                                    //             "${element.name}" ==
-                                                    //             record[0]['value']
-                                                    //                 .toString());
-                                                    if (controller
-                                                            .selectedItem !=
-                                                        null) {
-                                                      // controller.selectedItem!
-                                                      //     .checklist_observation
-                                                      //     ?.forEach((element) {
-                                                      //   controller.rowItemobs.value
-                                                      //       .add([
-                                                      //     {
-                                                      //       "key": "checkpoint",
-                                                      //       "id":
-                                                      //           '${element.execution_id}',
-                                                      //       "value":
-                                                      //           '${element.check_point_name}',
-                                                      //     },
-                                                      //     {
-                                                      //       "key": "requirement",
-                                                      //       "value":
-                                                      //           '${element.requirement}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "weightage",
-                                                      //       "value":
-                                                      //           '${element.failure_waightage}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "cpok",
-                                                      //       "value":
-                                                      //           '${element.cp_ok.value}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "observation",
-                                                      //       "value":
-                                                      //           '${element.observation}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "uploadimg",
-                                                      //       "value": ''
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "type",
-                                                      //       'inpute_type':
-                                                      //           '${element.check_point_type}',
-                                                      //       "value":
-                                                      //           '${element.type_text}',
-                                                      //       "min":
-                                                      //           '${element.min_range}',
-                                                      //       "max":
-                                                      //           '${element.max_range}'
-                                                      //     },
-                                                      //     {
-                                                      //       'key': "job_created",
-                                                      //       "value":
-                                                      //           '${element.linked_job_id.value}',
-                                                      //     },
-                                                      //   ]);
-                                                      // });
-                                                      // Get.dialog(
-                                                      //     ObservationPmExecutionViewDialog());
-                                                    }
-                                                  })
-                                            ]),
-                                      ]),
+                                        : Dimens.box0;
+                                  }).toList(),
                                 ),
-                              );
-                            }),
+                              ),
+                            );
+                          },
+                        ),
                         controller.pmtaskViewModel.value?.permit_id == 0
                             ? Dimens.box0
                             : Text(
