@@ -136,29 +136,32 @@ class FacilityTypeListController extends GetxController {
 
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
-    Future.delayed(Duration(seconds: 1), () async {
-      if (countryList.isEmpty) {
-        await getCountryList();
-      }
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () async {
+        if (countryList.isEmpty) {
+          await getCountryList();
+        }
 
-      // Check if the business lists are already fetched
-      if (ownerList.isEmpty) {
-        await getBusinessList(1,facilityId);
-      }
-      if (customerList.isEmpty) {
-        await getBusinessList(2,facilityId);
-      }
-      if (operatorList.isEmpty) {
-        await getBusinessList(3, facilityId);
-      }
-      if (SpvList.isEmpty) {
-        await getSpvList();
-      }
-      // getCountryList();
-      getFacilityTypeList();
-      // getBusinessList(1);
-      // getBusinessList(2);
-      // getBusinessList(3);\
+        // Check if the business lists are already fetched
+        if (ownerList.isEmpty) {
+          await getBusinessList(1, facilityId);
+        }
+        if (customerList.isEmpty) {
+          await getBusinessList(2, facilityId);
+        }
+        if (operatorList.isEmpty) {
+          await getBusinessList(3, facilityId);
+        }
+        if (SpvList.isEmpty) {
+          await getSpvList();
+        }
+        // getCountryList();
+        getFacilityTypeList();
+        // getBusinessList(1);
+        // getBusinessList(2);
+        // getBusinessList(3);\
+      });
     });
     // });
 
@@ -376,9 +379,9 @@ class FacilityTypeListController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType,int facilityId) async {
+  Future<void> getBusinessList(ListType, int facilityId) async {
     final list = await facilityTypeListPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       ListType: ListType,
       isLoading: true,
     );
