@@ -518,8 +518,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             // controller.id.value = viewLotoListName?.id ?? 0;
                                                                             print('Equipment Isss5:${controller.id.value}');
                                                                             return [
-                                                                              '${viewLotoListName?.asset_name}',
-                                                                              '${viewLotoListName?.locksrno}',
+                                                                              '${viewLotoListName?.loto_Key}',
+                                                                              '${viewLotoListName?.loto_lock_number}',
                                                                               // '${newPermitDetails?.workingAreaId}',
                                                                               // '${newPermitDetails?.description}',
                                                                               // '${newPermitDetails?.permitTypeName}',
@@ -2538,12 +2538,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     (index) => DataRow(cells: [
                                                       DataCell(Text(controller
                                                               .listLoto?[index]
-                                                              ?.asset_name
+                                                              ?.loto_Key
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listLoto?[index]
-                                                              ?.locksrno
+                                                              ?.loto_lock_number
                                                               .toString() ??
                                                           '')),
                                                     ]),

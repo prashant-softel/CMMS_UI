@@ -1740,7 +1740,7 @@ class ViewPermitController extends GetxController {
         ),
         bounds: Rect.fromLTWH(370, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('${listLoto!.map((element) => element!.locksrno)}',
+    page.graphics.drawString('${listLoto!.map((element) => element!.loto_lock_number)}',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(430, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));

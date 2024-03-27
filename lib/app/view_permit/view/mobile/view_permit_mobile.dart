@@ -496,13 +496,13 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                                             cells: [
                                               DataCell(
                                                 Text(controller.listLoto?[index]
-                                                        ?.asset_name
+                                                        ?.loto_Key
                                                         .toString() ??
                                                     ''),
                                               ),
                                               DataCell(
                                                 Text(controller.listLoto?[index]
-                                                        ?.locksrno
+                                                        ?.loto_lock_number
                                                         .toString() ??
                                                     ''),
                                               ),

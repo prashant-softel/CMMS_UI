@@ -934,11 +934,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           (index) => DataRow(cells: [
                                             DataCell(Text(controller
                                                     .listLoto?[index]
-                                                    ?.asset_name
+                                                    ?.loto_Key
                                                     .toString() ??
                                                 '')),
                                             DataCell(Text(controller
-                                                    .listLoto?[index]?.locksrno
+                                                    .listLoto?[index]?.loto_lock_number
                                                     .toString() ??
                                                 '')),
                                           ]),

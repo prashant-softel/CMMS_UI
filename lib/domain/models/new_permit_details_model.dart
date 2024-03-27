@@ -298,22 +298,33 @@ class NewPermitDetailModel {
 
 class LotoLists {
   LotoLists({
-    this.asset_id,
-    this.asset_name,
-    this.locksrno,
+    this.equipment_name,
+    this.equipment_cat,
+    this.loto_Key,
+    this.loto_lock_number,
+    this.employee_name,
   });
 
-  int? asset_id;
-  String? asset_name;
-  String? locksrno;
+  String? equipment_name;
+  String? equipment_cat;
+  String? loto_Key;
+  String? employee_name;
+  int? loto_lock_number;
 
   factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
-      asset_id: json["asset_id"],
-      asset_name: json["asset_name"],
-      locksrno: json['locksrno']);
+      equipment_name: json["equipment_name"],
+      equipment_cat: json["equipment_cat"],
+      loto_Key: json['loto_Key'],
+      loto_lock_number: json['loto_lock_number'],
+      employee_name: json['employee_name']);
 
-  Map<String, dynamic> toJson() =>
-      {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
+  Map<String, dynamic> toJson() => {
+        "equipment_name": equipment_name,
+        "equipment_cat": equipment_cat,
+        "loto_Key": loto_Key,
+        "loto_lock_number": loto_lock_number,
+        "employee_name": employee_name,
+      };
 }
 
 // class LotoOtherDetail {
