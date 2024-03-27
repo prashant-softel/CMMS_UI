@@ -84,7 +84,9 @@ class ViewMcPlaningController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getEquipmentModelList(facilityId, true);
       });
-      getMcPlanHistory(id: mcid.value);
+      Future.delayed(Duration(seconds: 1), () {
+        getMcPlanHistory(id: mcid.value, facilityId: facilityId);
+      });
       super.onInit();
     } catch (e) {
       print(e);
@@ -120,25 +122,28 @@ class ViewMcPlaningController extends GetxController {
     update(['equipment_list']);
   }
 
-  Future<void> getMcPlanHistory({required int id}) async {
+  Future<void> getMcPlanHistory(
+      {required int id, required int facilityId}) async {
     int moduleType = 81;
     historyList?.value = await viewMcPlaningPresenter.getHistory(
           // tempModuleType,
           // tempJobCardId,
           moduleType,
           id,
+          facilityId,
           true,
         ) ??
         [];
     update(["historyList"]);
   }
 
-  Future<void> getMcPlanDetail({required int planId,required int facilityId}) async {
+  Future<void> getMcPlanDetail(
+      {required int planId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _mcPlanDetails = await viewMcPlaningPresenter.getMcPlanDetail(facilityId:facilityId,
-        planId: planId, isLoading: true);
+    final _mcPlanDetails = await viewMcPlaningPresenter.getMcPlanDetail(
+        facilityId: facilityId, planId: planId, isLoading: true);
     print('MC plan Detail:$_mcPlanDetails');
 
     if (_mcPlanDetails != null) {
