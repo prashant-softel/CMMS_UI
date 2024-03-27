@@ -933,6 +933,49 @@ class PermitListDataSource extends DataTableSource {
                                                   )
                                                   ?.ptwStatus ==
                                               PermitStatusConstants
+                                                  .PTW_APPROVE //125
+
+                                          &&
+                                          varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPermitFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                      ? TableActionButton(
+                                          color: Color.fromARGB(
+                                              136, 107, 152, 211),
+                                          icon: Icons.golf_course,
+                                          message: 'GO For TBT',
+                                          onPress: () {
+                                            // controller.viewNewPermitList(
+                                            //     permitId:
+                                            //         PermitDetails?.permitId);
+                                            controller.editNewPermit(
+                                                permitId:
+                                                    PermitDetails?.permitId,
+                                                isChecked:
+                                                    controller.isChecked.value);
+                                            print(
+                                                'PermitTest:${controller.newPermitListModel?.permitId}');
+                                          },
+                                        )
+                                      : Dimens.box0,
+                                  controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus ==
+                                              PermitStatusConstants
                                                   .PTW_REJECTED_BY_APPROVER //124
 
                                           &&
