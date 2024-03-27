@@ -195,28 +195,95 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           children: [
                                             Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  "Job Id:",
-                                                  style: Styles.black14,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Job Id:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        "${controller.jobDetailsModel.value?.id ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  "Job Title:",
-                                                  style: Styles.black14,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Job Title:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Container(
+                                                      width: 530,
+                                                      child: Text(
+                                                          "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
+                                                          style: Styles.blue14,
+                                                          maxLines: 2),
+                                                    ),
+                                                  ],
                                                 ),
-
-                                                Text(
-                                                  "Plant Name:",
-                                                  style: Styles.black14,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Plant Name:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        "${controller.jobDetailsModel.value?.facilityName ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  "Equipment Categories:",
-                                                  style: Styles.black14,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Equipment Categories:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Container(
+                                                      width: 300,
+                                                      child: Text(
+                                                          "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
+                                                          style: Styles.blue14,
+                                                          maxLines: 2),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  "Work Type:",
-                                                  style: Styles.black14,
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Work Type:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Container(
+                                                      width: 580,
+                                                      child: Text(
+                                                        "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}",
+                                                        maxLines: 2,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Job Description:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
                                                 ),
                                                 // Text(
                                                 //   "Tools Required ",
@@ -224,170 +291,131 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 // ),
                                               ],
                                             ),
-                                            Dimens.boxWidth10,
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.id ?? ""}",
-                                                    style: Styles.blue14),
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
-                                                    style: Styles.blue14),
+                                            // Dimens.boxWidth10,
+                                            // Column(
+                                            //   crossAxisAlignment:
+                                            //       CrossAxisAlignment.start,
+                                            //   children: [
+                                            // Text(
+                                            //     "${controller.jobDetailsModel.value?.id ?? ""}",
+                                            //     style: Styles.blue14),
+                                            // Text(
+                                            //     "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
+                                            //     style: Styles.blue14),
 
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.facilityName ?? ""}",
-                                                    style: Styles.blue14),
+                                            // Text(
+                                            //     "${controller.jobDetailsModel.value?.facilityName ?? ""}",
+                                            //     style: Styles.blue14),
 
-                                                // Text(
-                                                //     "${controller.jobDetailsModel
-                                                //         .value?.workingAreaList !=
-                                                //         null
-                                                //         ? controller.jobDetailsModel.value
-                                                //         ?.workingAreaList
-                                                //         ?.map<String>((item) => item
-                                                //         .workingAreaName
-                                                //         .toString())
-                                                //         .toList()
-                                                //         : []}",
-                                                //     style: Styles.blue14),
+                                            // Text(
+                                            //     "${controller.jobDetailsModel
+                                            //         .value?.workingAreaList !=
+                                            //         null
+                                            //         ? controller.jobDetailsModel.value
+                                            //         ?.workingAreaList
+                                            //         ?.map<String>((item) => item
+                                            //         .workingAreaName
+                                            //         .toString())
+                                            //         .toList()
+                                            //         : []}",
+                                            //     style: Styles.blue14),
 
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
-                                                    style: Styles.blue14),
+                                            // Text(
+                                            //     "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
+                                            //     style: Styles.blue14),
 
-                                                Text(
-                                                    "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}"),
-                                                // Text(
-                                                //     " ${controller.jobDetailsModel.value?.lstToolsRequired ?? ""}",
-                                                //     style: Styles.blue14),
+                                            // Text(
+                                            //     "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}"),
+                                            // Text(
+                                            //     " ${controller.jobDetailsModel.value?.lstToolsRequired ?? ""}",
+                                            //     style: Styles.blue14),
 
-                                                // Text("${
-                                                //     "${controller.jobDetailsModel
-                                                //         .value?.lstToolsRequired !=
-                                                //         null
-                                                //         ? controller.jobDetailsModel.value
-                                                //         ?.lstToolsRequired
-                                                //         ?.map<String>((item) => item
-                                                //         .toolsName.toString())
-                                                //         .toList()
-                                                //         : []}"
-                                                // }"
-                                                // ),
-                                              ],
-                                            ),
+                                            // Text("${
+                                            //     "${controller.jobDetailsModel
+                                            //         .value?.lstToolsRequired !=
+                                            //         null
+                                            //         ? controller.jobDetailsModel.value
+                                            //         ?.lstToolsRequired
+                                            //         ?.map<String>((item) => item
+                                            //         .toolsName.toString())
+                                            //         .toList()
+                                            //         : []}"
+                                            // }"
+                                            // ),
+                                            // ],
+                                            // ),
                                             Spacer(),
                                             Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  "Block Name:",
-                                                  style: Styles.black14,
-                                                ),
-                                                Text(
-                                                  "Equipment Name:",
-                                                  style: Styles.black14,
-                                                ),
-                                                Text(
-                                                  "Raised By:",
-                                                  style: Styles.black14,
-                                                ),
-                                                Text(
-                                                  "Assigned To:",
-                                                  style: Styles.black14,
-                                                ),
-                                                // Text(
-                                                //   "Status",
-                                                //   style: Styles.black14,
-                                                // ),
-                                                Text(
-                                                  "BreakDown Time:",
-                                                  style: Styles.black14,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxWidth10,
-                                            Column(
-                                              crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                    " ${controller.jobDetailsModel.value?.blockName ?? ""}",
-                                                    style: Styles.blue14),
-                                                Container(
-                                                  width: 200,
-                                                  child: Text(
-                                                      "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}"),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Block Name:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        " ${controller.jobDetailsModel.value?.blockName ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
                                                 ),
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.createdByName ?? ""}",
-                                                    style: Styles.blue14),
-                                                Text(
-                                                    "${controller.jobDetailsModel.value?.assignedName ?? ""}",
-                                                    style: Styles.blue14),
-                                                // Text(
-                                                //     " ${controller.jobDetailsModel
-                                                //         .value?.currentPtwId !=
-                                                //         null
-                                                //     ? controller.jobDetailsModel.value
-                                                //     ?.currentPtwId
-                                                //     .toString() ??
-                                                //     ''
-                                                //     : ''}",
-                                                //     style: Styles.blue14),
-                                                // Text(
-                                                //   "${
-                                                //       JobStatusData
-                                                //           .getStatusStringFromInt(controller
-                                                //           .jobDetailsModel
-                                                //           .value
-                                                //           ?.status)
-                                                //   }"
-                                                // ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Equipment Name:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Container(
+                                                      width: 590,
+                                                      child: Text(
+                                                        "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}",
+                                                        maxLines: 2,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Raised By:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        "${controller.jobDetailsModel.value?.createdByName ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "Assigned To:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        "${controller.jobDetailsModel.value?.assignedName ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "BreakDown Time:",
+                                                      style: Styles.black14,
+                                                    ),
+                                                    Text(
+                                                        " ${controller.jobDetailsModel.value?.breakdownTime ?? ""}",
+                                                        style: Styles.blue14),
+                                                  ],
+                                                ),
 
-                                                Text(
-                                                    " ${controller.jobDetailsModel.value?.breakdownTime ?? ""}",
-                                                    style: Styles.blue14),
-                                                // Text(
-                                                //     "${controller.jobDetailsModel
-                                                //         .value
-                                                //         ?.equipmentCatList !=
-                                                //         null ? controller.jobDetailsModel.value
-                                                //     ?.equipmentCatList
-                                                //     ?.map<String>((item) => item
-                                                //     .equipmentCatName
-                                                //     .toString())
-                                                //     .toList()
-                                                //     : []
-                                                // }",
-                                                //     style: Styles.blue14),
+                                                // // Text(
+                                                // //   "Status",
+                                                // //   style: Styles.black14,
+                                                // // ),
                                               ],
                                             ),
                                           ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 50, right: 20),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Job Description:",
-                                                style: Styles.black14,
-                                              ),
-                                              Dimens.boxWidth10,
-                                              Expanded(
-                                                child: Text(
-                                                    "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
-                                                    style: Styles.blue14),
-                                              ),
-                                            ],
-                                          ),
                                         ),
                                       ],
                                     ),

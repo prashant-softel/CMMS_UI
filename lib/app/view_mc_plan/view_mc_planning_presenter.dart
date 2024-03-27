@@ -14,7 +14,7 @@ class ViewMcPlaningPresenter {
   }) async {
     return viewMcPlaningUsecase.getMcPlanDetail(
       planId: planId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -22,11 +22,13 @@ class ViewMcPlaningPresenter {
   Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
+    facilityId,
     isLoading,
   ) async =>
       await viewMcPlaningUsecase.getHistory(
         moduleType: moduleType,
         id: id,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
