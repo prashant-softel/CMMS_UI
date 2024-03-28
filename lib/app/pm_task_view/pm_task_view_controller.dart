@@ -415,7 +415,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     clearjobmodelValue();
     clearpmTaskValue();
     Get.toNamed(Routes.createPermit, arguments: {
-      "scheduleCheckPoint" : scheduleCheckPoint!.value,
       "pmTaskModel": pmtaskViewModel.value,
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
