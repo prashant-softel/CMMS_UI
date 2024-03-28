@@ -388,7 +388,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   PmtaskViewModel? pmtaskViewModel;
-  ScheduleCheckPoint? scheduleCheckPoint;
+  RxList<ScheduleCheckPoint?>? scheduleCheckPoint;
   int? jcId = 0;
 
   //File Import
@@ -404,6 +404,8 @@ class NewPermitController extends GetxController {
       {'key': "Action ", "value": ''},
     ]);
   }
+
+  String allChecklistNames = '';
 
   ///
   @override
@@ -524,8 +526,15 @@ class NewPermitController extends GetxController {
         isChecked.value = dataFromPreviousScreen['isChecked'];
         jobModel = dataFromPreviousScreen['jobModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
-        scheduleCheckPoint = dataFromPreviousScreen['scheduleCheckPoint'];
-        print("SChedule check point: ${scheduleCheckPoint}");
+        print("SChedule check point: ${pmtaskViewModel}");
+        for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
+          allChecklistNames +=
+              pmtaskViewModel!.schedules![i].checklist_name ?? '';
+          // Add a comma and space if it's not the last item
+          // if (i < pmtaskViewModel.s.length - 1) {
+          //   allChecklistNames += ', ';
+          // }
+        }
 
         permitPresenter.saveValue(permitId: permitId.value.toString());
         permitPresenter.savePmTaskModelValue(

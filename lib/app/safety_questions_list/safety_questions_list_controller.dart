@@ -38,6 +38,7 @@ class SafetyQuestionsListController extends GetxController {
   void updateChecklistType(String value) {
     updateType.value = value;
   }
+
   void toggleContainer() {
     isContainerVisible.toggle();
   }
@@ -327,7 +328,7 @@ class SafetyQuestionsListController extends GetxController {
       selectedTypePermit.value = typePermitList[0]?.name ?? '';
       selectedTypePermitId = typePermitList[0]?.id;
       print('PermitTypeId:$selectedTypePermitId');
-      getSafetyMeasureList(true, selectedTypePermitId!);
+      getSafetyMeasureList(true, 0);
     }
   }
 

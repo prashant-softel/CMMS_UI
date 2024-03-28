@@ -15,10 +15,7 @@ class PreventiveMaintenanceExecutionPresenter {
     bool? isloading,
   }) async =>
       await preventiveMaintenanceExecutionUsecase.getPmtaskViewList(
-        scheduleId: scheduleId,
-        isLoading: isloading,
-        facilityId: facilityId
-      );
+          scheduleId: scheduleId, isLoading: isloading, facilityId: facilityId);
   Future<List<dynamic>> updatePmExecution({
     pmExecutionJsonString,
     required bool isLoading,
@@ -30,11 +27,13 @@ class PreventiveMaintenanceExecutionPresenter {
   }
 
   Future<List<HistoryModel>?> getHistory(
+    facilityId,
     moduleType,
     id,
     isLoading,
   ) async =>
       await preventiveMaintenanceExecutionUsecase.getHistory(
+        facilityId: facilityId,
         moduleType: moduleType,
         id: id,
         isLoading: isLoading,
