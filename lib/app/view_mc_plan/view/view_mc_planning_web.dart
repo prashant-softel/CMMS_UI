@@ -73,7 +73,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.moduleCleaningDashboard);
+                            Get.offNamed(Routes.moduleCleaningListPlan);
                           },
                           child: Text(" / MODULE CLEANING",
                               style: Styles.greyLight14),
@@ -643,29 +643,18 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                         ),
 
                                   Dimens.boxHeight12,
-                                  // controller.mcPlanDetailsList!
-                                  //                                         .firstWhere(
-                                  //                                           (e) =>
-                                  //                                               e!.planId ==
-                                  //                                               McPalningDetailsModel
-                                  //                                                   .
-                                  //                                           orElse: () =>
-                                  //                                               ModuleCleaningListPlanModel(
-                                  //                                                   planId: 00),
-                                  //                                         )
-                                  //                                         .status ==
-                                  //                                     353
-                                  //                                      &&
-                                  varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kModuleCleaningFeatureId &&
-                                                  e.approve ==
-                                                      UserAccessConstants
-                                                          .kHaveApproveAccess)
-                                              .length >
-                                          0
+                                  controller.mcPlanDetailsModel.value?.status ==
+                                              351 &&
+                                          varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kModuleCleaningFeatureId &&
+                                                      e.approve ==
+                                                          UserAccessConstants
+                                                              .kHaveApproveAccess)
+                                                  .length >
+                                              0
                                       ? Row(
                                           children: [
                                             Spacer(),
