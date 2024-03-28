@@ -180,9 +180,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                      '${controller.pmtaskViewModel?.plan_title}',
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
+                                                    '${controller.pmtaskViewModel?.plan_title}',
+                                                  ),
                                                 ),
                                                 DataCell(
                                                   Text(
@@ -192,9 +191,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                      '${controller.scheduleCheckPoint?.checklist_name}',
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
+                                                    '${controller.allChecklistNames}',
+                                                  ),
                                                 ),
                                                 DataCell(
                                                   Text(
