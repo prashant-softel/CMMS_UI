@@ -32,8 +32,8 @@ class PreventiveMaintenanceTaskViewContentWeb
 
   Widget buildDocument({required BuildContext context}) {
     return SelectionArea(
-      child: Obx(()=>
-       Container(
+      child: Obx(
+        () => Container(
           // height: Get.height,
           // width: Get.width,
           child: Column(
@@ -48,7 +48,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -74,9 +75,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                       onTap: () {
                         final _flutterSecureStorage =
                             const FlutterSecureStorage();
-      
+
                         _flutterSecureStorage.delete(key: "scheduleId");
-      
+
                         Get.offNamed(Routes.preventive);
                       },
                       child: Text(" / Preventive Maintenance".toUpperCase(),
@@ -91,7 +92,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                   key: controller.printKey,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-      
+
                     margin: EdgeInsets.all(20),
                     // height: Get.height,
                     child: Card(
@@ -115,8 +116,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 Container(
                                   height: 30,
                                   child: CustomElevatedButton(
-                                    backgroundColor: controller
-                                                .pmtaskViewModel.value?.status ==
+                                    backgroundColor: controller.pmtaskViewModel
+                                                .value?.status ==
                                             164
                                         ? ColorValues.linktopermitColor
                                         : controller.pmtaskViewModel.value
@@ -127,13 +128,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         ?.status ==
                                                     163
                                                 ? ColorValues.appYellowColor
-                                                : controller.pmtaskViewModel.value
-                                                            ?.status ==
+                                                : controller.pmtaskViewModel
+                                                            .value?.status ==
                                                         167
                                                     ? ColorValues
                                                         .approveStatusColor
-                                                    : controller.pmtaskViewModel
-                                                                .value?.status ==
+                                                    : controller
+                                                                .pmtaskViewModel
+                                                                .value
+                                                                ?.status ==
                                                             165
                                                         ? ColorValues.closeColor
                                                         : controller
@@ -262,9 +265,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         ),
                                       ),
                                       // Dimens.boxHeight30,
-      
+
                                       ///Assets
-      
+
                                       Container(
                                         margin: Dimens.edgeInsets20,
                                         height: ((controller.scheduleCheckPoint
@@ -291,7 +294,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(10.0),
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -314,7 +318,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                   DataColumn2(
                                                       label: Text(
@@ -340,7 +345,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                   DataColumn2(
                                                       fixedWidth: 150,
@@ -349,7 +355,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                 ],
                                                 rows: List<DataRow>.generate(
@@ -385,8 +392,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                             ?.status ==
                                                                         167 &&
                                                                     varUserAccessModel
-                                                                            .value
-                                                                            .access_list!
+                                                                            .value.access_list!
                                                                             .where((e) =>
                                                                                 e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
                                                                                 e.add ==
@@ -412,14 +418,13 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                     .remove_red_eye,
                                                                 message: "View",
                                                                 onPress: () {
-                                                                  controller.selectedItem = controller
-                                                                      .scheduleCheckPoint!
-                                                                      .firstWhere((element) =>
-                                                                          "${element?.schedule_id}" ==
-                                                                          controller
-                                                                              .scheduleCheckPoint?[index]
-                                                                              ?.schedule_id
-                                                                              .toString());
+                                                                  controller.selectedItem = controller.scheduleCheckPoint!.firstWhere((element) =>
+                                                                      "${element?.schedule_id}" ==
+                                                                      controller
+                                                                          .scheduleCheckPoint?[
+                                                                              index]
+                                                                          ?.schedule_id
+                                                                          .toString());
                                                                   if (controller
                                                                           .selectedItem !=
                                                                       null) {
@@ -462,8 +467,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               child: Column(
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(
-                                                        10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: Row(
                                                       children: [
                                                         Text(
@@ -476,18 +482,20 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   Expanded(
                                                     child: DataTable2(
                                                         border: TableBorder.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                206,
-                                                                229,
-                                                                234)),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    206,
+                                                                    229,
+                                                                    234)),
                                                         columns: [
                                                           DataColumn2(
                                                               fixedWidth: 150,
                                                               label: Text(
                                                                 "Permit ID",
                                                                 style: TextStyle(
-                                                                    fontSize: 15,
+                                                                    fontSize:
+                                                                        15,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -527,7 +535,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                               label: Text(
                                                                 'Action',
                                                                 style: TextStyle(
-                                                                    fontSize: 15,
+                                                                    fontSize:
+                                                                        15,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -562,7 +571,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 //     onPress: () {
                                                                 //       controller
                                                                 //           .clearStoreData();
-      
+
                                                                 //       String jobCardId = controller
                                                                 //               .jobAssociatedModelsList?[
                                                                 //                   index]
@@ -572,7 +581,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 //       print({
                                                                 //         "JcId": jobCardId
                                                                 //       });
-      
+
                                                                 //       Get.toNamed(
                                                                 //           Routes.jobCard,
                                                                 //           arguments: {
@@ -581,7 +590,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 //                     "$jobCardId")
                                                                 //           });
                                                                 //     }),
-      
+
                                                                 varUserAccessModel
                                                                             .value
                                                                             .access_list!
@@ -604,8 +613,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           controller
                                                                               .clearPermitStoreData();
                                                                           controller.viewNewPermitList(
-                                                                              permitId:
-                                                                                  controller.pmtaskViewModel.value?.permit_id,
+                                                                              permitId: controller.pmtaskViewModel.value?.permit_id,
                                                                               jobId: controller.jobDetailsModel.value!.id ?? 0);
                                                                         })
                                                                     : Container(),
@@ -627,235 +635,239 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                 ],
                                               ),
                                             ),
-                                      Container(
-                                        margin: Dimens.edgeInsets20,
-                                        height:
-                                            controller.listMrsByTaskId!.length > 0
-                                                ? ((controller.listMrsByTaskId
-                                                                ?.length ??
-                                                            0) *
-                                                        40) +
-                                                    150
-                                                : 55,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues
-                                                .lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Material Issue / Used",
-                                                    style: Styles.blue700,
+                                      controller.pmtaskViewModel.value
+                                                  ?.status ==
+                                              169
+                                          ? Dimens.box0
+                                          : Container(
+                                              margin: Dimens.edgeInsets20,
+                                              height: controller
+                                                          .listMrsByTaskId!
+                                                          .length >
+                                                      0
+                                                  ? ((controller.listMrsByTaskId
+                                                                  ?.length ??
+                                                              0) *
+                                                          40) +
+                                                      150
+                                                  : 55,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: ColorValues
+                                                      .lightGreyColorWithOpacity35,
+                                                  width: 1,
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .appBlueBackgroundColor,
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: Offset(0, 2),
                                                   ),
-                                                  Spacer(),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          "Material Issue / Used",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                        Spacer(),
+                                                        controller
+                                                                .listMrsByTaskId!
+                                                                .isEmpty
+                                                            ? Container(
+                                                                height: 30,
+                                                                child:
+                                                                    CustomElevatedButton(
+                                                                  backgroundColor:
+                                                                      ColorValues
+                                                                          .addNewColor,
+                                                                  onPressed:
+                                                                      () async {
+                                                                    Get.offAllNamed(
+                                                                        Routes
+                                                                            .createMrs,
+                                                                        arguments: {
+                                                                          "whereUsedId": controller
+                                                                              .pmtaskViewModel
+                                                                              .value
+                                                                              ?.id,
+                                                                          "activity": controller
+                                                                              .pmtaskViewModel
+                                                                              .value
+                                                                              ?.plan_title,
+                                                                          "whereUsed":
+                                                                              27,
+                                                                          "fromActorTypeId":
+                                                                              2,
+                                                                          "to_actor_type_id":
+                                                                              3
+                                                                        });
+                                                                  },
+                                                                  text:
+                                                                      "Add New MRS",
+                                                                ),
+                                                              )
+                                                            : Dimens.box0,
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  // Divider(
+                                                  //   color:
+                                                  //       ColorValues.greyLightColour,
+                                                  // ),
                                                   controller.listMrsByTaskId!
-                                                          .isEmpty
-                                                      ? Container(
-                                                          height: 30,
-                                                          child:
-                                                              CustomElevatedButton(
-                                                            backgroundColor:
-                                                                ColorValues
-                                                                    .addNewColor,
-                                                            onPressed: () async {
-                                                              Get.offAllNamed(
-                                                                  Routes
-                                                                      .createMrs,
-                                                                  arguments: {
-                                                                    "whereUsedId":
-                                                                        controller
-                                                                            .pmtaskViewModel
-                                                                            .value
-                                                                            ?.id,
-                                                                    "activity": controller
-                                                                        .pmtaskViewModel
-                                                                        .value
-                                                                        ?.plan_title,
-                                                                    "whereUsed":
-                                                                        27,
-                                                                    "fromActorTypeId":
-                                                                        2,
-                                                                    "to_actor_type_id":
-                                                                        3
-                                                                  });
-                                                            },
-                                                            text: "Add New MRS",
+                                                              .length >
+                                                          0
+                                                      ? Expanded(
+                                                          child: DataTable2(
+                                                            border: TableBorder.all(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        206,
+                                                                        229,
+                                                                        234)),
+                                                            columns: [
+                                                              DataColumn2(
+                                                                  fixedWidth:
+                                                                      100,
+                                                                  label: Text(
+                                                                    "Sr. No.",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  )),
+                                                              DataColumn2(
+                                                                  fixedWidth:
+                                                                      130,
+                                                                  label: Text(
+                                                                    "MRS ID",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  )),
+                                                              DataColumn2(
+                                                                  // fixedWidth: 200,
+                                                                  label: Text(
+                                                                "MRS Items List ",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              )),
+                                                              DataColumn2(
+                                                                  //  fixedWidth: 300,
+                                                                  label: Text(
+                                                                "Status",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              )),
+                                                              DataColumn2(
+                                                                  fixedWidth:
+                                                                      300,
+                                                                  label: Text(
+                                                                    'Action',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  )),
+                                                            ],
+                                                            rows: List<
+                                                                DataRow>.generate(
+                                                              controller
+                                                                      .listMrsByTaskId
+                                                                      ?.length ??
+                                                                  0,
+                                                              (index) =>
+                                                                  DataRow(
+                                                                      cells: [
+                                                                    DataCell(Text(
+                                                                        '${index + 1}')),
+                                                                    DataCell(Text(
+                                                                        "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
+                                                                    DataCell(Text(controller
+                                                                            .listMrsByTaskId?[index]
+                                                                            ?.mrsItems ??
+                                                                        '')),
+                                                                    DataCell(Text(controller
+                                                                            .listMrsByTaskId?[index]
+                                                                            ?.status_short ??
+                                                                        '')),
+                                                                    DataCell(
+                                                                        Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                            color: ColorValues
+                                                                                .viewColor,
+                                                                            icon: Icons
+                                                                                .remove_red_eye,
+                                                                            message:
+                                                                                "View MRS",
+                                                                            onPress:
+                                                                                () {
+                                                                              String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+
+                                                                              Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                                'mrsId': int.tryParse("$mrsId"),
+                                                                                'type': 1
+                                                                              });
+                                                                            }),
+                                                                        TableActionButton(
+                                                                            color: ColorValues
+                                                                                .editColor,
+                                                                            icon: Icons
+                                                                                .edit,
+                                                                            message:
+                                                                                "Edit MRS",
+                                                                            onPress:
+                                                                                () {
+                                                                              String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+                                                                              print({
+                                                                                "mrsId": mrsId
+                                                                              });
+                                                                              Get.toNamed(Routes.editMrs, arguments: {
+                                                                                'mrsId': int.tryParse("$mrsId")
+                                                                              });
+                                                                            })
+                                                                      ],
+                                                                    )),
+                                                                  ]),
+                                                            ),
                                                           ),
                                                         )
                                                       : Dimens.box0,
                                                 ],
                                               ),
                                             ),
-                                            // Divider(
-                                            //   color:
-                                            //       ColorValues.greyLightColour,
-                                            // ),
-                                            controller.listMrsByTaskId!.length > 0
-                                                ? Expanded(
-                                                    child: DataTable2(
-                                                      border: TableBorder.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              206,
-                                                              229,
-                                                              234)),
-                                                      columns: [
-                                                        DataColumn2(
-                                                            fixedWidth: 100,
-                                                            label: Text(
-                                                              "Sr. No.",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                        DataColumn2(
-                                                            fixedWidth: 130,
-                                                            label: Text(
-                                                              "MRS ID",
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                        DataColumn2(
-                                                            // fixedWidth: 200,
-                                                            label: Text(
-                                                          "MRS Items List ",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                        DataColumn2(
-                                                            //  fixedWidth: 300,
-                                                            label: Text(
-                                                          "Status",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                        DataColumn2(
-                                                            fixedWidth: 300,
-                                                            label: Text(
-                                                              'Action',
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                      ],
-                                                      rows:
-                                                          List<DataRow>.generate(
-                                                        controller.listMrsByTaskId
-                                                                ?.length ??
-                                                            0,
-                                                        (index) => DataRow(
-                                                            cells: [
-                                                              DataCell(Text(
-                                                                  '${index + 1}')),
-                                                              DataCell(Text(
-                                                                  "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
-                                                              DataCell(Text(controller
-                                                                      .listMrsByTaskId?[
-                                                                          index]
-                                                                      ?.mrsItems ??
-                                                                  '')),
-                                                              DataCell(Text(controller
-                                                                      .listMrsByTaskId?[
-                                                                          index]
-                                                                      ?.status_short ??
-                                                                  '')),
-                                                              DataCell(Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceEvenly,
-                                                                children: [
-                                                                  TableActionButton(
-                                                                      color: ColorValues
-                                                                          .viewColor,
-                                                                      icon: Icons
-                                                                          .remove_red_eye,
-                                                                      message:
-                                                                          "View MRS",
-                                                                      onPress:
-                                                                          () {
-                                                                        String
-                                                                            mrsId =
-                                                                            controller.listMrsByTaskId?[index]?.mrsId.toString() ??
-                                                                                "";
-      
-                                                                        Get.toNamed(
-                                                                            Routes
-                                                                                .mrsViewScreen,
-                                                                            arguments: {
-                                                                              'mrsId':
-                                                                                  int.tryParse("$mrsId"),
-                                                                              'type':
-                                                                                  1
-                                                                            });
-                                                                      }),
-                                                                  TableActionButton(
-                                                                      color: ColorValues
-                                                                          .editColor,
-                                                                      icon: Icons
-                                                                          .edit,
-                                                                      message:
-                                                                          "Edit MRS",
-                                                                      onPress:
-                                                                          () {
-                                                                        String
-                                                                            mrsId =
-                                                                            controller.listMrsByTaskId?[index]?.mrsId.toString() ??
-                                                                                "";
-                                                                        print({
-                                                                          "mrsId":
-                                                                              mrsId
-                                                                        });
-                                                                        Get.toNamed(
-                                                                            Routes
-                                                                                .editMrs,
-                                                                            arguments: {
-                                                                              'mrsId':
-                                                                                  int.tryParse("$mrsId")
-                                                                            });
-                                                                      })
-                                                                ],
-                                                              )),
-                                                            ]),
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Dimens.box0,
-                                          ],
-                                        ),
-                                      ),
                                       // : Dimens.box0,
-      
+
                                       (controller.historyList != null &&
-                                              controller.historyList!.isNotEmpty)
+                                              controller
+                                                  .historyList!.isNotEmpty)
                                           ? Container(
                                               margin: Dimens.edgeInsets20,
                                               height: ((controller.historyList
@@ -875,7 +887,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Row(
                                                       children: [
                                                         Text(
@@ -886,9 +899,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                     ),
                                                   ),
                                                   Expanded(
-                                                    child: HistoryTableWidgetWeb(
-                                                      historyList:
-                                                          controller.historyList,
+                                                    child:
+                                                        HistoryTableWidgetWeb(
+                                                      historyList: controller
+                                                          .historyList,
                                                     ),
                                                   ),
                                                 ],
@@ -955,7 +969,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //           text: "Link to Permit",
                     //           onPressed: () {
                     //             controller.createNewPermit();
-      
+
                     //             //controller.printScreen();
                     //           },
                     //         ),
@@ -983,7 +997,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-      
+
                     controller.pmtaskViewModel.value?.status == 164 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
@@ -1098,7 +1112,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                     //   ),
                     // ),
                     Dimens.boxWidth10,
-      
+
                     controller.pmtaskViewModel.value?.status == 165 &&
                             varUserAccessModel.value.access_list!
                                     .where((e) =>
@@ -1188,15 +1202,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 controller.clearStoreTasktoActorData();
                                 controller.clearStoreTaskWhereUsedData();
                                 controller.clearStoreTaskfromActorData();
-      
+
                                 Get.toNamed(Routes.mrsReturnScreen, arguments: {
                                   "whereUsed": 27,
                                   "fromActorTypeId": 3,
                                   "to_actor_type_id": 2,
                                   "pmTaskId":
                                       controller.pmtaskViewModel.value?.id ?? 0,
-                                  "activity":
-                                      controller.pmtaskViewModel.value?.plan_title
+                                  "activity": controller
+                                      .pmtaskViewModel.value?.plan_title
                                 });
                               },
                             ),

@@ -83,26 +83,26 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   List<dynamic> fileIds = [];
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        getPmtaskViewList(
-            scheduleId: scheduleId.value,
-            isloading: true,
-            facilityId: facilityId);
-      }
-    });
     try {
-      token = await repository.getSecuredValue(LocalKeys.authToken);
-
       await setScheduleId();
-      if (scheduleId != 0) {
-        await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true, facilityId: facilityId);
 
-        getHistory();
-      }
+      token = await repository.getSecuredValue(LocalKeys.authToken);
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          if (scheduleId != 0) {
+            await getPmtaskViewList(
+                scheduleId: scheduleId.value,
+                isloading: true,
+                facilityId: facilityId);
+
+            getHistory();
+          }
+        }
+      });
+
       super.onInit();
     } catch (e) {
       print(e);
@@ -167,7 +167,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     historyList?.value =
         await preventiveMaintenanceExecutionPresenter.getHistory(
               // tempModuleType,
-              // tempJobCardId,
+              facilityId,
               moduleType,
               scheduleId.value,
               true,
@@ -181,9 +181,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     print(isTouchable.value);
   }
 
-  Future<void> getPmtaskViewList({int? scheduleId, bool? isloading, required int facilityId}) async {
-    final _permitDetails = await preventiveMaintenanceExecutionPresenter
-        .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading, facilityId: facilityId);
+  Future<void> getPmtaskViewList(
+      {int? scheduleId, bool? isloading, required int facilityId}) async {
+    final _permitDetails =
+        await preventiveMaintenanceExecutionPresenter.getPmtaskViewList(
+            scheduleId: scheduleId,
+            isloading: isloading,
+            facilityId: facilityId);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       _permitDetails.schedules?.forEach((element) {

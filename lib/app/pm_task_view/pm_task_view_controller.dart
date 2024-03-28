@@ -76,34 +76,25 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        getAssignedToList(facilityId);
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getPmtaskViewList(
-            scheduleId: scheduleId.value,
-            isloading: true,
-            facilityId: facilityId);
-      });
-      Future.delayed(Duration(milliseconds: 1000), () {
-        getHistory(facilityId);
-      });
-    });
     try {
       await setScheduleId();
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+          if (scheduleId != 0) {
+            await getPmtaskViewList(
+                scheduleId: scheduleId.value,
+                isloading: true,
+                facilityId: facilityId);
+            getHistory(facilityId);
+            getMrsListByModuleTask(taskId: scheduleId.value);
+          }
+          getAssignedToList(facilityId);
+        }
+      });
 
-      if (scheduleId != 0) {
-        await getPmtaskViewList(
-            scheduleId: scheduleId.value,
-            isloading: true,
-            facilityId: facilityId);
-        getHistory(facilityId);
-        getMrsListByModuleTask(taskId: scheduleId.value);
-      }
       // textControllers =
       //     List.generate(permitValuesCount, (_) => TextEditingController());
       // permitValues = RxList<String>.filled(permitValuesCount, '');
