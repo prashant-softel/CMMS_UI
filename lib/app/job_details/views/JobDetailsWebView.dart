@@ -219,7 +219,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       style: Styles.black14,
                                                     ),
                                                     Container(
-                                                      width: 530,
+                                                      width: Get.width * 0.3,
                                                       child: Text(
                                                           "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
                                                           style: Styles.blue14,
@@ -249,7 +249,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       style: Styles.black14,
                                                     ),
                                                     Container(
-                                                      width: 300,
+                                                      width: Get.width * 0.3,
                                                       child: Text(
                                                           "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
                                                           style: Styles.blue14,
@@ -266,7 +266,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       style: Styles.black14,
                                                     ),
                                                     Container(
-                                                      width: 580,
+                                                      width: Get.width * 0.3,
                                                       child: Text(
                                                         "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}",
                                                         maxLines: 2,
@@ -367,7 +367,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       style: Styles.black14,
                                                     ),
                                                     Container(
-                                                      width: 590,
+                                                      width: Get.width * 0.3,
                                                       child: Text(
                                                         "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}",
                                                         maxLines: 2,

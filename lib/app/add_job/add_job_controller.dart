@@ -61,6 +61,7 @@ class AddJobController extends GetxController {
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   List<int> selectedAssetsIdList = [];
+  List<int> selectedwrktype = [];
   //
   Rx<String> selectedEquipmentCategory = ''.obs;
   Rx<bool> isEquipmentCategorySelected = true.obs;
@@ -254,7 +255,7 @@ class AddJobController extends GetxController {
     //  if (selectedBlockIdList.length < 1) {
     //   isBlockSelected.value = false;
     // }
-    if (selectedWorkTypeIdList.length < 1) {
+    if (selectedWorkTypeList.length < 1) {
       isWorkTypeSelected.value = false;
     }
     if (selectedEquipmentCategoryIdList.length < 1) {
@@ -312,6 +313,12 @@ class AddJobController extends GetxController {
       for (var _selectedWorkArea in selectedWorkAreaList) {
         selectedAssetsIdList.add(_selectedWorkArea?.id ?? 0);
       }
+      print("selected workarea eqipment id: $selectedAssetsIdList");
+      selectedwrktype.clear();
+      for (var _selectedworktype in selectedWorkTypeList) {
+        selectedwrktype.add(_selectedworktype?.id ?? 0);
+      }
+      print("selected  work type : $selectedwrktype");
 
       AddJobModel addJobModel = AddJobModel(
         id: 0,
@@ -324,7 +331,7 @@ class AddJobController extends GetxController {
         description: _description,
         breakdownTime: _breakdownTime,
         assetsIds: selectedAssetsIdList,
-        workTypeIds: selectedWorkAreaIdList,
+        workTypeIds: selectedwrktype,
       );
 
       Map<String, dynamic>? responseMapJobCreated =
