@@ -57,13 +57,16 @@ class CalibrationListController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getCalibrationList(facilityId, false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getVenderNameList(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getCalibrationList(facilityId, false);
+        });
+      }
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getVenderNameList(facilityId);
-    });
+
     super.onInit();
   }
 
@@ -92,7 +95,7 @@ class CalibrationListController extends GetxController {
   void getVenderNameList(int facilityId) async {
     venderNameList.value = <BusinessListModel>[];
     final _venderNameList = await calibrationListPresenter.getVenderNameList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: true,
       businessType: 4,
     );

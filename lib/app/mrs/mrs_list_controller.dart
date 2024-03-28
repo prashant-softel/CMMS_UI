@@ -80,10 +80,12 @@ class MrsListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
+      if (facilityId > 0) {
+        //Future.delayed(Duration(seconds: 1), () {
         getMrsList(
             facilityId, formattedTodate1, formattedFromdate1, true, false);
-      });
+        // });
+      }
     });
     super.onInit();
   }
