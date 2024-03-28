@@ -6,7 +6,6 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -144,16 +143,23 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           ),
                                           columns: [
                                             DataColumn2(
-                                                label: Text('PM Task ID')),
+                                              label: Text('PM Task ID'),
+                                            ),
                                             DataColumn2(
-                                                label: Text('Plan Title')),
+                                              label: Text('Plan Title'),
+                                            ),
                                             DataColumn2(
-                                                label:
-                                                    Text('Equipment Category')),
+                                              label: Text('Equipment Category'),
+                                            ),
                                             DataColumn2(
-                                                label: Text('Frequency')),
+                                              label: Text('Asset Name'),
+                                            ),
                                             DataColumn2(
-                                                label: Text('Assigned To')),
+                                              label: Text('Frequency'),
+                                            ),
+                                            DataColumn2(
+                                              label: Text('Assigned To'),
+                                            ),
                                           ],
                                           rows: [
                                             DataRow(
@@ -181,6 +187,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 DataCell(
                                                   Text(
                                                       '${controller.pmtaskViewModel?.category_name}',
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                      '${controller.scheduleCheckPoint?.checklist_name}',
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                 ),
