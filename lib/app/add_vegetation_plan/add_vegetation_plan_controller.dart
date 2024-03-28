@@ -83,6 +83,9 @@ class AddVegetationPlanController extends GetxController {
       // await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getVegEquipmentModelList(facilityId, true);
+        });
       });
       if (vegPlanId != 0) {
         Future.delayed(Duration(seconds: 1), () {
@@ -91,9 +94,6 @@ class AddVegetationPlanController extends GetxController {
       }
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
-      });
-      Future.delayed(Duration(seconds: 1), () {
-        getVegEquipmentModelList(facilityId, true);
       });
       super.onInit();
     } catch (e) {
@@ -220,12 +220,13 @@ class AddVegetationPlanController extends GetxController {
   //   // print('update Veg   data: $updateMcModelJsonString');
   // }
 
-  Future<void> getVegPlanDetail({required int planId,required int facilityId}) async {
+  Future<void> getVegPlanDetail(
+      {required int planId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(facilityId:facilityId,
-        planId: planId, isLoading: true);
+    final _vegPlanDetails = await addVegetationPresenter.getVegPlanDetail(
+        facilityId: facilityId, planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetails');
 
     if (_vegPlanDetails != null) {
@@ -318,7 +319,7 @@ class AddVegetationPlanController extends GetxController {
     );
     selectedStartTime.value = dateTime;
     startDateTc
-      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: startDateTc.text.length,
