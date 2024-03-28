@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
@@ -1305,7 +1306,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                       125 &&
                                   controller.newPermitDetailsModel.value!
                                           .is_TBT_Expire ==
-                                      true
+                                      false
                               ? Center(
                                   child: Container(
                                     width:
@@ -1948,24 +1949,54 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             .newPermitDetailsModel
                                                             .value
                                                             ?.is_TBT_Expire ==
-                                                        true
+                                                        false
                                                 ? Center(
                                                     child: Container(
-                                                        height: 45,
-                                                        child:
-                                                            CustomElevatedButton(
-                                                          backgroundColor:
-                                                              ColorValues
-                                                                  .appDarkBlueColor,
-                                                          text: "Update TBT",
-                                                          onPressed: () {
-                                                            controller.updateNewPermit(
-                                                                fileIds:
-                                                                    dropzoneController
-                                                                        .fileIds);
-                                                          },
-                                                        )),
+                                                      height: 45,
+                                                      child:
+                                                          CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appDarkBlueColor,
+                                                        text: "Update TBT",
+                                                        onPressed: () {
+                                                          controller.updateNewPermit(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
+                                                        },
+                                                      ),
+                                                    ),
                                                   )
+                                                : Dimens.box0,
+                                            Dimens.boxWidth20,
+                                            controller.newPermitDetailsModel
+                                                            .value?.ptwStatus ==
+                                                        125 &&
+                                                    controller
+                                                            .newPermitDetailsModel
+                                                            .value
+                                                            ?.is_TBT_Expire ==
+                                                        true
+                                                ? Container(
+                                                    height: 45,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appRedColor,
+                                                      text: "Cancel Permit",
+                                                      icon: Icons.close,
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                          PermitCancelReQuestDialog(
+                                                            permitId:
+                                                                '${controller.permitId.value}',
+                                                            // jobId: controller
+                                                            //     .jobId.value,
+                                                          ),
+                                                        );
+                                                      },
+                                                    ))
                                                 : Dimens.box0,
                                             Dimens.boxWidth20,
                                             controller.newPermitDetailsModel
