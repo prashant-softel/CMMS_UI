@@ -2056,6 +2056,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       onPress: () async {
                                                         String baseUrl =
                                                             "http://65.0.20.19/CMMS_API/";
+                                                            // String baseUrl =
+                                                            // 'http://172.20.43.9:83/';
                                                         String fileName =
                                                             controller
                                                                     .file_list![

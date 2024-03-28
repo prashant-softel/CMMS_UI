@@ -99,6 +99,9 @@ class ModuleCleaningPlanningController extends GetxController {
       await setMcId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getEquipmentModelList(facilityId, true);
+        });
       });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
@@ -107,10 +110,6 @@ class ModuleCleaningPlanningController extends GetxController {
       }
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
-      });
-
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentModelList(facilityId, true);
       });
 
       // getMcPlanHistory(id: id.value);
@@ -195,6 +194,7 @@ class ModuleCleaningPlanningController extends GetxController {
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
     String _startDateTc = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+    print("Start Date: ${_startDateTc}");
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         planId: 0,
@@ -267,12 +267,14 @@ class ModuleCleaningPlanningController extends GetxController {
     print('update MC   data: $updateMcModelJsonString');
   }
 
-  Future<void> getMcPlanDetail({required int planId,required int facilityId}) async {
+  Future<void> getMcPlanDetail(
+      {required int planId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _mcPlanDetails = await moduleCleaningPlanningPresenter
-        .getMcPlanDetail(planId: planId,facilityId:facilityId, isLoading: true);
+    final _mcPlanDetails =
+        await moduleCleaningPlanningPresenter.getMcPlanDetail(
+            planId: planId, facilityId: facilityId, isLoading: true);
     print('MC plan Detail:$_mcPlanDetails');
 
     if (_mcPlanDetails != null) {

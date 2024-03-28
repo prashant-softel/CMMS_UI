@@ -2001,10 +2001,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           PermitCancelReQuestDialog(
                                                             permitId:
                                                                 '${controller.permitId.value}',
-                                                            // jobId: controller
-                                                            //     .jobId.value,
+                                                            jobId: controller
+                                                                .jobModel!.id,
                                                           ),
                                                         );
+                                                        print("Permit ID TO Cancel: ${controller.permitId.value}");
+                                                        print("JobId To cancel: ${controller.jobModel!.id}");
                                                       },
                                                     ))
                                                 : Dimens.box0,
