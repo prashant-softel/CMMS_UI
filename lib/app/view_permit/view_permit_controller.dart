@@ -291,6 +291,8 @@ class ViewPermitController extends GetxController {
   ///Extend Condition List
   RxList<ExtendConditions?>? listExtendCondition =
       <ExtendConditions?>[].obs; //Extend Condition List
+  RxList<List<Map<String, String>>> rowTBTTrainingOtherPersonItem =
+      <List<Map<String, String>>>[].obs;
 
   ///Cancel Condition List
   RxList<CancelConditions?>? listCancelCondition =
@@ -842,6 +844,15 @@ class ViewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
 
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
+      rowTBTTrainingOtherPersonItem.value = [];
+      viewPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
+        rowTBTTrainingOtherPersonItem.value.add([
+          {'key': "Employee Name", "value": '${element?.employee_name}'},
+          {'key': "Contact Number", "value": '${element?.contact_number}'},
+          {'key': "Responsibility", "value": '${element?.responsibility}'},
+          {'key': "Action ", "value": ''},
+        ]);
+      });
 
       listAssociatedJobs?.value =
           viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
@@ -1740,7 +1751,8 @@ class ViewPermitController extends GetxController {
         ),
         bounds: Rect.fromLTWH(370, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
-    page.graphics.drawString('${listLoto!.map((element) => element!.loto_lock_number)}',
+    page.graphics.drawString(
+        '${listLoto!.map((element) => element!.loto_lock_number)}',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(430, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
