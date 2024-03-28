@@ -598,7 +598,7 @@ class BusinessListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBusinessList(selectedBusinessTypeId, true, facilityId);
+                    getBusinessList(0, true, facilityId);
                   });
                 },
                 child: Text('YES'),
