@@ -388,6 +388,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   PmtaskViewModel? pmtaskViewModel;
+  ScheduleCheckPoint? scheduleCheckPoint;
   int? jcId = 0;
 
   //File Import
@@ -523,6 +524,8 @@ class NewPermitController extends GetxController {
         isChecked.value = dataFromPreviousScreen['isChecked'];
         jobModel = dataFromPreviousScreen['jobModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
+        scheduleCheckPoint = dataFromPreviousScreen['scheduleCheckPoint'];
+        print("SChedule check point: ${scheduleCheckPoint}");
 
         permitPresenter.saveValue(permitId: permitId.value.toString());
         permitPresenter.savePmTaskModelValue(
@@ -1859,5 +1862,6 @@ class NewPermitController extends GetxController {
     print("Selected Equipment : ${selectedEquipmentCategoryIdList}");
     print("PM Task ID: ${pmtaskViewModel.id}");
   }
+
   /// class ends
 }
