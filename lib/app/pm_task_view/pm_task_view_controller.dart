@@ -71,7 +71,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   int selectedAssignedToId = 0;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
-
+  RxList<CmmrsItems> cmmrsItems = <CmmrsItems>[].obs;
   //////////////////////////////////
 
   @override
@@ -138,6 +138,9 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
               false,
             ) ??
             [];
+    for (var item in listMrsByTaskId!.value) {
+      cmmrsItems.value = item!.cmmrsItems!;
+    }
     print({"listMrsByTaskId", listMrsByTaskId});
     // update(["taskLinkdToPermitList"]);
   }

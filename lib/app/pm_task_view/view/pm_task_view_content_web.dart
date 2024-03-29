@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -636,8 +637,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               ),
                                             ),
                                       controller.pmtaskViewModel.value
-                                                  ?.status ==
-                                              169
+                                                      ?.status ==
+                                                  169 &&
+                                              controller
+                                                  .listMrsByTaskId!.isEmpty
                                           ? Dimens.box0
                                           : Container(
                                               margin: Dimens.edgeInsets20,
@@ -1181,15 +1184,24 @@ class PreventiveMaintenanceTaskViewContentWeb
                     Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 169 &&
                             varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmTaskFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0 &&
-                            controller.listMrsByTaskId!.isNotEmpty
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPmTaskFeatureId &&
+                                    e.add == UserAccessConstants.kHaveAddAccess)
+                                .isNotEmpty &&
+                            controller.listMrsByTaskId!.isNotEmpty &&
+                            (() {
+                              try {
+                                final firstCmmrsItem =
+                                    controller.cmmrsItems.firstWhere(
+                                  (element) => element.mrs_return_ID == 0,
+                                  orElse: () => CmmrsItems(mrs_return_ID: 1),
+                                );
+                                return firstCmmrsItem != null;
+                              } catch (e) {
+                                return false;
+                              }
+                            }())
                         ? Container(
                             height: 35,
                             child: CustomElevatedButton(
@@ -1215,7 +1227,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                               },
                             ),
                           )
-                        : Dimens.box0,
+                        : SizedBox(), // Use SizedBox to provide an empty space when the condition is not met
                   ],
                 ),
               )

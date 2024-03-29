@@ -261,130 +261,80 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                       ),
                                                     )
                                                   : (mapData['key'] ==
-                                                          "uploadimg")
-                                                      ? Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller
-                                                                    .selectFiles();
-                                                              },
-                                                              child: Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                  color: ColorValues
-                                                                      .appDarkBlueColor,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: ColorValues
-                                                                        .appDarkBlueColor,
-                                                                    width: 1,
-                                                                  ),
-                                                                ),
-                                                                child: Icon(
-                                                                    Icons
-                                                                        .upload,
-                                                                    size: 30,
-                                                                    color: ColorValues
-                                                                        .whiteColor),
-                                                              ),
-                                                            ),
-                                                            // Dimens.boxWidth15,
-                                                            // Container(
-                                                            //   width: 60,
-                                                            //   decoration: BoxDecoration(
-                                                            //     borderRadius:
-                                                            //         BorderRadius.circular(2),
-                                                            //     color: ColorValues
-                                                            //         .appDarkBlueColor,
-                                                            //     border: Border.all(
-                                                            //       color: ColorValues
-                                                            //           .appDarkBlueColor,
-                                                            //       width: 1,
-                                                            //     ),
-                                                            //   ),
-                                                            //   child: Text(
-                                                            //     "${controller.fileIds.length} Files",
-                                                            //     textAlign: TextAlign.center,
-                                                            //     style:
-                                                            //         Styles.white12.copyWith(
-                                                            //       color: Theme.of(context)
-                                                            //           .textTheme
-                                                            //           .displaySmall!
-                                                            //           .color,
-                                                            //     ),
-                                                            //   ),
-                                                            // ),
-                                                          ],
-                                                        )
+                                                          "checkpoint")
+                                                      ? Text(mapData['value'] ??
+                                                          '')
                                                       : (mapData['key'] ==
-                                                              "cpok")
-                                                          ? _rowcpOkItem(
-                                                              int.tryParse(
-                                                                  '${mapData['value']}'),
-                                                              onCheck: (val) {
-                                                              mapData['value'] =
-                                                                  val == true
-                                                                      ? "1"
-                                                                      : "0";
-                                                              Future.delayed(
-                                                                  Duration.zero,
-                                                                  () {
-                                                                setState(() {});
-                                                              });
-                                                            })
+                                                              "requirement")
+                                                          ? Text(mapData[
+                                                                  'value'] ??
+                                                              '')
                                                           : (mapData['key'] ==
-                                                                      "type" &&
-                                                                  mapData['inpute_type'] ==
-                                                                      "2")
-                                                              ? Padding(
-                                                                  padding:
-                                                                      const EdgeInsets.all(
-                                                                          8.0),
-                                                                  child: Column(
-                                                                    children: [
-                                                                      LoginCustomTextfield(
-                                                                          width: (Get.width *
-                                                                              .8),
-                                                                          textController: new TextEditingController(
-                                                                              text: mapData["value"] ??
-                                                                                  ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                          }),
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                              "Min:${mapData["min"]}"),
-                                                                          Dimens
-                                                                              .boxWidth15,
-                                                                          Text(
-                                                                              "Max:${mapData["max"]}")
-                                                                        ],
-                                                                      )
-                                                                    ],
-                                                                  ))
+                                                                  "weightage")
+                                                              ? Text(mapData[
+                                                                      'value'] ??
+                                                                  '')
                                                               : (mapData['key'] ==
-                                                                          "type" &&
-                                                                      mapData['inpute_type'] ==
-                                                                          "0")
-                                                                  ? Text('Text')
+                                                                      "uploadimg")
+                                                                  ? Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            controller.selectFiles();
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(5),
+                                                                              color: ColorValues.appDarkBlueColor,
+                                                                              border: Border.all(
+                                                                                color: ColorValues.appDarkBlueColor,
+                                                                                width: 1,
+                                                                              ),
+                                                                            ),
+                                                                            child: Icon(Icons.upload,
+                                                                                size: 30,
+                                                                                color: ColorValues.whiteColor),
+                                                                          ),
+                                                                        ),
+                                                                        // Dimens.boxWidth15,
+                                                                        // Container(
+                                                                        //   width: 60,
+                                                                        //   decoration: BoxDecoration(
+                                                                        //     borderRadius:
+                                                                        //         BorderRadius.circular(2),
+                                                                        //     color: ColorValues
+                                                                        //         .appDarkBlueColor,
+                                                                        //     border: Border.all(
+                                                                        //       color: ColorValues
+                                                                        //           .appDarkBlueColor,
+                                                                        //       width: 1,
+                                                                        //     ),
+                                                                        //   ),
+                                                                        //   child: Text(
+                                                                        //     "${controller.fileIds.length} Files",
+                                                                        //     textAlign: TextAlign.center,
+                                                                        //     style:
+                                                                        //         Styles.white12.copyWith(
+                                                                        //       color: Theme.of(context)
+                                                                        //           .textTheme
+                                                                        //           .displaySmall!
+                                                                        //           .color,
+                                                                        //     ),
+                                                                        //   ),
+                                                                        // ),
+                                                                      ],
+                                                                    )
                                                                   : (mapData['key'] ==
-                                                                          "job_created")
-                                                                      ?
-                                                                      // Obx(() {
-                                                                      //     return
-                                                                      _rowItem(
-                                                                          int.tryParse('${mapData['value']}'),
+                                                                          "cpok")
+                                                                      ? _rowcpOkItem(
+                                                                          int.tryParse(
+                                                                              '${mapData['value']}'),
                                                                           onCheck:
                                                                               (val) {
                                                                           mapData[
@@ -397,11 +347,47 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                               () {
                                                                             setState(() {});
                                                                           });
-
-                                                                          // Update the reactive variable
-                                                                          //  });
                                                                         })
-                                                                      : Text(mapData['value'] ?? ''),
+                                                                      : (mapData['key'] == "type" &&
+                                                                              mapData['inpute_type'] == "2")
+                                                                          ? Padding(
+                                                                              padding: const EdgeInsets.all(8.0),
+                                                                              child: Column(
+                                                                                children: [
+                                                                                  LoginCustomTextfield(
+                                                                                      width: (Get.width * .8),
+                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                      onChanged: (txt) {
+                                                                                        mapData["value"] = txt;
+                                                                                      }),
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Text("Min:${mapData["min"]}"),
+                                                                                      Dimens.boxWidth15,
+                                                                                      Text("Max:${mapData["max"]}")
+                                                                                    ],
+                                                                                  )
+                                                                                ],
+                                                                              ))
+                                                                          : (mapData['key'] == "type" && mapData['inpute_type'] == "0")
+                                                                              ? Text('Text')
+                                                                              : (mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "0")
+                                                                                  ?
+                                                                                  // Obx(() {
+                                                                                  //     return
+                                                                                  _rowItem(int.tryParse('${mapData['job_value']}'), onCheck: (val) {
+                                                                                      mapData['job_value'] = val == true ? "1" : "0";
+                                                                                      Future.delayed(Duration.zero, () {
+                                                                                        setState(() {});
+                                                                                      });
+
+                                                                                      // Update the reactive variable
+                                                                                      //  });
+                                                                                    })
+                                                                                  // : mapData['job_value'] != "0" || mapData['job_value'] != "1"
+                                                                                  //     ? Text('JOB${mapData['job_value']}')
+                                                                                      : Dimens.box0,
+                                              // : Text(mapData['value'] ?? ''),
                                             );
                                           }).toList(),
                                         );
