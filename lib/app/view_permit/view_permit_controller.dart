@@ -187,7 +187,7 @@ class ViewPermitController extends GetxController {
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
 
   //block
-  int facilityId = 1779;
+  int facilityId = 0;
   StreamSubscription<int>? facilityIdStreamSubscription;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<bool> isBlockSelected = true.obs;
@@ -477,7 +477,7 @@ class ViewPermitController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-        Future.delayed(Duration(seconds: 1), () async {
+        Future.delayed(Duration(seconds: 2), () async {
           await getBlocksList(facilityId);
           await getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
           await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
