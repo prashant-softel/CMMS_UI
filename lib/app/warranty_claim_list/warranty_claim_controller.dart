@@ -147,6 +147,8 @@ class WarrantyClaimController extends GetxController {
   RxList<int> selectedEquipmentIdList = <int>[].obs;
   Rx<String> selectedInventory = ''.obs;
 
+  int selectedInventoryCategoryId = 0;
+
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Rx<String> selectedEquipmentName = ''.obs;
@@ -351,7 +353,7 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getEmployeesList();
     });
-  immcoracFocus.addListener(() {
+    immcoracFocus.addListener(() {
       if (!immcoracFocus.hasFocus) {
         immcoracScroll.jumpTo(0.0);
       }
@@ -459,7 +461,7 @@ class WarrantyClaimController extends GetxController {
     eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await warrantyClaimPresenter.getInventoryList(
       isLoading: true,
-      categoryIds: categoryIds,
+      categoryIds: selectedInventoryCategoryId.toString(),
       facilityId: facilityId,
     );
     //  print('equipment Name List:$inventoryNameList');
@@ -477,7 +479,7 @@ class WarrantyClaimController extends GetxController {
   void getBusinessList(int facilityId) async {
     supplierNameList.value = <BusinessListModel>[];
     final _supplierNameList = await warrantyClaimPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: true,
       //  categoryIds: categoryIds,
       businessType: 5,
@@ -686,6 +688,7 @@ class WarrantyClaimController extends GetxController {
           // }
         }
         break;
+
       case RxList<InventoryCategoryModel2>:
         {
           // for (var workAreaName in selectedWorkAreaNameList) {
@@ -702,8 +705,16 @@ class WarrantyClaimController extends GetxController {
           selectedAffectedPart.value = value;
           print('Affected part Id: $selectedAffectedPartId');
           print('Affected part name : $selectedAffectedPartName');
-
-          // }
+        }
+        break;
+      case RxList<InventoryCategoryModel>:
+        {
+          int invCatListIndex =
+              equipmentCategoryList.indexWhere((x) => x!.name == value);
+          selectedInventoryCategoryId =
+              equipmentCategoryList[invCatListIndex]!.id ?? 0;
+          getInventoryList();
+          //}
         }
         break;
       case RxList<BusinessListModel>:
