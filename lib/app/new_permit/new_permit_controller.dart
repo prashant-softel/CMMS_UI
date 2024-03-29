@@ -1399,6 +1399,7 @@ class NewPermitController extends GetxController {
           approver_id: selectedPermitApproverTypeId,
           uploadfile_ids: fileIds,
           user_id: userId,
+          lotoOtherDetails: [],
           latitude: 0,
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
