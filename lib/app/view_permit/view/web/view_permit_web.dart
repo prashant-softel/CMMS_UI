@@ -9,6 +9,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_dialog.dart';
@@ -933,12 +934,12 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           controller.listLoto?.length ?? 0,
                                           (index) => DataRow(cells: [
                                             DataCell(Text(controller
-                                                    .listLoto?[index]
-                                                    ?.loto_Key
+                                                    .listLoto?[index]?.loto_Key
                                                     .toString() ??
                                                 '')),
                                             DataCell(Text(controller
-                                                    .listLoto?[index]?.loto_lock_number
+                                                    .listLoto?[index]
+                                                    ?.loto_lock_number
                                                     .toString() ??
                                                 '')),
                                           ]),
@@ -1231,227 +1232,432 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               //     ? Dimens.box0
                               //     :
 
+                              Dimens.boxHeight10,
+
                               controller.viewPermitDetailsModel.value
                                           ?.ptwStatus ==
                                       121
                                   ? Dimens.box0
-                                  : Container(
-                                      margin: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.3)),
-                                      ),
-                                      child: Container(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
-                                              style: Styles.blue700,
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Wrap(
+                                  : Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.all(20),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey
+                                                    .withOpacity(.3)),
+                                          ),
+                                          child: Container(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Column(
+                                                Text(
+                                                  "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                                  style: Styles.blue700,
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Wrap(
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10,
-                                                              right: 10),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
+                                                    Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 10,
+                                                                  right: 10),
+                                                          child: Row(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
-                                                                    .end,
+                                                                    .start,
                                                             children: [
-                                                              Text(
-                                                                'Conducted At Job-Site By:',
-                                                                style: Styles
-                                                                    .blackBold17,
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    'Conducted At Job-Site By:',
+                                                                    style: Styles
+                                                                        .blackBold17,
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Text(
+                                                                    '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
+                                                                    style: Styles
+                                                                        .black17,
+                                                                  ),
+                                                                  // SizedBox(
+                                                                  //   width: MediaQuery.of(
+                                                                  //               context)
+                                                                  //           .size
+                                                                  //           .width /
+                                                                  //       7,
+                                                                  //   child: Obx(
+                                                                  //     () =>
+                                                                  //         DropdownWebWidget(
+                                                                  //       dropdownList:
+                                                                  //           controller
+                                                                  //               .employeeList,
+                                                                  //       isValueSelected:
+                                                                  //           controller
+                                                                  //               .isemployeeListSelected
+                                                                  //               .value,
+                                                                  //       selectedValue:
+                                                                  //           controller
+                                                                  //               .selectedEmployeeList
+                                                                  //               .value,
+                                                                  //       onValueChanged:
+                                                                  //           controller
+                                                                  //               .onValueChanged,
+                                                                  //     ),
+                                                                  //   ),
+                                                                  // ),
+                                                                ],
                                                               ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Text(
-                                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
-                                                                style: Styles
-                                                                    .black17,
+                                                              Spacer(),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        right:
+                                                                            450),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Date & Time',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                    // _buildDateTimeField_web(
+                                                                    //     context),
+                                                                  ],
+                                                                ),
                                                               ),
-                                                              // SizedBox(
-                                                              //   width: MediaQuery.of(
-                                                              //               context)
-                                                              //           .size
-                                                              //           .width /
-                                                              //       7,
-                                                              //   child: Obx(
-                                                              //     () =>
-                                                              //         DropdownWebWidget(
-                                                              //       dropdownList:
-                                                              //           controller
-                                                              //               .employeeList,
-                                                              //       isValueSelected:
-                                                              //           controller
-                                                              //               .isemployeeListSelected
-                                                              //               .value,
-                                                              //       selectedValue:
-                                                              //           controller
-                                                              //               .selectedEmployeeList
-                                                              //               .value,
-                                                              //       onValueChanged:
-                                                              //           controller
-                                                              //               .onValueChanged,
-                                                              //     ),
-                                                              //   ),
-                                                              // ),
                                                             ],
                                                           ),
-                                                          Spacer(),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 450),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  'Date & Time',
-                                                                  style: Styles
-                                                                      .blackBold17,
-                                                                ),
-
-                                                                Text(
-                                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
-                                                                  style: Styles
-                                                                      .black17,
-                                                                ),
-                                                                // _buildDateTimeField_web(
-                                                                //     context),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          Dimens.edgeInsets20,
-                                                      height: ((controller
-                                                                      .listEmployee
-                                                                      ?.length ??
-                                                                  0) *
-                                                              40) +
-                                                          130,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .lightGreyColorWithOpacity35,
-                                                          width: 1,
                                                         ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .appBlueBackgroundColor,
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Text(
-                                                                  'TBT Training Attended By',
-                                                                  style: Styles
-                                                                      .blue700,
-                                                                ),
-                                                              ],
+                                                        Container(
+                                                          margin: Dimens
+                                                              .edgeInsets20,
+                                                          height: ((controller
+                                                                          .listEmployee
+                                                                          ?.length ??
+                                                                      0) *
+                                                                  40) +
+                                                              130,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color: ColorValues
+                                                                  .lightGreyColorWithOpacity35,
+                                                              width: 1,
                                                             ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: ColorValues
+                                                                    .appBlueBackgroundColor,
+                                                                spreadRadius: 2,
+                                                                blurRadius: 5,
+                                                                offset: Offset(
+                                                                    0, 2),
+                                                              ),
+                                                            ],
                                                           ),
-                                                          Expanded(
-                                                            child: DataTable2(
-                                                              border: TableBorder.all(
-                                                                  color: Color
-                                                                      .fromARGB(
+                                                          child: Column(
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        10.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      'TBT Training Attended By',
+                                                                      style: Styles
+                                                                          .blue700,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child:
+                                                                    DataTable2(
+                                                                  border: TableBorder.all(
+                                                                      color: Color.fromARGB(
                                                                           255,
                                                                           206,
                                                                           229,
                                                                           234)),
-                                                              columns: [
-                                                                DataColumn(
-                                                                    label: Text(
-                                                                  "Employee Name",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                                DataColumn(
-                                                                    label: Text(
-                                                                  "Responsibility",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                )),
-                                                              ],
-                                                              rows: List<
-                                                                  DataRow>.generate(
-                                                                controller
-                                                                        .listEmployee
-                                                                        ?.length ??
-                                                                    0,
-                                                                (index) =>
-                                                                    DataRow(
-                                                                        cells: [
-                                                                      DataCell(Text(controller
-                                                                              .listEmployee?[index]
-                                                                              ?.empName
-                                                                              .toString() ??
-                                                                          '')),
-                                                                      DataCell(Text(controller
-                                                                              .listEmployee?[index]
-                                                                              ?.resp
-                                                                              .toString() ??
-                                                                          '')),
-                                                                    ]),
+                                                                  columns: [
+                                                                    DataColumn(
+                                                                        label:
+                                                                            Text(
+                                                                      "Employee Name",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    )),
+                                                                    DataColumn(
+                                                                        label:
+                                                                            Text(
+                                                                      "Responsibility",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    )),
+                                                                  ],
+                                                                  rows: List<
+                                                                      DataRow>.generate(
+                                                                    controller
+                                                                            .listEmployee
+                                                                            ?.length ??
+                                                                        0,
+                                                                    (index) =>
+                                                                        DataRow(
+                                                                            cells: [
+                                                                          DataCell(Text(controller.listEmployee?[index]?.empName.toString() ??
+                                                                              '')),
+                                                                          DataCell(Text(controller.listEmployee?[index]?.resp.toString() ??
+                                                                              '')),
+                                                                        ]),
+                                                                  ),
+                                                                ),
                                                               ),
-                                                            ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
                                               ],
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 20, right: 20, bottom: 20),
+                                          height: ((controller
+                                                      .rowTBTTrainingOtherPersonItem
+                                                      .value
+                                                      .length) *
+                                                  70) +
+                                              140,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(children: [
+                                            // Column(
+                                            //     children: []..addAll(controller.rowTBTTrainingOtherPersonItem.value.map((e) {
+                                            //         return Text(jsonEncode(e));
+                                            //       }))),
+                                            // Text(jsonEncode(controller.dropdownMapperData)),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "TBT Training Attended By Other Person ",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: DataTable2(
+                                                // minWidth: 1700,
+                                                dataRowHeight: 50,
+                                                // columnSpacing: 10,
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn2(
+                                                      label: Text(
+                                                    "Employee Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                    "Contact Number",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                    "Responsibility",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      fixedWidth: 100,
+                                                      label: Text(
+                                                        "Action",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                ],
+                                                rows: controller
+                                                    .rowTBTTrainingOtherPersonItem
+                                                    .value
+                                                    .map((record) {
+                                                  return DataRow(
+                                                    // height: 130,
+                                                    cells:
+                                                        record.map((mapData) {
+                                                      return DataCell(
+                                                        (mapData['key'] ==
+                                                                    "Employee Name") ||
+                                                                (mapData[
+                                                                        'key'] ==
+                                                                    "Contact Number") ||
+                                                                (mapData[
+                                                                        'key'] ==
+                                                                    "Responsibility")
+                                                            ? Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black26,
+                                                                              offset: const Offset(
+                                                                                5.0,
+                                                                                5.0,
+                                                                              ),
+                                                                              blurRadius: 5.0,
+                                                                              spreadRadius: 1.0,
+                                                                            ),
+                                                                          ],
+                                                                          color:
+                                                                              ColorValues.whiteColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
+                                                                        ),
+                                                                        child:
+                                                                            LoginCustomTextfield(
+                                                                          keyboardType:
+                                                                              TextInputType.number,
+                                                                          maxLine:
+                                                                              1,
+                                                                          textController:
+                                                                              new TextEditingController(text: mapData["value"] ?? ''),
+                                                                          onChanged:
+                                                                              (txt) {
+                                                                            mapData["value"] =
+                                                                                txt;
+                                                                          },
+                                                                        )),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            : (mapData['key'] ==
+                                                                    "Action ")
+                                                                ? Padding(
+                                                                    padding: EdgeInsets
+                                                                        .only(
+                                                                            top:
+                                                                                10),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.delete,
+                                                                          label:
+                                                                              '',
+                                                                          message:
+                                                                              '',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.rowTBTTrainingOtherPersonItem.remove(record);
+                                                                          },
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : Text(mapData[
+                                                                        'key'] ??
+                                                                    ''),
+                                                      );
+                                                    }).toList(),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ]),
+                                        ),
+                                      ],
                                     ),
 
                               //   SizedBox(height: 10),
@@ -2056,8 +2262,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       onPress: () async {
                                                         String baseUrl =
                                                             "http://65.0.20.19/CMMS_API/";
-                                                            // String baseUrl =
-                                                            // 'http://172.20.43.9:83/';
+                                                        // String baseUrl =
+                                                        // 'http://172.20.43.9:83/';
                                                         String fileName =
                                                             controller
                                                                     .file_list![

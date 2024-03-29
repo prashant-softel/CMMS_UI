@@ -629,6 +629,7 @@ class NewPermitController extends GetxController {
           {'key': "Action ", "value": ''},
         ]);
       });
+
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
       if (selectedPermitTypeId != 0) {
