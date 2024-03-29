@@ -524,7 +524,7 @@ class MastersDashboard extends GetView<MastersController> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Module and Users",
+                                          "Users Management",
                                           style: TextStyle(
                                             color: Color.fromARGB(
                                                 255, 159, 156, 156),
@@ -810,131 +810,7 @@ class MastersDashboard extends GetView<MastersController> {
                                       }))),
                                     ],
                                   ),
-                                  // Container(
-                                  //   margin: EdgeInsets.only(left: 20),
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Text(
-                                  //         "Stock Management",
-                                  //         style: TextStyle(
-                                  //           color: Color.fromARGB(255, 159, 156, 156),
-                                  //           fontSize: 16,
-                                  //           fontWeight: FontWeight.w400,
-                                  //         ),
-                                  //       ),
-                                  //       SizedBox(
-                                  //           width:
-                                  //               10), // Add some space between the text and the line
-                                  //       Expanded(
-                                  //         child: Divider(
-                                  //           color: Colors
-                                  //               .grey, // Customize the color of the line if needed
-                                  //           height:
-                                  //               1, // Adjust the height of the line if needed
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  // GridView.count(
-                                  //   shrinkWrap: true,
-                                  //   primary: false,
-                                  //   padding: Dimens.edgeInsets15,
-                                  //   crossAxisSpacing: 6,
-                                  //   mainAxisSpacing: 6,
-                                  //   crossAxisCount:
-                                  //       Responsive.isMobile(context) ? 2 : 5,
-                                  //   childAspectRatio: Responsive.isMobile(context)
-                                  //       ? (itemWidth / itemHeight)
-                                  //       : 5,
-                                  //   children: <Widget>[
-                                  //     OnHover(builder: (((isHovered) {
-                                  //       return createContentTile(
-                                  //           title: "Asset Master",
-                                  //           onTap: () {
-                                  //             controller.goToAssetMasterList();
-                                  //           });
-                                  //     }))),
-                                  //     OnHover(builder: (((isHovered) {
-                                  //       return createContentTile(
-                                  //           title: "Add Asset Master",
-                                  //           onTap: () {
-                                  //             controller.goToAddAssetMaster();
-                                  //           });
-                                  //     }))),
-                                  //     // OnHover(builder: (((isHovered) {
-                                  //     //   return createContentTile(
-                                  //     //       title: "Country List",
-                                  //     //       onTap: () {
-                                  //     //         controller.goToCountryTypeList();
-                                  //     //       });
-                                  //     // }))),
-                                  //     // OnHover(builder: (((isHovered) {
-                                  //     //   return createContentTile(
-                                  //     //       title: "State List",
-                                  //     //       onTap: () {
-                                  //     //         controller.goToStateTypeList();
-                                  //     //       });
-                                  //     // }))),
-                                  //     //
-                                  //     // OnHover(builder: (((isHovered) {
-                                  //     //   return createContentTile(
-                                  //     //       title: "Frequency List",
-                                  //     //       onTap: () {
-                                  //     //         controller.goToFrequencyList();
-                                  //     //       });
-                                  //     // }))),
-                                  //   ],
-                                  // ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 20),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Document Manager",
-                                          style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 159, 156, 156),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            width:
-                                                10), // Add some space between the text and the line
-                                        Expanded(
-                                          child: Divider(
-                                            color: Colors
-                                                .grey, // Customize the color of the line if needed
-                                            height:
-                                                1, // Adjust the height of the line if needed
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    padding: Dimens.edgeInsets15,
-                                    crossAxisSpacing: 70,
-                                    mainAxisSpacing: 6,
-                                    crossAxisCount:
-                                        Responsive.isMobile(context) ? 2 : 5,
-                                    childAspectRatio:
-                                        Responsive.isMobile(context)
-                                            ? (itemWidth / itemHeight)
-                                            : 5,
-                                    children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Document Manager",
-                                            onTap: () {
-                                              controller.goToDocumentManager();
-                                            });
-                                      }))),
-                                    ],
-                                  ),
+
                                   Container(
                                     margin: EdgeInsets.only(left: 20),
                                     child: Row(
@@ -1000,34 +876,9 @@ class MastersDashboard extends GetView<MastersController> {
                                                       AppConstants.kImportAsset
                                                 });
                                           }),
-                                      _inventoryList(
-                                        tittle: "Warranty Claims List",
-                                        ontap: () =>
-                                            controller.breakdownMaintenance(),
-                                      )
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Category",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //         Routes.assetTypeListScreen,
-                                      //       );
-                                      //     }),
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Type",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //       Routes.inventoryTypeListScreen,
-                                      //     );
-                                      //   }),
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Status",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //         Routes.inventoryStatusListScreen,
-                                      //       );
-                                      //     }),
                                     ],
                                   ),
+
                                   GridView.count(
                                     shrinkWrap: true,
                                     primary: false,
@@ -1041,133 +892,83 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      // _inventoryList(
-                                      //     tittle: "Warranty Certificates",
-                                      //     ontap: () {
-                                      //       // controller.pmSchedule();
-                                      //       Get.toNamed(
-                                      //         Routes.warrantyCertificate,
-                                      //       );
-                                      //     }),
-                                      // varUserAccessModel.value.access_list!
-                                      //             .where((e) =>
-                                      //                 e.feature_id ==
-                                      //                     UserAccessConstants
-                                      //                         .kWarrantyClaimFeatureId &&
-                                      //                 e.view ==
-                                      //                     UserAccessConstants
-                                      //                         .kHaveViewAccess)
-                                      //             .length >
-                                      //         0
-                                      //     ?
-
-                                      // : Container(),
-
-                                      // varUserAccessModel.value.access_list!
-                                      //             .where((e) =>
-                                      //                 e.feature_id ==
-                                      //                     UserAccessConstants
-                                      //                         .kWarrantyClaimFeatureId &&
-                                      //                 e.add ==
-                                      //                     UserAccessConstants
-                                      //                         .kHaveAddAccess)
-                                      //             .length >
-                                      //         0
-                                      //     ?
-
                                       _inventoryList(
-                                          tittle: "New Warranty Claim",
-                                          ontap: () {
-                                            controller.newWarrantyClaimList();
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Calibration List",
+                                          tittle: "Assets Category",
                                           ontap: () {
                                             Get.toNamed(
-                                              Routes.calibrationList,
+                                              Routes.inventoryCategory,
                                             );
                                           }),
                                       _inventoryList(
-                                          tittle: "WC Certificates List",
+                                          tittle: "Assets Type",
                                           ontap: () {
                                             Get.toNamed(
-                                              Routes.warrantyCertificatesList,
+                                              Routes.inventoryTypeListScreen,
                                             );
                                           }),
-                                      // : Container(),
-
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Category",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //         Routes.assetTypeListScreen,
-                                      //       );
-                                      //     }),
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Type",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //       Routes.inventoryTypeListScreen,
-                                      //     );
-                                      //   }),
-                                      // _inventoryList(
-                                      //     tittle: "Inventory Status",
-                                      //     ontap: () {
-                                      //       Get.toNamed(
-                                      //         Routes.inventoryStatusListScreen,
-                                      //       );
-                                      //     }),
+                                      _inventoryList(
+                                          tittle: "Assets Status",
+                                          ontap: () {
+                                            controller.inventoryStatusScreen();
+                                          }),
                                     ],
                                   ),
-                                  // GridView.count(
-                                  //   shrinkWrap: true,
-                                  //   primary: false,
-                                  //   padding: const EdgeInsets.all(16),
-                                  //   crossAxisSpacing: 70,
-                                  //   mainAxisSpacing: 6,
-                                  //   crossAxisCount:
-                                  //       Responsive.isMobile(context) ? 2 : 5,
-                                  //   childAspectRatio: Responsive.isMobile(context)
-                                  //       ? (itemWidth / itemHeight)
-                                  //       : 5,
-                                  //   children: <Widget>[
-                                  // _inventoryList(
-                                  //     tittle: "Calibration Certificates",
-                                  //     ontap: () {
-                                  //       Get.toNamed(
-                                  //         Routes.calibrationCertificate,
-                                  //       );
-                                  //     }),
 
-                                  // _inventoryList(
-                                  //     tittle: "Inventory Category",
-                                  //     ontap: () {
-                                  //       Get.toNamed(
-                                  //         Routes.assetTypeListScreen,
-                                  //       );
-                                  //     }),
-                                  // _inventoryList(
-                                  //     tittle: "Inventory Type",
-                                  //     ontap: () {
-                                  //       Get.toNamed(
-                                  //       Routes.inventoryTypeListScreen,
-                                  //     );
-                                  //   }),
-                                  // _inventoryList(
-                                  //     tittle: "Inventory Status",
-                                  //     ontap: () {
-                                  //       Get.toNamed(
-                                  //         Routes.inventoryStatusListScreen,
-                                  //       );
-                                  //     }),
-                                  //   ],
-                                  // ),
                                   Container(
                                     margin: EdgeInsets.only(left: 20),
                                     child: Row(
                                       children: [
                                         Text(
-                                          "Masters",
+                                          "Document Manager",
+                                          style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 159, 156, 156),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                10), // Add some space between the text and the line
+                                        Expanded(
+                                          child: Divider(
+                                            color: Colors
+                                                .grey, // Customize the color of the line if needed
+                                            height:
+                                                1, // Adjust the height of the line if needed
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
+                                      OnHover(builder: (((isHovered) {
+                                        return createContentTile(
+                                            title: "Document Manager",
+                                            onTap: () {
+                                              controller.goToDocumentManager();
+                                            });
+                                      }))),
+                                    ],
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 20),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Warranty",
                                           style: TextStyle(
                                             color: Color.fromARGB(
                                                 255, 159, 156, 156),
@@ -1203,87 +1004,31 @@ class MastersDashboard extends GetView<MastersController> {
                                             : 5,
                                     children: <Widget>[
                                       _inventoryList(
-                                          tittle: "Assets Category",
+                                          tittle: "New Warranty Claim",
+                                          ontap: () {
+                                            controller.newWarrantyClaimList();
+                                          }),
+                                      _inventoryList(
+                                          tittle: "Calibration List",
                                           ontap: () {
                                             Get.toNamed(
-                                              Routes.inventoryCategory,
+                                              Routes.calibrationList,
                                             );
                                           }),
                                       _inventoryList(
-                                          tittle: "Assets Type",
+                                          tittle: "WC Certificates List",
                                           ontap: () {
                                             Get.toNamed(
-                                              Routes.inventoryTypeListScreen,
+                                              Routes.warrantyCertificatesList,
                                             );
                                           }),
                                       _inventoryList(
-                                          tittle: "Assets Status",
-                                          ontap: () {
-                                            controller.inventoryStatusScreen();
-                                          }),
+                                        tittle: "Warranty Claims List",
+                                        ontap: () =>
+                                            controller.breakdownMaintenance(),
+                                      )
                                     ],
                                   ),
-                                  // Container(
-                                  //   margin: EdgeInsets.only(left: 20),
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Text(
-                                  //         "MIS",
-                                  //         style: TextStyle(
-                                  //           color: Color.fromARGB(255, 159, 156, 156),
-                                  //           fontSize: 16,
-                                  //           fontWeight: FontWeight.w400,
-                                  //         ),
-                                  //       ),
-                                  //       SizedBox(
-                                  //           width:
-                                  //               10), // Add some space between the text and the line
-                                  //       Expanded(
-                                  //         child: Divider(
-                                  //           color: Colors
-                                  //               .grey, // Customize the color of the line if needed
-                                  //           height:
-                                  //               1, // Adjust the height of the line if needed
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  // GridView.count(
-                                  //   shrinkWrap: true,
-                                  //   primary: false,
-                                  //   padding: Dimens.edgeInsets15,
-                                  //   crossAxisSpacing: 70,
-                                  //   mainAxisSpacing: 6,
-                                  //   crossAxisCount:
-                                  //       Responsive.isMobile(context) ? 2 : 5,
-                                  //   childAspectRatio: Responsive.isMobile(context)
-                                  //       ? (itemWidth / itemHeight)
-                                  //       : 5,
-                                  //   children: <Widget>[
-                                  //     OnHover(builder: (((isHovered) {
-                                  //       return createContentTile(
-                                  //           title: "Type of observation",
-                                  //           onTap: () {
-                                  //             controller.goToTypeOfObservation();
-                                  //           });
-                                  //     }))),
-                                  //     OnHover(builder: (((isHovered) {
-                                  //       return createContentTile(
-                                  //           title: "Source of observation",
-                                  //           onTap: () {
-                                  //             controller.goToSourceOfObservation();
-                                  //           });
-                                  //     }))),
-                                  //     OnHover(builder: (((isHovered) {
-                                  //       return createContentTile(
-                                  //           title: "Risk Type",
-                                  //           onTap: () {
-                                  //             controller.goToRiskType();
-                                  //           });
-                                  //     }))),
-                                  //   ],
-                                  // ),
                                 ],
                               )),
                             ),
