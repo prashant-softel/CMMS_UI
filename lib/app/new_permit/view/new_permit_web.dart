@@ -152,7 +152,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               label: Text('Equipment Category'),
                                             ),
                                             DataColumn2(
-                                              label: Text('Asset Name'),
+                                              label: Text('Checklist Name'),
                                             ),
                                             DataColumn2(
                                               label: Text('Frequency'),

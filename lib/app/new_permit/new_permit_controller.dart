@@ -33,7 +33,6 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/job_details_model.dart';
-import 'package:cmms/domain/models/create_permit_model.dart';
 
 class NewPermitController extends GetxController {
   NewPermitController(this.permitPresenter, this.jobListPresenter);
@@ -1400,6 +1399,7 @@ class NewPermitController extends GetxController {
           approver_id: selectedPermitApproverTypeId,
           uploadfile_ids: fileIds,
           user_id: userId,
+          lotoOtherDetails: [],
           latitude: 0,
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
@@ -1443,28 +1443,36 @@ class NewPermitController extends GetxController {
 
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
+      print("Description: ${_description}");
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
+      print("Title: ${_title}");
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+      print("Start Date: ${_startDate}");
       String _workPermitRemark =
           htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
+      print("Remark: ${_workPermitRemark}");
 
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
+      print("User ID: ${userId}");
 
       var data = filteredEmployeeNameList
           .map((element) => element?.responsibility?.map((e) => e.name));
+      print("Employee Data: ${data}");
 
       List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
         employee_map_list.add(
             Employeelist(employeeId: e?.id, responsibility: data.toString()));
       });
+      print("employee_map_list: ${employee_map_list}");
 
       late List<LotoList> loto_map_list = [];
 
       filteredEquipmentNameList.forEach((e) {
         loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
       });
+      print("loto_map_list: ${loto_map_list}");
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
 
@@ -1472,56 +1480,43 @@ class NewPermitController extends GetxController {
         safety_measure_map_list.add(Safetyquestionlist(
             safetyMeasureId: e.id, safetyMeasureValue: e.name));
       });
-
-      //  List<Employeelist> employee_list= <Employeelist>[];
-      // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
-      // List<LotoList> loto_list = <LotoList>[];
-
-      // for (var _selectedWorkArea in selectedWorkAreaList) {
-      //   var json = '{"asset_id": ${_selectedWorkArea?.id},'
-      //       '"category_ids": ${_selectedWorkArea?.categoryId}}';
-
-      //   // CreatePermitModel _employeeList = addCreatePermitModelFromJson(json);
-      //   // employee_list.add(_employeeList as Employeelist);
-      //   // CreatePermitModel _safetyQuestionList = addCreatePermitModelFromJson(json);
-      //   // safety_question_list.add(_safetyQuestionList as Safetyquestionlist);
-      //   // CreatePermitModel _lotoList = addCreatePermitModelFromJson(json);
-      //   // loto_list.add(_lotoList as LotoList);
-
-      //   // SafetyQuestionList _safetyQuestionList = addSafetyQuestionListFromJson(json);
-      //   // safety_question_list.add(_safetyQuestionList);
-      // }
+      print("safety_measure_map_list: ${safety_measure_map_list}");
 
       CreatePermitModel createPermitModel = CreatePermitModel(
-          facility_id: facilityId,
-          blockId: selectedBlockId,
-          lotoId: selectedEquipmentCategoryIdList.first,
-          permitTypeId: selectedPermitTypeId,
-
-          ///Permit Type Id
-          start_datetime: startDateTimeCtrlrBuffer,
-          end_datetime: validTillTimeCtrlrBuffer,
-          title: _title,
-          description: _description,
-          job_type_id: selectedJobTypesId, ////Job type Id
-          sop_type_id: selectedSOPId,
-          issuer_id: selectedPermitIssuerTypeId,
-          approver_id: selectedPermitApproverTypeId,
-          uploadfile_ids: fileIds,
-          user_id: userId,
-          latitude: 0,
-          longitude: 0,
-          block_ids: selectedEmployeeNameIdList,
-          category_ids: selectedEquipmentCategoryIdList,
-          is_isolation_required: isToggleOn.value,
-          isolated_category_ids: selectedEquipmentIsolationIdList,
-          Loto_list: loto_map_list,
-          employee_list: employee_map_list,
-          safety_question_list: safety_measure_map_list,
-          TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: tbtDateTimeCtrlrBuffer,
-          PHYSICAL_ISO_REMARK: _workPermitRemark);
+        permit_id: permitId.value,
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permitTypeId: selectedPermitTypeId,
+        resubmit: false,
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        uploadfile_ids: fileIds,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        is_isolation_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        lotoOtherDetails: [],
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+        TBT_Done_by: selectedTbtConductedId,
+        TBT_Done_at: tbtDateTimeCtrlrBuffer,
+        PHYSICAL_ISO_REMARK: _workPermitRemark,
+      );
       var jobJsonString = createPermitModel.toJson();
+      print(createPermitModel);
+      print(jobJsonString);
       Map<String, dynamic>? responseNewPermitCreatedForJob =
           await permitPresenter.createNewPermitForPm(
         newPermit: jobJsonString,
