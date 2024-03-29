@@ -440,8 +440,10 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                         {
                                                                           'key':
                                                                               "job_created",
-                                                                          "value":
+                                                                          "job_value":
                                                                               '${element.linked_job_id.value}',
+                                                                          "cp_ok_value":
+                                                                              '${element.cp_ok.value}',
                                                                         },
                                                                       ]);
                                                                     });
