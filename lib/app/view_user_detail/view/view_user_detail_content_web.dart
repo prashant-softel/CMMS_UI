@@ -59,8 +59,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                       onTap: () {
                         Get.offNamed(Routes.setting);
                       },
-                      child:
-                          Text(" / SETTING", style: Styles.greyLight14),
+                      child: Text(" / SETTING", style: Styles.greyLight14),
                     ),
                     InkWell(
                         onTap: () {
@@ -70,8 +69,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                           _flutterSecureStorage.delete(key: "userId");
                           Get.offNamed(Routes.userList);
                         },
-                        child: Text(" / USER LIST",
-                            style: Styles.greyLight14)),
+                        child: Text(" / USER LIST", style: Styles.greyLight14)),
                     Text(" / VIEW USER", style: Styles.greyLight14)
                   ],
                 ),
@@ -243,11 +241,15 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                      controller.userDetailModel.value
-                                              ?.user_name ??
-                                          "",
-                                      style: Styles.blue17),
+                                  Container(
+                                    width: 350,
+                                    child: Text(
+                                        controller.userDetailModel.value
+                                                ?.user_name ??
+                                            "",
+                                        style: Styles.blue17,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
                                   Text(
                                       controller.userDetailModel.value
                                               ?.last_name ??

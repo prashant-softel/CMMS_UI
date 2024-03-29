@@ -33,8 +33,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -106,7 +106,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
                                           height: 185,
@@ -156,7 +157,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                   ),
                                   Dimens.boxWidth15,
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                           controller.userDetailModel.value
@@ -224,20 +226,27 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                   Dimens.boxWidth15,
 
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      Container(
+                                        width: 350,
+                                        child: Text(
                                           controller.userDetailModel.value
                                                   ?.user_name ??
                                               "",
-                                          style: Styles.blue17),
+                                          style: Styles.blue17,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                       Text(
                                           controller.userDetailModel.value
                                                   ?.last_name ??
                                               "",
                                           style: Styles.blue17),
                                       Text(
-                                          controller.userDetailModel.value?.dob ??
+                                          controller
+                                                  .userDetailModel.value?.dob ??
                                               "",
                                           style: Styles.blue17),
                                       Text(
@@ -286,8 +295,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                           BorderRadius.only(
                                                               topLeft: Radius
                                                                   .circular(40),
-                                                              topRight:
-                                                                  Radius.circular(
+                                                              topRight: Radius
+                                                                  .circular(
                                                                       40)),
                                                       color: Color.fromARGB(
                                                           255, 245, 248, 250),
@@ -301,15 +310,18 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                         borderRadius:
                                                             BorderRadius.only(
                                                                 topLeft: Radius
-                                                                    .circular(40),
+                                                                    .circular(
+                                                                        40),
                                                                 topRight: Radius
                                                                     .circular(
                                                                         40)),
                                                         color: Colors.white,
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: Colors.black26,
-                                                            offset: const Offset(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
                                                               1.0,
                                                               1.0,
                                                             ),
@@ -318,8 +330,9 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                           BoxShadow(
                                                             color: ColorValues
                                                                 .whiteColor,
-                                                            offset: const Offset(
-                                                                0.0, 0.0),
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
                                                             blurRadius: 0.0,
                                                             spreadRadius: 0.0,
                                                           ),
@@ -384,8 +397,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                           BorderRadius.only(
                                                               topLeft: Radius
                                                                   .circular(40),
-                                                              topRight:
-                                                                  Radius.circular(
+                                                              topRight: Radius
+                                                                  .circular(
                                                                       40)),
                                                       color: Color.fromARGB(
                                                           255, 245, 248, 250),
@@ -404,10 +417,9 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                       margin: Dimens.edgeInsets15,
                                                                       decoration: BoxDecoration(
                                                                         border:
-                                                                            Border
-                                                                                .all(
-                                                                          color: ColorValues
-                                                                              .lightGreyColorWithOpacity35,
+                                                                            Border.all(
+                                                                          color:
+                                                                              ColorValues.lightGreyColorWithOpacity35,
                                                                           width:
                                                                               1,
                                                                         ),
@@ -419,20 +431,16 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                                 2,
                                                                             blurRadius:
                                                                                 5,
-                                                                            offset: Offset(
-                                                                                0,
-                                                                                2),
+                                                                            offset:
+                                                                                Offset(0, 2),
                                                                           ),
                                                                         ],
                                                                       ),
                                                                       child: controller.plantListModel.length > 0
                                                                           ? DataTable2(
-                                                                              dataRowHeight:
-                                                                                  40,
-                                                                              columnSpacing:
-                                                                                  50,
-                                                                              columns:
-                                                                                  [
+                                                                              dataRowHeight: 40,
+                                                                              columnSpacing: 50,
+                                                                              columns: [
                                                                                 DataColumn2(
                                                                                     size: ColumnSize.L,
                                                                                     // fixedWidth: 180,
@@ -458,8 +466,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                                                     )),
                                                                               ].toList(),
-                                                                              rows:
-                                                                                  controller.plantListModel.map<DataRow>((plants) {
+                                                                              rows: controller.plantListModel.map<DataRow>((plants) {
                                                                                 return DataRow(
                                                                                   cells: [
                                                                                     DataCell(Text("${plants?.name ?? ""}")),
@@ -484,8 +491,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                     .edgeInsets15,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  border:
-                                                                      Border.all(
+                                                                  border: Border
+                                                                      .all(
                                                                     color: ColorValues
                                                                         .lightGreyColorWithOpacity35,
                                                                     width: 1,
@@ -505,7 +512,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                     ),
                                                                   ],
                                                                 ),
-                                                                child: DataTable2(
+                                                                child:
+                                                                    DataTable2(
                                                                   dataRowHeight:
                                                                       30,
                                                                   columnSpacing:
@@ -581,7 +589,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                     )),
                                                                     DataColumn2(
                                                                       // fixedWidth: 75,
-                                                                      label: Text(
+                                                                      label:
+                                                                          Text(
                                                                         "Approve",
                                                                         style:
                                                                             TextStyle(
@@ -608,8 +617,8 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                           (getAccesslevelDetails) {
                                                                     return DataRow(
                                                                       cells: [
-                                                                        DataCell(Text(
-                                                                            "${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                        DataCell(
+                                                                            Text("${getAccesslevelDetails?.feature_name ?? ""}")),
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.add
                                                                             .value)),
@@ -646,10 +655,9 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                       margin: Dimens.edgeInsets15,
                                                                       decoration: BoxDecoration(
                                                                         border:
-                                                                            Border
-                                                                                .all(
-                                                                          color: ColorValues
-                                                                              .lightGreyColorWithOpacity35,
+                                                                            Border.all(
+                                                                          color:
+                                                                              ColorValues.lightGreyColorWithOpacity35,
                                                                           width:
                                                                               1,
                                                                         ),
@@ -661,16 +669,14 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                                 2,
                                                                             blurRadius:
                                                                                 5,
-                                                                            offset: Offset(
-                                                                                0,
-                                                                                2),
+                                                                            offset:
+                                                                                Offset(0, 2),
                                                                           ),
                                                                         ],
                                                                       ),
                                                                       child: controller.notificationListByUserId.length > 0
                                                                           ? ScrollableTableView(
-                                                                              columns:
-                                                                                  [
+                                                                              columns: [
                                                                                 "Notifications",
                                                                                 "Default Value",
                                                                                 "Can Override",
