@@ -44,8 +44,8 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -83,7 +83,8 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                       child: Stack(
                         children: [
                           Card(
-                            margin: EdgeInsets.only(left: 20, top: 10, right: 20),
+                            margin:
+                                EdgeInsets.only(left: 20, top: 10, right: 20),
                             color: ColorValues.cardColor,
                             elevation: 10,
                             shape: RoundedRectangleBorder(
@@ -126,8 +127,8 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                 ),
                                 Dimens.boxHeight15,
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 50),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50),
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -197,13 +198,14 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                       150,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color:
-                                          ColorValues.lightGreyColorWithOpacity35,
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
                                       width: 1,
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: ColorValues.appBlueBackgroundColor,
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -266,7 +268,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             DataColumn2(
                                                 fixedWidth: 150,
                                                 label: Text(
-                                                  "Module Quntity",
+                                                  "Module Quantity",
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -282,42 +284,50 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             )),
                                           ],
                                           rows: List<DataRow>.generate(
-                                            controller.pmPlanDetailsModel.value
-                                                    ?.mapAssetChecklist?.length ??
+                                            controller
+                                                    .pmPlanDetailsModel
+                                                    .value
+                                                    ?.mapAssetChecklist
+                                                    ?.length ??
                                                 0,
                                             (index) => DataRow(cells: [
                                               DataCell(Text('${index + 1}')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
                                                       .value
-                                                      ?.mapAssetChecklist?[index]
+                                                      ?.mapAssetChecklist?[
+                                                          index]
                                                       .name
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
                                                       .value
-                                                      ?.mapAssetChecklist?[index]
+                                                      ?.mapAssetChecklist?[
+                                                          index]
                                                       .asset_id
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
                                                       .value
-                                                      ?.mapAssetChecklist?[index]
+                                                      ?.mapAssetChecklist?[
+                                                          index]
                                                       .parent_name ??
                                                   '')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
                                                       .value
-                                                      ?.mapAssetChecklist?[index]
+                                                      ?.mapAssetChecklist?[
+                                                          index]
                                                       .module_qty
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
                                                       .pmPlanDetailsModel
                                                       .value
-                                                      ?.mapAssetChecklist?[index]
+                                                      ?.mapAssetChecklist?[
+                                                          index]
                                                       .checklist_name ??
                                                   '')),
                                             ]),

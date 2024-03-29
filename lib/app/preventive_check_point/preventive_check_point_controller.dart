@@ -55,7 +55,7 @@ class PreventiveCheckPointController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Sr No": true,
     "Check Point Id": true,
-    "Check List No.": true,
+    "Check List Name": true,
     "Check Point": true,
     "Requirement": true,
     "Upload Image?": true,
@@ -66,8 +66,8 @@ class PreventiveCheckPointController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Sr No": 50,
-    "Check Point Id": 100,
-    "Check List No.": 250,
+    "Check Point Id": 120,
+    "Check List Name": 250,
     "Check Point": 250,
     "Requirement": 300,
     "Upload Image?": 200,
@@ -97,7 +97,7 @@ class PreventiveCheckPointController extends GetxController {
       this.filterText = {
         "Sr No": srFilterText,
         "Check Point Id": idFilterText,
-        "Check List No.": checkListFilterText,
+        "Check List Name": checkListFilterText,
         "Check Point": checkpointFilterText,
         "Requirement": reqFilterText,
         "Upload Image?": imageFilterText,
