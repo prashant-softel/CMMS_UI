@@ -389,18 +389,22 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               CustomRichText(
                                                   title: 'Block/Plot: '),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                width: Get.width * .2,
-                                                child: Obx(
-                                                  () => DropdownWebWidget(
-                                                    dropdownList:
-                                                        controller.blockList,
-                                                    isValueSelected: controller
-                                                        .isBlockSelected.value,
-                                                    selectedValue: controller
-                                                        .selectedBlock.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
+                                              IgnorePointer(
+                                                ignoring: 
+                                                controller.jobModel?.id != null ? true : false,
+                                                child: SizedBox(
+                                                  width: Get.width * .2,
+                                                  child: Obx(
+                                                    () => DropdownWebWidget(
+                                                      dropdownList:
+                                                          controller.blockList,
+                                                      isValueSelected: controller
+                                                          .isBlockSelected.value,
+                                                      selectedValue: controller
+                                                          .selectedBlock.value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -465,49 +469,51 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   title:
                                                       'Equipment Categories: '),
                                               Dimens.boxWidth10,
-                                              controller.permitId.value > 0
-                                                  ? SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      child:
-                                                          CustomMultiSelectDialogField(
-                                                        title:
-                                                            'Select Equipment Category',
-                                                        // buttonText:
-                                                        //     'Equipment Category',
-                                                        initialValue: ((controller
-                                                                .selectedEquipmentCategoryIdList
-                                                                .isNotEmpty)
-                                                            ? controller
-                                                                .selectedEquipmentCategoryIdList
-                                                            : []),
-                                                        items: controller
-                                                            .equipmentCategoryList
-                                                            .map(
-                                                              (equipmentCategory) =>
-                                                                  MultiSelectItem(
-                                                                equipmentCategory
-                                                                    ?.id,
-                                                                equipmentCategory
-                                                                        ?.name ??
-                                                                    '',
-                                                              ),
-                                                            )
-                                                            .toList(),
-                                                        onConfirm:
-                                                            (selectedOptionsList) =>
-                                                                {
-                                                          controller
-                                                              .equipmentCategoriesSelected(
-                                                                  selectedOptionsList),
-                                                          print(
-                                                              'Equipment list ${controller.selectedEquipmentCategoryIdList}')
-                                                        },
+                                              controller.pmtaskViewModel?.id != null || controller.jobModel?.id != null
+                                                  ? IgnorePointer(
+                                                    child: SizedBox(
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                        child:
+                                                            CustomMultiSelectDialogField(
+                                                          title:
+                                                              'Select Equipment Category',
+                                                          // buttonText:
+                                                          //     'Equipment Category',
+                                                          initialValue: ((controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                                  .isNotEmpty)
+                                                              ? controller
+                                                                  .selectedEquipmentCategoryIdList
+                                                              : []),
+                                                          items: controller
+                                                              .equipmentCategoryList
+                                                              .map(
+                                                                (equipmentCategory) =>
+                                                                    MultiSelectItem(
+                                                                  equipmentCategory
+                                                                      ?.id,
+                                                                  equipmentCategory
+                                                                          ?.name ??
+                                                                      '',
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                          onConfirm:
+                                                              (selectedOptionsList) =>
+                                                                  {
+                                                            controller
+                                                                .equipmentCategoriesSelected(
+                                                                    selectedOptionsList),
+                                                            print(
+                                                                'Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                          },
+                                                        ),
                                                       ),
-                                                    )
+                                                  )
                                                   : SizedBox(
                                                       width: Get.width * .2,
                                                       child:
