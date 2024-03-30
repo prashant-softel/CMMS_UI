@@ -1665,7 +1665,7 @@ class Repository {
         // categoryIds: categoryIds ?? "",
         // businessType: businessType,
         isLoading: isLoading,
-        facilityId:facilityId,
+        facilityId: facilityId,
         auth: auth,
       );
       if (!res.hasError) {
@@ -1745,12 +1745,10 @@ class Repository {
       final res = await _dataRepository.getViewPermitDetail(
         auth: auth,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
-
       print({"Viewpermitdetail", res.data});
-
       if (!res.hasError) {
         if (res.errorCode == 200) {
           final NewPermitDetailModel _viewPermitDetailModel =
@@ -1761,7 +1759,7 @@ class Repository {
           return responseMap;
         }
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'createNewPermit');
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
         //return '';
       }
       return null;
@@ -1816,7 +1814,7 @@ class Repository {
       final res = await _dataRepository.getMCExecutionDetail(
         auth: auth,
         executionId: executionId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1852,7 +1850,7 @@ class Repository {
       final res = await _dataRepository.getMcPlanDetail(
         auth: auth,
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -1957,7 +1955,7 @@ class Repository {
       final res = await _dataRepository.getRoDetailsByID(
         auth: auth,
         requestID: requestID,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -2711,7 +2709,7 @@ class Repository {
         // blockId: blockId,
         // categoryIds: categoryIds,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -3119,7 +3117,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getPermitConditionList(
         isCancle: isCancle,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -3357,7 +3355,7 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getMCTaskEquipmentList(
         taskId: taskId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
         auth: auth,
       );
@@ -4899,7 +4897,7 @@ class Repository {
       final res = await _dataRepository.getJobDetails(
         auth: auth,
         jobId: jobId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         userId: userId,
         isLoading: isLoading,
       );
@@ -4934,7 +4932,7 @@ class Repository {
       final res = await _dataRepository.getjobDetailsModel(
         auth: auth,
         jobId: jobId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         userId: userId,
         isLoading: isLoading,
       );
@@ -5757,7 +5755,7 @@ class Repository {
       final res = await _dataRepository.getPermitDetails(
         auth: auth,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -5788,7 +5786,7 @@ class Repository {
       final res = await _dataRepository.getJobCardHistory(
         auth: auth,
         moduleType: moduleType,
-        facilityId:facilityId,
+        facilityId: facilityId,
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
@@ -5826,7 +5824,7 @@ class Repository {
       final res = await _dataRepository.getPermitHistory(
         auth: auth,
         moduleType: moduleType,
-        facilityId:facilityId,
+        facilityId: facilityId,
         permitId: permitId,
         isLoading: isLoading,
       );
@@ -5990,7 +5988,7 @@ class Repository {
         isLoading: isLoading,
         moduleType: moduleType,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
       );
 
       if (!res.hasError) {
@@ -6023,7 +6021,7 @@ class Repository {
       final res = await _dataRepository.getJobsLinkdToPermitList(
         auth: auth,
         isLoading: isLoading,
-        facilityId:facilityId,
+        facilityId: facilityId,
         permitId: permitId,
       );
 
@@ -6057,11 +6055,10 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getMrsListByModule(
-        auth: auth,
-        isLoading: isLoading,
-        jobId: jobId,
-        facilityId:facilityId
-      );
+          auth: auth,
+          isLoading: isLoading,
+          jobId: jobId,
+          facilityId: facilityId);
 
       if (!res.hasError) {
         final jsonMrsListByModuleModel = jsonDecode(res.data);
@@ -6732,7 +6729,7 @@ class Repository {
       final res = await _dataRepository.getNewPermitDetail(
         auth: auth,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -6759,16 +6756,13 @@ class Repository {
   }
 
   Future<PmtaskViewModel?> getPmtaskViewList(
-    int? scheduleId,
-    bool? isLoading,
-    int facilityId
-  ) async {
+      int? scheduleId, bool? isLoading, int facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPmtaskViewList(
         auth: auth,
         scheduleId: scheduleId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       // print(res.data);
@@ -7903,7 +7897,7 @@ class Repository {
         auth: auth,
         moduleType: moduleType,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       // print('Permit History: ${res.data}');
@@ -8186,7 +8180,7 @@ class Repository {
       final res = await _dataRepository.getCalibrationView(
         auth: auth,
         calibrationId: calibrationId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -9286,11 +9280,10 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getMrsDetails(
-        auth: auth,
-        mrsId: mrsId,
-        isLoading: isLoading,
-        facilityId: facilityId
-      );
+          auth: auth,
+          mrsId: mrsId,
+          isLoading: isLoading,
+          facilityId: facilityId);
       if (!res.hasError) {
         final MrsDetailsModel _mrsDetailModel =
             mrsDetailsModelFromJson(res.data);
@@ -9317,7 +9310,7 @@ class Repository {
       final res = await _dataRepository.getPmPlanDetails(
         auth: auth,
         pmPlanId: pmPlanId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -10018,7 +10011,7 @@ class Repository {
       final res = await _dataRepository.getReturnMrsDetails(
         auth: auth,
         mrsId: mrsId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -10849,7 +10842,7 @@ class Repository {
       final res = await _dataRepository.getAuditPlanDetails(
         auth: auth,
         auditPlanId: auditPlanId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
       if (!res.hasError) {
@@ -11216,7 +11209,7 @@ class Repository {
       final res = await _dataRepository.getVegPlanDetail(
         auth: auth,
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -11467,7 +11460,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getVegExecutionDetail(
         auth: auth,
-        facilityId:facilityId,
+        facilityId: facilityId,
         executionId: executionId,
         isLoading: isLoading ?? false,
       );
@@ -11516,13 +11509,13 @@ class Repository {
     }
   }
 
-  Future<List<IncidentRiskTypeModell>> getIncidentRiskType({
-    // required int? facility_id,
-    // int? blockId,
-    // required String categoryIds,
-    required bool isLoading,
-    required int facilityId
-  }) async {
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
+      {
+      // required int? facility_id,
+      // int? blockId,
+      // required String categoryIds,
+      required bool isLoading,
+      required int facilityId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
@@ -11530,7 +11523,7 @@ class Repository {
       final res = await _dataRepository.getIncidentRiskType(
         // facility_id: facility_id,
         isLoading: isLoading,
-        facilityId:facilityId,
+        facilityId: facilityId,
         auth: auth,
       );
       print('Incident Risk Type List Data: ${res.data}');
@@ -11780,13 +11773,12 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> createfreq({bool? isLoading, freqJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createfreq(
-          auth: auth,
-          isLoading: isLoading,
-          freqJsonString: freqJsonString);
+          auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
 
       if (!res.hasError) {
         return true;

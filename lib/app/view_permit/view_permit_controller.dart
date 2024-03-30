@@ -477,7 +477,7 @@ class ViewPermitController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
         print('FacilityIdsss$facilityId');
-        Future.delayed(Duration(seconds: 2), () async {
+        Future.delayed(Duration(seconds: 1), () async {
           await getBlocksList(facilityId);
           await getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
           await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
@@ -486,8 +486,8 @@ class ViewPermitController extends GetxController {
 
         // });
       });
-      await getViewPermitDetail(
-          permitId: permitId.value, facilityId: facilityId);
+      // await getViewPermitDetail(
+      //     permitId: permitId.value, facilityId: facilityId);
       await getSafetyMeasureList();
       await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
       await getPermitConditionList(isCancle: isCancle!, facilityId: facilityId);
