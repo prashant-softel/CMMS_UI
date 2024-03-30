@@ -103,417 +103,446 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: Column(
-                          children: [
-                            // Text(
-                            //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 5.0, right: 10, top: 10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Create Permit Type",
-                                      style: Styles.blackBold16,
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Visibility(
-                                      visible: controller.isSuccess.value,
-                                      child: Center(
-                                        child: Wrap(
-                                          children: [
-                                            Text(
-                                              controller.isFormInvalid == false
-                                                  ? controller.selectedItem ==
-                                                          null
-                                                      ? "Permit Type added Successfully in the List."
-                                                      : "Permit Type updated Successfully in the List."
-                                                  : "Facility not added",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Color.fromARGB(
-                                                      255, 24, 243, 123)),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              // Text(
+                              //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, right: 10, top: 10),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Create Permit Type",
+                                        style: Styles.blackBold16,
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Visibility(
+                                        visible: controller.isSuccess.value,
+                                        child: Center(
+                                          child: Wrap(
+                                            children: [
+                                              Text(
+                                                controller.isFormInvalid ==
+                                                        false
+                                                    ? controller.selectedItem ==
+                                                            null
+                                                        ? "Permit Type added Successfully in the List."
+                                                        : "Permit Type updated Successfully in the List."
+                                                    : "Facility not added",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Color.fromARGB(
+                                                        255, 24, 243, 123)),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                            child: CustomRichText(
-                                                title: 'Facility Name')),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Facility Name')),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Container(
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .20),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.040,
-                                              child: Obx(
-                                                () => DropdownWebWidget(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.facilityList,
-                                                  isValueSelected: controller
-                                                      .isFacilitySelected.value,
-                                                  selectedValue: controller
-                                                      .selectedFacility.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
                                                 ),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child:
-                                                CustomRichText(title: 'Title')),
-                                        Container(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: TextField(
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                            controller: controller.titleCtrlr,
-                                            focusNode:
-                                                controller.titleFocusNode,
-                                            scrollController: controller
-                                                .titleScrollController,
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            autofocus: false,
-                                            decoration: InputDecoration(
-                                              fillColor: ColorValues.whiteColor,
-                                              filled: true,
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedErrorBorder: controller
-                                                      .isNameInvalid.value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : InputBorder.none,
-                                              errorBorder: controller
-                                                      .isNameInvalid.value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : null,
-                                              errorText:
-                                                  controller.isNameInvalid.value
-                                                      ? "Required field"
-                                                      : null,
-                                              hintStyle: TextStyle(height: 2.0),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
-                                            onChanged: (value) {
-                                              if (value.trim().length > 1) {
-                                                controller.isNameInvalid.value =
-                                                    false;
-                                              } else {
-                                                controller.isNameInvalid.value =
-                                                    true;
-                                              }
-                                            },
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.deny(
-                                                RegExp('[\'^]'),
-                                              )
-                                            ],
+                                            child: Container(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .20),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                child: Obx(
+                                                  () => DropdownWebWidget(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.facilityList,
+                                                    isValueSelected: controller
+                                                        .isFacilitySelected
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedFacility.value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
+                                                )),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child: CustomRichText(
-                                                title: 'Description')),
-                                        Container(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Title')),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
                                                 ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                              BoxShadow(
-                                                color: ColorValues.whiteColor,
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 0.0,
-                                                spreadRadius: 0.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: TextField(
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                            controller:
-                                                controller.descriptionCtrlr,
-                                            focusNode: controller.descFocusNode,
-                                            scrollController:
-                                                controller.descScrollController,
-                                            keyboardType:
-                                                TextInputType.multiline,
-                                            autofocus: false,
-                                            decoration: InputDecoration(
-                                              fillColor: ColorValues.whiteColor,
-                                              filled: true,
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 5, right: 5),
-                                              border: InputBorder.none,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
-                                                    color: Colors.transparent),
-                                              ),
-                                              focusedErrorBorder: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : InputBorder.none,
-                                              errorBorder: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide: BorderSide(
-                                                        color: ColorValues
-                                                            .redColorDark,
-                                                      ),
-                                                    )
-                                                  : null,
-                                              errorText: controller
-                                                      .isDescriptionInvalid
-                                                      .value
-                                                  ? "Required field"
-                                                  : null,
-                                              hintStyle: TextStyle(height: 2.0),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
-                                            onChanged: (value) {
-                                              if (value.trim().length > 1) {
-                                                controller.isDescriptionInvalid
-                                                    .value = false;
-                                              } else {
-                                                controller.isDescriptionInvalid
-                                                    .value = true;
-                                              }
-                                            },
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.deny(
-                                                RegExp('[\'^]'),
-                                              )
-                                            ],
+                                            child: TextField(
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                              controller: controller.titleCtrlr,
+                                              focusNode:
+                                                  controller.titleFocusNode,
+                                              scrollController: controller
+                                                  .titleScrollController,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isNameInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isNameInvalid.value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isNameInvalid.value
+                                                    ? "Required field"
+                                                    : null,
+                                                hintStyle:
+                                                    TextStyle(height: 2.0),
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
+                                                  controller.isNameInvalid
+                                                      .value = false;
+                                                } else {
+                                                  controller.isNameInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                  ]),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    height: 40,
-                                    width: (Get.width * .08),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appRedColor,
-                                        onPressed: () {
-                                          controller.cleardata();
-                                        },
-                                        text: 'Cancel')),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                    height: 40,
-                                    child: controller.selectedItem == null
-                                        ? CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .createPermitType()
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description')),
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: TextField(
+                                              style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                              controller:
+                                                  controller.descriptionCtrlr,
+                                              focusNode:
+                                                  controller.descFocusNode,
+                                              scrollController: controller
+                                                  .descScrollController,
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              autofocus: false,
+                                              decoration: InputDecoration(
+                                                fillColor:
+                                                    ColorValues.whiteColor,
+                                                filled: true,
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                border: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                ),
+                                                focusedErrorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : InputBorder.none,
+                                                errorBorder: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide: BorderSide(
+                                                          color: ColorValues
+                                                              .redColorDark,
+                                                        ),
+                                                      )
+                                                    : null,
+                                                errorText: controller
+                                                        .isDescriptionInvalid
+                                                        .value
+                                                    ? "Required field"
+                                                    : null,
+                                                hintStyle:
+                                                    TextStyle(height: 2.0),
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.trim().length > 1) {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Create Permit')
-                                        : CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
-                                            onPressed: () {
-                                              controller
-                                                  .updatePermitType(controller
-                                                      .selectedItem?.id)
-                                                  .then((value) {
-                                                print("value,$value");
-                                                if (value == true)
+                                                      .isDescriptionInvalid
+                                                      .value = false;
+                                                } else {
                                                   controller
-                                                      .issuccessCreatechecklist();
-                                              });
-                                            },
-                                            text: 'Update')),
-                              ],
-                            ),
-                          ],
+                                                      .isDescriptionInvalid
+                                                      .value = true;
+                                                }
+                                              },
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .deny(
+                                                  RegExp('[\'^]'),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ]),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      height: 40,
+                                      width: (Get.width * .08),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appRedColor,
+                                          onPressed: () {
+                                            controller.cleardata();
+                                          },
+                                          text: 'Cancel')),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                      height: 40,
+                                      child: controller.selectedItem == null
+                                          ? CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                controller
+                                                    .createPermitType()
+                                                    .then((value) {
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                });
+                                              },
+                                              text: 'Create Permit')
+                                          : CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
+                                              onPressed: () {
+                                                controller
+                                                    .updatePermitType(controller
+                                                        .selectedItem?.id)
+                                                    .then((value) {
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                });
+                                              },
+                                              text: 'Update')),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -738,7 +767,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                               .selectedItem
                                                               ?.name ??
                                                           '';
-                                                          controller.descriptionCtrlr
+                                                      controller
+                                                          .descriptionCtrlr
                                                           .text = controller
                                                               .selectedItem
                                                               ?.description ??

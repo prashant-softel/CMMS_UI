@@ -190,8 +190,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           .ellipsis),
                                                 ),
                                                 DataCell(
-                                                  Text(
-                                                    '${controller.allChecklistNames}',
+                                                  SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: Text(
+                                                      '${controller.allChecklistNames}',
+                                                    ),
                                                   ),
                                                 ),
                                                 DataCell(
@@ -283,9 +287,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           ),
                                         ),
                                         DataCell(
-                                          Text(
-                                              'tfygbhunj${controller.titleTextCtrlr.text}',
-                                              overflow: TextOverflow.ellipsis),
+                                          SizedBox(
+                                            child: Text(
+                                                'tfygbhunj${controller.titleTextCtrlr.text}',
+                                                maxLines: 3),
+                                          ),
                                         ),
                                         DataCell(
                                           SizedBox(
@@ -300,11 +306,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text(
+                                                          SizedBox(
+                                                            child: Text(
                                                               "${element?.equipmentCatName}",
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis),
+                                                              maxLines: 3,
+                                                            ),
+                                                          ),
                                                         ],
                                                       ))
                                                   .toList(),
@@ -312,9 +319,13 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           ),
                                         ),
                                         DataCell(
-                                          Text(
+                                          SizedBox(
+                                            // width: Get.width * 0.2,
+                                            child: Text(
                                               '${controller.blockNameTextCtrlr.text}',
-                                              overflow: TextOverflow.ellipsis),
+                                              maxLines: 3,
+                                            ),
+                                          ),
                                         ),
                                         DataCell(
                                           SizedBox(
@@ -330,11 +341,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
+                                                        SizedBox(
+                                                          child: Text(
                                                             "${element?.workingAreaName}",
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis),
+                                                            maxLines: 3,
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   )

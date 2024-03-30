@@ -161,7 +161,7 @@ class PreventiveCheckPointContentWeb
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             CustomRichText(
-                                                title: 'Check List No. '),
+                                                title: 'Check List Name'),
                                             SizedBox(
                                               width: 15,
                                             ),
