@@ -621,196 +621,143 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                 // )
                               ],
                             ),
-                            controller.typePermitList.isEmpty
-                                ? Expanded(
-                                    child: DataTable2(
-                                      key: UniqueKey(),
-                                      dataRowHeight: 50,
-                                      columnSpacing: 10,
-                                      border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234)),
-                                      columns: [
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: List.generate(
-                                        controller.typePermitList.length,
-                                        (index) {
-                                          return DataRow.byIndex(
-                                            index: index,
-                                            cells: [
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: DataTable2(
-                                      key: UniqueKey(),
-                                      dataRowHeight: 50,
-                                      columnSpacing: 10,
-                                      border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234)),
-                                      columns: [
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: List<DataRow>.generate(
-                                        controller.typePermitList.length,
-                                        (index) {
-                                          return DataRow(
-                                            // index: index,
-                                            cells: [
-                                              DataCell(
-                                                  Text((index + 1).toString())),
-                                              DataCell(Text(controller
-                                                  .typePermitList[index]!.name
-                                                  .toString())),
-                                              DataCell(Text(controller
-                                                  .typePermitList[index]!
-                                                  .description
-                                                  .toString())),
-                                              DataCell(Row(
-                                                children: [
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.editColor,
-                                                    icon: Icons.edit,
-                                                    message: 'Edit',
-                                                    onPress: () {
-                                                      controller
-                                                          .toggleContainer();
-                                                      controller.selectedItem = controller
-                                                          .typePermitList
-                                                          .firstWhere((element) =>
-                                                              "${element?.id}" ==
+                            controller.typePermitList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                                    : Expanded(
+                                        child: DataTable2(
+                                          key: UniqueKey(),
+                                          dataRowHeight: 50,
+                                          columnSpacing: 10,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Sr.No.",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Title",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.typePermitList.length,
+                                            (index) {
+                                              return DataRow(
+                                                // index: index,
+                                                cells: [
+                                                  DataCell(Text(
+                                                      (index + 1).toString())),
+                                                  DataCell(Text(controller
+                                                      .typePermitList[index]!
+                                                      .name
+                                                      .toString())),
+                                                  DataCell(Text(controller
+                                                      .typePermitList[index]!
+                                                      .description
+                                                      .toString())),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller
+                                                              .toggleContainer();
+                                                          controller.selectedItem = controller
+                                                              .typePermitList
+                                                              .firstWhere((element) =>
+                                                                  "${element?.id}" ==
+                                                                  controller
+                                                                      .typePermitList[
+                                                                          index]!
+                                                                      .id
+                                                                      .toString());
+                                                          controller.titleCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                                  .selectedFacility
+                                                                  .value =
                                                               controller
+                                                                  .onFetchNameFromId(
+                                                                      controller
+                                                                          .selectedItem
+                                                                          ?.id)!;
+                                                          print(
+                                                              "${controller.selectedFacility.value}");
+                                                        },
+                                                      ),
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .deleteColor,
+                                                        icon: Icons.delete,
+                                                        message: 'Delete',
+                                                        onPress: () {
+                                                          controller.isDeleteDialog(
+                                                              checklist_id: controller
                                                                   .typePermitList[
                                                                       index]!
                                                                   .id
-                                                                  .toString());
-                                                      controller.titleCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                      controller
-                                                          .descriptionCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.description ??
-                                                          '';
-                                                      controller
-                                                              .selectedFacility
-                                                              .value =
-                                                          controller
-                                                              .onFetchNameFromId(
-                                                                  controller
-                                                                      .selectedItem
-                                                                      ?.id)!;
-                                                      print(
-                                                          "${controller.selectedFacility.value}");
-                                                    },
-                                                  ),
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.deleteColor,
-                                                    icon: Icons.delete,
-                                                    message: 'Delete',
-                                                    onPress: () {
-                                                      controller.isDeleteDialog(
-                                                          checklist_id: controller
-                                                              .typePermitList[
-                                                                  index]!
-                                                              .id
-                                                              .toString(),
-                                                          checklist: controller
-                                                              .typePermitList[
-                                                                  index]!
-                                                              .name);
-                                                    },
-                                                  ),
+                                                                  .toString(),
+                                                              checklist: controller
+                                                                  .typePermitList[
+                                                                      index]!
+                                                                  .name);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  )),
                                                 ],
-                                              )),
-                                            ],
-                                          );
-                                        },
+                                              );
+                                            },
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
                           ],
                         ),
                       ),

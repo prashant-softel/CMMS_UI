@@ -164,6 +164,7 @@ class NewPermitListController extends GetxController {
   int get facilityId1 => _facilityId.value;
 
   ///
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -182,7 +183,7 @@ class NewPermitListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-            true, false, false, false);
+            false, false, false);
       });
     });
 
@@ -264,19 +265,12 @@ class NewPermitListController extends GetxController {
     // update(['permit_list']);
   }
 
-  Future<void> getNewPermitList(
-      int facilityId,
-      int userId,
-      dynamic startDate,
-      dynamic endDate,
-      bool isLoading,
-      bool self_view,
-      bool non_expired,
-      bool isExport) async {
+  Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
+      dynamic endDate, bool self_view, bool non_expired, bool isExport) async {
     newPermitList.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
         userId: userId,
@@ -294,6 +288,7 @@ class NewPermitListController extends GetxController {
     if (_newPermitList != null) {
       newPermitList.value = _newPermitList;
       filteredData.value = newPermitList.value;
+      isLoading.value = false;
       if (newPermitList.isNotEmpty) {
         // newPermitListModel = newPermitList![0];
         newPermitListModel = filteredData[0];
@@ -425,7 +420,7 @@ class NewPermitListController extends GetxController {
 
   void getNewPermitListByDate() {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-        false, false, false, false);
+        false, false, false);
   }
 
   void clearStoreData() {
@@ -450,6 +445,6 @@ class NewPermitListController extends GetxController {
 
   void export() {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
-        false, false, false, true);
+        false, false, true);
   }
 }

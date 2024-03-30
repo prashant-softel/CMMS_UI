@@ -79,6 +79,7 @@ class PermitTypeController extends GetxController {
     isContainerVisible.toggle();
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -89,7 +90,7 @@ class PermitTypeController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getFacilityList();
         //   Future.delayed(Duration(seconds: 1), () {
-        getTypePermitList(true, facilityId);
+        getTypePermitList(facilityId);
         // });
       });
       titleFocusNode.addListener(() {
@@ -167,7 +168,7 @@ class PermitTypeController extends GetxController {
                 onPressed: () {
                   deletePermitType(checklist_id).then((value) {
                     Get.back();
-                    getTypePermitList(true, facilityId);
+                    getTypePermitList(facilityId);
                   });
                 },
                 child: Text('YES'),
@@ -185,7 +186,7 @@ class PermitTypeController extends GetxController {
         permit_id,
         isLoading: true,
       );
-      getTypePermitList(true, selectedFacilityId!);
+      getTypePermitList(selectedFacilityId!);
     }
   }
 
@@ -199,15 +200,16 @@ class PermitTypeController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       selectedFacilityId = facilityList[0]?.id;
-      getTypePermitList(true, selectedFacilityId!);
+      // getTypePermitList(true, selectedFacilityId!);
     }
   }
 
-  Future<void> getTypePermitList(bool isLoading, int facilityId) async {
+  Future<void> getTypePermitList(int facilityId) async {
     final _permitTypeList = await permitTypePresenter.getTypePermitList(
-        isLoading: isLoading, facility_id: facilityId);
+        isLoading: isLoading.value, facility_id: facilityId);
     typePermitList.value = <TypePermitModel>[];
     if (_permitTypeList != null) {
+      isLoading.value = false;
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
@@ -245,7 +247,7 @@ class PermitTypeController extends GetxController {
             facilityIds = facilityList[facilityIndex]?.id ?? 0;
           }
           selectedFacilityId = facilityIds;
-          getTypePermitList(true, selectedFacilityId!);
+          getTypePermitList(selectedFacilityId!);
         }
         break;
       default:
@@ -309,7 +311,7 @@ class PermitTypeController extends GetxController {
     selectedItem = null;
     // selectedFacilityId=0;
     Future.delayed(Duration(seconds: 1), () {
-      getTypePermitList(true, facilityId);
+      getTypePermitList(facilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -318,13 +320,10 @@ class PermitTypeController extends GetxController {
 
   Future<bool> updatePermitType(checklistId) async {
     String _name = titleCtrlr.text.trim();
-    String _description= descriptionCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
     // selectedFacility.value =
     TypePermitModel createChecklist = TypePermitModel(
-      name: _name,
-      id: checklistId,
-      description: _description
-    );
+        name: _name, id: checklistId, description: _description);
     var checklistJsonString =
         createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 

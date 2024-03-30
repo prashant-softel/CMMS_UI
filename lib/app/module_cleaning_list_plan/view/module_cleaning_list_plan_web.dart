@@ -311,8 +311,10 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.moduleCleaningListPlan.isEmpty
-                                      ? Center(child: Text('No data'))
+                                  controller.moduleCleaningListPlan.isEmpty ==true && controller.isLoading==false
+                                  ?Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                  ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

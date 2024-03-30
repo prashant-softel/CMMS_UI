@@ -86,6 +86,7 @@ class PmPlanListController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -99,8 +100,7 @@ class PmPlanListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmPlanList(
-            facilityId, formattedTodate1, formattedFromdate1, true, false);
+        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
       });
       // isDataLoading.value = false;
 
@@ -149,18 +149,19 @@ class PmPlanListController extends GetxController {
   }
 
   Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading, bool? isExport) async {
+      bool? isExport) async {
     pmPlanList.value = <PmPlanListModel>[];
     filteredData.value = <PmPlanListModel>[];
     final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
         isExport: isExport);
     if (_pmPlanList != null) {
       pmPlanList.value = _pmPlanList;
       filteredData.value = pmPlanList.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: filteredData.length,
         rowsPerPage: 10,
@@ -180,7 +181,7 @@ class PmPlanListController extends GetxController {
 
   void getPmPlanListByDate() {
     getPmPlanList(
-        facilityId, formattedTodate1, formattedFromdate1, true, false);
+        facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {
@@ -226,7 +227,7 @@ class PmPlanListController extends GetxController {
                     deletePmPlan(planId).then((value) {
                       Get.back();
                       getPmPlanList(facilityId, formattedTodate1,
-                          formattedFromdate1, true, false);
+                          formattedFromdate1, false);
                     });
                   },
                   text: 'Yes'),
@@ -251,6 +252,6 @@ class PmPlanListController extends GetxController {
   }
 
   void export() {
-    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true, true);
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

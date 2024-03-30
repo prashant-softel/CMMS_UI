@@ -70,6 +70,7 @@ class VegetationPlanListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -83,35 +84,39 @@ class VegetationPlanListController extends GetxController {
     // facilityIdStreamSubscription?.cancel();
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () async {
-        getVegetationPlanList(facilityId, true,false);
-        // facilityIdStreamSubscription!.cancel();
-      });
-      print("get plan called");
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 0), () async {
+          getVegetationPlanList(facilityId, false);
+          // facilityIdStreamSubscription!.cancel();
+        });
+        print("get plan called");
+      }
     });
 
     super.onInit();
   }
 
-  Future<void> getVegetationPlanList(int facilityId, bool isLoading, bool isExport) async {
+  Future<void> getVegetationPlanList(int facilityId, bool isExport) async {
     vegetationPlanList.value = <VegetationPlanListModel>[];
     filteredData.value = <VegetationPlanListModel>[];
 
     final _vegetationPlanList =
         await vegetationPlanListPresenter.getVegetationPlanList(
-      isLoading: true,
-      facility_id: facilityId,
-      isExport: isExport
-    );
+            isLoading: isLoading.value,
+            facility_id: facilityId,
+            isExport: isExport);
     vegetationPlanList.value = _vegetationPlanList;
     paginationController = PaginationController(
       rowCount: vegetationPlanList.length,
       rowsPerPage: 10,
     );
 
+    if (_vegetationPlanList != null) {
+      vegetationPlanList.value = _vegetationPlanList;
+      isLoading.value = false;
+    }
     if (vegetationPlanList.isNotEmpty) {
       filteredData.value = vegetationPlanList.value;
-
       vegetationPlanListModel = vegetationPlanList[0];
       var newPermitListJson = vegetationPlanListModel?.toJson();
       vegetationPlanListTableColumns.value = <String>[];
@@ -166,8 +171,9 @@ class VegetationPlanListController extends GetxController {
         .toList();
     vegetationPlanList.value = filteredList;
   }
+
   void export() {
-    getVegetationPlanList(facilityId, true,true);
+    getVegetationPlanList(facilityId, true);
   }
 
   // @override
