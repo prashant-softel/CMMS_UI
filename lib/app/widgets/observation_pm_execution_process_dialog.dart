@@ -384,8 +384,8 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                       // Update the reactive variable
                                                                                       //  });
                                                                                     })
-                                                                                  // : mapData['job_value'] != "0" || mapData['job_value'] != "1"
-                                                                                  //     ? Text('JOB${mapData['job_value']}')
+                                                                                  : mapData['job_value'] != 0 || mapData['job_value'] != 1
+                                                                                      ? Text('JOB${mapData['job_value']}')
                                                                                       : Dimens.box0,
                                               // : Text(mapData['value'] ?? ''),
                                             );
