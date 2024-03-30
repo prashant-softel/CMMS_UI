@@ -91,6 +91,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -105,10 +106,10 @@ class PreventiveMaintenanceTaskController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
-        getPmTaskList(
-            facilityId, formattedTodate1, formattedFromdate1, false, false);
-      });
+      if (facilityId > 0) {
+        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+      }
+
       // isDataLoading.value = false;
 
       // Future.delayed(Duration(seconds: 2), () async {
@@ -166,24 +167,24 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading, bool? isExport) async {
+      bool? isExport) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
         isExport: isExport);
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
+      isLoading.value = false;
     }
   }
 
   void getPmTaskListByDate() {
-    getPmTaskList(
-        facilityId, formattedTodate1, formattedFromdate1, false, false);
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void clearStoreData() {
@@ -232,7 +233,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
                   deletePmTask(task_id).then((value) {
                     Get.back();
                     getPmTaskList(facilityId, formattedTodate1,
-                        formattedFromdate1, false, false);
+                        formattedFromdate1, false);
                   });
                 },
                 child: Text('YES'),
@@ -254,6 +255,6 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   void export() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true, true);
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

@@ -202,36 +202,34 @@ class _PreventiveMaintenanceTaskContentWebState
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -292,55 +290,64 @@ class _PreventiveMaintenanceTaskContentWebState
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.pmTaskList.isEmpty == true
+                                controller.pmTaskList.isEmpty == true &&
+                                        controller.isLoading == false
                                     ? Center(child: Text('No data'))
-                                    : Expanded(
-                                        child: ValueListenableBuilder(
-                                            valueListenable:
-                                                controller.columnVisibility,
-                                            builder: (context, value, child) {
-                                              final dataSource =
-                                                  PmTaskDataSource(controller);
+                                    : controller.isLoading.value == true
+                                        ? Center(
+                                            child: Text('Data Loading......'))
+                                        : Expanded(
+                                            child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  final dataSource =
+                                                      PmTaskDataSource(
+                                                          controller);
 
-                                              return PaginatedDataTable2(
-                                                // fixedLeftColumns: 1,
-                                                // dataRowHeight: Get.height * 0.10,
-                                                columnSpacing: 10,
-                                                source:
-                                                    dataSource, // Custom DataSource class
-                                                // headingRowHeight:
-                                                //     Get.height * 0.12,
-                                                minWidth:
-                                                    2000, //Get.width * 1.2,
-                                                showCheckboxColumn: false,
-                                                rowsPerPage:
-                                                    10, // Number of rows per page
-                                                availableRowsPerPage: [
-                                                  10,
-                                                  20,
-                                                  30,
-                                                  50
-                                                ],
-                                                columns: [
-                                                  for (var entry
-                                                      in value.entries)
-                                                    if (entry.value)
+                                                  return PaginatedDataTable2(
+                                                    // fixedLeftColumns: 1,
+                                                    // dataRowHeight: Get.height * 0.10,
+                                                    columnSpacing: 10,
+                                                    source:
+                                                        dataSource, // Custom DataSource class
+                                                    // headingRowHeight:
+                                                    //     Get.height * 0.12,
+                                                    minWidth:
+                                                        2000, //Get.width * 1.2,
+                                                    showCheckboxColumn: false,
+                                                    rowsPerPage:
+                                                        10, // Number of rows per page
+                                                    availableRowsPerPage: [
+                                                      10,
+                                                      20,
+                                                      30,
+                                                      50
+                                                    ],
+                                                    columns: [
+                                                      for (var entry
+                                                          in value.entries)
+                                                        if (entry.value)
+                                                          buildDataColumn(
+                                                            entry.key,
+                                                            controller
+                                                                    .filterText[
+                                                                entry.key]!,
+                                                            controller
+                                                                    .columnwidth[
+                                                                entry.key],
+                                                          ),
                                                       buildDataColumn(
-                                                        entry.key,
-                                                        controller.filterText[
-                                                            entry.key]!,
-                                                        controller.columnwidth[
-                                                            entry.key],
+                                                        'Actions',
+                                                        controller
+                                                            .titleFilterText,
+                                                        200,
                                                       ),
-                                                  buildDataColumn(
-                                                    'Actions',
-                                                    controller.titleFilterText,
-                                                    200,
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                      )
+                                                    ],
+                                                  );
+                                                }),
+                                          )
                               ],
                             ),
                           ),
