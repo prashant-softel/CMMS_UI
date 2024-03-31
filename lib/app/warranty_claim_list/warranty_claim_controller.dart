@@ -140,6 +140,8 @@ class WarrantyClaimController extends GetxController {
   Rx<bool> isEquipmentCategorySelected = true.obs;
   Rx<String> selectedEquipmentCategory = ''.obs;
   int selectedEquipmentCategoryIds = 0;
+  RxList<List<Map<String, String>>> rowItems =
+      <List<Map<String, String>>>[].obs;
 
   RxList<EquipmentModel?> equipmentModelList = <EquipmentModel>[].obs;
   RxList<int> selectedEquipmentList = <int>[].obs;
@@ -457,6 +459,13 @@ class WarrantyClaimController extends GetxController {
     }
   }
 
+  void addRowItem() {
+    rowItems.add([
+      {'key': "Affected Parts", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
+  }
+
   void getInventoryList() async {
     eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await warrantyClaimPresenter.getInventoryList(
@@ -473,6 +482,7 @@ class WarrantyClaimController extends GetxController {
       rowCount: eqipmentNameList.length,
       rowsPerPage: 10,
     );
+    addRowItem();
     update(['inventory_list']);
   }
 
