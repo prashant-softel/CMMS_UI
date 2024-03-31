@@ -85,7 +85,8 @@ class SafetyQuestionsListController extends GetxController {
 
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
-
+  RxList<SafetyMeasureListModel> BufferPreventiveseff =
+      <SafetyMeasureListModel>[].obs;
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
@@ -132,6 +133,38 @@ class SafetyQuestionsListController extends GetxController {
     } else {
       isFormInvalid.value = false;
     }
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      safetyMeasureList.value = BufferPreventiveseff.value;
+      return;
+    }
+    List<SafetyMeasureListModel> filteredList = BufferPreventiveseff!
+        .where((item) =>
+            (item.id
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.permitType
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.inputName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    safetyMeasureList.value = filteredList;
   }
 
   Future<bool> createSafetyMeasure() async {
@@ -306,6 +339,8 @@ class SafetyQuestionsListController extends GetxController {
     for (var safetyMeasure_list in _safetyMeasureList) {
       safetyMeasureList.add(safetyMeasure_list);
     }
+    BufferPreventiveseff.value = safetyMeasureList.value;
+
     // supplierNameList = _supplierNameList;
     safetyQuestionListPaginationController = PaginationController(
       rowCount: safetyMeasureList.length,
