@@ -339,143 +339,148 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      controller.newPermitList.value == null ||
-                                              controller.newPermitList.value ==
-                                                  0
+                                      controller.newPermitList.isEmpty ==
+                                                  true &&
+                                              controller.isLoading == false
                                           ? Center(child: Text('No data'))
-                                          : Expanded(
-                                              child: ValueListenableBuilder(
-                                                valueListenable:
-                                                    controller.columnVisibility,
-                                                builder:
-                                                    (context, value, child) {
-                                                  final dataSource =
-                                                      PermitListDataSource(
-                                                          controller);
-                                                  return PaginatedDataTable2(
-                                                    columnSpacing: 10,
-                                                    dataRowHeight:
-                                                        Get.height * 0.12,
-                                                    source:
-                                                        dataSource, // Custom DataSource class
-                                                    // headingRowHeight:
-                                                    // Get.height * 0.12,
-                                                    minWidth:
-                                                        3000, //Get.width * 1.2,
-                                                    showCheckboxColumn: false,
-                                                    rowsPerPage:
-                                                        10, // Number of rows per page
-                                                    availableRowsPerPage: [
-                                                      10,
-                                                      20,
-                                                      30,
-                                                      50
-                                                    ],
-                                                    columns: [
-                                                      for (var entry
-                                                          in value.entries)
-                                                        if (entry.value)
+                                          : controller.isLoading.value == true
+                                              ? Center(
+                                                  child: Text(
+                                                      "Data Loading......"))
+                                              : Expanded(
+                                                  child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      final dataSource =
+                                                          PermitListDataSource(
+                                                              controller);
+                                                      return PaginatedDataTable2(
+                                                        columnSpacing: 10,
+                                                        dataRowHeight:
+                                                            Get.height * 0.12,
+                                                        source:
+                                                            dataSource, // Custom DataSource class
+                                                        // headingRowHeight:
+                                                        // Get.height * 0.12,
+                                                        minWidth:
+                                                            3000, //Get.width * 1.2,
+                                                        showCheckboxColumn:
+                                                            false,
+                                                        rowsPerPage:
+                                                            10, // Number of rows per page
+                                                        availableRowsPerPage: [
+                                                          10,
+                                                          20,
+                                                          30,
+                                                          50
+                                                        ],
+                                                        columns: [
+                                                          for (var entry
+                                                              in value.entries)
+                                                            if (entry.value)
+                                                              buildDataColumn(
+                                                                entry.key,
+                                                                controller
+                                                                        .filterText[
+                                                                    entry.key]!,
+                                                                controller
+                                                                        .columnwidth[
+                                                                    entry.key],
+                                                              ),
                                                           buildDataColumn(
-                                                            entry.key,
+                                                            'Actions',
                                                             controller
-                                                                    .filterText[
-                                                                entry.key]!,
-                                                            controller
-                                                                    .columnwidth[
-                                                                entry.key],
+                                                                .ActionFilterText,
+                                                            150,
                                                           ),
-                                                      buildDataColumn(
-                                                        'Actions',
-                                                        controller
-                                                            .ActionFilterText,
-                                                        150,
-                                                      ),
-                                                      // buildDataColumn(
-                                                      //   'PermitId',
-                                                      //   'Permit Id',
-                                                      //   //  ColumnSize.S,
-                                                      //   controller
-                                                      //       .PermitIdFilterText,
-                                                      //   130,
-                                                      // ),
+                                                          // buildDataColumn(
+                                                          //   'PermitId',
+                                                          //   'Permit Id',
+                                                          //   //  ColumnSize.S,
+                                                          //   controller
+                                                          //       .PermitIdFilterText,
+                                                          //   130,
+                                                          // ),
 
-                                                      // // buildDataColumn(
-                                                      // //     "Description",
-                                                      // //     "Description",
-                                                      // //     // ColumnSize.M,
-                                                      // //     controller
-                                                      // //         .DescriptionFilterText,
-                                                      // //     200),
-                                                      // buildDataColumn(
-                                                      //   'Description',
-                                                      //   'Title',
-                                                      //   //  ColumnSize.S,
-                                                      //   controller
-                                                      //       .DescriptionFilterText,
-                                                      //   200,
-                                                      // ),
-                                                      // buildDataColumn(
-                                                      //   'PermitTypeName',
-                                                      //   'Permit Type Name',
-                                                      //   //  ColumnSize.S,
-                                                      //   controller
-                                                      //       .PermitTypeNameFilterText,
-                                                      //   200,
-                                                      // ),
-                                                      // buildDataColumn(
-                                                      //   'EquipmentCategories',
-                                                      //   'Equipment Category',
-                                                      //   //  ColumnSize.S,
-                                                      //   controller
-                                                      //       .EquipmentCategoriesFilterText,
-                                                      //   180,
-                                                      // ),
-                                                      // buildDataColumn(
-                                                      //     "WorkingAreaName",
-                                                      //     "Working Area", // ColumnSize.L,
-                                                      //     controller
-                                                      //         .WorkingAreaNameFilterText,
-                                                      //     200),
-                                                      // buildDataColumn(
-                                                      //     "RequestByName",
-                                                      //     "Requested By",
-                                                      //     // ColumnSize.L,
-                                                      //     controller
-                                                      //         .RequestByNameFilterText,
-                                                      //     200),
-                                                      // buildDataColumn(
-                                                      //     "ApprovedByName",
-                                                      //     "Approved By",
-                                                      //     // ColumnSize.L,
-                                                      //     controller
-                                                      //         .ApprovedByNameFilterText,
-                                                      //     200),
-                                                      // buildDataColumn(
-                                                      //     "CurrentStatusShort",
-                                                      //     "Status",
-                                                      //     // ColumnSize.L,
-                                                      //     controller
-                                                      //         .CurrentStatusShortFilterText,
-                                                      //     200),
-                                                      // buildDataColumn(
-                                                      //     "PTW Status code",
-                                                      //     "Status code",
-                                                      //     // ColumnSize.L,
-                                                      //     controller
-                                                      //         .PtwStatusFilterText,
-                                                      //     200),
-                                                      // buildDataColumn(
-                                                      //     'Action'.tr,
-                                                      //     'Actions',
-                                                      //     // ColumnSize.L,
-                                                      //     controller
-                                                      //         .ActionFilterText,
-                                                      //     230),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            )
+                                                          // // buildDataColumn(
+                                                          // //     "Description",
+                                                          // //     "Description",
+                                                          // //     // ColumnSize.M,
+                                                          // //     controller
+                                                          // //         .DescriptionFilterText,
+                                                          // //     200),
+                                                          // buildDataColumn(
+                                                          //   'Description',
+                                                          //   'Title',
+                                                          //   //  ColumnSize.S,
+                                                          //   controller
+                                                          //       .DescriptionFilterText,
+                                                          //   200,
+                                                          // ),
+                                                          // buildDataColumn(
+                                                          //   'PermitTypeName',
+                                                          //   'Permit Type Name',
+                                                          //   //  ColumnSize.S,
+                                                          //   controller
+                                                          //       .PermitTypeNameFilterText,
+                                                          //   200,
+                                                          // ),
+                                                          // buildDataColumn(
+                                                          //   'EquipmentCategories',
+                                                          //   'Equipment Category',
+                                                          //   //  ColumnSize.S,
+                                                          //   controller
+                                                          //       .EquipmentCategoriesFilterText,
+                                                          //   180,
+                                                          // ),
+                                                          // buildDataColumn(
+                                                          //     "WorkingAreaName",
+                                                          //     "Working Area", // ColumnSize.L,
+                                                          //     controller
+                                                          //         .WorkingAreaNameFilterText,
+                                                          //     200),
+                                                          // buildDataColumn(
+                                                          //     "RequestByName",
+                                                          //     "Requested By",
+                                                          //     // ColumnSize.L,
+                                                          //     controller
+                                                          //         .RequestByNameFilterText,
+                                                          //     200),
+                                                          // buildDataColumn(
+                                                          //     "ApprovedByName",
+                                                          //     "Approved By",
+                                                          //     // ColumnSize.L,
+                                                          //     controller
+                                                          //         .ApprovedByNameFilterText,
+                                                          //     200),
+                                                          // buildDataColumn(
+                                                          //     "CurrentStatusShort",
+                                                          //     "Status",
+                                                          //     // ColumnSize.L,
+                                                          //     controller
+                                                          //         .CurrentStatusShortFilterText,
+                                                          //     200),
+                                                          // buildDataColumn(
+                                                          //     "PTW Status code",
+                                                          //     "Status code",
+                                                          //     // ColumnSize.L,
+                                                          //     controller
+                                                          //         .PtwStatusFilterText,
+                                                          //     200),
+                                                          // buildDataColumn(
+                                                          //     'Action'.tr,
+                                                          //     'Actions',
+                                                          //     // ColumnSize.L,
+                                                          //     controller
+                                                          //         .ActionFilterText,
+                                                          //     230),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                )
                                     ]),
                               ),
                             ),

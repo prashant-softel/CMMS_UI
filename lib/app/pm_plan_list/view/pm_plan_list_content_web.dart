@@ -267,8 +267,10 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.pmPlanList.isEmpty == true
-                                  ? Center(child: Text('No data'))
+                              controller.pmPlanList.isEmpty == true && controller.isLoading == false
+                              ?Center(child: Text("No data"))
+                              :controller.isLoading.value==true
+                              ? Center(child: Text("Data Loading......"))
                                   : Expanded(
                                       child: ValueListenableBuilder(
                                           valueListenable:

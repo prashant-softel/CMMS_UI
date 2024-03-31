@@ -92,7 +92,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     visible: controller.isContainerVisible.value,
                     child: Container(
                       width: (Get.width * .3),
-                      margin: EdgeInsets.only(left: 10, top: 30),
+                      margin: EdgeInsets.only(left: 10, top: 20),
                       height: Get.height / 2.2,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),
@@ -570,7 +570,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 30),
+                      margin: EdgeInsets.only(left: 10, top: 20),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 251, 252, 253),

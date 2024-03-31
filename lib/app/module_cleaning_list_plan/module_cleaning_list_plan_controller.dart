@@ -74,6 +74,7 @@ class ModuleCleaningListPlanController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -87,22 +88,20 @@ class ModuleCleaningListPlanController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, true,false);
+        getModuleCleaningListPlan(facilityId, false);
       });
     });
     super.onInit();
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading, bool isExport) async {
+  Future<void> getModuleCleaningListPlan(
+      int facilityId, bool isExport) async {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
     filteredData.value = <ModuleCleaningListPlanModel>[];
 
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
-      isLoading: true,
-      facility_id: facilityId,
-      isExport: isExport
-    );
+            isLoading: isLoading.value, facility_id: facilityId, isExport: isExport);
     moduleCleaningListPlan.value = _moduleCleaningListPlan;
     paginationController = PaginationController(
       rowCount: moduleCleaningListPlan.length,
@@ -111,6 +110,7 @@ class ModuleCleaningListPlanController extends GetxController {
 
     if (moduleCleaningListPlan.isNotEmpty) {
       filteredData.value = moduleCleaningListPlan.value;
+      isLoading.value = false;
 
       moduleCleaningListModel = moduleCleaningListPlan[0];
       var newPermitListJson = moduleCleaningListModel?.toJson();
@@ -122,9 +122,7 @@ class ModuleCleaningListPlanController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   void search(String keyword) {
@@ -171,7 +169,8 @@ class ModuleCleaningListPlanController extends GetxController {
   void clearStoreDataPlanid() {
     moduleCleaningListPlanPresenter.clearValuePlanId();
   }
+
   void export() {
-   getModuleCleaningListPlan(facilityId, true,true);
+    getModuleCleaningListPlan(facilityId, true);
   }
 }

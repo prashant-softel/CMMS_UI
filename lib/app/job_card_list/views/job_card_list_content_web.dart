@@ -210,100 +210,110 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.jobList.isEmpty == true
+                                  controller.jobList.isEmpty == true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
-                                      : Expanded(
-                                          child: PaginatedDataTable2(
-                                            // border: TableBorder.all(
-                                            //     color: Color.fromARGB(
-                                            //         255, 9, 5, 20)),
-                                            // fixedLeftColumns: 1,
-                                            // dataRowHeight: Get.height * 0.12,
-                                            columnSpacing: 10,
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: PaginatedDataTable2(
+                                                // border: TableBorder.all(
+                                                //     color: Color.fromARGB(
+                                                //         255, 9, 5, 20)),
+                                                // fixedLeftColumns: 1,
+                                                // dataRowHeight: Get.height * 0.12,
+                                                columnSpacing: 10,
 
-                                            source:
-                                                dataSource, // Custom DataSource class
-                                            // headingRowHeight: Get.height * 0.12,
-                                            minWidth: Get.width * 1.2,
-                                            showCheckboxColumn: false,
-                                            rowsPerPage:
-                                                10, // Number of rows per page
-                                            availableRowsPerPage: [
-                                              10,
-                                              20,
-                                              30,
-                                              50
-                                            ],
-                                            columns: [
-                                              // buildDataColumn(
-                                              //   'Id',
-                                              //   'Id',
-                                              //   //  ColumnSize.S,
-                                              //   controller.IdFilterText,
-                                              //   100,
-                                              // ),
-                                              buildDataColumn(
-                                                'JobCardId',
-                                                'Job Card Id',
-                                                //  ColumnSize.S,
-                                                controller.JobCardIdFilterText,
-                                                130,
+                                                source:
+                                                    dataSource, // Custom DataSource class
+                                                // headingRowHeight: Get.height * 0.12,
+                                                minWidth: Get.width * 1.2,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  // buildDataColumn(
+                                                  //   'Id',
+                                                  //   'Id',
+                                                  //   //  ColumnSize.S,
+                                                  //   controller.IdFilterText,
+                                                  //   100,
+                                                  // ),
+                                                  buildDataColumn(
+                                                    'JobCardId',
+                                                    'Job Card Id',
+                                                    //  ColumnSize.S,
+                                                    controller
+                                                        .JobCardIdFilterText,
+                                                    130,
+                                                  ),
+                                                  buildDataColumn(
+                                                      "JobId",
+                                                      "Job Id",
+                                                      // ColumnSize.M,
+                                                      controller
+                                                          .JobIdFilterText,
+                                                      130),
+                                                  buildDataColumn(
+                                                    'PermitId',
+                                                    'Permit Id',
+                                                    //  ColumnSize.S,
+                                                    controller
+                                                        .PermitIdFilterText,
+                                                    130,
+                                                  ),
+                                                  buildDataColumn(
+                                                    'PermitNo',
+                                                    'Permit No.',
+                                                    //  ColumnSize.S,
+                                                    controller
+                                                        .PermitNoFilterText,
+                                                    130,
+                                                  ),
+                                                  buildDataColumn(
+                                                      "JobAssingedTo",
+                                                      "Assinged To", // ColumnSize.L,
+                                                      controller
+                                                          .JobAssingedToFilterText,
+                                                      200),
+                                                  buildDataColumn(
+                                                      "Description",
+                                                      "Description",
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .DescriptionFilterText,
+                                                      200),
+                                                  buildDataColumn(
+                                                      "StartTime",
+                                                      "Start Time",
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .StartTimeFilterText,
+                                                      200),
+                                                  buildDataColumn(
+                                                      "EndTime",
+                                                      "End Time",
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .EndTimeFilterText,
+                                                      200),
+                                                  buildDataColumn(
+                                                      'Action'.tr,
+                                                      'Actions',
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .ActionFilterText,
+                                                      150),
+                                                ],
                                               ),
-                                              buildDataColumn(
-                                                  "JobId",
-                                                  "Job Id",
-                                                  // ColumnSize.M,
-                                                  controller.JobIdFilterText,
-                                                  130),
-                                              buildDataColumn(
-                                                'PermitId',
-                                                'Permit Id',
-                                                //  ColumnSize.S,
-                                                controller.PermitIdFilterText,
-                                                130,
-                                              ),
-                                              buildDataColumn(
-                                                'PermitNo',
-                                                'Permit No.',
-                                                //  ColumnSize.S,
-                                                controller.PermitNoFilterText,
-                                                130,
-                                              ),
-                                              buildDataColumn(
-                                                  "JobAssingedTo",
-                                                  "Assinged To", // ColumnSize.L,
-                                                  controller
-                                                      .JobAssingedToFilterText,
-                                                  200),
-                                              buildDataColumn(
-                                                  "Description",
-                                                  "Description",
-                                                  // ColumnSize.L,
-                                                  controller
-                                                      .DescriptionFilterText,
-                                                  200),
-                                              buildDataColumn(
-                                                  "StartTime",
-                                                  "Start Time",
-                                                  // ColumnSize.L,
-                                                  controller
-                                                      .StartTimeFilterText,
-                                                  200),
-                                              buildDataColumn(
-                                                  "EndTime",
-                                                  "End Time",
-                                                  // ColumnSize.L,
-                                                  controller.EndTimeFilterText,
-                                                  200),
-                                              buildDataColumn(
-                                                  'Action'.tr,
-                                                  'Actions',
-                                                  // ColumnSize.L,
-                                                  controller.ActionFilterText,
-                                                  150),
-                                            ],
-                                          ),
-                                        )
+                                            )
                                 ]),
                           ),
                         ),

@@ -90,6 +90,8 @@ class PreventiveCheckPointController extends GetxController {
   RxString failerFilterText = ''.obs;
   RxString imageFilterText = ''.obs;
   RxString typeFilterText = ''.obs;
+
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     try {
@@ -220,6 +222,7 @@ class PreventiveCheckPointController extends GetxController {
         facilityId: facilityId, type: type, isLoading: true);
 
     if (list != null) {
+      isLoading.value = false;
       // checkList.clear();
 
       for (var _checkList in list) {
@@ -295,7 +298,7 @@ class PreventiveCheckPointController extends GetxController {
             selectedchecklistId: int.tryParse(
               selectedchecklistId,
             ),
-            isLoading: true,
+            isLoading: isLoading.value,
             facilityId: facilityId,
             isExport: isExport);
 
