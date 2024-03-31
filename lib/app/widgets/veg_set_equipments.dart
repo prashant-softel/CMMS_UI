@@ -28,32 +28,10 @@ class VegSetEquipment extends GetView {
                 fontSize: 15,
               ),
             ),
-            // Spacer(),
-            // Container(
-            //   width: 150,
-            //   height: 25,
-            //   margin: Dimens.edgeInsets0_0_16_0,
-            //   child: TextField(
-            //     decoration: InputDecoration(
-            //       enabledBorder: const OutlineInputBorder(
-            //         borderSide:
-            //             const BorderSide(color: Colors.grey, width: 0.0),
-            //       ),
-            //       focusedBorder: const OutlineInputBorder(
-            //         borderSide:
-            //             const BorderSide(color: Colors.grey, width: 0.0),
-            //       ),
-            //       contentPadding: Dimens.edgeInsets10_0_0_0,
-            //       hintText: 'search'.tr,
-            //       hintStyle: Styles.grey12,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-
           return Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -72,7 +50,7 @@ class VegSetEquipment extends GetView {
               ),
               // padding: EdgeInsets.only(right: 120, top: 10),
               height: height / 1.5,
-              width: double.infinity,
+              width: Get.width * 0.5,
               child: SingleChildScrollView(
                 child: Column(
                     children: [
@@ -81,29 +59,36 @@ class VegSetEquipment extends GetView {
                     child: Row(
                       children: [
                         Expanded(
+                          flex: 4,
                           child: Text(
                             "Blocks",
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
                         Expanded(
+                          flex: 2,
                           child: Text("Grass Cutting Area",
                               style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
+                            flex: 2,
                             child: Text("Select Day",
                                 style: TextStyle(color: Color(0xff31576D)))),
                       ],
                     ),
+                  ),
+                  Divider(
+                    thickness: 2,
                   )
                 ]..addAll(controller.equipmentList.value.map((e) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
                           child: Column(
                             children: [
                               Row(
                                 children: [
                                   Expanded(
+                                    flex: 4,
                                     child: GestureDetector(
                                       onTap: () {
                                         setState(
@@ -128,6 +113,7 @@ class VegSetEquipment extends GetView {
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
                                       "${e.area}",
                                       style: TextStyle(
@@ -136,6 +122,7 @@ class VegSetEquipment extends GetView {
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: DropdownButton<String>(
                                       value: e.selectedDay,
                                       onChanged: (newValue) {
@@ -166,12 +153,15 @@ class VegSetEquipment extends GetView {
                                               return Row(
                                                 children: [
                                                   Expanded(
+                                                      flex: 4,
                                                       child: Text(
                                                           invs.invName ?? "")),
                                                   Expanded(
+                                                      flex: 2,
                                                       child:
                                                           Text("${invs.area}")),
                                                   Expanded(
+                                                    flex: 2,
                                                     child:
                                                         DropdownButton<String>(
                                                       value: invs.selectedDay,
@@ -200,7 +190,10 @@ class VegSetEquipment extends GetView {
                                           ),
                                         ),
                                     )
-                                  : Dimens.box0
+                                  : Dimens.box0,
+                              Divider(
+                                thickness: 1,
+                              )
                             ],
                           ),
                         );

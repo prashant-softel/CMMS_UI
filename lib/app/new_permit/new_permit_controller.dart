@@ -635,7 +635,9 @@ class NewPermitController extends GetxController {
       if (selectedPermitTypeId != 0) {
         getSafetyMeasureList();
       }
-
+      selectedEquipmentCategoryIdList.assignAll(
+        (newPermitDetailsModel.value?.category_ids ?? []) as Iterable<int>,
+      );
       selectedJobType.value = newPermitDetailsModel.value?.job_type_name ?? "";
       selectedSopPermit.value =
           newPermitDetailsModel.value?.sop_type_name ?? '';
