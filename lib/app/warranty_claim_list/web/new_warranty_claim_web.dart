@@ -410,10 +410,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                     borderRadius: BorderRadius.circular(5),
                                                                                   ),
                                                                                   child: LoginCustomTextfield(
-                                                                                    keyboardType: TextInputType.number,
-                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                      FilteringTextInputFormatter.digitsOnly
-                                                                                    ],
                                                                                     maxLine: 1,
                                                                                     textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                     onChanged: (txt) {

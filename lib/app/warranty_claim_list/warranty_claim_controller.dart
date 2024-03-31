@@ -355,6 +355,10 @@ class WarrantyClaimController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getEmployeesList();
     });
+    if (wc_id == 0) {
+      addRowItem();
+    }
+
     immcoracFocus.addListener(() {
       if (!immcoracFocus.hasFocus) {
         immcoracScroll.jumpTo(0.0);
@@ -482,7 +486,7 @@ class WarrantyClaimController extends GetxController {
       rowCount: eqipmentNameList.length,
       rowsPerPage: 10,
     );
-    addRowItem();
+
     update(['inventory_list']);
   }
 
@@ -908,13 +912,20 @@ class WarrantyClaimController extends GetxController {
           // is_required: e.is_required
         ));
       });
+      late List<AffectedParts> affectedParts = [];
+
+      rowItems.forEach((element) {
+        AffectedParts item = AffectedParts(name: element[1]["value"] ?? '0');
+        affectedParts.add(item);
+        print('Create req  order  data: $item');
+      });
 
       CreateWarrantyClaimModel createwarrantyClaimModel =
           CreateWarrantyClaimModel(
               facilityId: facilityId,
               equipmentId: selectedEquipmentnameId,
               goodsOrderId: 14205,
-              affectedPart: selectedAffectedPartName,
+              affectedParts: affectedParts,
               orderReference: _orderReferenceNo,
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
@@ -1058,6 +1069,15 @@ class WarrantyClaimController extends GetxController {
       externalEmails.forEach((e) {
         external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
       });
+      late List<AffectedParts> affectedParts = [];
+
+      rowItems.forEach((element) {
+        AffectedParts item = AffectedParts(name: element[1]["value"] ?? '0');
+
+        affectedParts.add(item);
+
+        print('Create req  order  data: $item');
+      });
 
       late List<SupplierActions> supplier_action_list = [];
 
@@ -1074,7 +1094,7 @@ class WarrantyClaimController extends GetxController {
               facilityId: facilityId,
               equipmentId: selectedEquipmentnameId,
               goodsOrderId: 14205,
-              affectedPart: selectedAffectedPartName,
+              affectedParts: affectedParts,
               orderReference: _orderReferenceNo,
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
