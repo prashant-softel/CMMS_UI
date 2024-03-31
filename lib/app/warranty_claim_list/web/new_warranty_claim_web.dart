@@ -399,16 +399,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                             context);
                                                       },
                                                     ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    CustomTextField(
-                                                      label:
-                                                          'Approximate Daily Loss: ',
-                                                    ),
                                                     SizedBox(
                                                       width: 40,
                                                     ),
@@ -438,6 +428,57 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     ),
                                                   ],
                                                 ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    CustomTextField(
+                                                      label:
+                                                          'Approximate Daily Loss: ',
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        CustomRichText(
+                                                            title:
+                                                                'Select Currency Unit: '),
+                                                        Dimens.boxWidth5,
+                                                        SizedBox(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              6.3,
+                                                          child: Obx(
+                                                            () =>
+                                                                DropdownWebWidget(
+                                                              dropdownList:
+                                                                  controller
+                                                                      .unitCurrencyList,
+                                                              isValueSelected:
+                                                                  controller
+                                                                      .isUnitCurrencySelected
+                                                                      .value,
+                                                              selectedValue:
+                                                                  controller
+                                                                      .selectedUnitCurrency
+                                                                      .value,
+                                                              onValueChanged:
+                                                                  controller
+                                                                      .onValueChanged,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+
                                                 Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -969,45 +1010,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                         //       '${controller.inventoryDetailsModel.value?.supplierName}',
                                                         // ),
                                                       ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Select Currency Unit: '),
-                                                    Dimens.boxWidth5,
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              6.3,
-                                                      child: Obx(
-                                                        () => DropdownWebWidget(
-                                                          dropdownList: controller
-                                                              .unitCurrencyList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isUnitCurrencySelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedUnitCurrency
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
-                                                      ),
                                                     ),
                                                   ],
                                                 ),
